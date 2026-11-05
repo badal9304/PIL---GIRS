@@ -16,7 +16,7 @@ body{margin:0;background:#F4F5F7;color:#161A21;font-size:13px;line-height:20px}
 a{color:#0071B7}a:hover{color:#005C96}
 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item{display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
 .nav-item:hover{background:#F1F3F6;color:#161A21}
 .nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
@@ -54,31 +54,59 @@ input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor
         <span style="width: 1px; height: 20px; background: #DADDE3"></span>
         <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
       </div>
-      <nav aria-label="{{t.screens}}" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
-        <a href="index.html" class="nav-item nav-on" aria-current="page">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
-          <span>{{t.nav1}}</span>
-        </a>
-        <a href="invoice-previewer.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
-          <span>{{t.nav2}}</span>
-        </a>
-        <a href="dar-console.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
-          <span>{{t.nav3}}</span>
-        </a>
-        <a href="soa-aging.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
-          <span>{{t.nav4}}</span>
-        </a>
-        <a href="cashapp-workbench.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
-          <span>{{t.nav5}}</span>
-        </a>
-        <a href="tolerance-coreor.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
-          <span>{{t.nav6}}</span>
-        </a>
+      <nav aria-label="{{t.screens}}" style="display: flex; flex-direction: column; gap: 20px; padding: 16px 12px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div style="padding: 0 12px; margin-bottom: 4px; font-size: 11px; line-height: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #5A6170">{{t.gOps}}</div>
+          <a href="index.html" class="nav-item nav-on" aria-current="page">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+            <span>{{t.nav1}}</span>
+          </a>
+          <a href="charge-processing.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"></path><circle cx="19" cy="18" r="2"></circle></svg>
+            <span>{{t.nav7}}</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div style="padding: 0 12px; margin-bottom: 4px; font-size: 11px; line-height: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #5A6170">{{t.gInv}}</div>
+          <a href="invoice-previewer.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+            <span>{{t.nav2}}</span>
+          </a>
+          <a href="credit-notes.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M9 15h6"></path></svg>
+            <span>{{t.nav8}}</span>
+          </a>
+          <a href="dar-console.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <span>{{t.nav3}}</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div style="padding: 0 12px; margin-bottom: 4px; font-size: 11px; line-height: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #5A6170">{{t.gRec}}</div>
+          <a href="receipting.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h7"></path><path d="M15 17l2 2 4-4"></path></svg>
+            <span>{{t.nav9}}</span>
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+            <span>{{t.nav5}}</span>
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+            <span>{{t.nav6}}</span>
+          </a>
+          <a href="soa-aging.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+            <span>{{t.nav4}}</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div style="padding: 0 12px; margin-bottom: 4px; font-size: 11px; line-height: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #5A6170">{{t.gEnq}}</div>
+          <a href="enquiry.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <span>{{t.nav10}}</span>
+          </a>
+        </div>
       </nav>
     </aside>
 
@@ -258,7 +286,7 @@ class Component extends DCLogic {
   }
   strings() {
     return {
-      en: { screens: 'Screens', language: 'Language', nav1: 'Operations Cockpit', nav2: 'Invoice Previewer', nav3: 'DAR Console', nav4: 'SOA & Aging', nav5: 'CashApp Workbench', nav6: 'Tolerance & COREOR',
+      en: { screens: 'Screens', language: 'Language', nav1: 'Operations Cockpit', nav2: 'Invoice Previewer', nav3: 'DAR Console', nav4: 'SOA & Aging', nav5: 'CashApp Workbench', nav6: 'Tolerance & COREOR', nav7: 'Charge Processing', nav8: 'Credit Notes', nav9: 'Receipting', nav10: 'Enquiry & Monitoring', gOps: 'Operations', gInv: 'Invoicing', gRec: 'Receivables', gEnq: 'Enquiry',
         title: 'Operations Cockpit', subtitle: 'Straight-Through Processing (STP) auto-invoicing from confirmed BDRs', tz: 'All times in SGT (UTC+8)',
         lastBatch: 'Last batch run: ', batchDone: 'Batch run complete · just now', runBatch: 'Run auto-invoicing batch',
         roeTitle: 'Daily ROE feed unavailable', roeBody: 'at the scheduled midnight auto-invoicing batch run. Affected BDRs are held in exception staging.', retryRoe: 'Retry ROE feed',
@@ -273,7 +301,7 @@ class Component extends DCLogic {
         rHaz: 'Pending hazardous commodity certification', rRoe: 'Daily ROE feed unavailable', rSplit: 'Split-payer unconfirmed at vessel departure',
         flagged: 'Flagged', flag: 'Flag dispute', unflag: 'Remove flag', empty: 'No BDRs in exception staging for this filter.',
         selectAll: 'Select all', cancel: 'Cancel', confirm: 'Confirm release', confirmTitle: 'Release {n} BDR(s) from exception staging via batch override?', releasedMsg: '{n} BDR(s) released via batch override.' },
-      zh: { screens: '页面', language: '语言', nav1: '运营驾驶舱', nav2: '发票模板预览', nav3: '争议审批 (DAR)', nav4: '对账单与账龄', nav5: '现金核销工作台', nav6: '容差与放货 (COREOR)',
+      zh: { screens: '页面', language: '语言', nav1: '运营驾驶舱', nav2: '发票模板预览', nav3: '争议审批 (DAR)', nav4: '对账单与账龄', nav5: '现金核销工作台', nav6: '容差与放货 (COREOR)', nav7: '费用处理', nav8: '贷项通知单', nav9: '收款', nav10: '查询与监控', gOps: '运营', gInv: '开票', gRec: '应收账款', gEnq: '查询',
         title: '运营驾驶舱', subtitle: '基于已确认 BDR 的直通式处理 (STP) 自动开票', tz: '所有时间均为新加坡时间 (UTC+8)',
         lastBatch: '上次批处理：', batchDone: '批处理已完成 · 刚刚', runBatch: '运行自动开票批处理',
         roeTitle: '每日汇率 (ROE) 数据源不可用', roeBody: '发生于午夜定时自动开票批处理。受影响的 BDR 已暂存于异常队列。', retryRoe: '重试汇率数据源',
@@ -288,7 +316,7 @@ class Component extends DCLogic {
         rHaz: '危险品认证待处理', rRoe: '每日汇率数据源不可用', rSplit: '开船时分付方未确认',
         flagged: '已标记', flag: '标记争议', unflag: '取消标记', empty: '此筛选条件下没有异常暂存的 BDR。',
         selectAll: '全选', cancel: '取消', confirm: '确认放行', confirmTitle: '通过批量覆盖从异常暂存中放行 {n} 条 BDR？', releasedMsg: '已通过批量覆盖放行 {n} 条 BDR。' },
-      ar: { screens: 'الشاشات', language: 'اللغة', nav1: 'لوحة العمليات', nav2: 'معاينة الفواتير', nav3: 'طلبات النزاع (DAR)', nav4: 'كشف الحساب والأعمار', nav5: 'منضدة تخصيص النقد', nav6: 'التسامح والإفراج (COREOR)',
+      ar: { screens: 'الشاشات', language: 'اللغة', nav1: 'لوحة العمليات', nav2: 'معاينة الفواتير', nav3: 'طلبات النزاع (DAR)', nav4: 'كشف الحساب والأعمار', nav5: 'منضدة تخصيص النقد', nav6: 'التسامح والإفراج (COREOR)', nav7: 'معالجة الرسوم', nav8: 'إشعارات دائنة', nav9: 'التحصيل', nav10: 'الاستعلام والمراقبة', gOps: 'العمليات', gInv: 'الفوترة', gRec: 'الذمم المدينة', gEnq: 'الاستعلام',
         title: 'لوحة العمليات', subtitle: 'الفوترة التلقائية بالمعالجة المباشرة (STP) من سجلات BDR المؤكدة', tz: 'جميع الأوقات بتوقيت سنغافورة (UTC+8)',
         lastBatch: 'آخر تشغيل للدفعة: ', batchDone: 'اكتمل تشغيل الدفعة · الآن', runBatch: 'تشغيل دفعة الفوترة التلقائية',
         roeTitle: 'موجز سعر الصرف اليومي (ROE) غير متاح', roeBody: 'عند تشغيل دفعة الفوترة التلقائية المجدولة منتصف الليل. سجلات BDR المتأثرة محتجزة في قائمة الاستثناءات.', retryRoe: 'إعادة محاولة موجز سعر الصرف',
@@ -303,7 +331,7 @@ class Component extends DCLogic {
         rHaz: 'شهادة السلعة الخطرة قيد الانتظار', rRoe: 'موجز سعر الصرف اليومي غير متاح', rSplit: 'تعدد الدافعين غير مؤكد عند مغادرة السفينة',
         flagged: 'معلّمة', flag: 'تعليم كنزاع', unflag: 'إزالة العلامة', empty: 'لا توجد سجلات BDR محتجزة ضمن هذا التصنيف.',
         selectAll: 'تحديد الكل', cancel: 'إلغاء', confirm: 'تأكيد الإفراج', confirmTitle: 'الإفراج عن {n} من سجلات BDR من قائمة الاستثناءات عبر تجاوز الدفعة؟', releasedMsg: 'تم الإفراج عن {n} من سجلات BDR عبر تجاوز الدفعة.' },
-      es: { screens: 'Pantallas', language: 'Idioma', nav1: 'Cabina de operaciones', nav2: 'Vista previa de facturas', nav3: 'Consola DAR', nav4: 'Estado de cuenta', nav5: 'Aplicación de cobros', nav6: 'Tolerancia y COREOR',
+      es: { screens: 'Pantallas', language: 'Idioma', nav1: 'Cabina de operaciones', nav2: 'Vista previa de facturas', nav3: 'Consola DAR', nav4: 'Estado de cuenta', nav5: 'Aplicación de cobros', nav6: 'Tolerancia y COREOR', nav7: 'Procesamiento de cargos', nav8: 'Notas de crédito', nav9: 'Recibos', nav10: 'Consulta y monitoreo', gOps: 'Operaciones', gInv: 'Facturación', gRec: 'Cuentas por cobrar', gEnq: 'Consulta',
         title: 'Cabina de operaciones', subtitle: 'Facturación automática STP (Straight-Through Processing) a partir de BDR confirmados', tz: 'Todas las horas en SGT (UTC+8)',
         lastBatch: 'Último lote: ', batchDone: 'Lote completado · ahora', runBatch: 'Ejecutar lote de facturación',
         roeTitle: 'Fuente diaria de tipo de cambio (ROE) no disponible', roeBody: 'en el lote programado de medianoche. Los BDR afectados quedan retenidos en excepciones.', retryRoe: 'Reintentar fuente ROE',

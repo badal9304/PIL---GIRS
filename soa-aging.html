@@ -16,7 +16,7 @@ body{margin:0;background:#F4F5F7;color:#161A21;font-family:'IBM Plex Sans',syste
 a{color:#0071B7}a:hover{color:#005C96}
 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item{display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
 .nav-item:hover{background:#F1F3F6;color:#161A21}
 .nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
@@ -58,31 +58,59 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:#0071B7;cursor:po
         <span style="width: 1px; height: 20px; background: #DADDE3"></span>
         <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
       </div>
-      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
-        <a href="index.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
-          <span>Operations Cockpit</span>
-        </a>
-        <a href="invoice-previewer.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
-          <span>Invoice Previewer</span>
-        </a>
-        <a href="dar-console.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
-          <span>DAR Console</span>
-        </a>
-        <a href="soa-aging.html" class="nav-item nav-on" aria-current="page">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
-          <span>SOA &amp; Aging</span>
-        </a>
-        <a href="cashapp-workbench.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
-          <span>CashApp Workbench</span>
-        </a>
-        <a href="tolerance-coreor.html" class="nav-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
-          <span>Tolerance &amp; COREOR</span>
-        </a>
+      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 20px; padding: 16px 12px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Operations</div>
+          <a href="index.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+            <span>Operations Cockpit</span>
+          </a>
+          <a href="charge-processing.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"></path><circle cx="19" cy="18" r="2"></circle></svg>
+            <span>Charge Processing</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Invoicing</div>
+          <a href="invoice-previewer.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+            <span>Invoice Previewer</span>
+          </a>
+          <a href="credit-notes.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M9 15h6"></path></svg>
+            <span>Credit Notes</span>
+          </a>
+          <a href="dar-console.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <span>DAR Console</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Receivables</div>
+          <a href="receipting.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h7"></path><path d="M15 17l2 2 4-4"></path></svg>
+            <span>Receipting</span>
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+            <span>CashApp Workbench</span>
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+            <span>Tolerance &amp; COREOR</span>
+          </a>
+          <a href="soa-aging.html" class="nav-item nav-on" aria-current="page">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+            <span>SOA &amp; Aging</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Enquiry</div>
+          <a href="enquiry.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <span>Enquiry &amp; Monitoring</span>
+          </a>
+        </div>
       </nav>
     </aside>
 
@@ -214,14 +242,14 @@ class Component extends DCLogic {
     const s = this.state;
     const m = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const inv = [
-      { id: 'i1', no: 'SG-INV-2026-002281', charge: 'Ocean Freight', ccy: 'USD', amt: 62400, usd: 62400, sail: 15 },
-      { id: 'i2', no: 'SG-INV-2026-002290', charge: 'Terminal Handling (THC)', ccy: 'SGD', amt: 18500, usd: 13700, sail: 25 },
-      { id: 'i3', no: 'SG-INV-2026-002144', charge: 'Ocean Freight', ccy: 'USD', amt: 48200, usd: 48200, sail: 50 },
-      { id: 'i4', no: 'SG-INV-2026-002150', charge: 'Demurrage', ccy: 'USD', amt: 50, usd: 50, sail: 55 },
-      { id: 'i5', no: 'IN-INV-2026-001012', charge: 'Ocean Freight', ccy: 'INR', amt: 2450000, usd: 29300, sail: 80 },
-      { id: 'i6', no: 'SG-INV-2026-002033', charge: 'Bunker / Environmental Surcharge', ccy: 'USD', amt: 41000, usd: 41000, sail: 85 },
-      { id: 'i7', no: 'SG-INV-2026-001870', charge: 'Ocean Freight', ccy: 'USD', amt: 34350, usd: 34350, sail: 150 },
-      { id: 'i8', no: 'MY-INV-2026-000702', charge: 'Detention', ccy: 'MYR', amt: 98000, usd: 21000, sail: 170 }
+      { id: 'i1', no: 'SINOF2602281', charge: 'Ocean Freight', ccy: 'USD', amt: 62400, usd: 62400, sail: 15 },
+      { id: 'i2', no: 'SINOF2602290', charge: 'Terminal Handling (THC)', ccy: 'SGD', amt: 18500, usd: 13700, sail: 25 },
+      { id: 'i3', no: 'SINOF2602144', charge: 'Ocean Freight', ccy: 'USD', amt: 48200, usd: 48200, sail: 50 },
+      { id: 'i4', no: 'SINOD2602150', charge: 'Demurrage', ccy: 'USD', amt: 50, usd: 50, sail: 55 },
+      { id: 'i5', no: 'NSAOF2601012', charge: 'Ocean Freight', ccy: 'INR', amt: 2450000, usd: 29300, sail: 80 },
+      { id: 'i6', no: 'SINOF2602033', charge: 'Bunker / Environmental Surcharge', ccy: 'USD', amt: 41000, usd: 41000, sail: 85 },
+      { id: 'i7', no: 'SINOF2601870', charge: 'Ocean Freight', ccy: 'USD', amt: 34350, usd: 34350, sail: 150 },
+      { id: 'i8', no: 'PKGID2600702', charge: 'Detention', ccy: 'MYR', amt: 98000, usd: 21000, sail: 170 }
     ];
     const bk = (over) => over <= 0 ? 'cur' : (over <= 30 ? 'b30' : (over <= 60 ? 'b60' : 'b90'));
     const meta = {

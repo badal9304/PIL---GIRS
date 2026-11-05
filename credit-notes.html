@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS Credit Notes</title>
+<link rel="icon" href="pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7;color:#161A21;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:#0071B7}a:hover{color:#005C96}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item:hover{background:#F1F3F6;color:#161A21}
+.nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:#F1F3F6}
+.btn-sm{height:32px;padding:0 12px}
+.btn-primary{background:#0071B7;border-color:#0071B7;color:#fff}
+.btn-primary:hover{background:#005C96;border-color:#005C96}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible{outline:2px solid #0071B7;outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select:hover,.input:hover{border-color:#8C95A3}
+.input{height:36px;padding:0 12px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:#fff;border:1px solid #DADDE3;border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid #DADDE3;box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:#5A6170}
+.lbl{display:block;font-size:12px;font-weight:600;color:#5A6170;line-height:16px;margin-bottom:6px}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5A6170;font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:#5A6170;padding:0 12px;border-bottom:1px solid #DADDE3;white-space:nowrap;background:#F7F8FA;box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid #ECEEF2;vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:#F7F9FC}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:#0071B7;cursor:pointer}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:4px;width:100%;padding:12px 16px;border-radius:8px}
+.seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;border-radius:4px;font-size:13px;color:#161A21}
+.ro{display:flex;align-items:center;height:36px;padding:0 12px;border:1px solid #DADDE3;border-radius:6px;background:#F7F8FA;color:#3A4556;box-sizing:border-box}</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+  <div aria-hidden="true" style="height: 3px; background: #E31D1A; flex: none"></div>
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+    <aside style="flex: 1 0 240px; max-width: 240px; background: #fff; border-inline-end: 1px solid #DADDE3; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid #ECEEF2; box-sizing: border-box">
+        <img src="pil-logo.png" alt="PIL" style="height: 26px; width: auto; display: block">
+        <span style="width: 1px; height: 20px; background: #DADDE3"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
+      </div>
+      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 20px; padding: 16px 12px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Operations</div>
+          <a href="index.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+            <span>Operations Cockpit</span>
+          </a>
+          <a href="charge-processing.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"></path><circle cx="19" cy="18" r="2"></circle></svg>
+            <span>Charge Processing</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Invoicing</div>
+          <a href="invoice-previewer.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+            <span>Invoice Previewer</span>
+          </a>
+          <a href="credit-notes.html" class="nav-item nav-on" aria-current="page">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M9 15h6"></path></svg>
+            <span>Credit Notes</span>
+          </a>
+          <a href="dar-console.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <span>DAR Console</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Receivables</div>
+          <a href="receipting.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h7"></path><path d="M15 17l2 2 4-4"></path></svg>
+            <span>Receipting</span>
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+            <span>CashApp Workbench</span>
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+            <span>Tolerance &amp; COREOR</span>
+          </a>
+          <a href="soa-aging.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+            <span>SOA &amp; Aging</span>
+          </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div class="k" style="padding: 0 12px; margin-bottom: 4px">Enquiry</div>
+          <a href="enquiry.html" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <span>Enquiry &amp; Monitoring</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+      <header style="min-height: 64px; background: #fff; border-bottom: 1px solid #DADDE3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px 24px; box-sizing: border-box">
+        <div style="min-width: 0">
+          <h1 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">Credit Notes</h1>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">Full and partial credits against the original invoice · same exchange rate · approval with segregation of duties</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+
+        </div>
+      </header>
+
+      <main style="flex: 1 1 auto; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="card" style="flex: 1 1 340px; max-width: 360px; min-width: 0; overflow: hidden">
+            <div class="card-head"><h2 class="card-title">Original invoice</h2></div>
+            <div style="padding: 12px; display: flex; flex-direction: column; gap: 8px">
+              <sc-for list="{{invoices}}" as="v" hint-placeholder-count="4">
+                <button class="opt" onClick="{{v.pick}}" aria-pressed="{{v.on}}" style="border: 1px solid {{v.border}}; background: {{v.bg}}">
+                  <span style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="mono" style="font-weight: 500">{{v.no}}</span><span class="chip" style="{{v.payStyle}}">{{v.pay}}</span></span>
+                  <span style="font-size: 12px; line-height: 16px; color: #5A6170">{{v.type}} · {{v.bl}} · USD {{v.totalText}}</span>
+                </button>
+              </sc-for>
+            </div>
+            <p style="margin: 0; padding: 0 16px 16px; font-size: 12px; line-height: 16px; color: #5A6170">A credit note must reference an existing invoice. Standalone credit notes are not permitted.</p>
+          </section>
+
+          <section class="card" style="flex: 999 1 640px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
+            <div class="card-head">
+              <h2 class="card-title">Credit note request</h2>
+              <span class="chip" style="{{stageChip}}">{{stageText}}</span>
+            </div>
+
+            <sc-if value="{{isProforma}}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin: 16px 16px 0; padding: 12px 16px; border-radius: 6px; background: #FBEAEA; color: #8E1F23">Credit notes are not allowed for proforma invoices. Cancel the proforma instead.</div>
+            </sc-if>
+            <sc-if value="{{needsUnapply}}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin: 16px 16px 0; padding: 12px 12px 12px 16px; border-radius: 6px; background: #FDF0E3; color: #7A3A00; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+                <span><strong>Invoice is paid.</strong> Unapply the payment before issuing a credit note and replacement invoice.</span>
+                <button class="btn btn-sm" onClick="{{unapply}}">Unapply payment</button>
+              </div>
+            </sc-if>
+
+            <div style="padding: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+              <div>
+                <label class="lbl" for="src">Source</label>
+                <div style="position: relative">
+                  <select id="src" class="select" value="{{source}}" onChange="{{setSource}}" disabled="{{locked}}" style="width: 100%">
+                    <option value="FCA approval">FCA approval</option>
+                    <option value="DAR waiver">DAR waiver</option>
+                    <option value="Pricing correction">Pricing correction</option>
+                    <option value="Invoice amendment">Invoice amendment</option>
+                  </select>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 10px; pointer-events: none"><path d="M6 9l6 6 6-6"></path></svg>
+                </div>
+              </div>
+              <div>
+                <span class="lbl">Credit note date</span>
+                <div class="ro mono">{{today}}</div>
+                <div style="font-size: 11px; line-height: 16px; color: #5A6170; margin-top: 4px">Backdating not permitted</div>
+              </div>
+              <div>
+                <span class="lbl">Exchange rate (from original invoice)</span>
+                <div class="ro mono">{{roe}}</div>
+                <div style="font-size: 11px; line-height: 16px; color: #5A6170; margin-top: 4px">Locked — same rate as original invoice</div>
+              </div>
+            </div>
+
+            <div style="padding: 0 16px 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+              <div role="radiogroup" aria-label="Credit type" style="display: grid; grid-template-columns: repeat(2, 120px); gap: 3px; height: 36px; background: #EEF1F5; padding: 3px; border-radius: 6px; box-sizing: border-box">
+                <button class="seg" role="radio" aria-checked="{{fullOn}}" onClick="{{pickFull}}" disabled="{{locked}}" style="background: {{fullBg}}; font-weight: {{fullFw}}">Full credit</button>
+                <button class="seg" role="radio" aria-checked="{{partOn}}" onClick="{{pickPart}}" disabled="{{locked}}" style="background: {{partBg}}; font-weight: {{partFw}}">Partial credit</button>
+              </div>
+              <span style="font-size: 12px; color: #5A6170">Full / partial: configured per country</span>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-inline-start: auto">
+                <input type="checkbox" checked="{{replace}}" onChange="{{toggleReplace}}" disabled="{{locked}}">
+                <span>Generate replacement invoice after approval</span>
+              </label>
+            </div>
+
+            <div style="overflow-x: auto; border-top: 1px solid #DADDE3">
+              <table>
+                <thead><tr><th style="width: 44px"><span class="sr">Credit</span></th><th>Charge code</th><th class="r">Invoiced USD</th><th class="r" style="width: 200px">Credit USD</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
+                    <tr>
+                      <td><input type="checkbox" checked="{{l.on}}" onChange="{{l.toggle}}" disabled="{{l.lock}}" aria-label="Credit {{l.code}}"></td>
+                      <td>{{l.code}}</td>
+                      <td class="mono r">{{l.amtText}}</td>
+                      <td class="r"><input class="input mono" type="number" min="0" max="{{l.amt}}" step="0.01" value="{{l.credit}}" onChange="{{l.setCredit}}" disabled="{{l.inputLock}}" aria-label="Credit amount {{l.code}}" style="width: 140px; text-align: end"></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+            <sc-if value="{{overCredit}}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin: 12px 16px 0; padding: 12px 16px; border-radius: 6px; background: #FBEAEA; color: #8E1F23">Credit value cannot exceed the original invoice value of each charge.</div>
+            </sc-if>
+            <sc-if value="{{taxPortal}}" hint-placeholder-val="{{ false }}">
+              <div style="margin: 12px 16px 0; padding: 12px 16px; border-radius: 6px; background: #EAF4FB; color: #005C96">Local regulation requires this credit note to be submitted to the government tax portal ({{regime}}), referencing the original invoice IRN.</div>
+            </sc-if>
+
+            <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; height: 72px; padding: 0 16px; border-top: 1px solid #DADDE3; background: #F7F8FA; box-sizing: border-box; margin-block-start: 16px">
+              <div style="display: flex; gap: 40px">
+                <div><div class="k">Original invoice</div><div class="mono" style="font-size: 16px; line-height: 24px">USD {{origTotal}}</div></div>
+                <div><div class="k">Credit note value</div><div class="mono" style="font-size: 16px; line-height: 24px; color: #005C96">USD {{creditTotal}}</div></div>
+              </div>
+              <sc-if value="{{showSubmit}}" hint-placeholder-val="{{ true }}">
+                <button class="btn btn-primary" onClick="{{submit}}" disabled="{{cantSubmit}}">Submit for approval</button>
+              </sc-if>
+              <sc-if value="{{showReset}}" hint-placeholder-val="{{ false }}">
+                <button class="btn" onClick="{{reset}}">Raise another credit note</button>
+              </sc-if>
+            </div>
+          </section>
+
+          <aside style="flex: 1 1 400px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+            <section class="card">
+              <div class="card-head"><h2 class="card-title">Approval matrix</h2><span class="card-meta">Credit note value</span></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px">
+                <div>
+                  <label class="lbl" for="route">Approval route</label>
+                  <div style="position: relative">
+                    <select id="route" class="select" value="{{route}}" onChange="{{setRoute}}" disabled="{{routeLocked}}" style="width: 100%">
+                      <option value="matrix">Approval matrix (by amount)</option>
+                      <option value="alt">Manual alternative approver</option>
+                    </select>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 10px; pointer-events: none"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
+                </div>
+                <sc-for list="{{tiers}}" as="t" hint-placeholder-count="2">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; height: 56px; padding: 0 16px; border-radius: 8px; border: 1px solid {{t.border}}; background: {{t.bg}}; box-sizing: border-box">
+                    <span style="font-weight: 500">{{t.role}}</span>
+                    <span class="mono" style="font-size: 12px; color: #5A6170">{{t.limit}}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head"><h2 class="card-title">Workflow</h2></div>
+              <ol style="list-style: none; margin: 0; padding: 8px 16px 16px; display: flex; flex-direction: column">
+                <sc-for list="{{flow}}" as="f" hint-placeholder-count="8">
+                  <li style="display: flex; gap: 12px; align-items: flex-start; padding: 6px 0">
+                    <span style="width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: {{f.dot}}; flex: none"></span>
+                    <span style="display: flex; flex-direction: column"><span style="font-weight: 500; color: {{f.fg}}">{{f.label}}</span><span class="mono" style="font-size: 12px; line-height: 16px; color: #5A6170">{{f.sub}}</span></span>
+                  </li>
+                </sc-for>
+              </ol>
+              <sc-if value="{{showApprove}}" hint-placeholder-val="{{ false }}">
+                <div style="padding: 0 16px 16px; display: flex; flex-direction: column; gap: 8px">
+                  <div style="padding: 12px 16px; border-radius: 6px; background: #F4F5F7; color: #3A4556">Prepared by [User ID]. The preparer cannot approve their own credit note. Multi-factor authentication is required to approve.</div>
+                  <button class="btn btn-primary" onClick="{{approve}}" style="align-self: flex-start">Approve as {{approver}}</button>
+                </div>
+              </sc-if>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { inv: 'v1', full: false, sel: { v1: { l1: true } }, credit: {}, source: 'FCA approval', replace: true, unapplied: {}, stage: 'draft', route: 'matrix' };
+  }
+  renderVals() {
+    const s = this.state;
+    const m = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const INV = [
+      { id: 'v1', no: 'SINOF2602401', type: 'Final', bl: 'BL-SG-24001', paid: false, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 1850], ['l2', 'Bunker / Environmental Surcharge', 320], ['l3', 'Terminal Handling (THC)', 305]] },
+      { id: 'v2', no: 'SINOF2602405', type: 'Final', bl: 'BL-SG-24006', paid: true, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 3200], ['l2', 'Demurrage', 700]] },
+      { id: 'v3', no: 'NSAOF2601044', type: 'Final', bl: 'BL-IN-24005', paid: false, roe: '1 USD = 83.2000 INR', ctry: 'IN', lines: [['l1', 'Ocean Freight', 980], ['l2', 'Documentation Fee', 220]] },
+      { id: 'v4', no: 'SINOF2600118PRF', type: 'Proforma', bl: 'BL-SG-24002', paid: false, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 2100]] }
+    ];
+    const v = INV.find((x) => x.id === s.inv);
+    const total = v.lines.reduce((a, l) => a + l[2], 0);
+    const proforma = v.type === 'Proforma';
+    const needsUnapply = v.paid && !s.unapplied[v.id];
+    const locked = s.stage !== 'draft' || proforma || needsUnapply;
+    const selMap = s.sel[v.id] || {};
+    const crMap = s.credit[v.id] || {};
+    const lines = v.lines.map(([id, code, amt]) => {
+      const on = s.full || !!selMap[id];
+      const credit = s.full ? amt : (on ? (crMap[id] !== undefined ? crMap[id] : amt) : 0);
+      return { code, amt, amtText: m(amt), on, credit: credit.toFixed(2), val: credit,
+        lock: locked || s.full, inputLock: locked || s.full || !on,
+        toggle: () => this.setState({ sel: { ...s.sel, [v.id]: { ...selMap, [id]: !on } } }),
+        setCredit: (e) => this.setState({ credit: { ...s.credit, [v.id]: { ...crMap, [id]: Math.max(0, Number(e.target.value) || 0) } } }) };
+    });
+    const over = lines.some((l) => l.val > l.amt + 0.001);
+    const creditTotal = lines.reduce((a, l) => a + l.val, 0);
+    const tierIdx = creditTotal <= 0 ? -1 : (creditTotal > 50000 ? 1 : 0);
+    const tierDefs = [
+      { role: 'Team lead', limit: 'Up to USD 50,000' },
+      { role: 'Chief Commercial Officer (CCO)', limit: 'Above USD 50,000' }
+    ];
+    const approver = s.route === 'alt' ? 'alternative approver' : (tierIdx === 1 ? 'CCO' : 'team lead');
+    const taxPortal = v.ctry === 'IN';
+    const done = s.stage === 'approved';
+    const cnNo = v.no.slice(0, 7) + String(311 + INV.indexOf(v)).padStart(5, '0') + 'CR';
+    const wasPaid = v.paid;
+    const replNo = v.no.slice(0, 7) + String(2501 + INV.indexOf(v) * 7).padStart(5, '0');
+    const flow = [
+      wasPaid ? { label: 'Payment unapplied', sub: s.unapplied[v.id] ? 'Done' : 'Required first', on: !!s.unapplied[v.id] } : null,
+      { label: 'Request prepared', sub: '[User ID]', on: s.stage !== 'draft' },
+      { label: 'Approver notified by email', sub: s.stage === 'draft' ? '—' : (s.route === 'alt' ? '[Alternative approver]' : (tierIdx === 1 ? 'CCO' : 'Team lead')), on: s.stage !== 'draft' },
+      { label: 'Approval', sub: s.stage === 'pending' ? 'Pending · MFA required' : (done ? 'Approved · MFA verified' : 'Not started'), on: done },
+      { label: 'Credit note issued', sub: done ? cnNo : '—', on: done },
+      { label: 'Charge codes released for new invoice', sub: done ? 'Released' : '—', on: done },
+      { label: 'Replacement invoice', sub: !s.replace ? 'Not required' : (done ? replNo : '—'), on: done && s.replace },
+      wasPaid ? { label: 'Payment re-applied to replacement invoice', sub: done && s.replace ? replNo : '—', on: done && s.replace } : null,
+      { label: 'Government tax portal', sub: !taxPortal ? 'Not required' : (done ? 'IRN: [64-char hash]' : '—'), on: done && taxPortal },
+      { label: 'Posted to GFS', sub: done ? 'Posted' : '—', on: done }
+    ].filter(Boolean);
+    const stageMeta = { draft: ['Draft', 'background:#EEF1F5;color:#5A6170'], pending: ['Pending approval', 'background:#FDF0E3;color:#8A4200'], approved: ['Approved', 'background:#E6F3EC;color:#1F6B45'] };
+    return {
+      invoices: INV.map((x) => ({ ...x, totalText: m(x.lines.reduce((a, l) => a + l[2], 0)), on: x.id === s.inv ? 'true' : 'false',
+        border: x.id === s.inv ? '#0071B7' : '#DADDE3', bg: x.id === s.inv ? '#EAF4FB' : '#fff',
+        pay: x.type === 'Proforma' ? 'Proforma' : (x.paid && !s.unapplied[x.id] ? 'Paid' : 'Unpaid'),
+        payStyle: x.paid && !s.unapplied[x.id] ? 'background:#E6F3EC;color:#1F6B45' : 'background:#EEF1F5;color:#5A6170',
+        pick: () => this.setState({ inv: x.id, stage: 'draft', full: false }) })),
+      isProforma: proforma, needsUnapply,
+      unapply: () => this.setState({ unapplied: { ...s.unapplied, [v.id]: true } }),
+      locked, source: s.source, setSource: (e) => this.setState({ source: e.target.value }),
+      today: '05 Nov 2026', roe: v.roe,
+      fullOn: s.full ? 'true' : 'false', partOn: s.full ? 'false' : 'true',
+      fullBg: s.full ? '#fff' : 'transparent', partBg: s.full ? 'transparent' : '#fff',
+      fullFw: s.full ? 600 : 500, partFw: s.full ? 500 : 600,
+      pickFull: () => this.setState({ full: true }), pickPart: () => this.setState({ full: false }),
+      replace: s.replace, toggleReplace: () => this.setState({ replace: !s.replace }),
+      lines, overCredit: over, taxPortal, regime: 'GSTN e-Invoice (IRN)',
+      origTotal: m(total), creditTotal: m(creditTotal),
+      stageText: stageMeta[s.stage][0], stageChip: stageMeta[s.stage][1],
+      showSubmit: s.stage === 'draft', cantSubmit: locked || over || creditTotal <= 0,
+      submit: () => this.setState({ stage: 'pending' }),
+      showApprove: s.stage === 'pending', approver,
+      route: s.route, setRoute: (e) => this.setState({ route: e.target.value }), routeLocked: s.stage !== 'draft',
+      approve: () => this.setState({ stage: 'approved' }),
+      showReset: done, reset: () => this.setState({ stage: 'draft', full: false, sel: { ...s.sel, [v.id]: {} }, credit: { ...s.credit, [v.id]: {} } }),
+      tiers: tierDefs.map((t, i) => ({ ...t, border: i === tierIdx ? '#0071B7' : '#DADDE3', bg: i === tierIdx ? '#EAF4FB' : '#fff' })),
+      flow: flow.map((f) => ({ ...f, dot: f.on ? '#1F8A55' : '#C5CAD3', fg: f.on ? '#161A21' : '#5A6170' }))
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>
