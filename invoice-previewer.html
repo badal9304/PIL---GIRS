@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS Invoice Template Previewer</title>
+<link rel="icon" href="assets/pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7;color:#161A21;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:#0071B7}a:hover{color:#005C96}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item:hover{background:#F1F3F6;color:#161A21}
+.nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:#F1F3F6}
+.btn-sm{height:32px;padding:0 12px}
+.btn-primary{background:#0071B7;border-color:#0071B7;color:#fff}
+.btn-primary:hover{background:#005C96;border-color:#005C96}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible{outline:2px solid #0071B7;outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select:hover,.input:hover{border-color:#8C95A3}
+.input{height:36px;padding:0 12px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:#fff;border:1px solid #DADDE3;border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid #DADDE3;box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:#5A6170}
+.lbl{display:block;font-size:12px;font-weight:600;color:#5A6170;line-height:16px;margin-bottom:6px}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5A6170;font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:#5A6170;padding:0 12px;border-bottom:1px solid #DADDE3;white-space:nowrap;background:#F7F8FA;box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid #ECEEF2;vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:#F7F9FC}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:#0071B7;cursor:pointer}
+.seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;border-radius:4px;font-size:13px;color:#161A21}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:#0071B7;color:#fff;font-size:10px;font-weight:600;font-family:'IBM Plex Mono',monospace;margin-inline-end:6px;vertical-align:middle;box-sizing:border-box}
+.ar{font-family:'IBM Plex Sans Arabic',sans-serif}
+.inv th{position:static;height:auto;background:none;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid #C9CED6}
+.inv td{height:auto;padding:9px 10px;vertical-align:top}
+.inv tbody tr:hover td{background:none}</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+  <div aria-hidden="true" style="height: 3px; background: #E31D1A; flex: none"></div>
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+    <aside style="flex: 1 0 240px; max-width: 240px; background: #fff; border-inline-end: 1px solid #DADDE3; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid #ECEEF2; box-sizing: border-box">
+        <img src="assets/pil-logo.png" alt="PIL" style="height: 26px; width: auto; display: block">
+        <span style="width: 1px; height: 20px; background: #DADDE3"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
+      </div>
+      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
+        <a href="index.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+          <span>Operations Cockpit</span>
+        </a>
+        <a href="invoice-previewer.html" class="nav-item nav-on" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+          <span>Invoice Previewer</span>
+        </a>
+        <a href="dar-console.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <span>DAR Console</span>
+        </a>
+        <a href="soa-aging.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+          <span>SOA &amp; Aging</span>
+        </a>
+        <a href="cashapp-workbench.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+          <span>CashApp Workbench</span>
+        </a>
+        <a href="tolerance-coreor.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+          <span>Tolerance &amp; COREOR</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+      <header style="min-height: 64px; background: #fff; border-bottom: 1px solid #DADDE3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px 24px; box-sizing: border-box">
+        <div style="min-width: 0">
+          <h1 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">Dynamic Invoice Template Previewer</h1>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">Invoice, credit note and debit note rendering with mandatory legal fields, statutory QR and gapless numbering</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+
+        </div>
+      </header>
+
+      <main style="flex: 1 1 auto; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <aside style="flex: 1 1 340px; max-width: 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+            <section class="card">
+              <div class="card-head"><h2 class="card-title">Template</h2></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 16px">
+                <div>
+                  <span class="lbl">Document type</span>
+                  <div role="radiogroup" aria-label="Document type" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; height: 36px; background: #EEF1F5; padding: 3px; border-radius: 6px; box-sizing: border-box">
+                    <sc-for list="{{docTypes}}" as="d" hint-placeholder-count="3">
+                      <button class="seg" role="radio" aria-checked="{{d.on}}" onClick="{{d.pick}}" style="background: {{d.bg}}; font-weight: {{d.fw}}; box-shadow: {{d.shadow}}">{{d.label}}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div>
+                  <label class="lbl" for="ctry">Country template</label>
+                  <div style="position: relative">
+                    <select id="ctry" class="select" value="{{country}}" onChange="{{pickCountry}}" style="width: 100%">
+                      <sc-for list="{{countries}}" as="c" hint-placeholder-count="5">
+                        <option value="{{c.k}}">{{c.name}} — {{c.regime}}</option>
+                      </sc-for>
+                    </select>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 10px; pointer-events: none"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
+                </div>
+                <label style="display: flex; align-items: center; gap: 10px; height: 20px; cursor: pointer">
+                  <input type="checkbox" checked="{{marks}}" onChange="{{toggleMarks}}">
+                  <span>Highlight mandatory legal fields</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <h2 class="card-title">Mandatory legal fields</h2>
+                <span class="mono card-meta">8 of 19 named</span>
+              </div>
+              <ol style="margin: 0; padding: 8px 16px 12px; list-style: none; display: flex; flex-direction: column">
+                <sc-for list="{{fields}}" as="f" hint-placeholder-count="8">
+                  <li style="display: flex; align-items: center; height: 32px"><span class="badge">{{f.n}}</span>{{f.label}}</li>
+                </sc-for>
+                <li style="display: flex; align-items: center; height: 32px; color: #5A6170"><span class="badge" style="background: #8A919E">9–19</span>[11 fields — to be confirmed in T1-06]</li>
+              </ol>
+            </section>
+
+            <section class="card">
+              <div class="card-head"><h2 class="card-title">Gapless sequence</h2></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+                  <div>
+                    <span class="k">Next number</span>
+                    <div class="mono" style="font-size: 15px; font-weight: 500; line-height: 24px">{{nextNo}}</div>
+                  </div>
+                  <button class="btn btn-primary" onClick="{{issue}}">Issue</button>
+                </div>
+                <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+                  <sc-for list="{{log}}" as="l" hint-placeholder-count="3">
+                    <li class="mono" style="font-size: 12px; height: 28px; color: #5A6170; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #ECEEF2"><span>{{l.no}}</span><span>Issued</span></li>
+                  </sc-for>
+                </ul>
+              </div>
+            </section>
+          </aside>
+
+          <section style="flex: 999 1 720px; min-width: 0; background: #E4E7EC; border-radius: 8px; padding: 24px; display: flex; justify-content: center; overflow-x: auto; box-sizing: border-box">
+            <article aria-label="Invoice preview" style="width: 100%; max-width: 820px; min-width: 640px; background: #fff; box-shadow: 0 1px 3px rgba(22,26,33,.12), 0 8px 24px rgba(22,26,33,.08); padding: 40px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+              <div style="display: flex; justify-content: space-between; gap: 24px; align-items: flex-start">
+                <div style="display: flex; flex-direction: column; gap: 6px; padding: 4px; border-radius: 4px; outline: {{hl}}">
+                  <div style="font-size: 18px; font-weight: 700; letter-spacing: .02em"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">1</span></sc-if>Pacific International Lines</div>
+                  <div style="font-size: 12px; color: #5A6170">[Registered address]</div>
+                </div>
+                <div style="text-align: end; display: flex; flex-direction: column; gap: 4px">
+                  <div style="font-size: 20px; font-weight: 700; color: #161A21">{{docTitle}}</div>
+                  <sc-if value="{{bilingual}}" hint-placeholder-val="{{ false }}">
+                    <div class="{{altClass}}" style="font-size: 16px; font-weight: 600; color: #161A21">{{docTitleAlt}}</div>
+                  </sc-if>
+                  <div class="mono" style="font-size: 13px">{{currentNo}}</div>
+                  <sc-if value="{{isCredit}}" hint-placeholder-val="{{ false }}">
+                    <div class="mono" style="font-size: 12px; color: #5A6170">Ref. invoice: {{refNo}}</div>
+                  </sc-if>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 4px; border-radius: 4px; outline: {{hl}}">
+                <div><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">2</span></sc-if>Tax ID — Corporate HQ</span><div class="mono" style="font-size: 13px; margin-top: 4px">[HQ tax registration no.]</div></div>
+                <sc-if value="{{dualTax}}" hint-placeholder-val="{{ true }}">
+                  <div><span class="k">Tax ID — Local Agency GSTIN</span><div class="mono" style="font-size: 13px; margin-top: 4px">[Local agency GSTIN]</div></div>
+                </sc-if>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; border-top: 1px solid #ECEEF2; border-bottom: 1px solid #ECEEF2; padding: 16px 0">
+                <div style="display: flex; flex-direction: column; gap: 4px">
+                  <span class="k">Billed to</span>
+                  <span style="font-size: 13px">[Billed-To party]</span>
+                  <span class="mono" style="font-size: 12px; color: #5A6170">[Customer tax ID]</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+                  <div style="padding: 2px; border-radius: 4px; outline: {{hl}}"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">3</span></sc-if>B/L #</span><div class="mono" style="font-size: 13px; margin-top: 4px">BL-SG-24001</div></div>
+                  <div style="padding: 2px; border-radius: 4px; outline: {{hl}}"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">4</span></sc-if>Voyage</span><div class="mono" style="font-size: 13px; margin-top: 4px">Vessel 01 / 012E</div></div>
+                  <div style="padding: 2px; border-radius: 4px; outline: {{hl}}; grid-column: span 2"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">5</span></sc-if>POL / POD</span><div class="mono" style="font-size: 13px; margin-top: 4px">{{polpod}}</div></div>
+                </div>
+              </div>
+
+              <div class="inv" style="padding: 4px; border-radius: 4px; outline: {{hl}}">
+                <table>
+                  <thead><tr><th>Description</th><th>Schedule</th><th>Ccy</th><th class="r">Amount</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{lines}}" as="ln" hint-placeholder-count="4">
+                      <tr>
+                        <td style="font-size: 13px"><sc-if value="{{ln.mark}}" hint-placeholder-val="{{ false }}"><span class="badge">{{ln.badge}}</span></sc-if>{{ln.desc}}</td>
+                        <td style="font-size: 12px; color: #5A6170">{{ln.sched}}</td>
+                        <td class="mono" style="font-size: 13px">{{ln.ccy}}</td>
+                        <td class="mono r" style="font-size: 13px">{{ln.amt}}</td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; gap: 24px; align-items: flex-end">
+                <div style="display: flex; gap: 16px; align-items: flex-end">
+                  <div aria-label="Statutory QR code placeholder" role="img" style="width: 105px; height: 105px; display: grid; grid-template-columns: repeat(21, minmax(0, 1fr)); border: 4px solid #fff; outline: 1px solid #ECEEF2">
+                    <sc-for list="{{qr}}" as="q" hint-placeholder-count="441">
+                      <span style="background: {{q}}"></span>
+                    </sc-for>
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 4px">
+                    <span class="k">Statutory QR</span>
+                    <span style="font-size: 13px; font-weight: 600">{{regime}}</span>
+                    <span class="mono" style="font-size: 11px; color: #5A6170">{{qrRef}}</span>
+                  </div>
+                </div>
+                <div style="min-width: 280px; display: flex; flex-direction: column; gap: 6px; padding: 4px; border-radius: 4px; outline: {{hl}}">
+                  <div class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">8</span></sc-if>Tax breakdown &amp; totals</div>
+                  <sc-for list="{{totals}}" as="t" hint-placeholder-count="3">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; {{t.style}}"><span>{{t.label}}</span><span class="mono">{{t.val}}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { doc: 'inv', country: 'IN', marks: true, seq: { IN: 1042, SG: 2310, SA: 518, MY: 774, MX: 291 }, log: {} };
+  }
+  renderVals() {
+    const s = this.state;
+    const C = {
+      SG: { name: 'Singapore', regime: 'Peppol / InvoiceNow', ccy: 'SGD', rate: 0.09, taxName: 'GST 9%', pod: 'SGSIN', alt: null, dual: false },
+      IN: { name: 'India', regime: 'GSTN e-Invoice (IRN)', ccy: 'INR', rate: 0.18, taxName: 'IGST 18%', pod: 'INNSA', alt: null, dual: true },
+      SA: { name: 'Saudi Arabia', regime: 'ZATCA Phase 2', ccy: 'SAR', rate: 0.15, taxName: 'VAT 15%', pod: 'SAJED', alt: 'ar', dual: false },
+      MY: { name: 'Malaysia', regime: 'MyInvois', ccy: 'MYR', rate: 0.08, taxName: 'SST 8%', pod: 'MYPKG', alt: null, dual: false },
+      MX: { name: 'Mexico', regime: 'CFDI', ccy: 'MXN', rate: 0.16, taxName: 'IVA 16%', pod: 'MXZLO', alt: 'es', dual: false }
+    };
+    const c = C[s.country];
+    const titles = { inv: ['Tax Invoice', 'فاتورة ضريبية', 'Factura'], cn: ['Credit Note', 'إشعار دائن', 'Nota de crédito'], dn: ['Debit Note', 'إشعار مدين', 'Nota de débito'] };
+    const prefix = { inv: 'INV', cn: 'CN', dn: 'DN' }[s.doc];
+    const fmtNo = (n) => s.country + '-' + prefix + '-2026-' + String(n).padStart(6, '0');
+    const seqN = s.seq[s.country];
+    const local = { SGD: 410, INR: 24500, SAR: 1100, MYR: 1300, MXN: 5200 }[c.ccy];
+    const doc = { SGD: 45, INR: 2800, SAR: 120, MYR: 140, MXN: 560 }[c.ccy];
+    const sign = s.doc === 'cn' ? -1 : 1;
+    const f2 = (v) => (sign * v).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const marks = s.marks;
+    const lines = [
+      { desc: 'Ocean Freight', sched: 'International — zero-rated', ccy: 'USD', amt: f2(1850), badge: 6, mark: marks },
+      { desc: 'Bunker / Environmental Surcharge', sched: 'International — zero-rated', ccy: 'USD', amt: f2(320), badge: 7, mark: marks },
+      { desc: 'Terminal Handling (THC)', sched: 'Domestic — ' + c.taxName, ccy: c.ccy, amt: f2(local), badge: 7, mark: marks },
+      { desc: 'Documentation Fee', sched: 'Domestic — ' + c.taxName, ccy: c.ccy, amt: f2(doc), badge: 7, mark: marks }
+    ];
+    const tax = (local + doc) * c.rate;
+    const totals = [
+      { label: 'Subtotal USD', val: f2(2170), style: '' },
+      { label: 'Subtotal ' + c.ccy, val: f2(local + doc), style: '' },
+      { label: c.taxName + ' (' + c.ccy + ')', val: f2(tax), style: '' },
+      { label: 'Total USD', val: f2(2170), style: 'font-weight:600;border-top:1px solid #C9CED6;padding-top:6px' },
+      { label: 'Total ' + c.ccy, val: f2(local + doc + tax), style: 'font-weight:600' }
+    ];
+    let seed = seqN * 7 + s.doc.length * 13 + s.country.charCodeAt(0);
+    const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const finder = (r, col) => {
+      const inBox = (r0, c0) => r >= r0 && r < r0 + 7 && col >= c0 && col < c0 + 7;
+      const boxes = [[0, 0], [0, 14], [14, 0]];
+      for (const [r0, c0] of boxes) {
+        if (inBox(r0, c0)) {
+          const y = r - r0, x = col - c0;
+          return (y === 0 || y === 6 || x === 0 || x === 6 || (y >= 2 && y <= 4 && x >= 2 && x <= 4)) ? 1 : 0;
+        }
+      }
+      return -1;
+    };
+    const qr = [];
+    for (let r = 0; r < 21; r++) for (let col = 0; col < 21; col++) {
+      const f = finder(r, col);
+      qr.push((f === 1 || (f === -1 && rnd() > 0.52)) ? '#161A21' : '#fff');
+    }
+    const fieldNames = ['Legal Carrier Name', 'Tax IDs', 'B/L #', 'Voyage', 'POL / POD', 'Itemized Freight', 'Surcharges', 'Tax Breakdowns'];
+    const recent = (s.log[s.country] || []).slice(-3).reverse().map((no) => ({ no }));
+    return {
+      docTypes: [['inv', 'Invoice'], ['cn', 'Credit Note'], ['dn', 'Debit Note']].map(([k, label]) => ({ label, on: s.doc === k ? 'true' : 'false', bg: s.doc === k ? '#fff' : 'transparent', fw: s.doc === k ? 600 : 500, shadow: s.doc === k ? '0 1px 2px rgba(22,26,33,.15)' : 'none', pick: () => this.setState({ doc: k }) })),
+      countries: Object.keys(C).map((k) => ({ k, name: C[k].name, regime: C[k].regime })),
+      country: s.country,
+      pickCountry: (e) => this.setState({ country: e.target.value }),
+      marks,
+      toggleMarks: () => this.setState({ marks: !marks }),
+      hl: marks ? '2px dashed #0071B7' : 'none',
+      fields: fieldNames.map((label, i) => ({ n: i + 1, label })),
+      docTitle: titles[s.doc][0],
+      bilingual: !!c.alt,
+      docTitleAlt: c.alt === 'ar' ? titles[s.doc][1] : titles[s.doc][2],
+      altClass: c.alt === 'ar' ? 'ar' : '',
+      currentNo: fmtNo(seqN),
+      nextNo: fmtNo(seqN + 1),
+      isCredit: s.doc !== 'inv',
+      refNo: s.country + '-INV-2026-' + String(seqN - 3).padStart(6, '0'),
+      dualTax: c.dual,
+      polpod: 'SGSIN → ' + (c.pod === 'SGSIN' ? 'INNSA' : c.pod),
+      lines, totals, qr,
+      regime: c.regime,
+      qrRef: s.country === 'IN' ? 'IRN: [64-char hash]' : '[Clearance reference]',
+      log: recent,
+      issue: () => {
+        const cur = fmtNo(seqN);
+        const lg = { ...s.log, [s.country]: [...(s.log[s.country] || []), cur] };
+        this.setState({ seq: { ...s.seq, [s.country]: seqN + 1 }, log: lg });
+      }
+    };
+  }
+}
+</script>
+<script src="assets/runtime.js"></script>
+</body>
+</html>

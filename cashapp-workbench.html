@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS CashApp AI Allocation Workbench</title>
+<link rel="icon" href="assets/pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7;color:#161A21;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:#0071B7}a:hover{color:#005C96}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item:hover{background:#F1F3F6;color:#161A21}
+.nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:#F1F3F6}
+.btn-sm{height:32px;padding:0 12px}
+.btn-primary{background:#0071B7;border-color:#0071B7;color:#fff}
+.btn-primary:hover{background:#005C96;border-color:#005C96}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible{outline:2px solid #0071B7;outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select:hover,.input:hover{border-color:#8C95A3}
+.input{height:36px;padding:0 12px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:#fff;border:1px solid #DADDE3;border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid #DADDE3;box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:#5A6170}
+.lbl{display:block;font-size:12px;font-weight:600;color:#5A6170;line-height:16px;margin-bottom:6px}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5A6170;font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:#5A6170;padding:0 12px;border-bottom:1px solid #DADDE3;white-space:nowrap;background:#F7F8FA;box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid #ECEEF2;vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:#F7F9FC}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:#0071B7;cursor:pointer}
+.hl-box{position:relative;padding:8px 10px;border:2px solid #0071B7;border-radius:4px;background:rgba(0,113,183,.06)}
+.hl-tag{position:absolute;top:-10px;inset-inline-end:8px;background:#0071B7;color:#fff;font-size:10px;line-height:16px;padding:0 6px;border-radius:3px;font-family:'IBM Plex Sans',sans-serif;font-weight:600}</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+  <div aria-hidden="true" style="height: 3px; background: #E31D1A; flex: none"></div>
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+    <aside style="flex: 1 0 240px; max-width: 240px; background: #fff; border-inline-end: 1px solid #DADDE3; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid #ECEEF2; box-sizing: border-box">
+        <img src="assets/pil-logo.png" alt="PIL" style="height: 26px; width: auto; display: block">
+        <span style="width: 1px; height: 20px; background: #DADDE3"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
+      </div>
+      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
+        <a href="index.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+          <span>Operations Cockpit</span>
+        </a>
+        <a href="invoice-previewer.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+          <span>Invoice Previewer</span>
+        </a>
+        <a href="dar-console.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <span>DAR Console</span>
+        </a>
+        <a href="soa-aging.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+          <span>SOA &amp; Aging</span>
+        </a>
+        <a href="cashapp-workbench.html" class="nav-item nav-on" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+          <span>CashApp Workbench</span>
+        </a>
+        <a href="tolerance-coreor.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+          <span>Tolerance &amp; COREOR</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+      <header style="min-height: 64px; background: #fff; border-bottom: 1px solid #DADDE3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px 24px; box-sizing: border-box">
+        <div style="min-width: 0">
+          <h1 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">CashApp AI Allocation Workbench</h1>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">Multi-factor matching: Virtual Account → Invoice Ref → Exact Amount → Customer BDR</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+
+        </div>
+      </header>
+
+      <main style="flex: 1 1 auto; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <section class="card" aria-label="Bank statement line" style="min-height: 64px; padding: 12px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 40px; box-sizing: border-box">
+          <div><div class="k">Bank statement line</div><div class="mono" style="margin-top: 2px">MT940 :61: EUR 45,600.00</div></div>
+          <span aria-hidden="true" style="width: 1px; height: 32px; background: #ECEEF2"></span>
+          <div><div class="k">:86: reference</div><div class="mono" style="margin-top: 2px">[Customer reference string]</div></div>
+          <span aria-hidden="true" style="width: 1px; height: 32px; background: #ECEEF2"></span>
+          <div><div class="k">Virtual account</div><div style="margin-top: 2px"><span class="chip" style="background: #E6F3EC; color: #1F6B45">Matched · [Customer A]</span></div></div>
+        </section>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="card" aria-label="OCR remittance slip" style="flex: 1 1 520px; max-width: 600px; min-width: 0; overflow: hidden">
+            <div class="card-head">
+              <h2 class="card-title">Remittance slip — OCR extraction</h2>
+              <span class="mono card-meta">remittance_advice.pdf · p.1</span>
+            </div>
+            <div style="background: #E4E7EC; padding: 20px">
+              <div style="background: #fff; padding: 28px 32px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 1px 3px rgba(22,26,33,.12); font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+                <div style="display: flex; justify-content: space-between">
+                  <span style="font-weight: 600; font-size: 15px; font-family: 'IBM Plex Sans', sans-serif">PAYMENT ADVICE</span>
+                  <span style="color: #5A6170">[Date]</span>
+                </div>
+                <div class="hl-box">
+                  <span class="hl-tag">Payer · 97%</span>
+                  <div style="color: #5A6170; font-size: 11px; line-height: 16px">Remitter</div>
+                  <div>[Freight forwarder — third-party payer]</div>
+                </div>
+                <div style="color: #5A6170; font-size: 11px; line-height: 16px; margin-top: -8px">Paying on behalf of: [Consignee]</div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <div style="color: #5A6170; font-size: 11px; line-height: 16px">Invoices settled</div>
+                  <sc-for list="{{slipRefs}}" as="sr" hint-placeholder-count="3">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border: 2px solid {{sr.border}}; border-radius: 4px; background: {{sr.bg}}">
+                      <span>{{sr.text}}</span><span style="font-size: 11px; color: {{sr.fg}}; font-family: 'IBM Plex Sans', sans-serif; font-weight: 600">{{sr.conf}}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div class="hl-box" style="display: flex; justify-content: space-between; font-weight: 500">
+                  <span>TOTAL REMITTED</span><span>EUR 45,600.00</span>
+                </div>
+              </div>
+            </div>
+            <div style="height: 52px; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid #DADDE3; box-sizing: border-box">
+              <span style="color: #5A6170">ROE match EUR → USD</span>
+              <span class="mono">45,600.00 × 1.0850 = <strong style="font-weight: 600">USD 49,476.00</strong></span>
+            </div>
+          </section>
+
+          <section class="card" style="flex: 999 1 720px; min-width: 0; overflow: hidden">
+            <div class="card-head" style="flex-wrap: wrap; padding-block: 8px">
+              <h2 class="card-title">Open invoice reconciliation</h2>
+              <div style="flex: 0 1 320px; min-width: 240px">
+                <label for="thr" style="display: flex; justify-content: space-between; font-size: 12px; line-height: 16px; font-weight: 600; color: #5A6170"><span>Confidence threshold</span><span class="mono" style="color: #161A21">≥ {{thr}}%</span></label>
+                <input id="thr" type="range" min="30" max="99" step="1" value="{{thr}}" onChange="{{setThr}}" onInput="{{setThr}}" style="margin-top: 4px">
+              </div>
+            </div>
+            <div style="overflow-x: auto">
+              <table>
+                <thead><tr><th style="width: 44px"><span class="sr">Include</span></th><th>Invoice #</th><th>B/L #</th><th>Match factors</th><th class="r">Open USD</th><th style="width: 180px">Confidence</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+                    <tr>
+                      <td style="{{r.rowStyle}}"><input type="checkbox" checked="{{r.inc}}" onChange="{{r.toggle}}" disabled="{{allocated}}" aria-label="Include {{r.no}}"></td>
+                      <td class="mono" style="font-weight: 500; {{r.rowStyle}}">{{r.no}}</td>
+                      <td class="mono" style="{{r.rowStyle}}">{{r.bl}}</td>
+                      <td style="{{r.rowStyle}}">
+                        <span style="display: inline-flex; flex-wrap: wrap; gap: 4px">
+                          <sc-for list="{{r.factors}}" as="f" hint-placeholder-count="2">
+                            <span class="chip" style="background: #EAF4FB; color: #005C96">{{f}}</span>
+                          </sc-for>
+                        </span>
+                      </td>
+                      <td class="mono r" style="{{r.rowStyle}}">{{r.amtText}}</td>
+                      <td style="{{r.rowStyle}}">
+                        <span style="display: flex; align-items: center; gap: 8px">
+                          <span style="flex: 1; height: 6px; border-radius: 3px; background: #EEF1F5; overflow: hidden"><span style="display: block; height: 6px; width: {{r.w}}; background: {{r.bar}}"></span></span>
+                          <span class="mono" style="font-size: 12px; width: 36px; text-align: end">{{r.conf}}%</span>
+                        </span>
+                      </td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; min-height: 72px; padding: 12px 16px; background: #F7F8FA; border-top: 1px solid #DADDE3; box-sizing: border-box">
+              <div style="display: flex; flex-wrap: wrap; gap: 40px">
+                <div><div class="k">Received (USD)</div><div class="mono" style="font-size: 16px; line-height: 24px">49,476.00</div></div>
+                <div><div class="k">Allocated</div><div class="mono" style="font-size: 16px; line-height: 24px">{{allocText}}</div></div>
+                <div><div class="k">Difference</div><div class="mono" style="font-size: 16px; line-height: 24px; color: {{diffColor}}">{{diffText}}</div></div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center">
+                <sc-if value="{{allocated}}" hint-placeholder-val="{{ false }}">
+                  <span class="chip" style="background: #E6F3EC; color: #1F6B45">Allocated to {{selCount}} invoices</span>
+                  <button class="btn" onClick="{{undo}}">Undo</button>
+                </sc-if>
+                <sc-if value="{{notAllocated}}" hint-placeholder-val="{{ true }}">
+                  <button class="btn btn-primary" onClick="{{allocate}}" disabled="{{cantAllocate}}">1-click batch allocation ({{selCount}})</button>
+                </sc-if>
+              </div>
+            </div>
+            <sc-if value="{{overAlloc}}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin: 0 16px 16px; padding: 12px 16px; border-radius: 6px; background: #FBEAEA; color: #8E1F23">Selected invoices exceed the amount received. Raise the threshold or deselect invoices.</div>
+            </sc-if>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { thr: 85, manual: {}, allocated: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const m = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const received = 49476;
+    const inv = [
+      { id: 'a', no: 'SG-INV-2026-002144', bl: 'BL-SG-24001', amt: 18326, conf: 99, factors: ['Virtual Account', 'Invoice Ref', 'Exact Amount'] },
+      { id: 'b', no: 'SG-INV-2026-002310', bl: 'BL-SG-24006', amt: 9750, conf: 93, factors: ['Virtual Account', 'Customer BDR'] },
+      { id: 'c', no: 'SG-INV-2026-002281', bl: 'BL-SG-24005', amt: 21400, conf: 88, factors: ['Virtual Account', 'Invoice Ref (fuzzy)'] },
+      { id: 'd', no: 'SG-INV-2026-002298', bl: 'BL-SG-24009', amt: 6120, conf: 54, factors: ['Virtual Account'] },
+      { id: 'e', no: 'SG-INV-2026-002301', bl: 'BL-SG-24011', amt: 2880, conf: 31, factors: ['Virtual Account'] }
+    ];
+    const isInc = (i) => (s.manual[i.id] !== undefined ? s.manual[i.id] : i.conf >= s.thr);
+    const sel = inv.filter(isInc);
+    const alloc = sel.reduce((a, i) => a + i.amt, 0);
+    const diff = received - alloc;
+    const refs = [
+      { text: 'SG-INV-2026-002144', id: 'a', conf: 'Invoice ref · 99%' },
+      { text: '002281  (prefix missing)', id: 'c', conf: 'Fuzzy · 88%' },
+      { text: 'B/L BL-SG-24006', id: 'b', conf: 'B/L · 93%' }
+    ];
+    return {
+      thr: s.thr,
+      setThr: (e) => this.setState({ thr: Number(e.target.value), manual: {} }),
+      rows: inv.map((i) => {
+        const inc = isInc(i);
+        const hi = i.conf >= 85, mid = i.conf >= 60;
+        return { ...i, inc, amtText: m(i.amt), w: i.conf + '%',
+          bar: hi ? '#2E8B57' : (mid ? '#C86B10' : '#B3363A'),
+          rowStyle: s.allocated && inc ? 'background:#F1F8F4' : (inc ? 'background:#F2F8FC' : ''),
+          toggle: () => this.setState({ manual: { ...s.manual, [i.id]: !inc } }) };
+      }),
+      slipRefs: refs.map((r) => {
+        const on = isInc(inv.find((i) => i.id === r.id));
+        return { text: r.text, conf: r.conf, border: on ? '#2E8B57' : '#C5CAD3', bg: on ? 'rgba(46,139,87,.07)' : '#fff', fg: on ? '#1F6B45' : '#5A6170' };
+      }),
+      allocText: m(alloc),
+      diffText: (diff < 0 ? '− ' : '') + m(Math.abs(diff)),
+      diffColor: diff === 0 ? '#1F6B45' : (diff < 0 ? '#A3262A' : '#8A4200'),
+      selCount: sel.length,
+      overAlloc: diff < 0,
+      cantAllocate: sel.length === 0 || diff < 0,
+      allocated: s.allocated,
+      notAllocated: !s.allocated,
+      allocate: () => this.setState({ allocated: true }),
+      undo: () => this.setState({ allocated: false })
+    };
+  }
+}
+</script>
+<script src="assets/runtime.js"></script>
+</body>
+</html>

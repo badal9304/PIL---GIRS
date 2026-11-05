@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS Dispute and Approval Request Console</title>
+<link rel="icon" href="assets/pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7;color:#161A21;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:#0071B7}a:hover{color:#005C96}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item:hover{background:#F1F3F6;color:#161A21}
+.nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:#F1F3F6}
+.btn-sm{height:32px;padding:0 12px}
+.btn-primary{background:#0071B7;border-color:#0071B7;color:#fff}
+.btn-primary:hover{background:#005C96;border-color:#005C96}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible{outline:2px solid #0071B7;outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select:hover,.input:hover{border-color:#8C95A3}
+.input{height:36px;padding:0 12px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:#fff;border:1px solid #DADDE3;border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid #DADDE3;box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:#5A6170}
+.lbl{display:block;font-size:12px;font-weight:600;color:#5A6170;line-height:16px;margin-bottom:6px}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5A6170;font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:#5A6170;padding:0 12px;border-bottom:1px solid #DADDE3;white-space:nowrap;background:#F7F8FA;box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid #ECEEF2;vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:#F7F9FC}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:#0071B7;cursor:pointer}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:64px;padding:12px 16px;border-radius:8px}
+.step{all:unset;box-sizing:border-box;cursor:pointer;width:100%;height:56px;padding:0 16px;display:flex;align-items:center;gap:12px}
+.step:disabled{cursor:default}
+.step:focus-visible{outline:2px solid #0071B7;outline-offset:-2px}
+.stat{padding:12px 16px;border-radius:6px}</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+  <div aria-hidden="true" style="height: 3px; background: #E31D1A; flex: none"></div>
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+    <aside style="flex: 1 0 240px; max-width: 240px; background: #fff; border-inline-end: 1px solid #DADDE3; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid #ECEEF2; box-sizing: border-box">
+        <img src="assets/pil-logo.png" alt="PIL" style="height: 26px; width: auto; display: block">
+        <span style="width: 1px; height: 20px; background: #DADDE3"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
+      </div>
+      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
+        <a href="index.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+          <span>Operations Cockpit</span>
+        </a>
+        <a href="invoice-previewer.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+          <span>Invoice Previewer</span>
+        </a>
+        <a href="dar-console.html" class="nav-item nav-on" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <span>DAR Console</span>
+        </a>
+        <a href="soa-aging.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+          <span>SOA &amp; Aging</span>
+        </a>
+        <a href="cashapp-workbench.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+          <span>CashApp Workbench</span>
+        </a>
+        <a href="tolerance-coreor.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+          <span>Tolerance &amp; COREOR</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+      <header style="min-height: 64px; background: #fff; border-bottom: 1px solid #DADDE3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px 24px; box-sizing: border-box">
+        <div style="min-width: 0">
+          <h1 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">Dispute &amp; Approval Request (DAR) Console</h1>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">Operational waivers, multi-tier authorization and automated credit note triggering</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+
+        </div>
+      </header>
+
+      <main style="flex: 1 1 auto; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="card" style="flex: 999 1 720px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
+            <ol aria-label="Dispute lodging steps" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid #DADDE3">
+              <sc-for list="{{steps}}" as="st" hint-placeholder-count="4">
+                <li>
+                  <button class="step" onClick="{{st.go}}" disabled="{{st.locked}}" aria-current="{{st.current}}" style="box-shadow: inset 0 -3px 0 {{st.line}}; color: {{st.fg}}">
+                    <span class="mono" style="width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; flex: none; background: {{st.dotBg}}; color: {{st.dotFg}}">{{st.n}}</span>
+                    <span style="font-weight: 500">{{st.label}}</span>
+                  </button>
+                </li>
+              </sc-for>
+            </ol>
+
+            <div style="padding: 24px; display: flex; flex-direction: column; gap: 16px; min-height: 520px; box-sizing: border-box">
+              <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+                <h2 class="card-title" style="font-size: 15px">Select the disputed charge</h2>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <sc-for list="{{charges}}" as="c" hint-placeholder-count="3">
+                    <button class="opt" onClick="{{c.pick}}" aria-pressed="{{c.on}}" style="border: 1px solid {{c.border}}; background: {{c.bg}}">
+                      <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                        <span style="font-weight: 600">{{c.type}} · <span class="mono">{{c.bl}}</span></span>
+                        <span style="font-size: 12px; color: #5A6170">{{c.detail}}</span>
+                      </span>
+                      <span style="display: flex; align-items: center; gap: 16px">
+                        <span class="chip" style="{{c.payStyle}}">{{c.pay}}</span>
+                        <span class="mono" style="font-weight: 500; min-width: 112px; text-align: end">USD {{c.amtText}}</span>
+                      </span>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+                <h2 class="card-title" style="font-size: 15px">Dispute reason</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+                  <sc-for list="{{reasons}}" as="r" hint-placeholder-count="4">
+                    <button class="opt" onClick="{{r.pick}}" aria-pressed="{{r.on}}" style="border: 1px solid {{r.border}}; background: {{r.bg}}">
+                      <span style="display: flex; flex-direction: column; gap: 4px">
+                        <span style="font-weight: 600">{{r.label}}</span>
+                        <span style="font-size: 12px; color: #5A6170">{{r.group}}</span>
+                      </span>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{carrierFault}}" hint-placeholder-val="{{ false }}">
+                  <div role="status" class="stat" style="background: #EAF4FB; color: #005C96">Carrier-fault reason — eligible for automated carrier-fault waiver.</div>
+                </sc-if>
+              </sc-if>
+
+              <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+                <h2 class="card-title" style="font-size: 15px">Waiver amount</h2>
+                <div style="display: flex; flex-direction: column; gap: 8px; max-width: 640px">
+                  <label for="pct" style="display: flex; justify-content: space-between; font-weight: 500"><span>Waiver %</span><span class="mono">{{pct}}%</span></label>
+                  <input id="pct" type="range" min="0" max="100" step="5" value="{{pct}}" onChange="{{setPct}}" onInput="{{setPct}}">
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+                  <div class="stat" style="background: #F4F5F7"><div class="k">Charge</div><div class="mono" style="font-size: 18px; line-height: 28px; margin-top: 4px">USD {{chargeAmt}}</div></div>
+                  <div class="stat" style="background: #EAF4FB"><div class="k" style="color: #005C96">Waiver</div><div class="mono" style="font-size: 18px; line-height: 28px; margin-top: 4px; color: #005C96">USD {{waiverAmt}}</div></div>
+                  <div class="stat" style="background: #F4F5F7"><div class="k">Remaining payable</div><div class="mono" style="font-size: 18px; line-height: 28px; margin-top: 4px">USD {{remainAmt}}</div></div>
+                </div>
+                <sc-if value="{{overGm}}" hint-placeholder-val="{{ false }}">
+                  <div role="alert" class="stat" style="background: #FDF0E3; color: #7A3A00"><strong>Exceeds local delegation limit</strong> (USD {{gmText}}). Escalation runbook applies — routed to {{tierApprover}}.</div>
+                </sc-if>
+              </sc-if>
+
+              <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+                <h2 class="card-title" style="font-size: 15px">Review &amp; submit</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+                  <dl style="flex: 1 1 360px; margin: 0; display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 12px 16px">
+                    <dt style="color: #5A6170">Charge</dt><dd style="margin: 0">{{selCharge.type}} · <span class="mono">{{selCharge.bl}}</span></dd>
+                    <dt style="color: #5A6170">Reason</dt><dd style="margin: 0">{{reasonLabel}}</dd>
+                    <dt style="color: #5A6170">Waiver</dt><dd class="mono" style="margin: 0">{{pct}}% · USD {{waiverAmt}}</dd>
+                    <dt style="color: #5A6170">Approver</dt><dd style="margin: 0">{{approverText}}</dd>
+                  </dl>
+                  <sc-if value="{{submitted}}" hint-placeholder-val="{{ false }}">
+                    <ol style="flex: 1 1 320px; list-style: none; margin: 0; padding: 0 0 0 16px; border-inline-start: 1px solid #ECEEF2; display: flex; flex-direction: column">
+                      <sc-for list="{{timeline}}" as="t" hint-placeholder-count="4">
+                        <li style="display: flex; gap: 12px; align-items: flex-start; padding: 8px 0">
+                          <span style="width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: {{t.dot}}; flex: none"></span>
+                          <span style="display: flex; flex-direction: column"><span style="font-weight: 500; color: {{t.fg}}">{{t.label}}</span><span style="font-size: 12px; line-height: 16px; color: #5A6170">{{t.sub}}</span></span>
+                        </li>
+                      </sc-for>
+                    </ol>
+                  </sc-if>
+                </div>
+                <sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}">
+                  <fieldset style="border: 1px solid #DADDE3; border-radius: 8px; padding: 8px 16px 12px; margin: 0">
+                    <legend style="font-weight: 600; padding: 0 6px">Invoice already paid — settle waiver as</legend>
+                    <div style="display: flex; flex-wrap: wrap; gap: 24px">
+                      <label style="display: flex; align-items: center; gap: 8px; height: 32px; cursor: pointer"><input type="radio" name="settle" checked="{{settleCredit}}" onChange="{{pickCredit}}">Credit on customer account</label>
+                      <label style="display: flex; align-items: center; gap: 8px; height: 32px; cursor: pointer"><input type="radio" name="settle" checked="{{settleRefund}}" onChange="{{pickRefund}}">Refund</label>
+                    </div>
+                  </fieldset>
+                </sc-if>
+              </sc-if>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; height: 64px; padding: 0 24px; border-top: 1px solid #DADDE3; background: #F7F8FA; box-sizing: border-box">
+              <button class="btn" onClick="{{back}}" disabled="{{atStart}}">Back</button>
+              <div style="display: flex; gap: 8px">
+                <sc-if value="{{showNext}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{next}}" disabled="{{nextDisabled}}">Continue</button></sc-if>
+                <sc-if value="{{showSubmit}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{submit}}">Submit DAR</button></sc-if>
+                <sc-if value="{{showApprove}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{approve}}">Approve as {{tierApprover}}</button></sc-if>
+                <sc-if value="{{showReset}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{reset}}">Lodge another dispute</button></sc-if>
+              </div>
+            </div>
+          </section>
+
+          <aside style="flex: 1 1 400px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+            <section class="card">
+              <div class="card-head"><h2 class="card-title">Authorization matrix</h2></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px">
+                <sc-for list="{{tiers}}" as="t" hint-placeholder-count="3">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; height: 64px; padding: 0 16px; border-radius: 8px; border: 1px solid {{t.border}}; background: {{t.bg}}; box-sizing: border-box">
+                    <div style="display: flex; flex-direction: column">
+                      <span style="font-size: 12px; line-height: 16px; font-weight: 600; color: {{t.tagFg}}">{{t.tier}}</span>
+                      <span style="font-weight: 500">{{t.role}}</span>
+                    </div>
+                    <span class="mono">{{t.limit}}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head"><h2 class="card-title">Commercial GM waiver threshold</h2></div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px">
+                <label for="gm" style="display: flex; justify-content: space-between"><span>Local delegation limit</span><span class="mono" style="font-weight: 500">USD {{gmText}}</span></label>
+                <input id="gm" type="range" min="500" max="5000" step="250" value="{{gm}}" onChange="{{setGm}}" onInput="{{setGm}}">
+                <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">Waivers above this limit follow the escalation runbook.</p>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { step: 1, charge: 'c3', reason: null, pct: 100, gm: 2500, submitted: false, approved: false, settle: 'credit' };
+  }
+  renderVals() {
+    const s = this.state;
+    const money = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const charges = [
+      { id: 'c1', type: 'Demurrage', bl: 'BL-SG-24002', detail: 'SGSIN → AEJEA · 4 days beyond free time', amt: 380, paid: false },
+      { id: 'c2', type: 'Detention', bl: 'BL-CN-24003', detail: 'CNSHA → SGSIN · 6 days beyond free time', amt: 1800, paid: true },
+      { id: 'c3', type: 'Demurrage', bl: 'BL-SG-24004', detail: 'SGSIN → MYPKG · Strategic VIP shipper · 12 days', amt: 4200, paid: false }
+    ];
+    const sel = charges.find((c) => c.id === s.charge);
+    const reasonDefs = [
+      { k: 'blank', label: 'Vessel blank sailing', group: 'Carrier delay', carrier: true },
+      { k: 'rolled', label: 'Rolled container', group: 'Carrier delay', carrier: true },
+      { k: 'cong', label: 'Port terminal congestion', group: 'Free-time dispute', carrier: false },
+      { k: 'hol', label: 'Port holiday', group: 'Free-time dispute', carrier: false }
+    ];
+    const rsel = reasonDefs.find((r) => r.k === s.reason);
+    const waiver = Math.round(sel.amt * s.pct) / 100;
+    const tierIdx = waiver < 500 ? 0 : (waiver < 2500 ? 1 : 2);
+    const tierDefs = [
+      { tier: 'Tier 1', role: 'Agency Ops', limit: '< USD 500' },
+      { tier: 'Tier 2', role: 'Trade Desk', limit: '< USD 2,500' },
+      { tier: 'Tier 3', role: 'Commercial Director', limit: '> USD 2,500' }
+    ];
+    const auto = rsel && rsel.carrier;
+    const approver = tierDefs[tierIdx].role;
+    const stepLabels = ['Charge', 'Reason', 'Waiver', 'Review'];
+    const done = s.approved || (s.submitted && auto);
+    const tl = [
+      { label: 'DAR lodged', sub: 'Dispute registered against ' + sel.bl, on: true },
+      { label: auto ? 'Automated carrier-fault waiver' : 'Approval — ' + tierDefs[tierIdx].tier + ' · ' + approver, sub: auto ? 'No manual approval required' : (s.approved ? 'Approved' : 'Awaiting approval'), on: auto || s.approved },
+      { label: (sel.paid && s.settle === 'refund') ? 'Refund initiated' : 'Credit note triggered', sub: 'USD ' + money(waiver) + (sel.paid && s.settle === 'credit' ? ' · credit on customer account' : ''), on: done },
+      { label: 'Subledger reversal posted', sub: 'Oracle Cloud GFS', on: done }
+    ];
+    return {
+      steps: stepLabels.map((label, i) => {
+        const n = i + 1, cur = s.step === n, past = s.step > n;
+        return { n, label, current: cur ? 'step' : 'false', locked: n > s.step || s.submitted,
+          line: cur ? '#0071B7' : 'transparent', fg: cur || past ? '#161A21' : '#5A6170',
+          dotBg: cur ? '#0071B7' : (past ? '#1F6B45' : '#EEF1F5'), dotFg: cur || past ? '#fff' : '#5A6170',
+          go: () => { if (n <= s.step && !s.submitted) this.setState({ step: n }); } };
+      }),
+      s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4,
+      charges: charges.map((c) => ({ ...c, amtText: money(c.amt), on: c.id === s.charge ? 'true' : 'false',
+        border: c.id === s.charge ? '#0071B7' : '#DADDE3', bg: c.id === s.charge ? '#EAF4FB' : '#fff',
+        pay: c.paid ? 'Paid' : 'Unpaid', payStyle: c.paid ? 'background:#E6F3EC;color:#1F6B45' : 'background:#EEF1F5;color:#5A6170',
+        pick: () => this.setState({ charge: c.id }) })),
+      reasons: reasonDefs.map((r) => ({ ...r, on: r.k === s.reason ? 'true' : 'false',
+        border: r.k === s.reason ? '#0071B7' : '#DADDE3', bg: r.k === s.reason ? '#EAF4FB' : '#fff',
+        pick: () => this.setState({ reason: r.k }) })),
+      carrierFault: !!auto,
+      pct: s.pct,
+      setPct: (e) => this.setState({ pct: Number(e.target.value) }),
+      chargeAmt: money(sel.amt), waiverAmt: money(waiver), remainAmt: money(sel.amt - waiver),
+      gm: s.gm, gmText: money(s.gm),
+      setGm: (e) => this.setState({ gm: Number(e.target.value) }),
+      overGm: waiver > s.gm && !auto,
+      tierApprover: approver,
+      selCharge: sel,
+      reasonLabel: rsel ? rsel.group + ' — ' + rsel.label : '—',
+      approverText: auto ? 'Automated carrier-fault waiver' : tierDefs[tierIdx].tier + ' · ' + approver,
+      isPaid: sel.paid,
+      settleCredit: s.settle === 'credit', settleRefund: s.settle === 'refund',
+      pickCredit: () => this.setState({ settle: 'credit' }), pickRefund: () => this.setState({ settle: 'refund' }),
+      tiers: tierDefs.map((t, i) => {
+        const on = i === tierIdx && !auto;
+        return { ...t, border: on ? '#0071B7' : '#DADDE3', bg: on ? '#EAF4FB' : '#fff', tagFg: on ? '#0071B7' : '#5A6170' };
+      }),
+      submitted: s.submitted,
+      timeline: tl.map((t) => ({ ...t, dot: t.on ? '#1F8A55' : '#C5CAD3', fg: t.on ? '#161A21' : '#5A6170' })),
+      atStart: s.step === 1 || s.submitted,
+      showNext: s.step < 4,
+      nextDisabled: s.step === 2 && !s.reason,
+      showSubmit: s.step === 4 && !s.submitted,
+      showApprove: s.submitted && !auto && !s.approved,
+      showReset: done,
+      next: () => this.setState({ step: s.step + 1 }),
+      back: () => this.setState({ step: Math.max(1, s.step - 1) }),
+      submit: () => this.setState({ submitted: true }),
+      approve: () => this.setState({ approved: true }),
+      reset: () => this.setState({ step: 1, reason: null, pct: 100, submitted: false, approved: false, settle: 'credit' })
+    };
+  }
+}
+</script>
+<script src="assets/runtime.js"></script>
+</body>
+</html>

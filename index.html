@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS Operations Cockpit</title>
+<link rel="icon" href="assets/pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7;color:#161A21;font-size:13px;line-height:20px}
+a{color:#0071B7}a:hover{color:#005C96}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item:hover{background:#F1F3F6;color:#161A21}
+.nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:#F1F3F6}
+.btn-sm{height:32px;padding:0 12px}
+.btn-primary{background:#0071B7;border-color:#0071B7;color:#fff}
+.btn-primary:hover{background:#005C96;border-color:#005C96}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.pill:focus-visible,.rowbtn:focus-visible,.select:focus-visible,.nav-item:focus-visible{outline:2px solid #0071B7;outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:32px 32px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select:hover{border-color:#8C95A3}
+.pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:#fff;border:1px solid #DADDE3;border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid #DADDE3;box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.rowbtn{all:unset;cursor:pointer;display:inline-block}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:#5A6170;padding:0 12px;border-bottom:1px solid #DADDE3;white-space:nowrap;background:#F7F8FA;box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid #ECEEF2;vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:#F7F9FC}
+input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor:pointer;vertical-align:middle}
+.kpi-label{font-size:12px;font-weight:500;color:#5A6170;line-height:16px}
+.dl-k{font-size:12px;color:#5A6170;line-height:16px}
+.dl-v{font-size:13px;font-weight:500;line-height:20px;margin-top:2px}
+</style>
+</helmet>
+<div dir="{{dir}}" lang="{{lang}}" style="min-height: 100vh; display: flex; flex-direction: column; font-family: {{font}}">
+  <div aria-hidden="true" style="height: 3px; background: #E31D1A; flex: none"></div>
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+
+    <aside style="flex: 1 0 240px; max-width: 240px; background: #fff; border-inline-end: 1px solid #DADDE3; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid #ECEEF2; box-sizing: border-box" dir="ltr">
+        <img src="assets/pil-logo.png" alt="PIL" style="height: 26px; width: auto; display: block">
+        <span style="width: 1px; height: 20px; background: #DADDE3"></span>
+        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
+      </div>
+      <nav aria-label="{{t.screens}}" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
+        <a href="index.html" class="nav-item nav-on" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+          <span>{{t.nav1}}</span>
+        </a>
+        <a href="invoice-previewer.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+          <span>{{t.nav2}}</span>
+        </a>
+        <a href="dar-console.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <span>{{t.nav3}}</span>
+        </a>
+        <a href="soa-aging.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+          <span>{{t.nav4}}</span>
+        </a>
+        <a href="cashapp-workbench.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+          <span>{{t.nav5}}</span>
+        </a>
+        <a href="tolerance-coreor.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+          <span>{{t.nav6}}</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+      <header style="min-height: 64px; background: #fff; border-bottom: 1px solid #DADDE3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px 24px; box-sizing: border-box">
+        <div style="min-width: 0">
+          <h1 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">{{t.title}}</h1>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">{{t.subtitle}}</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <span style="display: inline-flex; align-items: center; gap: 6px; height: 36px; color: #5A6170; font-size: 12px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            {{t.tz}}
+          </span>
+          <span aria-hidden="true" style="width: 1px; height: 20px; background: #DADDE3"></span>
+          <span style="color: #5A6170; font-size: 12px">{{batchText}}</span>
+          <button class="btn btn-primary" onClick="{{runBatch}}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13-8z"></path></svg>
+            {{t.runBatch}}
+          </button>
+          <div style="position: relative; display: inline-flex; align-items: center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6170" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 10px; pointer-events: none"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"></path></svg>
+            <label for="lang" class="sr">{{t.language}}</label>
+            <select id="lang" class="select" value="{{lang}}" onChange="{{setLang}}" style="width: 156px">
+              <option value="en">English</option>
+              <option value="zh">中文（简体）</option>
+              <option value="ar">العربية</option>
+              <option value="es">Español</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; pointer-events: none"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+        </div>
+      </header>
+
+      <main style="flex: 1 1 auto; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <sc-if value="{{roeDown}}" hint-placeholder-val="{{ true }}">
+          <div role="status" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; min-height: 48px; padding: 8px 8px 8px 16px; border-radius: 8px; background: #FDF0E3; border: 1px solid #F0C899; color: #7A3A00; box-sizing: border-box">
+            <div style="display: flex; gap: 10px; align-items: center; min-width: 0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>
+              <span><strong>{{t.roeTitle}}</strong> — {{t.roeBody}}</span>
+            </div>
+            <button class="btn btn-sm" onClick="{{retryRoe}}">{{t.retryRoe}}</button>
+          </div>
+        </sc-if>
+
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+          <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+            <div class="card" style="height: 76px; padding: 0 20px; display: flex; flex-direction: column; justify-content: center; gap: 4px; box-sizing: border-box">
+              <span class="kpi-label">{{k.label}}</span>
+              <span class="mono" style="font-size: 24px; font-weight: 500; line-height: 32px; color: {{k.color}}">{{k.value}}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <div style="flex: 999 1 720px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+            <section class="card" style="overflow: hidden">
+              <div class="card-head" style="flex-wrap: wrap; padding-block: 10px">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px">
+                  <h2 class="card-title">{{t.queueTitle}}</h2>
+                  <div role="group" aria-label="{{t.queueTitle}}" style="display: flex; flex-wrap: wrap; gap: 8px">
+                    <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+                      <button class="pill" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="border: 1px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}">{{f.label}}<span class="mono" style="font-size: 12px; opacity: 0.85">{{f.count}}</span></button>
+                    </sc-for>
+                  </div>
+                </div>
+                <button class="btn btn-primary" onClick="{{askRelease}}" disabled="{{noneChecked}}">{{t.release}} ({{checkedCount}})</button>
+              </div>
+              <sc-if value="{{confirming}}" hint-placeholder-val="{{ false }}">
+                <div role="group" aria-labelledby="rel-title" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px; background: #EAF4FB; border-bottom: 1px solid #B9D9EE">
+                  <div style="min-width: 0">
+                    <strong id="rel-title">{{confirmTitle}}</strong>
+                    <p class="mono" style="margin: 2px 0 0; font-size: 12px; color: #33405A"><bdi>{{checkedBls}}</bdi></p>
+                  </div>
+                  <div style="display: flex; gap: 8px">
+                    <button class="btn btn-sm" onClick="{{cancelRelease}}">{{t.cancel}}</button>
+                    <button class="btn btn-sm btn-primary" onClick="{{releaseSelected}}">{{t.confirm}}</button>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}">
+                <div role="status" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; background: #E6F3EC; color: #1A5C3B; border-bottom: 1px solid #BFE0CC; font-size: 13px">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+                  {{notice}}
+                </div>
+              </sc-if>
+              <div style="max-height: 236px; overflow: auto">
+                <table>
+                  <thead><tr><th style="width: 44px"><input type="checkbox" checked="{{allChecked}}" onChange="{{toggleAll}}" aria-label="{{t.selectAll}}"></th><th>{{t.cBl}}</th><th>{{t.cReason}}</th><th style="width: 140px">{{t.cStaged}}</th><th style="width: 120px">{{t.cDispute}}</th><th style="width: 150px; text-align: end">{{t.cAction}}</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{queue}}" as="q" hint-placeholder-count="4">
+                      <tr>
+                        <td style="{{q.edgeStyle}}"><input type="checkbox" checked="{{q.checked}}" onChange="{{q.toggle}}" aria-label="{{t.cSelect}} {{q.bl}}"></td>
+                        <td style="{{q.cellStyle}}"><button class="rowbtn mono" onClick="{{q.select}}" aria-label="{{t.gatesTitle}} {{q.bl}}" style="font-weight: 500; color: #0071B7"><bdi>{{q.bl}}</bdi></button></td>
+                        <td style="{{q.cellStyle}}"><span class="chip" style="background: #FDF0E3; color: #8A4200">{{q.reason}}</span></td>
+                        <td class="mono" style="color: #5A6170; {{q.cellStyle}}"><bdi>{{q.time}}</bdi></td>
+                        <td style="{{q.cellStyle}}"><span class="chip" style="{{q.disputeStyle}}">{{q.disputeText}}</span></td>
+                        <td style="text-align: end; {{q.cellStyle}}"><button class="btn btn-sm" onClick="{{q.flag}}" style="min-width: 112px">{{q.flagLabel}}</button></td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+                <sc-if value="{{queueEmpty}}" hint-placeholder-val="{{ false }}">
+                  <p style="margin: 0; padding: 32px 16px; text-align: center; color: #5A6170">{{t.empty}}</p>
+                </sc-if>
+              </div>
+            </section>
+
+            <section class="card" style="overflow: hidden">
+              <div class="card-head">
+                <h2 class="card-title">{{t.feedTitle}}</h2>
+                <span class="chip" style="background: #E6F3EC; color: #1F6B45"><span style="width: 8px; height: 8px; border-radius: 50%; background: #1F8A55"></span>{{t.live}}</span>
+              </div>
+              <div style="max-height: 340px; overflow: auto">
+                <table>
+                  <thead><tr><th>{{t.cBl}}</th><th>{{t.cVv}}</th><th>{{t.cPolPod}}</th><th>{{t.cCarrier}}</th><th>{{t.cType}}</th><th>{{t.cIngested}}</th><th>{{t.cStatus}}</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+                      <tr style="cursor: pointer" onClick="{{r.select}}">
+                        <td style="{{r.edgeStyle}}"><button class="rowbtn mono" onClick="{{r.select}}" aria-label="{{t.gatesTitle}} {{r.bl}}" style="font-weight: 500; color: #0071B7"><bdi>{{r.bl}}</bdi></button></td>
+                        <td style="{{r.cellStyle}}"><bdi>{{r.vv}}</bdi></td>
+                        <td class="mono" style="{{r.cellStyle}}"><bdi dir="ltr">{{r.pol}} → {{r.pod}}</bdi></td>
+                        <td style="{{r.cellStyle}}">{{r.carrier}}</td>
+                        <td style="{{r.cellStyle}}">{{r.term}}</td>
+                        <td class="mono" style="color: #5A6170; {{r.cellStyle}}"><bdi>{{r.time}}</bdi></td>
+                        <td style="{{r.cellStyle}}"><span class="chip" style="{{r.chipStyle}}">{{r.status}}</span></td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <section class="card" style="flex: 1 1 400px; max-width: 440px; min-width: 0; overflow: hidden">
+            <div class="card-head">
+              <h2 class="card-title">{{t.gatesTitle}}</h2>
+              <span class="chip" style="{{sel.chipStyle}}">{{sel.status}}</span>
+            </div>
+            <div style="padding: 16px; border-bottom: 1px solid #ECEEF2">
+              <div class="mono" style="font-size: 16px; font-weight: 500; line-height: 24px"><bdi>{{sel.bl}}</bdi></div>
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; margin-top: 12px">
+                <div><div class="dl-k">{{t.cVv}}</div><div class="dl-v"><bdi>{{sel.vv}}</bdi></div></div>
+                <div><div class="dl-k">{{t.cPolPod}}</div><div class="dl-v mono"><bdi dir="ltr">{{sel.pol}} → {{sel.pod}}</bdi></div></div>
+                <div><div class="dl-k">{{t.cCarrier}}</div><div class="dl-v">{{sel.carrier}}</div></div>
+                <div><div class="dl-k">{{t.cType}}</div><div class="dl-v">{{sel.term}}</div></div>
+                <div><div class="dl-k">{{t.cIngested}}</div><div class="dl-v mono"><bdi>{{sel.time}}</bdi></div></div>
+              </div>
+            </div>
+            <ol style="list-style: none; margin: 0; padding: 4px 16px; display: flex; flex-direction: column">
+              <sc-for list="{{gates}}" as="g" hint-placeholder-count="5">
+                <li style="display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 48px; border-bottom: 1px solid #ECEEF2">
+                  <div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+                    <span class="mono" style="width: 24px; height: 24px; border-radius: 50%; background: {{g.dotBg}}; color: {{g.dotFg}}; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: none">{{g.n}}</span>
+                    <span>{{g.label}}</span>
+                  </div>
+                  <span class="chip" style="{{g.chipStyle}}">{{g.state}}</span>
+                </li>
+              </sc-for>
+            </ol>
+            <div style="padding: 16px">
+              <div style="padding: 12px 14px; border-radius: 6px; font-size: 13px; line-height: 20px; {{sel.outcomeStyle}}">{{sel.outcome}}</div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { lang: 'en', selected: 'b2', checked: {}, released: {}, flagged: {}, filter: 'all', roeDown: true, batchDone: false, confirming: false, notice: 0 };
+  }
+  strings() {
+    return {
+      en: { screens: 'Screens', language: 'Language', nav1: 'Operations Cockpit', nav2: 'Invoice Previewer', nav3: 'DAR Console', nav4: 'SOA & Aging', nav5: 'CashApp Workbench', nav6: 'Tolerance & COREOR',
+        title: 'Operations Cockpit', subtitle: 'Straight-Through Processing (STP) auto-invoicing from confirmed BDRs', tz: 'All times in SGT (UTC+8)',
+        lastBatch: 'Last batch run: ', batchDone: 'Batch run complete · just now', runBatch: 'Run auto-invoicing batch',
+        roeTitle: 'Daily ROE feed unavailable', roeBody: 'at the scheduled midnight auto-invoicing batch run. Affected BDRs are held in exception staging.', retryRoe: 'Retry ROE feed',
+        k1: 'BDRs ingested today', k2: 'STP auto-invoiced / released', k3: 'In exception staging', k4: 'Flagged for dispute',
+        feedTitle: 'Real-time BDR ingestion feed', live: 'Live from LMS',
+        cBl: 'B/L #', cVv: 'Vessel / Voyage', cPolPod: 'POL → POD', cCarrier: 'Carrier', cType: 'B/L Type', cIngested: 'Ingested', cStatus: 'STP status',
+        sAuto: 'Auto-invoiced', sExc: 'Exception staging', sRel: 'Released (override)', prepaid: 'Prepaid', collect: 'Collect',
+        gatesTitle: 'STP validation gates', g1: 'BDR schema validation', g2: 'Billed-To party determined', g3: 'ROE available', g4: 'Commodity certification', g5: 'Split-payer confirmed', passed: 'Passed', failed: 'Failed',
+        held: 'Held in exception staging — ', relOut: 'Manually released via batch override.', allOk: 'All gates passed — 100% automated STP invoice issued.',
+        queueTitle: 'Exception triage queue', fAll: 'All', fHaz: 'Hazardous cert.', fRoe: 'ROE', fSplit: 'Split-payer', release: 'Override & release selected',
+        cSelect: 'Select', cReason: 'Exception reason', cStaged: 'Staged since', cDispute: 'Dispute', cAction: 'Action',
+        rHaz: 'Pending hazardous commodity certification', rRoe: 'Daily ROE feed unavailable', rSplit: 'Split-payer unconfirmed at vessel departure',
+        flagged: 'Flagged', flag: 'Flag dispute', unflag: 'Remove flag', empty: 'No BDRs in exception staging for this filter.',
+        selectAll: 'Select all', cancel: 'Cancel', confirm: 'Confirm release', confirmTitle: 'Release {n} BDR(s) from exception staging via batch override?', releasedMsg: '{n} BDR(s) released via batch override.' },
+      zh: { screens: '页面', language: '语言', nav1: '运营驾驶舱', nav2: '发票模板预览', nav3: '争议审批 (DAR)', nav4: '对账单与账龄', nav5: '现金核销工作台', nav6: '容差与放货 (COREOR)',
+        title: '运营驾驶舱', subtitle: '基于已确认 BDR 的直通式处理 (STP) 自动开票', tz: '所有时间均为新加坡时间 (UTC+8)',
+        lastBatch: '上次批处理：', batchDone: '批处理已完成 · 刚刚', runBatch: '运行自动开票批处理',
+        roeTitle: '每日汇率 (ROE) 数据源不可用', roeBody: '发生于午夜定时自动开票批处理。受影响的 BDR 已暂存于异常队列。', retryRoe: '重试汇率数据源',
+        k1: '今日接收 BDR', k2: 'STP 自动开票 / 已放行', k3: '异常暂存中', k4: '已标记争议',
+        feedTitle: '实时 BDR 接收流', live: 'LMS 实时',
+        cBl: '提单号', cVv: '船名 / 航次', cPolPod: '装货港 → 卸货港', cCarrier: '承运人', cType: '提单类型', cIngested: '接收时间', cStatus: 'STP 状态',
+        sAuto: '已自动开票', sExc: '异常暂存', sRel: '已放行（人工覆盖）', prepaid: '预付', collect: '到付',
+        gatesTitle: 'STP 校验关卡', g1: 'BDR 结构校验', g2: '已确定开票对象', g3: '汇率可用', g4: '货物品类认证', g5: '分付方已确认', passed: '通过', failed: '未通过',
+        held: '暂存于异常队列 — ', relOut: '已通过批量覆盖人工放行。', allOk: '所有关卡均已通过 — 已自动签发 STP 发票。',
+        queueTitle: '异常分拣队列', fAll: '全部', fHaz: '危险品认证', fRoe: '汇率', fSplit: '分付方', release: '覆盖并放行所选',
+        cSelect: '选择', cReason: '异常原因', cStaged: '暂存时间', cDispute: '争议', cAction: '操作',
+        rHaz: '危险品认证待处理', rRoe: '每日汇率数据源不可用', rSplit: '开船时分付方未确认',
+        flagged: '已标记', flag: '标记争议', unflag: '取消标记', empty: '此筛选条件下没有异常暂存的 BDR。',
+        selectAll: '全选', cancel: '取消', confirm: '确认放行', confirmTitle: '通过批量覆盖从异常暂存中放行 {n} 条 BDR？', releasedMsg: '已通过批量覆盖放行 {n} 条 BDR。' },
+      ar: { screens: 'الشاشات', language: 'اللغة', nav1: 'لوحة العمليات', nav2: 'معاينة الفواتير', nav3: 'طلبات النزاع (DAR)', nav4: 'كشف الحساب والأعمار', nav5: 'منضدة تخصيص النقد', nav6: 'التسامح والإفراج (COREOR)',
+        title: 'لوحة العمليات', subtitle: 'الفوترة التلقائية بالمعالجة المباشرة (STP) من سجلات BDR المؤكدة', tz: 'جميع الأوقات بتوقيت سنغافورة (UTC+8)',
+        lastBatch: 'آخر تشغيل للدفعة: ', batchDone: 'اكتمل تشغيل الدفعة · الآن', runBatch: 'تشغيل دفعة الفوترة التلقائية',
+        roeTitle: 'موجز سعر الصرف اليومي (ROE) غير متاح', roeBody: 'عند تشغيل دفعة الفوترة التلقائية المجدولة منتصف الليل. سجلات BDR المتأثرة محتجزة في قائمة الاستثناءات.', retryRoe: 'إعادة محاولة موجز سعر الصرف',
+        k1: 'سجلات BDR المستلمة اليوم', k2: 'مفوترة تلقائياً / مُفرج عنها', k3: 'في قائمة الاستثناءات', k4: 'معلّمة كنزاع',
+        feedTitle: 'موجز استلام BDR المباشر', live: 'مباشر من LMS',
+        cBl: 'رقم البوليصة', cVv: 'السفينة / الرحلة', cPolPod: 'ميناء التحميل ← التفريغ', cCarrier: 'الناقل', cType: 'نوع البوليصة', cIngested: 'وقت الاستلام', cStatus: 'حالة STP',
+        sAuto: 'مفوترة تلقائياً', sExc: 'محتجزة كاستثناء', sRel: 'مُفرج عنها (تجاوز يدوي)', prepaid: 'مدفوع مسبقاً', collect: 'تحصيل عند الوصول',
+        gatesTitle: 'بوابات التحقق STP', g1: 'التحقق من بنية BDR', g2: 'تحديد الطرف المفوتر', g3: 'توفر سعر الصرف', g4: 'شهادة السلعة', g5: 'تأكيد تعدد الدافعين', passed: 'ناجح', failed: 'فاشل',
+        held: 'محتجزة في قائمة الاستثناءات — ', relOut: 'أُفرج عنها يدوياً عبر تجاوز الدفعة.', allOk: 'اجتازت جميع البوابات — صدرت فاتورة STP آلياً بالكامل.',
+        queueTitle: 'قائمة فرز الاستثناءات', fAll: 'الكل', fHaz: 'شهادة المواد الخطرة', fRoe: 'سعر الصرف', fSplit: 'تعدد الدافعين', release: 'تجاوز وإفراج عن المحدد',
+        cSelect: 'تحديد', cReason: 'سبب الاستثناء', cStaged: 'محتجزة منذ', cDispute: 'النزاع', cAction: 'إجراء',
+        rHaz: 'شهادة السلعة الخطرة قيد الانتظار', rRoe: 'موجز سعر الصرف اليومي غير متاح', rSplit: 'تعدد الدافعين غير مؤكد عند مغادرة السفينة',
+        flagged: 'معلّمة', flag: 'تعليم كنزاع', unflag: 'إزالة العلامة', empty: 'لا توجد سجلات BDR محتجزة ضمن هذا التصنيف.',
+        selectAll: 'تحديد الكل', cancel: 'إلغاء', confirm: 'تأكيد الإفراج', confirmTitle: 'الإفراج عن {n} من سجلات BDR من قائمة الاستثناءات عبر تجاوز الدفعة؟', releasedMsg: 'تم الإفراج عن {n} من سجلات BDR عبر تجاوز الدفعة.' },
+      es: { screens: 'Pantallas', language: 'Idioma', nav1: 'Cabina de operaciones', nav2: 'Vista previa de facturas', nav3: 'Consola DAR', nav4: 'Estado de cuenta', nav5: 'Aplicación de cobros', nav6: 'Tolerancia y COREOR',
+        title: 'Cabina de operaciones', subtitle: 'Facturación automática STP (Straight-Through Processing) a partir de BDR confirmados', tz: 'Todas las horas en SGT (UTC+8)',
+        lastBatch: 'Último lote: ', batchDone: 'Lote completado · ahora', runBatch: 'Ejecutar lote de facturación',
+        roeTitle: 'Fuente diaria de tipo de cambio (ROE) no disponible', roeBody: 'en el lote programado de medianoche. Los BDR afectados quedan retenidos en excepciones.', retryRoe: 'Reintentar fuente ROE',
+        k1: 'BDR recibidos hoy', k2: 'Facturados por STP / liberados', k3: 'En excepciones', k4: 'Marcados en disputa',
+        feedTitle: 'Ingesta de BDR en tiempo real', live: 'En vivo desde LMS',
+        cBl: 'N.º B/L', cVv: 'Buque / Viaje', cPolPod: 'POL → POD', cCarrier: 'Transportista', cType: 'Tipo de B/L', cIngested: 'Recibido', cStatus: 'Estado STP',
+        sAuto: 'Facturado automáticamente', sExc: 'En excepción', sRel: 'Liberado (anulación)', prepaid: 'Prepagado', collect: 'Al cobro',
+        gatesTitle: 'Controles de validación STP', g1: 'Validación de esquema BDR', g2: 'Parte facturable determinada', g3: 'Tipo de cambio disponible', g4: 'Certificación de mercancía', g5: 'Pagadores divididos confirmados', passed: 'Superado', failed: 'Fallido',
+        held: 'Retenido en excepciones — ', relOut: 'Liberado manualmente mediante anulación de lote.', allOk: 'Todos los controles superados — factura STP emitida automáticamente.',
+        queueTitle: 'Cola de excepciones', fAll: 'Todas', fHaz: 'Cert. peligrosa', fRoe: 'Tipo de cambio', fSplit: 'Pagadores divididos', release: 'Anular y liberar seleccionados',
+        cSelect: 'Seleccionar', cReason: 'Motivo de excepción', cStaged: 'En espera desde', cDispute: 'Disputa', cAction: 'Acción',
+        rHaz: 'Certificación de mercancía peligrosa pendiente', rRoe: 'Fuente diaria de tipo de cambio no disponible', rSplit: 'Pagadores divididos sin confirmar a la salida del buque',
+        flagged: 'Marcada', flag: 'Marcar disputa', unflag: 'Quitar marca', empty: 'No hay BDR en excepción para este filtro.',
+        selectAll: 'Seleccionar todo', cancel: 'Cancelar', confirm: 'Confirmar liberación', confirmTitle: '¿Liberar {n} BDR de excepciones mediante anulación de lote?', releasedMsg: '{n} BDR liberados mediante anulación de lote.' }
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const t = this.strings()[s.lang];
+    const rtl = s.lang === 'ar';
+    const locale = { en: 'en-SG', zh: 'zh-CN', ar: 'ar-SA-u-nu-latn', es: 'es-MX' }[s.lang];
+    const fonts = {
+      en: "'IBM Plex Sans', system-ui, sans-serif",
+      zh: "'IBM Plex Sans', 'Noto Sans SC', 'PingFang SC', sans-serif",
+      ar: "'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif",
+      es: "'IBM Plex Sans', system-ui, sans-serif"
+    };
+    const fmtTime = (h, mi) => new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Singapore' }).format(new Date(Date.UTC(2026, 10, 16, (h + 16) % 24, mi)));
+    const fmtN = (n) => n.toLocaleString(locale);
+    const selCell = 'background:#EAF4FB;';
+    const selEdge = 'background:#EAF4FB;box-shadow:inset ' + (rtl ? '-3px' : '3px') + ' 0 0 #0071B7;';
+
+    const base = [
+      { id: 'b1', bl: 'BL-SG-24001', vv: 'Vessel 01 / 012E', pol: 'SGSIN', pod: 'INNSA', carrier: 'PIL', term: 'prepaid', h: 13, m: 42, fail: null },
+      { id: 'b2', bl: 'BL-SG-24002', vv: 'Vessel 01 / 012E', pol: 'SGSIN', pod: 'AEJEA', carrier: 'PIL', term: 'collect', h: 13, m: 40, fail: 'haz' },
+      { id: 'b3', bl: 'BL-CN-24003', vv: 'Vessel 02 / 044W', pol: 'CNSHA', pod: 'SGSIN', carrier: 'PIL', term: 'prepaid', h: 13, m: 37, fail: 'roe' },
+      { id: 'b4', bl: 'BL-SG-24004', vv: 'Vessel 03 / 108N', pol: 'SGSIN', pod: 'MYPKG', carrier: 'PIL', term: 'collect', h: 13, m: 31, fail: 'split' },
+      { id: 'b5', bl: 'BL-IN-24005', vv: 'Vessel 04 / 021S', pol: 'INNSA', pod: 'SGSIN', carrier: 'PIL', term: 'prepaid', h: 13, m: 28, fail: null },
+      { id: 'b6', bl: 'BL-SG-24006', vv: 'Vessel 01 / 012E', pol: 'SGSIN', pod: 'SAJED', carrier: 'PIL', term: 'prepaid', h: 13, m: 22, fail: null },
+      { id: 'b7', bl: 'BL-TH-24007', vv: 'Vessel 05 / 077E', pol: 'THLCH', pod: 'SGSIN', carrier: 'PIL', term: 'collect', h: 13, m: 15, fail: 'roe' }
+    ];
+    const reasons = { haz: t.rHaz, roe: t.rRoe, split: t.rSplit };
+    const failOf = (b) => (b.fail === 'roe' && !s.roeDown) ? null : b.fail;
+    const isExc = (b) => failOf(b) && !s.released[b.id];
+    const chip = { ok: 'background:#E6F3EC;color:#1F6B45', exc: 'background:#FDF0E3;color:#8A4200', rel: 'background:#EAF4FB;color:#005C96' };
+    const statusOf = (b) => isExc(b) ? 'exc' : (s.released[b.id] ? 'rel' : 'ok');
+    const statusText = { exc: t.sExc, rel: t.sRel, ok: t.sAuto };
+
+    const rows = base.map((b) => {
+      const st = statusOf(b);
+      return { ...b, term: t[b.term], time: fmtTime(b.h, b.m), status: statusText[st], chipStyle: chip[st],
+        cellStyle: s.selected === b.id ? selCell : '', edgeStyle: s.selected === b.id ? selEdge : '',
+        select: () => this.setState({ selected: b.id }) };
+    });
+
+    const selB = base.find((b) => b.id === s.selected) || base[0];
+    const f = failOf(selB);
+    const gateDefs = [['schema', t.g1], ['billto', t.g2], ['roe', t.g3], ['haz', t.g4], ['split', t.g5]];
+    const gates = gateDefs.map(([k, label], i) => {
+      const bad = f === k;
+      return { n: fmtN(i + 1), label, state: bad ? t.failed : t.passed, chipStyle: bad ? chip.exc : chip.ok,
+        dotBg: bad ? '#FDF0E3' : '#EEF1F5', dotFg: bad ? '#8A4200' : '#5A6170' };
+    });
+    const selExc = isExc(selB);
+    const selSt = statusOf(selB);
+    const sel = { ...selB, term: t[selB.term], time: fmtTime(selB.h, selB.m), status: statusText[selSt], chipStyle: chip[selSt],
+      outcome: selExc ? t.held + reasons[f] : (s.released[selB.id] ? t.relOut : t.allOk),
+      outcomeStyle: selExc ? 'background:#FDF0E3;color:#7A3A00' : 'background:#E6F3EC;color:#1A5C3B' };
+
+    const excAll = base.filter(isExc);
+    const filterDefs = [['all', t.fAll], ['haz', t.fHaz], ['roe', t.fRoe], ['split', t.fSplit]];
+    const filters = filterDefs.map(([k, label]) => {
+      const on = s.filter === k;
+      return { label, on: on ? 'true' : 'false',
+        count: fmtN(k === 'all' ? excAll.length : excAll.filter((b) => failOf(b) === k).length),
+        bg: on ? '#0071B7' : '#fff', fg: on ? '#fff' : '#161A21', border: on ? '#0071B7' : '#C5CAD3',
+        pick: () => this.setState({ filter: k }) };
+    });
+    const visible = excAll.filter((b) => s.filter === 'all' || failOf(b) === s.filter);
+    const queue = visible.map((b) => {
+      const fl = !!s.flagged[b.id];
+      return { bl: b.bl, reason: reasons[failOf(b)], time: fmtTime(b.h, b.m), checked: !!s.checked[b.id],
+        cellStyle: s.selected === b.id ? selCell : '', edgeStyle: s.selected === b.id ? selEdge : '',
+        disputeText: fl ? t.flagged : '—', disputeStyle: fl ? 'background:#FBEAEA;color:#A3262A' : 'color:#5A6170;padding:0',
+        flagLabel: fl ? t.unflag : t.flag,
+        select: () => this.setState({ selected: b.id }),
+        toggle: () => this.setState({ checked: { ...s.checked, [b.id]: !s.checked[b.id] } }),
+        flag: () => this.setState({ flagged: { ...s.flagged, [b.id]: !fl } }) };
+    });
+    const checkedIds = excAll.filter((b) => s.checked[b.id]).map((b) => b.id);
+    const auto = base.filter((b) => !isExc(b)).length;
+    const kpis = [
+      { label: t.k1, value: fmtN(base.length), color: '#161A21' },
+      { label: t.k2, value: fmtN(auto), color: '#1F6B45' },
+      { label: t.k3, value: fmtN(excAll.length), color: '#8A4200' },
+      { label: t.k4, value: fmtN(Object.values(s.flagged).filter(Boolean).length), color: '#A3262A' }
+    ];
+
+    return {
+      t, lang: s.lang, dir: rtl ? 'rtl' : 'ltr', font: fonts[s.lang],
+      setLang: (e) => this.setState({ lang: e.target.value }),
+      rows, gates, sel, kpis, filters, queue,
+      queueEmpty: queue.length === 0,
+      roeDown: s.roeDown,
+      batchText: s.batchDone ? t.batchDone : t.lastBatch + fmtTime(0, 0),
+      checkedCount: fmtN(checkedIds.length),
+      noneChecked: checkedIds.length === 0,
+      allChecked: visible.length > 0 && visible.every((b) => s.checked[b.id]),
+      toggleAll: () => {
+        const all = visible.length > 0 && visible.every((b) => s.checked[b.id]);
+        const c = { ...s.checked };
+        visible.forEach((b) => { c[b.id] = !all; });
+        this.setState({ checked: c });
+      },
+      confirming: s.confirming && checkedIds.length > 0,
+      confirmTitle: t.confirmTitle.replace('{n}', fmtN(checkedIds.length)),
+      checkedBls: excAll.filter((b) => s.checked[b.id]).map((b) => b.bl).join(', '),
+      askRelease: () => this.setState({ confirming: true, notice: 0 }),
+      cancelRelease: () => this.setState({ confirming: false }),
+      hasNotice: s.notice > 0,
+      notice: s.notice > 0 ? t.releasedMsg.replace('{n}', fmtN(s.notice)) : '',
+      retryRoe: () => this.setState({ roeDown: false }),
+      runBatch: () => this.setState({ batchDone: true }),
+      releaseSelected: () => {
+        const rel = { ...s.released };
+        checkedIds.forEach((id) => { rel[id] = true; });
+        this.setState({ released: rel, checked: {}, confirming: false, notice: checkedIds.length });
+      }
+    };
+  }
+}
+</script>
+<script src="assets/runtime.js"></script>
+</body>
+</html>

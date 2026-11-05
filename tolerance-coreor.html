@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS Underpayment Tolerance and COREOR Release</title>
+<link rel="icon" href="assets/pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7;color:#161A21;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:#0071B7}a:hover{color:#005C96}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:40px;padding-inline:12px;border-radius:6px;color:#3A4556;text-decoration:none;font-size:13px;font-weight:500}
+.nav-item:hover{background:#F1F3F6;color:#161A21}
+.nav-on,.nav-on:hover{background:#EAF4FB;color:#0071B7;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid #C5CAD3;background:#fff;color:#161A21;font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:#F1F3F6}
+.btn-sm{height:32px;padding:0 12px}
+.btn-primary{background:#0071B7;border-color:#0071B7;color:#fff}
+.btn-primary:hover{background:#005C96;border-color:#005C96}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible{outline:2px solid #0071B7;outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select:hover,.input:hover{border-color:#8C95A3}
+.input{height:36px;padding:0 12px;border:1px solid #C5CAD3;border-radius:6px;background:#fff;color:#161A21;font-family:inherit;font-size:13px;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:#fff;border:1px solid #DADDE3;border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid #DADDE3;box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:#5A6170}
+.lbl{display:block;font-size:12px;font-weight:600;color:#5A6170;line-height:16px;margin-bottom:6px}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5A6170;font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:#5A6170;padding:0 12px;border-bottom:1px solid #DADDE3;white-space:nowrap;background:#F7F8FA;box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid #ECEEF2;vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:#F7F9FC}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:#0071B7;cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:#0071B7;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column">
+  <div aria-hidden="true" style="height: 3px; background: #E31D1A; flex: none"></div>
+  <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+    <aside style="flex: 1 0 240px; max-width: 240px; background: #fff; border-inline-end: 1px solid #DADDE3; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid #ECEEF2; box-sizing: border-box">
+        <img src="assets/pil-logo.png" alt="PIL" style="height: 26px; width: auto; display: block">
+        <span style="width: 1px; height: 20px; background: #DADDE3"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #0071B7">GIRS</span>
+      </div>
+      <nav aria-label="Screens" style="display: flex; flex-direction: column; gap: 4px; padding: 16px 12px">
+        <a href="index.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+          <span>Operations Cockpit</span>
+        </a>
+        <a href="invoice-previewer.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+          <span>Invoice Previewer</span>
+        </a>
+        <a href="dar-console.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          <span>DAR Console</span>
+        </a>
+        <a href="soa-aging.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+          <span>SOA &amp; Aging</span>
+        </a>
+        <a href="cashapp-workbench.html" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+          <span>CashApp Workbench</span>
+        </a>
+        <a href="tolerance-coreor.html" class="nav-item nav-on" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+          <span>Tolerance &amp; COREOR</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+      <header style="min-height: 64px; background: #fff; border-bottom: 1px solid #DADDE3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px 24px; box-sizing: border-box">
+        <div style="min-width: 0">
+          <h1 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">Underpayment Tolerance &amp; Cargo Release</h1>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; color: #5A6170">Auto-write-off, unapplied cash staging and automated COREOR release to LMS</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <label for="tol" style="font-size: 12px; font-weight: 600; color: #5A6170">Auto-write-off tolerance (USD)</label>
+          <input id="tol" type="number" min="0" max="20" step="0.5" value="{{tol}}" onChange="{{setTol}}" class="input mono" style="width: 104px">
+        </div>
+      </header>
+
+      <main style="flex: 1 1 auto; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <section class="card" style="overflow: hidden">
+          <div class="card-head"><h2 class="card-title">Settlement check</h2></div>
+          <div style="overflow-x: auto">
+            <table>
+              <thead><tr><th>B/L #</th><th>Invoice #</th><th class="r">Invoiced USD</th><th class="r">Received USD</th><th class="r">Variance</th><th>Result</th><th class="r" style="width: 240px">Action</th></tr></thead>
+              <tbody>
+                <sc-for list="{{pays}}" as="p" hint-placeholder-count="4">
+                  <tr>
+                    <td class="mono" style="font-weight: 500">{{p.bl}}</td>
+                    <td class="mono">{{p.inv}}</td>
+                    <td class="mono r">{{p.invText}}</td>
+                    <td class="mono r">{{p.recText}}</td>
+                    <td class="mono r" style="color: {{p.varColor}}">{{p.varText}}</td>
+                    <td><span class="chip" style="{{p.chip}}">{{p.result}}</span></td>
+                    <td class="r">
+                      <sc-if value="{{p.hasAction}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{p.act}}">{{p.actLabel}}</button></sc-if>
+                    </td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+          <section class="card" style="flex: 999 1 720px; min-width: 0; overflow: hidden">
+            <div class="card-head">
+              <h2 class="card-title">COREOR cargo release → LMS</h2>
+              <span class="mono card-meta">{{sentCount}} of {{cntrCount}} containers released</span>
+            </div>
+            <div style="overflow-x: auto">
+              <table>
+                <thead><tr><th>Container</th><th>B/L #</th><th>Release status</th><th>COREOR EDI</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{cntrs}}" as="c" hint-placeholder-count="6">
+                    <tr>
+                      <td class="mono" style="font-weight: 500">{{c.no}}</td>
+                      <td class="mono">{{c.bl}}</td>
+                      <td><span class="chip" style="{{c.chip}}">{{c.status}}</span></td>
+                      <td class="mono" style="font-size: 12px; color: #5A6170">{{c.edi}}</td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card" style="flex: 1 1 400px; max-width: 440px; min-width: 0; overflow: hidden">
+            <div class="card-head"><h2 class="card-title">Unapplied cash staging queue</h2></div>
+            <sc-if value="{{hasStaged}}" hint-placeholder-val="{{ true }}">
+              <ul style="list-style: none; margin: 0; padding: 0">
+                <sc-for list="{{staged}}" as="u" hint-placeholder-count="1">
+                  <li style="padding: 16px; border-bottom: 1px solid #ECEEF2; display: flex; flex-direction: column; gap: 8px">
+                    <div style="display: flex; justify-content: space-between; gap: 12px"><span class="mono" style="font-weight: 500">{{u.bl}}</span><span class="mono" style="font-weight: 600">USD {{u.amt}}</span></div>
+                    <div style="font-size: 12px; line-height: 16px; color: #5A6170">Overpayment staged as unapplied cash</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 4px">
+                      <span class="chip" style="{{u.nStyle}}">{{u.nText}}</span>
+                      <button class="btn btn-sm" onClick="{{u.notify}}" disabled="{{u.notified}}">Notify customer</button>
+                    </div>
+                  </li>
+                </sc-for>
+              </ul>
+            </sc-if>
+            <sc-if value="{{noStaged}}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; padding: 32px 16px; color: #5A6170; text-align: center">No unapplied cash staged.</p>
+            </sc-if>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+  <sc-if value="{{modal}}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; background: rgba(22,26,33,.45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10">
+      <div role="dialog" aria-modal="true" aria-labelledby="wo-title" style="width: 100%; max-width: 480px; background: #fff; border-radius: 8px; box-shadow: 0 20px 48px rgba(22,26,33,.3); overflow: hidden">
+        <div style="padding: 20px 24px 8px">
+          <h2 id="wo-title" style="margin: 0; font-size: 16px; font-weight: 600; line-height: 24px">Auto-write-off underpayment</h2>
+          <p style="margin: 4px 0 0; color: #5A6170; font-size: 12px; line-height: 16px">Short-payment within tolerance — e.g. intermediary bank wire deduction.</p>
+        </div>
+        <dl style="margin: 0; padding: 12px 24px; display: grid; grid-template-columns: 1fr auto; gap: 8px 16px">
+          <dt style="color: #5A6170">B/L #</dt><dd class="mono" style="margin: 0">{{mp.bl}}</dd>
+          <dt style="color: #5A6170">Invoiced</dt><dd class="mono" style="margin: 0">USD {{mp.invText}}</dd>
+          <dt style="color: #5A6170">Received</dt><dd class="mono" style="margin: 0">USD {{mp.recText}}</dd>
+          <dt style="color: #5A6170">Short-paid</dt><dd class="mono" style="margin: 0; color: #8A4200; font-weight: 600">USD {{mp.shortText}}</dd>
+          <dt style="color: #5A6170">Tolerance limit</dt><dd class="mono" style="margin: 0">USD {{tolText}}</dd>
+        </dl>
+        <div style="margin: 4px 24px 16px; padding: 12px 16px; border-radius: 6px; background: #EAF4FB; color: #005C96">On confirm, the balance is written off, the invoice is settled and COREOR release is dispatched to LMS.</div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px; height: 64px; align-items: center; padding: 0 24px; background: #F7F8FA; border-top: 1px solid #DADDE3">
+          <button class="btn" onClick="{{closeModal}}">Cancel</button>
+          <button class="btn btn-primary" onClick="{{confirmWo}}">Confirm write-off &amp; release</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { tol: 5, writtenOff: {}, notified: {}, condApproved: false, modal: null };
+  }
+  renderVals() {
+    const s = this.state;
+    const m = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const pays = [
+      { id: 'p1', bl: 'BL-SG-24001', inv: 'SG-INV-2026-002401', amt: 2480, rec: 2476.5, cleared: true },
+      { id: 'p2', bl: 'BL-IN-24005', inv: 'IN-INV-2026-001044', amt: 1200, rec: 1350, cleared: true },
+      { id: 'p3', bl: 'BL-SG-24006', inv: 'SG-INV-2026-002405', amt: 3900, rec: 3900, cleared: true },
+      { id: 'p4', bl: 'BL-TH-24007', inv: 'TH-INV-2026-000318', amt: 5600, rec: 5600, cleared: false }
+    ];
+    const C = { ok: 'background:#E6F3EC;color:#1F6B45', warn: 'background:#FDF0E3;color:#8A4200', info: 'background:#EAF4FB;color:#005C96', bad: 'background:#FBEAEA;color:#A3262A', mute: 'background:#EEF1F5;color:#5A6170' };
+    const evalPay = (p) => {
+      const v = Math.round((p.rec - p.amt) * 100) / 100;
+      if (!p.cleared) return s.condApproved
+        ? { key: 'released', result: 'Conditional credit release approved', chip: C.info, v }
+        : { key: 'cond', result: 'Funds not yet cleared', chip: C.warn, v, act: 'Request conditional release' };
+      if (v === 0) return { key: 'released', result: 'Settled', chip: C.ok, v };
+      if (v > 0) return { key: 'released', result: 'Settled · overpayment staged', chip: C.ok, v };
+      if (s.writtenOff[p.id]) return { key: 'released', result: 'Settled · auto-write-off', chip: C.ok, v };
+      if (-v <= s.tol) return { key: 'tol', result: 'Within tolerance', chip: C.info, v, act: 'Review write-off' };
+      return { key: 'held', result: 'Exceeds tolerance — manual review', chip: C.bad, v };
+    };
+    const ev = {};
+    pays.forEach((p) => { ev[p.id] = evalPay(p); });
+    const cntrDefs = [
+      { no: 'CONT 100001', pid: 'p1' }, { no: 'CONT 100002', pid: 'p1' },
+      { no: 'CONT 200001', pid: 'p2' },
+      { no: 'CONT 300001', pid: 'p3' }, { no: 'CONT 300002', pid: 'p3' },
+      { no: 'CONT 400001', pid: 'p4' }
+    ];
+    const cntrs = cntrDefs.map((c, i) => {
+      const p = pays.find((x) => x.id === c.pid);
+      const e = ev[c.pid];
+      const rel = e.key === 'released';
+      return { no: c.no, bl: p.bl,
+        status: rel ? (p.cleared ? 'Released' : 'Released — conditional') : (e.key === 'cond' ? 'Held — awaiting clearance' : 'Held — payment variance'),
+        chip: rel ? C.ok : C.warn,
+        edi: rel ? 'COREOR sent · ACK ' + String(4100 + i) : '—' };
+    });
+    const staged = pays.filter((p) => p.rec > p.amt).map((p) => {
+      const n = !!s.notified[p.id];
+      return { bl: p.bl, amt: m(p.rec - p.amt), notified: n,
+        nText: n ? 'Customer notified' : 'Notification pending', nStyle: n ? C.ok : C.mute,
+        notify: () => this.setState({ notified: { ...s.notified, [p.id]: true } }) };
+    });
+    const mpRaw = pays.find((p) => p.id === s.modal) || pays[0];
+    return {
+      tol: s.tol, tolText: m(s.tol),
+      setTol: (e) => this.setState({ tol: Math.max(0, Number(e.target.value) || 0) }),
+      pays: pays.map((p) => {
+        const e = ev[p.id];
+        return { bl: p.bl, inv: p.inv, invText: m(p.amt), recText: m(p.rec),
+          varText: e.v === 0 ? '0.00' : (e.v > 0 ? '+' : '−') + m(Math.abs(e.v)),
+          varColor: e.v < 0 ? '#8A4200' : (e.v > 0 ? '#005C96' : '#5A6170'),
+          result: e.result, chip: e.chip, hasAction: !!e.act, actLabel: e.act || '',
+          act: () => { if (e.key === 'tol') this.setState({ modal: p.id }); if (e.key === 'cond') this.setState({ condApproved: true }); } };
+      }),
+      cntrs, cntrCount: cntrs.length, sentCount: cntrs.filter((c) => c.edi !== '—').length,
+      staged, hasStaged: staged.length > 0, noStaged: staged.length === 0,
+      modal: !!s.modal,
+      mp: { bl: mpRaw.bl, invText: m(mpRaw.amt), recText: m(mpRaw.rec), shortText: m(mpRaw.amt - mpRaw.rec) },
+      closeModal: () => this.setState({ modal: null }),
+      confirmWo: () => this.setState({ writtenOff: { ...s.writtenOff, [s.modal]: true }, modal: null })
+    };
+  }
+}
+</script>
+<script src="assets/runtime.js"></script>
+</body>
+</html>
