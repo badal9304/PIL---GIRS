@@ -14,6 +14,10 @@ Clickable prototype of the GIRS Live Build UI Showcase screens, designed for a 1
 | Credit Notes | `credit-notes.html` |
 | Receipting & Reconciliation | `receipting.html` |
 | Enquiry & Monitoring | `enquiry.html` |
+| Invoices Hub | `invoices-hub.html` |
+| D&D Engine | `dd-engine.html` |
+| Approvals Inbox | `approvals-inbox.html` |
+| Tax Rules | `tax-rules.html` |
 
 ## Run locally
 
