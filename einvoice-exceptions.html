@@ -152,37 +152,6 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
           </a>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 2px">
-          <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g4}}</div>
-          <a href="tax-rules.html" class="nav-item" title="{{shell.l.nTaxRules}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19L19 5"></path><circle cx="7" cy="7" r="2.5"></circle><circle cx="17" cy="17" r="2.5"></circle></svg>
-            <span style="{{shell.hide}}">{{shell.l.nTaxRules}}</span>
-          </a>
-          <a href="exchange-rates.html" class="nav-item" title="{{shell.l.nExchangeRates}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nExchangeRates}}</span>
-          </a>
-          <a href="customer-billing.html" class="nav-item" title="{{shell.l.nCustomerBilling}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCustomerBilling}}</span>
-          </a>
-          <a href="charge-catalogue.html" class="nav-item" title="{{shell.l.nChargeCatalogue}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nChargeCatalogue}}</span>
-          </a>
-          <a href="invoice-setup.html" class="nav-item" title="{{shell.l.nInvoiceSetup}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"></path><path d="M17 15l3 3-3 3"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nInvoiceSetup}}</span>
-          </a>
-          <a href="access-approvers.html" class="nav-item" title="{{shell.l.nAccessApprovers}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path><circle cx="12" cy="15.5" r="1.5"></circle></svg>
-            <span style="{{shell.hide}}">{{shell.l.nAccessApprovers}}</span>
-          </a>
-          <a href="cutover.html" class="nav-item" title="{{shell.l.nCutover}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h13"></path><path d="M12 7l5 5-5 5"></path><path d="M20 4v16"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCutover}}</span>
-          </a>
-        </div>
       </nav>
     </aside>
 
@@ -423,7 +392,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "g4": "Configure", "nTaxRules": "Tax Rules", "nExchangeRates": "Exchange Rates (ROE)", "nCustomerBilling": "Customer & Billing Setup", "nChargeCatalogue": "Charge Catalogue", "nInvoiceSetup": "Invoice Format & Numbering", "nAccessApprovers": "Access & Approvers", "nCutover": "Cut-over & Migration"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation"}, v.navT || {});
     const c = s.__sb;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark',

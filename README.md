@@ -22,13 +22,6 @@ Clickable prototype of the GIRS Live Build UI Showcase screens, designed for a 1
 | Approvals Inbox | `approvals-inbox.html` |
 | Enquiry & Monitoring | `enquiry.html` |
 | Reconciliation | `reconciliation.html` |
-| Tax Rules | `tax-rules.html` |
-| Exchange Rates (ROE) | `exchange-rates.html` |
-| Customer & Billing Setup | `customer-billing.html` |
-| Charge Catalogue | `charge-catalogue.html` |
-| Invoice Format & Numbering | `invoice-setup.html` |
-| Access & Approvers | `access-approvers.html` |
-| Cut-over & Migration | `cutover.html` |
 
 ## Run locally
 
