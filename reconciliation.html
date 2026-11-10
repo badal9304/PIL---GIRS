@@ -219,13 +219,15 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           </a>
           <div style="position: relative">
             <button onClick="{{shell.toggleUm}}" aria-expanded="{{shell.um}}" aria-haspopup="menu" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 4px; border: 1px solid var(--line); border-radius: 18px; box-sizing: border-box">
-              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600">U</span>
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600">{{shell.initials}}</span>
               <span style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 11px; color: var(--muted)">{{shell.curRole}}</span></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
             </button>
             <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
               <div role="menu" style="position: absolute; top: 42px; inset-inline-end: 0; z-index: 30; width: 280px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(22,26,33,.14); padding: 6px">
-                <div class="k" style="padding: 6px 10px 4px">Switch login · LMS IAM</div>
+                <div style="padding: 8px 10px 6px; display: flex; flex-direction: column; line-height: 18px"><span style="font-weight: 600">{{shell.userName}}</span><span style="font-size: 12px; color: var(--muted)">2 logins · roles from LMS IAM</span></div>
+                <div style="height: 1px; background: var(--line2); margin: 4px 0 6px"></div>
+                <div class="k" style="padding: 2px 10px 4px">Switch login</div>
                 <sc-for list="{{shell.logins}}" as="g" hint-placeholder-count="2">
                   <button role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 10px; border-radius: 6px">
                     <span style="display: flex; flex-direction: column; line-height: 16px"><span style="font-weight: 500">{{g.label}}</span><span style="font-size: 11px; color: var(--muted)">{{g.role}}</span></span>
@@ -345,6 +347,8 @@ class GirsPage extends DCLogic {
   }
 }
 
+const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
+const LOGINS = [{ role: 'Billing Executive', agency: 'Singapore · SIN', code: 'SIN' }, { role: 'Team Lead', agency: 'Malaysia · PKG', code: 'PKG' }];
 class Component extends GirsPage {
   constructor(p) {
     super(p);
@@ -375,9 +379,9 @@ class Component extends GirsPage {
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
       pending: 10, l: L,
       um: s.__um, toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
-      logins: [0, 1].map((i) => ({ label: '[Login ' + (i + 1) + ']', role: '[Role ' + (i + 1) + ']', on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
-        pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to [Login ' + (i + 1) + '] · [Role ' + (i + 1) + ']. Screens and actions follow that role.' }); } })),
-      curLogin: '[Login ' + (s.__lg + 1) + ']', curRole: '[Role ' + (s.__lg + 1) + ']',
+      logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
+        pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
+      userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
       signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
