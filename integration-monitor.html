@@ -90,12 +90,20 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"></circle><circle cx="19" cy="5" r="2.5"></circle><circle cx="19" cy="19" r="2.5"></circle><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nIntegrationMonitor}}</span>
           </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
+          </a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
           <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g1}}</div>
           <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
           </a>
           <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v6M9 15h6"></path></svg>
@@ -154,6 +162,14 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M9 15l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nMonthEnd}}</span>
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
           </a>
         </div>
       </nav>
@@ -238,7 +254,8 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
                   </button>
                 </sc-for>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
-                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Session timeout: [n] min, then automatic logout</div>
+                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Idle timeout: 15 min, then automatic logout</div>
+                <button role="menuitem" onClick="{{shell.elevate}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center; gap: 8px">Request temporary elevated access<span class="chip" style="height: 20px; font-size: 11px; background: var(--neutral); color: var(--muted2)">Time-bound · manager approval</span></button>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
                 <button role="menuitem" onClick="{{shell.signOut}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center">Sign out</button>
               </div>
@@ -308,6 +325,17 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
                   </tbody>
                 </table>
               </sc-if>
+              <sc-if value="{{tabDlq}}" hint-placeholder-val="{{ false }}">
+                <table>
+                  <thead><tr><th>Message</th><th>Interface</th><th>Reason</th><th>Detail</th><th>Received</th><th>Status</th><th></th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{dlq}}" as="r" hint-placeholder-count="5">
+                      <tr><td class="mono">{{r.id}}</td><td>{{r.ifc}}</td><td><span class="chip" style="{{r.rchip}}">{{r.reason}}</span></td><td style="color: var(--muted)">{{r.detail}}</td><td class="mono" style="color: var(--muted)">{{r.at}}</td><td><span class="chip" style="{{r.chip}}">{{r.st}}</span></td>
+                        <td><sc-if value="{{r.open}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{r.replay}}">{{r.action}}</button></sc-if></td></tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </sc-if>
               <sc-if value="{{tabMsg}}" hint-placeholder-val="{{ false }}">
                 <table>
                   <thead><tr><th>Time</th><th>Interface</th><th>Direction</th><th>Message</th><th>Result</th></tr></thead>
@@ -350,7 +378,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { sel: 'lms', tab: 'req', retried: {}, notice: '' };
+    this.state = { sel: 'lms', tab: 'req', retried: {}, dlq: {}, notice: '' };
   }
   renderVals() {
     const s = this.state;
@@ -400,11 +428,21 @@ class GirsPage extends DCLogic {
       ['11:15', 'Email delivery', 'Out', 'Invoice email · [Customer E]', 'Bounced', WARN], ['11:02', 'FAM', 'In', 'Invoice request REQ-0423', 'Accepted', OK],
       ['10:58', 'PocketApp / MELL / MSC', 'Out', 'Receipt upload · P-0006', 'Delivered', OK], ['10:44', 'PowerBI · data lake · AI agents', 'Out', 'Business events batch', 'Delivered', OK]
     ].map(([at, ifc, dir, msg, res, chip]) => ({ at: '10 Nov ' + at, ifc, dir, msg, res, chip }));
-    const T = [['req', 'Inbound invoice requests', reqs.length], ['back', 'Status flow-back to LMS', back.length], ['msg', 'Message log', msgs.length]];
+    const DL = [
+      ['DLQ-0091', 'LMS', 'Out of sequence', 'Booking cancellation arrived before booking creation · held in staging buffer', '10 Nov 08:12', 'Replay in order'],
+      ['DLQ-0092', 'LMS', 'Duplicate event', 'Same container event received twice · idempotency check stopped a second billing', '10 Nov 09:40', 'Close'],
+      ['DLQ-0093', 'LMS', 'Malformed payload', 'Invalid characters in container record · could not be read', '10 Nov 10:05', 'Return to source'],
+      ['DLQ-0094', 'ODeX', 'Duplicate notification', 'Payment notification retried by the portal · same transaction ID', '10 Nov 10:31', 'Close'],
+      ['DLQ-0095', 'GFS (Oracle Fusion)', 'Rejected by target', 'Journal batch rejected · closed fiscal period', '10 Nov 11:40', 'Replay after fix']
+    ];
+    const dlq = DL.map(([id, ifc, reason, detail, at, action]) => { const done = !!s.dlq[id]; return { id, ifc, reason, detail, at, action, open: !done, st: done ? 'Resolved' : 'Open', chip: done ? OK : WARN,
+      rchip: reason.indexOf('Malformed') === 0 || reason.indexOf('Rejected') === 0 ? BAD : NEU,
+      replay: () => this.setState({ dlq: { ...s.dlq, [id]: true }, notice: id + ': ' + action.toLowerCase() + ' — done.' }) }; });
+    const T = [['req', 'Inbound invoice requests', reqs.length], ['back', 'Status flow-back to LMS', back.length], ['dlq', 'Failed messages · replay', DL.filter((d) => !s.dlq[d[0]]).length], ['msg', 'Message log', msgs.length]];
     return {
       ifcs, reqs, back, msgs,
       tabs: T.map(([k, label, count]) => ({ label, count, on: s.tab === k ? 'true' : 'false', fg: s.tab === k ? 'var(--accent)' : 'var(--muted)', line: s.tab === k ? 'var(--accent)' : 'transparent', pick: () => this.setState({ tab: k }) })),
-      tabReq: s.tab === 'req', tabBack: s.tab === 'back', tabMsg: s.tab === 'msg',
+      tabReq: s.tab === 'req', tabBack: s.tab === 'back', tabMsg: s.tab === 'msg', tabDlq: s.tab === 'dlq', dlq,
       sel: { name: c[1], proto: c[2], dir: c[3], err: c[4], state: ST[c[5]][0], chip: ST[c[5]][1], last: '10 Nov 11:5' + (c[4] % 10), flows: c[6] },
       refresh: () => this.setState({ notice: 'Interface status refreshed.' }),
       hasNotice: !!s.notice, notice: s.notice, closeNotice: () => this.setState({ notice: '' })
@@ -426,7 +464,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
     const c = s.__sb;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark',
@@ -449,6 +487,7 @@ class Component extends GirsPage {
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
       signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
     } });
   }

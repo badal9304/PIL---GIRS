@@ -89,12 +89,20 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"></circle><circle cx="19" cy="5" r="2.5"></circle><circle cx="19" cy="19" r="2.5"></circle><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nIntegrationMonitor}}</span>
           </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
+          </a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
           <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g1}}</div>
           <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
           </a>
           <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v6M9 15h6"></path></svg>
@@ -153,6 +161,14 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M9 15l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nMonthEnd}}</span>
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
           </a>
         </div>
       </nav>
@@ -237,7 +253,8 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
                   </button>
                 </sc-for>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
-                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Session timeout: [n] min, then automatic logout</div>
+                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Idle timeout: 15 min, then automatic logout</div>
+                <button role="menuitem" onClick="{{shell.elevate}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center; gap: 8px">Request temporary elevated access<span class="chip" style="height: 20px; font-size: 11px; background: var(--neutral); color: var(--muted2)">Time-bound · manager approval</span></button>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
                 <button role="menuitem" onClick="{{shell.signOut}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center">Sign out</button>
               </div>
@@ -251,7 +268,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           </div>
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values — source system in development</span>
-          <span style="font-size: 12px; color: var(--muted)">Warning at [x]% · hold at [y]% of limit</span>
+          <span style="font-size: 12px; color: var(--muted)">Warning at [x]% · hold at [y]% of limit · LMS release hold when overdue &gt; 7 days</span>
           <div style="position: relative">
             <label for="gexp" class="sr">Export</label>
             <select id="gexp" class="select" value="" onChange="{{shell.exp}}" style="width: 112px">
@@ -348,16 +365,16 @@ class GirsPage extends DCLogic {
     const C = [
       ['c1', '[Customer A] group', 250000, 118400], ['c2', '[Customer B] group', 120000, 34200], ['c3', '[Customer C] group', 300000, 262500], ['c4', '[Customer D] group', 80000, 42000],
       ['c5', '[Customer E] group', 60000, 5600], ['c6', '[Customer F] group', 150000, 163900], ['c7', '[Customer H] group', 200000, 191000], ['c8', '[Customer I] group', 90000, 13700],
-      ['c9', '[Customer J] group', 50000, 3150], ['c10', '[Customer L] group', 100000, 104300], ['c11', '[Customer K] group', 70000, 4410], ['c12', '[Customer M] group', 40000, 1980]
+      ['c9', '[Customer J] group', 50000, 3150], ['c10', '[Customer L] group', 100000, 104300], ['c11', '[Customer K] group', 70000, 4410], ['c12', '[Customer M] group', 40000, 1980], ['c13', '[Customer S] · one-time', 0, 0], ['c14', '[Customer T] · one-time', 0, 0]
     ];
-    const ST = { ok: ['Within limit', 'background:var(--okbg);color:var(--ok)', 'var(--okbar)'], warn: ['Warning', 'background:var(--warnbg);color:var(--warn)', 'var(--warnbar)'], hold: ['Credit hold', 'background:var(--badbg);color:var(--bad)', 'var(--badbar)'], pend: ['Release requested', 'background:var(--tint);color:var(--accent2)', 'var(--accent)'] };
-    const stOf = (c) => { if (s.req[c[0]]) return 'pend'; const u = c[3] / c[2]; return u > 1 ? 'hold' : (u >= 0.85 ? 'warn' : 'ok'); };
+    const ST = { ok: ['Within limit', 'background:var(--okbg);color:var(--ok)', 'var(--okbar)'], warn: ['Warning', 'background:var(--warnbg);color:var(--warn)', 'var(--warnbar)'], hold: ['Credit hold', 'background:var(--badbg);color:var(--bad)', 'var(--badbar)'], pend: ['Release requested', 'background:var(--tint);color:var(--accent2)', 'var(--accent)'], cash: ['Cash · pay before invoice', 'background:var(--neutral);color:var(--muted2)', 'var(--muted4)'] };
+    const stOf = (c) => { if (!c[2]) return 'cash'; if (s.req[c[0]]) return 'pend'; const u = c[3] / c[2]; return u > 1 ? 'hold' : (u >= 0.85 ? 'warn' : 'ok'); };
     const T = [['hold', 'Credit hold'], ['warn', 'Warning'], ['pend', 'Release requested'], ['ok', 'Within limit']];
     const tiles = T.map(([k, label]) => { const on = s.filter === k; return { label, value: C.filter((c) => stOf(c) === k).length, color: ST[k][2], on: on ? 'true' : 'false',
       border: on ? 'var(--accent)' : 'var(--line)', shadow: on ? '0 0 0 1px var(--accent)' : 'none', pick: () => this.setState({ filter: on ? 'all' : k }) }; });
     const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);';
-    const rows = C.filter((c) => s.filter === 'all' || stOf(c) === s.filter).map((c) => { const k = stOf(c), u = c[3] / c[2], on = s.sel === c[0];
-      return { name: c[1], limitText: m(c[2]), expText: m(c[3]), pct: Math.round(u * 100) + '%', w: Math.min(100, Math.round(u * 100)) + '%', bar: ST[k === 'pend' ? 'hold' : k][2], st: ST[k][0], chip: ST[k][1],
+    const rows = C.filter((c) => s.filter === 'all' || stOf(c) === s.filter).map((c) => { const k = stOf(c), u = c[2] ? c[3] / c[2] : 0, on = s.sel === c[0];
+      return { name: c[1], limitText: c[2] ? m(c[2]) : 'No credit account', expText: m(c[3]), pct: c[2] ? Math.round(u * 100) + '%' : '—', w: Math.min(100, Math.round(u * 100)) + '%', bar: ST[k === 'pend' ? 'hold' : k][2], st: ST[k][0], chip: ST[k][1],
         edge: on ? selEdge : '', cell: on ? 'background:var(--tint);' : '', pick: () => this.setState({ sel: c[0] }) }; });
     const c = C.find((x) => x[0] === s.sel) || C[0];
     const k = stOf(c);
@@ -365,14 +382,16 @@ class GirsPage extends DCLogic {
     const impact = [
       { k: 'New invoice issuance', v: held ? 'Blocked' : (k === 'warn' ? 'Allowed · warning' : 'Allowed'), chip: held ? ST.hold[1] : (k === 'warn' ? ST.warn[1] : ST.ok[1]) },
       { k: 'Shipment-related billing', v: held ? 'Restricted' : 'Allowed', chip: held ? ST.hold[1] : ST.ok[1] },
-      { k: 'Receipt allocation', v: held ? 'Pending review' : 'Allowed', chip: held ? ST.warn[1] : ST.ok[1] }
+      { k: 'Receipt allocation', v: held ? 'Pending review' : 'Allowed', chip: held ? ST.warn[1] : ST.ok[1] },
+      { k: 'LMS container release', v: held ? 'Hold sent to LMS' : 'No hold', chip: held ? ST.hold[1] : ST.ok[1] }
     ];
+    if (k === 'cash') { impact.length = 0; impact.push({ k: 'Invoice finalisation', v: 'After payment verified', chip: ST.warn[1] }, { k: 'Credit terms', v: 'None · cash', chip: ST.cash[1] }); }
     const audit = [{ e: 'Credit status refreshed', by: 'Credit Management System', at: '10 Nov 08:00' }]
       .concat(c[3] > c[2] ? [{ e: 'Credit hold applied · limit exceeded', by: 'System', at: '10 Nov 08:00' }] : [])
       .concat(s.req[c[0]] ? [{ e: 'Release requested', by: '[User ID]', at: '10 Nov 12:05' }] : []);
     return {
       tiles, rows, listTitle: s.filter === 'all' ? 'Customer credit position' : T.find((t) => t[0] === s.filter)[1],
-      sel: { name: c[1], limitText: m(c[2]), expText: m(c[3]), st: ST[k][0], chip: ST[k][1], reason: c[3] > c[2] ? 'Exposure exceeds approved credit limit' : (k === 'warn' ? 'Exposure near approved limit' : '—') },
+      sel: { name: c[1], limitText: c[2] ? m(c[2]) : '—', expText: m(c[3]), st: ST[k][0], chip: ST[k][1], reason: k === 'cash' ? 'One-time / cash customer — no CMD credit account. Upfront payment verified before the invoice is finalised.' : c[3] > c[2] ? 'Exposure exceeds approved credit limit' : (k === 'warn' ? 'Exposure near approved limit' : '—') },
       impact, audit, canAct: k === 'hold', pending: k === 'pend',
       request: () => this.setState({ req: { ...s.req, [c[0]]: true }, notice: 'Release request for ' + c[1] + ' sent to the credit approver. Notified by email.' }),
       override: () => this.setState({ req: { ...s.req, [c[0]]: true }, notice: 'Override request for ' + c[1] + ' sent to the credit approver.' }),
@@ -395,7 +414,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
     const c = s.__sb;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark',
@@ -418,6 +437,7 @@ class Component extends GirsPage {
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
       signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
     } });
   }

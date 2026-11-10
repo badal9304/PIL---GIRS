@@ -91,12 +91,20 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"></circle><circle cx="19" cy="5" r="2.5"></circle><circle cx="19" cy="19" r="2.5"></circle><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nIntegrationMonitor}}</span>
           </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
+          </a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
           <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g1}}</div>
           <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
           </a>
           <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v6M9 15h6"></path></svg>
@@ -155,6 +163,14 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M9 15l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nMonthEnd}}</span>
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
           </a>
         </div>
       </nav>
@@ -239,7 +255,8 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
                   </button>
                 </sc-for>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
-                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Session timeout: [n] min, then automatic logout</div>
+                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Idle timeout: 15 min, then automatic logout</div>
+                <button role="menuitem" onClick="{{shell.elevate}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center; gap: 8px">Request temporary elevated access<span class="chip" style="height: 20px; font-size: 11px; background: var(--neutral); color: var(--muted2)">Time-bound · manager approval</span></button>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
                 <button role="menuitem" onClick="{{shell.signOut}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center">Sign out</button>
               </div>
@@ -282,7 +299,15 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <div class="cfg"><span class="k">Progressive start</span><span>Free time + <strong class="mono">7</strong> days</span></div>
           <div class="cfg">
             <label class="k" for="intv">Recurring interval</label>
-            <div style="position: relative"><select id="intv" class="select select-sm" value="{{interval}}" onChange="{{setInterval}}" style="width: 150px"><option value="Monthly">Monthly</option><option value="Fortnightly">Fortnightly</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+            <div style="position: relative"><select id="intv" class="select select-sm" value="{{interval}}" onChange="{{setInterval}}" style="width: 150px"><option value="Monthly">Monthly</option><option value="Fortnightly">Fortnightly</option><option value="Weekly">Weekly</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          </div>
+          <div class="cfg">
+            <label class="k" for="ftb">Free-time basis</label>
+            <div style="position: relative"><select id="ftb" class="select select-sm" value="{{basis}}" onChange="{{setBasis}}" style="width: 196px"><option value="sep">Separate DET and DEM</option><option value="comb">Combined DET + DEM</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          </div>
+          <div class="cfg">
+            <label class="k" for="dct">Day count</label>
+            <div style="position: relative"><select id="dct" class="select select-sm" value="{{dayCount}}" onChange="{{setDayCount}}" style="width: 220px"><option value="cal">Calendar days</option><option value="work">Working days · port holiday calendar</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
           </div>
           <div class="cfg"><span class="k">Guardrails</span><span class="mono">Min [n] · Max [n] invoices</span></div>
           <div class="cfg">
@@ -325,6 +350,20 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
               <div><div class="k">Free days</div><div class="mono">{{sel.free}}</div></div>
               <div><div class="k">Days used</div><div class="mono">{{sel.used}}</div></div>
             </div>
+            <div style="padding: 10px 16px 8px; border-bottom: 1px solid var(--line2)">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px"><span class="k">Equipment milestones · from LMS</span><sc-if value="{{clash}}" hint-placeholder-val="{{ false }}"><span class="chip" style="height: 20px; font-size: 11px; background: var(--badbg); color: var(--bad)">Milestone clash</span></sc-if></div>
+              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px">
+                <sc-for list="{{miles}}" as="ms" hint-placeholder-count="4">
+                  <div style="display: flex; flex-direction: column; gap: 2px; padding: 6px 8px; border-radius: 6px; background: {{ms.bg}}">
+                    <span style="font-size: 11px; line-height: 14px; color: var(--muted)">{{ms.label}}</span>
+                    <span class="mono" style="font-size: 12px; line-height: 16px; font-weight: 500; color: {{ms.fg}}">{{ms.at}}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{clash}}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 6px 10px; border-radius: 6px; background: var(--badbg); color: var(--bad2); font-size: 12px; line-height: 16px"><span>{{clashText}}</span><button class="btn btn-sm" onClick="{{resolveClash}}">Resolve</button></div>
+              </sc-if>
+            </div>
             <div style="padding: 12px 16px 4px; display: flex; justify-content: space-between; align-items: center"><span class="k">Tariff tiers</span><span class="chip" style="background: var(--warnbg); color: var(--warn)">Sample tariff — rates to be provided by PIL</span></div>
             <ul style="list-style: none; margin: 0; padding: 0 16px 8px">
               <sc-for list="{{tiers}}" as="t" hint-placeholder-count="4">
@@ -352,6 +391,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
                 <sc-if value="{{canProg}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{runProg}}">{{progLabel}}</button></sc-if>
                 <sc-if value="{{canFinal}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{runFinal}}">Raise final DD invoice</button></sc-if>
                 <sc-if value="{{canCharge}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{addLolo}}">Add charge (e.g. LOLO)</button></sc-if>
+                <sc-if value="{{canDamage}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{addDamage}}">Link container damage fee</button></sc-if>
                 <sc-if value="{{canConvert}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{convert}}">Convert proforma to final (paid)</button></sc-if>
                 <sc-if value="{{canAdv}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{addAdv}}">Add advance DD / container deposit</button></sc-if>
               </div>
@@ -371,7 +411,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { mode: 'prog', interval: 'Monthly', fee: true, selected: 'd1', done: {}, lolo: {}, adv: {}, conv: {}, notice: '' };
+    this.state = { mode: 'prog', interval: 'Monthly', fee: true, selected: 'd1', done: {}, lolo: {}, adv: {}, conv: {}, dmg: {}, fixed: {}, basis: 'sep', dayCount: 'cal', notice: '' };
   }
   renderVals() {
     const s = this.state;
@@ -414,6 +454,7 @@ class GirsPage extends DCLogic {
       else if (c.st === 'OP' && used >= c.free + 7 && unbilled > 0) act = [s.mode === 'prog' ? 'Progressive due' : 'Proforma due', 'background:var(--warnbg);color:var(--warn)'];
       else if (c.st === 'OP' && used < c.free) act = ['In free time', 'background:var(--okbg);color:var(--ok)'];
       else if (c.st === 'OP') act = ['Before start point', 'background:var(--neutral);color:var(--muted)'];
+      if ((c.id === 'd9' || c.id === 'd14') && !s.fixed[c.id]) act = ['Milestone clash', 'background:var(--badbg);color:var(--bad)'];
       return { used, bill, tiers, total, unbilled, act, stopped, invEnd };
     };
     const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);';
@@ -422,9 +463,17 @@ class GirsPage extends DCLogic {
       cell: on ? 'background:var(--tint);' : '', edge: on ? selEdge : '', select: () => this.setState({ selected: c.id }) }; });
     const c = C.find((x) => x.id === s.selected) || C[0];
     const k = calc(c);
-    const extra = (s.lolo[c.id] ? [['[LOLO charge]', 'Additional charge', '—']] : []).concat(s.adv[c.id] ? [['[Advance DD / deposit]', 'Advance before VD status', '—']] : []);
+    const extra = (s.lolo[c.id] ? [['[LOLO charge]', 'Additional charge', '—']] : []).concat(s.dmg[c.id] ? [['[Damage fee]', 'Container damage recovery', '—']] : []).concat(s.adv[c.id] ? [['[Advance DD / deposit]', 'Advance before VD status', '—']] : []);
     const doneInv = s.done[c.id] === 'prog' ? [['SINOD26' + String(2700 + C.indexOf(c)).padStart(5, '0'), s.mode === 'prog' ? 'Progressive' : (s.conv[c.id] ? 'Proforma → final (paid)' : 'Proforma'), 'to ' + fmt(TODAY)]] : (s.done[c.id] === 'final' ? [['SINOD26' + String(2750 + C.indexOf(c)).padStart(5, '0'), 'Final', 'to ' + fmt(Date.parse(c.ret))]] : []);
     const invs = c.invs.concat(doneInv).map(([no, kind, period]) => ({ no, kind, period, amt: '' })).concat(extra.map(([no, kind]) => ({ no, kind, period: 'added to next DD invoice', amt: '' })));
+    const CLASH = ['d9', 'd14'];
+    const clash = CLASH.indexOf(c.id) >= 0 && !s.fixed[c.id];
+    const st0 = Date.parse(c.start);
+    const MS = c.kind === 'Demurrage'
+      ? [['Discharge', clash ? null : st0 - 2 * day], ['Gate-out full', st0], ['Gate-in empty', c.ret ? Date.parse(c.ret) : null], ['Clock', c.ret ? 'Stopped' : 'Running']]
+      : [['Discharge', clash ? null : st0 - 1 * day], ['Gate-out full', st0], ['Gate-in empty', c.ret ? Date.parse(c.ret) : null], ['Clock', c.ret ? 'Stopped' : 'Running']];
+    const miles = MS.map(([label, v]) => { const missing = v === null; const txt = typeof v === 'string' ? v : (missing ? (label === 'Discharge' && clash ? 'Missing' : 'Pending') : fmt(v));
+      return { label, at: txt, bg: missing && clash && label === 'Discharge' ? 'var(--badbg)' : 'var(--sub)', fg: missing ? (clash && label === 'Discharge' ? 'var(--bad)' : 'var(--muted)') : 'var(--ink)' }; });
     let note = ['', ''];
     if (s.done[c.id] === 'final') note = ['Final DD invoice raised for the remaining unbilled days only. Prior progressive invoices are not reversed. Progressive invoicing has stopped.', 'background:var(--okbg);color:var(--ok2)'];
     else if (k.stopped) note = ['D&D invoicing stopped — container status changed to ' + ST[c.st][0] + '.', 'background:var(--bg);color:var(--muted2)'];
@@ -446,6 +495,10 @@ class GirsPage extends DCLogic {
       runProg: () => this.setState({ done: { ...s.done, [c.id]: 'prog' }, notice: (s.mode === 'prog' ? 'Progressive' : 'Proforma') + ' DD invoice raised for ' + c.no + (s.fee ? ' with admin fee.' : '.') }),
       runFinal: () => this.setState({ done: { ...s.done, [c.id]: 'final' }, notice: 'Final DD invoice raised for ' + c.no + (s.fee ? ' with admin fee.' : '.') }),
       addLolo: () => this.setState({ lolo: { ...s.lolo, [c.id]: true } }),
+      basis: s.basis, setBasis: (e) => this.setState({ basis: e.target.value }), dayCount: s.dayCount, setDayCount: (e) => this.setState({ dayCount: e.target.value }),
+      miles, clash, clashText: 'Gate-out full recorded in LMS without a discharge milestone. D&D clock held until resolved.',
+      resolveClash: () => this.setState({ fixed: { ...s.fixed, [c.id]: true }, notice: 'Milestone clash on ' + c.no + ' resolved. D&D clock recalculated.' }),
+      canDamage: c.st === 'MT' && !s.dmg[c.id], addDamage: () => this.setState({ dmg: { ...s.dmg, [c.id]: true }, notice: 'Container damage fee [Repair cost] linked to ' + c.no + ' and added to the next D&D invoice.' }),
       canAdv: c.st === 'OP' && !s.adv[c.id] && !s.done[c.id],
       addAdv: () => this.setState({ adv: { ...s.adv, [c.id]: true }, notice: 'Advance DD / container deposit added for ' + c.no + ' before VD status. Amount: [Deposit amount].' }),
       canConvert: s.mode === 'pro' && s.done[c.id] === 'prog' && !s.conv[c.id],
@@ -470,7 +523,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
     const c = s.__sb;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark',
@@ -493,6 +546,7 @@ class Component extends GirsPage {
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
       signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
     } });
   }

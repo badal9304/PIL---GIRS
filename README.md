@@ -8,7 +8,9 @@ Clickable prototype of the GIRS Live Build UI Showcase screens, designed for a 1
 | Charge Processing | `charge-processing.html` |
 | D&D Engine | `dd-engine.html` |
 | Integration Monitor | `integration-monitor.html` |
+| Document Intake | `document-intake.html` |
 | Invoices Hub | `invoices-hub.html` |
+| Split B/L & Billed-To | `split-billing.html` |
 | Manual & MISC Invoice | `manual-invoice.html` |
 | Invoice Template Previewer | `invoice-previewer.html` |
 | Credit Notes | `credit-notes.html` |
@@ -22,6 +24,8 @@ Clickable prototype of the GIRS Live Build UI Showcase screens, designed for a 1
 | Approvals Inbox | `approvals-inbox.html` |
 | Enquiry & Monitoring | `enquiry.html` |
 | Reconciliation | `reconciliation.html` |
+| Month-End Close | `month-end.html` |
+| Reports & Analytics | `reports.html` |
 
 ## Run locally
 

@@ -87,12 +87,20 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"></circle><circle cx="19" cy="5" r="2.5"></circle><circle cx="19" cy="19" r="2.5"></circle><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nIntegrationMonitor}}</span>
           </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
+          </a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
           <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g1}}</div>
           <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
           </a>
           <a href="manual-invoice.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nManualInvoice}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v6M9 15h6"></path></svg>
@@ -151,6 +159,14 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M9 15l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nMonthEnd}}</span>
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
           </a>
         </div>
       </nav>
@@ -235,7 +251,8 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
                   </button>
                 </sc-for>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
-                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Session timeout: [n] min, then automatic logout</div>
+                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Idle timeout: 15 min, then automatic logout</div>
+                <button role="menuitem" onClick="{{shell.elevate}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center; gap: 8px">Request temporary elevated access<span class="chip" style="height: 20px; font-size: 11px; background: var(--neutral); color: var(--muted2)">Time-bound · manager approval</span></button>
                 <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
                 <button role="menuitem" onClick="{{shell.signOut}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center">Sign out</button>
               </div>
@@ -258,10 +275,13 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
         <sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}">
           <div role="status" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--okbg); border: 1px solid var(--okbd); color: var(--ok2); box-sizing: border-box">{{notice}}<button class="btn btn-sm" onClick="{{closeNotice}}">Close</button></div>
         </sc-if>
+        <sc-if value="{{conflict}}" hint-placeholder-val="{{ false }}">
+          <div role="alert" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--warnbg); border: 1px solid var(--warnbd); color: var(--warn2); box-sizing: border-box">This draft was changed by [User 03] after you opened it (revision 3). Reload to see their changes before saving.<button class="btn btn-sm" onClick="{{reload}}">Reload draft</button></div>
+        </sc-if>
         <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
           <div style="flex: 999 1 860px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
             <section class="card">
-              <div class="card-head"><h2 class="card-title">Invoice details</h2><span class="mono" style="font-size: 13px; color: var(--muted)">Number on generation: <strong style="color: var(--ink)">{{numPreview}}</strong></span></div>
+              <div class="card-head"><h2 class="card-title">Invoice details <span class="chip" style="margin-inline-start: 8px; height: 22px; font-size: 11px; background: var(--neutral); color: var(--muted2)">Draft · revision {{rev}} · also open by [User 03]</span></h2><span class="mono" style="font-size: 13px; color: var(--muted)">Number on generation: <strong style="color: var(--ink)">{{numPreview}}</strong></span></div>
               <div style="padding: 14px 16px 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 16px">
                 <div style="grid-column: span 2">
                   <span class="lbl">Invoice type</span>
@@ -341,7 +361,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { type: 'MISC', reason: 'misc', bl: 'BL-SG-24011', dir: 'O', ccy: 'SGD', idate: 'today', bp: 'shipper', lines: [['Lift on / lift off (LOLO)', 'Catalogue', '180.00'], ['[Ancillary charge A]', 'Catalogue', '']], notice: '', done: 0 };
+    this.state = { type: 'MISC', reason: 'misc', bl: 'BL-SG-24011', dir: 'O', ccy: 'SGD', idate: 'today', bp: 'shipper', lines: [['Lift on / lift off (LOLO)', 'Catalogue', '180.00'], ['[Ancillary charge A]', 'Catalogue', '']], notice: '', done: 0, rev: 1, reloaded: false, conflict: false };
   }
   renderVals() {
     const s = this.state;
@@ -370,7 +390,8 @@ class GirsPage extends DCLogic {
       lines, noLines: lines.length === 0, subtotal: sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
       addCharge: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ lines: s.lines.concat([[v, 'Catalogue', '']]) }); },
       checks, blocked, preText: blocked ? 'Not ready' : 'Ready', preChip: blocked ? 'background:var(--badbg);color:var(--bad)' : 'background:var(--okbg);color:var(--ok)',
-      draft: () => this.setState({ notice: 'Draft saved for ' + s.bl + '.' }),
+      rev: s.rev, conflict: s.conflict, reload: () => this.setState({ conflict: false, rev: 3, reloaded: true, notice: 'Draft reloaded at revision 3. Your next save checks the revision again.' }),
+      draft: () => { if (s.rev === 2 && !s.reloaded) { this.setState({ conflict: true, notice: '' }); return; } const r = s.rev + 1; this.setState({ rev: r, notice: 'Draft saved for ' + s.bl + ' (revision ' + r + ').' }); },
       generate: () => this.setState({ done: s.done + 1, notice: num + ' generated for ' + s.bl + (s.idate === 'back' ? ' (dated 09 Nov 2026 · 1-day backdate for GFS).' : '.') + ' Sent for distribution.' }),
       hasNotice: !!s.notice, notice: s.notice, closeNotice: () => this.setState({ notice: '' })
     };
@@ -391,7 +412,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
     const c = s.__sb;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark',
@@ -414,6 +435,7 @@ class Component extends GirsPage {
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
       signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
     } });
   }
