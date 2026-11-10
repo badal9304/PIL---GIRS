@@ -5,19 +5,30 @@ Clickable prototype of the GIRS Live Build UI Showcase screens, designed for a 1
 | Page | File |
 | --- | --- |
 | Operations Cockpit | `index.html` |
+| Charge Processing | `charge-processing.html` |
+| D&D Engine | `dd-engine.html` |
+| Integration Monitor | `integration-monitor.html` |
+| Invoices Hub | `invoices-hub.html` |
+| Manual & MISC Invoice | `manual-invoice.html` |
 | Invoice Template Previewer | `invoice-previewer.html` |
+| Credit Notes | `credit-notes.html` |
 | DAR Console | `dar-console.html` |
-| SOA & Aging Dashboard | `soa-aging.html` |
+| E-invoice Exceptions | `einvoice-exceptions.html` |
+| Receipting | `receipting.html` |
 | CashApp AI Allocation Workbench | `cashapp-workbench.html` |
 | Tolerance & COREOR Release | `tolerance-coreor.html` |
-| Charge Processing | `charge-processing.html` |
-| Credit Notes | `credit-notes.html` |
-| Receipting & Reconciliation | `receipting.html` |
-| Enquiry & Monitoring | `enquiry.html` |
-| Invoices Hub | `invoices-hub.html` |
-| D&D Engine | `dd-engine.html` |
+| SOA & Aging Dashboard | `soa-aging.html` |
+| Credit Management | `credit-management.html` |
 | Approvals Inbox | `approvals-inbox.html` |
+| Enquiry & Monitoring | `enquiry.html` |
+| Reconciliation | `reconciliation.html` |
 | Tax Rules | `tax-rules.html` |
+| Exchange Rates (ROE) | `exchange-rates.html` |
+| Customer & Billing Setup | `customer-billing.html` |
+| Charge Catalogue | `charge-catalogue.html` |
+| Invoice Format & Numbering | `invoice-setup.html` |
+| Access & Approvers | `access-approvers.html` |
+| Cut-over & Migration | `cutover.html` |
 
 ## Run locally
 
@@ -30,4 +41,4 @@ Open `index.html` through a local web server (for example the VS Code "Live Serv
 3. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/ (root)`, then **Save**.
 4. After a minute the site is live at `https://<your-username>.github.io/<repository-name>/`.
 
-All data on these screens is dummy prototype data.
+All data on these screens is dummy prototype data. Values in [square brackets] are placeholders for PIL to provide.
