@@ -1,6 +1,6 @@
 # PIL GIRS — UI Prototype
 
-Clickable prototype of the GIRS Live Build UI Showcase screens, designed for a 1920×1080 screen.
+Clickable prototype of the GIRS Live Build UI Showcase screens. Designed for 1920×1080 desktop and responsive down to tablet (768px+) and mobile (360px+). Below 1024px the side panel opens from the menu button.
 
 | Page | File |
 | --- | --- |

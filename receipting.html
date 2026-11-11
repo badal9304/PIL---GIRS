@@ -57,18 +57,103 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .gsearch{position:relative;flex:0 1 480px;min-width:220px}
 .gsearch .input{width:100%;padding-inline:36px 12px;background:var(--sub)}
 .grow{flex:1 1 auto}
+
+.gmenu,.gdclose{display:none}
+.gdctx{display:none}
+.gscrim{display:none}
+.gutxt span{white-space:nowrap}
+@media (max-width:1439px){
+.gperiod,.gtl{display:none !important}
+.card{overflow-x:auto !important}
+}
+@media (max-width:1279px){
+.r-col{max-width:none !important}
+.gutxt{display:none !important}
+}
+@media (max-width:1023px){
+.groot{height:100vh;height:100dvh !important;min-height:0 !important}
+.gmenu{display:inline-flex;flex:none}
+.gside{position:fixed;top:0;bottom:0;inset-inline-start:0;z-index:60;width:288px !important;max-width:86vw;transform:translateX(-100%);transition:transform .22s ease,box-shadow .22s ease;visibility:hidden}
+.theme[dir=rtl] .gside{transform:translateX(100%)}
+.gside[data-drawer=open]{transform:none !important;visibility:visible;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+.gside .nav-item{height:40px}
+.gsbfoot{display:none !important}
+.gdclose{display:inline-flex}
+.gscrim{display:block;position:fixed;inset:0;z-index:55;background:rgba(14,17,22,.45)}
+.gtop{padding:0 12px !important;gap:8px !important}
+.gperiod,.gtl,.gutxt{display:none !important}
+.gsearch{flex:1 1 auto !important;min-width:120px !important}
+.ghead{padding:10px 12px !important}
+.gmain{padding:12px !important;gap:12px !important}
+.r-col{flex:1 1 100% !important}
+.card{overflow-x:auto !important}
+.r-g5,.r-g6{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+.r-mh{min-height:0 !important}
+.r-mxh{max-height:none !important}
+.r-gdoc{grid-template-columns:minmax(0,1fr) !important}
+.r-gdoc > *{border-inline-end:0 !important}
+}
+@media (max-width:767px){
+.gctx,.gtheme{display:none !important}
+.gdctx{display:flex}
+.gsearch .input{font-size:16px}
+.r-g4,.r-g5,.r-g6{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+.r-g3a,.r-gs,.r-g3:has(input,select,textarea){grid-template-columns:minmax(0,1fr) !important}
+.r-g4:has(input,select,textarea){grid-template-columns:minmax(0,1fr) !important}
+.r-g3a > *,.r-gs > *,.r-g3:has(input,select,textarea) > *,.r-g4:has(input,select,textarea) > *{grid-column:1/-1 !important}
+section:has(> .r-paper){justify-content:flex-start !important;padding:12px !important;overflow-x:auto}
+.r-paper{zoom:.505}
+.r-g3a > :first-child{border-inline-end:0 !important;padding:12px 16px 0 !important}
+.r-g3a br{display:none}
+.r-g3a > a{border-inline-end:0 !important;border-top:1px solid var(--line2)}
+.r-w{max-width:100% !important}
+.card-head{flex-wrap:wrap;padding-block:8px}
+.ghead h1{font-size:16px !important}
+.ghead p{font-size:11.5px !important}
+.gright{width:100%;gap:8px !important}
+.gright .select,.gright .input{max-width:100%}
+.r-wrap,.opt{flex-wrap:wrap !important;row-gap:8px !important}
+.ifc .r-wrap,.tile .r-wrap,[role=tablist]{flex-wrap:nowrap !important}
+[role=tablist]{overflow-x:auto;scrollbar-width:none;gap:20px !important}
+[role=tablist]::-webkit-scrollbar{display:none}
+.r-g4 > *,.r-g5 > *,.r-g6 > *{height:auto !important;min-height:68px;padding-block:10px !important}
+.r-g4 > * > :last-child{font-size:19px !important;line-height:26px !important;word-break:break-word}
+.gtoast{inset-inline:12px !important;bottom:12px !important;max-width:none !important}
+.paper{max-width:none}
+}
+@media (max-width:420px){
+.r-g2m:has(input,select,textarea),.r-g2:has(input,select,textarea){grid-template-columns:minmax(0,1fr) !important}
+.r-g2m:has(input,select,textarea) > *,.r-g2:has(input,select,textarea) > *{grid-column:1/-1 !important}
+}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;height:76px;padding:0 20px;display:flex;flex-direction:column;justify-content:center;gap:4px;box-sizing:border-box}
 .rowbtn{all:unset;cursor:pointer;display:inline-block}
 .rowbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}</style>
 </helmet>
-<div class="theme" data-theme="{{shell.theme}}"  style="height: 100vh; min-height: 640px; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div class="theme groot" data-theme="{{shell.theme}}"  style="height: 100vh; min-height: 640px; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
   <div style="flex: 1 1 auto; min-height: 0; display: flex">
-    <aside aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
+    <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
+    <aside id="gside" class="gside" data-drawer="{{shell.drawer}}" aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
       <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); box-sizing: border-box; {{shell.logoRow}}">
         <span style="display: inline-flex; background: white; border-radius: 4px; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
         <span style="width: 1px; height: 20px; background: var(--line); {{shell.hide}}"></span>
         <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); {{shell.hide}}">GIRS</span>
+        <button class="btn btn-icon btn-sm gdclose" onClick="{{shell.closeDrawer}}" aria-label="Close menu" style="margin-inline-start: auto; width: 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="gdctx" style="flex: none; flex-direction: column; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line2)">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px">
+          <div style="position: relative"><label for="dhub" class="sr">Hub</label><select id="dhub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 100%"><option value="SIN">Singapore · SIN</option><option value="NSA">India · NSA</option><option value="LCH">Thailand · LCH</option><option value="PKG">Malaysia · PKG</option><option value="JED">Saudi Arabia · JED</option><option value="ZLO">Mexico · ZLO</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><label for="dent" class="sr">Entity</label><select id="dent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100%"><option value="PIL">PIL</option><option value="MELL">MELL</option><option value="MSC">MSC</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
+          <div role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
+            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" aria-label="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 4px; background: {{shell.lightBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" aria-label="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 4px; background: {{shell.darkBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
+          </div>
+        </div>
       </div>
       <nav aria-label="Screens" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 10px; padding: 10px 10px 16px">
         <div style="display: flex; flex-direction: column; gap: 2px">
@@ -172,7 +257,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           </a>
         </div>
       </nav>
-      <div style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
+      <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
         <button class="sbtoggle" onClick="{{shell.toggleSb}}" aria-expanded="{{shell.sbOpen}}" aria-label="{{shell.sbLabel}}" title="{{shell.sbLabel}}" style="{{shell.item}}">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path><path d="{{shell.sbIcon}}"></path></svg>
           <span style="{{shell.hide}}">Collapse side panel</span>
@@ -180,13 +265,16 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
       </div>
     </aside>
 
-    <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; overflow-y: auto">
+    <div class="gcontent" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; overflow-y: auto">
       <div style="position: sticky; top: 0; z-index: 20; flex: none">
-        <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line2); box-sizing: border-box">
+        <div class="gtop" style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line2); box-sizing: border-box">
+          <button class="btn btn-icon gmenu" onClick="{{shell.toggleDrawer}}" aria-label="Open menu" aria-controls="gside" aria-expanded="{{shell.drawerAria}}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
           <div class="gsearch">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
             <label for="gq" class="sr">Search</label>
-            <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="Search B/L, VVD, invoice no., container no." autocomplete="off">
+            <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
             <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
               <div style="position: absolute; top: 42px; inset-inline: 0; z-index: 30; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(22,26,33,.12); padding: 6px">
                 <a href="enquiry.html" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; color: var(--ink); text-decoration: none">
@@ -201,7 +289,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             </sc-if>
           </div>
           <div class="grow"></div>
-          <div style="position: relative">
+          <div class="gctx" style="position: relative">
             <label for="ghub" class="sr">Hub</label>
             <select id="ghub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 148px">
               <option value="SIN">Singapore · SIN</option>
@@ -213,7 +301,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             </select>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
           </div>
-          <div style="position: relative">
+          <div class="gctx" style="position: relative">
             <label for="gent" class="sr">Entity</label>
             <select id="gent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100px">
               <option value="PIL">PIL</option>
@@ -222,13 +310,13 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             </select>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
           </div>
-          <span class="chip" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
-          <div role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
+          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="gtheme" role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
             <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" title="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: {{shell.lightBg}}">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>Light
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span class="gtl">Light</span>
             </button>
             <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" title="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: {{shell.darkBg}}">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>Dark
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span class="gtl">Dark</span>
             </button>
           </div>
           <a href="approvals-inbox.html" class="btn btn-icon" aria-label="{{shell.pending}} pending approvals" title="{{shell.pending}} pending approvals" style="position: relative; text-decoration: none">
@@ -238,11 +326,11 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <div style="position: relative">
             <button onClick="{{shell.toggleUm}}" aria-expanded="{{shell.um}}" aria-haspopup="menu" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 4px; border: 1px solid var(--line); border-radius: 18px; box-sizing: border-box">
               <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600">{{shell.initials}}</span>
-              <span style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 11px; color: var(--muted)">{{shell.curRole}}</span></span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+              <span class="gutxt" style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 11px; color: var(--muted)">{{shell.curRole}}</span></span>
+              <svg class="gutxt" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
             </button>
             <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
-              <div role="menu" style="position: absolute; top: 42px; inset-inline-end: 0; z-index: 30; width: 280px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(22,26,33,.14); padding: 6px">
+              <div role="menu" style="position: absolute; top: 42px; inset-inline-end: 0; z-index: 30; width: 280px; max-width: calc(100vw - 24px); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(22,26,33,.14); padding: 6px">
                 <div style="padding: 8px 10px 6px; display: flex; flex-direction: column; line-height: 18px"><span style="font-weight: 600">{{shell.userName}}</span><span style="font-size: 12px; color: var(--muted)">2 logins · roles from LMS IAM</span></div>
                 <div style="height: 1px; background: var(--line2); margin: 4px 0 6px"></div>
                 <div class="k" style="padding: 2px 10px 4px">Switch login</div>
@@ -261,15 +349,15 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             </sc-if>
           </div>
         </div>
-        <div style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
+        <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Receipting &amp; Reconciliation</h1>
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Bank and third-party payments matched to invoices · cleared-funds recognition · reconciliation across GIRS, GFS, bank and customer platforms</p>
           </div>
-          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <label for="src" style="font-size: 12px; font-weight: 600; color: var(--muted)">Source</label>
           <div style="position: relative">
-            <select id="src" class="select" value="{{src}}" onChange="{{setSrc}}" style="width: 200px">
+            <select id="src" class="select r-w" value="{{src}}" onChange="{{setSrc}}" style="width: 200px">
               <option value="all">All sources</option>
               <option value="Bank · MT940">Bank · MT940</option>
               <option value="Bank · CAMT.053">Bank · CAMT.053</option>
@@ -303,12 +391,12 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           </div>
         </div>
       </div>
-      <main style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+      <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}">
           <div role="status" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 16px; border-radius: 8px; background: var(--tint); border: 1px solid var(--tintbd); color: var(--accent2); box-sizing: border-box">{{notice}}</div>
         </sc-if>
 
-        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+        <div class="r-g4" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
           <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
             <div class="tile">
               <span style="font-size: 12px; font-weight: 500; color: var(--muted)">{{k.label}}</span>
@@ -325,7 +413,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
           <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>VAN routing · funds allocated to customer accounts</span>
         </div>
         <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
-          <section class="card" style="flex: 999 1 720px; min-width: 0; overflow: hidden">
+          <section class="card r-col" style="flex: 999 1 720px; min-width: 0; overflow: hidden">
             <div class="card-head"><h2 class="card-title">Incoming payments</h2><span class="card-meta">{{rowCount}} payments</span></div>
             <div style="overflow-x: auto">
               <table>
@@ -348,9 +436,9 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             </div>
           </section>
 
-          <section class="card" style="flex: 1 1 400px; max-width: 440px; min-width: 0; overflow: hidden">
+          <section class="card r-col" style="flex: 1 1 400px; max-width: 440px; min-width: 0; overflow: hidden">
             <div class="card-head"><h2 class="card-title">Payment detail</h2><span class="chip" style="{{sel.stChip}}">{{sel.status}}</span></div>
-            <div style="padding: 16px; border-bottom: 1px solid var(--line2); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px">
+            <div class="r-g2m" style="padding: 16px; border-bottom: 1px solid var(--line2); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px">
               <div><div class="k">Payment ref.</div><div class="mono" style="margin-top: 2px">{{sel.id}}</div></div>
               <div><div class="k">Amount</div><div class="mono" style="margin-top: 2px">{{sel.ccy}} {{sel.amtText}}</div></div>
               <div><div class="k">Source</div><div style="margin-top: 2px">{{sel.src}}</div></div>
@@ -360,7 +448,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
             <div style="padding: 12px 16px 4px"><div class="k">Reconciliation</div></div>
             <ul style="list-style: none; margin: 0; padding: 0 16px 8px">
               <sc-for list="{{recon}}" as="c" hint-placeholder-count="4">
-                <li style="display: flex; align-items: center; justify-content: space-between; height: 40px; border-bottom: 1px solid var(--line2)"><span>{{c.label}}</span><span class="chip" style="{{c.chip}}">{{c.state}}</span></li>
+                <li class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; height: 40px; border-bottom: 1px solid var(--line2)"><span>{{c.label}}</span><span class="chip" style="{{c.chip}}">{{c.state}}</span></li>
               </sc-for>
             </ul>
             <div style="padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 12px">
@@ -385,7 +473,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
   </div>
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
   </sc-if>
 </div>
 </script>
@@ -498,16 +586,25 @@ class Component extends GirsPage {
     let sb = false, th = 'light', hub = 'SIN', ent = 'PIL';
     try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
     let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
-    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '' });
+    let narrow = false;
+    try {
+      const mq = window.matchMedia('(max-width: 1023px)');
+      narrow = mq.matches;
+      const on = (e) => this.setState({ __narrow: e.matches, __drawer: false });
+      if (mq.addEventListener) mq.addEventListener('change', on); else mq.addListener(on);
+    } catch (e) {}
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false });
   }
   renderVals() {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
     const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
-    const c = s.__sb;
+    const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark',
+      drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
+      toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
       sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '',
       logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
       logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
@@ -520,7 +617,7 @@ class Component extends GirsPage {
       hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
-      pending: 10, l: L,
+      pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
       um: s.__um, toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
