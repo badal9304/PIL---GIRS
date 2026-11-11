@@ -22,6 +22,7 @@ Clickable prototype of the GIRS Live Build UI Showcase screens. Designed for 192
 | SOA & Aging Dashboard | `soa-aging.html` |
 | Credit Management | `credit-management.html` |
 | Customer Master | `customer-master.html` |
+| Charge Master | `charge-master.html` |
 | Approvals Inbox | `approvals-inbox.html` |
 | Enquiry & Monitoring | `enquiry.html` |
 | Reconciliation | `reconciliation.html` |
