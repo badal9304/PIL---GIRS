@@ -124,6 +124,13 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .sect{padding:24px 0;border-bottom:1px solid var(--line2)}
 .sect:last-child{border-bottom:0}
 .sect h3{margin:0 0 16px;font-size:16px;font-weight:600}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px}
+.col{display:flex;flex-direction:column}
+.sech{margin:0 0 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.row{display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid var(--line2)}
+.row:last-child{border-bottom:0}
+.row .l{font-size:12px;color:var(--muted)}
+.row .v{font-size:14px;line-height:20px}
 .g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 32px}
 .g3 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
 .g3 .v{display:block;font-size:14px}</style>
@@ -429,7 +436,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <button class="gbtn" aria-expanded="{{g.open}}" onClick="{{g.toggle}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate({{g.rot}}); transition: transform .15s"><path d="M9 6l6 6-6 6"></path></svg><span style="flex: 1 1 auto">{{g.name}}</span><span class="mono" style="font-size: 12px; font-weight: 500; color: var(--muted)">{{g.n}}</span></button>
                   <sc-if value="{{g.isOpen}}" hint-placeholder-val="{{ true }}">
                     <sc-for list="{{g.kids}}" as="k" hint-placeholder-count="2">
-                      <button class="cbtn" aria-current="{{k.cur}}" onClick="{{k.pick}}" style="{{k.sel}}"><span class="mono" style="flex: 0 0 auto">{{k.code}}</span><span style="flex: 1 1 auto; color: var(--muted)">{{k.ctry}}</span><sc-if value="{{k.flag}}" hint-placeholder-val="{{ false }}"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--badbar)" title="{{k.st}}"></span></sc-if></button>
+                      <button class="cbtn" aria-current="{{k.cur}}" onClick="{{k.pick}}" style="{{k.sel}}"><span class="mono" style="flex: 0 0 auto">{{k.code}}</span><span style="flex: 1 1 auto; color: var(--muted)">{{k.ctry}}</span><sc-if value="{{k.flag}}" hint-placeholder-val="{{ false }}"><span class="sr">{{k.st}}</span></sc-if><sc-if value="{{k.flag}}" hint-placeholder-val="{{ false }}"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--badbar)" title="{{k.st}}"></span></sc-if></button>
                     </sc-for>
                   </sc-if>
                 </div>
@@ -441,17 +448,27 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <section class="card" style="padding: 20px 24px; display: flex; align-items: center; gap: 40px; background: var(--hover2)">
               <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 12px; color: var(--muted)">Parent customer group</span><span style="font-size: 16px; font-weight: 600">{{grp.name}}</span></div>
               <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Legal entity name</span><span>{{grp.legal}}</span></div>
-              <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Registration / Tax ID</span><span class="ph">[Registration / Tax ID]</span></div>
+              <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Registration / Tax ID</span><span class="mono">{{grp.tax}}</span></div>
               <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Customer codes</span><span class="mono">{{grp.n}}</span></div>
               <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Invoicing arrangement</span><span><span class="chip" style="{{grp.arrChip}}">{{grp.arr}}</span></span></div>
               <span style="margin-inline-start: auto; font-size: 12px; color: var(--muted); max-width: 260px; text-align: end">Grouping drives invoicing, reporting and credit management</span>
             </section>
 
             <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden">
-              <div style="padding: 20px 28px 16px; display: flex; align-items: center; gap: 12px">
-                <div style="flex: 1 1 auto"><h2 style="margin: 0; font-size: 22px; font-weight: 600; line-height: 28px">{{c.name}}</h2><div style="margin-top: 4px; font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></div></div>
-                <span class="chip" style="{{c.chip}}; height: 28px; padding: 0 12px">{{c.st}}</span>
+              <div class="r-wrap" style="padding: 20px 28px 18px; display: flex; align-items: center; gap: 16px">
+                <div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 10px; background: var(--tint); color: var(--accent2); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; flex: 0 0 auto">{{c.ini}}</div>
+                <div style="flex: 1 1 auto; min-width: 0">
+                  <div style="display: flex; align-items: center; gap: 10px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.chip}}">{{c.st}}</span></div>
+                  <div style="margin-top: 2px; font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></div>
+                </div>
+                <div style="display: flex; gap: 32px; flex: 0 0 auto">
+                  <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Credit terms</span><span style="font-weight: 500">{{c.terms}}</span></div>
+                  <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: var(--muted)">Default billing party</span><span style="font-weight: 500">{{c.defParty}}</span></div>
+                </div>
               </div>
+              <sc-if value="{{c.flag}}" hint-placeholder-val="{{ false }}">
+                <div role="status" style="margin: 0 28px 16px; display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 14px; border-radius: 8px; background: var(--badbg); border: 1px solid var(--badbd); color: var(--bad); font-weight: 500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>Sanction / Blacklist status: {{c.st}}</div>
+              </sc-if>
               <div class="r-wrap" role="tablist" aria-label="Customer sections" style="display: flex; gap: 28px; padding: 0 28px; border-bottom: 1px solid var(--line)">
                 <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
                   <button class="tab" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="color: {{t.fg}}; box-shadow: inset 0 -2px 0 {{t.line}}">{{t.label}}<span class="mono" style="font-size: 12px; color: var(--muted)">{{t.count}}</span></button>
@@ -459,15 +476,26 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               </div>
               <div role="tabpanel" style="flex: 1 1 auto; overflow: auto; padding: 24px 28px">
                 <sc-if value="{{tab1}}" hint-placeholder-val="{{ true }}">
-                  <div class="g3">
-                    <div><span class="l">Customer code</span><span class="v mono">{{c.code}}</span></div>
-                    <div><span class="l">Customer name</span><span class="v">{{c.name}}</span></div>
-                    <div><span class="l">Legal entity name</span><span class="v">{{grp.legal}}</span></div>
-                    <div><span class="l">Email</span><span class="v ph">[Email from CMD]</span></div>
-                    <div><span class="l">Credit terms</span><span class="v ph">[Credit terms]</span></div>
-                    <div><span class="l">Sanction / Blacklist status</span><span class="v"><span class="chip" style="{{c.chip}}">{{c.st}}</span></span></div>
-                    <div style="grid-column: span 2"><span class="l">Address details</span><span class="v"><span class="ph">[Address line 1], [Address line 2], [City] [Postal code]</span>, {{c.ctryName}}</span></div>
-                    <div><span class="l">LMS CMD reference</span><span class="v mono">{{c.ref}}</span></div>
+                  <div class="cols">
+                    <div class="col">
+                      <h3 class="sech">Identity</h3>
+                      <div class="row"><span class="l">Customer code</span><span class="v mono">{{c.code}}</span></div>
+                      <div class="row"><span class="l">Customer name</span><span class="v">{{c.name}}</span></div>
+                      <div class="row"><span class="l">Legal entity name</span><span class="v">{{grp.legal}}</span></div>
+                      <div class="row"><span class="l">Registration / Tax ID</span><span class="v mono">{{c.tax}}</span></div>
+                      <div class="row"><span class="l">LMS CMD reference</span><span class="v mono">{{c.ref}}</span></div>
+                    </div>
+                    <div class="col">
+                      <h3 class="sech">Contact</h3>
+                      <div class="row"><span class="l">Email</span><span class="v">{{c.email}}</span></div>
+                      <div class="row"><span class="l">Address details</span><span class="v">{{c.addr}}</span></div>
+                    </div>
+                    <div class="col">
+                      <h3 class="sech">Terms &amp; compliance</h3>
+                      <div class="row"><span class="l">Credit terms</span><span class="v">{{c.terms}}</span></div>
+                      <div class="row"><span class="l">Parent customer group</span><span class="v">{{grp.name}}</span></div>
+                      <div class="row"><span class="l">Sanction / Blacklist status</span><span class="v"><span class="chip" style="{{c.chip}}">{{c.st}}</span></span></div>
+                    </div>
                   </div>
                 </sc-if>
                 <sc-if value="{{tab2}}" hint-placeholder-val="{{ false }}">
@@ -492,7 +520,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <sc-if value="{{tab4}}" hint-placeholder-val="{{ false }}">
                   <div class="g3">
                     <div><span class="l">Document / data delivery</span><span class="v" style="display: flex; gap: 6px"><span class="chip" style="{{pdfChip}}">PDF</span><span class="chip" style="{{jsonChip}}">JSON</span></span></div>
-                    <div><span class="l">Delivery to</span><span class="v ph">[Email from CMD]</span></div>
+                    <div><span class="l">Delivery to</span><span class="v">{{c.email}}</span></div>
                   </div>
                 </sc-if>
               </div>
@@ -517,20 +545,32 @@ class GirsPage extends DCLogic {
   renderVals() {
     const s = this.state;
     const G = {
-      gA: { name: 'Straits Harbour Logistics', legal: 'Straits Harbour Logistics Pte. Ltd.', arr: 'Split' },
-      gB: { name: 'Meridian Agro Exports', legal: 'Meridian Agro Exports Pte. Ltd.', arr: 'Default' },
-      gC: { name: 'Andaman Bay Traders', legal: 'Andaman Bay Traders Co., Ltd.', arr: 'Default' },
-      gD: { name: 'Kinabalu Home Furnishings', legal: 'Kinabalu Home Furnishings Pte. Ltd.', arr: 'Split' },
-      gE: { name: 'Orchid Lane Polymers', legal: 'Orchid Lane Polymers Pvt. Ltd.', arr: 'Default' }
+      gA: { name: 'Straits Harbour Logistics', legal: 'Straits Harbour Logistics Pte. Ltd.', arr: 'Split' , tax: '201812345K', terms: 'Net 30 days' },
+      gB: { name: 'Meridian Agro Exports', legal: 'Meridian Agro Exports Pte. Ltd.', arr: 'Default' , tax: '201534567D', terms: 'Net 45 days' },
+      gC: { name: 'Andaman Bay Traders', legal: 'Andaman Bay Traders Co., Ltd.', arr: 'Default' , tax: '0105561012345', terms: 'Cash · pay before invoice' },
+      gD: { name: 'Kinabalu Home Furnishings', legal: 'Kinabalu Home Furnishings Pte. Ltd.', arr: 'Split' , tax: '200912345W', terms: 'Net 30 days' },
+      gE: { name: 'Orchid Lane Polymers', legal: 'Orchid Lane Polymers Pvt. Ltd.', arr: 'Default' , tax: '27AABCO1234F1Z5', terms: 'Net 15 days' }
     };
     const CN = { SG: 'Singapore', MY: 'Malaysia', IN: 'India', CN: 'China', TH: 'Thailand' };
+    const AD = {
+      k1: ['10 Pasir Panjang Road, #12-01 Mapletree Business City, Singapore 117438', 'ar.sg@straitsharbour.example'],
+      k2: ['Level 15, Menara Hap Seng, Jalan P. Ramlee, 50250 Kuala Lumpur, Malaysia', 'ar.my@straitsharbour.example'],
+      k3: ['Unit 704, Raheja Centre, Nariman Point, Mumbai 400021, India', 'ar.in@straitsharbour.example'],
+      k4: ['80 Robinson Road, #09-02, Singapore 068898', 'billing@meridianagro.example'],
+      k5: ['Room 1802, 1000 Lujiazui Ring Road, Pudong, Shanghai 200120, China', 'billing.cn@meridianagro.example'],
+      k6: ['88 Sathorn Nua Road, Silom, Bang Rak, Bangkok 10500, Thailand', 'accounts@andamanbay.example'],
+      k7: ['2 Jurong East Street 21, #04-15, Singapore 609601', 'finance@kinabaluhome.example'],
+      k8: ['Lot 3, Jalan Kemajuan, Seksyen 13, 46200 Petaling Jaya, Selangor, Malaysia', 'finance.my@kinabaluhome.example'],
+      k9: ['Plot 45, MIDC Industrial Area, Andheri East, Mumbai 400093, India', 'ap@orchidlanepoly.example'],
+      k10: ['No. 66 Huangpu Avenue West, Tianhe, Guangzhou 510620, China', 'ap.cn@orchidlanepoly.example']
+    };
     const C = [
       ['k1', 'SG-100231', 'Straits Harbour Logistics (SG)', 'gA', 'SG', 'ok'], ['k2', 'MY-200417', 'Straits Harbour Logistics (MY)', 'gA', 'MY', 'ok'], ['k3', 'IN-300552', 'Straits Harbour Logistics (IN)', 'gA', 'IN', 'ok'],
       ['k4', 'SG-100874', 'Meridian Agro Exports (SG)', 'gB', 'SG', 'ok'], ['k5', 'CN-400129', 'Meridian Agro Exports (CN)', 'gB', 'CN', 'ok'],
       ['k6', 'TH-500318', 'Andaman Bay Traders (TH)', 'gC', 'TH', 'sanc'],
       ['k7', 'SG-101066', 'Kinabalu Home Furnishings (SG)', 'gD', 'SG', 'ok'], ['k8', 'MY-200903', 'Kinabalu Home Furnishings (MY)', 'gD', 'MY', 'ok'],
       ['k9', 'IN-300781', 'Orchid Lane Polymers (IN)', 'gE', 'IN', 'black'], ['k10', 'CN-400566', 'Orchid Lane Polymers (CN)', 'gE', 'CN', 'black']
-    ].map((r) => ({ id: r[0], code: r[1], name: r[2], g: r[3], ctry: r[4], st: r[5] }));
+    ].map((r, i) => ({ id: r[0], code: r[1], name: r[2], g: r[3], ctry: r[4], st: r[5], ref: 'CMD-' + String(70412 + i * 137).padStart(7, '0'), addr: AD[r[0]][0], email: AD[r[0]][1] }));
     const ST = {
       ok: { t: 'Not listed', chip: 'background:var(--okbg);color:var(--ok)', dot: 'var(--okbar)', flag: false },
       sanc: { t: 'Sanctioned', chip: 'background:var(--badbg);color:var(--bad)', dot: 'var(--badbar)', flag: true },
@@ -558,8 +598,8 @@ class GirsPage extends DCLogic {
     const yes = 'background:var(--tint);color:var(--accent2)', no = 'background:var(--line2);color:var(--muted4);text-decoration:line-through';
     return {
       q: s.q, onQ: (e) => this.setState({ q: e.target.value }), tree, groupCount: gids.length, tabs, tab1: s.tab === '1', tab2: s.tab === '2', tab3: s.tab === '3', tab4: s.tab === '4',
-      grp: { name: g.name, legal: g.legal, n: String(C.filter((x) => x.g === c.g).length), arr: g.arr, arrChip: ARR[g.arr] },
-      c: { name: c.name, code: c.code, ctryName: CN[c.ctry], ref: '[LMS CMD ref]', st: ST[c.st].t, chip: ST[c.st].chip, defParty: c.name },
+      grp: { name: g.name, legal: g.legal, tax: g.tax, n: String(C.filter((x) => x.g === c.g).length), arr: g.arr, arrChip: ARR[g.arr] },
+      c: { ini: initials(c.name), flag: ST[c.st].flag, name: c.name, code: c.code, ctryName: CN[c.ctry], ref: c.ref, tax: g.tax, terms: g.terms, email: c.email, addr: c.addr, st: ST[c.st].t, chip: ST[c.st].chip, defParty: c.name },
       parties: P, pdfChip: yes, jsonChip: jsonOn(c) ? yes : no
     };
   }
