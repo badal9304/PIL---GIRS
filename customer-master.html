@@ -563,19 +563,19 @@ class GirsPage extends DCLogic {
   renderVals() {
     const s = this.state;
     const G = {
-      gA: { name: '[Customer A] group', legal: '[Customer A legal entity]', arr: 'Split' },
-      gB: { name: '[Customer B] group', legal: '[Customer B legal entity]', arr: 'Default' },
-      gC: { name: '[Customer C] group', legal: '[Customer C legal entity]', arr: 'Default' },
-      gD: { name: '[Customer D] group', legal: '[Customer D legal entity]', arr: 'Split' },
-      gE: { name: '[Customer E] group', legal: '[Customer E legal entity]', arr: 'Default' }
+      gA: { name: 'Straits Harbour Logistics', legal: 'Straits Harbour Logistics Pte. Ltd.', arr: 'Split' },
+      gB: { name: 'Meridian Agro Exports', legal: 'Meridian Agro Exports Pte. Ltd.', arr: 'Default' },
+      gC: { name: 'Andaman Bay Traders', legal: 'Andaman Bay Traders Co., Ltd.', arr: 'Default' },
+      gD: { name: 'Kinabalu Home Furnishings', legal: 'Kinabalu Home Furnishings Pte. Ltd.', arr: 'Split' },
+      gE: { name: 'Orchid Lane Polymers', legal: 'Orchid Lane Polymers Pvt. Ltd.', arr: 'Default' }
     };
     const CN = { SG: 'Singapore', MY: 'Malaysia', IN: 'India', CN: 'China', TH: 'Thailand' };
     const C = [
-      ['k1', 'SG-100231', '[Customer A] Singapore', 'gA', 'SG', 'ok'], ['k2', 'MY-200417', '[Customer A] Malaysia', 'gA', 'MY', 'ok'], ['k3', 'IN-300552', '[Customer A] India', 'gA', 'IN', 'ok'],
-      ['k4', 'SG-100874', '[Customer B] Singapore', 'gB', 'SG', 'ok'], ['k5', 'CN-400129', '[Customer B] China', 'gB', 'CN', 'ok'],
-      ['k6', 'TH-500318', '[Customer C] Thailand', 'gC', 'TH', 'sanc'],
-      ['k7', 'SG-101066', '[Customer D] Singapore', 'gD', 'SG', 'ok'], ['k8', 'MY-200903', '[Customer D] Malaysia', 'gD', 'MY', 'ok'],
-      ['k9', 'IN-300781', '[Customer E] India', 'gE', 'IN', 'black'], ['k10', 'CN-400566', '[Customer E] China', 'gE', 'CN', 'black']
+      ['k1', 'SG-100231', 'Straits Harbour Logistics (SG)', 'gA', 'SG', 'ok'], ['k2', 'MY-200417', 'Straits Harbour Logistics (MY)', 'gA', 'MY', 'ok'], ['k3', 'IN-300552', 'Straits Harbour Logistics (IN)', 'gA', 'IN', 'ok'],
+      ['k4', 'SG-100874', 'Meridian Agro Exports (SG)', 'gB', 'SG', 'ok'], ['k5', 'CN-400129', 'Meridian Agro Exports (CN)', 'gB', 'CN', 'ok'],
+      ['k6', 'TH-500318', 'Andaman Bay Traders (TH)', 'gC', 'TH', 'sanc'],
+      ['k7', 'SG-101066', 'Kinabalu Home Furnishings (SG)', 'gD', 'SG', 'ok'], ['k8', 'MY-200903', 'Kinabalu Home Furnishings (MY)', 'gD', 'MY', 'ok'],
+      ['k9', 'IN-300781', 'Orchid Lane Polymers (IN)', 'gE', 'IN', 'black'], ['k10', 'CN-400566', 'Orchid Lane Polymers (CN)', 'gE', 'CN', 'black']
     ].map((r) => ({ id: r[0], code: r[1], name: r[2], g: r[3], ctry: r[4], st: r[5] }));
     const ST = {
       ok: { t: 'Not listed', chip: 'background:var(--okbg);color:var(--ok)', dot: 'var(--okbar)', flag: false },
@@ -584,7 +584,7 @@ class GirsPage extends DCLogic {
     };
     const ARR = { Split: 'background:var(--aibg);color:var(--ai)', Default: 'background:var(--neutral);color:var(--muted2)' };
     const initials = (n) => n.replace(/[\[\]]/g, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
-    const parties = (c) => C.filter((x) => x.g === c.g).map((x, i) => ({ ctry: CN[x.ctry], name: '[Billing party · ' + x.ctry + ']', code: x.code, isDef: x.id === c.id,
+    const parties = (c) => C.filter((x) => x.g === c.g).map((x, i) => ({ ctry: CN[x.ctry], name: x.name, code: x.code, isDef: x.id === c.id,
       def: x.id === c.id ? 'Default' : '', src: x.id === c.id ? (i % 2 ? 'LMS CMD' : 'Customer nomination · [Third-party platform]') : '' }));
     const jsonOn = (c) => c.g !== 'gC';
     const q = (s.q || '').trim().toLowerCase();
@@ -602,7 +602,7 @@ class GirsPage extends DCLogic {
     return {
       q: s.q, onQ: (e) => this.setState({ q: e.target.value }), segs, rows, empty: list.length === 0, countText: list.length + ' of ' + C.length,
       c: { ini: initials(c.name), name: c.name, code: c.code, ctryName: CN[c.ctry], ref: '[LMS CMD ref]', st: ST[c.st].t, chip: ST[c.st].chip, flag: ST[c.st].flag,
-        legal: g.legal, group: g.name, arr: g.arr, arrChip: ARR[g.arr], defParty: '[Billing party · ' + c.ctry + ']' },
+        legal: g.legal, group: g.name, arr: g.arr, arrChip: ARR[g.arr], defParty: c.name },
       tabs, tabOverview: s.tab === 'ov', tabParties: s.tab === 'bp', tabGroup: s.tab === 'gr', tabBilling: s.tab === 'bd',
       parties: P, members: mem.map((x) => ({ code: x.code, name: x.name, ctry: CN[x.ctry], st: ST[x.st].t, chip: ST[x.st].chip, sel: x.id === c.id ? 'background:var(--tint)' : '', pick: () => this.setState({ sel: x.id }) })),
       pdfChip: yes, jsonChip: jsonOn(c) ? yes : no

@@ -117,6 +117,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .gbtn:hover,.cbtn:hover{background:var(--hover)}
 .cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:0 12px 0 36px;border-radius:6px;font-size:13px}
 .gbtn:focus-visible,.cbtn:focus-visible,.anc:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;height:48px;padding:0 2px;display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .anc{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;height:36px;line-height:36px;padding:0 12px;border-radius:6px;font-size:13px}
 .anc:hover{background:var(--hover)}
 .sect{padding:24px 0;border-bottom:1px solid var(--line2)}
@@ -445,20 +447,18 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <span style="margin-inline-start: auto; font-size: 12px; color: var(--muted); max-width: 260px; text-align: end">Grouping drives invoicing, reporting and credit management</span>
             </section>
 
-            <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; overflow: hidden">
-              <nav class="r-col" aria-label="On this page" style="flex: 0 0 220px; padding: 20px 12px; border-inline-end: 1px solid var(--line2)">
-                <div style="padding: 0 12px 8px; font-size: 12px; color: var(--muted)">On this page</div>
-                <sc-for list="{{anchors}}" as="a" hint-placeholder-count="4">
-                  <button class="anc" onClick="{{a.go}}" style="color: {{a.fg}}; background: {{a.bg}}; font-weight: {{a.fw}}">{{a.label}}</button>
+            <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden">
+              <div style="padding: 20px 28px 16px; display: flex; align-items: center; gap: 12px">
+                <div style="flex: 1 1 auto"><h2 style="margin: 0; font-size: 22px; font-weight: 600; line-height: 28px">{{c.name}}</h2><div style="margin-top: 4px; font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></div></div>
+                <span class="chip" style="{{c.chip}}; height: 28px; padding: 0 12px">{{c.st}}</span>
+              </div>
+              <div class="r-wrap" role="tablist" aria-label="Customer sections" style="display: flex; gap: 28px; padding: 0 28px; border-bottom: 1px solid var(--line)">
+                <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+                  <button class="tab" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="color: {{t.fg}}; box-shadow: inset 0 -2px 0 {{t.line}}">{{t.label}}<span class="mono" style="font-size: 12px; color: var(--muted)">{{t.count}}</span></button>
                 </sc-for>
-              </nav>
-              <div id="cm-doc" onScroll="{{onDoc}}" style="position: relative; flex: 1 1 auto; min-width: 0; overflow: auto; padding: 0 32px">
-                <div style="padding: 24px 0 8px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); padding-bottom: 20px">
-                  <div style="flex: 1 1 auto"><h2 style="margin: 0; font-size: 22px; font-weight: 600; line-height: 28px">{{c.name}}</h2><div style="margin-top: 4px; font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></div></div>
-                  <span class="chip" style="{{c.chip}}; height: 28px; padding: 0 12px">{{c.st}}</span>
-                </div>
-                <div class="sect" id="cm-s1">
-                  <h3>Customer details</h3>
+              </div>
+              <div role="tabpanel" style="flex: 1 1 auto; overflow: auto; padding: 24px 28px">
+                <sc-if value="{{tab1}}" hint-placeholder-val="{{ true }}">
                   <div class="g3">
                     <div><span class="l">Customer code</span><span class="v mono">{{c.code}}</span></div>
                     <div><span class="l">Customer name</span><span class="v">{{c.name}}</span></div>
@@ -469,9 +469,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                     <div style="grid-column: span 2"><span class="l">Address details</span><span class="v"><span class="ph">[Address line 1], [Address line 2], [City] [Postal code]</span>, {{c.ctryName}}</span></div>
                     <div><span class="l">LMS CMD reference</span><span class="v mono">{{c.ref}}</span></div>
                   </div>
-                </div>
-                <div class="sect" id="cm-s2">
-                  <h3>Billing party details</h3>
+                </sc-if>
+                <sc-if value="{{tab2}}" hint-placeholder-val="{{ false }}">
                   <div class="card" style="overflow: hidden">
                     <table>
                       <thead><tr><th>Country</th><th>Billing party</th><th>Customer code</th><th>Default</th><th>Default set by</th></tr></thead>
@@ -482,22 +481,20 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                       </tbody>
                     </table>
                   </div>
-                </div>
-                <div class="sect" id="cm-s3">
-                  <h3>Billing configuration</h3>
+                </sc-if>
+                <sc-if value="{{tab3}}" hint-placeholder-val="{{ false }}">
                   <div class="g3">
                     <div><span class="l">Invoicing arrangement</span><span class="v"><span class="chip" style="{{grp.arrChip}}">{{grp.arr}}</span></span></div>
                     <div><span class="l">Default billing party</span><span class="v">{{c.defParty}}</span></div>
                     <div><span class="l">Customer-specific rules</span><span class="v ph">[Customer-specific billing configuration]</span></div>
                   </div>
-                </div>
-                <div class="sect" id="cm-s4">
-                  <h3>Customer distribution</h3>
+                </sc-if>
+                <sc-if value="{{tab4}}" hint-placeholder-val="{{ false }}">
                   <div class="g3">
                     <div><span class="l">Document / data delivery</span><span class="v" style="display: flex; gap: 6px"><span class="chip" style="{{pdfChip}}">PDF</span><span class="chip" style="{{jsonChip}}">JSON</span></span></div>
                     <div><span class="l">Delivery to</span><span class="v ph">[Email from CMD]</span></div>
                   </div>
-                </div>
+                </sc-if>
               </div>
             </section>
           </div>
@@ -515,24 +512,24 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { sel: 'k2', q: '', open: { gA: true, gE: true }, sec: 'cm-s1' };
+    this.state = { sel: 'k2', q: '', open: { gA: true, gE: true }, tab: '1' };
   }
   renderVals() {
     const s = this.state;
     const G = {
-      gA: { name: '[Customer A] group', legal: '[Customer A legal entity]', arr: 'Split' },
-      gB: { name: '[Customer B] group', legal: '[Customer B legal entity]', arr: 'Default' },
-      gC: { name: '[Customer C] group', legal: '[Customer C legal entity]', arr: 'Default' },
-      gD: { name: '[Customer D] group', legal: '[Customer D legal entity]', arr: 'Split' },
-      gE: { name: '[Customer E] group', legal: '[Customer E legal entity]', arr: 'Default' }
+      gA: { name: 'Straits Harbour Logistics', legal: 'Straits Harbour Logistics Pte. Ltd.', arr: 'Split' },
+      gB: { name: 'Meridian Agro Exports', legal: 'Meridian Agro Exports Pte. Ltd.', arr: 'Default' },
+      gC: { name: 'Andaman Bay Traders', legal: 'Andaman Bay Traders Co., Ltd.', arr: 'Default' },
+      gD: { name: 'Kinabalu Home Furnishings', legal: 'Kinabalu Home Furnishings Pte. Ltd.', arr: 'Split' },
+      gE: { name: 'Orchid Lane Polymers', legal: 'Orchid Lane Polymers Pvt. Ltd.', arr: 'Default' }
     };
     const CN = { SG: 'Singapore', MY: 'Malaysia', IN: 'India', CN: 'China', TH: 'Thailand' };
     const C = [
-      ['k1', 'SG-100231', '[Customer A] Singapore', 'gA', 'SG', 'ok'], ['k2', 'MY-200417', '[Customer A] Malaysia', 'gA', 'MY', 'ok'], ['k3', 'IN-300552', '[Customer A] India', 'gA', 'IN', 'ok'],
-      ['k4', 'SG-100874', '[Customer B] Singapore', 'gB', 'SG', 'ok'], ['k5', 'CN-400129', '[Customer B] China', 'gB', 'CN', 'ok'],
-      ['k6', 'TH-500318', '[Customer C] Thailand', 'gC', 'TH', 'sanc'],
-      ['k7', 'SG-101066', '[Customer D] Singapore', 'gD', 'SG', 'ok'], ['k8', 'MY-200903', '[Customer D] Malaysia', 'gD', 'MY', 'ok'],
-      ['k9', 'IN-300781', '[Customer E] India', 'gE', 'IN', 'black'], ['k10', 'CN-400566', '[Customer E] China', 'gE', 'CN', 'black']
+      ['k1', 'SG-100231', 'Straits Harbour Logistics (SG)', 'gA', 'SG', 'ok'], ['k2', 'MY-200417', 'Straits Harbour Logistics (MY)', 'gA', 'MY', 'ok'], ['k3', 'IN-300552', 'Straits Harbour Logistics (IN)', 'gA', 'IN', 'ok'],
+      ['k4', 'SG-100874', 'Meridian Agro Exports (SG)', 'gB', 'SG', 'ok'], ['k5', 'CN-400129', 'Meridian Agro Exports (CN)', 'gB', 'CN', 'ok'],
+      ['k6', 'TH-500318', 'Andaman Bay Traders (TH)', 'gC', 'TH', 'sanc'],
+      ['k7', 'SG-101066', 'Kinabalu Home Furnishings (SG)', 'gD', 'SG', 'ok'], ['k8', 'MY-200903', 'Kinabalu Home Furnishings (MY)', 'gD', 'MY', 'ok'],
+      ['k9', 'IN-300781', 'Orchid Lane Polymers (IN)', 'gE', 'IN', 'black'], ['k10', 'CN-400566', 'Orchid Lane Polymers (CN)', 'gE', 'CN', 'black']
     ].map((r) => ({ id: r[0], code: r[1], name: r[2], g: r[3], ctry: r[4], st: r[5] }));
     const ST = {
       ok: { t: 'Not listed', chip: 'background:var(--okbg);color:var(--ok)', dot: 'var(--okbar)', flag: false },
@@ -541,7 +538,7 @@ class GirsPage extends DCLogic {
     };
     const ARR = { Split: 'background:var(--aibg);color:var(--ai)', Default: 'background:var(--neutral);color:var(--muted2)' };
     const initials = (n) => n.replace(/[\[\]]/g, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
-    const parties = (c) => C.filter((x) => x.g === c.g).map((x, i) => ({ ctry: CN[x.ctry], name: '[Billing party · ' + x.ctry + ']', code: x.code, isDef: x.id === c.id,
+    const parties = (c) => C.filter((x) => x.g === c.g).map((x, i) => ({ ctry: CN[x.ctry], name: x.name, code: x.code, isDef: x.id === c.id,
       def: x.id === c.id ? 'Default' : '', src: x.id === c.id ? (i % 2 ? 'LMS CMD' : 'Customer nomination · [Third-party platform]') : '' }));
     const jsonOn = (c) => c.g !== 'gC';
     const q = (s.q || '').trim().toLowerCase();
@@ -555,16 +552,15 @@ class GirsPage extends DCLogic {
     }).filter((g) => !g.hide);
     const c = C.find((x) => x.id === s.sel) || C[0];
     const g = G[c.g];
-    const A = [['cm-s1', 'Customer details'], ['cm-s2', 'Billing party details'], ['cm-s3', 'Billing configuration'], ['cm-s4', 'Customer distribution']];
-    const anchors = A.map(([id, label]) => { const on = s.sec === id; return { label, fg: on ? 'var(--accent)' : 'var(--muted2)', bg: on ? 'var(--tint)' : 'transparent', fw: on ? '600' : '400',
-      go: () => { this.setState({ sec: id }); try { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} } }; });
+    const P = parties(c);
+    const T = [['1', 'Customer details', ''], ['2', 'Billing party details', String(P.length)], ['3', 'Billing configuration', ''], ['4', 'Customer distribution', '']];
+    const tabs = T.map(([k, label, count]) => { const on = s.tab === k; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => this.setState({ tab: k }) }; });
     const yes = 'background:var(--tint);color:var(--accent2)', no = 'background:var(--line2);color:var(--muted4);text-decoration:line-through';
     return {
-      q: s.q, onQ: (e) => this.setState({ q: e.target.value }), tree, groupCount: gids.length, anchors,
+      q: s.q, onQ: (e) => this.setState({ q: e.target.value }), tree, groupCount: gids.length, tabs, tab1: s.tab === '1', tab2: s.tab === '2', tab3: s.tab === '3', tab4: s.tab === '4',
       grp: { name: g.name, legal: g.legal, n: String(C.filter((x) => x.g === c.g).length), arr: g.arr, arrChip: ARR[g.arr] },
-      c: { name: c.name, code: c.code, ctryName: CN[c.ctry], ref: '[LMS CMD ref]', st: ST[c.st].t, chip: ST[c.st].chip, defParty: '[Billing party · ' + c.ctry + ']' },
-      onDoc: (e) => { try { const d = e.currentTarget || e.target; let cur = 'cm-s1'; A.forEach(([id]) => { const el = document.getElementById(id); if (el && el.offsetTop - 24 <= d.scrollTop) cur = id; }); if (d.scrollTop + d.clientHeight >= d.scrollHeight - 4) cur = A[A.length - 1][0]; if (cur !== this.state.sec) this.setState({ sec: cur }); } catch (x) {} },
-      parties: parties(c), pdfChip: yes, jsonChip: jsonOn(c) ? yes : no
+      c: { name: c.name, code: c.code, ctryName: CN[c.ctry], ref: '[LMS CMD ref]', st: ST[c.st].t, chip: ST[c.st].chip, defParty: c.name },
+      parties: P, pdfChip: yes, jsonChip: jsonOn(c) ? yes : no
     };
   }
 }
