@@ -99,6 +99,9 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
 .ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .uchev{transition:transform .15s ease}
+tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
+@keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose{display:none}
 .gdctx{display:none}
 .gscrim{display:none}
@@ -316,11 +319,11 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
             <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
             <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
               <div class="menu" role="listbox" aria-label="Search suggestions" style="inset-inline: 0; width: auto; top: 42px">
-                <a href="enquiry.html" class="mi" role="option">
+                <a href="enquiry.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
                   <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
                 </a>
-                <a href="invoices-hub.html" class="mi" role="option">
+                <a href="invoices-hub.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
                   <span>Find “<strong>{{shell.q}}</strong>” in Invoices Hub</span>
                 </a>
@@ -566,6 +569,7 @@ class Component extends GirsPage {
       const on = (e) => this.setState({ __narrow: e.matches, __drawer: false });
       if (mq.addEventListener) mq.addEventListener('change', on); else mq.addListener(on);
     } catch (e) {}
+    try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
     this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false });
   }
   renderVals() {
@@ -589,7 +593,7 @@ class Component extends GirsPage {
       setDark: () => { save('girs.th', 'dark'); this.setState({ __th: 'dark' }); },
       hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
-      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
+      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
       pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
       um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',

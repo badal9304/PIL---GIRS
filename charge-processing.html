@@ -99,6 +99,9 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
 .ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .uchev{transition:transform .15s ease}
+tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
+@keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose{display:none}
 .gdctx{display:none}
 .gscrim{display:none}
@@ -319,11 +322,11 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
             <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
             <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
               <div class="menu" role="listbox" aria-label="Search suggestions" style="inset-inline: 0; width: auto; top: 42px">
-                <a href="enquiry.html" class="mi" role="option">
+                <a href="enquiry.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
                   <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
                 </a>
-                <a href="invoices-hub.html" class="mi" role="option">
+                <a href="invoices-hub.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
                   <span>Find “<strong>{{shell.q}}</strong>” in Invoices Hub</span>
                 </a>
@@ -485,8 +488,9 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
               <div class="mono" style="font-size: 16px; font-weight: 500; line-height: 24px">{{sel.bl}}</div>
               <div style="margin-top: 2px; color: var(--muted)">{{sel.charge}} · {{sel.ccy}} {{sel.amt}} · {{sel.cust}}</div>
             </div>
+            <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 16px 0; font-size: 12px"><span style="color: var(--muted)">{{passText}}</span><sc-if value="{{canToggle}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{toggleAll}}">{{toggleText}}</button></sc-if></div>
             <ul class="r-mxh" style="list-style: none; margin: 0; padding: 4px 16px; max-height: 520px; overflow-y: auto">
-              <sc-for list="{{checks}}" as="c" hint-placeholder-count="10">
+              <sc-for list="{{checksShown}}" as="c" hint-placeholder-count="10">
                 <li class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 32px; padding: 3px 0; font-size: 12px; line-height: 16px; border-bottom: 1px solid var(--line2)">
                   <span style="display: flex; align-items: center; gap: 10px">
                     <span style="width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: none; background: {{c.dotBg}}; color: {{c.dotFg}}; font-size: 12px; font-weight: 700">{{c.icon}}</span>
@@ -502,7 +506,30 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
                 <a class="btn btn-primary" href="credit-management.html" style="align-self: flex-start; text-decoration: none">Review credit hold</a>
               </sc-if>
               <sc-if value="{{canCorrect}}" hint-placeholder-val="{{ false }}">
-                <button class="btn btn-primary" onClick="{{correct}}" style="align-self: flex-start">Correct data &amp; release hold</button>
+                <div style="border: 1px solid var(--line); border-radius: 8px; overflow: hidden">
+                  <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; background: var(--sub); border-bottom: 1px solid var(--line2)"><span style="font-weight: 600">Resolve hold</span><span class="chip" style="{{fix.chip}}">{{fix.state}}</span></div>
+                  <dl style="margin: 0; padding: 10px 14px; display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 6px 12px; font-size: 12px; line-height: 16px">
+                    <dt style="color: var(--muted)">Reason code</dt><dd class="mono" style="margin: 0">{{fix.code}}</dd>
+                    <dt style="color: var(--muted)">Field to fix</dt><dd style="margin: 0; font-weight: 500">{{fix.field}}</dd>
+                    <dt style="color: var(--muted)">Fix in</dt><dd style="margin: 0">{{fix.src}}</dd>
+                    <dt style="color: var(--muted)">Responsible</dt><dd style="margin: 0">{{fix.team}}</dd>
+                  </dl>
+                  <ol style="list-style: none; margin: 0; padding: 4px 14px 10px; border-top: 1px solid var(--line2)">
+                    <sc-for list="{{fix.steps}}" as="t" hint-placeholder-count="4">
+                      <li style="display: flex; align-items: center; gap: 10px; min-height: 30px; font-size: 12px">
+                        <span aria-hidden="true" style="width: 18px; height: 18px; flex: none; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: {{t.bg}}; color: {{t.fg}}">{{t.icon}}</span>
+                        <span style="flex: 1">{{t.label}}</span><span style="color: var(--muted)">{{t.when}}</span>
+                      </li>
+                    </sc-for>
+                  </ol>
+                  <sc-if value="{{fix.hasMsg}}" hint-placeholder-val="{{ false }}"><div style="margin: 0 14px 10px; padding: 8px 10px; border-radius: 6px; font-size: 12px; line-height: 16px; {{fix.msgStyle}}">{{fix.msg}}</div></sc-if>
+                  <sc-if value="{{fix.open2}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 0 14px 12px">
+                    <sc-if value="{{fix.canNotify}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm btn-primary" onClick="{{fix.notify}}">Notify responsible team</button></sc-if>
+                    <button class="btn btn-sm" onClick="{{fix.open}}">{{fix.openLabel}}</button>
+                    <button class="btn btn-sm" onClick="{{fix.revalidate}}" style="{{fix.revalStyle}}">Re-validate now</button>
+                  </div></sc-if>
+                  <p style="margin: 0; padding: 8px 14px 12px; border-top: 1px solid var(--line2); font-size: 11.5px; line-height: 16px; color: var(--muted)">GIRS does not edit source data. The correction is made in the owning system and synced back; the held charge then re-enters validation — no new invoice is created. Held charges are also re-checked automatically on the next batch run.</p>
+                </div>
               </sc-if>
               <sc-if value="{{canManual}}" hint-placeholder-val="{{ false }}">
                 <button class="btn btn-primary" onClick="{{manual}}" style="align-self: flex-start">Raise manual invoice</button>
@@ -523,7 +550,7 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { filter: 'all', selected: 'c3', fixed: {}, invoiced: {}, manualInv: {}, itype: 'Freight', notice: '' };
+    this.state = { filter: 'all', selected: 'c3', fixed: {}, notified: {}, reval: {}, invoiced: {}, manualInv: {}, itype: 'Freight', notice: '' };
   }
   renderVals() {
     const s = this.state;
@@ -614,7 +641,7 @@ class GirsPage extends DCLogic {
     const notes = {
       ready: ['All validations passed — eligible for invoice generation.', 'background:var(--okbg);color:var(--ok2)'],
       warning: [sc.late ? 'Surcharge added after vessel sailing. Billing treatment — supplementary invoice or debit note — to be confirmed by PIL.' : 'Sanction / blacklist match raised as a warning. The invoice can still proceed.', 'background:var(--warnbg);color:var(--warn2)'],
-      blocked: [sc.fail === 'cancel' ? 'Cancelled booking — not included in automatic invoicing. A manual invoice can be raised where charges apply.' : 'Invoice on hold — prerequisite not met. Correct the data to release the hold.', 'background:var(--badbg);color:var(--bad2)'],
+      blocked: [sc.fail === 'cancel' ? 'Cancelled booking — not included in automatic invoicing. A manual invoice can be raised where charges apply.' : 'Invoice on hold — prerequisite not met. Fix it in the owning system shown below, then re-validate.', 'background:var(--badbg);color:var(--bad2)'],
       inv: ['Invoice generated for this charge.', 'background:var(--tint);color:var(--accent2)']
     };
     const readyIds = charges.filter((c) => statusOf(c) === 'ready' || statusOf(c) === 'warning').map((c) => c.id);
@@ -622,11 +649,53 @@ class GirsPage extends DCLogic {
       itype: s.itype,
       setType: (e) => this.setState({ itype: e.target.value }),
       tiles, rows, empty: rows.length === 0, checks,
+      ...(() => { const ok = checks.filter((c) => c.state === 'Passed' || c.state === 'Clear').length; const compact = (sst === 'blocked' || !!s.fixed[sc.id]) && !s.showAll;
+        const failing = checks.filter((c) => !(c.state === 'Passed' || c.state === 'Clear'));
+        return { checksShown: compact ? failing : checks, passText: ok + ' of ' + checks.length + ' checks passed', canToggle: sst === 'blocked' || !!s.fixed[sc.id],
+          toggleText: s.showAll ? 'Show failed only' : 'Show all checks', toggleAll: () => this.setState({ showAll: !s.showAll }) }; })(),
       tableTitle: s.filter === 'all' ? 'Charges received from LMS' : META[s.filter].label + ' charges',
       sel: { ...sc, amt: m(sc.amt), status: META[sst].label, chip: META[sst].chip, note: notes[sst][0], noteStyle: notes[sst][1] },
-      canCorrect: sst === 'blocked' && sc.fail !== 'cancel' && sc.fail !== 'credit', isCredit: sst === 'blocked' && sc.fail === 'credit',
+      canCorrect: !!sc.fail && sc.fail !== 'cancel' && sc.fail !== 'credit' && (sst === 'blocked' || !!s.fixed[sc.id]), isCredit: sst === 'blocked' && sc.fail === 'credit',
       canManual: sst === 'blocked' && sc.fail === 'cancel',
-      correct: () => this.setState({ fixed: { ...s.fixed, [sc.id]: true } }),
+      fix: (() => {
+        const SRC = {
+          roe: ['Exchange rate for the charge and invoice currency', 'LMS · exchange rates (ROE)', '[LMS / treasury team]'],
+          party: ['Billing party customer code', 'LMS · booking and customer master (CMD)', '[Documentation / CMD team]'],
+          cust: ['Customer details (name, email, phone, postal, state / city)', 'LMS · customer master (CMD)', '[CMD team]'],
+          local: ['Local information', '[Owning system to be confirmed by PIL]', '[Team]'],
+          tax: ['Tax structure for this charge', 'GIRS tax set-up', '[Tax team]'],
+          mand: ['HSN code', 'GIRS tax set-up (HSN mapping)', '[Tax team]'],
+          payable: ['Bills payable vs manifest count', 'LMS · manifest / bills payable', '[Documentation team]'],
+          fca: ['Pending FCA (charge amendment)', 'LMS · FCA approval by trade / commercial', '[Trade / commercial team]'],
+          pc: ['Generic PC linked on the B/L', 'LMS · B/L', '[Documentation team]'],
+          charges: ['Charges on the B/L', 'LMS · Charge(8)', '[Documentation team]'],
+          lines: ['Negative charge line', 'LMS · charge amendment', '[Documentation team]']
+        };
+        const k = sc.fail, d = SRC[k] || ['—', '—', '—'];
+        const notified = !!s.notified[sc.id], done = !!s.fixed[sc.id], rv = s.reval[sc.id];
+        const fca = k === 'fca';
+        const st = (on, label, when) => ({ label, when: on ? when : '', icon: on ? '✓' : '·', bg: on ? 'var(--okbg)' : 'var(--neutral)', fg: on ? 'var(--ok)' : 'var(--muted)' });
+        const steps = [
+          st(true, 'Hold raised with reason code', '13:40'),
+          st(notified || fca, fca ? 'Waiting for FCA approval in LMS' : 'Responsible team notified', notified ? '13:46' : 'Auto'),
+          st(done, 'Corrected in ' + d[1].split(' · ')[0] + ' and synced', '13:58'),
+          st(done, 'Re-validated · released to generation', '13:58')
+        ];
+        return {
+          code: 'HOLD-' + k.toUpperCase(), field: d[0], src: d[1], team: d[2], steps,
+          state: done ? 'Released' : (notified || fca ? 'Awaiting correction' : 'Open'),
+          chip: done ? 'background:var(--okbg);color:var(--ok)' : (notified || fca ? 'background:var(--warnbg);color:var(--warn)' : 'background:var(--badbg);color:var(--bad)'),
+          canNotify: !notified && !fca && !done, open2: !done,
+          notify: () => this.setState({ notified: { ...s.notified, [sc.id]: true }, reval: { ...s.reval, [sc.id]: '' }, notice: d[2] + ' notified by email: ' + d[0].toLowerCase() + ' on ' + sc.bl + ' (' + 'HOLD-' + k.toUpperCase() + ').' }),
+          openLabel: d[1].indexOf('GIRS') === 0 ? 'Open tax set-up' : 'Open B/L in LMS',
+          open: () => this.setState({ notice: (d[1].indexOf('GIRS') === 0 ? 'Opens GIRS tax set-up for ' : 'Opens ' + sc.bl + ' in LMS for ') + 'the correction (outside this prototype).' }),
+          revalidate: () => (notified || fca)
+            ? this.setState({ fixed: { ...s.fixed, [sc.id]: true }, reval: { ...s.reval, [sc.id]: 'ok' }, notice: sc.bl + ' re-validated: all checks passed. Charge is READY for the next batch run or Generate invoices.' })
+            : this.setState({ reval: { ...s.reval, [sc.id]: 'fail' } }),
+          revalStyle: '',
+          hasMsg: rv === 'fail', msg: 'Still on hold — the correction has not been received from ' + d[1].split(' · ')[0] + ' yet. Notify the responsible team if not done.', msgStyle: 'background:var(--badbg);color:var(--bad2)'
+        };
+      })(),
       manual: () => this.setState({ invoiced: { ...s.invoiced, [sc.id]: true }, manualInv: { ...s.manualInv, [sc.id]: true }, notice: 'Manual invoice raised for ' + sc.bl + ' (cancelled booking).' }),
       readyCount: readyIds.length, noReady: readyIds.length === 0,
       hasNotice: !!s.notice, notice: s.notice,
@@ -654,6 +723,7 @@ class Component extends GirsPage {
       const on = (e) => this.setState({ __narrow: e.matches, __drawer: false });
       if (mq.addEventListener) mq.addEventListener('change', on); else mq.addListener(on);
     } catch (e) {}
+    try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
     this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false });
   }
   renderVals() {
@@ -677,7 +747,7 @@ class Component extends GirsPage {
       setDark: () => { save('girs.th', 'dark'); this.setState({ __th: 'dark' }); },
       hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
-      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
+      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
       pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
       um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
