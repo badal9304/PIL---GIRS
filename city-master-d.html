@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS City Master · Layout D</title>
+<link rel="icon" href="pil-logo.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root,.theme{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#8A919E;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96}
+.theme[data-theme=dark]{--ink:#E6E9EE;--muted:#9AA3B2;--muted2:#C3CAD5;--muted3:#C3CAD5;--muted4:#6B7485;--line:#2C333E;--line2:#232A34;--bd:#3A4350;--bdh:#5D6878;--line3:#3A4350;--bg:#0E1116;--sub:#1B212A;--hover:#222934;--hover2:#1A2029;--hover3:#1A2029;--neutral:#262D38;--canvas:#0B0E13;--accent:#2A86CC;--accent2:#7DBDEE;--tint:#13263A;--tintbd:#1F4566;--tint2:#14222F;--ok:#5FC896;--okbg:#12291E;--ok2:#7AD3A6;--okdot:#3FB97A;--okbar:#3FB97A;--okbd:#1F4A33;--okrow:#132219;--warn:#F0A35C;--warnbg:#2E1F10;--warn2:#F5B37A;--warnbar:#E08A2E;--warnbd:#5A3A17;--bad:#F08A8C;--badbg:#321718;--badbar:#E0575B;--bad2:#F5A3A5;--badbd:#5C2A2C;--badrow:#24181A;--aibg:#241C38;--ai:#B9A4F2;--surface:#161B22;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#1F6FAE;color-scheme:dark}
+.theme[data-theme=dark] .paper,.paper{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#8A919E;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;color-scheme:light;color:var(--ink)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:var(--accent)}a:hover{color:var(--accent2)}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:12px;height:32px;padding-inline:12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.nav-item:hover{background:var(--hover);color:var(--ink)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 10px 0 12px;border-radius:6px;color:var(--muted)}
+.nav-grp:hover{background:var(--hover);color:var(--ink)}
+.nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}
+.nav-item svg{flex:none}
+.sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.sbtoggle:hover{background:var(--hover);color:var(--ink)}
+.sbtoggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--bd);background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:var(--hover)}
+.btn-sm{height:32px;padding:0 12px}
+.btn-icon{width:36px;padding:0}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.btn-primary:hover{background:var(--accenth);border-color:var(--accenth)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible,.pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select-sm{height:32px;line-height:30px;font-size:12px}
+.select:hover,.input:hover{border-color:var(--bdh)}
+.input{height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;box-sizing:border-box}
+.input::placeholder{color:var(--muted4)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 16px;border-bottom:1px solid var(--line);box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:var(--muted)}
+.lbl{display:block;font-size:12px;font-weight:600;color:var(--muted);line-height:16px;margin-bottom:6px}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);padding:0 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sub);box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid var(--line2);vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:var(--hover2)}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cursor:pointer}
+.gsearch{position:relative;flex:0 1 480px;min-width:220px}
+.gsearch .input{width:100%;padding-inline:36px 12px;background:var(--sub)}
+.grow{flex:1 1 auto}
+
+.select:focus,.select:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:active{background:var(--sub)}
+.select:disabled{background:var(--bg);color:var(--muted4);border-color:var(--line);cursor:not-allowed}
+.input:focus,.input:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+@supports (appearance: base-select){
+.select,.select::picker(select){appearance:base-select}
+.select{display:inline-flex;align-items:center;line-height:normal}
+.select::picker-icon{display:none}
+.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
+.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
+.select option::checkmark{order:2;margin-inline-start:auto;color:var(--accent);font-weight:700}
+.select option:hover{background:var(--hover)}
+.select option:focus-visible{background:var(--hover);box-shadow:inset 0 0 0 2px var(--accent)}
+.select option:active{background:var(--neutral)}
+.select option:checked{background:var(--tint);color:var(--accent2);font-weight:600}
+.select option:disabled{color:var(--muted4);cursor:not-allowed}
+.select:open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:open + svg{transform:rotate(180deg)}
+}
+.select + svg{transition:transform .15s ease}
+.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
+.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
+.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
+.mi:hover{background:var(--hover);color:var(--ink)}
+.mi:active{background:var(--neutral)}
+.mi:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mi[aria-checked=true]{background:var(--tint);color:var(--accent2)}
+.mi[aria-checked=true] .mi-sub{color:var(--accent2)}
+.mi svg{flex:none;color:var(--muted)}
+.mi[aria-checked=true] svg{color:var(--accent)}
+.mi-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.mi-lbl{font-weight:500;white-space:normal}
+.mi-sub{font-size:12px;line-height:16px;color:var(--muted);white-space:normal}
+.mi-danger{color:var(--bad)}.mi-danger svg{color:var(--bad)}.mi-danger:hover{background:var(--badbg);color:var(--bad)}
+.ubtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;height:36px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:18px;box-sizing:border-box;transition:background .12s,border-color .12s}
+.ubtn:hover{background:var(--hover);border-color:var(--bd)}
+.ubtn:active{background:var(--neutral)}
+.ubtn[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
+.ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.uchev{transition:transform .15s ease}
+tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
+@keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
+.gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+.gmain{flex:1 1 0 !important;min-height:0 !important}
+.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;white-space:nowrap}
+.lay:hover{color:var(--ink)}
+.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg{all:unset;box-sizing:border-box;cursor:pointer;white-space:nowrap;display:flex;align-items:center;justify-content:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500}
+.gbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:38px;padding:0 10px;border-radius:6px;font-weight:600;font-size:13px}
+.cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:4px 10px 4px 32px;border-radius:6px;font-size:13px}
+.gbtn:hover,.cbtn:hover{background:var(--hover)}
+.seg:focus-visible,.gbtn:focus-visible,.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-block:1px solid var(--line2);background:var(--hover2)}
+.fct{padding:12px 20px;border-inline-end:1px solid var(--line2);display:flex;flex-direction:column;gap:3px;min-width:0}
+.fct:last-child{border-inline-end:0}
+.fct .l{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.fct .v{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px;grid-auto-flow:row dense;gap:16px;align-items:start}
+.sc{border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:0}
+.sc h3{margin:0;display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line2)}
+.sc h3 .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.kg{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;padding:14px 16px 16px}
+.kg .w{grid-column:1 / -1}
+.kg .l{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
+.kg .v{display:block;font-size:13px;line-height:18px;color:var(--ink);overflow-wrap:anywhere}
+.ot{width:100%}
+.ot th{height:34px;font-size:12px;background:var(--hover2)}
+.ot td{height:36px;font-size:13px}
+.ot th,.ot td{padding-inline:16px 8px}
+.cb{display:grid}
+.cbk{min-width:0;border-inline-end:1px solid var(--line2)}
+.cbk:last-child{border-inline-end:0}
+.cbk h4{margin:0;display:flex;align-items:center;gap:8px;padding:12px 16px 0;font-size:13px;font-weight:600}
+.cbk h4 .dot,.sc h3 .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.kg1{grid-template-columns:1fr 1fr}
+.rail{grid-column:3;grid-row:1 / span 40;position:sticky;top:0}
+.tl{position:relative;padding:0 0 14px 22px}
+.tl:before{content:"";position:absolute;inset-inline-start:5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--bd)}
+.tl.cur:before{background:var(--accent);box-shadow:0 0 0 3px var(--tint)}
+.tl:after{content:"";position:absolute;inset-inline-start:8.5px;top:17px;bottom:0;width:1px;background:var(--line)}
+.tl:last-child:after{display:none}
+.tl:last-child{padding-bottom:0}</style>
+</helmet>
+<div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
+  <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
+  <div style="flex: 1 1 auto; min-height: 0; display: flex">
+    <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
+    <aside id="gside" class="gside" data-drawer="{{shell.drawer}}" aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
+      <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); box-sizing: border-box; {{shell.logoRow}}">
+        <span style="display: inline-flex; background: white; border-radius: 4px; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
+        <span style="width: 1px; height: 20px; background: var(--line); {{shell.hide}}"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); {{shell.hide}}">GIRS</span>
+        <button class="btn btn-icon btn-sm gdclose" onClick="{{shell.closeDrawer}}" aria-label="Close menu" style="margin-inline-start: auto; width: 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="gdctx" style="flex: none; flex-direction: column; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line2)">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px">
+          <div style="position: relative"><label for="dhub" class="sr">Hub</label><select id="dhub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 100%"><option value="SIN">Singapore · SIN</option><option value="NSA">India · NSA</option><option value="LCH">Thailand · LCH</option><option value="PKG">Malaysia · PKG</option><option value="JED">Saudi Arabia · JED</option><option value="ZLO">Mexico · ZLO</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><label for="dent" class="sr">Entity</label><select id="dent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100%"><option value="PIL">PIL</option><option value="MELL">MELL</option><option value="MSC">MSC</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
+          <div role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
+            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" aria-label="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 4px; background: {{shell.lightBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" aria-label="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 4px; background: {{shell.darkBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
+          </div>
+        </div>
+      </div>
+      <nav aria-label="Screens" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g0}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g0" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="index.html" class="nav-item" title="{{shell.l.nMain}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nMain}}</span>
+          </a>
+          <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"></path><circle cx="19" cy="18" r="2"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nChargeProcessing}}</span>
+          </a>
+          <a href="dd-engine.html" class="nav-item" title="{{shell.l.nDDEngine}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="12" rx="2"></rect><path d="M7 7v12M12 7v12M17 7v12"></path><path d="M12 3v2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDDEngine}}</span>
+          </a>
+          <a href="integration-monitor.html" class="nav-item" title="{{shell.l.nIntegrationMonitor}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"></circle><circle cx="19" cy="5" r="2.5"></circle><circle cx="19" cy="19" r="2.5"></circle><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nIntegrationMonitor}}</span>
+          </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g1}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g1" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
+          </a>
+          <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v6M9 15h6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nManualInvoice}}</span>
+          </a>
+          <a href="invoice-previewer.html" class="nav-item" title="{{shell.l.nInvoicePreviewer}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nInvoicePreviewer}}</span>
+          </a>
+          <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M9 15h6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCreditNotes}}</span>
+          </a>
+          <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nDARConsole}}</span>
+          </a>
+          <a href="einvoice-exceptions.html" class="nav-item" title="{{shell.l.nEInvoiceExceptions}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v3M12 18h.01"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nEInvoiceExceptions}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g2}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g2}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g2" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h7"></path><path d="M15 17l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReceipting}}</span>
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item" title="{{shell.l.nCashAppWorkbench}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCashAppWorkbench}}</span>
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item" title="{{shell.l.nToleranceCOREOR}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nToleranceCOREOR}}</span>
+          </a>
+          <a href="soa-aging.html" class="nav-item" title="{{shell.l.nSOADashboard}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nSOADashboard}}</span>
+          </a>
+          <a href="credit-management.html" class="nav-item" title="{{shell.l.nCreditManagement}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"></path><path d="M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCreditManagement}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g3}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g3}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g3" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H4z"></path><path d="M8 20h8M12 16v4"></path><path d="M9 10l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nApprovalsInbox}}</span>
+          </a>
+          <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nEnquiry}}</span>
+          </a>
+          <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M9 15l2 2 4-4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nMonthEnd}}</span>
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g4}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g4}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g4" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3 6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCustomerMaster}}</span>
+          </a>
+          <a href="contract-master.html" class="nav-item" title="{{shell.l.nContractMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nContractMaster}}</span>
+          </a>
+          <a href="charge-master.html" class="nav-item" title="{{shell.l.nChargeMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nChargeMaster}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g5}}<span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-inline-start: 6px"></span></span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g5}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g5" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCountryMaster}}</span>
+          </a>
+          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCurrencyMaster}}</span>
+          </a>
+          <a href="city-master.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nCityMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l6-3v16M11 21V10h8v11M8 10v.01M8 13v.01M8 16v.01M14 13h2M14 16h2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCityMaster}}</span>
+          </a>
+          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><path d="M12 7v14M5 13a7 7 0 0 0 14 0M9 10h6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nPortMaster}}</span>
+          </a>
+          <a href="tax-setup.html" class="nav-item" title="{{shell.l.nTaxSetup}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"></path><circle cx="7" cy="7" r="2.5"></circle><circle cx="17" cy="17" r="2.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nTaxSetup}}</span>
+          </a>
+          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nExchangeRate}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
+      </nav>
+      <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
+        <button class="sbtoggle" onClick="{{shell.toggleSb}}" aria-expanded="{{shell.sbOpen}}" aria-label="{{shell.sbLabel}}" title="{{shell.sbLabel}}" style="{{shell.item}}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path><path d="{{shell.sbIcon}}"></path></svg>
+          <span style="{{shell.hide}}">Collapse side panel</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="gcontent" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; overflow-y: auto">
+      <div style="position: sticky; top: 0; z-index: 20; flex: none">
+        <div class="gtop" style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line2); box-sizing: border-box">
+          <button class="btn btn-icon gmenu" onClick="{{shell.toggleDrawer}}" aria-label="Open menu" aria-controls="gside" aria-expanded="{{shell.drawerAria}}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <div class="gsearch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <label for="gq" class="sr">Search</label>
+            <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
+            <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
+              <div class="menu" role="listbox" aria-label="Search suggestions" style="inset-inline: 0; width: auto; top: 42px">
+                <a href="enquiry.html" class="mi" role="option" onClick="{{shell.goFind}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+                  <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
+                </a>
+                <a href="invoices-hub.html" class="mi" role="option" onClick="{{shell.goFind}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
+                  <span>Find “<strong>{{shell.q}}</strong>” in Invoices Hub</span>
+                </a>
+              </div>
+            </sc-if>
+          </div>
+          <div class="grow"></div>
+          <div class="gctx" style="position: relative">
+            <label for="ghub" class="sr">Hub</label>
+            <select id="ghub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 148px">
+              <option value="SIN">Singapore · SIN</option>
+              <option value="NSA">India · NSA</option>
+              <option value="LCH">Thailand · LCH</option>
+              <option value="PKG">Malaysia · PKG</option>
+              <option value="JED">Saudi Arabia · JED</option>
+              <option value="ZLO">Mexico · ZLO</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div class="gctx" style="position: relative">
+            <label for="gent" class="sr">Entity</label>
+            <select id="gent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100px">
+              <option value="PIL">PIL</option>
+              <option value="MELL">MELL</option>
+              <option value="MSC">MSC</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="gtheme" role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
+            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" title="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: {{shell.lightBg}}">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span class="gtl">Light</span>
+            </button>
+            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" title="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: {{shell.darkBg}}">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span class="gtl">Dark</span>
+            </button>
+          </div>
+          <a href="approvals-inbox.html" class="btn btn-icon" aria-label="{{shell.pending}} pending approvals" title="{{shell.pending}} pending approvals" style="position: relative; text-decoration: none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>
+            <span class="mono" style="position: absolute; top: -6px; inset-inline-end: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand); color: var(--onaccent); font-size: 11px; line-height: 18px; text-align: center; box-sizing: border-box">{{shell.pending}}</span>
+          </a>
+          <div style="position: relative">
+            <button class="ubtn" onClick="{{shell.toggleUm}}" aria-expanded="{{shell.umAria}}" aria-haspopup="menu" aria-label="User menu: {{shell.curLogin}}, {{shell.curRole}}">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex: none">{{shell.initials}}</span>
+              <span class="gutxt" style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 11px; color: var(--muted)">{{shell.curRole}}</span></span>
+              <svg class="gutxt uchev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
+              <div aria-hidden="true" onClick="{{shell.closeUm}}" style="position: fixed; inset: 0; z-index: 29"></div>
+              <div class="menu" role="menu" aria-label="User menu">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px">
+                  <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex: none">{{shell.initials}}</span>
+                  <span class="mi-txt"><span style="font-weight: 600; line-height: 20px">{{shell.userName}}</span><span class="mi-sub">2 logins · roles from LMS IAM</span></span>
+                </div>
+                <div class="menu-sep"></div>
+                <div class="k" style="padding: 6px 10px 4px">Switch login</div>
+                <sc-for list="{{shell.logins}}" as="g" hint-placeholder-count="2">
+                  <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span><span class="mi-sub">{{g.role}}</span></span>
+                    <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                  </button>
+                </sc-for>
+                <div class="menu-sep"></div>
+                <div style="display: flex; gap: 10px; padding: 6px 10px; color: var(--muted)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg>
+                  <span class="mi-txt"><span class="mi-sub">Single sign-on · MFA for financial approvals</span><span class="mi-sub">Idle timeout 15 min, then automatic logout</span></span>
+                </div>
+                <button class="mi" role="menuitem" onClick="{{shell.elevate}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Request temporary elevated access</span><span class="mi-sub">Time-bound · manager approval</span></span>
+                </button>
+                <div class="menu-sep"></div>
+                <button class="mi mi-danger" role="menuitem" onClick="{{shell.signOut}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
+                  <span class="mi-lbl">Sign out</span>
+                </button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
+          <div style="min-width: 0">
+            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">City Master</h1>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">City / location hierarchy used by customer, agency, port and invoice formatting set-up · read-only</p>
+          </div>
+          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
+            <a class="lay" href="city-master.html">A · Table</a><a class="lay" href="city-master-b.html">B · List + detail</a><a class="lay" href="city-master-c.html">C · Tabs</a><a class="lay" href="city-master-d.html" aria-current="page">D · Overview</a>
+          </div></nav>
+          <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
+          <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
+          <div style="position: relative">
+            <label for="gexp" class="sr">Export</label>
+            <select id="gexp" class="select" value="" onChange="{{shell.exp}}" style="width: 112px">
+              <option value="">Export</option>
+              <option value="xlsx">Excel</option>
+              <option value="csv">CSV</option>
+              <option value="pdf">PDF</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          </div>
+        </div>
+      </div>
+      <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <div class="r-wrap" style="flex: 1 1 auto; min-height: 0; display: flex; gap: 16px; align-items: stretch">
+          <section class="card r-col" style="flex: 0 0 340px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
+            <div style="padding: 14px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--line)">
+              <input class="input" style="width: 100%" placeholder="Search city code or name" value="{{q}}" onInput="{{onQ}}" aria-label="Search">
+              <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+                <div role="radiogroup" aria-label="Status" style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral); min-width: 0; overflow: hidden">
+                  <sc-for list="{{segs}}" as="g" hint-placeholder-count="3"><button class="seg" role="radio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="background: {{g.bg}}; color: {{g.fg}}; box-shadow: {{g.sh}}">{{g.label}}</button></sc-for>
+                </div>
+              </div>
+            </div>
+            <div class="r-wrap" style="padding: 10px 14px 4px; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted)"><span>{{gCount}}</span><span>{{countText}}</span></div>
+            <nav aria-label="{{gLabel}}" style="flex: 1 1 auto; overflow: auto; padding: 0 6px 12px">
+              <sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
+                <div>
+                  <button class="gbtn" aria-expanded="{{g.ax}}" onClick="{{g.tg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex: none; transform: rotate({{g.rot}}); transition: transform .15s"><path d="M9 6l6 6-6 6"></path></svg><span style="flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{g.name}}</span><span class="mono" style="font-size: 12px; font-weight: 500; color: var(--muted)">{{g.n}}</span></button>
+                  <sc-if value="{{g.open}}" hint-placeholder-val="{{ true }}">
+                    <sc-for list="{{g.rows}}" as="x" hint-placeholder-count="2">
+                      <button class="cbtn" aria-current="{{x.on}}" onClick="{{x.pick}}" style="{{x.sel}}">
+                        <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span class="mono" style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{x.code}}</span><span style="font-size: 12px; color: var(--muted); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{x.title}}</span></span>
+                        <span title="{{x.st}}" style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: {{x.dot}}"></span>
+                      </button>
+                    </sc-for>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 32px 16px; text-align: center; color: var(--muted)">No records match</div></sc-if>
+            </nav>
+          </section>
+
+          <section class="card" aria-label="Overview" style="flex: 1 1 auto; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
+            <div class="r-wrap" style="padding: 18px 24px 16px; display: flex; align-items: center; gap: 16px">
+              <span class="mono" style="display: inline-flex; align-items: center; justify-content: center; min-width: 52px; height: 52px; padding: 0 12px; box-sizing: border-box; border-radius: 12px; background: var(--tint); color: var(--accent2); font-size: 14px; font-weight: 600; flex: none">{{h.code}}</span>
+              <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{h.title}}</h2><span class="chip" style="{{h.chip}}">{{h.st}}</span><sc-for list="{{h.chips}}" as="c" hint-placeholder-count="1"><span class="chip" style="{{c.s}}">{{c.t}}</span></sc-for></div>
+                <div style="font-size: 13px; color: var(--muted)">{{h.sub}}</div>
+              </div>
+              <span style="display: flex; align-items: center; gap: 6px; flex: none">
+                <button class="btn btn-sm btn-icon" onClick="{{prev}}" disabled="{{noPrev}}" aria-label="Previous record"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                <span class="mono" style="min-width: 60px; text-align: center; font-size: 12px; color: var(--muted)">{{pos}}</span>
+                <button class="btn btn-sm btn-icon" onClick="{{next}}" disabled="{{noNext}}" aria-label="Next record"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+              </span>
+            </div>
+            <sc-if value="{{h.hasAlert}}" hint-placeholder-val="{{ false }}">
+              <div role="status" style="margin: 0 24px 14px; display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 14px; border-radius: 8px; background: var(--badbg); border: 1px solid var(--badbd); color: var(--bad); font-weight: 500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>{{h.alert}}</div>
+            </sc-if>
+            <div class="facts"><sc-for list="{{h.facts}}" as="f" hint-placeholder-count="5"><div class="fct"><span class="l">{{f.l}}</span><span class="v" style="{{f.st}}" title="{{f.v}}">{{f.v}}</span></div></sc-for></div>
+            <div style="flex: 1 1 auto; overflow: auto; padding: 18px 24px 24px">
+              <div class="ov">
+                <sc-if value="{{comb}}" hint-placeholder-val="{{ false }}">
+                  <div class="sc" style="grid-column: 1 / span 2"><div class="cb" style="grid-template-columns: {{cbCols}}"><sc-for list="{{cblocks}}" as="x" hint-placeholder-count="3"><div class="cbk"><h4><span class="dot"></span>{{x.t}}</h4><div class="kg kg1"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="3"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></div></sc-for></div></div>
+                </sc-if>
+                <sc-for list="{{secs}}" as="x" hint-placeholder-count="4">
+                  <div class="sc" style="{{x.span}}"><h3><span class="dot"></span>{{x.t}}</h3><div class="kg"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="4"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></div>
+                </sc-for>
+                <sc-for list="{{tbls}}" as="t" hint-placeholder-count="1">
+                  <div class="sc" style="{{t.span}}; overflow: hidden"><h3><span class="dot"></span>{{t.t}}</h3>
+                    <table class="ot"><thead><tr><sc-for list="{{t.h}}" as="c" hint-placeholder-count="4"><th style="{{c.st}}">{{c.v}}</th></sc-for></tr></thead><tbody><sc-for list="{{t.rows}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r}}" as="c" hint-placeholder-count="4"><td class="{{c.cls}}" style="{{c.st}}">{{c.v}}</td></sc-for></tr></sc-for></tbody></table>
+                    <sc-if value="{{t.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 14px 16px; color: var(--muted4); font-size: 13px">None</div></sc-if>
+                  </div>
+                </sc-for>
+                <aside class="sc rail" aria-label="{{h.railTitle}}"><h3><span class="dot"></span>{{h.railTitle}}</h3>
+                  <div style="padding: 16px">
+                    <sc-if value="{{h.hasNote}}" hint-placeholder-val="{{ false }}"><div style="margin-bottom: 14px; padding: 10px 12px; border-radius: 8px; background: var(--hover2); font-size: 12px; color: var(--muted)">{{h.railNote}}</div></sc-if>
+                    <sc-for list="{{h.rail}}" as="i" hint-placeholder-count="3"><div class="{{i.cls}}"><div style="font-size: 13px; font-weight: 500; color: {{i.fg}}">{{i.a}}</div><div style="font-size: 13px; margin-top: 1px">{{i.b}}</div><div style="font-size: 12px; color: var(--muted); margin-top: 1px">{{i.c}}</div></div></sc-for>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+  </sc-if>
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class GirsPage extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { q: '', fs: '', sel: 'SIN', open: null };
+  }
+  renderVals() {
+    const s = this.state;
+    const D = {"recs": [{"id": "SIN", "code": "SIN", "title": "Singapore", "group": "Singapore", "st": "Active", "search": "SIN Singapore SG — Port city · Office Asia/Singapore Active SIN01 · Singapore Singapore › Singapore Singapore", "sub": "Country: Singapore", "chips": [], "alert": "", "facts": [["Country code", "Singapore", 1], ["State / Province", "—", 0], ["Location type", "Port city · Office", 0], ["Time zone", "Asia/Singapore", 1]], "sections": [["General", [["City code", "SIN", 1, 0, 0], ["City name", "Singapore", 0, 0, 0], ["Location type", "Port city · Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Singapore › Singapore", 0, 0, 0], ["Country code", "SG", 1, 0, 0], ["State / Province", "—", 0, 0, 1], ["Time zone", "Asia/Singapore", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "SIN01 · Singapore", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["SIN01", "Singapore", "SGSIN", "3"]], [0, 2]], ["Other cities in Singapore · 0", ["City code", "City name", "Location type"], [], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "KUL", "code": "KUL", "title": "Kuala Lumpur", "group": "Malaysia", "st": "Active", "search": "KUL Kuala Lumpur MY Wilayah Persekutuan Office Asia/Kuala_Lumpur Active None Malaysia › Wilayah Persekutuan › Kuala Lumpur Kuala Lumpur", "sub": "Country: Malaysia", "chips": [], "alert": "", "facts": [["Country code", "Malaysia", 1], ["State / Province", "Wilayah Persekutuan", 0], ["Location type", "Office", 0], ["Time zone", "Asia/Kuala_Lumpur", 1]], "sections": [["General", [["City code", "KUL", 1, 0, 0], ["City name", "Kuala Lumpur", 0, 0, 0], ["Location type", "Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Malaysia › Wilayah Persekutuan › Kuala Lumpur", 0, 1, 0], ["Country code", "MY", 1, 0, 0], ["State / Province", "Wilayah Persekutuan", 0, 0, 0], ["Time zone", "Asia/Kuala_Lumpur", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "None", 0, 0, 1]]]], "tables": [["Ports in this city · 0", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [], [0, 2]], ["Other cities in Malaysia · 2", ["City code", "City name", "Location type"], [["PKG", "Port Klang", "Port city"], ["PEN", "Penang", "Port city"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "PKG", "code": "PKG", "title": "Port Klang", "group": "Malaysia", "st": "Active", "search": "PKG Port Klang MY Selangor Port city Asia/Kuala_Lumpur Active PKG01 · Port Klang Malaysia › Selangor › Port Klang Port Klang", "sub": "Country: Malaysia", "chips": [], "alert": "", "facts": [["Country code", "Malaysia", 1], ["State / Province", "Selangor", 0], ["Location type", "Port city", 0], ["Time zone", "Asia/Kuala_Lumpur", 1]], "sections": [["General", [["City code", "PKG", 1, 0, 0], ["City name", "Port Klang", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Malaysia › Selangor › Port Klang", 0, 1, 0], ["Country code", "MY", 1, 0, 0], ["State / Province", "Selangor", 0, 0, 0], ["Time zone", "Asia/Kuala_Lumpur", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "PKG01 · Port Klang", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["PKG01", "Port Klang", "MYPKG", "2"]], [0, 2]], ["Other cities in Malaysia · 2", ["City code", "City name", "Location type"], [["KUL", "Kuala Lumpur", "Office"], ["PEN", "Penang", "Port city"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "PEN", "code": "PEN", "title": "Penang", "group": "Malaysia", "st": "Active", "search": "PEN Penang MY Pulau Pinang Port city Asia/Kuala_Lumpur Active PEN01 · Penang Malaysia › Pulau Pinang › Penang Penang", "sub": "Country: Malaysia", "chips": [], "alert": "", "facts": [["Country code", "Malaysia", 1], ["State / Province", "Pulau Pinang", 0], ["Location type", "Port city", 0], ["Time zone", "Asia/Kuala_Lumpur", 1]], "sections": [["General", [["City code", "PEN", 1, 0, 0], ["City name", "Penang", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Malaysia › Pulau Pinang › Penang", 0, 1, 0], ["Country code", "MY", 1, 0, 0], ["State / Province", "Pulau Pinang", 0, 0, 0], ["Time zone", "Asia/Kuala_Lumpur", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "PEN01 · Penang", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["PEN01", "Penang", "MYPEN", "1"]], [0, 2]], ["Other cities in Malaysia · 2", ["City code", "City name", "Location type"], [["KUL", "Kuala Lumpur", "Office"], ["PKG", "Port Klang", "Port city"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "JKT", "code": "JKT", "title": "Jakarta", "group": "Indonesia", "st": "Active", "search": "JKT Jakarta ID DKI Jakarta Port city · Office Asia/Jakarta Active JKT01 · Tanjung Priok Indonesia › DKI Jakarta › Jakarta Jakarta", "sub": "Country: Indonesia", "chips": [], "alert": "", "facts": [["Country code", "Indonesia", 1], ["State / Province", "DKI Jakarta", 0], ["Location type", "Port city · Office", 0], ["Time zone", "Asia/Jakarta", 1]], "sections": [["General", [["City code", "JKT", 1, 0, 0], ["City name", "Jakarta", 0, 0, 0], ["Location type", "Port city · Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Indonesia › DKI Jakarta › Jakarta", 0, 1, 0], ["Country code", "ID", 1, 0, 0], ["State / Province", "DKI Jakarta", 0, 0, 0], ["Time zone", "Asia/Jakarta", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "JKT01 · Tanjung Priok", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["JKT01", "Tanjung Priok", "IDTPP", "3"]], [0, 2]], ["Other cities in Indonesia · 0", ["City code", "City name", "Location type"], [], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "BKK", "code": "BKK", "title": "Bangkok", "group": "Thailand", "st": "Active", "search": "BKK Bangkok TH Bangkok Office Asia/Bangkok Active None Thailand › Bangkok › Bangkok Bangkok", "sub": "Country: Thailand", "chips": [], "alert": "", "facts": [["Country code", "Thailand", 1], ["State / Province", "Bangkok", 0], ["Location type", "Office", 0], ["Time zone", "Asia/Bangkok", 1]], "sections": [["General", [["City code", "BKK", 1, 0, 0], ["City name", "Bangkok", 0, 0, 0], ["Location type", "Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Thailand › Bangkok › Bangkok", 0, 1, 0], ["Country code", "TH", 1, 0, 0], ["State / Province", "Bangkok", 0, 0, 0], ["Time zone", "Asia/Bangkok", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "None", 0, 0, 1]]]], "tables": [["Ports in this city · 0", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [], [0, 2]], ["Other cities in Thailand · 1", ["City code", "City name", "Location type"], [["LCH", "Laem Chabang", "Port city"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "LCH", "code": "LCH", "title": "Laem Chabang", "group": "Thailand", "st": "Active", "search": "LCH Laem Chabang TH Chon Buri Port city Asia/Bangkok Active LCH01 · Laem Chabang Thailand › Chon Buri › Laem Chabang Laem Chabang", "sub": "Country: Thailand", "chips": [], "alert": "", "facts": [["Country code", "Thailand", 1], ["State / Province", "Chon Buri", 0], ["Location type", "Port city", 0], ["Time zone", "Asia/Bangkok", 1]], "sections": [["General", [["City code", "LCH", 1, 0, 0], ["City name", "Laem Chabang", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Thailand › Chon Buri › Laem Chabang", 0, 1, 0], ["Country code", "TH", 1, 0, 0], ["State / Province", "Chon Buri", 0, 0, 0], ["Time zone", "Asia/Bangkok", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "LCH01 · Laem Chabang", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["LCH01", "Laem Chabang", "THLCH", "2"]], [0, 2]], ["Other cities in Thailand · 1", ["City code", "City name", "Location type"], [["BKK", "Bangkok", "Office"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "BOM", "code": "BOM", "title": "Mumbai", "group": "India", "st": "Active", "search": "BOM Mumbai IN Maharashtra Office Asia/Kolkata Active None India › Maharashtra › Mumbai Mumbai", "sub": "Country: India", "chips": [], "alert": "", "facts": [["Country code", "India", 1], ["State / Province", "Maharashtra", 0], ["Location type", "Office", 0], ["Time zone", "Asia/Kolkata", 1]], "sections": [["General", [["City code", "BOM", 1, 0, 0], ["City name", "Mumbai", 0, 0, 0], ["Location type", "Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "India › Maharashtra › Mumbai", 0, 1, 0], ["Country code", "IN", 1, 0, 0], ["State / Province", "Maharashtra", 0, 0, 0], ["Time zone", "Asia/Kolkata", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "None", 0, 0, 1]]]], "tables": [["Ports in this city · 0", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [], [0, 2]], ["Other cities in India · 3", ["City code", "City name", "Location type"], [["NSA", "Navi Mumbai", "Port city"], ["MAA", "Chennai", "Port city"], ["TKD", "New Delhi", "Inland depot"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "NSA", "code": "NSA", "title": "Navi Mumbai", "group": "India", "st": "Active", "search": "NSA Navi Mumbai IN Maharashtra Port city Asia/Kolkata Active NSA01 · Nhava Sheva India › Maharashtra › Navi Mumbai Navi Mumbai", "sub": "Country: India", "chips": [], "alert": "", "facts": [["Country code", "India", 1], ["State / Province", "Maharashtra", 0], ["Location type", "Port city", 0], ["Time zone", "Asia/Kolkata", 1]], "sections": [["General", [["City code", "NSA", 1, 0, 0], ["City name", "Navi Mumbai", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "India › Maharashtra › Navi Mumbai", 0, 1, 0], ["Country code", "IN", 1, 0, 0], ["State / Province", "Maharashtra", 0, 0, 0], ["Time zone", "Asia/Kolkata", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "NSA01 · Nhava Sheva", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["NSA01", "Nhava Sheva", "INNSA", "4"]], [0, 2]], ["Other cities in India · 3", ["City code", "City name", "Location type"], [["BOM", "Mumbai", "Office"], ["MAA", "Chennai", "Port city"], ["TKD", "New Delhi", "Inland depot"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "MAA", "code": "MAA", "title": "Chennai", "group": "India", "st": "Active", "search": "MAA Chennai IN Tamil Nadu Port city Asia/Kolkata Active MAA01 · Chennai India › Tamil Nadu › Chennai Chennai", "sub": "Country: India", "chips": [], "alert": "", "facts": [["Country code", "India", 1], ["State / Province", "Tamil Nadu", 0], ["Location type", "Port city", 0], ["Time zone", "Asia/Kolkata", 1]], "sections": [["General", [["City code", "MAA", 1, 0, 0], ["City name", "Chennai", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "India › Tamil Nadu › Chennai", 0, 1, 0], ["Country code", "IN", 1, 0, 0], ["State / Province", "Tamil Nadu", 0, 0, 0], ["Time zone", "Asia/Kolkata", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "MAA01 · Chennai", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["MAA01", "Chennai", "INMAA", "1"]], [0, 2]], ["Other cities in India · 3", ["City code", "City name", "Location type"], [["BOM", "Mumbai", "Office"], ["NSA", "Navi Mumbai", "Port city"], ["TKD", "New Delhi", "Inland depot"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "TKD", "code": "TKD", "title": "New Delhi", "group": "India", "st": "Inactive", "search": "TKD New Delhi IN Delhi Inland depot Asia/Kolkata Inactive TKD01 · Tughlakabad ICD India › Delhi › New Delhi New Delhi", "sub": "Country: India", "chips": [], "alert": "", "facts": [["Country code", "India", 1], ["State / Province", "Delhi", 0], ["Location type", "Inland depot", 0], ["Time zone", "Asia/Kolkata", 1]], "sections": [["General", [["City code", "TKD", 1, 0, 0], ["City name", "New Delhi", 0, 0, 0], ["Location type", "Inland depot", 0, 0, 0], ["Active status", "Inactive", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "India › Delhi › New Delhi", 0, 0, 0], ["Country code", "IN", 1, 0, 0], ["State / Province", "Delhi", 0, 0, 0], ["Time zone", "Asia/Kolkata", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "TKD01 · Tughlakabad ICD", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["TKD01", "Tughlakabad ICD", "INTKD", "1"]], [0, 2]], ["Other cities in India · 3", ["City code", "City name", "Location type"], [["BOM", "Mumbai", "Office"], ["NSA", "Navi Mumbai", "Port city"], ["MAA", "Chennai", "Port city"]], [0]]], "railTitle": "Audit trail · 2", "railNote": "", "rail": [["Deactivated · depot closed", "Priya Nair", "15 May 2026 14:10", 0], ["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "SHA", "code": "SHA", "title": "Shanghai", "group": "China", "st": "Active", "search": "SHA Shanghai CN Shanghai Port city · Office Asia/Shanghai Active SHA01 · Shanghai China › Shanghai › Shanghai Shanghai", "sub": "Country: China", "chips": [], "alert": "", "facts": [["Country code", "China", 1], ["State / Province", "Shanghai", 0], ["Location type", "Port city · Office", 0], ["Time zone", "Asia/Shanghai", 1]], "sections": [["General", [["City code", "SHA", 1, 0, 0], ["City name", "Shanghai", 0, 0, 0], ["Location type", "Port city · Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "China › Shanghai › Shanghai", 0, 1, 0], ["Country code", "CN", 1, 0, 0], ["State / Province", "Shanghai", 0, 0, 0], ["Time zone", "Asia/Shanghai", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "SHA01 · Shanghai", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["SHA01", "Shanghai", "CNSHA", "2"]], [0, 2]], ["Other cities in China · 1", ["City code", "City name", "Location type"], [["SZX", "Shenzhen", "Port city"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "SZX", "code": "SZX", "title": "Shenzhen", "group": "China", "st": "Active", "search": "SZX Shenzhen CN Guangdong Port city Asia/Shanghai Active SZX01 · Yantian China › Guangdong › Shenzhen Shenzhen", "sub": "Country: China", "chips": [], "alert": "", "facts": [["Country code", "China", 1], ["State / Province", "Guangdong", 0], ["Location type", "Port city", 0], ["Time zone", "Asia/Shanghai", 1]], "sections": [["General", [["City code", "SZX", 1, 0, 0], ["City name", "Shenzhen", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "China › Guangdong › Shenzhen", 0, 1, 0], ["Country code", "CN", 1, 0, 0], ["State / Province", "Guangdong", 0, 0, 0], ["Time zone", "Asia/Shanghai", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "SZX01 · Yantian", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["SZX01", "Yantian", "CNYTN", "1"]], [0, 2]], ["Other cities in China · 1", ["City code", "City name", "Location type"], [["SHA", "Shanghai", "Port city · Office"]], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "DXB", "code": "DXB", "title": "Dubai", "group": "United Arab Emirates", "st": "Active", "search": "DXB Dubai AE Dubai Port city · Office Asia/Dubai Active DXB01 · Jebel Ali United Arab Emirates › Dubai › Dubai Dubai", "sub": "Country: United Arab Emirates", "chips": [], "alert": "", "facts": [["Country code", "United Arab Emirates", 1], ["State / Province", "Dubai", 0], ["Location type", "Port city · Office", 0], ["Time zone", "Asia/Dubai", 1]], "sections": [["General", [["City code", "DXB", 1, 0, 0], ["City name", "Dubai", 0, 0, 0], ["Location type", "Port city · Office", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "United Arab Emirates › Dubai › Dubai", 0, 1, 0], ["Country code", "AE", 1, 0, 0], ["State / Province", "Dubai", 0, 0, 0], ["Time zone", "Asia/Dubai", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "DXB01 · Jebel Ali", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["DXB01", "Jebel Ali", "AEJEA", "2"]], [0, 2]], ["Other cities in United Arab Emirates · 0", ["City code", "City name", "Location type"], [], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "MBA", "code": "MBA", "title": "Mombasa", "group": "Kenya", "st": "Active", "search": "MBA Mombasa KE Mombasa County Port city Africa/Nairobi Active MBA01 · Mombasa Kenya › Mombasa County › Mombasa Mombasa", "sub": "Country: Kenya", "chips": [], "alert": "", "facts": [["Country code", "Kenya", 1], ["State / Province", "Mombasa County", 0], ["Location type", "Port city", 0], ["Time zone", "Africa/Nairobi", 1]], "sections": [["General", [["City code", "MBA", 1, 0, 0], ["City name", "Mombasa", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Kenya › Mombasa County › Mombasa", 0, 1, 0], ["Country code", "KE", 1, 0, 0], ["State / Province", "Mombasa County", 0, 0, 0], ["Time zone", "Africa/Nairobi", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "MBA01 · Mombasa", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["MBA01", "Mombasa", "KEMBA", "2"]], [0, 2]], ["Other cities in Kenya · 0", ["City code", "City name", "Location type"], [], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}, {"id": "LOS", "code": "LOS", "title": "Lagos", "group": "Nigeria", "st": "Active", "search": "LOS Lagos NG Lagos State Port city Africa/Lagos Active LOS01 · Apapa Nigeria › Lagos State › Lagos Lagos", "sub": "Country: Nigeria", "chips": [], "alert": "", "facts": [["Country code", "Nigeria", 1], ["State / Province", "Lagos State", 0], ["Location type", "Port city", 0], ["Time zone", "Africa/Lagos", 1]], "sections": [["General", [["City code", "LOS", 1, 0, 0], ["City name", "Lagos", 0, 0, 0], ["Location type", "Port city", 0, 0, 0], ["Active status", "Active", 0, 0, 0]]], ["Location hierarchy", [["Hierarchy", "Nigeria › Lagos State › Lagos", 0, 1, 0], ["Country code", "NG", 1, 0, 0], ["State / Province", "Lagos State", 0, 0, 0], ["Time zone", "Africa/Lagos", 1, 0, 0]]], ["Linked ports", [["Ports in this city", "LOS01 · Apapa", 0, 0, 0]]]], "tables": [["Ports in this city · 1", ["Port code", "Port name", "UN/LOCODE", "Terminals / depots"], [["LOS01", "Apapa", "NGAPP", "1"]], [0, 2]], ["Other cities in Nigeria · 0", ["City code", "City name", "Location type"], [], [0]]], "railTitle": "Audit trail · 1", "railNote": "", "rail": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00", 0]], "comb": true}], "smap": {"Active": ["background:var(--okbg);color:var(--ok)", "var(--okbar)"], "Inactive": ["background:var(--neutral);color:var(--muted2)", "var(--muted4)"]}, "segLabels": {"Pending approval": "Pending"}, "groupLabel": "Country", "nouns": "cities"};
+    const q = (s.q || '').trim().toLowerCase();
+    const list = D.recs.filter((r) => (!q || (r.code + ' ' + r.title + ' ' + r.search).toLowerCase().indexOf(q) >= 0) && (!s.fs || r.st === s.fs));
+    const stOf = (st) => D.smap[st] || ['background:var(--neutral);color:var(--muted2)', 'var(--muted4)'];
+    const segs = [['', 'All']].concat(Object.keys(D.smap).map((k) => [k, D.segLabels[k] || k])).map(([k, label]) => { const on = (s.fs || '') === k; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--surface)' : 'transparent', fg: on ? 'var(--accent)' : 'var(--muted)', sh: on ? '0 1px 2px rgba(22,26,33,.12)' : 'none', pick: () => this.setState({ fs: k }) }; });
+    const gids = D.recs.map((x) => x.group).filter((v, i, a) => a.indexOf(v) === i);
+    const ordered = gids.reduce((a, g) => a.concat(list.filter((x) => x.group === g)), []);
+    const r = ordered.find((x) => x.id === s.sel) || ordered[0] || D.recs[0];
+    const openM = s.open || { [r.group]: true };
+    const groups = gids.map((g) => { const L = list.filter((x) => x.group === g); const open = !!q || !!s.fs || !!openM[g];
+      return { name: g, n: String(L.length), hide: !L.length, open, ax: open ? 'true' : 'false', rot: open ? '90deg' : '0deg', tg: () => this.setState({ open: Object.assign({}, openM, { [g]: !openM[g] }) }),
+        rows: L.map((x) => { const on = x.id === r.id; return { code: x.code, title: x.title, st: x.st, dot: stOf(x.st)[1], on: on ? 'true' : 'false', sel: on ? 'background:var(--tint);color:var(--accent2);box-shadow:inset 3px 0 0 var(--accent)' : '',
+          pick: () => this.setState({ sel: x.id, open: Object.assign({}, openM, { [g]: true }) }) }; }) }; }).filter((g) => !g.hide);
+    const i = ordered.findIndex((x) => x.id === r.id);
+    const go = (n) => { const x = ordered[n]; this.setState({ sel: x.id, open: Object.assign({}, openM, { [x.group]: true }) }); };
+    const MONO = 'font-family:var(--mono,ui-monospace,monospace)';
+    const mk = ([t, kv]) => ({ t, span: '', kv: kv.map(([l, v, m, w, mu]) => ({ l, v, cls: w ? 'w' : '', st: (m ? MONO : '') + (mu ? ';color:var(--muted4)' : '') })) });
+    const secs = r.comb ? [] : r.sections.map(mk);
+    const cblocks = r.comb ? r.sections.map(mk) : [];
+    const tbls = r.tables.map(([t, hd, rows, mono]) => ({ t, span: hd.length <= 3 ? 'grid-column: span 1' : 'grid-column: 1 / span 2', empty: rows.length === 0, h: hd.map((v, j) => ({ v, st: v === 'Rate' ? 'text-align:end' : '' })),
+      rows: rows.map((row) => row.map((v, j) => ({ v, cls: mono.indexOf(j) >= 0 ? 'mono' : '', st: (hd[j] === 'Rate' ? 'text-align:end;' : '') + (j === 0 ? 'font-weight:500;' : '') + (v === '—' || v === 'Not mapped' ? 'color:var(--muted4)' : (v === 'Default' ? 'color:var(--accent2);font-weight:600' : '')) }))) }));
+    const sc = stOf(r.st);
+    return { q: s.q, onQ: (e) => this.setState({ q: e.target.value }), segs, groups, empty: list.length === 0, gLabel: D.groupLabel,
+      gCount: groups.length + ' · ' + D.groupLabel.toLowerCase(), countText: list.length + ' of ' + D.recs.length + ' ' + D.nouns,
+      h: { code: r.code, title: r.title, st: r.st, chip: sc[0], sub: r.sub, chips: r.chips.map(([t, st]) => ({ t, s: st })), hasAlert: !!r.alert, alert: r.alert,
+        facts: r.facts.map(([l, v, m]) => ({ l, v, st: m ? MONO : '' })), railTitle: r.railTitle, railNote: r.railNote, hasNote: !!r.railNote,
+        rail: r.rail.map(([a, b, c, cur]) => ({ a, b, c, cls: cur ? 'tl cur' : 'tl', fg: cur ? 'var(--accent2)' : 'var(--ink)' })) },
+      secs, tbls, comb: !!r.comb, cblocks, cbCols: 'repeat(' + Math.max(1, cblocks.length) + ', minmax(0, 1fr))', pos: i >= 0 ? (i + 1) + ' of ' + ordered.length : '', noPrev: i <= 0, noNext: i < 0 || i >= ordered.length - 1,
+      prev: () => { if (i > 0) go(i - 1); }, next: () => { if (i >= 0 && i < ordered.length - 1) go(i + 1); } };
+  }
+}
+
+const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
+const LOGINS = [{ role: 'Billing Executive', agency: 'Singapore · SIN', code: 'SIN' }, { role: 'Team Lead', agency: 'Malaysia · PKG', code: 'PKG' }];
+class Component extends GirsPage {
+  constructor(p) {
+    super(p);
+    let sb = false, th = 'light', hub = 'SIN', ent = 'PIL';
+    try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
+    let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
+    const narrow = false;
+    const fit = () => { try { const z = Math.max(0.1, window.innerWidth / 1920); return { z, h: window.innerHeight / z }; } catch (e) { return { z: 1, h: 1080 }; } };
+    const f0 = fit();
+    try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
+    try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g5' });
+  }
+  renderVals() {
+    const v = super.renderVals();
+    const s = this.state;
+    const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master"}, v.navT || {});
+    const c = s.__sb && !s.__narrow;
+    return Object.assign({}, v, { shell: {
+      theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
+      drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
+      toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
+      sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '',
+      logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
+      logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
+      sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
+      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, !!c || s.__acc === g])),
+      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, s.__acc === g ? 'true' : 'false'])),
+      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, s.__acc === g ? '180deg' : '0deg'])),
+      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, () => this.setState({ __acc: s.__acc === g ? '' : g })])),
+      toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c }); },
+      lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
+      lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
+      setLight: () => { save('girs.th', 'light'); this.setState({ __th: 'light' }); },
+      setDark: () => { save('girs.th', 'dark'); this.setState({ __th: 'dark' }); },
+      hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
+      ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
+      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
+      pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
+      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
+      logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
+        pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
+      userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
+      exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
+      hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
+      signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
+    } });
+  }
+}
+
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>
