@@ -102,80 +102,14 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
-.gmenu,.gdclose{display:none}
-.gdctx{display:none}
-.gscrim{display:none}
-.gutxt span{white-space:nowrap}
-@media (max-width:1439px){
-.gperiod,.gtl{display:none !important}
-.card{overflow-x:auto !important}
-}
-@media (max-width:1279px){
-.r-col{max-width:none !important}
-.gutxt{display:none !important}
-}
-@media (max-width:1023px){
-.groot{height:100vh;height:100dvh !important;min-height:0 !important}
-.gmenu{display:inline-flex;flex:none}
-.gside{position:fixed;top:0;bottom:0;inset-inline-start:0;z-index:60;width:288px !important;max-width:86vw;transform:translateX(-100%);transition:transform .22s ease,box-shadow .22s ease;visibility:hidden}
-.theme[dir=rtl] .gside{transform:translateX(100%)}
-.gside[data-drawer=open]{transform:none !important;visibility:visible;box-shadow:0 12px 40px rgba(0,0,0,.28)}
-.gside .nav-item{height:40px}
-.gsbfoot{display:none !important}
-.gdclose{display:inline-flex}
-.gscrim{display:block;position:fixed;inset:0;z-index:55;background:rgba(14,17,22,.45)}
-.gtop{padding:0 12px !important;gap:8px !important}
-.gperiod,.gtl,.gutxt{display:none !important}
-.gsearch{flex:1 1 auto !important;min-width:120px !important}
-.ghead{padding:10px 12px !important}
-.gmain{padding:12px !important;gap:12px !important}
-.r-col{flex:1 1 100% !important}
-.card{overflow-x:auto !important}
-.r-g5,.r-g6{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
-.r-mh{min-height:0 !important}
-.r-mxh{max-height:none !important}
-.r-gdoc{grid-template-columns:minmax(0,1fr) !important}
-.r-gdoc > *{border-inline-end:0 !important}
-}
-@media (max-width:767px){
-.gctx,.gtheme{display:none !important}
-.gdctx{display:flex}
-.gsearch .input{font-size:16px}
-.r-g4,.r-g5,.r-g6{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
-.r-g3a,.r-gs,.r-g3:has(input,select,textarea){grid-template-columns:minmax(0,1fr) !important}
-.r-g4:has(input,select,textarea){grid-template-columns:minmax(0,1fr) !important}
-.r-g3a > *,.r-gs > *,.r-g3:has(input,select,textarea) > *,.r-g4:has(input,select,textarea) > *{grid-column:1/-1 !important}
-section:has(> .r-paper){justify-content:flex-start !important;padding:12px !important;overflow-x:auto}
-.r-paper{zoom:.505}
-.r-g3a > :first-child{border-inline-end:0 !important;padding:12px 16px 0 !important}
-.r-g3a br{display:none}
-.r-g3a > a{border-inline-end:0 !important;border-top:1px solid var(--line2)}
-.r-w{max-width:100% !important}
-.card-head{flex-wrap:wrap;padding-block:8px}
-.ghead h1{font-size:16px !important}
-.ghead p{font-size:11.5px !important}
-.gright{width:100%;gap:8px !important}
-.gright .select,.gright .input{max-width:100%}
-.r-wrap,.opt{flex-wrap:wrap !important;row-gap:8px !important}
-.ifc .r-wrap,.tile .r-wrap,[role=tablist]{flex-wrap:nowrap !important}
-[role=tablist]{overflow-x:auto;scrollbar-width:none;gap:20px !important}
-[role=tablist]::-webkit-scrollbar{display:none}
-.r-g4 > *,.r-g5 > *,.r-g6 > *{height:auto !important;min-height:68px;padding-block:10px !important}
-.r-g4 > * > :last-child{font-size:19px !important;line-height:26px !important;word-break:break-word}
-.gtoast{inset-inline:12px !important;bottom:12px !important;max-width:none !important}
-.paper{max-width:none}
-}
-@media (max-width:420px){
-.r-g2m:has(input,select,textarea),.r-g2:has(input,select,textarea){grid-template-columns:minmax(0,1fr) !important}
-.r-g2m:has(input,select,textarea) > *,.r-g2:has(input,select,textarea) > *{grid-column:1/-1 !important}
-}
+.gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
 .pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;box-sizing:border-box}
 .rowbtn{all:unset;cursor:pointer;display:inline-block}
 .kpi-label{font-size:12px;font-weight:500;color:var(--muted);line-height:16px}
 .dl-k{font-size:12px;color:var(--muted);line-height:16px}
 .dl-v{font-size:13px;font-weight:500;line-height:20px;margin-top:2px}</style>
 </helmet>
-<div class="theme groot" data-theme="{{shell.theme}}" dir="{{dir}}" lang="{{lang}}" style="height: 100vh; min-height: 640px; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: {{font}}">
+<div class="theme groot" data-theme="{{shell.theme}}" dir="{{dir}}" lang="{{lang}}" style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: {{font}}">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
   <div style="flex: 1 1 auto; min-height: 0; display: flex">
     <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
@@ -809,15 +743,12 @@ class Component extends GirsPage {
     let sb = false, th = 'light', hub = 'SIN', ent = 'PIL';
     try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
     let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
-    let narrow = false;
-    try {
-      const mq = window.matchMedia('(max-width: 1023px)');
-      narrow = mq.matches;
-      const on = (e) => this.setState({ __narrow: e.matches, __drawer: false });
-      if (mq.addEventListener) mq.addEventListener('change', on); else mq.addListener(on);
-    } catch (e) {}
+    const narrow = false;
+    const fit = () => { try { const z = Math.max(0.1, window.innerWidth / 1920); return { z, h: window.innerHeight / z }; } catch (e) { return { z: 1, h: 1080 }; } };
+    const f0 = fit();
+    try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
     try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
-    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false });
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h });
   }
   renderVals() {
     const v = super.renderVals();
@@ -826,7 +757,7 @@ class Component extends GirsPage {
     const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
     const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
-      theme: s.__th, dark: s.__th === 'dark',
+      theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
       drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
       toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
       sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '',
