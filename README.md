@@ -24,6 +24,12 @@ Clickable prototype of the GIRS Live Build UI Showcase screens. Designed for 192
 | Customer Master | `customer-master.html` |
 | Charge Master | `charge-master.html` |
 | Contract Master | `contract-master.html` |
+| Country Master | `country-master.html` |
+| Currency Master | `currency-master.html` |
+| City Master | `city-master.html` |
+| Port Master | `port-master.html` |
+| Tax Set-up | `tax-setup.html` |
+| Exchange Rate Master | `exchange-rate-master.html` |
 | Approvals Inbox | `approvals-inbox.html` |
 | Enquiry & Monitoring | `enquiry.html` |
 | Reconciliation | `reconciliation.html` |

@@ -308,6 +308,40 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             </div>
           </sc-if>
         </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g5}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g5}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g5" style="display: flex; flex-direction: column; gap: 2px">
+          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCountryMaster}}</span>
+          </a>
+          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCurrencyMaster}}</span>
+          </a>
+          <a href="city-master.html" class="nav-item" title="{{shell.l.nCityMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l6-3v16M11 21V10h8v11M8 10v.01M8 13v.01M8 16v.01M14 13h2M14 16h2"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCityMaster}}</span>
+          </a>
+          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><path d="M12 7v14M5 13a7 7 0 0 0 14 0M9 10h6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nPortMaster}}</span>
+          </a>
+          <a href="tax-setup.html" class="nav-item" title="{{shell.l.nTaxSetup}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"></path><circle cx="7" cy="7" r="2.5"></circle><circle cx="17" cy="17" r="2.5"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nTaxSetup}}</span>
+          </a>
+          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nExchangeRate}}</span>
+          </a>
+            </div>
+          </sc-if>
+        </div>
       </nav>
       <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
         <button class="sbtoggle" onClick="{{shell.toggleSb}}" aria-expanded="{{shell.sbOpen}}" aria-label="{{shell.sbLabel}}" title="{{shell.sbLabel}}" style="{{shell.item}}">
@@ -659,7 +693,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master"}, v.navT || {});
     const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
@@ -669,10 +703,10 @@ class Component extends GirsPage {
       logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
       logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
       sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
-      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4'].map((g) => [g, !!c || s.__acc === g])),
-      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4'].map((g) => [g, s.__acc === g ? 'true' : 'false'])),
-      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4'].map((g) => [g, s.__acc === g ? '180deg' : '0deg'])),
-      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4'].map((g) => [g, () => this.setState({ __acc: s.__acc === g ? '' : g })])),
+      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, !!c || s.__acc === g])),
+      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, s.__acc === g ? 'true' : 'false'])),
+      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, s.__acc === g ? '180deg' : '0deg'])),
+      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, () => this.setState({ __acc: s.__acc === g ? '' : g })])),
       toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c }); },
       lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
       lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
