@@ -58,6 +58,47 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .gsearch .input{width:100%;padding-inline:36px 12px;background:var(--sub)}
 .grow{flex:1 1 auto}
 
+.select:focus,.select:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:active{background:var(--sub)}
+.select:disabled{background:var(--bg);color:var(--muted4);border-color:var(--line);cursor:not-allowed}
+.input:focus,.input:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+@supports (appearance: base-select){
+.select,.select::picker(select){appearance:base-select}
+.select{display:inline-flex;align-items:center;line-height:normal}
+.select::picker-icon{display:none}
+.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
+.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
+.select option::checkmark{order:2;margin-inline-start:auto;color:var(--accent);font-weight:700}
+.select option:hover{background:var(--hover)}
+.select option:focus-visible{background:var(--hover);box-shadow:inset 0 0 0 2px var(--accent)}
+.select option:active{background:var(--neutral)}
+.select option:checked{background:var(--tint);color:var(--accent2);font-weight:600}
+.select option:disabled{color:var(--muted4);cursor:not-allowed}
+.select:open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:open + svg{transform:rotate(180deg)}
+}
+.select + svg{transition:transform .15s ease}
+.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
+.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
+.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
+.mi:hover{background:var(--hover);color:var(--ink)}
+.mi:active{background:var(--neutral)}
+.mi:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mi[aria-checked=true]{background:var(--tint);color:var(--accent2)}
+.mi[aria-checked=true] .mi-sub{color:var(--accent2)}
+.mi svg{flex:none;color:var(--muted)}
+.mi[aria-checked=true] svg{color:var(--accent)}
+.mi-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.mi-lbl{font-weight:500;white-space:normal}
+.mi-sub{font-size:12px;line-height:16px;color:var(--muted);white-space:normal}
+.mi-danger{color:var(--bad)}.mi-danger svg{color:var(--bad)}.mi-danger:hover{background:var(--badbg);color:var(--bad)}
+.ubtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;height:36px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:18px;box-sizing:border-box;transition:background .12s,border-color .12s}
+.ubtn:hover{background:var(--hover);border-color:var(--bd)}
+.ubtn:active{background:var(--neutral)}
+.ubtn[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
+.ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.uchev{transition:transform .15s ease}
 .gmenu,.gdclose{display:none}
 .gdctx{display:none}
 .gscrim{display:none}
@@ -274,12 +315,12 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
             <label for="gq" class="sr">Search</label>
             <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
             <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
-              <div style="position: absolute; top: 42px; inset-inline: 0; z-index: 30; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(22,26,33,.12); padding: 6px">
-                <a href="enquiry.html" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; color: var(--ink); text-decoration: none">
+              <div class="menu" role="listbox" aria-label="Search suggestions" style="inset-inline: 0; width: auto; top: 42px">
+                <a href="enquiry.html" class="mi" role="option">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
                   <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
                 </a>
-                <a href="invoices-hub.html" style="display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 6px; color: var(--ink); text-decoration: none">
+                <a href="invoices-hub.html" class="mi" role="option">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
                   <span>Find “<strong>{{shell.q}}</strong>” in Invoices Hub</span>
                 </a>
@@ -322,27 +363,41 @@ section:has(> .r-paper){justify-content:flex-start !important;padding:12px !impo
             <span class="mono" style="position: absolute; top: -6px; inset-inline-end: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand); color: var(--onaccent); font-size: 11px; line-height: 18px; text-align: center; box-sizing: border-box">{{shell.pending}}</span>
           </a>
           <div style="position: relative">
-            <button onClick="{{shell.toggleUm}}" aria-expanded="{{shell.um}}" aria-haspopup="menu" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 4px; border: 1px solid var(--line); border-radius: 18px; box-sizing: border-box">
-              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600">{{shell.initials}}</span>
+            <button class="ubtn" onClick="{{shell.toggleUm}}" aria-expanded="{{shell.umAria}}" aria-haspopup="menu" aria-label="User menu: {{shell.curLogin}}, {{shell.curRole}}">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex: none">{{shell.initials}}</span>
               <span class="gutxt" style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 11px; color: var(--muted)">{{shell.curRole}}</span></span>
-              <svg class="gutxt" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+              <svg class="gutxt uchev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
             </button>
             <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
-              <div role="menu" style="position: absolute; top: 42px; inset-inline-end: 0; z-index: 30; width: 280px; max-width: calc(100vw - 24px); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px rgba(22,26,33,.14); padding: 6px">
-                <div style="padding: 8px 10px 6px; display: flex; flex-direction: column; line-height: 18px"><span style="font-weight: 600">{{shell.userName}}</span><span style="font-size: 12px; color: var(--muted)">2 logins · roles from LMS IAM</span></div>
-                <div style="height: 1px; background: var(--line2); margin: 4px 0 6px"></div>
-                <div class="k" style="padding: 2px 10px 4px">Switch login</div>
+              <div aria-hidden="true" onClick="{{shell.closeUm}}" style="position: fixed; inset: 0; z-index: 29"></div>
+              <div class="menu" role="menu" aria-label="User menu">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px">
+                  <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex: none">{{shell.initials}}</span>
+                  <span class="mi-txt"><span style="font-weight: 600; line-height: 20px">{{shell.userName}}</span><span class="mi-sub">2 logins · roles from LMS IAM</span></span>
+                </div>
+                <div class="menu-sep"></div>
+                <div class="k" style="padding: 6px 10px 4px">Switch login</div>
                 <sc-for list="{{shell.logins}}" as="g" hint-placeholder-count="2">
-                  <button role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 10px; border-radius: 6px">
-                    <span style="display: flex; flex-direction: column; line-height: 16px"><span style="font-weight: 500">{{g.label}}</span><span style="font-size: 11px; color: var(--muted)">{{g.role}}</span></span>
-                    <span style="color: var(--accent); font-weight: 700">{{g.mark}}</span>
+                  <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span><span class="mi-sub">{{g.role}}</span></span>
+                    <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
                   </button>
                 </sc-for>
-                <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
-                <div style="padding: 4px 10px; font-size: 12px; line-height: 18px; color: var(--muted)">Single sign-on · MFA for financial approvals<br>Idle timeout: 15 min, then automatic logout</div>
-                <button role="menuitem" onClick="{{shell.elevate}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center; gap: 8px">Request temporary elevated access<span class="chip" style="height: 20px; font-size: 11px; background: var(--neutral); color: var(--muted2)">Time-bound · manager approval</span></button>
-                <div style="height: 1px; background: var(--line2); margin: 6px 0"></div>
-                <button role="menuitem" onClick="{{shell.signOut}}" style="all: unset; cursor: pointer; box-sizing: border-box; width: 100%; height: 36px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center">Sign out</button>
+                <div class="menu-sep"></div>
+                <div style="display: flex; gap: 10px; padding: 6px 10px; color: var(--muted)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg>
+                  <span class="mi-txt"><span class="mi-sub">Single sign-on · MFA for financial approvals</span><span class="mi-sub">Idle timeout 15 min, then automatic logout</span></span>
+                </div>
+                <button class="mi" role="menuitem" onClick="{{shell.elevate}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Request temporary elevated access</span><span class="mi-sub">Time-bound · manager approval</span></span>
+                </button>
+                <div class="menu-sep"></div>
+                <button class="mi mi-danger" role="menuitem" onClick="{{shell.signOut}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
+                  <span class="mi-lbl">Sign out</span>
+                </button>
               </div>
             </sc-if>
           </div>
@@ -536,7 +591,7 @@ class Component extends GirsPage {
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
       pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
-      um: s.__um, toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
+      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
