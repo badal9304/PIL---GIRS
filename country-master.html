@@ -19,17 +19,17 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',
 a{color:var(--accent)}a:hover{color:var(--accent2)}
 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.nav-item{display:flex;align-items:center;gap:12px;height:32px;padding-inline:12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.nav-item{display:flex;align-items:center;gap:12px;height:32px;padding-inline:12px;border-radius:0;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
 .nav-item:hover{background:var(--hover);color:var(--ink)}
-.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 10px 0 12px;border-radius:6px;color:var(--muted)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 10px 0 12px;border-radius:0;color:var(--muted)}
 .nav-grp:hover{background:var(--hover);color:var(--ink)}
 .nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}
 .nav-item svg{flex:none}
-.sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:0;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
 .sbtoggle:hover{background:var(--hover);color:var(--ink)}
 .sbtoggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--bd);background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:0;border:1px solid var(--bd);background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
 .btn:hover{background:var(--hover)}
 .btn-sm{height:32px;padding:0 12px}
 .btn-icon{width:36px;padding:0}
@@ -37,18 +37,18 @@ a{color:var(--accent)}a:hover{color:var(--accent2)}
 .btn-primary:hover{background:var(--accenth);border-color:var(--accenth)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible,.pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid var(--bd);border-radius:0;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
 .select-sm{height:32px;line-height:30px;font-size:12px}
 .select:hover,.input:hover{border-color:var(--bdh)}
-.input{height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;box-sizing:border-box}
+.input{height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:0;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;box-sizing:border-box}
 .input::placeholder{color:var(--muted4)}
-.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:0;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:0}
 .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 16px;border-bottom:1px solid var(--line);box-sizing:border-box}
 .card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
 .card-meta{font-size:12px;color:var(--muted)}
 .lbl{display:block;font-size:12px;font-weight:600;color:var(--muted);line-height:16px;margin-bottom:6px}
-.k{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;line-height:16px}
+.k{font-size:12px;letter-spacing: .32px;color:var(--muted);font-weight:600;line-height:16px}
 .r{text-align:end}
 table{border-collapse:separate;border-spacing:0;width:100%}
 th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);padding:0 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sub);box-sizing:border-box}
@@ -69,8 +69,8 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .select,.select::picker(select){appearance:base-select}
 .select{display:inline-flex;align-items:center;line-height:normal}
 .select::picker-icon{display:none}
-.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
-.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
+.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:0;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
+.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:0;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
 .select option::checkmark{order:2;margin-inline-start:auto;color:var(--accent);font-weight:700}
 .select option:hover{background:var(--hover)}
 .select option:focus-visible{background:var(--hover);box-shadow:inset 0 0 0 2px var(--accent)}
@@ -81,9 +81,9 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .select:open + svg{transform:rotate(180deg)}
 }
 .select + svg{transition:transform .15s ease}
-.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
+.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:0;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
 .menu-sep{height:1px;background:var(--line2);margin:6px 4px}
-.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
+.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:0;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
 .mi:hover{background:var(--hover);color:var(--ink)}
 .mi:active{background:var(--neutral)}
 .mi:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
@@ -104,11 +104,41 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 .uchev{transition:transform .15s ease}
 tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
-.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:0;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+
+/* ===== IBM Carbon alignment (structure, type, spacing, shape) · colours stay PIL ===== */
+body{font-size:14px;line-height:18px;letter-spacing:.16px}
+.btn{height:40px;padding:0 16px;border-radius:0;font-size:14px;font-weight:400;letter-spacing:.16px;border-color:var(--accent);color:var(--accent);background:var(--surface)}
+.btn:hover{background:var(--accent);color:var(--onaccent)}
+.btn-sm{height:32px;padding:0 12px}
+.btn-icon{width:40px;padding:0;justify-content:center}
+.btn-sm.btn-icon{width:32px}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.btn-primary:hover{background:var(--accenth);border-color:var(--accenth);color:var(--onaccent)}
+.btn-primary:disabled:hover{background:var(--accent);color:var(--onaccent)}
+.select{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.btn:disabled:hover{background:var(--surface);color:var(--accent)}
+.input,.select{height:40px;border:0;border-bottom:1px solid var(--muted4);border-radius:0;background:var(--bg);font-size:14px;padding-inline:16px}
+.select{padding-inline:12px 36px}
+.select-sm{height:32px;font-size:14px}
+.input:focus,.input:focus-visible,.select:focus,.select:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;box-shadow:none;border-bottom-color:transparent}
+.lbl{font-size:12px;font-weight:400;letter-spacing:.32px;line-height:16px;margin-bottom:8px}
+.k{font-size:12px;font-weight:400;letter-spacing:.32px;text-transform:none}
+.chip{border-radius:24px !important;font-size:12px;font-weight:400;letter-spacing:.32px;padding:0 8px;height:24px}
+.card{border-radius:0}
+.card-head{min-height:48px;padding:0 16px}
+.card-title{font-size:16px;font-weight:600;line-height:22px}
+.card-meta{font-size:12px;letter-spacing:.32px}
+th{height:40px;font-size:14px;font-weight:600;color:var(--ink);padding:0 16px;background:var(--neutral);border-bottom:0;letter-spacing:.16px}
+td{height:40px;font-size:14px;padding:0 16px;letter-spacing:.16px}
+.nav-item{border-radius:0;font-size:14px;font-weight:400}
+.nav-on,.nav-on:hover{font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+.nav-grp{border-radius:0}
+.nav-grp .k{font-size:14px;font-weight:600;letter-spacing:.16px;text-transform:none;color:var(--ink)}
 .gmain{flex:1 1 0 !important;min-height:0 !important}
-.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
-.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
+.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:0;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:0;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
 .lay:hover{color:var(--ink)}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 .lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -131,7 +161,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .navr[aria-selected=true] td{background:var(--tint)}
 .navr[aria-selected=true] td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
 table td,table th{padding-inline:12px}
-.seg{all:unset;box-sizing:border-box;cursor:pointer;white-space:nowrap;display:flex;align-items:center;justify-content:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500}
+.seg{all:unset;box-sizing:border-box;cursor:pointer;white-space:nowrap;display:flex;align-items:center;justify-content:center;height:28px;padding:0 10px;border-radius:0;font-size:12px;font-weight:500}
 .seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .acc{border-bottom:1px solid var(--line2)}
 .acc-h{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:14px 24px}
@@ -148,7 +178,7 @@ table td,table th{padding-inline:12px}
     <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
     <aside id="gside" class="gside" data-drawer="{{shell.drawer}}" aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
       <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); box-sizing: border-box; {{shell.logoRow}}">
-        <span style="display: inline-flex; background: white; border-radius: 4px; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
+        <span style="display: inline-flex; background: white; border-radius: 0; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
         <span style="width: 1px; height: 20px; background: var(--line); {{shell.hide}}"></span>
         <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); {{shell.hide}}">GIRS</span>
         <button class="btn btn-icon btn-sm gdclose" onClick="{{shell.closeDrawer}}" aria-label="Close menu" style="margin-inline-start: auto; width: 32px">
@@ -161,10 +191,10 @@ table td,table th{padding-inline:12px}
           <div style="position: relative"><label for="dent" class="sr">Entity</label><select id="dent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100%"><option value="PIL">PIL</option><option value="MELL">MELL</option><option value="MSC">MSC</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
         </div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
-          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
-          <div role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
-            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" aria-label="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 4px; background: {{shell.lightBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
-            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" aria-label="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 4px; background: {{shell.darkBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
+          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 0"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
+          <div role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 0; background: var(--neutral); box-sizing: border-box">
+            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" aria-label="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 0; background: {{shell.lightBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" aria-label="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 0; background: {{shell.darkBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
           </div>
         </div>
       </div>
@@ -407,12 +437,12 @@ table td,table th{padding-inline:12px}
             </select>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
           </div>
-          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
-          <div class="gtheme" role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 6px; background: var(--neutral); box-sizing: border-box">
-            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" title="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: {{shell.lightBg}}">
+          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 0"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="gtheme" role="radiogroup" aria-label="Theme" style="display: flex; gap: 2px; height: 32px; padding: 2px; border-radius: 0; background: var(--neutral); box-sizing: border-box">
+            <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}" title="Light theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 0; font-size: 12px; font-weight: 500; background: {{shell.lightBg}}">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span class="gtl">Light</span>
             </button>
-            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" title="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: {{shell.darkBg}}">
+            <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}" title="Dark theme" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 0; font-size: 12px; font-weight: 500; background: {{shell.darkBg}}">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span class="gtl">Dark</span>
             </button>
           </div>
@@ -462,14 +492,14 @@ table td,table th{padding-inline:12px}
         </div>
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
-            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Country Master</h1>
+            <h1 style="margin: 0; font-size: 20px; font-weight: 400; line-height: 28px">Country Master</h1>
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Country set-up: regulatory, tax, invoice-format, language and government-portal applicability rules · read-only</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
+          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 0; background: var(--neutral)">
             <a class="lay" href="country-master.html" aria-current="page">A · Table</a><a class="lay" href="country-master-b.html" >B · List + detail</a><a class="lay" href="country-master-c.html" >C · Tabs</a><a class="lay" href="country-master-d.html">D · Overview</a>
           </div></nav>
-          <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
+          <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 0">Sample values</span>
           <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
           <div style="position: relative">
             <label for="gexp" class="sr">Export</label>
@@ -498,7 +528,7 @@ table td,table th{padding-inline:12px}
           </section>
           <aside class="card r-col" aria-label="Details" style="flex: 0 0 500px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
             <div style="padding: 18px 24px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px">
-              <div style="display: flex; align-items: center; gap: 10px"><span class="mono" style="display: inline-flex; align-items: center; height: 26px; padding: 0 8px; border-radius: 6px; background: var(--tint); color: var(--accent2); font-size: 12px; font-weight: 600">{{h.code}}</span><h2 style="margin: 0; flex: 1 1 auto; min-width: 0; font-size: 18px; font-weight: 600; line-height: 26px">{{h.title}}</h2><span class="chip" style="{{h.chip}}">{{h.st}}</span></div>
+              <div style="display: flex; align-items: center; gap: 10px"><span class="mono" style="display: inline-flex; align-items: center; height: 26px; padding: 0 8px; border-radius: 0; background: var(--tint); color: var(--accent2); font-size: 12px; font-weight: 600">{{h.code}}</span><h2 style="margin: 0; flex: 1 1 auto; min-width: 0; font-size: 18px; font-weight: 600; line-height: 26px">{{h.title}}</h2><span class="chip" style="{{h.chip}}">{{h.st}}</span></div>
               <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 13px; color: var(--muted)">{{h.sub}}</span><button class="lnk" onClick="{{allT}}" style="font-size: 12px">{{allL}}</button></div>
             </div>
             <div style="flex: 1 1 auto; overflow: auto">
@@ -522,7 +552,7 @@ table td,table th{padding-inline:12px}
   </div>
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 0; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
   </sc-if>
 </div>
 </script>
