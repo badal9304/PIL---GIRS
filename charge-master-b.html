@@ -126,7 +126,17 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .tl:last-child:after{display:none}
 .tl:last-child{padding-bottom:0}
 .ph{color:var(--muted4)}
-.fb{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 16px;padding:16px 20px}
+.fb{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 16px;padding:12px 20px 16px}
+.navr[aria-selected=true] td{background:var(--tint)}
+.navr[aria-selected=true] td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+table td,table th{padding-inline:12px}
+.dgrid{display:flex;align-items:stretch;border-top:0}
+.dcol{flex:1 1 0;min-width:0;padding:14px 20px 16px;border-inline-end:1px solid var(--line2);display:flex;flex-direction:column;gap:10px}
+.dcol:last-child{border-inline-end:0}
+.dcol h3{margin:0;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.kvs{display:flex;flex-direction:column;gap:10px}
+.kvs .l{display:block;font-size:12px;color:var(--muted);margin-bottom:1px}
+.kvs .v{display:block;font-size:13px;line-height:18px}
 .fb .lbl{margin-bottom:4px}
 .th{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font:inherit;color:inherit}
 .th:hover{color:var(--ink)}
@@ -432,7 +442,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
-            <a class="lay" href="charge-master.html" >A · Table</a><a class="lay" href="charge-master-b.html" aria-current="page">B · List report</a><a class="lay" href="charge-master-c.html" >C · Tabs</a>
+            <a class="lay" href="charge-master.html" >A · Table</a><a class="lay" href="charge-master-b.html" aria-current="page">B · List + detail</a><a class="lay" href="charge-master-c.html" >C · Tabs</a>
           </div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
           <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
@@ -450,13 +460,13 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <sc-if value="{{isList}}" hint-placeholder-val="{{ true }}">
           <section class="card" aria-label="Filter bar">
             <div style="display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-bottom: 1px solid var(--line2)">
               <div style="position: relative"><select class="select r-w" value="{{view}}" onChange="{{onView}}" aria-label="Saved view" style="width: 240px; font-weight: 600"><option value="std">View: Standard</option><option value="sur">View: Active surcharges</option><option value="nomap">View: Not mapped to LMS</option><option value="inact">View: Inactive charges</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
               <input class="input r-w" style="width: 320px" placeholder="Search code, name or LMS code" value="{{dq}}" onInput="{{onDq}}" onKeyDown="{{onEnter}}" aria-label="Search">
               <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 8px">
-                <button class="lnk" onClick="{{toggleFb}}" style="all: unset; cursor: pointer; color: var(--accent); font-size: 13px; font-weight: 500">{{fbLabel}}</button>
+                <sc-if value="{{fbOpen}}" hint-placeholder-val="{{ true }}"><button onClick="{{toggleMore}}" style="all: unset; cursor: pointer; color: var(--accent); font-size: 13px; font-weight: 500">{{moreLabel}}</button><span style="width: 1px; height: 16px; background: var(--line)"></span></sc-if>
+                <button onClick="{{toggleFb}}" style="all: unset; cursor: pointer; color: var(--accent); font-size: 13px; font-weight: 500">{{fbLabel}}</button>
                 <button class="btn" onClick="{{clearF}}">Clear</button>
                 <button class="btn btn-primary" onClick="{{go}}">Go</button>
               </span>
@@ -469,9 +479,11 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <div><label class="lbl" for="f-ctry">Country</label><div style="position: relative"><select id="f-ctry" class="select" style="width: 100%" value="{{d.ctry}}" onChange="{{set.ctry}}"><option value="">All</option><option value="SG">Singapore</option><option value="MY">Malaysia</option><option value="IN">India</option><option value="CN">China</option><option value="TH">Thailand</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
                 <div><label class="lbl" for="f-tax">Tax code</label><div style="position: relative"><select id="f-tax" class="select mono" style="width: 100%" value="{{d.tax}}" onChange="{{set.tax}}"><option value="">All</option><sc-for list="{{taxOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
                 <div><label class="lbl" for="f-ccy">Currency</label><div style="position: relative"><select id="f-ccy" class="select mono" style="width: 100%" value="{{d.ccy}}" onChange="{{set.ccy}}"><option value="">All</option><sc-for list="{{ccyOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <sc-if value="{{more}}" hint-placeholder-val="{{ false }}">
                 <div><label class="lbl" for="f-lms">LMS mapping</label><div style="position: relative"><select id="f-lms" class="select" style="width: 100%" value="{{d.lms}}" onChange="{{set.lms}}"><option value="">All</option><option value="y">Mapped</option><option value="n">Not mapped</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
                 <div><label class="lbl" for="f-st">Active status</label><div style="position: relative"><select id="f-st" class="select" style="width: 100%" value="{{d.st}}" onChange="{{set.st}}"><option value="">All</option><option value="on">Active</option><option value="off">Inactive</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
                 <div><label class="lbl" for="f-on">Effective on</label><input id="f-on" type="date" class="input" style="width: 100%" value="{{d.on}}" onInput="{{set.on}}"></div>
+                </sc-if>
               </div>
             </sc-if>
           </section>
@@ -498,14 +510,12 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <table class="{{tblCls}}">
                 <thead style="position: sticky; top: 0; z-index: 2"><tr>
                   <sc-for list="{{heads}}" as="h" hint-placeholder-count="10"><th aria-sort="{{h.aria}}"><button class="th" onClick="{{h.sort}}">{{h.label}}<span style="font-size: 10px; color: {{h.ic}}">{{h.arrow}}</span></button></th></sc-for>
-                  <th style="width: 40px"><span class="sr">Open</span></th>
                 </tr></thead>
                 <tbody>
                   <sc-for list="{{rows}}" as="r" hint-placeholder-count="14">
-                    <tr class="navr" onClick="{{r.open}}">
+                    <tr class="navr" aria-selected="{{r.on}}" onClick="{{r.open}}">
                       <sc-for list="{{r.cells}}" as="x" hint-placeholder-count="10"><td class="{{x.cls}}" style="{{x.st}}">{{x.v}}</td></sc-for>
-                      <td style="color: var(--muted4)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></td>
-                    </tr>
+                                          </tr>
                   </sc-for>
                 </tbody>
               </table>
@@ -517,52 +527,30 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <span style="display: flex; align-items: center; gap: 4px"><button class="btn btn-sm btn-icon" onClick="{{pPrev}}" disabled="{{noPP}}" aria-label="Previous page"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button><span class="mono" style="min-width: 56px; text-align: center">{{pageTxt}}</span><button class="btn btn-sm btn-icon" onClick="{{pNext}}" disabled="{{noPN}}" aria-label="Next page"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button></span>
             </div>
           </section>
-        </sc-if>
 
-        <sc-if value="{{isObj}}" hint-placeholder-val="{{ false }}">
-          <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden">
-            <div style="padding: 16px 28px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted)">
-              <button class="crumb" onClick="{{back}}">Charge Master</button><span>/</span><span class="mono" style="color: var(--ink)">{{c.code}}</span>
-              <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 6px">
-                <button class="btn btn-sm btn-icon" onClick="{{prev}}" disabled="{{noPrev}}" aria-label="Previous charge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button>
-                <span class="mono" style="min-width: 64px; text-align: center">{{pos}}</span>
-                <button class="btn btn-sm btn-icon" onClick="{{next}}" disabled="{{noNext}}" aria-label="Next charge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
-                <button class="btn btn-sm" onClick="{{back}}" style="margin-inline-start: 8px">Back to list</button>
-              </span>
-            </div>
-            <div style="padding: 14px 28px 20px; display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid var(--line2)">
-              <div style="display: flex; align-items: center; gap: 14px">
-                <span class="mono" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 8px; background: var(--tint); color: var(--accent2); font-size: 15px; font-weight: 600">{{c.code}}</span>
-                <div><div style="display: flex; align-items: center; gap: 10px"><h2 style="margin: 0; font-size: 22px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.stChip}}">{{c.st}}</span></div><div style="font-size: 13px; color: var(--muted); margin-top: 2px">{{c.cat}}</div></div>
-              </div>
-              <div style="display: flex">
-                <div class="facet"><span class="l">Origin / Destination</span><span class="v">{{c.app}}</span></div>
-                <div class="facet"><span class="l">Port / Country</span><span class="v">{{c.where}}</span></div>
-                <div class="facet"><span class="l">Tax code</span><span class="v mono">{{c.tax}}</span></div>
-                <div class="facet"><span class="l">Currency</span><span class="v mono">{{c.ccy}}</span></div>
-                <div class="facet"><span class="l">LMS mapping</span><span class="v mono" style="color: {{c.lmsFg}}">{{c.lms}}</span></div>
-                <div class="facet"><span class="l">Effective dates</span><span class="v">{{c.eff}}</span></div>
+        <section class="card" aria-label="Charge details" style="flex: 0 0 auto; display: flex; flex-direction: column; overflow: hidden">
+          <div style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px 0 20px; border-bottom: {{dBorder}}">
+            <span class="mono" style="display: inline-flex; align-items: center; height: 26px; padding: 0 8px; border-radius: 6px; background: var(--tint); color: var(--accent2); font-size: 12px; font-weight: 600">{{c.code}}</span>
+            <h2 class="card-title">{{c.name}}</h2><span class="chip" style="{{c.stChip}}">{{c.st}}</span>
+            <span style="font-size: 13px; color: var(--muted)">{{c.cat}} · Effective {{c.eff}}</span>
+            <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 6px">
+              <button class="btn btn-sm btn-icon" onClick="{{prev}}" disabled="{{noPrev}}" aria-label="Previous charge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button>
+              <span class="mono" style="min-width: 64px; text-align: center; font-size: 12px; color: var(--muted)">{{pos}}</span>
+              <button class="btn btn-sm btn-icon" onClick="{{next}}" disabled="{{noNext}}" aria-label="Next charge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+              <button class="btn btn-sm" onClick="{{toggleD}}" aria-expanded="{{dA}}" style="margin-inline-start: 6px">{{dLabel}}</button>
+            </span>
+          </div>
+          <sc-if value="{{dOpen}}" hint-placeholder-val="{{ true }}">
+            <div class="dgrid">
+              <div class="dcol"><h3>Applicability</h3><div class="kvs"><div><span class="l">Origin / Destination</span><span class="v">{{c.app}}</span></div><div><span class="l">Country</span><span class="v">{{c.ctry}}</span></div><div><span class="l">Port</span><span class="v">{{c.port}}</span></div></div></div>
+              <div class="dcol"><h3>Country / Tax / Currency</h3><div class="kvs"><div><span class="l">Tax code</span><span class="v mono">{{c.tax}}</span></div><div><span class="l">Tax description</span><span class="v">{{c.taxD}}</span></div><div><span class="l">Currency</span><span class="v mono">{{c.ccy}}</span></div></div></div>
+              <div class="dcol"><h3>LMS mapping &amp; business rules</h3><div class="kvs"><div><span class="l">LMS charge code</span><span class="v mono" style="color: {{c.lmsFg}}">{{c.lms}}</span></div><div><span class="l">Mapping</span><span class="v">{{c.map}}</span></div><div><span class="l">Business rules</span><span class="v ph">[Business rules using this charge]</span></div></div></div>
+              <div class="dcol" style="flex: 1.4 1 0"><h3>Audit trail <span style="font-weight: 400; color: var(--muted)">{{c.auditN}}</span></h3>
+                <div style="overflow: auto; max-height: 176px"><sc-for list="{{c.audit}}" as="i" hint-placeholder-count="3"><div class="tl"><div style="font-weight: 500; font-size: 13px">{{i.a}}</div><div style="font-size: 12px; color: var(--muted)">{{i.b}} · {{i.c}}</div></div></sc-for></div>
               </div>
             </div>
-            <div class="r-wrap" role="tablist" aria-label="Charge sections" style="display: flex; gap: 28px; padding: 0 28px; border-bottom: 1px solid var(--line)">
-              <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="color: {{t.fg}}; box-shadow: inset 0 -2px 0 {{t.line}}">{{t.label}}<span class="mono" style="font-size: 12px; color: var(--muted)">{{t.count}}</span></button></sc-for>
-            </div>
-            <div class="r-g2" id="op-body" style="flex: 1 1 auto; overflow: auto; padding: 20px 28px; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: min-content; gap: 16px">
-              <sc-for list="{{panel}}" as="x" hint-placeholder-count="6">
-                <div class="oblk" id="{{x.id}}" style="{{x.span}}">
-                  <h3>{{x.title}}</h3>
-                  <div class="bd">
-                    <sc-if value="{{x.isKv}}" hint-placeholder-val="{{ true }}"><div class="kv3"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="6"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></sc-if>
-                    <sc-if value="{{x.isList}}" hint-placeholder-val="{{ false }}"><sc-for list="{{x.items}}" as="i" hint-placeholder-count="1"><div class="ph">{{i.a}} · {{i.b}}</div></sc-for></sc-if>
-                    <sc-if value="{{x.isAudit}}" hint-placeholder-val="{{ false }}">
-                      <table><thead><tr><th>Change</th><th>Changed by</th><th>Date &amp; time</th></tr></thead><tbody><sc-for list="{{x.items}}" as="i" hint-placeholder-count="3"><tr><td>{{i.a}}</td><td>{{i.b}}</td><td class="mono">{{i.c}}</td></tr></sc-for></tbody></table>
-                    </sc-if>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-          </section>
-        </sc-if>
+          </sc-if>
+        </section>
       </main>
     </div>
   </div>
@@ -577,7 +565,7 @@ class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
     const E = { code: '', cat: '', app: '', ctry: '', tax: '', ccy: '', lms: '', st: '', on: '', q: '' };
-    this.state = { mode: 'list', sel: '', view: 'std', d: Object.assign({}, E), f: Object.assign({}, E), fb: true, dq: '', sort: 'code', dir: 1, ps: 25, page: 0, dense: false, cols: { cat: true, app: true, where: true, tax: true, ccy: true, from: true, to: false, lms: true, st: true }, colsOpen: false, tab: 'gen' };
+    this.state = { sel: 'h2', more: false, dOpen: true, view: 'std', d: Object.assign({}, E), f: Object.assign({}, E), fb: true, dq: '', sort: 'code', dir: 1, ps: 25, page: 0, dense: false, cols: { cat: true, app: true, where: true, tax: true, ccy: true, from: true, to: false, lms: true, st: true }, colsOpen: false, };
     this.E = E;
   }
   renderVals() {
@@ -636,7 +624,7 @@ class GirsPage extends DCLogic {
     const pages = Math.max(1, Math.ceil(all.length / s.ps)); const pg = Math.min(s.page, pages - 1);
     const page = all.slice(pg * s.ps, pg * s.ps + s.ps);
     const MONOK = { code: 1, tax: 1, ccy: 1, lms: 1 };
-    const rows = page.map((h) => ({ open: () => this.setState({ mode: 'object', sel: h.id, tab: 'gen' }), cells: vis.map(([k]) => ({ v: val(h, k), cls: MONOK[k] ? 'mono' : '',
+    const rows = page.map((h) => ({ on: s.sel === h.id ? 'true' : 'false', open: () => this.setState({ sel: h.id }), cells: vis.map(([k]) => ({ v: val(h, k), cls: MONOK[k] ? 'mono' : '',
       st: k === 'code' ? 'color:var(--accent);font-weight:500' : k === 'st' ? (h.active ? 'color:var(--ok);font-weight:500' : 'color:var(--muted)') : k === 'lms' && !h.lms ? 'color:var(--muted4)' : k === 'cat' ? 'color:var(--muted)' : '' })) }));
     const heads = vis.map(([k, label]) => { const on = s.sort === k; return { label, arrow: on ? (s.dir > 0 ? '▲' : '▼') : '▲', ic: on ? 'var(--accent)' : 'transparent', aria: on ? (s.dir > 0 ? 'ascending' : 'descending') : 'none',
       sort: () => this.setState(on ? { dir: -s.dir } : { sort: k, dir: 1 }) }; });
@@ -646,7 +634,8 @@ class GirsPage extends DCLogic {
     const dens = [['c', 'Compact', true], ['z', 'Cozy', false]].map(([k, label, v]) => { const on = s.dense === v; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--surface)' : 'transparent', fg: on ? 'var(--accent)' : 'var(--muted)', sh: on ? '0 1px 2px rgba(22,26,33,.12)' : 'none', pick: () => this.setState({ dense: v }) }; });
     const go = () => this.setState({ f: Object.assign({}, s.d, { q: s.dq }), page: 0 });
     const out = {
-      isList: s.mode === 'list', isObj: s.mode === 'object',
+      more: s.more, moreLabel: s.more ? 'Fewer filters' : 'More filters (3)', toggleMore: () => this.setState({ more: !s.more }),
+      dOpen: s.dOpen, dA: s.dOpen ? 'true' : 'false', dLabel: s.dOpen ? 'Hide details' : 'Show details', toggleD: () => this.setState({ dOpen: !s.dOpen }), dBorder: s.dOpen ? '1px solid var(--line2)' : '0',
       view: s.view, onView: (e) => { const v = e.target.value; const n = Object.assign({}, E, VIEWS[v]); this.setState({ view: v, d: n, f: Object.assign({}, n), dq: '', page: 0 }); },
       dq: s.dq, onDq: (e) => this.setState({ dq: e.target.value }), onEnter: (e) => { if (e.key === 'Enter') go(); }, go,
       clearF: () => this.setState({ d: Object.assign({}, E), f: Object.assign({}, E), dq: '', view: 'std', page: 0 }),
@@ -660,20 +649,15 @@ class GirsPage extends DCLogic {
       range: all.length ? (pg * s.ps + 1) + '–' + (pg * s.ps + page.length) + ' of ' + all.length : '0 of 0', pageTxt: (pg + 1) + ' / ' + pages,
       ps: String(s.ps), onPs: (e) => this.setState({ ps: +e.target.value, page: 0 }), noPP: pg <= 0, noPN: pg >= pages - 1,
       pPrev: () => this.setState({ page: Math.max(0, pg - 1) }), pNext: () => this.setState({ page: Math.min(pages - 1, pg + 1) }),
-      back: () => this.setState({ mode: 'list' })
     };
-    const h = H.find((x) => x.id === s.sel);
+    const h = all.find((x) => x.id === s.sel) || all[0];
     if (h) {
       const i = all.findIndex((x) => x.id === h.id); const st = stOf(h);
-      const S = {}; SECTIONS(h).forEach(([k, title, sum, body]) => { S[k] = Object.assign({ title, isKv: false, isList: false, isAudit: false, kv: [], items: [] }, body); });
-      const T = [['gen', 'General', '', 's1'], ['app', 'Applicability', '', 's2'], ['tax', 'Country / Tax / Currency', '', 's3'], ['lms', 'LMS mapping', '', 's4'], ['br', 'Business rules', '', 's5'], ['au', 'Audit trail', String(h.audit.length), 's6']];
-      const cur = T.find((t) => t[0] === s.tab) || T[0];
-      const panel = T.map(([k, , , sk]) => Object.assign({ id: 'op-' + k, span: sk === 's6' ? 'grid-column: span 1' : '' }, S[sk]));
-      Object.assign(out, { c: { code: h.code, name: h.name, cat: h.cat, st: st.t, stChip: st.chip, app: h.app, where: where(h), tax: h.tax, ccy: h.ccy, lms: h.lms || 'Not mapped', lmsFg: h.lms ? 'var(--ink)' : 'var(--muted4)', eff: eff(h) },
-        tabs: T.map(([k, label, count]) => { const on = cur[0] === k; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => { this.setState({ tab: k }); try { const el = document.getElementById('op-' + k); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} } }; }),
-        panel, pos: i >= 0 ? (i + 1) + ' of ' + all.length : '', noPrev: i <= 0, noNext: i < 0 || i >= all.length - 1,
-        prev: () => { if (i > 0) this.setState({ sel: all[i - 1].id }); }, next: () => { if (i >= 0 && i < all.length - 1) this.setState({ sel: all[i + 1].id }); } });
-    } else Object.assign(out, { c: {}, tabs: [], panel: [], pos: '', noPrev: true, noNext: true, prev: () => {}, next: () => {} });
+      const go2 = (n) => { const p2 = Math.floor(n / s.ps); this.setState({ sel: all[n].id, page: p2 }); };
+      Object.assign(out, { c: { code: h.code, name: h.name, cat: h.cat, st: st.t, stChip: st.chip, eff: eff(h), app: h.app, ctry: CN[h.ctry], port: portTxt(h), tax: h.tax, taxD: TAX[h.tax], ccy: h.ccy,
+          lms: h.lms || 'Not mapped', lmsFg: h.lms ? 'var(--ink)' : 'var(--muted4)', map: h.lms ? 'Aligned with LMS charge code' : 'Charge maintained in GIRS only', audit: h.audit.slice().reverse(), auditN: '· ' + h.audit.length },
+        pos: (i + 1) + ' of ' + all.length, noPrev: i <= 0, noNext: i >= all.length - 1, prev: () => { if (i > 0) go2(i - 1); }, next: () => { if (i < all.length - 1) go2(i + 1); } });
+    } else Object.assign(out, { c: { code: '—', name: 'No charge selected', audit: [] }, pos: '', noPrev: true, noNext: true, prev: () => {}, next: () => {} });
     return out;
   }
 }
