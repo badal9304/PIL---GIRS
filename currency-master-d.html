@@ -140,6 +140,22 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .cbk h4{margin:0;display:flex;align-items:center;gap:8px;padding:12px 16px 0;font-size:13px;font-weight:600}
 .cbk h4 .dot,.sc h3 .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 .kg1{grid-template-columns:1fr 1fr}
+.ac{border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.ach{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;min-height:50px;padding:0 20px}
+.ach:hover{background:var(--hover2)}
+.ach:focus-visible,.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.act{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap}
+.acn{font-size:12px;font-weight:500;color:var(--muted);background:var(--neutral);border-radius:10px;padding:1px 8px}
+.acs{flex:1 1 auto;min-width:0;text-align:end;font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ach[aria-expanded=true] .acs{visibility:hidden}
+.acb{border-top:1px solid var(--line2)}
+.kg4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 24px;padding:16px 20px 18px}
+.kg4 .w{grid-column:span 2}
+.kg4 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
+.kg4 .v{display:block;font-size:14px;line-height:20px;color:var(--ink);overflow-wrap:anywhere}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500;font-size:13px}
+.lnk:hover{text-decoration:underline}
+.ot th,.ot td{padding-inline:20px 8px}
 .rail{grid-column:3;grid-row:1 / span 40;position:sticky;top:0}
 .tl{position:relative;padding:0 0 14px 22px}
 .tl:before{content:"";position:absolute;inset-inline-start:5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--bd)}
@@ -537,26 +553,33 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div role="status" style="margin: 0 24px 14px; display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 14px; border-radius: 8px; background: var(--badbg); border: 1px solid var(--badbd); color: var(--bad); font-weight: 500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>{{h.alert}}</div>
             </sc-if>
             <div class="facts"><sc-for list="{{h.facts}}" as="f" hint-placeholder-count="5"><div class="fct"><span class="l">{{f.l}}</span><span class="v" style="{{f.st}}" title="{{f.v}}">{{f.v}}</span></div></sc-for></div>
-            <div style="flex: 1 1 auto; overflow: auto; padding: 18px 24px 24px">
-              <div class="ov">
-                <sc-if value="{{comb}}" hint-placeholder-val="{{ false }}">
-                  <div class="sc" style="grid-column: 1 / span 2"><div class="cb" style="grid-template-columns: {{cbCols}}"><sc-for list="{{cblocks}}" as="x" hint-placeholder-count="3"><div class="cbk"><h4><span class="dot"></span>{{x.t}}</h4><div class="kg kg1"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="3"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></div></sc-for></div></div>
-                </sc-if>
-                <sc-for list="{{secs}}" as="x" hint-placeholder-count="4">
-                  <div class="sc" style="{{x.span}}"><h3><span class="dot"></span>{{x.t}}</h3><div class="kg"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="4"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></div>
-                </sc-for>
-                <sc-for list="{{tbls}}" as="t" hint-placeholder-count="1">
-                  <div class="sc" style="{{t.span}}; overflow: hidden"><h3><span class="dot"></span>{{t.t}}</h3>
-                    <table class="ot"><thead><tr><sc-for list="{{t.h}}" as="c" hint-placeholder-count="4"><th style="{{c.st}}">{{c.v}}</th></sc-for></tr></thead><tbody><sc-for list="{{t.rows}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r}}" as="c" hint-placeholder-count="4"><td class="{{c.cls}}" style="{{c.st}}">{{c.v}}</td></sc-for></tr></sc-for></tbody></table>
-                    <sc-if value="{{t.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 14px 16px; color: var(--muted4); font-size: 13px">None</div></sc-if>
+            <div style="flex: 1 1 auto; overflow: auto; padding: 16px 24px 24px">
+              <div style="display: flex; justify-content: flex-end; margin-bottom: 10px"><button class="lnk" onClick="{{allT}}">{{allL}}</button></div>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <sc-for list="{{secs}}" as="x" hint-placeholder-count="5">
+                  <div class="ac">
+                    <h3 style="margin: 0"><button class="ach" aria-expanded="{{x.ax}}" onClick="{{x.tg}}">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{x.rot}}); transition: transform .15s"><path d="M9 6l6 6-6 6"></path></svg>
+                      <span class="act">{{x.t}}</span><sc-if value="{{x.hasN}}" hint-placeholder-val="{{ false }}"><span class="acn mono">{{x.n}}</span></sc-if>
+                      <span class="acs">{{x.sum}}</span>
+                    </button></h3>
+                    <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}">
+                      <div class="acb">
+                        <sc-if value="{{x.isKv}}" hint-placeholder-val="{{ true }}"><div class="kg4"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="4"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></sc-if>
+                        <sc-if value="{{x.isTbl}}" hint-placeholder-val="{{ false }}">
+                          <table class="ot"><thead><tr><sc-for list="{{x.h}}" as="c" hint-placeholder-count="4"><th style="{{c.st}}">{{c.v}}</th></sc-for></tr></thead><tbody><sc-for list="{{x.rows}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r}}" as="c" hint-placeholder-count="4"><td class="{{c.cls}}" style="{{c.st}}">{{c.v}}</td></sc-for></tr></sc-for></tbody></table>
+                          <sc-if value="{{x.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 14px 20px; color: var(--muted4); font-size: 13px">None</div></sc-if>
+                        </sc-if>
+                        <sc-if value="{{x.isTl}}" hint-placeholder-val="{{ false }}">
+                          <div style="padding: 16px 20px">
+                            <sc-if value="{{x.hasNote}}" hint-placeholder-val="{{ false }}"><div style="margin-bottom: 14px; padding: 10px 12px; border-radius: 8px; background: var(--hover2); font-size: 12px; color: var(--muted)">{{x.note}}</div></sc-if>
+                            <sc-for list="{{x.tl}}" as="i" hint-placeholder-count="3"><div class="{{i.cls}}"><div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap"><span style="font-size: 13px; font-weight: 500; color: {{i.fg}}">{{i.a}}</span><span style="font-size: 13px">{{i.b}}</span><span style="font-size: 12px; color: var(--muted)">{{i.c}}</span></div></div></sc-for>
+                          </div>
+                        </sc-if>
+                      </div>
+                    </sc-if>
                   </div>
                 </sc-for>
-                <aside class="sc rail" aria-label="{{h.railTitle}}"><h3><span class="dot"></span>{{h.railTitle}}</h3>
-                  <div style="padding: 16px">
-                    <sc-if value="{{h.hasNote}}" hint-placeholder-val="{{ false }}"><div style="margin-bottom: 14px; padding: 10px 12px; border-radius: 8px; background: var(--hover2); font-size: 12px; color: var(--muted)">{{h.railNote}}</div></sc-if>
-                    <sc-for list="{{h.rail}}" as="i" hint-placeholder-count="3"><div class="{{i.cls}}"><div style="font-size: 13px; font-weight: 500; color: {{i.fg}}">{{i.a}}</div><div style="font-size: 13px; margin-top: 1px">{{i.b}}</div><div style="font-size: 12px; color: var(--muted); margin-top: 1px">{{i.c}}</div></div></sc-for>
-                  </div>
-                </aside>
               </div>
             </div>
           </section>
@@ -574,7 +597,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { q: '', fs: '', sel: 'USD', open: null };
+    this.state = { q: '', fs: '', sel: 'USD', open: null, op: null };
   }
   renderVals() {
     const s = this.state;
@@ -594,18 +617,27 @@ class GirsPage extends DCLogic {
     const i = ordered.findIndex((x) => x.id === r.id);
     const go = (n) => { const x = ordered[n]; this.setState({ sel: x.id, open: Object.assign({}, openM, { [x.group]: true }) }); };
     const MONO = 'font-family:var(--mono,ui-monospace,monospace)';
-    const mk = ([t, kv]) => ({ t, span: '', kv: kv.map(([l, v, m, w, mu]) => ({ l, v, cls: w ? 'w' : '', st: (m ? MONO : '') + (mu ? ';color:var(--muted4)' : '') })) });
-    const secs = r.comb ? [] : r.sections.map(mk);
-    const cblocks = r.comb ? r.sections.map(mk) : [];
-    const tbls = r.tables.map(([t, hd, rows, mono]) => ({ t, span: hd.length <= 3 ? 'grid-column: span 1' : 'grid-column: 1 / span 2', empty: rows.length === 0, h: hd.map((v, j) => ({ v, st: v === 'Rate' ? 'text-align:end' : '' })),
-      rows: rows.map((row) => row.map((v, j) => ({ v, cls: mono.indexOf(j) >= 0 ? 'mono' : '', st: (hd[j] === 'Rate' ? 'text-align:end;' : '') + (j === 0 ? 'font-weight:500;' : '') + (v === '—' || v === 'Not mapped' ? 'color:var(--muted4)' : (v === 'Default' ? 'color:var(--accent2);font-weight:600' : '')) }))) }));
+    const KVS = (kv) => kv.map(([l, v, m, w, mu]) => ({ l, v, cls: w ? 'w' : '', st: (m ? MONO : '') + (mu ? ';color:var(--muted4)' : '') }));
+    const ALL = [];
+    r.sections.forEach(([t, kv], k) => ALL.push({ id: 's' + k, t, n: '', sum: kv.slice(0, 3).map((x) => x[1]).join(' · '), isKv: true, kv: KVS(kv) }));
+    r.tables.forEach(([t, hd, rows, mono], k) => { const p = t.split(' · '); const cnt = /^\d+$/.test(p[p.length - 1]) ? p.pop() : '';
+      ALL.push({ id: 't' + k, t: p.join(' · '), n: cnt, sum: rows.length ? rows.slice(0, 3).map((x) => x[0]).join(', ') + (rows.length > 3 ? ' +' + (rows.length - 3) : '') : 'None', isTbl: true, empty: rows.length === 0,
+        h: hd.map((v) => ({ v, st: v === 'Rate' ? 'text-align:end' : '' })),
+        rows: rows.map((row) => row.map((v, j) => ({ v, cls: mono.indexOf(j) >= 0 ? 'mono' : '', st: (hd[j] === 'Rate' ? 'text-align:end;' : '') + (j === 0 ? 'font-weight:500;' : '') + (v === '—' || v === 'Not mapped' ? 'color:var(--muted4)' : (v === 'Default' ? 'color:var(--accent2);font-weight:600' : '')) }))) }); });
+    { const p = r.railTitle.split(' · '); const cnt = /^\d+( codes)?$/.test(p[p.length - 1]) ? p.pop() : '';
+      ALL.push({ id: 'rl', t: p.join(' · '), n: cnt, sum: r.rail.length ? r.rail[0][0] + ' · ' + r.rail[0][2] : '', isTl: true, note: r.railNote, hasNote: !!r.railNote,
+        tl: r.rail.map(([a, b, c, cur]) => ({ a, b, c, cls: cur ? 'tl cur' : 'tl', fg: cur ? 'var(--accent2)' : 'var(--ink)' })) }); }
+    const op = s.op || { s0: true, s1: true };
+    const allOpen = ALL.every((x) => op[x.id]);
+    const secs = ALL.map((x) => Object.assign({ isKv: false, isTbl: false, isTl: false, kv: [], h: [], rows: [], empty: false, tl: [], note: '', hasNote: false }, x, { hasN: !!x.n, open: !!op[x.id], ax: op[x.id] ? 'true' : 'false', rot: op[x.id] ? '90deg' : '0deg',
+      tg: () => this.setState({ op: Object.assign({}, op, { [x.id]: !op[x.id] }) }) }));
     const sc = stOf(r.st);
     return { q: s.q, onQ: (e) => this.setState({ q: e.target.value }), segs, groups, empty: list.length === 0, gLabel: D.groupLabel,
       gCount: groups.length + ' · ' + D.groupLabel.toLowerCase(), countText: list.length + ' of ' + D.recs.length + ' ' + D.nouns,
       h: { code: r.code, title: r.title, st: r.st, chip: sc[0], sub: r.sub, chips: r.chips.map(([t, st]) => ({ t, s: st })), hasAlert: !!r.alert, alert: r.alert,
         facts: r.facts.map(([l, v, m]) => ({ l, v, st: m ? MONO : '' })), railTitle: r.railTitle, railNote: r.railNote, hasNote: !!r.railNote,
         rail: r.rail.map(([a, b, c, cur]) => ({ a, b, c, cls: cur ? 'tl cur' : 'tl', fg: cur ? 'var(--accent2)' : 'var(--ink)' })) },
-      secs, tbls, comb: !!r.comb, cblocks, cbCols: 'repeat(' + Math.max(1, cblocks.length) + ', minmax(0, 1fr))', pos: i >= 0 ? (i + 1) + ' of ' + ordered.length : '', noPrev: i <= 0, noNext: i < 0 || i >= ordered.length - 1,
+      secs, allL: allOpen ? 'Collapse all' : 'Expand all', allT: () => { const n = {}; ALL.forEach((x) => { n[x.id] = !allOpen; }); this.setState({ op: n }); }, pos: i >= 0 ? (i + 1) + ' of ' + ordered.length : '', noPrev: i <= 0, noNext: i < 0 || i >= ordered.length - 1,
       prev: () => { if (i > 0) go(i - 1); }, next: () => { if (i >= 0 && i < ordered.length - 1) go(i + 1); } };
   }
 }
