@@ -106,6 +106,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+.acc{border-bottom:1px solid var(--line2)}
+.acc-h{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:16px 24px}
+.acc-h:hover{background:var(--hover2)}
+.acc-h:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.acc-s{font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acc-h[aria-expanded=true] .acc-s{display:none}
+.acc-b{padding:0 24px 20px}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
+.lnk:hover{text-decoration:underline}
+.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
 .lay:hover{color:var(--ink)}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
@@ -444,11 +454,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <aside class="card r-col" aria-label="Customer details" style="flex: 0 0 560px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
             <div style="padding: 20px 24px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px">
               <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.chip}}">{{c.st}}</span></div>
-              <div style="font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></div>
+              <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></span><button class="lnk" onClick="{{allT}}" style="font-size: 12px">{{allL}}</button></div>
             </div>
             <div style="flex: 1 1 auto; overflow: auto">
-              <div class="dsec">
-                <h3>Customer details</h3>
+              <div class="acc">
+                <h3 style="margin: 0"><button class="acc-h" aria-expanded="{{ax.s1}}" aria-controls="acc-s1" onClick="{{tg.s1}}">
+                  <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: var(--ink)">Customer details</span><span class="acc-s">{{sum.s1}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{rot.s1}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+                </button></h3>
+                <sc-if value="{{op.s1}}" hint-placeholder-val="{{ true }}">
+                  <div id="acc-s1" role="region" class="acc-b">
                 <div class="kv2">
                   <div><span class="l">Legal entity name</span><span class="v">{{c.legal}}</span></div>
                   <div><span class="l">Registration / Tax ID</span><span class="v mono">{{c.tax}}</span></div>
@@ -456,22 +471,43 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <div><span class="l">Credit terms</span><span class="v">{{c.terms}}</span></div>
                   <div style="grid-column: 1 / -1"><span class="l">Address details</span><span class="v">{{c.addr}}</span></div>
                 </div>
+                  </div>
+                </sc-if>
               </div>
-              <div class="dsec">
-                <h3>Billing party · country-wise</h3>
+              <div class="acc">
+                <h3 style="margin: 0"><button class="acc-h" aria-expanded="{{ax.s2}}" aria-controls="acc-s2" onClick="{{tg.s2}}">
+                  <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: var(--ink)">Billing party · country-wise</span><span class="acc-s">{{sum.s2}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{rot.s2}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+                </button></h3>
+                <sc-if value="{{op.s2}}" hint-placeholder-val="{{ false }}">
+                  <div id="acc-s2" role="region" class="acc-b">
                 <sc-for list="{{parties}}" as="b" hint-placeholder-count="3">
                   <div class="mini"><span style="display: flex; flex-direction: column"><span>{{b.ctry}} · {{b.name}}</span><span style="font-size: 12px; color: var(--muted)">{{b.src}}</span></span><sc-if value="{{b.isDef}}" hint-placeholder-val="{{ true }}"><span class="chip" style="background: var(--tint); color: var(--accent2)">Default</span></sc-if></div>
                 </sc-for>
+                  </div>
+                </sc-if>
               </div>
-              <div class="dsec">
-                <h3>Parent customer group</h3>
+              <div class="acc">
+                <h3 style="margin: 0"><button class="acc-h" aria-expanded="{{ax.s3}}" aria-controls="acc-s3" onClick="{{tg.s3}}">
+                  <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: var(--ink)">Parent customer group</span><span class="acc-s">{{sum.s3}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{rot.s3}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+                </button></h3>
+                <sc-if value="{{op.s3}}" hint-placeholder-val="{{ false }}">
+                  <div id="acc-s3" role="region" class="acc-b">
                 <div style="margin-bottom: 8px">{{c.group}} <span style="color: var(--muted)">· {{memberCount}} codes, same tax ID</span></div>
                 <sc-for list="{{members}}" as="m" hint-placeholder-count="3">
-                  <div class="mini"><span><span class="mono">{{m.code}}</span> <span style="color: var(--muted)">· {{m.ctry}}</span></span><span style="font-size: 12px; color: var(--muted)">{{m.here}}</span></div>
+                  <div class="mini"><button class="lnk" onClick="{{m.pick}}"><span class="mono">{{m.code}}</span> <span style="color: var(--muted); font-weight: 400">· {{m.name}}</span></button><span style="font-size: 12px; color: var(--muted)">{{m.here}}</span></div>
                 </sc-for>
+                  </div>
+                </sc-if>
               </div>
-              <div class="dsec" style="border-bottom: 0">
-                <h3>Billing configuration &amp; distribution</h3>
+              <div class="acc">
+                <h3 style="margin: 0"><button class="acc-h" aria-expanded="{{ax.s4}}" aria-controls="acc-s4" onClick="{{tg.s4}}">
+                  <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: var(--ink)">Billing configuration &amp; distribution</span><span class="acc-s">{{sum.s4}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{rot.s4}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+                </button></h3>
+                <sc-if value="{{op.s4}}" hint-placeholder-val="{{ false }}">
+                  <div id="acc-s4" role="region" class="acc-b">
                 <div class="kv2">
                   <div><span class="l">Invoicing arrangement</span><span class="v"><span class="chip" style="{{c.arrChip}}">{{c.arr}}</span></span></div>
                   <div><span class="l">Default billing party</span><span class="v">{{c.defParty}}</span></div>
@@ -479,6 +515,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <div><span class="l">Delivery to</span><span class="v">{{c.email}}</span></div>
                   <div style="grid-column: 1 / -1"><span class="l">Customer-specific rules</span><span class="v ph">[Customer-specific billing configuration]</span></div>
                 </div>
+                  </div>
+                </sc-if>
               </div>
             </div>
           </aside>
@@ -496,7 +534,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { sel: 'k9', q: '', fc: '', fs: '' };
+    this.state = { sel: 'k9', q: '', fc: '', fs: '', op: { s1: true } };
   }
   renderVals() {
     const s = this.state;
@@ -545,13 +583,20 @@ class GirsPage extends DCLogic {
     const c = C.find((x) => x.id === s.sel) || C[0];
     const g = G[c.g];
     const mem = C.filter((x) => x.g === c.g);
+    const K = ['s1', 's2', 's3', 's4'];
+    const op = {}, ax = {}, rot = {}, tg = {};
+    K.forEach((k) => { op[k] = !!s.op[k]; ax[k] = op[k] ? 'true' : 'false'; rot[k] = op[k] ? '180deg' : '0deg'; tg[k] = () => this.setState({ op: { ...s.op, [k]: !s.op[k] } }); });
+    const allOpen = K.every((k) => op[k]);
+    const P = parties(c), dp = P.find((x) => x.isDef);
+    const sum = { s1: g.legal + ' · ' + g.terms + ' · ' + c.email, s2: P.length + (P.length === 1 ? ' billing party' : ' billing parties') + (dp ? ' · default ' + dp.name : ''), s3: g.name + ' · ' + mem.length + ' codes, same tax ID', s4: g.arr + ' arrangement · ' + (jsonOn(c) ? 'PDF, JSON' : 'PDF') };
     const yes = 'background:var(--tint);color:var(--accent2)', no = 'background:var(--line2);color:var(--muted4);text-decoration:line-through';
     return {
       q: s.q, fc: s.fc, fs: s.fs, onQ: (e) => this.setState({ q: e.target.value }), onC: (e) => this.setState({ fc: e.target.value }), onS: (e) => this.setState({ fs: e.target.value }),
       filtered: !!(s.q || s.fc || s.fs), clear: () => this.setState({ q: '', fc: '', fs: '' }),
       rows, empty: list.length === 0, countText: list.length + ' of ' + C.length + ' customer codes',
       c: { name: c.name, code: c.code, ctryName: CN[c.ctry], ref: c.ref, tax: g.tax, terms: g.terms, email: c.email, addr: c.addr, st: ST[c.st].t, chip: ST[c.st].chip, legal: g.legal, group: g.name, arr: g.arr, arrChip: ARR[g.arr], defParty: c.name },
-      parties: parties(c), memberCount: mem.length, members: mem.map((x) => ({ code: x.code, ctry: CN[x.ctry], here: x.id === c.id ? 'This customer' : '' })),
+      op, ax, rot, tg, sum, allL: allOpen ? 'Collapse all' : 'Expand all', allT: () => { const n = {}; K.forEach((k) => { n[k] = !allOpen; }); this.setState({ op: n }); },
+      parties: P, memberCount: mem.length, members: mem.map((x) => ({ code: x.code, name: x.name, ctry: CN[x.ctry], here: x.id === c.id ? 'This customer' : '', pick: () => this.setState({ sel: x.id }) })),
       pdfChip: yes, jsonChip: jsonOn(c) ? yes : no
     };
   }
