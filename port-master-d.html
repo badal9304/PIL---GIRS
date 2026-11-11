@@ -149,8 +149,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .acs{flex:1 1 auto;min-width:0;text-align:end;font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ach[aria-expanded=true] .acs{visibility:hidden}
 .acb{border-top:1px solid var(--line2)}
-.kg4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 24px;padding:16px 20px 18px}
+.kg4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 24px;padding:16px 20px 18px}
 .kg4 .w{grid-column:span 2}
+.sc h3{margin:0;display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line2)}
 .kg4 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
 .kg4 .v{display:block;font-size:14px;line-height:20px;color:var(--ink);overflow-wrap:anywhere}
 .lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500;font-size:13px}
@@ -554,8 +555,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             </sc-if>
             <div class="facts"><sc-for list="{{h.facts}}" as="f" hint-placeholder-count="5"><div class="fct"><span class="l">{{f.l}}</span><span class="v" style="{{f.st}}" title="{{f.v}}">{{f.v}}</span></div></sc-for></div>
             <div style="flex: 1 1 auto; overflow: auto; padding: 16px 24px 24px">
-              <div style="display: flex; justify-content: flex-end; margin-bottom: 10px"><button class="lnk" onClick="{{allT}}">{{allL}}</button></div>
-              <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start">
+              <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+              <div style="display: flex; justify-content: flex-end; margin-bottom: -2px"><button class="lnk" onClick="{{allT}}">{{allL}}</button></div>
                 <sc-for list="{{secs}}" as="x" hint-placeholder-count="5">
                   <div class="ac">
                     <h3 style="margin: 0"><button class="ach" aria-expanded="{{x.ax}}" onClick="{{x.tg}}">
@@ -580,6 +582,13 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                     </sc-if>
                   </div>
                 </sc-for>
+              </div>
+                <aside class="sc" style="position: sticky; top: 0" aria-label="{{h.railTitle}}"><h3><span class="dot"></span>{{h.railTitle}}</h3>
+                  <div style="padding: 16px">
+                    <sc-if value="{{h.hasNote}}" hint-placeholder-val="{{ false }}"><div style="margin-bottom: 14px; padding: 10px 12px; border-radius: 8px; background: var(--hover2); font-size: 12px; color: var(--muted)">{{h.railNote}}</div></sc-if>
+                    <sc-for list="{{h.rail}}" as="i" hint-placeholder-count="3"><div class="{{i.cls}}"><div style="font-size: 13px; font-weight: 500; color: {{i.fg}}">{{i.a}}</div><div style="font-size: 13px; margin-top: 1px">{{i.b}}</div><div style="font-size: 12px; color: var(--muted); margin-top: 1px">{{i.c}}</div></div></sc-for>
+                  </div>
+                </aside>
               </div>
             </div>
           </section>
@@ -624,9 +633,6 @@ class GirsPage extends DCLogic {
       ALL.push({ id: 't' + k, t: p.join(' · '), n: cnt, sum: rows.length ? rows.slice(0, 3).map((x) => x[0]).join(', ') + (rows.length > 3 ? ' +' + (rows.length - 3) : '') : 'None', isTbl: true, empty: rows.length === 0,
         h: hd.map((v) => ({ v, st: v === 'Rate' ? 'text-align:end' : '' })),
         rows: rows.map((row) => row.map((v, j) => ({ v, cls: mono.indexOf(j) >= 0 ? 'mono' : '', st: (hd[j] === 'Rate' ? 'text-align:end;' : '') + (j === 0 ? 'font-weight:500;' : '') + (v === '—' || v === 'Not mapped' ? 'color:var(--muted4)' : (v === 'Default' ? 'color:var(--accent2);font-weight:600' : '')) }))) }); });
-    { const p = r.railTitle.split(' · '); const cnt = /^\d+( codes)?$/.test(p[p.length - 1]) ? p.pop() : '';
-      ALL.push({ id: 'rl', t: p.join(' · '), n: cnt, sum: r.rail.length ? r.rail[0][0] + ' · ' + r.rail[0][2] : '', isTl: true, note: r.railNote, hasNote: !!r.railNote,
-        tl: r.rail.map(([a, b, c, cur]) => ({ a, b, c, cls: cur ? 'tl cur' : 'tl', fg: cur ? 'var(--accent2)' : 'var(--ink)' })) }); }
     const op = s.op || { s0: true, s1: true };
     const allOpen = ALL.every((x) => op[x.id]);
     const secs = ALL.map((x) => Object.assign({ isKv: false, isTbl: false, isTl: false, kv: [], h: [], rows: [], empty: false, tl: [], note: '', hasNote: false }, x, { hasN: !!x.n, open: !!op[x.id], ax: op[x.id] ? 'true' : 'false', rot: op[x.id] ? '90deg' : '0deg',
