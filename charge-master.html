@@ -106,12 +106,28 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
-table th,table td{padding-inline:10px}
 .gmain{flex:1 1 0 !important;min-height:0 !important}
+.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
+.lay:hover{color:var(--ink)}
+.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:500}
 .seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.kv2 .v{display:block;font-size:14px;line-height:20px}
+.kv2 .full{grid-column:1 / -1}
+.mini{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
+.mini:first-child{border-top:0;padding-top:0}
+.tl{position:relative;padding-inline-start:20px;padding-bottom:14px}
+.tl:before{content:"";position:absolute;inset-inline-start:4px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tl:after{content:"";position:absolute;inset-inline-start:7.5px;top:18px;bottom:0;width:1px;background:var(--line)}
+.tl:last-child:after{display:none}
+.tl:last-child{padding-bottom:0}
+.ph{color:var(--muted4)}
+table th,table td{padding-inline:10px}
 .acc{border-bottom:1px solid var(--line2)}
-.acc:last-child{border-bottom:0}
 .acc-h{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:14px 24px}
 .acc-h:hover{background:var(--hover2)}
 .acc-h:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
@@ -119,21 +135,8 @@ table th,table td{padding-inline:10px}
 .acc-s{font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .acc-h[aria-expanded=true] .acc-s{display:none}
 .acc-b{padding:0 24px 18px}
-.kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
-.kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
-.kv2 .v{display:block;font-size:14px;line-height:20px}
-.kv2 .full{grid-column:1 / -1}
-.mini{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
-.mini:first-child{border-top:0;padding-top:0}
-.ph{color:var(--muted4)}
 .lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
-.lnk:hover{text-decoration:underline}
-.req{color:var(--badbar)}
-.err{font-size:12px;color:var(--bad);margin-top:4px}
-.tl{position:relative;padding-inline-start:20px;padding-bottom:14px}
-.tl:before{content:"";position:absolute;inset-inline-start:4px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.tl:after{content:"";position:absolute;inset-inline-start:7.5px;top:18px;bottom:0;width:1px;background:var(--line)}
-.tl:last-child:after{display:none}</style>
+.lnk:hover{text-decoration:underline}</style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -408,10 +411,14 @@ table th,table td{padding-inline:10px}
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Charge Master</h1>
-            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Maintain charge codes, charge categories, applicability, tax mapping and LMS charge-code alignment</p>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Charge codes, categories, applicability, tax mapping and LMS charge-code alignment · read-only</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
+            <a class="lay" href="charge-master.html" aria-current="page">A · Table</a><a class="lay" href="charge-master-b.html" >B · Grouped</a><a class="lay" href="charge-master-c.html" >C · Tabs</a>
+          </div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
+          <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
           <div style="position: relative">
             <label for="gexp" class="sr">Export</label>
             <select id="gexp" class="select" value="" onChange="{{shell.exp}}" style="width: 112px">
@@ -422,23 +429,21 @@ table th,table td{padding-inline:10px}
             </select>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
           </div>
-          <button class="btn btn-primary" onClick="{{newCharge}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>New charge</button>
           </div>
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <div style="display: flex; align-items: center; gap: 12px">
-          <input class="input r-w" style="width: 320px" placeholder="Search charge code, name or LMS code" value="{{q}}" onInput="{{onQ}}" aria-label="Search charges">
-          <div style="position: relative"><select class="select r-w" value="{{fCat}}" onChange="{{onCat}}" aria-label="Charge category" style="width: 220px"><option value="">All categories</option><sc-for list="{{catOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
-          <div style="position: relative"><select class="select r-w" value="{{fApp}}" onChange="{{onApp}}" aria-label="Applicability" style="width: 200px"><option value="">Origin &amp; destination</option><option value="Origin">Origin</option><option value="Destination">Destination</option><option value="Both">Both</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
-          <div style="position: relative"><select class="select r-w" value="{{fCtry}}" onChange="{{onCtry}}" aria-label="Country" style="width: 180px"><option value="">All countries</option><sc-for list="{{ctryOpts}}" as="o" hint-placeholder-count="5"><option value="{{o.k}}">{{o.v}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <input class="input r-w" style="width: 300px" placeholder="Search charge code, name or LMS code" value="{{q}}" onInput="{{onQ}}" aria-label="Search charges">
+          <div style="position: relative"><select class="select r-w" value="{{fCat}}" onChange="{{onCat}}" aria-label="Charge category" style="width: 220px"><option value="">All categories</option><option value="Freight">Freight</option><option value="Surcharge">Surcharge</option><option value="Origin local charges">Origin local charges</option><option value="Destination local charges">Destination local charges</option><option value="Demurrage &amp; Detention">Demurrage &amp; Detention</option><option value="Ancillary (MISC)">Ancillary (MISC)</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><select class="select r-w" value="{{fApp}}" onChange="{{onApp}}" aria-label="Applicability" style="width: 190px"><option value="">Origin &amp; destination</option><option value="Origin">Origin</option><option value="Destination">Destination</option><option value="Both">Both</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><select class="select r-w" value="{{fCtry}}" onChange="{{onCtry}}" aria-label="Country" style="width: 170px"><option value="">All countries</option><option value="SG">Singapore</option><option value="MY">Malaysia</option><option value="IN">India</option><option value="CN">China</option><option value="TH">Thailand</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
           <div role="radiogroup" aria-label="Active status" style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
             <sc-for list="{{segs}}" as="g" hint-placeholder-count="3"><button class="seg" role="radio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="background: {{g.bg}}; color: {{g.fg}}; box-shadow: {{g.sh}}">{{g.label}}</button></sc-for>
           </div>
           <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{clear}}">Clear</button></sc-if>
           <span style="margin-inline-start: auto; font-size: 13px; color: var(--muted)">{{countText}}</span>
         </div>
-
         <div class="r-wrap" style="flex: 1 1 auto; min-height: 0; display: flex; gap: 16px; align-items: stretch">
           <section class="card" style="flex: 1 1 auto; min-width: 0; overflow: auto">
             <table>
@@ -461,72 +466,31 @@ table th,table td{padding-inline:10px}
             </table>
             <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No charges match these filters</div></sc-if>
           </section>
-
           <aside class="card r-col" aria-label="Charge details" style="flex: 0 0 500px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
             <div style="padding: 18px 24px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px">
-              <div style="display: flex; align-items: center; gap: 10px">
-                <h2 style="margin: 0; flex: 1 1 auto; min-width: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{c.title}}</h2>
-                <span class="chip" style="{{c.stChip}}">{{c.st}}</span>
-              </div>
-              <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
-                <span style="font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.cat}}</span>
-                <sc-if value="{{viewMode}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{allT}}" style="font-size: 12px">{{allL}}</button></sc-if>
-              </div>
+              <div style="display: flex; align-items: center; gap: 10px"><h2 style="margin: 0; flex: 1 1 auto; min-width: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.stChip}}">{{c.st}}</span></div>
+              <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.cat}}</span><button class="lnk" onClick="{{allT}}" style="font-size: 12px">{{allL}}</button></div>
             </div>
-
-            <sc-if value="{{viewMode}}" hint-placeholder-val="{{ true }}">
-              <div style="flex: 1 1 auto; overflow: auto">
-                <sc-for list="{{secs}}" as="x" hint-placeholder-count="5">
-                  <div class="acc">
-                    <h3 style="margin: 0"><button class="acc-h" aria-expanded="{{x.ax}}" onClick="{{x.tg}}"><span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span class="acc-t">{{x.title}}</span><span class="acc-s">{{x.sum}}</span></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{x.rot}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></button></h3>
-                    <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}">
-                      <div class="acc-b">
+            <div style="flex: 1 1 auto; overflow: auto">
+              <sc-for list="{{secs}}" as="x" hint-placeholder-count="6">
+                <div class="acc">
+                  <h3 style="margin: 0"><button class="acc-h" aria-expanded="{{x.ax}}" onClick="{{x.tg}}"><span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span class="acc-t">{{x.title}}</span><span class="acc-s">{{x.sum}}</span></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; transform: rotate({{x.rot}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg></button></h3>
+                  <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}">
+                    <div class="acc-b">
                         <sc-if value="{{x.isKv}}" hint-placeholder-val="{{ true }}">
                           <div class="kv2"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="4"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div>
                         </sc-if>
                         <sc-if value="{{x.isList}}" hint-placeholder-val="{{ false }}">
-                          <sc-for list="{{x.items}}" as="i" hint-placeholder-count="3"><div class="mini"><span style="display: flex; flex-direction: column; gap: 2px"><span>{{i.a}}</span><span style="font-size: 12px; color: var(--muted)">{{i.b}}</span></span><span style="font-size: 12px; color: var(--muted); text-align: end">{{i.c}}</span></div></sc-for>
+                          <sc-for list="{{x.items}}" as="i" hint-placeholder-count="2"><div class="mini"><span style="display: flex; flex-direction: column; gap: 2px"><span class="ph">{{i.a}}</span><span style="font-size: 12px" class="ph">{{i.b}}</span></span></div></sc-for>
                         </sc-if>
                         <sc-if value="{{x.isAudit}}" hint-placeholder-val="{{ false }}">
                           <sc-for list="{{x.items}}" as="i" hint-placeholder-count="3"><div class="tl"><div style="font-weight: 500">{{i.a}}</div><div style="font-size: 12px; color: var(--muted)">{{i.b}} · {{i.c}}</div></div></sc-for>
                         </sc-if>
-                      </div>
-                    </sc-if>
-                  </div>
-                </sc-for>
-              </div>
-              <div style="padding: 14px 24px; border-top: 1px solid var(--line); display: flex; gap: 8px">
-                <button class="btn btn-primary" onClick="{{startEdit}}">Edit charge</button>
-                <button class="btn" onClick="{{toggleActive}}">{{activeLabel}}</button>
-              </div>
-            </sc-if>
-
-            <sc-if value="{{editMode}}" hint-placeholder-val="{{ false }}">
-              <form onSubmit="{{save}}" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column">
-                <div class="r-g2" style="flex: 1 1 auto; overflow: auto; padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; align-content: start">
-                  <div><label class="lbl" for="e-code">Charge code <span class="req">*</span></label><input id="e-code" class="input mono" style="width: 100%" value="{{d.code}}" onInput="{{set.code}}" aria-invalid="{{err.codeA}}"><sc-if value="{{err.code}}" hint-placeholder-val="{{ false }}"><div class="err">{{err.codeT}}</div></sc-if></div>
-                  <div><label class="lbl" for="e-name">Charge name <span class="req">*</span></label><input id="e-name" class="input" style="width: 100%" value="{{d.name}}" onInput="{{set.name}}" aria-invalid="{{err.nameA}}"><sc-if value="{{err.name}}" hint-placeholder-val="{{ false }}"><div class="err">Enter a charge name</div></sc-if></div>
-                  <div><label class="lbl" for="e-cat">Charge category</label><div style="position: relative"><select id="e-cat" class="select" style="width: 100%" value="{{d.cat}}" onChange="{{set.cat}}"><sc-for list="{{catOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div><label class="lbl" for="e-app">Origin / Destination applicability</label><div style="position: relative"><select id="e-app" class="select" style="width: 100%" value="{{d.app}}" onChange="{{set.app}}"><option value="Origin">Origin</option><option value="Destination">Destination</option><option value="Both">Both</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div><label class="lbl" for="e-ctry">Country</label><div style="position: relative"><select id="e-ctry" class="select" style="width: 100%" value="{{d.ctry}}" onChange="{{set.ctry}}"><option value="ALL">All countries</option><sc-for list="{{ctryOpts}}" as="o" hint-placeholder-count="5"><option value="{{o.k}}">{{o.v}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div><label class="lbl" for="e-port">Port</label><div style="position: relative"><select id="e-port" class="select" style="width: 100%" value="{{d.port}}" onChange="{{set.port}}"><option value="ALL">All ports</option><sc-for list="{{portOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.k}}">{{o.v}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div><label class="lbl" for="e-tax">Tax code</label><div style="position: relative"><select id="e-tax" class="select mono" style="width: 100%" value="{{d.tax}}" onChange="{{set.tax}}"><sc-for list="{{taxOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.k}}">{{o.v}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div><label class="lbl" for="e-ccy">Currency</label><div style="position: relative"><select id="e-ccy" class="select mono" style="width: 100%" value="{{d.ccy}}" onChange="{{set.ccy}}"><sc-for list="{{ccyOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div><label class="lbl" for="e-from">Effective from <span class="req">*</span></label><input id="e-from" type="date" class="input" style="width: 100%" value="{{d.from}}" onInput="{{set.from}}" aria-invalid="{{err.fromA}}"><sc-if value="{{err.from}}" hint-placeholder-val="{{ false }}"><div class="err">Enter an effective-from date</div></sc-if></div>
-                  <div><label class="lbl" for="e-to">Effective to</label><input id="e-to" type="date" class="input" style="width: 100%" value="{{d.to}}" onInput="{{set.to}}" aria-invalid="{{err.toA}}"><sc-if value="{{err.to}}" hint-placeholder-val="{{ false }}"><div class="err">Must be after the effective-from date</div></sc-if><sc-if value="{{noTo}}" hint-placeholder-val="{{ true }}"><div style="font-size: 12px; color: var(--muted); margin-top: 4px">Leave empty for open-ended</div></sc-if></div>
-                  <div style="grid-column: 1 / -1"><label class="lbl" for="e-lms">LMS charge mapping</label><div style="position: relative"><select id="e-lms" class="select" style="width: 100%" value="{{d.lms}}" onChange="{{set.lms}}"><option value="">Not mapped · GIRS only</option><sc-for list="{{lmsOpts}}" as="o" hint-placeholder-count="10"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
-                  <div class="r-wrap" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px">
-                    <span style="display: flex; flex-direction: column"><span style="font-weight: 500">Active status</span><span style="font-size: 12px; color: var(--muted)">{{d.activeText}}</span></span>
-                    <button type="button" role="switch" aria-checked="{{d.activeA}}" aria-label="Active status" onClick="{{set.active}}" style="all: unset; cursor: pointer; width: 40px; height: 22px; border-radius: 11px; background: {{d.swBg}}; position: relative; transition: background .15s"><span style="position: absolute; top: 3px; inset-inline-start: {{d.swX}}; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: inset-inline-start .15s"></span></button>
-                  </div>
+                    </div>
+                  </sc-if>
                 </div>
-                <div style="padding: 14px 24px; border-top: 1px solid var(--line); display: flex; gap: 8px; align-items: center">
-                  <button type="submit" class="btn btn-primary">{{saveLabel}}</button>
-                  <button type="button" class="btn" onClick="{{cancel}}">Cancel</button>
-                  <span style="margin-inline-start: auto; font-size: 12px; color: var(--muted)">Changes are recorded in the audit trail</span>
-                </div>
-              </form>
-            </sc-if>
+              </sc-for>
+            </div>
           </aside>
         </div>
       </main>
@@ -542,108 +506,66 @@ table th,table td{padding-inline:10px}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    const A = (a, b, c) => ({ a, b, c });
-    const sync = A('Created from LMS charge-code sync', 'System · LMS', '02 Jan 2026 06:00');
-    const mk = (id, code, name, cat, app, ctry, port, tax, ccy, from, to, lms, active, extra) => ({ id, code, name, cat, app, ctry, port, tax, ccy, from, to, lms, active, audit: [sync].concat(extra || []) });
-    this.state = {
-      q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all', sel: 'h4', mode: 'view', draft: null, tried: false, op: { s1: true },
-      list: [
-        mk('h1', 'OFT', 'Ocean Freight', 'Freight', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2026-01-01', '', 'LMS-OFT', true),
-        mk('h2', 'BAF', 'Bunker Adjustment Factor', 'Surcharge', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2026-01-01', '', 'LMS-BAF', true, [A('Effective from changed 01 Oct 2025 → 01 Jan 2026', 'Wei Ling Tan', '15 Dec 2025 10:12')]),
-        mk('h3', 'LSS', 'Low Sulphur Surcharge', 'Surcharge', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2026-01-01', '', 'LMS-LSS', true),
-        mk('h4', 'THC-O', 'Terminal Handling · Origin', 'Origin local charges', 'Origin', 'SG', 'SGSIN', 'SG-SR-9', 'SGD', '2026-01-01', '', 'LMS-THO', true, [A('Tax code changed SG-SR-8 → SG-SR-9', 'Wei Ling Tan', '20 Dec 2025 09:30')]),
-        mk('h5', 'THC-D', 'Terminal Handling · Destination', 'Destination local charges', 'Destination', 'IN', 'INNSA', 'IN-GST-18', 'INR', '2026-01-01', '', 'LMS-THD', true),
-        mk('h6', 'DOC', 'Documentation Fee', 'Origin local charges', 'Origin', 'MY', 'MYPKG', 'MY-SST-8', 'MYR', '2026-01-01', '', 'LMS-DOC', true),
-        mk('h7', 'BLF', 'Bill of Lading Fee', 'Origin local charges', 'Origin', 'CN', 'CNSHA', 'CN-VAT-6', 'CNY', '2026-01-01', '', 'LMS-BLF', true),
-        mk('h8', 'SEAL', 'Seal Fee', 'Origin local charges', 'Origin', 'TH', 'THLCH', 'TH-VAT-7', 'THB', '2026-01-01', '', 'LMS-SEL', true),
-        mk('h9', 'DEM', 'Demurrage', 'Demurrage & Detention', 'Destination', 'SG', 'SGSIN', 'SG-SR-9', 'SGD', '2026-01-01', '', 'LMS-DEM', true),
-        mk('h10', 'DET', 'Detention', 'Demurrage & Detention', 'Both', 'IN', 'INNSA', 'IN-GST-18', 'INR', '2026-01-01', '', 'LMS-DET', true),
-        mk('h11', 'CLN', 'Container Cleaning Fee', 'Ancillary (MISC)', 'Destination', 'SG', 'SGSIN', 'SG-SR-9', 'SGD', '2026-03-01', '', '', true, []),
-        mk('h12', 'AMD', 'B/L Amendment Fee', 'Ancillary (MISC)', 'Both', 'SG', 'ALL', 'SG-SR-9', 'SGD', '2026-03-01', '', '', true, []),
-        mk('h13', 'PSS', 'Peak Season Surcharge', 'Surcharge', 'Origin', 'CN', 'CNSHA', 'ZR-INTL', 'USD', '2026-06-01', '2026-09-30', 'LMS-PSS', false, [A('Deactivated · season ended', 'Wei Ling Tan', '01 Oct 2026 08:05')]),
-        mk('h14', 'EBS', 'Emergency Bunker Surcharge', 'Surcharge', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2025-04-01', '2025-12-31', 'LMS-EBS', false, [A('Deactivated', 'Wei Ling Tan', '02 Jan 2026 09:00')])
-      ]
-    };
-    this.state.list[10].audit = [A('Created in GIRS', 'Wei Ling Tan', '24 Feb 2026 14:20')];
-    this.state.list[11].audit = [A('Created in GIRS', 'Wei Ling Tan', '24 Feb 2026 14:26')];
+    this.state = { q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all', sel: 'h4', op: { s1: true } };
   }
   renderVals() {
     const s = this.state;
+    const A = (a, b, c) => ({ a, b, c });
+    const sync = A('Created from LMS charge-code sync', 'System · LMS', '02 Jan 2026 06:00');
+    const mk = (id, code, name, cat, app, ctry, port, tax, ccy, from, to, lms, active, extra, base) => ({ id, code, name, cat, app, ctry, port, tax, ccy, from, to, lms, active, audit: (base || [sync]).concat(extra || []) });
+    const H = [
+      mk('h1', 'OFT', 'Ocean Freight', 'Freight', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2026-01-01', '', 'LMS-OFT', true),
+      mk('h2', 'BAF', 'Bunker Adjustment Factor', 'Surcharge', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2026-01-01', '', 'LMS-BAF', true, [A('Effective from changed 1 Oct 2025 → 1 Jan 2026', 'Wei Ling Tan', '15 Dec 2025 10:12')]),
+      mk('h3', 'LSS', 'Low Sulphur Surcharge', 'Surcharge', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2026-01-01', '', 'LMS-LSS', true),
+      mk('h4', 'THC-O', 'Terminal Handling · Origin', 'Origin local charges', 'Origin', 'SG', 'SGSIN', 'SG-SR-9', 'SGD', '2026-01-01', '', 'LMS-THO', true, [A('Tax code changed SG-SR-8 → SG-SR-9', 'Wei Ling Tan', '20 Dec 2025 09:30')]),
+      mk('h5', 'THC-D', 'Terminal Handling · Destination', 'Destination local charges', 'Destination', 'IN', 'INNSA', 'IN-GST-18', 'INR', '2026-01-01', '', 'LMS-THD', true),
+      mk('h6', 'DOC', 'Documentation Fee', 'Origin local charges', 'Origin', 'MY', 'MYPKG', 'MY-SST-8', 'MYR', '2026-01-01', '', 'LMS-DOC', true),
+      mk('h7', 'BLF', 'Bill of Lading Fee', 'Origin local charges', 'Origin', 'CN', 'CNSHA', 'CN-VAT-6', 'CNY', '2026-01-01', '', 'LMS-BLF', true),
+      mk('h8', 'SEAL', 'Seal Fee', 'Origin local charges', 'Origin', 'TH', 'THLCH', 'TH-VAT-7', 'THB', '2026-01-01', '', 'LMS-SEL', true),
+      mk('h9', 'DEM', 'Demurrage', 'Demurrage & Detention', 'Destination', 'SG', 'SGSIN', 'SG-SR-9', 'SGD', '2026-01-01', '', 'LMS-DEM', true),
+      mk('h10', 'DET', 'Detention', 'Demurrage & Detention', 'Both', 'IN', 'INNSA', 'IN-GST-18', 'INR', '2026-01-01', '', 'LMS-DET', true),
+      mk('h11', 'CLN', 'Container Cleaning Fee', 'Ancillary (MISC)', 'Destination', 'SG', 'SGSIN', 'SG-SR-9', 'SGD', '2026-03-01', '', '', true, [], [A('Created in GIRS', 'Wei Ling Tan', '24 Feb 2026 14:20')]),
+      mk('h12', 'AMD', 'B/L Amendment Fee', 'Ancillary (MISC)', 'Both', 'SG', 'ALL', 'SG-SR-9', 'SGD', '2026-03-01', '', '', true, [], [A('Created in GIRS', 'Wei Ling Tan', '24 Feb 2026 14:26')]),
+      mk('h13', 'PSS', 'Peak Season Surcharge', 'Surcharge', 'Origin', 'CN', 'CNSHA', 'ZR-INTL', 'USD', '2026-06-01', '2026-09-30', 'LMS-PSS', false, [A('Deactivated · season ended', 'Wei Ling Tan', '1 Oct 2026 08:05')]),
+      mk('h14', 'EBS', 'Emergency Bunker Surcharge', 'Surcharge', 'Both', 'ALL', 'ALL', 'ZR-INTL', 'USD', '2025-04-01', '2025-12-31', 'LMS-EBS', false, [A('Deactivated', 'Wei Ling Tan', '2 Jan 2026 09:00')])
+    ];
     const CN = { SG: 'Singapore', MY: 'Malaysia', IN: 'India', CN: 'China', TH: 'Thailand', ALL: 'All countries' };
     const PORTS = { SGSIN: ['SG', 'Singapore'], MYPKG: ['MY', 'Port Klang'], INNSA: ['IN', 'Nhava Sheva'], CNSHA: ['CN', 'Shanghai'], THLCH: ['TH', 'Laem Chabang'] };
     const TAX = { 'ZR-INTL': 'Zero-rated · international transport', 'SG-SR-9': 'Singapore GST 9%', 'MY-SST-8': 'Malaysia SST 8%', 'IN-GST-18': 'India GST 18%', 'CN-VAT-6': 'China VAT 6%', 'TH-VAT-7': 'Thailand VAT 7%' };
     const CATS = ['Freight', 'Surcharge', 'Origin local charges', 'Destination local charges', 'Demurrage & Detention', 'Ancillary (MISC)'];
-    const CCY = ['USD', 'SGD', 'MYR', 'INR', 'CNY', 'THB'];
-    const LMS = ['LMS-OFT', 'LMS-BAF', 'LMS-LSS', 'LMS-THO', 'LMS-THD', 'LMS-DOC', 'LMS-BLF', 'LMS-SEL', 'LMS-DEM', 'LMS-DET', 'LMS-PSS', 'LMS-EBS'];
     const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const fd = (iso) => { if (!iso) return 'Open-ended'; const p = iso.split('-'); return +p[2] + ' ' + M[+p[1] - 1] + ' ' + p[0]; };
-    const where = (h) => (h.port === 'ALL' ? 'All ports' : h.port + ' · ' + PORTS[h.port][1]) + (h.ctry === 'ALL' ? '' : (h.port !== 'ALL' && PORTS[h.port][1] === CN[h.ctry] ? '' : ', ' + CN[h.ctry]));
-    const now = () => { const d = new Date(); return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
-    const me = 'Daniel Tan';
-    const q = (s.q || '').trim().toLowerCase();
-    const list = s.list.filter((h) => (!q || (h.code + ' ' + h.name + ' ' + h.lms).toLowerCase().indexOf(q) >= 0) && (!s.fCat || h.cat === s.fCat) && (!s.fApp || h.app === s.fApp) && (!s.fCtry || h.ctry === s.fCtry) && (s.fSt === 'all' || (s.fSt === 'on') === h.active));
-    const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent)';
-    const rows = list.map((h) => { const on = s.sel === h.id; return { code: h.code, name: h.name, cat: h.cat, app: h.app, where: h.port === 'ALL' ? (h.ctry === 'ALL' ? 'All' : 'All ports · ' + h.ctry) : h.port + ' · ' + h.ctry, tax: h.tax, ccy: h.ccy, lms: h.lms || 'Not mapped', lmsFg: h.lms ? 'var(--ink)' : 'var(--muted4)',
-      st: h.active ? 'Active' : 'Inactive', dot: h.active ? 'var(--okbar)' : 'var(--muted4)', stFg: h.active ? 'var(--ink)' : 'var(--muted)', edge: on ? selEdge : '', cell: on ? 'background:var(--tint)' : '',
-      pick: () => { if (s.mode !== 'view') return; this.setState({ sel: h.id }); } }; });
-    const h = s.list.find((x) => x.id === s.sel) || s.list[0];
-    const segs = [['all', 'All'], ['on', 'Active'], ['off', 'Inactive']].map(([k, label]) => { const on = s.fSt === k; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--surface)' : 'transparent', fg: on ? 'var(--accent)' : 'var(--muted)', sh: on ? '0 1px 2px rgba(22,26,33,.12)' : 'none', pick: () => this.setState({ fSt: k }) }; });
-
-    const K = ['s1', 's2', 's3', 's4', 's5', 's6'];
-    const allOpen = K.every((k) => s.op[k]);
+    const portTxt = (h) => h.port === 'ALL' ? 'All ports' : h.port + ' · ' + PORTS[h.port][1];
+    const where = (h) => portTxt(h) + (h.ctry === 'ALL' ? '' : (h.port !== 'ALL' && PORTS[h.port][1] === CN[h.ctry] ? '' : ', ' + CN[h.ctry]));
+    const whereS = (h) => h.port === 'ALL' ? (h.ctry === 'ALL' ? 'All' : 'All ports · ' + h.ctry) : h.port + ' · ' + h.ctry;
+    const eff = (h) => fd(h.from) + ' – ' + (h.to ? fd(h.to) : 'open');
+    const stOf = (h) => h.active ? { t: 'Active', chip: 'background:var(--okbg);color:var(--ok)', dot: 'var(--okbar)', fg: 'var(--ink)' } : { t: 'Inactive', chip: 'background:var(--neutral);color:var(--muted2)', dot: 'var(--muted4)', fg: 'var(--muted)' };
+    const MONO = 'font-family:var(--mono,ui-monospace,monospace)';
     const kv = (l, v, opt) => Object.assign({ l, v, cls: '', st: '' }, opt || {});
-    const SEC = [
-      ['s1', 'Charge details', h.name + ' · ' + h.cat, { isKv: true, kv: [kv('Charge code', h.code, { st: 'font-family:var(--mono,monospace)' }), kv('Charge name', h.name), kv('Charge category', h.cat), kv('Active status', h.active ? 'Active' : 'Inactive'), kv('Effective from', fd(h.from)), kv('Effective to', fd(h.to))] }],
-      ['s2', 'Applicability', h.app + ' · ' + where(h), { isKv: true, kv: [kv('Origin / Destination', h.app), kv('Country', CN[h.ctry]), kv('Port', h.port === 'ALL' ? 'All ports' : h.port + ' · ' + PORTS[h.port][1], { cls: 'full' })] }],
-      ['s3', 'Country / Tax / Currency setup', h.tax + ' · ' + h.ccy, { isKv: true, kv: [kv('Tax code', h.tax, { st: 'font-family:var(--mono,monospace)' }), kv('Currency', h.ccy, { st: 'font-family:var(--mono,monospace)' }), kv('Tax description', TAX[h.tax], { cls: 'full' })] }],
-      ['s4', 'LMS mapping', h.lms ? 'Mapped to ' + h.lms : 'Not mapped · GIRS only', { isKv: true, kv: [kv('LMS charge code', h.lms || 'Not mapped', { st: h.lms ? 'font-family:var(--mono,monospace)' : 'color:var(--muted4)' }), kv('Mapping', h.lms ? 'Aligned with LMS charge code' : 'Charge maintained in GIRS only')] }],
+    const SECTIONS = (h) => [
+      ['s1', 'Charge details', h.name + ' · ' + h.cat, { isKv: true, kv: [kv('Charge code', h.code, { st: MONO }), kv('Charge name', h.name), kv('Charge category', h.cat), kv('Active status', stOf(h).t), kv('Effective from', fd(h.from)), kv('Effective to', fd(h.to))] }],
+      ['s2', 'Applicability', h.app + ' · ' + where(h), { isKv: true, kv: [kv('Origin / Destination', h.app), kv('Country', CN[h.ctry]), kv('Port', portTxt(h), { cls: 'full' })] }],
+      ['s3', 'Country / Tax / Currency setup', h.tax + ' · ' + h.ccy, { isKv: true, kv: [kv('Tax code', h.tax, { st: MONO }), kv('Currency', h.ccy, { st: MONO }), kv('Tax description', TAX[h.tax], { cls: 'full' })] }],
+      ['s4', 'LMS mapping', h.lms ? 'Mapped to ' + h.lms : 'Not mapped · GIRS only', { isKv: true, kv: [kv('LMS charge code', h.lms || 'Not mapped', { st: h.lms ? MONO : 'color:var(--muted4)' }), kv('Mapping', h.lms ? 'Aligned with LMS charge code' : 'Charge maintained in GIRS only')] }],
       ['s5', 'Business rules', '[Business rules using this charge]', { isList: true, items: [{ a: '[Business rule]', b: '[Rule description]', c: '' }] }],
       ['s6', 'Audit trail', h.audit.length + (h.audit.length === 1 ? ' change' : ' changes') + ' · last ' + h.audit[h.audit.length - 1].c, { isAudit: true, items: h.audit.slice().reverse() }]
     ];
-    const secs = SEC.map(([k, title, sum, body]) => Object.assign({ title, sum, open: !!s.op[k], ax: s.op[k] ? 'true' : 'false', rot: s.op[k] ? '180deg' : '0deg', isKv: false, isList: false, isAudit: false, kv: [], items: [],
-      tg: () => this.setState({ op: Object.assign({}, s.op, { [k]: !s.op[k] }) }) }, body));
+    const q = (s.q || '').trim().toLowerCase();
+    const list = H.filter((h) => (!q || (h.code + ' ' + h.name + ' ' + h.lms).toLowerCase().indexOf(q) >= 0) && (!s.fCat || h.cat === s.fCat) && (!s.fApp || h.app === s.fApp) && (!s.fCtry || h.ctry === s.fCtry) && (s.fSt === 'all' || (s.fSt === 'on') === h.active));
+    const segs = [['all', 'All'], ['on', 'Active'], ['off', 'Inactive']].map(([k, label]) => { const on = s.fSt === k; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--surface)' : 'transparent', fg: on ? 'var(--accent)' : 'var(--muted)', sh: on ? '0 1px 2px rgba(22,26,33,.12)' : 'none', pick: () => this.setState({ fSt: k }) }; });
+    const F = { q: s.q, fCat: s.fCat, fApp: s.fApp, fCtry: s.fCtry, segs, onQ: (e) => this.setState({ q: e.target.value }), onCat: (e) => this.setState({ fCat: e.target.value }), onApp: (e) => this.setState({ fApp: e.target.value }), onCtry: (e) => this.setState({ fCtry: e.target.value }),
+      filtered: !!(s.q || s.fCat || s.fApp || s.fCtry || s.fSt !== 'all'), clear: () => this.setState({ q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all' }), empty: list.length === 0, countText: list.length + ' of ' + H.length + ' charges' };
 
-    const d = s.draft || {};
-    const codeTaken = s.draft && s.list.some((x) => x.id !== d.id && x.code.trim().toUpperCase() === (d.code || '').trim().toUpperCase());
-    const E = { code: !(d.code || '').trim() || codeTaken, name: !(d.name || '').trim(), from: !d.from, to: !!(d.to && d.from && d.to < d.from) };
-    const bad = E.code || E.name || E.from || E.to;
-    const setF = (k) => (e) => this.setState({ draft: Object.assign({}, s.draft, { [k]: e.target.value }) });
-    const isNew = s.mode === 'new';
-    const portOpts = Object.keys(PORTS).filter((p) => !d.ctry || d.ctry === 'ALL' || PORTS[p][0] === d.ctry).map((p) => ({ k: p, v: p + ' · ' + PORTS[p][1] }));
-    const diff = (a, b) => { const L = { code: 'Charge code', name: 'Charge name', cat: 'Category', app: 'Applicability', ctry: 'Country', port: 'Port', tax: 'Tax code', ccy: 'Currency', from: 'Effective from', to: 'Effective to', lms: 'LMS mapping' };
-      const out = []; Object.keys(L).forEach((k) => { if ((a[k] || '') !== (b[k] || '')) { const f = (v) => (k === 'from' || k === 'to') ? fd(v) : (v || '—'); out.push(L[k] + ' ' + f(a[k]) + ' → ' + f(b[k])); } }); if (a.active !== b.active) out.push(b.active ? 'Activated' : 'Deactivated'); return out; };
-    const show = s.mode === 'view' ? h : d;
-    return {
-      q: s.q, fCat: s.fCat, fApp: s.fApp, fCtry: s.fCtry, onQ: (e) => this.setState({ q: e.target.value }), onCat: (e) => this.setState({ fCat: e.target.value }), onApp: (e) => this.setState({ fApp: e.target.value }), onCtry: (e) => this.setState({ fCtry: e.target.value }),
-      segs, filtered: !!(s.q || s.fCat || s.fApp || s.fCtry || s.fSt !== 'all'), clear: () => this.setState({ q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all' }),
-      catOpts: CATS, ccyOpts: CCY, lmsOpts: LMS, ctryOpts: ['SG', 'MY', 'IN', 'CN', 'TH'].map((k) => ({ k, v: CN[k] })), portOpts, taxOpts: Object.keys(TAX).map((k) => ({ k, v: k + ' · ' + TAX[k] })),
-      rows, empty: list.length === 0, countText: list.length + ' of ' + s.list.length + ' charges',
-      c: { title: isNew ? (d.name || 'New charge') : show.name, code: isNew ? (d.code || '—') : show.code, cat: show.cat, st: isNew ? 'Draft' : (show.active ? 'Active' : 'Inactive'),
-        stChip: isNew ? 'background:var(--warnbg);color:var(--warn)' : (show.active ? 'background:var(--okbg);color:var(--ok)' : 'background:var(--neutral);color:var(--muted2)') },
-      viewMode: s.mode === 'view', editMode: s.mode !== 'view', secs, allL: allOpen ? 'Collapse all' : 'Expand all',
-      allT: () => { const n = {}; K.forEach((k) => { n[k] = !allOpen; }); this.setState({ op: n }); },
-      activeLabel: h.active ? 'Deactivate' : 'Activate',
-      toggleActive: () => { const L = s.list.map((x) => x.id === h.id ? Object.assign({}, x, { active: !x.active, audit: x.audit.concat([{ a: x.active ? 'Deactivated' : 'Activated', b: me, c: now() }]) }) : x);
-        this.setState({ list: L, op: Object.assign({}, s.op, { s6: true }), __toast: h.code + (h.active ? ' deactivated' : ' activated') + ' · recorded in audit trail' }); },
-      startEdit: () => this.setState({ mode: 'edit', tried: false, draft: Object.assign({}, h) }),
-      newCharge: () => this.setState({ mode: 'new', tried: false, draft: { id: 'n' + Date.now(), code: '', name: '', cat: 'Ancillary (MISC)', app: 'Both', ctry: 'SG', port: 'ALL', tax: 'SG-SR-9', ccy: 'SGD', from: '', to: '', lms: '', active: true, audit: [] } }),
-      cancel: () => this.setState({ mode: 'view', draft: null, tried: false }),
-      d: { code: d.code || '', name: d.name || '', cat: d.cat, app: d.app, ctry: d.ctry, port: d.port, tax: d.tax, ccy: d.ccy, from: d.from || '', to: d.to || '', lms: d.lms || '',
-        activeA: d.active ? 'true' : 'false', activeText: d.active ? 'Active · available for invoicing' : 'Inactive · not available for new invoices', swBg: d.active ? 'var(--accent)' : 'var(--bd)', swX: d.active ? '21px' : '3px' },
-      noTo: !d.to,
-      set: { code: setF('code'), name: setF('name'), cat: setF('cat'), app: setF('app'), port: setF('port'), tax: setF('tax'), ccy: setF('ccy'), from: setF('from'), to: setF('to'), lms: setF('lms'),
-        ctry: (e) => { const v = e.target.value; this.setState({ draft: Object.assign({}, s.draft, { ctry: v, port: 'ALL' }) }); },
-        active: () => this.setState({ draft: Object.assign({}, s.draft, { active: !s.draft.active }) }) },
-      err: { code: s.tried && E.code, codeA: s.tried && E.code ? 'true' : 'false', codeT: codeTaken ? 'This charge code already exists' : 'Enter a charge code',
-        name: s.tried && E.name, nameA: s.tried && E.name ? 'true' : 'false', from: s.tried && E.from, fromA: s.tried && E.from ? 'true' : 'false', to: s.tried && E.to, toA: s.tried && E.to ? 'true' : 'false' },
-      saveLabel: isNew ? 'Create charge' : 'Save changes',
-      save: (e) => { try { e.preventDefault(); } catch (x) {} if (bad) { this.setState({ tried: true }); return; }
-        const clean = Object.assign({}, d, { code: d.code.trim().toUpperCase(), name: d.name.trim() });
-        if (isNew) { clean.audit = [{ a: 'Created in GIRS', b: me, c: now() }]; this.setState({ list: [clean].concat(s.list), sel: clean.id, mode: 'view', draft: null, tried: false, q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all', op: { s1: true }, __toast: clean.code + ' created · recorded in audit trail' }); return; }
-        const ch = diff(h, clean);
-        const L = s.list.map((x) => x.id === h.id ? Object.assign({}, clean, { audit: x.audit.concat(ch.length ? ch.map((t) => ({ a: t, b: me, c: now() })) : []) }) : x);
-        this.setState({ list: L, mode: 'view', draft: null, tried: false, op: Object.assign({}, s.op, { s6: true }), __toast: ch.length ? clean.code + ' saved · ' + ch.length + (ch.length === 1 ? ' change' : ' changes') + ' recorded in audit trail' : 'No changes to save' }); }
-    };
+    const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent)';
+    const rows = list.map((h) => { const on = s.sel === h.id, st = stOf(h); return { code: h.code, name: h.name, cat: h.cat, app: h.app, where: whereS(h), tax: h.tax, ccy: h.ccy, lms: h.lms || 'Not mapped', lmsFg: h.lms ? 'var(--ink)' : 'var(--muted4)',
+      st: st.t, dot: st.dot, stFg: st.fg, edge: on ? selEdge : '', cell: on ? 'background:var(--tint)' : '', pick: () => this.setState({ sel: h.id }) }; });
+    const h = H.find((x) => x.id === s.sel) || H[0];
+    const K = ['s1', 's2', 's3', 's4', 's5', 's6'];
+    const allOpen = K.every((k) => s.op[k]);
+    const secs = SECTIONS(h).map(([k, title, sum, body]) => Object.assign({ title, sum, open: !!s.op[k], ax: s.op[k] ? 'true' : 'false', rot: s.op[k] ? '180deg' : '0deg', isKv: false, isList: false, isAudit: false, kv: [], items: [],
+      tg: () => this.setState({ op: Object.assign({}, s.op, { [k]: !s.op[k] }) }) }, body));
+    return Object.assign(F, { rows, secs, c: { name: h.name, code: h.code, cat: h.cat, st: stOf(h).t, stChip: stOf(h).chip },
+      allL: allOpen ? 'Collapse all' : 'Expand all', allT: () => { const n = {}; K.forEach((k) => { n[k] = !allOpen; }); this.setState({ op: n }); } });
   }
 }
 
