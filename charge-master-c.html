@@ -129,7 +129,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .citem{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:10px 16px}
 .citem:hover{background:#F6F8FA}
 .citem:focus-visible,.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.cat{position:sticky;top:0;z-index:1;padding:8px 16px;background:var(--hover2);border-block:1px solid var(--line2);font-size:12px;font-weight:600;color:var(--muted);display:flex;justify-content:space-between}
+.gbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:40px;padding:0 12px;border-radius:6px;font-weight:600}
+.cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:0 12px 0 34px;border-radius:6px;font-size:13px}
+.gbtn:hover,.cbtn:hover{background:var(--hover)}
+.gbtn:focus-visible,.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .tab{all:unset;box-sizing:border-box;cursor:pointer;height:48px;padding:0 2px;display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
 .fact{display:flex;flex-direction:column;gap:4px;padding:0 24px;border-inline-start:1px solid var(--line2)}
 .fact:first-child{padding-inline-start:0;border:0}
@@ -444,16 +447,23 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               </div>
             </div>
             <div role="listbox" aria-label="Charges" style="flex: 1 1 auto; overflow: auto">
+              <div style="padding: 12px 16px 4px; font-size: 12px; color: var(--muted)">{{catCount}} charge categories</div>
+              <div style="padding: 0 8px 12px">
               <sc-for list="{{groups}}" as="g" hint-placeholder-count="6">
-                <div class="cat"><span>{{g.name}}</span><span>{{g.n}}</span></div>
-                <sc-for list="{{g.rows}}" as="r" hint-placeholder-count="2">
-                  <button class="citem" role="option" aria-selected="{{r.on}}" onClick="{{r.pick}}" style="{{r.sel}}">
-                    <span class="mono r-col" style="flex: 0 0 56px; font-weight: 500; color: var(--accent)">{{r.code}}</span>
-                    <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.name}}</span><span style="font-size: 12px; color: var(--muted)">{{r.where}} · {{r.ccy}}</span></span>
-                    <sc-if value="{{r.off}}" hint-placeholder-val="{{ false }}"><span class="chip" style="background: var(--neutral); color: var(--muted2); height: 20px; padding: 0 8px">Inactive</span></sc-if>
-                  </button>
-                </sc-for>
+                <div>
+                  <button class="gbtn" aria-expanded="{{g.ax}}" onClick="{{g.tg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex: none; transform: rotate({{g.rot}}); transition: transform .15s"><path d="M9 6l6 6-6 6"></path></svg><span style="flex: 1 1 auto">{{g.name}}</span><sc-if value="{{g.hasOff}}" hint-placeholder-val="{{ false }}"><span title="Contains inactive charges" style="font-size: 11px; color: var(--muted); font-weight: 500">{{g.offTxt}}</span></sc-if><span class="mono" style="font-size: 12px; font-weight: 500; color: var(--muted); min-width: 16px; text-align: end">{{g.n}}</span></button>
+                  <sc-if value="{{g.open}}" hint-placeholder-val="{{ true }}">
+                    <sc-for list="{{g.rows}}" as="r" hint-placeholder-count="2">
+                      <button class="cbtn" role="option" aria-selected="{{r.on}}" onClick="{{r.pick}}" style="{{r.sel}}">
+                        <span class="mono r-col" style="flex: 0 0 52px">{{r.code}}</span>
+                        <span style="flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: {{r.fg}}">{{r.name}}</span>
+                        <sc-if value="{{r.off}}" hint-placeholder-val="{{ false }}"><span title="Inactive" style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--muted4)"></span></sc-if>
+                      </button>
+                    </sc-for>
+                  </sc-if>
+                </div>
               </sc-for>
+              </div>
               <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 32px 16px; text-align: center; color: var(--muted)">No charge matches your search</div></sc-if>
             </div>
           </section>
@@ -508,7 +518,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all', sel: 'h4', tab: 'ov' };
+    this.state = { q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all', sel: 'h4', tab: 'ov', open: { 'Origin local charges': true } };
   }
   renderVals() {
     const s = this.state;
@@ -558,16 +568,18 @@ class GirsPage extends DCLogic {
     const F = { q: s.q, fCat: s.fCat, fApp: s.fApp, fCtry: s.fCtry, segs, onQ: (e) => this.setState({ q: e.target.value }), onCat: (e) => this.setState({ fCat: e.target.value }), onApp: (e) => this.setState({ fApp: e.target.value }), onCtry: (e) => this.setState({ fCtry: e.target.value }),
       filtered: !!(s.q || s.fCat || s.fApp || s.fCtry || s.fSt !== 'all'), clear: () => this.setState({ q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all' }), empty: list.length === 0, countText: list.length + ' of ' + H.length + ' charges' };
 
-    const groups = CATS.map((cat) => { const L = list.filter((h) => h.cat === cat);
-      return { name: cat, n: String(L.length), hide: L.length === 0, rows: L.map((h) => { const on = s.sel === h.id; return { code: h.code, name: h.name, where: whereS(h), ccy: h.ccy, off: !h.active, on: on ? 'true' : 'false',
-        sel: on ? 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent)' : '', pick: () => this.setState({ sel: h.id }) }; }) }; }).filter((g) => !g.hide);
+    const groups = CATS.map((cat) => { const L = list.filter((h) => h.cat === cat); const open = !!q || !!s.open[cat]; const off = L.filter((h) => !h.active).length;
+      return { name: cat, n: String(L.length), hide: L.length === 0, open, ax: open ? 'true' : 'false', rot: open ? '90deg' : '0deg', hasOff: off > 0 && s.fSt === 'all', offTxt: off + ' inactive',
+        tg: () => this.setState({ open: Object.assign({}, s.open, { [cat]: !s.open[cat] }) }),
+        rows: L.map((h) => { const on = s.sel === h.id; return { code: h.code, name: h.name, off: !h.active, fg: h.active ? 'var(--ink)' : 'var(--muted)', on: on ? 'true' : 'false',
+        sel: on ? 'background:var(--tint);color:var(--accent2);font-weight:500;box-shadow:inset 3px 0 0 var(--accent)' : '', pick: () => this.setState({ sel: h.id }) }; }) }; }).filter((g) => !g.hide);
     const h = H.find((x) => x.id === s.sel) || H[0];
     const S = {}; SECTIONS(h).forEach(([k, title, sum, body]) => { S[k] = Object.assign({ title, isKv: false, isList: false, isAudit: false, kv: [], items: [] }, body); });
     const T = [['ov', 'Overview', '', ['s1', 's2']], ['tx', 'Tax & currency', '', ['s3']], ['lm', 'LMS mapping', '', ['s4']], ['br', 'Business rules', '', ['s5']], ['au', 'Audit trail', String(h.audit.length), ['s6']]];
     const tabs = T.map(([k, label, count]) => { const on = s.tab === k; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => this.setState({ tab: k }) }; });
     const cur = T.find((t) => t[0] === s.tab) || T[0];
     const st = stOf(h);
-    return Object.assign(F, { groups, tabs, panel: cur[3].map((k) => S[k]),
+    return Object.assign(F, { groups, catCount: groups.length, tabs, panel: cur[3].map((k) => S[k]),
       c: { code: h.code, name: h.name, cat: h.cat, eff: eff(h), app: h.app, where: where(h), tax: h.tax, ccy: h.ccy, lms: h.lms || 'Not mapped', lmsFg: h.lms ? 'var(--ink)' : 'var(--muted4)', st: st.t, stChip: st.chip } });
   }
 }
