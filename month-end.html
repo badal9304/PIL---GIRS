@@ -21,6 +21,9 @@ a{color:var(--accent)}a:hover{color:var(--accent2)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .nav-item{display:flex;align-items:center;gap:12px;height:32px;padding-inline:12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
 .nav-item:hover{background:var(--hover);color:var(--ink)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 10px 0 12px;border-radius:6px;color:var(--muted)}
+.nav-grp:hover{background:var(--hover);color:var(--ink)}
+.nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}
 .nav-item svg{flex:none}
 .sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
@@ -131,9 +134,14 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </div>
         </div>
       </div>
-      <nav aria-label="Screens" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 10px; padding: 10px 10px 16px">
+      <nav aria-label="Screens" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g0}}</div>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g0}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g0" style="display: flex; flex-direction: column; gap: 2px">
           <a href="index.html" class="nav-item" title="{{shell.l.nMain}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nMain}}</span>
@@ -154,9 +162,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
           </a>
+            </div>
+          </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g1}}</div>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g1}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g1" style="display: flex; flex-direction: column; gap: 2px">
           <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
@@ -185,9 +200,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v3M12 18h.01"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nEInvoiceExceptions}}</span>
           </a>
+            </div>
+          </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g2}}</div>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g2}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g2}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g2" style="display: flex; flex-direction: column; gap: 2px">
           <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h7"></path><path d="M15 17l2 2 4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nReceipting}}</span>
@@ -208,9 +230,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"></path><path d="M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nCreditManagement}}</span>
           </a>
+            </div>
+          </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <div class="k" style="padding: 0 12px; margin-bottom: 2px; {{shell.hide}}">{{shell.l.g3}}</div>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" style="{{shell.hide}}">
+            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g3}}<span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-inline-start: 6px"></span></span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g3}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g3" style="display: flex; flex-direction: column; gap: 2px">
           <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H4z"></path><path d="M8 20h8M12 16v4"></path><path d="M9 10l2 2 4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nApprovalsInbox}}</span>
@@ -218,6 +247,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nEnquiry}}</span>
+          </a>
+          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3 6"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCustomerMaster}}</span>
           </a>
           <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
@@ -231,6 +264,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
           </a>
+            </div>
+          </sc-if>
         </div>
       </nav>
       <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
@@ -501,13 +536,13 @@ class Component extends GirsPage {
     const f0 = fit();
     try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
     try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
-    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h });
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g3' });
   }
   renderVals() {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nCustomerMaster": "Customer Master", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics"}, v.navT || {});
     const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
       theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
@@ -517,6 +552,10 @@ class Component extends GirsPage {
       logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
       logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
       sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
+      acc: { g0: !!c || s.__acc === 'g0', g1: !!c || s.__acc === 'g1', g2: !!c || s.__acc === 'g2', g3: !!c || s.__acc === 'g3' },
+      accA: { g0: s.__acc === 'g0' ? 'true' : 'false', g1: s.__acc === 'g1' ? 'true' : 'false', g2: s.__acc === 'g2' ? 'true' : 'false', g3: s.__acc === 'g3' ? 'true' : 'false' },
+      accR: { g0: s.__acc === 'g0' ? '180deg' : '0deg', g1: s.__acc === 'g1' ? '180deg' : '0deg', g2: s.__acc === 'g2' ? '180deg' : '0deg', g3: s.__acc === 'g3' ? '180deg' : '0deg' },
+      accT: { g0: () => this.setState({ __acc: s.__acc === 'g0' ? '' : 'g0' }), g1: () => this.setState({ __acc: s.__acc === 'g1' ? '' : 'g1' }), g2: () => this.setState({ __acc: s.__acc === 'g2' ? '' : 'g2' }), g3: () => this.setState({ __acc: s.__acc === 'g3' ? '' : 'g3' }) },
       toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c }); },
       lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
       lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
