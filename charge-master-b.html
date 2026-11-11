@@ -126,20 +126,34 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .tl:last-child:after{display:none}
 .tl:last-child{padding-bottom:0}
 .ph{color:var(--muted4)}
-.rail{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;height:36px;padding:0 12px;border-radius:6px;font-size:13px;color:var(--muted2)}
-.rail:hover{background:var(--hover);color:var(--ink)}
-.rail[aria-current=true]{background:var(--tint);color:var(--accent2);font-weight:600}
-.rail .n{font-size:12px;color:var(--muted);font-weight:500}
-.rail[aria-current=true] .n{color:var(--accent2)}
-.li{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:72px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;height:52px;padding:0 14px;border-bottom:1px solid var(--line2)}
-.li:hover{background:var(--hover2)}
-.rail:focus-visible,.li:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.blk{border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;min-height:0}
-.blk h3{margin:0;padding:10px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line2);background:var(--hover2);border-radius:8px 8px 0 0}
-.blk .bd{padding:14px 16px;overflow:auto}
-.pg{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;color:var(--muted2)}
-.pg:hover{background:var(--neutral)}
-.pg:disabled{opacity:.35;cursor:default}</style>
+.fb{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 16px;padding:16px 20px}
+.fb .lbl{margin-bottom:4px}
+.th{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font:inherit;color:inherit}
+.th:hover{color:var(--ink)}
+.th:focus-visible,.navr:focus-visible,.tab:focus-visible,.crumb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.navr{cursor:pointer}
+.navr:hover td{background:var(--hover2)}
+.dense td{height:36px;padding-block:0}
+.pop{position:absolute;top:40px;inset-inline-end:0;z-index:30;width:240px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(22,26,33,.14)}
+.opt{display:flex;align-items:center;gap:10px;height:32px;padding:0 8px;border-radius:6px;cursor:pointer;font-size:13px}
+.opt:hover{background:var(--hover)}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;height:46px;padding:0 2px;display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
+.crumb{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
+.crumb:hover{text-decoration:underline}
+.facet{display:flex;flex-direction:column;gap:4px;padding:0 24px;border-inline-start:1px solid var(--line2)}
+.facet:first-child{padding-inline-start:0;border:0}
+.facet .l{font-size:12px;color:var(--muted)}
+.facet .v{font-size:14px;font-weight:500}
+.osec{max-width:1100px}
+.osec h3{margin:0 0 14px;font-size:15px;font-weight:600}
+.kv3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px}
+.kv3 .full{grid-column:1 / -1}
+.oblk{border:1px solid var(--line);border-radius:8px;scroll-margin-top:12px}
+.oblk h3{margin:0;padding:12px 18px;font-size:14px;font-weight:600;background:var(--hover2);border-bottom:1px solid var(--line2);border-radius:8px 8px 0 0}
+.oblk .bd{padding:16px 18px}
+.oblk table td,.oblk table th{padding-inline:0 12px}
+.kv3 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.kv3 .v{display:block;font-size:14px;line-height:20px}</style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -418,7 +432,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
-            <a class="lay" href="charge-master.html" >A · Table</a><a class="lay" href="charge-master-b.html" aria-current="page">B · Split view</a><a class="lay" href="charge-master-c.html" >C · Tabs</a>
+            <a class="lay" href="charge-master.html" >A · Table</a><a class="lay" href="charge-master-b.html" aria-current="page">B · List report</a><a class="lay" href="charge-master-c.html" >C · Tabs</a>
           </div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
           <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
@@ -436,68 +450,119 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <div class="r-wrap" style="flex: 1 1 auto; min-height: 0; display: flex; gap: 16px; align-items: stretch">
-          <nav class="card r-col" aria-label="Charge categories" style="flex: 0 0 240px; padding: 12px 8px; display: flex; flex-direction: column; gap: 2px; overflow: auto">
-            <div style="padding: 4px 12px 8px; font-size: 12px; font-weight: 600; color: var(--muted)">Category</div>
-            <sc-for list="{{rails}}" as="p" hint-placeholder-count="7"><button class="rail" aria-current="{{p.on}}" onClick="{{p.pick}}"><span>{{p.label}}</span><span class="n mono">{{p.n}}</span></button></sc-for>
-            <div style="margin: 12px 12px 8px; border-top: 1px solid var(--line2)"></div>
-            <div style="padding: 0 12px 8px; font-size: 12px; font-weight: 600; color: var(--muted)">Status</div>
-            <sc-for list="{{srail}}" as="p" hint-placeholder-count="3"><button class="rail" aria-current="{{p.on}}" onClick="{{p.pick}}"><span>{{p.label}}</span><span class="n mono">{{p.n}}</span></button></sc-for>
-          </nav>
-
-          <section class="card r-col" style="flex: 0 0 440px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
-            <div style="padding: 12px; border-bottom: 1px solid var(--line); display: flex; gap: 8px">
-              <input class="input" style="flex: 1 1 auto; min-width: 0" placeholder="Search code, name or LMS code" value="{{q}}" onInput="{{onQ}}" aria-label="Search charges">
-              <div style="position: relative"><select class="select" value="{{sort}}" onChange="{{onSort}}" aria-label="Sort" style="width: 128px"><option value="code">Sort: Code</option><option value="name">Sort: Name</option><option value="eff">Sort: Newest</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
-            </div>
-            <div role="listbox" aria-label="Charges" style="flex: 1 1 auto; overflow: auto">
-              <sc-for list="{{rows}}" as="r" hint-placeholder-count="14">
-                <button class="li" role="option" aria-selected="{{r.on}}" onClick="{{r.pick}}" style="{{r.sel}}">
-                  <span class="mono" style="font-weight: 500; color: var(--accent)">{{r.code}}</span>
-                  <span style="min-width: 0; display: flex; flex-direction: column"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: {{r.fg}}">{{r.name}}</span><span style="font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.app}} · {{r.where}} · {{r.ccy}}</span></span>
-                  <span title="{{r.st}}" style="width: 8px; height: 8px; border-radius: 50%; background: {{r.dot}}"></span>
-                </button>
-              </sc-for>
-              <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 32px 16px; text-align: center; color: var(--muted)">No charges match</div></sc-if>
-            </div>
-            <div class="r-wrap" style="height: 44px; flex: none; padding: 0 8px 0 14px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted)">
-              <span>{{range}}</span>
-              <span style="display: flex; align-items: center; gap: 2px">
-                <button class="pg" onClick="{{pPrev}}" disabled="{{noPP}}" aria-label="Previous page"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button>
-                <span class="mono" style="padding: 0 6px">{{pageTxt}}</span>
-                <button class="pg" onClick="{{pNext}}" disabled="{{noPN}}" aria-label="Next page"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        <sc-if value="{{isList}}" hint-placeholder-val="{{ true }}">
+          <section class="card" aria-label="Filter bar">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-bottom: 1px solid var(--line2)">
+              <div style="position: relative"><select class="select r-w" value="{{view}}" onChange="{{onView}}" aria-label="Saved view" style="width: 240px; font-weight: 600"><option value="std">View: Standard</option><option value="sur">View: Active surcharges</option><option value="nomap">View: Not mapped to LMS</option><option value="inact">View: Inactive charges</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+              <input class="input r-w" style="width: 320px" placeholder="Search code, name or LMS code" value="{{dq}}" onInput="{{onDq}}" onKeyDown="{{onEnter}}" aria-label="Search">
+              <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 8px">
+                <button class="lnk" onClick="{{toggleFb}}" style="all: unset; cursor: pointer; color: var(--accent); font-size: 13px; font-weight: 500">{{fbLabel}}</button>
+                <button class="btn" onClick="{{clearF}}">Clear</button>
+                <button class="btn btn-primary" onClick="{{go}}">Go</button>
               </span>
             </div>
-          </section>
-
-          <section class="card" aria-label="Charge details" style="flex: 1 1 auto; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
-            <sc-if value="{{has}}" hint-placeholder-val="{{ true }}">
-              <div style="padding: 18px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px">
-                <span class="mono" style="display: inline-flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px; background: var(--tint); color: var(--accent2); font-weight: 600">{{c.code}}</span>
-                <div style="flex: 1 1 auto; min-width: 0"><div style="display: flex; align-items: center; gap: 10px"><h2 style="margin: 0; font-size: 18px; font-weight: 600; line-height: 24px">{{c.name}}</h2><span class="chip" style="{{c.stChip}}">{{c.st}}</span></div><div style="font-size: 13px; color: var(--muted); margin-top: 2px">{{c.cat}} · Effective {{c.eff}}</div></div>
-              </div>
-              <div class="r-g2" style="flex: 1 1 auto; min-height: 0; overflow: auto; padding: 16px; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: min-content; gap: 16px">
-                <sc-for list="{{secs}}" as="x" hint-placeholder-count="6">
-                  <div class="blk" style="{{x.span}}">
-                    <h3>{{x.title}}</h3>
-                    <div class="bd">
-                        <sc-if value="{{x.isKv}}" hint-placeholder-val="{{ true }}">
-                          <div class="kv2"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="4"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div>
-                        </sc-if>
-                        <sc-if value="{{x.isList}}" hint-placeholder-val="{{ false }}">
-                          <sc-for list="{{x.items}}" as="i" hint-placeholder-count="2"><div class="mini"><span style="display: flex; flex-direction: column; gap: 2px"><span class="ph">{{i.a}}</span><span style="font-size: 12px" class="ph">{{i.b}}</span></span></div></sc-for>
-                        </sc-if>
-                        <sc-if value="{{x.isAudit}}" hint-placeholder-val="{{ false }}">
-                          <sc-for list="{{x.items}}" as="i" hint-placeholder-count="3"><div class="tl"><div style="font-weight: 500">{{i.a}}</div><div style="font-size: 12px; color: var(--muted)">{{i.b}} · {{i.c}}</div></div></sc-for>
-                        </sc-if>
-                    </div>
-                  </div>
-                </sc-for>
+            <sc-if value="{{fbOpen}}" hint-placeholder-val="{{ true }}">
+              <div class="fb">
+                <div><label class="lbl" for="f-code">Charge code</label><input id="f-code" class="input mono" style="width: 100%" value="{{d.code}}" onInput="{{set.code}}" onKeyDown="{{onEnter}}" placeholder="e.g. THC"></div>
+                <div><label class="lbl" for="f-cat">Charge category</label><div style="position: relative"><select id="f-cat" class="select" style="width: 100%" value="{{d.cat}}" onChange="{{set.cat}}"><option value="">All</option><sc-for list="{{catOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-app">Origin / Destination</label><div style="position: relative"><select id="f-app" class="select" style="width: 100%" value="{{d.app}}" onChange="{{set.app}}"><option value="">All</option><option value="Origin">Origin</option><option value="Destination">Destination</option><option value="Both">Both</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-ctry">Country</label><div style="position: relative"><select id="f-ctry" class="select" style="width: 100%" value="{{d.ctry}}" onChange="{{set.ctry}}"><option value="">All</option><option value="SG">Singapore</option><option value="MY">Malaysia</option><option value="IN">India</option><option value="CN">China</option><option value="TH">Thailand</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-tax">Tax code</label><div style="position: relative"><select id="f-tax" class="select mono" style="width: 100%" value="{{d.tax}}" onChange="{{set.tax}}"><option value="">All</option><sc-for list="{{taxOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-ccy">Currency</label><div style="position: relative"><select id="f-ccy" class="select mono" style="width: 100%" value="{{d.ccy}}" onChange="{{set.ccy}}"><option value="">All</option><sc-for list="{{ccyOpts}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-lms">LMS mapping</label><div style="position: relative"><select id="f-lms" class="select" style="width: 100%" value="{{d.lms}}" onChange="{{set.lms}}"><option value="">All</option><option value="y">Mapped</option><option value="n">Not mapped</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-st">Active status</label><div style="position: relative"><select id="f-st" class="select" style="width: 100%" value="{{d.st}}" onChange="{{set.st}}"><option value="">All</option><option value="on">Active</option><option value="off">Inactive</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+                <div><label class="lbl" for="f-on">Effective on</label><input id="f-on" type="date" class="input" style="width: 100%" value="{{d.on}}" onInput="{{set.on}}"></div>
               </div>
             </sc-if>
-            <sc-if value="{{none}}" hint-placeholder-val="{{ false }}"><div style="margin: auto; color: var(--muted)">Select a charge to see its details</div></sc-if>
           </section>
-        </div>
+
+          <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 0 16px 0 20px; min-height: 56px; border-bottom: 1px solid var(--line)">
+              <h2 class="card-title">Charges <span style="font-weight: 400; color: var(--muted)">({{total}})</span></h2>
+              <sc-if value="{{dirty}}" hint-placeholder-val="{{ false }}"><span class="chip" style="background: var(--warnbg); color: var(--warn)">Filters changed · press Go</span></sc-if>
+              <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 8px">
+                <div role="radiogroup" aria-label="Row density" style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
+                  <sc-for list="{{dens}}" as="g" hint-placeholder-count="2"><button class="seg" role="radio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="height: 28px; background: {{g.bg}}; color: {{g.fg}}; box-shadow: {{g.sh}}">{{g.label}}</button></sc-for>
+                </div>
+                <div style="position: relative">
+                  <button class="btn" aria-expanded="{{colsA}}" onClick="{{toggleCols}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path><circle cx="9" cy="6" r="2" fill="var(--surface)"></circle><circle cx="15" cy="12" r="2" fill="var(--surface)"></circle><circle cx="8" cy="18" r="2" fill="var(--surface)"></circle></svg>Columns</button>
+                  <sc-if value="{{colsOpen}}" hint-placeholder-val="{{ false }}">
+                    <div class="pop" role="group" aria-label="Show columns">
+                      <sc-for list="{{colOpts}}" as="o" hint-placeholder-count="10"><label class="opt"><input type="checkbox" checked="{{o.on}}" disabled="{{o.lock}}" onChange="{{o.tg}}">{{o.label}}</label></sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </span>
+            </div>
+            <div style="flex: 1 1 auto; overflow: auto">
+              <table class="{{tblCls}}">
+                <thead style="position: sticky; top: 0; z-index: 2"><tr>
+                  <sc-for list="{{heads}}" as="h" hint-placeholder-count="10"><th aria-sort="{{h.aria}}"><button class="th" onClick="{{h.sort}}">{{h.label}}<span style="font-size: 10px; color: {{h.ic}}">{{h.arrow}}</span></button></th></sc-for>
+                  <th style="width: 40px"><span class="sr">Open</span></th>
+                </tr></thead>
+                <tbody>
+                  <sc-for list="{{rows}}" as="r" hint-placeholder-count="14">
+                    <tr class="navr" onClick="{{r.open}}">
+                      <sc-for list="{{r.cells}}" as="x" hint-placeholder-count="10"><td class="{{x.cls}}" style="{{x.st}}">{{x.v}}</td></sc-for>
+                      <td style="color: var(--muted4)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+              <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 48px; text-align: center; color: var(--muted)">No charges match these filters</div></sc-if>
+            </div>
+            <div class="r-wrap" style="height: 48px; flex: none; display: flex; align-items: center; gap: 16px; padding: 0 16px 0 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted)">
+              <span>{{range}}</span>
+              <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 8px">Rows per page<div style="position: relative"><select class="select select-sm" value="{{ps}}" onChange="{{onPs}}" aria-label="Rows per page" style="width: 76px"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></span>
+              <span style="display: flex; align-items: center; gap: 4px"><button class="btn btn-sm btn-icon" onClick="{{pPrev}}" disabled="{{noPP}}" aria-label="Previous page"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button><span class="mono" style="min-width: 56px; text-align: center">{{pageTxt}}</span><button class="btn btn-sm btn-icon" onClick="{{pNext}}" disabled="{{noPN}}" aria-label="Next page"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button></span>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{isObj}}" hint-placeholder-val="{{ false }}">
+          <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden">
+            <div style="padding: 16px 28px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted)">
+              <button class="crumb" onClick="{{back}}">Charge Master</button><span>/</span><span class="mono" style="color: var(--ink)">{{c.code}}</span>
+              <span style="margin-inline-start: auto; display: flex; align-items: center; gap: 6px">
+                <button class="btn btn-sm btn-icon" onClick="{{prev}}" disabled="{{noPrev}}" aria-label="Previous charge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                <span class="mono" style="min-width: 64px; text-align: center">{{pos}}</span>
+                <button class="btn btn-sm btn-icon" onClick="{{next}}" disabled="{{noNext}}" aria-label="Next charge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+                <button class="btn btn-sm" onClick="{{back}}" style="margin-inline-start: 8px">Back to list</button>
+              </span>
+            </div>
+            <div style="padding: 14px 28px 20px; display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid var(--line2)">
+              <div style="display: flex; align-items: center; gap: 14px">
+                <span class="mono" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 8px; background: var(--tint); color: var(--accent2); font-size: 15px; font-weight: 600">{{c.code}}</span>
+                <div><div style="display: flex; align-items: center; gap: 10px"><h2 style="margin: 0; font-size: 22px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.stChip}}">{{c.st}}</span></div><div style="font-size: 13px; color: var(--muted); margin-top: 2px">{{c.cat}}</div></div>
+              </div>
+              <div style="display: flex">
+                <div class="facet"><span class="l">Origin / Destination</span><span class="v">{{c.app}}</span></div>
+                <div class="facet"><span class="l">Port / Country</span><span class="v">{{c.where}}</span></div>
+                <div class="facet"><span class="l">Tax code</span><span class="v mono">{{c.tax}}</span></div>
+                <div class="facet"><span class="l">Currency</span><span class="v mono">{{c.ccy}}</span></div>
+                <div class="facet"><span class="l">LMS mapping</span><span class="v mono" style="color: {{c.lmsFg}}">{{c.lms}}</span></div>
+                <div class="facet"><span class="l">Effective dates</span><span class="v">{{c.eff}}</span></div>
+              </div>
+            </div>
+            <div class="r-wrap" role="tablist" aria-label="Charge sections" style="display: flex; gap: 28px; padding: 0 28px; border-bottom: 1px solid var(--line)">
+              <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><button class="tab" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="color: {{t.fg}}; box-shadow: inset 0 -2px 0 {{t.line}}">{{t.label}}<span class="mono" style="font-size: 12px; color: var(--muted)">{{t.count}}</span></button></sc-for>
+            </div>
+            <div class="r-g2" id="op-body" style="flex: 1 1 auto; overflow: auto; padding: 20px 28px; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: min-content; gap: 16px">
+              <sc-for list="{{panel}}" as="x" hint-placeholder-count="6">
+                <div class="oblk" id="{{x.id}}" style="{{x.span}}">
+                  <h3>{{x.title}}</h3>
+                  <div class="bd">
+                    <sc-if value="{{x.isKv}}" hint-placeholder-val="{{ true }}"><div class="kv3"><sc-for list="{{x.kv}}" as="k" hint-placeholder-count="6"><div class="{{k.cls}}"><span class="l">{{k.l}}</span><span class="v" style="{{k.st}}">{{k.v}}</span></div></sc-for></div></sc-if>
+                    <sc-if value="{{x.isList}}" hint-placeholder-val="{{ false }}"><sc-for list="{{x.items}}" as="i" hint-placeholder-count="1"><div class="ph">{{i.a}} · {{i.b}}</div></sc-for></sc-if>
+                    <sc-if value="{{x.isAudit}}" hint-placeholder-val="{{ false }}">
+                      <table><thead><tr><th>Change</th><th>Changed by</th><th>Date &amp; time</th></tr></thead><tbody><sc-for list="{{x.items}}" as="i" hint-placeholder-count="3"><tr><td>{{i.a}}</td><td>{{i.b}}</td><td class="mono">{{i.c}}</td></tr></sc-for></tbody></table>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </sc-if>
       </main>
     </div>
   </div>
@@ -511,7 +576,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all', sel: 'h4', sort: 'code', page: 0 };
+    const E = { code: '', cat: '', app: '', ctry: '', tax: '', ccy: '', lms: '', st: '', on: '', q: '' };
+    this.state = { mode: 'list', sel: '', view: 'std', d: Object.assign({}, E), f: Object.assign({}, E), fb: true, dq: '', sort: 'code', dir: 1, ps: 25, page: 0, dense: false, cols: { cat: true, app: true, where: true, tax: true, ccy: true, from: true, to: false, lms: true, st: true }, colsOpen: false, tab: 'gen' };
+    this.E = E;
   }
   renderVals() {
     const s = this.state;
@@ -555,32 +622,58 @@ class GirsPage extends DCLogic {
       ['s5', 'Business rules', '[Business rules using this charge]', { isList: true, items: [{ a: '[Business rule]', b: '[Rule description]', c: '' }] }],
       ['s6', 'Audit trail', h.audit.length + (h.audit.length === 1 ? ' change' : ' changes') + ' · last ' + h.audit[h.audit.length - 1].c, { isAudit: true, items: h.audit.slice().reverse() }]
     ];
-    const q = (s.q || '').trim().toLowerCase();
-    const list = H.filter((h) => (!q || (h.code + ' ' + h.name + ' ' + h.lms).toLowerCase().indexOf(q) >= 0) && (!s.fCat || h.cat === s.fCat) && (!s.fApp || h.app === s.fApp) && (!s.fCtry || h.ctry === s.fCtry) && (s.fSt === 'all' || (s.fSt === 'on') === h.active));
-    const segs = [['all', 'All'], ['on', 'Active'], ['off', 'Inactive']].map(([k, label]) => { const on = s.fSt === k; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--surface)' : 'transparent', fg: on ? 'var(--accent)' : 'var(--muted)', sh: on ? '0 1px 2px rgba(22,26,33,.12)' : 'none', pick: () => this.setState({ fSt: k }) }; });
-    const F = { q: s.q, fCat: s.fCat, fApp: s.fApp, fCtry: s.fCtry, segs, onQ: (e) => this.setState({ q: e.target.value }), onCat: (e) => this.setState({ fCat: e.target.value }), onApp: (e) => this.setState({ fApp: e.target.value }), onCtry: (e) => this.setState({ fCtry: e.target.value }),
-      filtered: !!(s.q || s.fCat || s.fApp || s.fCtry || s.fSt !== 'all'), clear: () => this.setState({ q: '', fCat: '', fApp: '', fCtry: '', fSt: 'all' }), empty: list.length === 0, countText: list.length + ' of ' + H.length + ' charges' };
-
-    const PS = 25;
-    const base = H.filter((h) => !q || (h.code + ' ' + h.name + ' ' + h.lms).toLowerCase().indexOf(q) >= 0);
-    const inSt = (h) => s.fSt === 'all' || (s.fSt === 'on') === h.active;
-    const rails = [['', 'All charges']].concat(CATS.map((c) => [c, c])).map(([k, label]) => { const on = s.fCat === k; return { label, n: String(base.filter((h) => inSt(h) && (!k || h.cat === k)).length), on: on ? 'true' : 'false', pick: () => this.setState({ fCat: k, page: 0 }) }; });
-    const srail = [['all', 'All'], ['on', 'Active'], ['off', 'Inactive']].map(([k, label]) => { const on = s.fSt === k; return { label, n: String(base.filter((h) => (!s.fCat || h.cat === s.fCat) && (k === 'all' || (k === 'on') === h.active)).length), on: on ? 'true' : 'false', pick: () => this.setState({ fSt: k, page: 0 }) }; });
-    const sorted = list.slice().sort((a, b) => s.sort === 'name' ? a.name.localeCompare(b.name) : s.sort === 'eff' ? b.from.localeCompare(a.from) : a.code.localeCompare(b.code));
-    const pages = Math.max(1, Math.ceil(sorted.length / PS)); const pg = Math.min(s.page, pages - 1);
-    const vis = sorted.slice(pg * PS, pg * PS + PS);
-    const rows = vis.map((h) => { const on = s.sel === h.id, st = stOf(h); return { code: h.code, name: h.name, app: h.app, where: whereS(h), ccy: h.ccy, st: st.t, dot: st.dot, fg: h.active ? 'var(--ink)' : 'var(--muted)', on: on ? 'true' : 'false',
-      sel: on ? 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent)' : '', pick: () => this.setState({ sel: h.id }) }; });
-    const h = list.find((x) => x.id === s.sel) || null;
-    const out = Object.assign(F, { rails, srail, rows, sort: s.sort, onSort: (e) => this.setState({ sort: e.target.value }),
-      onQ: (e) => this.setState({ q: e.target.value, page: 0 }),
-      range: sorted.length ? (pg * PS + 1) + '–' + (pg * PS + vis.length) + ' of ' + sorted.length : '0 charges', pageTxt: (pg + 1) + ' / ' + pages,
-      noPP: pg <= 0, noPN: pg >= pages - 1, pPrev: () => this.setState({ page: Math.max(0, pg - 1) }), pNext: () => this.setState({ page: Math.min(pages - 1, pg + 1) }),
-      has: !!h, none: !h });
-    if (h) { const st = stOf(h);
-      Object.assign(out, { c: { code: h.code, name: h.name, cat: h.cat, eff: eff(h), st: st.t, stChip: st.chip },
-        secs: SECTIONS(h).map(([k, title, sum, body]) => Object.assign({ title, span: '', isKv: false, isList: false, isAudit: false, kv: [], items: [] }, body)) });
-    } else Object.assign(out, { c: {}, secs: [] });
+    const E = this.E;
+    const VIEWS = { std: {}, sur: { cat: 'Surcharge', st: 'on' }, nomap: { lms: 'n' }, inact: { st: 'off' } };
+    const f = s.f;
+    const match = (h) => { const q = (f.q || '').trim().toLowerCase();
+      return (!q || (h.code + ' ' + h.name + ' ' + h.lms).toLowerCase().indexOf(q) >= 0) && (!f.code || h.code.toLowerCase().indexOf(f.code.toLowerCase()) >= 0) && (!f.cat || h.cat === f.cat) && (!f.app || h.app === f.app) && (!f.ctry || h.ctry === f.ctry)
+        && (!f.tax || h.tax === f.tax) && (!f.ccy || h.ccy === f.ccy) && (!f.lms || (f.lms === 'y') === !!h.lms) && (!f.st || (f.st === 'on') === h.active) && (!f.on || (h.from <= f.on && (!h.to || h.to >= f.on))); };
+    const COLS = [['code', 'Charge code', true], ['name', 'Charge name', true], ['cat', 'Category'], ['app', 'O / D'], ['where', 'Port / Country'], ['tax', 'Tax code'], ['ccy', 'Currency'], ['from', 'Effective from'], ['to', 'Effective to'], ['lms', 'LMS mapping'], ['st', 'Status']];
+    const vis = COLS.filter(([k, , lock]) => lock || s.cols[k]);
+    const val = (h, k) => k === 'where' ? whereS(h) : k === 'st' ? (h.active ? 'Active' : 'Inactive') : k === 'lms' ? (h.lms || 'Not mapped') : k === 'from' ? fd(h.from) : k === 'to' ? fd(h.to) : h[k];
+    const key = (h, k) => k === 'from' || k === 'to' ? (h[k] || '9999') : String(val(h, k));
+    const all = H.filter(match).sort((a, b) => key(a, s.sort).localeCompare(key(b, s.sort)) * s.dir);
+    const pages = Math.max(1, Math.ceil(all.length / s.ps)); const pg = Math.min(s.page, pages - 1);
+    const page = all.slice(pg * s.ps, pg * s.ps + s.ps);
+    const MONOK = { code: 1, tax: 1, ccy: 1, lms: 1 };
+    const rows = page.map((h) => ({ open: () => this.setState({ mode: 'object', sel: h.id, tab: 'gen' }), cells: vis.map(([k]) => ({ v: val(h, k), cls: MONOK[k] ? 'mono' : '',
+      st: k === 'code' ? 'color:var(--accent);font-weight:500' : k === 'st' ? (h.active ? 'color:var(--ok);font-weight:500' : 'color:var(--muted)') : k === 'lms' && !h.lms ? 'color:var(--muted4)' : k === 'cat' ? 'color:var(--muted)' : '' })) }));
+    const heads = vis.map(([k, label]) => { const on = s.sort === k; return { label, arrow: on ? (s.dir > 0 ? '▲' : '▼') : '▲', ic: on ? 'var(--accent)' : 'transparent', aria: on ? (s.dir > 0 ? 'ascending' : 'descending') : 'none',
+      sort: () => this.setState(on ? { dir: -s.dir } : { sort: k, dir: 1 }) }; });
+    const setD = (k) => (e) => this.setState({ d: Object.assign({}, s.d, { [k]: e.target.value }) });
+    const dirty = JSON.stringify(Object.assign({}, s.d, { q: s.dq })) !== JSON.stringify(s.f);
+    const nF = Object.keys(E).filter((k) => s.f[k]).length;
+    const dens = [['c', 'Compact', true], ['z', 'Cozy', false]].map(([k, label, v]) => { const on = s.dense === v; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--surface)' : 'transparent', fg: on ? 'var(--accent)' : 'var(--muted)', sh: on ? '0 1px 2px rgba(22,26,33,.12)' : 'none', pick: () => this.setState({ dense: v }) }; });
+    const go = () => this.setState({ f: Object.assign({}, s.d, { q: s.dq }), page: 0 });
+    const out = {
+      isList: s.mode === 'list', isObj: s.mode === 'object',
+      view: s.view, onView: (e) => { const v = e.target.value; const n = Object.assign({}, E, VIEWS[v]); this.setState({ view: v, d: n, f: Object.assign({}, n), dq: '', page: 0 }); },
+      dq: s.dq, onDq: (e) => this.setState({ dq: e.target.value }), onEnter: (e) => { if (e.key === 'Enter') go(); }, go,
+      clearF: () => this.setState({ d: Object.assign({}, E), f: Object.assign({}, E), dq: '', view: 'std', page: 0 }),
+      fbOpen: s.fb, fbLabel: s.fb ? 'Hide filter bar' + (nF ? ' (' + nF + ')' : '') : 'Show filter bar' + (nF ? ' (' + nF + ')' : ''), toggleFb: () => this.setState({ fb: !s.fb }),
+      d: s.d, set: { code: setD('code'), cat: setD('cat'), app: setD('app'), ctry: setD('ctry'), tax: setD('tax'), ccy: setD('ccy'), lms: setD('lms'), st: setD('st'), on: setD('on') },
+      catOpts: CATS, taxOpts: Object.keys(TAX), ccyOpts: ['USD', 'SGD', 'MYR', 'INR', 'CNY', 'THB'],
+      total: all.length, dirty, dens, tblCls: s.dense ? 'dense' : '',
+      colsOpen: s.colsOpen, colsA: s.colsOpen ? 'true' : 'false', toggleCols: () => this.setState({ colsOpen: !s.colsOpen }),
+      colOpts: COLS.map(([k, label, lock]) => ({ label, on: !!(lock || s.cols[k]), lock: !!lock, tg: () => { if (!lock) this.setState({ cols: Object.assign({}, s.cols, { [k]: !s.cols[k] }) }); } })),
+      heads, rows, empty: all.length === 0,
+      range: all.length ? (pg * s.ps + 1) + '–' + (pg * s.ps + page.length) + ' of ' + all.length : '0 of 0', pageTxt: (pg + 1) + ' / ' + pages,
+      ps: String(s.ps), onPs: (e) => this.setState({ ps: +e.target.value, page: 0 }), noPP: pg <= 0, noPN: pg >= pages - 1,
+      pPrev: () => this.setState({ page: Math.max(0, pg - 1) }), pNext: () => this.setState({ page: Math.min(pages - 1, pg + 1) }),
+      back: () => this.setState({ mode: 'list' })
+    };
+    const h = H.find((x) => x.id === s.sel);
+    if (h) {
+      const i = all.findIndex((x) => x.id === h.id); const st = stOf(h);
+      const S = {}; SECTIONS(h).forEach(([k, title, sum, body]) => { S[k] = Object.assign({ title, isKv: false, isList: false, isAudit: false, kv: [], items: [] }, body); });
+      const T = [['gen', 'General', '', 's1'], ['app', 'Applicability', '', 's2'], ['tax', 'Country / Tax / Currency', '', 's3'], ['lms', 'LMS mapping', '', 's4'], ['br', 'Business rules', '', 's5'], ['au', 'Audit trail', String(h.audit.length), 's6']];
+      const cur = T.find((t) => t[0] === s.tab) || T[0];
+      const panel = T.map(([k, , , sk]) => Object.assign({ id: 'op-' + k, span: sk === 's6' ? 'grid-column: span 1' : '' }, S[sk]));
+      Object.assign(out, { c: { code: h.code, name: h.name, cat: h.cat, st: st.t, stChip: st.chip, app: h.app, where: where(h), tax: h.tax, ccy: h.ccy, lms: h.lms || 'Not mapped', lmsFg: h.lms ? 'var(--ink)' : 'var(--muted4)', eff: eff(h) },
+        tabs: T.map(([k, label, count]) => { const on = cur[0] === k; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => { this.setState({ tab: k }); try { const el = document.getElementById('op-' + k); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} } }; }),
+        panel, pos: i >= 0 ? (i + 1) + ' of ' + all.length : '', noPrev: i <= 0, noNext: i < 0 || i >= all.length - 1,
+        prev: () => { if (i > 0) this.setState({ sel: all[i - 1].id }); }, next: () => { if (i >= 0 && i < all.length - 1) this.setState({ sel: all[i + 1].id }); } });
+    } else Object.assign(out, { c: {}, tabs: [], panel: [], pos: '', noPrev: true, noNext: true, prev: () => {}, next: () => {} });
     return out;
   }
 }
