@@ -1002,9 +1002,7 @@ function KIT_VALS(self, s, v) {
   let dangerLabel = '', dangerDis = false, dangerTip = '', dangerNote = '';
   if (cur && M.danger === 'delete') {
     dangerLabel = 'Delete';
-    if (isCust && cur.nContracts) { dangerDis = true; dangerTip = 'Has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + ' — cannot be deleted'; dangerNote = 'Has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + ', so it cannot be deleted'; }
-    else if (!isCust && cur.st !== 'Draft') { dangerDis = true; dangerTip = 'Only draft contracts can be deleted. Approved contracts get a new version instead.'; dangerNote = 'Only draft contracts can be deleted'; }
-    else dangerTip = 'Delete ' + noun + ' ' + cur.code;
+    dangerTip = 'Delete ' + noun + ' ' + cur.code;
   } else if (cur && M.danger === 'toggle') { dangerLabel = cur.st === 'Inactive' ? 'Activate' : 'Deactivate'; dangerTip = dangerLabel + ' ' + noun + ' ' + cur.code; }
   let conf = null;
   if (k && k.m === 'confirm' && cur) {
@@ -1012,8 +1010,8 @@ function KIT_VALS(self, s, v) {
     const act = isDel ? 'Delete' : dangerLabel;
     conf = { title: act + ' ' + noun + ' ' + cur.code + '?', sub: cur.title, reason: k.reason || '', hasErr: !!k.tried && !String(k.reason || '').trim(),
       onReason: (e) => set({ __k: Object.assign({}, k, { reason: e.target.value }) }),
-      text: isCust ? 'The customer code is removed from Customer Master. It has no contracts, so nothing else is affected.'
-        : (isDel ? 'The draft contract is removed. This request goes to the approvals inbox.' : (act === 'Deactivate' ? 'The ' + noun + ' can no longer be used on new invoices. Existing invoices are not changed. This request goes to the approvals inbox.' : 'The ' + noun + ' becomes available again. This request goes to the approvals inbox.')),
+      text: isCust ? 'The customer code is removed from Customer Master.' + (cur.nContracts ? ' It has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + '.' : '')
+        : (isDel ? 'The contract is removed. This request goes to the approvals inbox.' : (act === 'Deactivate' ? 'The ' + noun + ' can no longer be used on new invoices. Existing invoices are not changed. This request goes to the approvals inbox.' : 'The ' + noun + ' becomes available again. This request goes to the approvals inbox.')),
       cta: isCust ? 'Delete customer' : 'Submit ' + act.toLowerCase(),
       ok: () => {
         if (!String(k.reason || '').trim()) { set({ __k: Object.assign({}, k, { tried: true }) }); return; }
