@@ -178,6 +178,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
           </a>
+          <a href="invoice-list.html" class="nav-item" title="{{shell.l.nInvoiceList}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
+            <span style="{{shell.hide}}">{{shell.l.nInvoiceList}}</span>
+          </a>
           <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
             <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
@@ -193,6 +197,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M9 15h6"></path></svg>
             <span style="{{shell.hide}}">{{shell.l.nCreditNotes}}</span>
+          </a>
+          <a href="credit-note-list.html" class="nav-item" title="{{shell.l.nCreditNoteList}}" style="{{shell.item}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"></path><path d="M9 12h6"></path><path d="M9 16h4"></path></svg>
+            <span style="{{shell.hide}}">{{shell.l.nCreditNoteList}}</span>
           </a>
           <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
@@ -600,7 +608,7 @@ class Component extends GirsPage {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master"}, v.navT || {});
+    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nInvoiceList": "Invoice List", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nCreditNoteList": "Credit Note List", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master"}, v.navT || {});
     const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
       kit: (typeof KIT_VALS === 'function' ? KIT_VALS(this, s, v) : null),
