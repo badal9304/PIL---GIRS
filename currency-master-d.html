@@ -169,7 +169,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .tl.cur:before{background:var(--accent);box-shadow:0 0 0 3px var(--tint)}
 .tl:after{content:"";position:absolute;inset-inline-start:8.5px;top:17px;bottom:0;width:1px;background:var(--line)}
 .tl:last-child:after{display:none}
-.tl:last-child{padding-bottom:0}</style>
+.tl:last-child{padding-bottom:0}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -496,7 +496,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
-            <a class="lay" href="currency-master.html">A · Table</a><a class="lay" href="currency-master-b.html">B · List + detail</a><a class="lay" href="currency-master-c.html">C · Tabs</a><a class="lay" href="currency-master-d.html" aria-current="page">D · Overview</a>
+            <a class="lay" href="currency-master.html">A · Table</a><a class="lay" href="currency-master-b.html">B · List + detail</a><a class="lay rec" href="currency-master-c.html" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>C · Tabs</a><a class="lay rec" href="currency-master-d.html" aria-current="page" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>D · Overview</a>
           </div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
           <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>

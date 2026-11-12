@@ -140,7 +140,7 @@ table td,table th{padding-inline:12px}
 .acc-t{font-size:14px;font-weight:600;color:var(--ink)}
 .acc-s{font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .acc-h[aria-expanded=true] .acc-s{display:none}
-.acc-b{padding:0 24px 18px}</style>
+.acc-b{padding:0 24px 18px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -467,7 +467,7 @@ table td,table th{padding-inline:12px}
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
-            <a class="lay" href="port-master.html" aria-current="page">A · Table</a><a class="lay" href="port-master-b.html" >B · List + detail</a><a class="lay" href="port-master-c.html" >C · Tabs</a><a class="lay" href="port-master-d.html">D · Overview</a>
+            <a class="lay" href="port-master.html" aria-current="page">A · Table</a><a class="lay" href="port-master-b.html" >B · List + detail</a><a class="lay rec" href="port-master-c.html"  title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>C · Tabs</a><a class="lay rec" href="port-master-d.html" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>D · Overview</a>
           </div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
           <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
