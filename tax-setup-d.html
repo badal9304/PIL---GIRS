@@ -169,7 +169,43 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .tl.cur:before{background:var(--accent);box-shadow:0 0 0 3px var(--tint)}
 .tl:after{content:"";position:absolute;inset-inline-start:8.5px;top:17px;bottom:0;width:1px;background:var(--line)}
 .tl:last-child:after{display:none}
-.tl:last-child{padding-bottom:0}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+.tl:last-child{padding-bottom:0}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.kbar{display:inline-flex;align-items:center;gap:6px;flex:none;margin-inline-start:auto}
+.kbar .btn{gap:6px}
+.kib{width:32px;padding:0}
+.kdanger{color:var(--bad)}
+.kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
+.kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
+.kmodal.sm{width:min(520px,calc(100vw - 48px))}
+.kdrawer{position:fixed;z-index:71;top:0;bottom:0;inset-inline-end:0;width:min(760px,100vw);display:flex;flex-direction:column;background:var(--surface);box-shadow:-16px 0 48px rgba(0,0,0,.22);color:var(--ink)}
+.khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
+.khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
+.khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.kbody{flex:1 1 auto;overflow:auto;padding:20px 24px}
+.kfoot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--sub)}
+.ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
+.ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
+.ktbl td{white-space:normal;padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px;line-height:18px;overflow-wrap:anywhere;vertical-align:top}
+.ktbl tr:first-child td{font-weight:500}
+.kfs{border:0;margin:0 0 22px;padding:0}
+.kfs legend{padding:0;margin-bottom:12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px}
+.kf{display:flex;flex-direction:column;gap:5px;min-width:0}
+.kf.w{grid-column:span 2}
+.kf .kl{font-size:12px;font-weight:500;color:var(--muted2)}
+.kf .kl b{color:var(--bad);font-weight:600;margin-inline-start:2px}
+.kf .input,.kf .select{width:100%;padding-inline-start:12px;background:var(--surface)}
+.kf textarea.input{height:auto;min-height:72px;padding:8px 12px;resize:vertical;line-height:20px}
+.kf .kro{min-height:36px;display:flex;align-items:center;padding:0 12px;border-radius:6px;background:var(--sub);border:1px dashed var(--bd);color:var(--muted2);font-size:13px;box-sizing:border-box}
+.kf .kh{font-size:12px;color:var(--muted)}
+.kf .ke{font-size:12px;color:var(--bad);font-weight:500}
+.kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
+.kbanner.err{background:var(--badbg);color:var(--bad)}
+.kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
+</style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -492,14 +528,14 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Tax Set-up</h1>
-            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Country-specific tax rules and validated tax-code mappings applied automatically before interfacing to GFS (ref. 2.2 Tax Set-Up) · read-only</p>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Country-specific tax rules and validated tax-code mappings applied automatically before interfacing to GFS (ref. 2.2 Tax Set-Up)</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
             <a class="lay" href="tax-setup.html">A · Table</a><a class="lay" href="tax-setup-b.html">B · List + detail</a><a class="lay rec" href="tax-setup-c.html" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>C · Tabs</a><a class="lay rec" href="tax-setup-d.html" aria-current="page" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>D · Overview</a>
           </div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
-          <span class="ro"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Read-only</span>
+          <button class="btn btn-primary" onClick="{{shell.kit.create}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New tax code</button>
           <div style="position: relative">
             <label for="gexp" class="sr">Export</label>
             <select id="gexp" class="select" value="" onChange="{{shell.exp}}" style="width: 112px">
@@ -550,6 +586,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{h.title}}</h2><span class="chip" style="{{h.chip}}">{{h.st}}</span><sc-for list="{{h.chips}}" as="c" hint-placeholder-count="1"><span class="chip" style="{{c.s}}">{{c.t}}</span></sc-for></div>
                 <div style="font-size: 13px; color: var(--muted)">{{h.sub}}</div>
               </div>
+              <span class="kbar" role="group" aria-label="Record actions"><sc-if value="{{shell.kit.hasHist}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{shell.kit.openHist}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg>{{shell.kit.histLabel}}</button></sc-if><sc-if value="{{shell.kit.canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{shell.kit.edit}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button></sc-if><sc-if value="{{shell.kit.canCopy}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{shell.kit.copy}}" title="{{shell.kit.copyLabel}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>{{shell.kit.copyShort}}</button></sc-if><sc-if value="{{shell.kit.hasDanger}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm kdanger" onClick="{{shell.kit.danger}}" disabled="{{shell.kit.dangerDis}}" title="{{shell.kit.dangerTip}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9"></path><path d="M6.4 6.4a8 8 0 1 0 11.2 0"></path></svg>{{shell.kit.dangerLabel}}</button></sc-if></span>
               <span style="display: flex; align-items: center; gap: 6px; flex: none">
                 <button class="btn btn-sm btn-icon" onClick="{{prev}}" disabled="{{noPrev}}" aria-label="Previous record"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"></path></svg></button>
                 <span class="mono" style="min-width: 60px; text-align: center; font-size: 12px; color: var(--muted)">{{pos}}</span>
@@ -561,7 +598,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             </sc-if>
             <div class="facts"><sc-for list="{{h.facts}}" as="f" hint-placeholder-count="5"><div class="fct"><span class="l">{{f.l}}</span><span class="v" style="{{f.st}}" title="{{f.v}}">{{f.v}}</span></div></sc-for></div>
             <div style="flex: 1 1 auto; overflow: auto; padding: 16px 24px 24px">
-              <div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start">
+              <div style="display: grid; grid-template-columns: {{railCols}}; gap: 16px; align-items: start">
               <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
               <div style="display: flex; justify-content: flex-end; margin-bottom: -2px"><button class="lnk" onClick="{{allT}}">{{allL}}</button></div>
                 <sc-for list="{{secs}}" as="x" hint-placeholder-count="5">
@@ -589,12 +626,12 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   </div>
                 </sc-for>
               </div>
-                <aside class="sc" style="position: sticky; top: 0" aria-label="{{h.railTitle}}"><h3><span class="dot"></span>{{h.railTitle}}</h3>
+                <sc-if value="{{h.hasRail}}" hint-placeholder-val="{{ true }}"><aside class="sc" style="position: sticky; top: 0" aria-label="{{h.railTitle}}"><h3><span class="dot"></span>{{h.railTitle}}</h3>
                   <div style="padding: 16px">
                     <sc-if value="{{h.hasNote}}" hint-placeholder-val="{{ false }}"><div style="margin-bottom: 14px; padding: 10px 12px; border-radius: 8px; background: var(--hover2); font-size: 12px; color: var(--muted)">{{h.railNote}}</div></sc-if>
                     <sc-for list="{{h.rail}}" as="i" hint-placeholder-count="3"><div class="{{i.cls}}"><div style="font-size: 13px; font-weight: 500; color: {{i.fg}}">{{i.a}}</div><div style="font-size: 13px; margin-top: 1px">{{i.b}}</div><div style="font-size: 12px; color: var(--muted); margin-top: 1px">{{i.c}}</div></div></sc-for>
                   </div>
-                </aside>
+                </aside></sc-if>
               </div>
             </div>
           </section>
@@ -603,6 +640,76 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
     </div>
   </div>
 
+  <sc-if value="{{shell.kit.isHist}}" hint-placeholder-val="{{ false }}">
+    <button class="kback" aria-label="Close" onClick="{{shell.kit.close}}"></button>
+    <div class="kmodal" role="dialog" aria-modal="true" aria-labelledby="khist-t">
+      <div class="khead">
+        <div style="flex: 1 1 auto; min-width: 0"><h2 id="khist-t">{{shell.kit.hist.title}}</h2><p>{{shell.kit.hist.sub}}</p></div>
+        <button class="btn btn-sm kib" onClick="{{shell.kit.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div class="ktool">
+        <span style="flex: 1 1 auto">{{shell.kit.hist.count}}</span>
+        <span>Download</span>
+        <button class="btn btn-sm" onClick="{{shell.kit.hist.pdf}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M4 20h16"></path></svg>PDF</button>
+        <button class="btn btn-sm" onClick="{{shell.kit.hist.xls}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M4 20h16"></path></svg>Excel</button>
+        <button class="btn btn-sm" onClick="{{shell.kit.hist.csv}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M4 20h16"></path></svg>CSV</button>
+        <button class="btn btn-sm" onClick="{{shell.kit.hist.print}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"></path><rect x="3" y="9" width="18" height="8" rx="2"></rect><path d="M6 14h12v7H6z"></path></svg>Print</button>
+      </div>
+      <div class="kbody" style="padding: 0">
+        <table class="ktbl"><thead><tr><sc-for list="{{shell.kit.hist.cols}}" as="c" hint-placeholder-count="3"><th>{{c}}</th></sc-for></tr></thead>
+          <tbody><sc-for list="{{shell.kit.hist.rows}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r}}" as="c" hint-placeholder-count="3"><td>{{c}}</td></sc-for></tr></sc-for></tbody></table>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{shell.kit.isForm}}" hint-placeholder-val="{{ false }}">
+    <button class="kback" aria-label="Close" onClick="{{shell.kit.close}}"></button>
+    <aside class="kdrawer" role="dialog" aria-modal="true" aria-labelledby="kform-t">
+      <div class="khead">
+        <div style="flex: 1 1 auto; min-width: 0"><h2 id="kform-t">{{shell.kit.form.title}}</h2><p>{{shell.kit.form.sub}}</p></div>
+        <button class="btn btn-sm kib" onClick="{{shell.kit.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div class="kbody">
+        <sc-if value="{{shell.kit.form.hasNote}}" hint-placeholder-val="{{ true }}"><div class="kbanner">{{shell.kit.form.note}}</div></sc-if>
+        <sc-if value="{{shell.kit.form.hasErr}}" hint-placeholder-val="{{ false }}"><div class="kbanner err" role="alert">{{shell.kit.form.errText}}</div></sc-if>
+        <sc-for list="{{shell.kit.form.secs}}" as="g" hint-placeholder-count="3">
+          <fieldset class="kfs"><legend>{{g.title}}</legend><div class="kgrid">
+            <sc-for list="{{g.fields}}" as="f" hint-placeholder-count="4">
+              <label class="{{f.cls}}"><span class="kl">{{f.label}}<sc-if value="{{f.req}}" hint-placeholder-val="{{ false }}"><b aria-hidden="true">*</b></sc-if></span>
+                <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}"><input class="input" type="{{f.type}}" value="{{f.v}}" onInput="{{f.on}}" placeholder="{{f.ph}}" aria-required="{{f.reqA}}" aria-invalid="{{f.bad}}"></sc-if>
+                <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}"><textarea class="input" rows="3" value="{{f.v}}" onInput="{{f.on}}" placeholder="{{f.ph}}" aria-required="{{f.reqA}}" aria-invalid="{{f.bad}}"></textarea></sc-if>
+                <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><select class="select" value="{{f.v}}" onChange="{{f.on}}" aria-required="{{f.reqA}}" aria-invalid="{{f.bad}}"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></span></sc-if>
+                <sc-if value="{{f.isRO}}" hint-placeholder-val="{{ false }}"><span class="kro">{{f.v}}</span></sc-if>
+                <sc-if value="{{f.hasErr}}" hint-placeholder-val="{{ false }}"><span class="ke">{{f.err}}</span></sc-if>
+                <sc-if value="{{f.hasHint}}" hint-placeholder-val="{{ false }}"><span class="kh">{{f.hint}}</span></sc-if>
+              </label>
+            </sc-for>
+          </div></fieldset>
+        </sc-for>
+      </div>
+      <div class="kfoot">
+        <span style="flex: 1 1 auto; font-size: 12px; color: var(--muted)">{{shell.kit.form.foot}}</span>
+        <button class="btn" onClick="{{shell.kit.close}}">Cancel</button>
+        <button class="btn btn-primary" onClick="{{shell.kit.form.submit}}">{{shell.kit.form.cta}}</button>
+      </div>
+    </aside>
+  </sc-if>
+  <sc-if value="{{shell.kit.isConfirm}}" hint-placeholder-val="{{ false }}">
+    <button class="kback" aria-label="Close" onClick="{{shell.kit.close}}"></button>
+    <div class="kmodal sm" role="alertdialog" aria-modal="true" aria-labelledby="kconf-t">
+      <div class="khead"><div style="flex: 1 1 auto; min-width: 0"><h2 id="kconf-t">{{shell.kit.conf.title}}</h2><p>{{shell.kit.conf.sub}}</p></div></div>
+      <div class="kbody">
+        <p style="margin: 0 0 14px; font-size: 13px; line-height: 20px">{{shell.kit.conf.text}}</p>
+        <label class="kf"><span class="kl">Reason<b aria-hidden="true">*</b></span>
+          <textarea class="input" rows="3" value="{{shell.kit.conf.reason}}" onInput="{{shell.kit.conf.onReason}}" placeholder="Why is this needed?" aria-required="true"></textarea>
+          <sc-if value="{{shell.kit.conf.hasErr}}" hint-placeholder-val="{{ false }}"><span class="ke">Enter a reason</span></sc-if>
+        </label>
+      </div>
+      <div class="kfoot">
+        <button class="btn" onClick="{{shell.kit.close}}">Cancel</button>
+        <button class="btn kbtn-danger" onClick="{{shell.kit.conf.ok}}">{{shell.kit.conf.cta}}</button>
+      </div>
+    </div>
+  </sc-if>
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
     <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
   </sc-if>
@@ -635,6 +742,7 @@ class GirsPage extends DCLogic {
     const i = ordered.findIndex((x) => x.id === r.id);
     const go = (n) => { const x = ordered[n]; this.setState({ sel: x.id, open: Object.assign({}, openM, { [x.group]: true }) }); };
     const MONO = 'font-family:var(--mono,ui-monospace,monospace)';
+    const RAIL = r.railTitle.indexOf('Customer group') === 0;
     const KVS = (kv) => kv.map(([l, v, m, w, mu]) => ({ l, v, cls: w ? 'w' : '', st: (m ? MONO : '') + (mu ? ';color:var(--muted4)' : '') }));
     const ALL = [];
     r.sections.forEach(([t, kv], k) => ALL.push({ id: 's' + k, t, n: '', sum: kv.slice(0, 3).map((x) => x[1]).join(' · '), isKv: true, kv: KVS(kv) }));
@@ -662,11 +770,210 @@ class GirsPage extends DCLogic {
     return { q: s.q, onQ: (e) => this.setState({ q: e.target.value }), segs, groups, empty: list.length === 0, gLabel: D.groupLabel,
       gCount: groups.length + ' · ' + D.groupLabel.toLowerCase(), countText: list.length + ' of ' + D.recs.length + ' ' + D.nouns,
       h: { code: r.code, title: r.title, st: r.st, chip: sc[0], sub: r.sub, chips: r.chips.map(([t, st]) => ({ t, s: st })), hasAlert: !!r.alert, alert: r.alert,
-        facts: r.facts.map(([l, v, m]) => ({ l, v, st: m ? MONO : '' })), railTitle: r.railTitle, railNote: r.railNote, hasNote: !!r.railNote,
+        facts: r.facts.map(([l, v, m]) => ({ l, v, st: m ? MONO : '' })), railTitle: r.railTitle, hasRail: RAIL, railNote: r.railNote, hasNote: !!r.railNote,
         rail: r.rail.map(([a, b, c, cur]) => ({ a, b, c, cls: cur ? 'tl cur' : 'tl', fg: cur ? 'var(--accent2)' : 'var(--ink)' })) },
-      secs, allL: allOpen ? 'Collapse all' : 'Expand all', allT: () => { const n = {}; ALL.forEach((x) => { n[x.id] = !allOpen; }); this.setState({ op: n }); }, pos: i >= 0 ? (i + 1) + ' of ' + ordered.length : '', noPrev: i <= 0, noNext: i < 0 || i >= ordered.length - 1,
+      secs, railCols: RAIL ? 'minmax(0, 1fr) 340px' : 'minmax(0, 1fr)', allL: allOpen ? 'Collapse all' : 'Expand all', allT: () => { const n = {}; ALL.forEach((x) => { n[x.id] = !allOpen; }); this.setState({ op: n }); }, pos: i >= 0 ? (i + 1) + ' of ' + ordered.length : '', noPrev: i <= 0, noNext: i < 0 || i >= ordered.length - 1,
       prev: () => { if (i > 0) go(i - 1); }, next: () => { if (i >= 0 && i < ordered.length - 1) go(i + 1); } };
   }
+}
+const KIT_M = {"key": "TaxSetup", "noun": "tax code", "newLabel": "New tax code", "copyLabel": "Copy as new tax code", "danger": "toggle", "readonly": false, "def_": "SG-SR-9", "opts": {"Tax type": ["GST", "SST", "VAT", "WHT"], "Country": ["AE", "CN", "IN", "KE", "MY", "SG", "TH"], "Exemption flag": ["Exempt", "No", "Zero-rated"], "Govt. portal rule": ["Fapiao issued via Golden Tax", "IRN required from IRP before issue", "Not applicable", "Submit via MyInvois before issue", "Validate on KRA eTIMS before issue", "e-Tax invoice (optional)"]}, "recs": [{"id": "SG-SR-9", "code": "SG-SR-9", "title": "GST 9% · Singapore", "st": "Active", "secs": [["Tax rule", [["Tax code", "SG-SR-9"], ["Tax type", "GST"], ["GST / VAT / WHT rate", "9%"], ["Country", "SG"], ["Exemption flag", "No"], ["Effective dates", "1 Jan 2024 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-O, DOC, DEM, CLN, AMD"], ["Customer tax category", "GST-registered"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-SG-SR9"], ["Govt. portal rule", "Not applicable"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created · GST rate change 8% → 9%", "Wei Ling Tan", "15 Dec 2023 10:00"], ["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "SG-SR-8", "code": "SG-SR-8", "title": "GST 8% · Singapore", "st": "Inactive", "secs": [["Tax rule", [["Tax code", "SG-SR-8"], ["Tax type", "GST"], ["GST / VAT / WHT rate", "8%"], ["Country", "SG"], ["Exemption flag", "No"], ["Effective dates", "1 Jan 2023 – 31 Dec 2023"]]], ["Charge & customer mapping", [["Charge mapping", "THC-O, DOC, DEM"], ["Customer tax category", "GST-registered"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-SG-SR8"], ["Govt. portal rule", "Not applicable"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Effective-to set to 31 Dec 2023", "Wei Ling Tan", "15 Dec 2023 10:02"], ["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "ZR-INTL", "code": "ZR-INTL", "title": "GST 0% · Singapore", "st": "Active", "secs": [["Tax rule", [["Tax code", "ZR-INTL"], ["Tax type", "GST"], ["GST / VAT / WHT rate", "0%"], ["Country", "SG"], ["Exemption flag", "Zero-rated"], ["Effective dates", "1 Jan 2020 – open"]]], ["Charge & customer mapping", [["Charge mapping", "OFT, BAF, LSS, PSS"], ["Customer tax category", "All customers"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-SG-ZR"], ["Govt. portal rule", "Not applicable"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "MY-SST-8", "code": "MY-SST-8", "title": "SST 8% · Malaysia", "st": "Active", "secs": [["Tax rule", [["Tax code", "MY-SST-8"], ["Tax type", "SST"], ["GST / VAT / WHT rate", "8%"], ["Country", "MY"], ["Exemption flag", "No"], ["Effective dates", "1 Mar 2024 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-O, DOC, DET"], ["Customer tax category", "Standard"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-MY-ST8"], ["Govt. portal rule", "Submit via MyInvois before issue"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Rate 6% → 8%", "Aisyah Rahman", "20 Feb 2024 09:30"], ["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "MY-SST-EX", "code": "MY-SST-EX", "title": "SST 0% · Malaysia", "st": "Active", "secs": [["Tax rule", [["Tax code", "MY-SST-EX"], ["Tax type", "SST"], ["GST / VAT / WHT rate", "0%"], ["Country", "MY"], ["Exemption flag", "Exempt"], ["Effective dates", "1 Mar 2024 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-O, DOC"], ["Customer tax category", "Exempt customer"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-MY-STX"], ["Govt. portal rule", "Submit via MyInvois before issue"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "IN-GST-18", "code": "IN-GST-18", "title": "GST 18% · India", "st": "Active", "secs": [["Tax rule", [["Tax code", "IN-GST-18"], ["Tax type", "GST"], ["GST / VAT / WHT rate", "18%"], ["Country", "IN"], ["Exemption flag", "No"], ["Effective dates", "1 Jul 2017 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-D, DET, DOC"], ["Customer tax category", "GST-registered (B2B)"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-IN-G18"], ["Govt. portal rule", "IRN required from IRP before issue"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "IN-WHT-2", "code": "IN-WHT-2", "title": "WHT 2% · India", "st": "Active", "secs": [["Tax rule", [["Tax code", "IN-WHT-2"], ["Tax type", "WHT"], ["GST / VAT / WHT rate", "2%"], ["Country", "IN"], ["Exemption flag", "No"], ["Effective dates", "1 Apr 2024 – open"]]], ["Charge & customer mapping", [["Charge mapping", "OFT"], ["Customer tax category", "Corporate customer"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-IN-W2"], ["Govt. portal rule", "Not applicable"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "CN-VAT-6", "code": "CN-VAT-6", "title": "VAT 6% · China", "st": "Active", "secs": [["Tax rule", [["Tax code", "CN-VAT-6"], ["Tax type", "VAT"], ["GST / VAT / WHT rate", "6%"], ["Country", "CN"], ["Exemption flag", "No"], ["Effective dates", "1 Apr 2019 – open"]]], ["Charge & customer mapping", [["Charge mapping", "BLF, DEM"], ["Customer tax category", "General taxpayer"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-CN-V6"], ["Govt. portal rule", "Fapiao issued via Golden Tax"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "TH-VAT-7", "code": "TH-VAT-7", "title": "VAT 7% · Thailand", "st": "Active", "secs": [["Tax rule", [["Tax code", "TH-VAT-7"], ["Tax type", "VAT"], ["GST / VAT / WHT rate", "7%"], ["Country", "TH"], ["Exemption flag", "No"], ["Effective dates", "1 Oct 2024 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-O, SEAL"], ["Customer tax category", "VAT-registered"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-TH-V7"], ["Govt. portal rule", "e-Tax invoice (optional)"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "TH-WHT-1", "code": "TH-WHT-1", "title": "WHT 1% · Thailand", "st": "Active", "secs": [["Tax rule", [["Tax code", "TH-WHT-1"], ["Tax type", "WHT"], ["GST / VAT / WHT rate", "1%"], ["Country", "TH"], ["Exemption flag", "No"], ["Effective dates", "1 Jan 2023 – open"]]], ["Charge & customer mapping", [["Charge mapping", "OFT"], ["Customer tax category", "Juristic person"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-TH-W1"], ["Govt. portal rule", "Not applicable"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "AE-VAT-5", "code": "AE-VAT-5", "title": "VAT 5% · United Arab Emirates", "st": "Active", "secs": [["Tax rule", [["Tax code", "AE-VAT-5"], ["Tax type", "VAT"], ["GST / VAT / WHT rate", "5%"], ["Country", "AE"], ["Exemption flag", "No"], ["Effective dates", "1 Jan 2018 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-D, DOC"], ["Customer tax category", "VAT-registered"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-AE-V5"], ["Govt. portal rule", "Not applicable"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}, {"id": "KE-VAT-16", "code": "KE-VAT-16", "title": "VAT 16% · Kenya", "st": "Active", "secs": [["Tax rule", [["Tax code", "KE-VAT-16"], ["Tax type", "VAT"], ["GST / VAT / WHT rate", "16%"], ["Country", "KE"], ["Exemption flag", "No"], ["Effective dates", "1 Jul 2023 – open"]]], ["Charge & customer mapping", [["Charge mapping", "THC-D, DET, DOC"], ["Customer tax category", "VAT-registered"]]], ["GFS & govt. portal", [["GFS tax code", "GFS-KE-V16"], ["Govt. portal rule", "Validate on KRA eTIMS before issue"]]]], "hist": {"title": "Audit trail", "cols": ["Change", "By", "Date & time"], "rows": [["Created from master-data migration", "System · Migration", "2 Jan 2026 06:00"]]}, "nContracts": 0}], "contracts": {}};
+
+function KIT_VALS(self, s, v) {
+  const M = KIT_M, k = s.__k || null;
+  const set = (o) => self.setState(o);
+  const close = () => set({ __k: null });
+  try { window.__kitClose = close; if (!window.__kitEsc) { window.__kitEsc = 1; window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && window.__kitClose) window.__kitClose(); }); } } catch (e) {}
+  const isCust = M.key === 'CustomerMaster';
+  const LS = 'girs.cust.v1';
+  const load = () => { let x = {}; try { x = JSON.parse(localStorage.getItem(LS) || '{}') || {}; } catch (e) {} ['add', 'del'].forEach((n) => { x[n] = x[n] || []; }); ['groups', 'gedit', 'edit'].forEach((n) => { x[n] = x[n] || {}; }); return x; };
+  const store = (x) => { try { localStorage.setItem(LS, JSON.stringify(x)); } catch (e) {} };
+  const toast = (t) => set({ __toast: t });
+  const reqNo = () => 'REQ-' + String(Date.now()).slice(-6);
+  const CM = isCust ? KIT_CM() : null;
+
+  // ---------------------------------------------------------------- current record
+  let cur = null, cc = null;
+  if (isCust) {
+    cc = CM.C.find((x) => x.id === s.sel) || CM.C.find((x) => x.id === M.def_) || CM.C[0] || null;
+    if (cc) cur = { id: cc.id, code: cc.code, title: cc.name, st: CM.ST[cc.st].t, hist: null, nContracts: M.contracts[cc.code] || 0 };
+  } else {
+    cur = M.recs.find((x) => x.id === s.sel) || M.recs.find((x) => x.id === M.def_) || M.recs[0] || null;
+  }
+  const noun = M.noun, Noun = noun.charAt(0).toUpperCase() + noun.slice(1);
+
+  // ---------------------------------------------------------------- history popup + downloads
+  const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const H = cur && cur.hist;
+  const hTitle = H ? H.title + ' · ' + cur.code : '';
+  const hFile = H ? (M.key + '-' + cur.code + '-' + H.title).replace(/[^A-Za-z0-9]+/g, '-').toLowerCase() : '';
+  const hDoc = () => '<!doctype html><html><head><meta charset="utf-8"><title>' + esc(hTitle) + '</title><style>body{font-family:"IBM Plex Sans",Arial,sans-serif;font-size:12px;color:var(--ink);margin:28px}h1{font-size:16px;margin:0 0 4px}p{color:var(--muted);margin:0 0 16px}table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--sub)}</style></head><body><h1>' + esc(hTitle) + '</h1><p>' + esc(cur.title) + ' · exported ' + esc(new Date().toLocaleString()) + '</p><table><thead><tr>' + H.cols.map((c) => '<th>' + esc(c) + '</th>').join('') + '</tr></thead><tbody>' + H.rows.map((r) => '<tr>' + r.map((c) => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></body></html>';
+  const dl = (ext, mime, data, label) => { try { const b = new Blob([data], { type: mime }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = hFile + '.' + ext; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); toast(H.title + ' for ' + cur.code + ' downloaded as ' + label + '.'); } catch (e) { toast('Download is not available in this preview.'); } };
+  const printDoc = (label) => { let w = null; try { w = window.open('', '_blank'); } catch (e) {} if (!w) { toast('Allow pop-ups for this site to ' + label + '.'); return; } w.document.write(hDoc()); w.document.close(); w.focus(); setTimeout(() => { try { w.print(); } catch (e) {} }, 300); };
+  const hist = H ? { title: hTitle, sub: cur.title, cols: H.cols, rows: H.rows, count: H.rows.length + (H.rows.length === 1 ? ' entry' : ' entries') + ' · newest first',
+    csv: () => dl('csv', 'text/csv;charset=utf-8', '﻿' + [H.cols].concat(H.rows).map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\r\n'), 'CSV'),
+    xls: () => dl('xls', 'application/vnd.ms-excel', hDoc(), 'Excel'),
+    pdf: () => printDoc('save as PDF'), print: () => printDoc('print') } : null;
+
+  // ---------------------------------------------------------------- forms
+  const SYS = /status|^Version$|^Approval|^LMS CMD reference$/i;
+  const genSecs = (rec) => { const seen = {}; return rec.secs.map(([t, kv]) => [t, kv.filter(([l, val]) => { if (seen[l] || /^\[/.test(val) || SYS.test(l)) return false; seen[l] = 1; return true; })]).filter((x) => x[1].length); };
+  const allCodes = isCust ? CM.C.map((x) => x.code.toUpperCase()) : M.recs.map((x) => x.code.toUpperCase());
+  const PFX = { SG: 'SG-1', MY: 'MY-2', IN: 'IN-3', CN: 'CN-4', TH: 'TH-5' };
+  const suggest = (ctry) => { if (!ctry) return ''; const p = ctry + '-'; const nums = CM.C.filter((x) => x.code.indexOf(p) === 0).map((x) => +x.code.slice(3)).filter((n) => !isNaN(n));
+    const base = nums.length ? Math.max.apply(null, nums) + 1 : +(PFX[ctry] ? PFX[ctry].slice(3) + '00001' : '100001'); return p + String(base).padStart(6, '0'); };
+  const nextRef = () => { const n = CM.C.map((x) => +String(x.ref).replace(/\D/g, '')).filter((x) => !isNaN(x)); return 'CMD-' + String((n.length ? Math.max.apply(null, n) : 70000) + 137).padStart(7, '0'); };
+  const gOf = (gid) => CM.G[gid] || {};
+
+  const custVals = (c, mode) => { const g = c ? gOf(c.g) : {};
+    if (!c) return { ctry: '', code: '', auto: true, name: '', g: '', gname: '', legal: '', tax: '', terms: '', arr: 'Default', json: 'PDF, JSON', email: '', addr: '', st: 'ok' };
+    const base = { g: c.g, gname: '', legal: g.legal, tax: g.tax, terms: g.terms, arr: g.arr, json: (g.json != null ? g.json : c.g !== 'gC') ? 'PDF, JSON' : 'PDF', st: c.st };
+    if (mode === 'copy') return Object.assign(base, { ctry: '', code: '', auto: true, name: c.name.replace(/ \([A-Z]{2}\)$/, ''), email: '', addr: '' });
+    return Object.assign(base, { ctry: c.ctry, code: c.code, auto: false, name: c.name, email: c.email, addr: c.addr }); };
+
+  const open = (mode) => {
+    if (isCust) set({ __k: { m: 'form', mode, vals: custVals(mode === 'new' ? null : cc, mode), tried: false } });
+    else { const vals = {}; if (mode !== 'new') genSecs(cur).forEach(([, kv]) => kv.forEach(([l, val]) => { vals[l] = val; }));
+      if (mode === 'copy') { const f = genSecs(cur)[0][1][0][0]; vals[f] = ''; }
+      set({ __k: { m: 'form', mode, vals, tried: false, orig: Object.assign({}, vals) } }); }
+  };
+
+  const custValidate = (V, mode) => { const e = {};
+    const req = (key, msg) => { if (!String(V[key] || '').trim()) e[key] = msg || 'Required'; };
+    if (mode !== 'edit') {
+      req('ctry', 'Select a country'); req('code');
+      const code = String(V.code || '').trim().toUpperCase();
+      if (code && !/^[A-Z]{2}-\d{6}$/.test(code)) e.code = 'Use the format CC-000000, e.g. SG-100232';
+      else if (code && V.ctry && code.slice(0, 2) !== V.ctry) e.code = 'Code must start with the country code ' + V.ctry;
+      else if (code && allCodes.indexOf(code) >= 0) e.code = 'Customer code ' + code + ' already exists';
+      req('g', 'Select a parent customer group');
+      if (V.g === '__new') { req('gname'); const gn = String(V.gname || '').trim().toLowerCase(); if (gn && Object.keys(CM.G).some((x) => CM.G[x].name.toLowerCase() === gn)) e.gname = 'A parent group with this name already exists — select it instead'; }
+    }
+    req('name');
+    req('legal'); req('tax');
+    const tax = String(V.tax || '').trim().toLowerCase();
+    if (tax && (mode !== 'edit' ? V.g === '__new' : true)) { const other = Object.keys(CM.G).find((x) => x !== V.g && String(CM.G[x].tax).toLowerCase() === tax); if (other) e.tax = 'Tax ID belongs to parent group ' + CM.G[other].name + ' — select that group'; }
+    req('terms', 'Select credit terms'); req('arr'); req('json');
+    req('email'); if (V.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(V.email).trim())) e.email = 'Enter a valid email address';
+    req('addr'); if (V.addr && String(V.addr).trim().length < 10) e.addr = 'Enter the full address';
+    return e; };
+
+  let form = null;
+  if (k && k.m === 'form') {
+    const V = k.vals, mode = k.mode, tried = k.tried;
+    const setV = (key, val, extra) => set({ __k: Object.assign({}, k, { vals: Object.assign({}, V, { [key]: val }, extra || {}) }) });
+    let secs = [], errs = {}, note = '', foot = '', cta = 'Save', title = '', sub = '', submit = null;
+    const F = (key, label, o) => { o = o || {}; const err = tried ? (errs[key] || '') : '';
+      const type = o.ro ? 'ro' : (o.opts ? 'sel' : (o.area ? 'area' : 'text'));
+      return { label, req: !!o.req && !o.ro, reqA: o.req ? 'true' : 'false', cls: 'kf' + (o.wide ? ' w' : '') + (err ? ' bad' : ''), bad: err ? 'true' : 'false',
+        isText: type === 'text', isArea: type === 'area', isSel: type === 'sel', isRO: type === 'ro', type: o.type || 'text',
+        v: o.ro ? (o.show != null ? o.show : (V[key] || '—')) : (V[key] == null ? '' : V[key]), ph: o.ph || '',
+        opts: o.opts ? [{ v: '', t: o.ph || 'Select…' }].concat(o.opts.map((x) => (typeof x === 'string' ? { v: x, t: x } : x))) : [],
+        on: o.on || ((e) => setV(key, e.target.value)), err, hasErr: !!err, hint: o.hint || '', hasHint: !!o.hint && !err }; };
+    if (isCust) {
+      errs = custValidate(V, mode);
+      const isNewG = V.g === '__new', exG = V.g && !isNewG ? gOf(V.g) : null;
+      const members = V.g ? CM.C.filter((x) => x.g === V.g).length : 0;
+      const gro = mode !== 'edit' && !!exG;                    // group-level fields come from the selected group
+      const gHint = mode === 'edit' ? 'Applies to all ' + members + ' customer code' + (members === 1 ? '' : 's') + ' in ' + (exG ? exG.name : 'this group') : (gro ? 'From parent customer group ' + exG.name : '');
+      const groups = Object.keys(CM.G).map((x) => ({ v: x, t: CM.G[x].name })).concat([{ v: '__new', t: '+ Create new parent group' }]);
+      const ctrys = Object.keys(CM.CN).map((x) => ({ v: x, t: CM.CN[x] + ' (' + x + ')' }));
+      const pickC = (e) => { const c = e.target.value; setV('ctry', c, V.auto || !V.code ? { code: suggest(c), auto: true } : {}); };
+      const pickG = (e) => { const g = e.target.value; const G0 = CM.G[g];
+        setV('g', g, G0 ? { legal: G0.legal, tax: G0.tax, terms: G0.terms, arr: G0.arr, json: (G0.json != null ? G0.json : g !== 'gC') ? 'PDF, JSON' : 'PDF', gname: '' } : { legal: '', tax: '', terms: '', arr: 'Default', json: 'PDF, JSON' }); };
+      const terms = Object.keys(CM.G).map((x) => CM.G[x].terms).filter((x, i, a) => x && a.indexOf(x) === i);
+      const ST = [{ v: 'ok', t: 'Not listed' }, { v: 'sanc', t: 'Sanctioned' }, { v: 'black', t: 'Blacklisted' }];
+      const idF = mode === 'edit'
+        ? [F('code', 'Customer code', { ro: true }), F('ctry', 'Country', { ro: true, show: CM.CN[V.ctry] }), F('name', 'Customer name', { req: true, wide: true }), F('g', 'Parent customer group', { ro: true, show: exG ? exG.name : '—', wide: true })]
+        : [F('ctry', 'Country', { req: true, opts: ctrys, on: pickC, ph: 'Select country' }), F('code', 'Customer code', { req: true, ph: 'e.g. SG-100232', on: (e) => setV('code', e.target.value.toUpperCase(), { auto: false }), hint: V.auto && V.code ? 'Next free code for ' + CM.CN[V.ctry] + ' — you can change it' : 'Format CC-000000' }),
+           F('name', 'Customer name', { req: true, wide: true, ph: 'e.g. Straits Harbour Logistics (VN)' }),
+           F('g', 'Parent customer group', { req: true, wide: true, opts: groups, on: pickG, ph: 'Select parent group', hint: 'Customer codes of one legal entity share a parent group' })]
+          .concat(isNewG ? [F('gname', 'Parent group name', { req: true, wide: true })] : []);
+      idF.push(F('legal', 'Legal entity name', { req: true, wide: true, ro: gro, hint: gro ? gHint : '' }), F('tax', 'Registration / Tax ID', { req: true, ro: gro, hint: gro ? gHint : '' }),
+        F('ref', 'LMS CMD reference', { ro: true, show: mode === 'edit' ? cc.ref : 'Assigned when the customer is created' }));
+      secs = [['Identity', idF],
+        ['Contact', [F('email', 'Email', { req: true, wide: true, type: 'email', ph: 'name@company.com' }), F('addr', 'Address details', { req: true, wide: true, area: true })]],
+        ['Terms & compliance', [F('terms', 'Credit terms', { req: true, opts: terms, ro: gro, hint: gro || mode === 'edit' ? gHint : '' }), F('st', 'Sanction / Blacklist', { req: true, opts: ST })]],
+        ['Billing configuration & distribution', [F('arr', 'Invoicing arrangement', { req: true, opts: ['Default', 'Split'], ro: gro, hint: gro || mode === 'edit' ? gHint : '' }),
+          F('json', 'Document / data delivery', { req: true, opts: ['PDF, JSON', 'PDF'], ro: gro }), F('dto', 'Delivery to', { ro: true, show: V.email || 'Same as email', wide: true })]]];
+      title = mode === 'edit' ? 'Edit customer · ' + cc.code : (mode === 'copy' ? 'Copy as new customer code' : 'Create new Customer');
+      sub = mode === 'edit' ? cc.name : (mode === 'copy' ? 'From ' + cc.code + ' · ' + cc.name : 'Add a customer code to Customer Master');
+      cta = mode === 'edit' ? 'Save changes' : 'Create customer';
+      foot = '* Required';
+      submit = () => {
+        if (Object.keys(errs).length) { set({ __k: Object.assign({}, k, { tried: true }) }); return; }
+        const x = load(); const t = (f) => String(V[f] || '').trim();
+        const gfields = { legal: t('legal'), tax: t('tax'), terms: V.terms, arr: V.arr, json: V.json === 'PDF, JSON' };
+        if (mode === 'edit') {
+          const ce = { name: t('name'), email: t('email'), addr: t('addr'), st: V.st };
+          const ai = x.add.findIndex((a) => a.id === cc.id);
+          if (ai >= 0) x.add[ai] = Object.assign({}, x.add[ai], ce); else x.edit[cc.id] = Object.assign({}, x.edit[cc.id] || {}, ce);
+          if (x.groups[cc.g]) x.groups[cc.g] = Object.assign({}, x.groups[cc.g], gfields); else x.gedit[cc.g] = Object.assign({}, x.gedit[cc.g] || {}, gfields);
+          store(x); set({ __k: null, __toast: 'Customer ' + cc.code + ' · ' + t('name') + ' updated.' }); return;
+        }
+        let gid = V.g, gname = '';
+        if (gid === '__new') { gid = 'ug' + Date.now().toString(36); gname = t('gname'); x.groups[gid] = Object.assign({ name: gname }, gfields); } else gname = gOf(gid).name;
+        const id = 'uc' + Date.now().toString(36), code = t('code').toUpperCase();
+        x.add.push({ id, code, name: t('name'), g: gid, ctry: V.ctry, st: V.st, ref: nextRef(), addr: t('addr'), email: t('email') });
+        store(x);
+        set({ __k: null, sel: id, selCode: '', q: '', fs: '', fc: '', show: 'all', open: Object.assign({}, s.open || {}, { [gid]: true, [gname]: true }), __toast: 'Customer ' + code + ' · ' + t('name') + ' created.' });
+      };
+    } else {
+      const base = genSecs(cur); const first = base[0][1][0][0];
+      base.forEach(([, kv]) => kv.forEach(([l], i) => { if ((i < 2 && kv === base[0][1]) || M.opts[l]) { if (!String(V[l] || '').trim()) errs[l] = 'Required'; } }));
+      if (mode !== 'edit') { const code = String(V[first] || '').trim().toUpperCase(); if (code && allCodes.indexOf(code) >= 0) errs[first] = first + ' ' + code + ' already exists'; }
+      secs = base.map(([t, kv]) => [t, kv.map(([l], i) => F(l, l, { req: (kv === base[0][1] && i < 2) || !!M.opts[l], opts: M.opts[l], ro: mode === 'edit' && l === first, wide: String(V[l] || '').length > 46 }))]);
+      const changed = mode === 'edit' ? Object.keys(V).filter((l) => V[l] !== k.orig[l]) : [];
+      title = mode === 'edit' ? 'Edit ' + noun + ' · ' + cur.code : (mode === 'copy' ? (M.copyLabel || 'Copy') : (M.newLabel || 'New ' + noun));
+      sub = mode === 'new' ? 'New record in ' + M.key.replace(/([a-z])([A-Z])/g, '$1 $2') : cur.title;
+      note = M.key === 'ContractMaster' && mode === 'edit' ? 'Saving creates a new contract version. It applies after approval.' : 'Changes to master data go to the approvals inbox before they apply.';
+      cta = 'Submit for approval'; foot = '* Required';
+      submit = () => {
+        if (Object.keys(errs).length) { set({ __k: Object.assign({}, k, { tried: true }) }); return; }
+        if (mode === 'edit' && !changed.length) { set({ __k: Object.assign({}, k, { tried: true, noChange: true }) }); return; }
+        const r = reqNo(), code = String(V[first] || '').trim();
+        set({ __k: null, __toast: (mode === 'edit' ? Noun + ' ' + cur.code + ': ' + changed.length + ' change' + (changed.length === 1 ? '' : 's') : 'New ' + noun + ' ' + code) + ' submitted for approval · ' + r + '.' });
+      };
+    }
+    const nErr = Object.keys(errs).length;
+    form = { title, sub, secs: secs.map(([t, f]) => ({ title: t, fields: f })), note, hasNote: !!note, cta, foot, submit,
+      hasErr: tried && (nErr > 0 || !!k.noChange), errText: k.noChange && !nErr ? 'Nothing has changed yet.' : 'Fix ' + nErr + ' field' + (nErr === 1 ? '' : 's') + ' marked below.' };
+  }
+
+  // ---------------------------------------------------------------- delete / deactivate
+  let dangerLabel = '', dangerDis = false, dangerTip = '';
+  if (cur && M.danger === 'delete') {
+    dangerLabel = 'Delete';
+    if (isCust && cur.nContracts) { dangerDis = true; dangerTip = 'Has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + ' — cannot be deleted'; }
+    else if (!isCust && cur.st !== 'Draft') { dangerDis = true; dangerTip = 'Only draft contracts can be deleted. Approved contracts get a new version instead.'; }
+    else dangerTip = 'Delete ' + noun + ' ' + cur.code;
+  } else if (cur && M.danger === 'toggle') { dangerLabel = cur.st === 'Inactive' ? 'Activate' : 'Deactivate'; dangerTip = dangerLabel + ' ' + noun + ' ' + cur.code; }
+  let conf = null;
+  if (k && k.m === 'confirm' && cur) {
+    const isDel = M.danger === 'delete';
+    const act = isDel ? 'Delete' : dangerLabel;
+    conf = { title: act + ' ' + noun + ' ' + cur.code + '?', sub: cur.title, reason: k.reason || '', hasErr: !!k.tried && !String(k.reason || '').trim(),
+      onReason: (e) => set({ __k: Object.assign({}, k, { reason: e.target.value }) }),
+      text: isCust ? 'The customer code is removed from Customer Master. It has no contracts, so nothing else is affected.'
+        : (isDel ? 'The draft contract is removed. This request goes to the approvals inbox.' : (act === 'Deactivate' ? 'The ' + noun + ' can no longer be used on new invoices. Existing invoices are not changed. This request goes to the approvals inbox.' : 'The ' + noun + ' becomes available again. This request goes to the approvals inbox.')),
+      cta: isCust ? 'Delete customer' : 'Submit ' + act.toLowerCase(),
+      ok: () => {
+        if (!String(k.reason || '').trim()) { set({ __k: Object.assign({}, k, { tried: true }) }); return; }
+        if (isCust) { const x = load(); const ai = x.add.findIndex((a) => a.id === cur.id); if (ai >= 0) x.add.splice(ai, 1); else if (x.del.indexOf(cur.id) < 0) x.del.push(cur.id); store(x);
+          const nxt = CM.C.find((c) => c.id !== cur.id); set({ __k: null, sel: nxt ? nxt.id : '', __toast: 'Customer ' + cur.code + ' · ' + cur.title + ' deleted.' }); return; }
+        set({ __k: null, __toast: act + ' request for ' + noun + ' ' + cur.code + ' submitted for approval · ' + reqNo() + '.' });
+      } };
+  }
+
+  const ro = M.readonly;
+  return {
+    isHist: !!(k && k.m === 'hist' && hist), isForm: !!form, isConfirm: !!conf, close,
+    hist: hist || {}, form: form || {}, conf: conf || {},
+    hasHist: !!hist, histLabel: H ? H.title : '', openHist: () => set({ __k: { m: 'hist' } }),
+    canEdit: !ro && !!cur, edit: () => open('edit'),
+    canCopy: !ro && !!cur && !!M.copyLabel, copy: () => open('copy'), copyShort: 'Copy', copyLabel: M.copyLabel || '',
+    hasDanger: !ro && !!cur && !!M.danger, danger: () => set({ __k: { m: 'confirm', reason: '' } }), dangerLabel, dangerDis, dangerTip,
+    create: () => open('new')
+  };
 }
 
 const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
@@ -691,6 +998,7 @@ class Component extends GirsPage {
     const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master"}, v.navT || {});
     const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
+      kit: (typeof KIT_VALS === 'function' ? KIT_VALS(this, s, v) : null),
       theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
       drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
       toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
