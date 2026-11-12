@@ -133,6 +133,25 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mini{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
 .mini:first-child{border-top:0}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.kbar{display:inline-flex;align-items:center;gap:6px;flex:none;margin-inline-start:auto}
 .kbar .btn{gap:6px}
+.kmore{position:relative;display:inline-flex}
+.kmorebtn[aria-expanded=true]{background:var(--hover);border-color:#A9B0BC}
+.kmback{position:fixed;inset:0;z-index:58;background:transparent;border:0;padding:0;margin:0;cursor:default}
+.kmenu{position:absolute;top:calc(100% + 6px);inset-inline-end:0;z-index:59;width:280px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(14,17,22,.16);text-align:start}
+.kmi{display:flex;align-items:flex-start;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--ink);font:inherit;font-size:13px;line-height:18px;text-align:start;cursor:pointer}
+.kmi svg{flex:none;margin-top:2px}
+.kmi:hover:not(:disabled),.kmi:focus-visible{background:var(--hover);outline:0}
+.kmt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kmt>span{font-weight:500}
+.kmt small{font-size:12px;line-height:16px;color:var(--muted);font-weight:400}
+.kmi-d{color:var(--bad)}
+.kmi-d:hover:not(:disabled){background:var(--badbg)}
+.kmi:disabled{cursor:not-allowed;color:var(--bad);opacity:.55}
+.kmenu.up{top:auto;bottom:calc(100% + 6px)}
+section:has(.kmenu.up),.card:has(.kmenu.up){overflow:visible!important;position:relative;z-index:6}
+.ksep{height:1px;margin:4px 0;background:var(--line2)}
+.fct .v{white-space:normal;text-overflow:clip;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:20px}
+.dcol .kvs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 20px}
+table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > td{height:auto;padding-block:8px}
 .kib{width:32px;padding:0}
 .kdanger{color:var(--bad)}
 .kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
@@ -140,7 +159,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
 .kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
 .kmodal.sm{width:min(520px,calc(100vw - 48px))}
-.kdrawer{position:fixed;z-index:71;top:0;bottom:0;inset-inline-end:0;width:min(760px,100vw);display:flex;flex-direction:column;background:var(--surface);box-shadow:-16px 0 48px rgba(0,0,0,.22);color:var(--ink)}
+.kdrawer{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
 .khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
 .khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
 .khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
@@ -167,6 +186,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
 .kbanner.err{background:var(--badbg);color:var(--bad)}
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
+.kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
+.kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
 </style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
@@ -541,7 +562,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
           <aside class="card r-col" aria-label="Customer details" style="flex: 0 0 560px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
             <div style="padding: 20px 24px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px">
-              <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.chip}}">{{c.st}}</span><span class="kbar" role="group" aria-label="Record actions"><sc-if value="{{shell.kit.hasHist}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm kib" onClick="{{shell.kit.openHist}}" aria-label="{{shell.kit.histLabel}}" title="{{shell.kit.histLabel}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg></button></sc-if><sc-if value="{{shell.kit.canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm kib" onClick="{{shell.kit.edit}}" aria-label="Edit" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button></sc-if><sc-if value="{{shell.kit.canCopy}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm kib" onClick="{{shell.kit.copy}}" aria-label="{{shell.kit.copyShort}}" title="{{shell.kit.copyLabel}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button></sc-if><sc-if value="{{shell.kit.hasDanger}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm kdanger kib" onClick="{{shell.kit.danger}}" aria-label="{{shell.kit.dangerLabel}}" disabled="{{shell.kit.dangerDis}}" title="{{shell.kit.dangerTip}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path></svg></button></sc-if></span></div>
+              <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 28px">{{c.name}}</h2><span class="chip" style="{{c.chip}}">{{c.st}}</span><span class="kbar" role="group" aria-label="Record actions"><sc-if value="{{shell.kit.canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm btn-primary" onClick="{{shell.kit.edit}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button></sc-if><sc-if value="{{shell.kit.hasMore}}" hint-placeholder-val="{{ true }}"><span class="kmore"><button class="btn btn-sm kmorebtn" aria-haspopup="menu" aria-expanded="{{shell.kit.menuOpen}}" onClick="{{shell.kit.toggleMenu}}">More<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{shell.kit.menuOpen}}" hint-placeholder-val="{{ false }}"><button class="kmback" tabindex="-1" aria-label="Close menu" onClick="{{shell.kit.close}}"></button><div class="kmenu" role="menu" aria-label="More actions"><sc-if value="{{shell.kit.canCopy}}" hint-placeholder-val="{{ true }}"><button class="kmi" role="menuitem" onClick="{{shell.kit.copy}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg><span class="kmt"><span>{{shell.kit.copyLabel}}</span></span></button></sc-if><sc-if value="{{shell.kit.hasHist}}" hint-placeholder-val="{{ true }}"><button class="kmi" role="menuitem" onClick="{{shell.kit.openHist}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg><span class="kmt"><span>{{shell.kit.histLabel}}</span><small>View and download · PDF, Excel, CSV</small></span></button></sc-if><sc-if value="{{shell.kit.hasDanger}}" hint-placeholder-val="{{ true }}"><div class="ksep" role="separator"></div></sc-if><sc-if value="{{shell.kit.hasDanger}}" hint-placeholder-val="{{ true }}"><button class="kmi kmi-d" role="menuitem" onClick="{{shell.kit.danger}}" disabled="{{shell.kit.dangerDis}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path></svg><span class="kmt"><span>{{shell.kit.dangerMenu}}</span><sc-if value="{{shell.kit.dangerDis}}" hint-placeholder-val="{{ false }}"><small>{{shell.kit.dangerNote}}</small></sc-if></span></button></sc-if></div></sc-if></span></sc-if><sc-if value="{{shell.kit.onlyHist}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{shell.kit.openHist}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg>{{shell.kit.histLabel}}</button></sc-if></span></div>
               <div class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 13px; color: var(--muted)"><span class="mono" style="color: var(--ink)">{{c.code}}</span> · {{c.ctryName}} · LMS CMD ref <span class="mono">{{c.ref}}</span></span><button class="lnk" onClick="{{allT}}" style="font-size: 12px">{{allL}}</button></div>
             </div>
             <div style="flex: 1 1 auto; overflow: auto">
@@ -978,11 +999,11 @@ function KIT_VALS(self, s, v) {
   }
 
   // ---------------------------------------------------------------- delete / deactivate
-  let dangerLabel = '', dangerDis = false, dangerTip = '';
+  let dangerLabel = '', dangerDis = false, dangerTip = '', dangerNote = '';
   if (cur && M.danger === 'delete') {
     dangerLabel = 'Delete';
-    if (isCust && cur.nContracts) { dangerDis = true; dangerTip = 'Has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + ' — cannot be deleted'; }
-    else if (!isCust && cur.st !== 'Draft') { dangerDis = true; dangerTip = 'Only draft contracts can be deleted. Approved contracts get a new version instead.'; }
+    if (isCust && cur.nContracts) { dangerDis = true; dangerTip = 'Has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + ' — cannot be deleted'; dangerNote = 'Has ' + cur.nContracts + ' contract' + (cur.nContracts === 1 ? '' : 's') + ', so it cannot be deleted'; }
+    else if (!isCust && cur.st !== 'Draft') { dangerDis = true; dangerTip = 'Only draft contracts can be deleted. Approved contracts get a new version instead.'; dangerNote = 'Only draft contracts can be deleted'; }
     else dangerTip = 'Delete ' + noun + ' ' + cur.code;
   } else if (cur && M.danger === 'toggle') { dangerLabel = cur.st === 'Inactive' ? 'Activate' : 'Deactivate'; dangerTip = dangerLabel + ' ' + noun + ' ' + cur.code; }
   let conf = null;
@@ -1008,6 +1029,9 @@ function KIT_VALS(self, s, v) {
     hist: hist || {}, form: form || {}, conf: conf || {},
     hasHist: !!hist, histLabel: H ? H.title : '', openHist: () => set({ __k: { m: 'hist' } }),
     canEdit: !ro && !!cur, edit: () => open('edit'),
+    hasMore: !ro && !!cur && (!!M.copyLabel || !!hist || !!M.danger), onlyHist: ro && !!hist,
+    menuOpen: !!(k && k.m === 'menu'), toggleMenu: () => set({ __k: k && k.m === 'menu' ? null : { m: 'menu' } }),
+    dangerMenu: dangerLabel + ' ' + noun, dangerNote,
     canCopy: !ro && !!cur && !!M.copyLabel, copy: () => open('copy'), copyShort: 'Copy', copyLabel: M.copyLabel || '',
     hasDanger: !ro && !!cur && !!M.danger, danger: () => set({ __k: { m: 'confirm', reason: '' } }), dangerLabel, dangerDis, dangerTip,
     create: () => open('new')
