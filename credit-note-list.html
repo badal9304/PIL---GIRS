@@ -116,7 +116,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .lst .dim{color:var(--muted)}
 .lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
 .lnk:hover{text-decoration:underline}
-.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -496,13 +496,17 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { q: '', st: '' };
+    let q0 = '';
+    try { q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
+    this.state = { q: q0, st: '' };
   }
   renderVals() {
     const s = this.state;
     const K = ["no", "orig", "ctype", "ref", "reason", "amount", "cur", "taxrev", "appr", "repl", "gov", "audit"];
     const TONE = {"Draft": ["var(--muted)", ""], "Pending approval": ["var(--warn)", ""], "Approved": ["var(--ok)", ""], "Rejected": ["var(--bad)", ""]};
-    const R = [
+    let extra = [];
+    try { extra = JSON.parse(localStorage.getItem('girs.cn.v1') || '[]') || []; } catch (e) {}
+    const R = extra.concat([
           [
                 "SINOD2600311CR",
                 "SINOD2602150",
@@ -615,7 +619,7 @@ class GirsPage extends DCLogic {
                 "—",
                 "AUD-26-104640"
           ]
-    ].map((a) => { const r = {}; K.forEach((k, i) => { r[k] = a[i]; }); return r; });
+    ].map((a) => { const r = {}; K.forEach((k, i) => { r[k] = a[i]; }); return r; }));
     const q = s.q.trim().toLowerCase();
     const rows = R.filter((r) => (!q || K.some((k) => String(r[k]).toLowerCase().includes(q))) && (!s.st || r.appr === s.st)).map((r) => {
       const t = TONE[r.appr] || ['var(--muted)', 'var(--neutral)'];
