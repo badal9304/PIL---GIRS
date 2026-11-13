@@ -193,7 +193,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .conf{text-align:center;align-items:center}
 .conf .ic{width:64px;height:64px;border-radius:50%;background:var(--okbg);display:flex;align-items:center;justify-content:center}
 .conf ul{margin:0;padding-inline-start:18px;text-align:start;font-weight:500;display:flex;flex-direction:column;gap:4px}
-.amenu{position:fixed;z-index:61;width:264px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(14,17,22,.16)}
+.amenu{position:fixed;z-index:81;width:264px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(14,17,22,.16)}
 .amenu .mi{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;width:100%;padding:7px 10px;border-radius:6px;font-size:13px;line-height:18px;color:var(--ink);cursor:pointer}
 .amenu .mi:hover:not([disabled]),.amenu .mi:focus-visible{background:var(--hover)}
 .amenu .mi[disabled]{cursor:not-allowed;color:var(--muted)}
@@ -201,11 +201,49 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .amenu .mi.d{color:var(--bad)}
 .amenu .mi.d[disabled]{color:#C9A0A2}
 .amenu .sep{height:1px;margin:4px 0;background:var(--line2)}
-.mback{position:fixed;inset:0;z-index:60;background:transparent;border:0;padding:0;margin:0;cursor:default}
+.mback{position:fixed;inset:0;z-index:80;background:transparent;border:0;padding:0;margin:0;cursor:default}
 .dbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .dbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .at{width:100%;border-collapse:collapse}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chipb{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--line);border-radius:17px;background:var(--surface);font-size:13px;font-weight:500;color:var(--muted2)}
+.chipb:hover{border-color:#A9B0BC}
+.chipb[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.chipb .cnt{font-size:12px;font-weight:600;opacity:.8}
+.chipb.w:not([aria-pressed=true]) .cnt{color:var(--bad);opacity:1}
+.chipb:focus-visible,.ili:focus-visible,.qitem:focus-visible,.icard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.callout{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:10px;background:var(--tint);border:1px solid var(--tintbd)}
+.callout .ci{width:40px;height:40px;border-radius:10px;background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none}
+.callout b{display:block;font-size:15px;color:var(--ink)}
+.callout span{font-size:13px;color:var(--muted2)}
+.ili{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px 16px;width:100%;padding:14px 18px;border-bottom:1px solid var(--line2);border-inline-start:3px solid transparent}
+.ili:hover{background:var(--hover2)}
+.ili[aria-current=true]{background:#EEF6FC;border-inline-start-color:var(--accent)}
+.ili .t{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.ili .r{text-align:end;font-weight:600;font-size:14px}
+.ili .m{font-size:13px;color:var(--muted2)}
+.ili .s{font-size:12px;color:var(--muted);text-align:end}
+.dsec{display:flex;flex-direction:column;gap:10px;padding:16px 20px;border-top:1px solid var(--line2)}
+.dsec h3{margin:0;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.kv2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px}
+.kv2 div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kv2 .l{font-size:12px;color:var(--muted)}
+.kv2 .v{font-size:14px;font-weight:500;overflow-wrap:anywhere}
+.qitem{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 8px;width:100%;padding:10px 12px;border-radius:8px;font-size:14px;font-weight:500;color:var(--ink)}
+.qitem:hover{background:var(--hover)}
+.qitem[aria-current=true]{background:var(--tint);color:var(--accent2)}
+.qitem .n{font-size:13px;font-weight:600;color:var(--muted)}
+.qitem.w .n{color:var(--bad)}
+.qitem small{grid-column:1 / -1;font-size:12px;font-weight:400;color:var(--muted)}
+.qhead{padding:14px 12px 6px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;align-content:start}
+.icard{display:flex;flex-direction:column;gap:10px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer}
+.icard:hover{border-color:#A9B0BC;box-shadow:0 2px 8px rgba(14,17,22,.06)}
+.icard .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.icard .amt{font-size:22px;line-height:28px;font-weight:600}
+.icard .meta{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+.icard .foot{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--line2);margin-top:2px}
 .at td,.at th{white-space:normal;vertical-align:top}
 .lay{white-space:nowrap;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
@@ -542,7 +580,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Rule-driven invoicing automation using LMS booking, B/L and container data</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="invoice-list.html" aria-current="page">A · Tabs</a><a class="lay" href="invoice-list-b.html">B · Separate generate page</a></div></nav>
+          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="invoice-list.html" aria-current="page">A · Tabs</a><a class="lay" href="invoice-list-b.html">B · Separate generate page</a><a class="lay rec" href="invoice-list-c.html" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>C · List + detail</a><a class="lay rec" href="invoice-list-d.html" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>D · Work queues</a></div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
           <div style="position: relative">
             <label for="gexp" class="sr">Export</label>
@@ -696,6 +734,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <label class="fld">Reason<textarea class="input" style="height: 80px; padding-top: 8px; resize: vertical" value="{{f.why}}" onInput="{{f.onWhy}}"></textarea><sc-if value="{{f.whyErr}}" hint-placeholder-val="{{ false }}"><span class="err">A reason is required</span></sc-if></label>
                 </sc-if>
               </div>
+              <sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" aria-haspopup="menu" onClick="{{det.openMenu}}">All actions<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button><sc-if value="{{det.showPrim}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{det.primRun}}">{{det.prim}}</button></sc-if></div></sc-if>
               <sc-if value="{{dlgDl}}" hint-placeholder-val="{{ false }}"><div class="df"><span class="mu" style="margin-inline-end: auto">Download</span><button class="btn btn-sm" onClick="{{dl.pdf}}">PDF</button><button class="btn btn-sm" onClick="{{dl.xls}}">Excel</button><button class="btn btn-sm" onClick="{{dl.csv}}">CSV</button></div></sc-if>
               <sc-if value="{{dlgAct}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" onClick="{{closeDlg}}">Cancel</button><button class="btn {{okCls}}" onClick="{{dlgOk}}">{{okLabel}}</button></div></sc-if>
             </sc-if>
@@ -720,7 +759,7 @@ const IV_READY = [{"id": "r1", "bl": "BL-SG-24011", "bkg": "SINB2610301", "cust"
 const IV_CHECKS = ["Customer", "Billing Party", "Charges", "Currency/ROE", "Tax Configuration", "B/L Data"];
 const IV_LINK = { 'CreditNoteList.dc.html': 'credit-note-list.html', 'SOADashboard.dc.html': 'soa-aging.html', 'Receipting.dc.html': 'receipting.html',
   'CashAppWorkbench.dc.html': 'cashapp-workbench.html', 'ManualInvoice.dc.html': 'manual-invoice.html', 'InvoiceGenerate.dc.html': 'invoice-generate.html',
-  'InvoiceListB.dc.html': 'invoice-list-b.html', 'InvoiceList.dc.html': 'invoice-list.html' };
+  'InvoiceListB.dc.html': 'invoice-list-b.html', 'InvoiceListC.dc.html': 'invoice-list-c.html', 'InvoiceListD.dc.html': 'invoice-list-d.html', 'InvoiceList.dc.html': 'invoice-list.html' };
 const IV_TONE = { 'Draft': 'var(--muted)', 'Pending validation': 'var(--warn)', 'Generated': 'var(--accent2)', 'Sent': 'var(--accent2)', 'Accepted': 'var(--ok)', 'Paid': 'var(--ok)',
   'Rejected': 'var(--bad)', 'Credited': 'var(--ai)', 'Cancelled': 'var(--muted)' };
 const IV_PILL = { Ready: 'background:var(--okbg);color:var(--ok)', Warning: 'background:var(--warnbg);color:var(--warn)', Blocked: 'background:var(--badbg);color:var(--bad)' };
@@ -826,22 +865,21 @@ class GirsPage extends DCLogic {
     const selNos = Object.keys(s.sel).filter((k) => s.sel[k] && byNo[k]);
     const allOn = shown.length > 0 && shown.every((i) => s.sel[i.no]);
     // ---------------- row menu
-    let menuItems = [], menuPos = '';
-    if (s.menu && byNo[s.menu.no]) {
-      const i = byNo[s.menu.no], st = i.status;
+    const itemsFor = (i) => {
+      const st = i.status;
       const paid = st === 'Paid', live = !['Draft', 'Pending validation', 'Cancelled'].includes(st);
       const cnOk = ['Generated', 'Sent', 'Accepted', 'Paid'].includes(st);
       const cancelOk = ['Draft', 'Pending validation', 'Generated', 'Sent', 'Rejected'].includes(st);
       const hasCn = st === 'Credited' || ((s.store.cn || []).some((c) => c.orig === i.no));
       const close = (fn) => () => { self.setState({ menu: null }); fn(); };
       const it = (label, run, dis, note, extra) => Object.assign({ label, run: dis ? () => {} : run, dis: !!dis, note: dis ? note : '', hasNote: !!(dis && note), cls: '', sep: false }, extra || {});
-      menuItems = [
+      return [
         it('View invoice details', () => self.dlg('details', i)),
         it('View credit note', close(() => ivGo('CreditNoteList.dc.html', i.no)), !hasCn, 'No credit note for this invoice'),
         it('View SOA', close(() => ivGo('SOADashboard.dc.html', i.cust))),
         it('Download PDF / JSON', close(() => toast(i.no + ' downloaded as ' + (i.files === '—' ? 'PDF' : i.files.replace(' · ', ' and ')) + ' · sample files')), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
-        it('Request credit note', () => self.dlg('cn', i, { full: true, amount: ivFmt(i.lines.reduce((a, l) => a + l[1], 0)), reason: '', ref: '' }), !cnOk, st === 'Credited' ? 'Already fully credited' : 'Only for generated, sent, accepted or paid invoices'),
+        it('Request credit note', () => self.dlg('cn', i, { full: true, amount: ivFmt(ivMain(i)), reason: '', ref: '' }), !cnOk, st === 'Credited' ? 'Already fully credited' : 'Only for generated, sent, accepted or paid invoices'),
         it('Request refund', close(() => ivGo('Receipting.dc.html', i.no)), !paid, 'Only for paid invoices'),
         it('View payment', close(() => ivGo('CashAppWorkbench.dc.html', i.no)), !paid, 'No payment received yet'),
         it('View receipt', close(() => ivGo('Receipting.dc.html', i.no)), !paid, 'No receipt yet'),
@@ -849,8 +887,51 @@ class GirsPage extends DCLogic {
         it('View audit trail', () => self.dlg('audit', i)),
         it('Cancel invoice', () => self.dlg('cancel', i, { why: '' }), !cancelOk, st === 'Cancelled' ? 'Already cancelled' : (st === 'Accepted' ? 'E-invoice accepted · raise a credit note instead' : 'Paid or credited invoices are reversed by credit note'), { cls: 'd', sep: true })
       ];
+    };
+    const PRIMARY = { 'Draft': 'View invoice details', 'Pending validation': 'View audit trail', 'Generated': 'e-Mail / Post', 'Sent': 'Download PDF / JSON', 'Accepted': 'Download PDF / JSON',
+      'Paid': 'View receipt', 'Rejected': 'View audit trail', 'Credited': 'View credit note', 'Cancelled': 'View audit trail' };
+    const primaryOf = (i) => itemsFor(i).find((m) => m.label === PRIMARY[i.status]) || itemsFor(i)[0];
+    let menuItems = [], menuPos = '';
+    if (s.menu && byNo[s.menu.no]) {
+      menuItems = itemsFor(byNo[s.menu.no]);
       menuPos = 'left:' + s.menu.pos.x + 'px;top:' + s.menu.pos.y + 'px';
     }
+    // ---------------- simple layouts (C, D)
+    const GROUPS = [['all', 'All invoices', null, 'Every invoice in this hub'], ['attention', 'Needs attention', ['Rejected', 'Pending validation'], 'Rejected by the tax portal or still in validation'],
+      ['draft', 'Draft', ['Draft'], 'Proformas and drafts not yet issued'], ['open', 'Awaiting payment', ['Generated', 'Sent', 'Accepted'], 'Generated, sent or accepted and not yet paid'],
+      ['paid', 'Paid', ['Paid'], 'Payment received'], ['closed', 'Credited / cancelled', ['Credited', 'Cancelled'], 'Reversed by credit note or cancelled']];
+    const gOf = (st) => (GROUPS.find((g) => g[2] && g[2].includes(st)) || [])[0];
+    const grp = s.grp || 'all';
+    const qOnly = INV.filter((i) => !q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q));
+    const gShown = qOnly.filter((i) => grp === 'all' || gOf(i.status) === grp);
+    const PILLC = { 'var(--muted)': 'var(--neutral)', 'var(--warn)': 'var(--warnbg)', 'var(--accent2)': 'var(--tint)', 'var(--ok)': 'var(--okbg)', 'var(--bad)': 'var(--badbg)', 'var(--ai)': 'var(--aibg)' };
+    const totalOf = (i) => { const per = {}; i.lines.forEach((l) => { per[l[2]] = (per[l[2]] || 0) + l[1]; }); const ks = Object.keys(per);
+      return { main: ivFmt(per[ks[0]]) + ' ' + ks[0], extra: ks.slice(1).map((c) => '+ ' + ivFmt(per[c]) + ' ' + c).join(' ') }; };
+    const groups = GROUPS.map(([k, label, sts, hint]) => ({ k, label, hint, n: qOnly.filter((i) => k === 'all' || gOf(i.status) === k).length, on: grp === k && s.tab === 'inv' ? 'true' : 'false',
+      warnCls: k === 'attention' ? 'w' : '', pick: () => self.setState({ grp: k, tab: 'inv', view: 'list', menu: null }) }));
+    const curNo = s.cur && gShown.some((i) => i.no === s.cur) ? s.cur : (gShown[0] || {}).no;
+    const cards = gShown.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
+      return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
+        total: t.main, extra: t.extra, hasExtra: !!t.extra, sel: i.no === curNo ? 'true' : 'false', lines: i.lines.length === 1 ? '1 charge' : i.lines.length + ' charges',
+        pick: () => self.setState({ cur: i.no }), open: () => self.dlg('details', i), prim: pr.label, primRun: pr.run, primDis: pr.dis,
+        menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e) }; });
+    let dv = null;
+    if (curNo && byNo[curNo]) {
+      const i = byNo[curNo], stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i), its = itemsFor(i);
+      const dlIt = its.find((m) => m.label === 'Download PDF / JSON'), mailIt = its.find((m) => m.label === 'e-Mail / Post');
+      const sec = [dlIt, mailIt, its.find((m) => m.label === 'Request credit note')].filter((m) => m && m.label !== pr.label && !m.dis).slice(0, 2);
+      const F = (k, v, mono) => ({ k, v, cls: mono ? 'mono' : '', st: v === '—' ? 'color:var(--muted)' : '' });
+      dv = { no: i.no, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
+        prim: pr.label, primRun: pr.run, primDis: pr.dis, sec: sec.map((m) => ({ label: m.label, run: m.run })),
+        menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
+        sections: [
+          { t: 'Invoice', f: [F('Invoice No.', i.no, 1), F('Invoice Type', i.type), F('Invoice Status', i.status), F('Due Date', i.due)] },
+          { t: 'Shipment', f: [F('Booking No.', i.bkg, 1), F('B/L No.', i.bl, 1), F('Container No.', i.cntr, 1), F('Voyage/VVD', i.vvd)] },
+          { t: 'Billing', f: [F('Billing Party', i.party), F('Customer Code', i.cust, 1)] },
+          { t: 'Compliance and files', f: [F('Govt. Reference', i.gov, 1), F('PDF/JSON Link', i.files), F('Audit ID', i.lines[0][5], 1)] }],
+        lines: i.lines.map((l) => ({ chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], tax: l[4] })) };
+    }
+    const gNow = GROUPS.find((g) => g[0] === grp);
     // ---------------- ready list
     const READY = this.readyList();
     const ports = uniq(IV_READY.map((r) => r.port)), procs = uniq(IV_READY.map((r) => r.type));
@@ -912,6 +993,9 @@ class GirsPage extends DCLogic {
         det.fields = [['Invoice Type', di.type], ['Booking No.', di.bkg], ['B/L No.', di.bl], ['Container No.', di.cntr], ['Voyage/VVD', di.vvd], ['Billing Party', di.party],
           ['Customer Code', di.cust], ['Invoice Status', di.status, 'color:' + (IV_TONE[di.status] || 'var(--ink)')], ['Due Date', di.due], ['Govt. Reference', di.gov], ['PDF/JSON Link', di.files], ['Audit ID', di.lines[0][5]]].map(([k, v, st]) => ({ k, v, st: st || '' }));
         det.lines = di.lines.map((l) => ({ chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], tax: l[4], audit: l[5] }));
+        const pr = primaryOf(di);
+        det.showPrim = pr.label !== 'View invoice details' && !pr.dis; det.prim = pr.label; det.primRun = () => { self.setState({ dlg: null }); setTimeout(() => pr.run(), 0); };
+        det.openMenu = (e) => self.openMenu(di.no, e);
       } else if (d.kind === 'audit' && di) {
         dlgTitle = 'Audit trail · ' + di.no; dlgSub = 'Invoice events, newest last'; dlgCls = 'wide';
         const rows = this.audit(di); tbl = tableOf(['When', 'Event', 'By'], rows); dl = dlFor('Audit trail ' + di.no, ['When', 'Event', 'By'], rows);
@@ -986,6 +1070,10 @@ class GirsPage extends DCLogic {
       pick: () => self.setF({ full, amountErr: false, amount: full && di ? ivFmt(ivMain(di)) : '' }) }));
     const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail'];
     return {
+      groups, cards, cardsEmpty: cards.length === 0, dv: dv || {}, hasDv: !!dv, noDv: !dv, stop: (e) => { try { e.stopPropagation(); } catch (er) {} }, gLabel: gNow[1], gHint: gNow[3],
+      readyN: READY.length, hasReady: READY.length > 0, readyOn: s.tab === 'ready' ? 'true' : 'false',
+      readySummary: ['Ready', 'Warning', 'Blocked'].map((k) => READY.filter((r) => r.status === k).length + ' ' + ({ Ready: 'ready', Warning: 'need review', Blocked: 'blocked' })[k]).join(' · '),
+      openReady: () => self.setState({ tab: 'ready', view: 'list', menu: null }), backInv: () => self.setState({ tab: 'inv', view: 'list', rv: null }),
       isA, isB, isG, tabReady: s.tab === 'ready', tabInv: s.tab === 'inv', inList: s.view === 'list', inReview: s.view === 'review' && !!cur,
       readyListOn: s.view === 'list' || !cur,
       tabs: [['ready', 'Ready to invoice', READY.length], ['inv', 'Invoices', INV.length]].map(([k, label, n]) => ({ label, n, on: s.tab === k ? 'true' : 'false', pick: () => self.setState({ tab: k, menu: null }) })),
