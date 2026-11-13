@@ -106,6 +106,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+.gmain{flex:1 1 0 !important;min-height:0 !important}
 .lst{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}
 .lst th,.lst td{white-space:nowrap}
 .lst .c-sel{position:sticky;inset-inline-start:0;z-index:1;width:40px;padding-inline:12px 4px;background:var(--surface)}
@@ -206,6 +207,14 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .dbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .at{width:100%;border-collapse:collapse}
+.cfoot{flex:none;border-top:1px solid var(--line);padding:4px 12px 6px;background:var(--sub)}
+.cfoot .pager{padding:0;flex-wrap:wrap;row-gap:4px}
+.pager{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 4px 0;font-size:13px;color:var(--muted2)}
+.pbtn{min-width:32px;justify-content:center;font-size:15px}
+.seg2{display:inline-flex;gap:2px;padding:2px;border-radius:6px;background:var(--neutral)}
+.seg2 button{all:unset;cursor:pointer;height:32px;padding:0 12px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted2)}
+.seg2 button[aria-pressed=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.seg2 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chipb{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--line);border-radius:17px;background:var(--surface);font-size:13px;font-weight:500;color:var(--muted2)}
 .chipb:hover{border-color:#A9B0BC}
@@ -580,7 +589,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Rule-driven invoicing automation using LMS booking, B/L and container data</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="invoice-list.html">A · Tabs</a><a class="lay" href="invoice-list-b.html">B · Separate generate page</a><a class="lay rec" href="invoice-list-c.html" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>C · List + detail</a><a class="lay rec" href="invoice-list-d.html" aria-current="page" title="Recommended · present to client first"><span class="recst" aria-hidden="true">★</span>D · Work queues</a></div></nav>
+          <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="invoice-list.html">A · Tabs</a><a class="lay" href="invoice-list-b.html">B · Separate generate page</a><a class="lay" href="invoice-list-c.html">C · List + detail</a><a class="lay" href="invoice-list-d.html" aria-current="page">D · Work queues</a></div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
           <button class="btn btn-primary" onClick="{{manual}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Manual invoice</button>
           </div>
@@ -598,10 +607,20 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 14px">
             <sc-if value="{{tabInv}}" hint-placeholder-val="{{ true }}">
               <div class="r-wrap" style="display: flex; align-items: center; gap: 16px">
-                <div style="flex: 1 1 auto; min-width: 0"><h2 style="margin: 0; font-size: 18px; line-height: 24px">{{gLabel}}</h2><p style="margin: 2px 0 0; font-size: 13px; color: var(--muted)">{{gHint}}</p></div>
-                <input class="input r-w" style="width: 320px" placeholder="Search invoice, B/L, booking or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
+                <div style="flex: 1 1 auto; min-width: 0"><h2 style="margin: 0; font-size: 18px; line-height: 24px">{{gLabel}} <span class="mu mono" style="font-size: 14px; font-weight: 500">· {{gCount}}</span></h2><p style="margin: 2px 0 0; font-size: 13px; color: var(--muted)">{{gHint}}</p></div>
+                <input class="input r-w" style="width: 300px" placeholder="Search invoice, B/L, booking or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
+                <div style="position: relative"><select class="select r-w" style="width: 190px" aria-label="Sort" value="{{sortSel.val}}" onChange="{{sortSel.on}}"><sc-for list="{{sortSel.opts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">Sort: {{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+                <div class="seg2" role="group" aria-label="View"><sc-for list="{{views}}" as="v" hint-placeholder-count="2"><button aria-pressed="{{v.on}}" onClick="{{v.pick}}">{{v.label}}</button></sc-for></div>
               </div>
-              <div class="cgrid" style="flex: 1 1 auto; min-height: 0; overflow: auto; padding: 2px">
+              <sc-if value="{{dRows}}" hint-placeholder-val="{{ false }}"><section class="card" style="flex: 1 1 auto; min-height: 0; overflow: auto">
+                <table class="lst" style="width: 100%"><thead style="position: sticky; top: 0; z-index: 2"><tr><th>Invoice No.</th><th>Billing Party</th><th class="num">Charge Amount</th><th>Due Date</th><th>Invoice Status</th><th>Next step</th><th class="c-act"><span class="sr">Actions</span></th></tr></thead>
+                <tbody><sc-for list="{{cards}}" as="c" hint-placeholder-count="10"><tr class="grp"><td><button class="lnk mono" onClick="{{c.open}}">{{c.no}}</button></td><td>{{c.party}} <span class="mono mu" style="font-size: 12px">{{c.cust}}</span></td>
+                  <td class="mono num" style="font-weight: 600">{{c.total}} <span class="mu" style="font-weight: 400; font-size: 12px">{{c.extra}}</span></td><td style="{{c.dueSt}}">{{c.due}}</td><td><span class="pill" style="{{c.pill}}">{{c.status}}</span></td>
+                  <td><button class="btn btn-sm" disabled="{{c.primDis}}" onClick="{{c.primRun}}">{{c.prim}}</button></td>
+                  <td class="c-act"><button class="dots" aria-label="All actions for {{c.no}}" aria-haspopup="menu" aria-expanded="{{c.menuOpen}}" onClick="{{c.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></td></tr></sc-for></tbody></table>
+                <sc-if value="{{cardsEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">Nothing in this queue</div></sc-if>
+              </section></sc-if>
+              <sc-if value="{{dCards}}" hint-placeholder-val="{{ true }}"><div class="cgrid" style="flex: 1 1 auto; min-height: 0; overflow: auto; padding: 2px">
                 <sc-for list="{{cards}}" as="c" hint-placeholder-count="6"><article class="icard" tabindex="0" aria-label="{{c.no}}" onClick="{{c.open}}">
                   <div class="top"><span class="mono" style="font-weight: 600">{{c.no}}</span><span class="pill" style="{{c.pill}}">{{c.status}}</span></div>
                   <div style="font-size: 14px">{{c.party}} <span class="mono mu" style="font-size: 12px">{{c.cust}}</span></div>
@@ -611,7 +630,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                     <button class="dots" style="margin-inline-start: auto" aria-label="All actions for {{c.no}}" aria-haspopup="menu" aria-expanded="{{c.menuOpen}}" onClick="{{c.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></div>
                 </article></sc-for>
                 <sc-if value="{{cardsEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted); grid-column: 1 / -1">Nothing in this queue</div></sc-if>
-              </div>
+              </div></sc-if>
+              <div class="pager" role="navigation" aria-label="Pages"><span>{{pQ.text}}</span><span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 6px"><span class="mu" style="font-size: 12px">Rows per page</span><div style="position: relative"><select class="select select-sm" style="width: 76px" aria-label="Rows per page" value="{{pQ.size}}" onChange="{{pQ.onSize}}"><sc-for list="{{pQ.sizes}}" as="z" hint-placeholder-count="3"><option value="{{z}}">{{z}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div><button class="btn btn-sm pbtn" aria-label="First page" disabled="{{pQ.firstDis}}" onClick="{{pQ.first}}">«</button><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{pQ.prevDis}}" onClick="{{pQ.prev}}">‹</button><span class="mono" style="font-size: 13px; min-width: 64px; text-align: center">{{pQ.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{pQ.nextDis}}" onClick="{{pQ.next}}">›</button><button class="btn btn-sm pbtn" aria-label="Last page" disabled="{{pQ.lastDis}}" onClick="{{pQ.last}}">»</button></span></div>
             </sc-if>
             <sc-if value="{{tabReady}}" hint-placeholder-val="{{ false }}">
               <sc-if value="{{readyListOn}}" hint-placeholder-val="{{ true }}">
@@ -632,6 +652,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             </table>
             <sc-if value="{{readyEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">{{readyEmptyText}}</div></sc-if>
           </section>
+          <div class="pager" role="navigation" aria-label="Pages"><span>{{pRdy.text}}</span><span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 6px"><span class="mu" style="font-size: 12px">Rows per page</span><div style="position: relative"><select class="select select-sm" style="width: 76px" aria-label="Rows per page" value="{{pRdy.size}}" onChange="{{pRdy.onSize}}"><sc-for list="{{pRdy.sizes}}" as="z" hint-placeholder-count="3"><option value="{{z}}">{{z}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div><button class="btn btn-sm pbtn" aria-label="First page" disabled="{{pRdy.firstDis}}" onClick="{{pRdy.first}}">«</button><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{pRdy.prevDis}}" onClick="{{pRdy.prev}}">‹</button><span class="mono" style="font-size: 13px; min-width: 64px; text-align: center">{{pRdy.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{pRdy.nextDis}}" onClick="{{pRdy.next}}">›</button><button class="btn btn-sm pbtn" aria-label="Last page" disabled="{{pRdy.lastDis}}" onClick="{{pRdy.last}}">»</button></span></div>
           <div style="display: flex; align-items: center; gap: 12px">
             <button class="btn" disabled="{{noRSel}}" onClick="{{reviewSel}}">Review selected<sc-if value="{{hasRSel}}" hint-placeholder-val="{{ false }}"> ({{rSelN}})</sc-if></button>
             <button class="btn btn-primary" disabled="{{genDis}}" onClick="{{genSel}}">Generate<sc-if value="{{hasRSel}}" hint-placeholder-val="{{ false }}"> ({{rSelN}})</sc-if></button>
@@ -754,6 +775,65 @@ const IV_SEED = [{"no": "SINOF2602401", "type": "Freight", "bkg": "SINB2610231",
 const IV_CUST = {"SG-100231": {"name": "Straits Harbour Logistics (SG)", "tax": "UEN 201812345K", "addr": "21 Pioneer Road, #04-02, Singapore 628491", "mail": "ap@straitsharbour.sg"}, "SG-100874": {"name": "Meridian Agro Exports (SG)", "tax": "UEN 199904417M", "addr": "8 Jurong Port Road, Singapore 619088", "mail": "finance@meridianagro.sg"}, "SG-101066": {"name": "Kinabalu Home Furnishings (SG)", "tax": "UEN 201533018D", "addr": "60 Tuas South Ave 1, Singapore 637611", "mail": "billing@kinabaluhome.sg"}, "MY-200417": {"name": "Straits Harbour Logistics (MY)", "tax": "C20811047090", "addr": "Lot 12, Jalan Pelabuhan, 42000 Port Klang", "mail": "ap@straitsharbour.my"}, "IN-300552": {"name": "Straits Harbour Logistics (IN)", "tax": "GSTIN 27AAGCS4412L1Z5", "addr": "Plot 7, JNPT Road, Navi Mumbai 400707", "mail": "ap@straitsharbour.in"}, "IN-300781": {"name": "Orchid Lane Polymers (IN)", "tax": "GSTIN 24AACCO9021P1ZK", "addr": "Survey 118, Vapi GIDC, Gujarat 396195", "mail": "accounts@orchidlane.in"}, "MY-200903": {"name": "Kinabalu Home Furnishings (MY)", "tax": "C21003391080", "addr": "No. 3, Jalan Perigi, 81700 Pasir Gudang", "mail": "billing@kinabaluhome.my"}, "TH-500318": {"name": "Andaman Bay Traders (TH)", "tax": "TIN 0105559013374", "addr": "88 Moo 3, Laem Chabang, Chonburi 20230", "mail": "ar@andamanbay.co.th"}};
 const IV_CHG = {"OFT": "Ocean Freight", "BAF": "Bunker Adjustment Factor", "THC-O": "Origin THC", "THC-DST": "Destination THC", "DOC": "Documentation", "DEM": "Demurrage", "DET": "Detention", "SEAL": "Seal Fee", "LSS": "Low Sulphur Surcharge"};
 const IV_READY = [{"id": "r1", "bl": "BL-SG-24011", "bkg": "SINB2610301", "cust": "SG-100231", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000102", "vvd": "Vessel 06 / 031E", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 7000.0, "ZR-INTL", 0], ["THC-O", 1, "BL", 750.0, "SG-SR-9", 9], ["DOC", 1, "BL", 250.0, "SG-SR-9", 9]]}, {"id": "r2", "bl": "BL-SG-24012", "bkg": "SINB2610302", "cust": "SG-100874", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000117", "vvd": "Vessel 06 / 031E", "status": "Warning", "msg": "Charge THC-DST has no tax classification", "checks": [["ok", "Available"], ["ok", "Available"], ["warn", "1 charge requires confirmation"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 2100.0, "ZR-INTL", 0], ["THC-DST", 1, "CNTR", 200.0, "—", 0]]}, {"id": "r3", "bl": "BL-SG-24013", "bkg": "SINB2610303", "cust": "SG-101066", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000125", "vvd": "Vessel 06 / 031E", "status": "Blocked", "msg": "Billing party SG-101066 has no active billing-party record", "checks": [["ok", "Available"], ["block", "Not found in Customer Master"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 6200.0, "ZR-INTL", 0], ["THC-O", 1, "BL", 500.0, "SG-SR-9", 9], ["DOC", 1, "BL", 250.0, "SG-SR-9", 9]]}, {"id": "r4", "bl": "BL-SG-24014", "bkg": "SINB2610304", "cust": "SG-100231", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000133", "vvd": "Vessel 06 / 031E", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 3400.0, "ZR-INTL", 0], ["BAF", 1, "CNTR", 420.0, "ZR-INTL", 0], ["THC-O", 1, "BL", 320.0, "SG-SR-9", 9]]}, {"id": "r5", "bl": "BL-SG-24015", "bkg": "SINB2610305", "cust": "SG-100874", "port": "SGSIN", "type": "DET / DEM", "cntr": "PILU1000148", "vvd": "Vessel 03 / 108N", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["DEM", 6, "DAY", 120.0, "SG-SR-9", 9]]}, {"id": "r6", "bl": "BL-SG-24016", "bkg": "SINB2610306", "cust": "SG-101066", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000156", "vvd": "Vessel 06 / 031E", "status": "Warning", "msg": "ROE USD/SGD 1.3412 is more than 1 day old", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["warn", "Rate dated 11 Nov 2026"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 2850.0, "ZR-INTL", 0], ["LSS", 1, "CNTR", 180.0, "ZR-INTL", 0]]}, {"id": "r7", "bl": "BL-SG-24017", "bkg": "SINB2610307", "cust": "SG-100231", "port": "SGSIN", "type": "MISC", "cntr": "PILU1000164", "vvd": "Vessel 06 / 031E", "status": "Blocked", "msg": "No tax code mapped for SEAL at SGSIN", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["block", "Tax code missing"], ["ok", "Available"]], "charges": [["SEAL", 2, "EA", 15.0, "—", 0]]}, {"id": "r8", "bl": "BL-SG-24018", "bkg": "SINB2610308", "cust": "SG-100874", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000171", "vvd": "Vessel 06 / 031E", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 4100.0, "ZR-INTL", 0], ["DOC", 1, "BL", 250.0, "SG-SR-9", 9]]}];
+function ivRand(seed) { let x = seed; return () => { x = (x * 1103515245 + 12345) % 2147483648; return x / 2147483648; }; }
+const IV_POOL = { 'SG-100231': 'SGSIN', 'SG-100874': 'SGSIN', 'SG-101066': 'SGSIN', 'MY-200417': 'MYPKG', 'MY-200903': 'MYPKG', 'IN-300552': 'INNSA', 'IN-300781': 'INNSA', 'TH-500318': 'THLCH' };
+const IV_LOC = { SGSIN: ['SIN', 'SG', 'SGD', '1.3412', 'SG-SR-9', 'ZR-INTL'], MYPKG: ['PKG', 'MY', 'MYR', '4.4710', 'MY-SST-8', 'MY-SST-8'], INNSA: ['NSA', 'IN', 'INR', '84.1200', 'IN-GST-18', 'IN-GST-18'], THLCH: ['LCH', 'TH', 'THB', '34.2500', 'TH-VAT-7', 'TH-VAT-7'] };
+function ivGen(n) {
+  const r = ivRand(20261113), pick = (a) => a[Math.floor(r() * a.length)], amt = (lo, hi) => Math.round((lo + r() * (hi - lo)) / 5) * 5;
+  const hex = (k) => Array.from({ length: k }, () => '0123456789abcdef'[Math.floor(r() * 16)]).join('');
+  const ST = [['Sent', 22], ['Paid', 30], ['Accepted', 14], ['Generated', 10], ['Draft', 4], ['Pending validation', 5], ['Rejected', 4], ['Credited', 6], ['Cancelled', 5]];
+  const tot = ST.reduce((a, x) => a + x[1], 0), stPick = () => { let v = r() * tot; for (const [k, w] of ST) { if ((v -= w) < 0) return k; } return 'Sent'; };
+  const fmt = (x) => x.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const custs = Object.keys(IV_POOL), out = [];
+  for (let k = 0; k < n; k++) {
+    const cust = pick(custs), port = IV_POOL[cust], L = IV_LOC[port];
+    const tr = r(), type = tr < 0.62 ? 'Freight' : (tr < 0.84 ? 'DET / DEM' : (tr < 0.95 ? 'MISC' : 'Proforma'));
+    const code = type === 'DET / DEM' ? 'OD' : (type === 'MISC' ? 'MI' : 'OF');
+    const no = L[0] + code + String(2601000 + k * 3 + Math.floor(r() * 3)).slice(-7) + (type === 'Proforma' ? 'PRF' : '');
+    const day = 1 + Math.floor(r() * 43), d = new Date(2026, 9, day), due = new Date(2026, 9, day + 14);
+    const status = type === 'Proforma' ? 'Draft' : stPick();
+    const lines = [];
+    if (type === 'Freight' || type === 'Proforma') {
+      lines.push(['OFT', amt(600, 7200), 'USD', L[3], L[5]]);
+      if (r() < 0.5) lines.push(['BAF', amt(120, 640), 'USD', L[3], L[5]]);
+      if (r() < 0.6) lines.push(['THC-O', amt(180, 820), L[2], '—', L[4]]);
+      if (r() < 0.3) lines.push(['DOC', amt(60, 260), L[2], '—', L[4]]);
+    } else if (type === 'DET / DEM') lines.push([r() < 0.5 ? 'DEM' : 'DET', amt(240, 6400), L[2], '—', L[4]]);
+    else lines.push([r() < 0.6 ? 'SEAL' : 'DOC', amt(15, 120), L[2], '—', L[4]]);
+    const aud = 110000 + k * 4;
+    lines.forEach((l, j) => l.push('AUD-26-' + (aud + j)));
+    const live = ['Sent', 'Paid', 'Accepted', 'Credited'].includes(status);
+    const gov = L[1] === 'IN' ? (live ? 'IRN ' + hex(4) + '…' + hex(4) : (status === 'Rejected' ? 'IRP error ' + pick(['2150', '2172', '2283']) : '—'))
+      : (L[1] === 'MY' ? (live || status === 'Generated' ? 'MyInvois ' + hex(4).toUpperCase() + '…' + hex(4).toUpperCase() : (status === 'Rejected' ? 'MyInvois rejected' : '—')) : '—');
+    out.push({ no, type, bkg: L[0] + 'B' + (2608000 + k), bl: 'BL-' + L[1] + '-' + (25000 + k), cntr: 'PILU' + (1100000 + k * 7), vvd: 'Vessel 0' + (1 + Math.floor(r() * 6)) + ' / 0' + (10 + Math.floor(r() * 89)) + pick(['E', 'W', 'N', 'S']),
+      party: (IV_CUST[cust] || {}).name, cust, status, due: ['Draft', 'Pending validation'].includes(status) ? '—' : fmt(due),
+      gov, files: status === 'Pending validation' ? '—' : (status === 'Draft' ? 'PDF' : 'PDF · JSON'), date: fmt(d), port, lines });
+  }
+  return out;
+}
+function ivGenReady(n) {
+  const r = ivRand(77001), pick = (a) => a[Math.floor(r() * a.length)], amt = (lo, hi) => Math.round((lo + r() * (hi - lo)) / 5) * 5;
+  const OK = ['ok', 'Available'], out = [];
+  const W = [['Charge THC-DST has no tax classification', 2, '1 charge requires confirmation', 'dst'], ['ROE USD/SGD 1.3412 is more than 1 day old', 3, 'Rate dated 11 Nov 2026'], ['Container count differs from the B/L by 1', 5, 'Container count mismatch']];
+  const B = [['Billing party has no active billing-party record', 1, 'Not found in Customer Master'], ['No tax code mapped for SEAL at SGSIN', 4, 'Tax code missing', 'seal']];
+  for (let k = 0; k < n; k++) {
+    const v = r(), status = v < 0.78 ? 'Ready' : (v < 0.93 ? 'Warning' : 'Blocked');
+    const rule = status === 'Warning' ? pick(W) : (status === 'Blocked' ? pick(B) : null);
+    const checks = [OK, OK, OK, OK, OK, OK].map((c) => c.slice());
+    if (rule) checks[rule[1]] = [status === 'Warning' ? 'warn' : 'block', rule[2]];
+    const t = r(), type = rule && rule[3] === 'seal' ? 'MISC' : (t < 0.7 ? 'Freight' : (t < 0.9 ? 'DET / DEM' : 'MISC'));
+    let charges;
+    if (type === 'Freight') { charges = [['OFT', 1, 'CNTR', amt(900, 7500), 'ZR-INTL', 0]]; if (r() < 0.5) charges.push(['BAF', 1, 'CNTR', amt(120, 600), 'ZR-INTL', 0]); charges.push(['THC-O', 1, 'BL', amt(200, 800), 'SG-SR-9', 9]); if (r() < 0.5) charges.push(['DOC', 1, 'BL', 250, 'SG-SR-9', 9]); }
+    else if (type === 'DET / DEM') charges = [[r() < 0.5 ? 'DEM' : 'DET', 1 + Math.floor(r() * 9), 'DAY', amt(80, 180), 'SG-SR-9', 9]];
+    else charges = [['SEAL', 1 + Math.floor(r() * 3), 'EA', 15, rule && rule[3] === 'seal' ? '—' : 'SG-SR-9', rule && rule[3] === 'seal' ? 0 : 9]];
+    if (rule && rule[3] === 'dst') charges.push(['THC-DST', 1, 'CNTR', amt(150, 320), '—', 0]);
+    out.push({ id: 'g' + k, bl: 'BL-SG-' + (24100 + k), bkg: 'SINB' + (2610400 + k), cust: pick(['SG-100231', 'SG-100874', 'SG-101066']), port: 'SGSIN', type, cntr: 'PILU' + (1200000 + k * 9),
+      vvd: 'Vessel 0' + (1 + Math.floor(r() * 6)) + ' / 0' + (10 + Math.floor(r() * 89)) + 'E', status, msg: rule ? rule[0] : '', checks, charges });
+  }
+  return out;
+}
+const IV_RDY = IV_READY.concat(ivGenReady(52));
+const IV_ALL = IV_SEED.concat(ivGen(491));
 const IV_CHECKS = ["Customer", "Billing Party", "Charges", "Currency/ROE", "Tax Configuration", "B/L Data"];
 const IV_LINK = { 'CreditNoteList.dc.html': 'credit-note-list.html', 'SOADashboard.dc.html': 'soa-aging.html', 'Receipting.dc.html': 'receipting.html',
   'CashAppWorkbench.dc.html': 'cashapp-workbench.html', 'ManualInvoice.dc.html': 'manual-invoice.html', 'InvoiceGenerate.dc.html': 'invoice-generate.html',
@@ -794,17 +874,17 @@ class GirsPage extends DCLogic {
     let q = '';
     try { q = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
     this.state = { tab: 'inv', view: 'list', q, fs: '', ft: '', fc: '', sel: {}, exp: {}, menu: null, dlg: null, f: {},
-      period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, rv: null, decl: false, store: ivLoad() };
+      period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, rv: null, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
   }
   put(mut, extra) { const d = JSON.parse(JSON.stringify(this.state.store)); mut(d); ivSave(d); if (typeof extra === 'function') extra = extra(); this.setState(Object.assign({ store: d }, extra || {})); if (extra && extra.__toast) this.fade(extra.__toast); }
   fade(t) { try { clearTimeout(this.__ft); this.__ft = setTimeout(() => { if (this.state.__toast === t) this.setState({ __toast: '' }); }, 5000); } catch (e) {} }
   ev(d, no, what) { d.ev = d.ev || {}; (d.ev[no] = d.ev[no] || []).push([ivStamp(), what, 'Daniel Tan']); }
   invoices() {
     const d = this.state.store;
-    const all = (d.gen || []).concat(IV_SEED);
+    const all = (d.gen || []).concat(IV_ALL);
     return all.map((i) => Object.assign({}, i, { status: (d.st && d.st[i.no]) || i.status }));
   }
-  readyList() { const d = this.state.store; return IV_READY.filter((r) => !(d.done || []).includes(r.id)); }
+  readyList() { const d = this.state.store; return IV_RDY.filter((r) => !(d.done || []).includes(r.id)); }
   openMenu(no, e) {
     let pos = { x: 0, y: 0, up: false };
     try {
@@ -829,8 +909,21 @@ class GirsPage extends DCLogic {
   }
   renderVals() {
     const s = this.state, self = this;
-    const isA = 'D' === 'A', isB = 'D' === 'B', isG = 'D' === 'G';
+    const isA = 'D' === 'A', isB = 'D' === 'B', isG = 'D' === 'G', isD = 'D' === 'D';
     const toast = (t) => { self.setState({ __toast: t }); self.fade(t); };
+    const P1 = { pg: {} };
+    const pager = (key, arr, sizes) => {
+      const size = s.psz[key] || sizes[0], pages = Math.max(1, Math.ceil(arr.length / size)), n = Math.min(s.pg[key] || 1, pages), from = (n - 1) * size;
+      const go = (v) => () => self.setState({ pg: Object.assign({}, s.pg, { [key]: v }), menu: null });
+      return { rows: arr.slice(from, from + size), p: { text: arr.length ? 'Showing ' + (from + 1).toLocaleString('en-US') + '–' + Math.min(from + size, arr.length).toLocaleString('en-US') + ' of ' + arr.length.toLocaleString('en-US') : 'Nothing to show',
+        pos: n + ' / ' + pages, prevDis: n <= 1, nextDis: n >= pages, firstDis: n <= 1, lastDis: n >= pages, prev: go(n - 1), next: go(n + 1), first: go(1), last: go(pages),
+        size: String(size), sizes: sizes.map(String), onSize: (e) => self.setState({ psz: Object.assign({}, s.psz, { [key]: parseInt(e.target.value, 10) }), pg: Object.assign({}, s.pg, { [key]: 1 }) }) } };
+    };
+    const toUsd = (l) => l[2] === 'USD' ? l[1] : l[1] / ((IV_FX.USD || {})[l[2]] || 1);
+    const dt = (x) => { const t = Date.parse(x); return isNaN(t) ? Infinity : t; };
+    const SORTS = [['new', 'Newest first'], ['due', 'Due date, soonest'], ['amt', 'Amount, highest'], ['no', 'Invoice No.']];
+    const sorter = { new: (a, b) => dt(b.date) - dt(a.date), due: (a, b) => dt(a.due) - dt(b.due), amt: (a, b) => b.lines.reduce((x, l) => x + toUsd(l), 0) - a.lines.reduce((x, l) => x + toUsd(l), 0), no: (a, b) => a.no < b.no ? -1 : 1 }[s.sort] || (() => 0);
+    const sortSel = { val: s.sort, opts: SORTS.map(([v, label]) => ({ v, label })), on: (e) => self.setState({ sort: e.target.value, pg: {} }) };
     // ---------------- invoices
     const INV = this.invoices();
     const byNo = {}; INV.forEach((i) => { byNo[i.no] = i; });
@@ -839,8 +932,10 @@ class GirsPage extends DCLogic {
       && (!s.fs || i.status === s.fs) && (!s.ft || i.type === s.ft) && (!s.fc || i.lines.some((l) => l[2] === s.fc)));
     const uniq = (a) => a.filter((v, n) => a.indexOf(v) === n);
     const fsel = [['Invoice Status', 'fs', uniq(INV.map((i) => i.status))], ['Invoice Type', 'ft', uniq(INV.map((i) => i.type))], ['Currency', 'fc', uniq([].concat(...INV.map((i) => i.lines.map((l) => l[2]))))]]
-      .map(([label, k, opts]) => ({ label, val: s[k], opts, on: (e) => self.setState({ [k]: e.target.value }) }));
-    const invs = shown.map((i) => {
+      .map(([label, k, opts]) => ({ label, val: s[k], opts, on: (e) => self.setState({ [k]: e.target.value, pg: {} }) }));
+    shown.sort(sorter);
+    const PI = pager('inv', shown, [25, 50, 100]);
+    const invs = PI.rows.map((i) => {
       const per = {}; i.lines.forEach((l) => { per[l[2]] = (per[l[2]] || 0) + l[1]; });
       const roe = (i.lines.find((l) => l[3] !== '—') || ['', '', '', '—'])[3];
       const files = i.status === 'Cancelled' && i.files === '—' ? '—' : i.files;
@@ -861,7 +956,7 @@ class GirsPage extends DCLogic {
       });
     });
     const selNos = Object.keys(s.sel).filter((k) => s.sel[k] && byNo[k]);
-    const allOn = shown.length > 0 && shown.every((i) => s.sel[i.no]);
+    const allOn = PI.rows.length > 0 && PI.rows.every((i) => s.sel[i.no]);
     // ---------------- row menu
     const itemsFor = (i) => {
       const st = i.status;
@@ -901,16 +996,18 @@ class GirsPage extends DCLogic {
     const gOf = (st) => (GROUPS.find((g) => g[2] && g[2].includes(st)) || [])[0];
     const grp = s.grp || 'all';
     const qOnly = INV.filter((i) => !q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q));
-    const gShown = qOnly.filter((i) => grp === 'all' || gOf(i.status) === grp);
+    const gShown = qOnly.filter((i) => grp === 'all' || gOf(i.status) === grp).sort(sorter);
+    const dRows = s.dview === 'rows';
+    const PQ = pager(isD ? (dRows ? 'dr' : 'dc') : 'cq', gShown, isD ? (dRows ? [25, 50, 100] : [12, 24, 48]) : [20, 50, 100]);
     const PILLC = { 'var(--muted)': 'var(--neutral)', 'var(--warn)': 'var(--warnbg)', 'var(--accent2)': 'var(--tint)', 'var(--ok)': 'var(--okbg)', 'var(--bad)': 'var(--badbg)', 'var(--ai)': 'var(--aibg)' };
     const totalOf = (i) => { const per = {}; i.lines.forEach((l) => { per[l[2]] = (per[l[2]] || 0) + l[1]; }); const ks = Object.keys(per);
       return { main: ivFmt(per[ks[0]]) + ' ' + ks[0], extra: ks.slice(1).map((c) => '+ ' + ivFmt(per[c]) + ' ' + c).join(' ') }; };
     const groups = GROUPS.map(([k, label, sts, hint]) => ({ k, label, hint, n: qOnly.filter((i) => k === 'all' || gOf(i.status) === k).length, on: grp === k && s.tab === 'inv' ? 'true' : 'false',
-      warnCls: k === 'attention' ? 'w' : '', pick: () => self.setState({ grp: k, tab: 'inv', view: 'list', menu: null }) }));
-    const curNo = s.cur && gShown.some((i) => i.no === s.cur) ? s.cur : (gShown[0] || {}).no;
-    const cards = gShown.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
+      warnCls: k === 'attention' ? 'w' : '', pick: () => self.setState({ grp: k, tab: 'inv', view: 'list', menu: null, pg: {} }) }));
+    const curNo = s.cur && gShown.some((i) => i.no === s.cur) ? s.cur : (PQ.rows[0] || {}).no;
+    const cards = PQ.rows.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
       return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
-        total: t.main, extra: t.extra, hasExtra: !!t.extra, sel: i.no === curNo ? 'true' : 'false', lines: i.lines.length === 1 ? '1 charge' : i.lines.length + ' charges',
+        total: t.main, extra: t.extra, hasExtra: !!t.extra, sel: i.no === curNo ? 'true' : 'false', dueSt: i.due === '—' ? 'color:var(--muted)' : '', lines: i.lines.length === 1 ? '1 charge' : i.lines.length + ' charges',
         pick: () => self.setState({ cur: i.no }), open: () => self.dlg('details', i), prim: pr.label, primRun: pr.run, primDis: pr.dis,
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e) }; });
     let dv = null;
@@ -932,9 +1029,11 @@ class GirsPage extends DCLogic {
     const gNow = GROUPS.find((g) => g[0] === grp);
     // ---------------- ready list
     const READY = this.readyList();
-    const ports = uniq(IV_READY.map((r) => r.port)), procs = uniq(IV_READY.map((r) => r.type));
+    const ports = uniq(IV_RDY.map((r) => r.port)), procs = uniq(IV_RDY.map((r) => r.type));
     const base = READY.filter((r) => (!s.rPort || r.port === s.rPort) && (!s.rProc || r.type === s.rProc));
-    const ready = base.filter((r) => !s.rKpi || r.status === s.rKpi).map((r) => {
+    const rAll = base.filter((r) => !s.rKpi || r.status === s.rKpi);
+    const PR = pager('rdy', rAll, [25, 50, 100]);
+    const ready = PR.rows.map((r) => {
       const c = ivReadyCalc(r), cu = IV_CUST[r.cust] || {};
       const lock = r.status === 'Blocked';
       return Object.assign({}, r, { name: cu.name, amt: ivFmt(c.inc), cur: c.cur, pill: IV_PILL[r.status], on: !!s.rsel[r.id], lock, lockTip: lock ? 'Blocked B/Ls cannot be generated' : '',
@@ -949,7 +1048,7 @@ class GirsPage extends DCLogic {
     const rAllOn = selectable.length > 0 && selectable.every((r) => s.rsel[r.id]);
     const warnSel = rSel.filter((r) => r.status === 'Warning').length;
     const kpis = [['Ready', 'var(--ok)'], ['Warning', 'var(--warnbar)'], ['Blocked', 'var(--bad)']].map(([k, color]) => ({ label: k, color, n: base.filter((r) => r.status === k).length,
-      on: s.rKpi === k ? 'true' : 'false', pick: () => self.setState({ rKpi: s.rKpi === k ? '' : k }) }));
+      on: s.rKpi === k ? 'true' : 'false', pick: () => self.setState({ rKpi: s.rKpi === k ? '' : k, pg: {} }) }));
     // ---------------- review
     let rv = {}, steps = [], rvGenDis = true, rvHint = '';
     const rvIds = s.rv ? s.rv.ids.filter((id) => READY.some((r) => r.id === id)) : [];
@@ -1006,7 +1105,7 @@ class GirsPage extends DCLogic {
         };
       } else if (d.kind === 'bulkmail') {
         dlgTitle = 'e-Mail / Post · ' + selNos.length + ' invoices'; dlgSub = 'Each invoice goes to its billing party\'s configured channel'; okLabel = 'Send';
-        tbl = tableOf(['Invoice No.', 'Billing Party', 'Channel'], selNos.map((no) => [no, byNo[no].party, (IV_CUST[byNo[no].cust] || {}).mail || 'Post']));
+        tbl = tableOf(['Invoice No.', 'Billing Party', 'Channel'], selNos.slice(0, 50).map((no) => [no, byNo[no].party, (IV_CUST[byNo[no].cust] || {}).mail || 'Post']).concat(selNos.length > 50 ? [['+ ' + (selNos.length - 50) + ' more', '', '']] : []));
         dlgOk = () => self.put((x) => selNos.forEach((no) => self.ev(x, no, 'e-mailed to configured channel')), { dlg: null, sel: {}, __toast: selNos.length + ' invoices sent to their configured channels' });
       } else if (d.kind === 'cn' && di) {
         dlgTitle = 'Request credit note · ' + di.no; dlgSub = di.party; okLabel = 'Submit for approval';
@@ -1052,9 +1151,9 @@ class GirsPage extends DCLogic {
       self.put((x) => {
         x.done = (x.done || []).concat(ids); x.gen = x.gen || [];
         ids.forEach((id) => {
-          const r = IV_READY.find((y) => y.id === id), c = ivReadyCalc(r), cu = IV_CUST[r.cust] || {};
+          const r = IV_RDY.find((y) => y.id === id), c = ivReadyCalc(r), cu = IV_CUST[r.cust] || {};
           const pre = r.type === 'DET / DEM' ? 'SINOD' : (r.type === 'MISC' ? 'SINMI' : 'SINOF');
-          const no = pre + String(2602430 + (x.gen.length + 1) * 7).slice(-7);
+          const no = pre + String(2609000 + (x.gen.length + 1) * 7).slice(-7);
           const aud = 105200 + x.gen.length * 10;
           x.gen.unshift({ no, type: r.type, bkg: r.bkg, bl: r.bl, cntr: r.cntr, vvd: r.vvd, party: cu.name, cust: r.cust, status: 'Generated', due: ivPlus(14), gov: '—', files: 'PDF · JSON', date: ivToday(), port: r.port,
             lines: c.lines.map((l, n) => [l.code, l.inc, l.cur, '1.3412', l.tax === '—' ? 'SG-SR-9' : l.tax, 'AUD-26-' + (aud + n)]) });
@@ -1068,7 +1167,8 @@ class GirsPage extends DCLogic {
       pick: () => self.setF({ full, amountErr: false, amount: full && di ? ivFmt(ivMain(di)) : '' }) }));
     const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail'];
     return {
-      groups, cards, cardsEmpty: cards.length === 0, dv: dv || {}, hasDv: !!dv, noDv: !dv, stop: (e) => { try { e.stopPropagation(); } catch (er) {} }, gLabel: gNow[1], gHint: gNow[3],
+      groups, cards, pQ: PQ.p, dCards: !dRows, dRows, views: [['cards', 'Cards'], ['rows', 'Rows']].map(([k, label]) => ({ label, on: (s.dview || 'cards') === k ? 'true' : 'false', pick: () => self.setState({ dview: k, menu: null }) })),
+      gCount: gShown.length.toLocaleString('en-US') + ' invoice' + (gShown.length === 1 ? '' : 's'), cardsEmpty: cards.length === 0, dv: dv || {}, hasDv: !!dv, noDv: !dv, stop: (e) => { try { e.stopPropagation(); } catch (er) {} }, gLabel: gNow[1], gHint: gNow[3],
       readyN: READY.length, hasReady: READY.length > 0, readyOn: s.tab === 'ready' ? 'true' : 'false',
       readySummary: ['Ready', 'Warning', 'Blocked'].map((k) => READY.filter((r) => r.status === k).length + ' ' + ({ Ready: 'ready', Warning: 'need review', Blocked: 'blocked' })[k]).join(' · '),
       openReady: () => self.setState({ tab: 'ready', view: 'list', menu: null }), backInv: () => self.setState({ tab: 'inv', view: 'list', rv: null }),
@@ -1076,16 +1176,18 @@ class GirsPage extends DCLogic {
       readyListOn: s.view === 'list' || !cur,
       tabs: [['ready', 'Ready to invoice', READY.length], ['inv', 'Invoices', INV.length]].map(([k, label, n]) => ({ label, n, on: s.tab === k ? 'true' : 'false', pick: () => self.setState({ tab: k, menu: null }) })),
       manual: () => ivGo('ManualInvoice.dc.html'), goGenerate: () => ivGo('InvoiceGenerate.dc.html'), goList: () => ivGo('InvoiceListB.dc.html'),
-      q: s.q, onQ: (e) => self.setState({ q: e.target.value }), fsel, filtered: !!(s.q || s.fs || s.ft || s.fc), clearF: () => self.setState({ q: '', fs: '', ft: '', fc: '' }),
+      q: s.q, onQ: (e) => self.setState({ q: e.target.value, pg: {} }), fsel, filtered: !!(s.q || s.fs || s.ft || s.fc), clearF: () => self.setState({ q: '', fs: '', ft: '', fc: '', pg: {} }),
       countText: shown.length + ' of ' + INV.length + ' invoices', invs, invEmpty: invs.length === 0,
-      allOn, toggleAll: () => { const n = Object.assign({}, s.sel); shown.forEach((i) => { n[i.no] = !allOn; }); self.setState({ sel: n }); },
-      hasSel: selNos.length > 0, selText: selNos.length + ' selected', clearSel: () => self.setState({ sel: {} }),
+      allOn, toggleAll: () => { const n = Object.assign({}, s.sel); PI.rows.forEach((i) => { n[i.no] = !allOn; }); self.setState({ sel: n }); },
+      pInv: PI.p, sortSel, canSelAll: allOn && selNos.length < shown.length, selAllText: 'Select all ' + shown.length.toLocaleString('en-US') + ' matching invoices',
+      selAll: () => { const n = {}; shown.forEach((i) => { n[i.no] = true; }); self.setState({ sel: n }); },
+      hasSel: selNos.length > 0, selText: selNos.length.toLocaleString('en-US') + ' selected', clearSel: () => self.setState({ sel: {} }),
       bulkDownload: () => toast(selNos.length + ' invoices downloaded as PDF / JSON · sample files'), bulkMail: () => self.setState({ dlg: { kind: 'bulkmail' }, f: {} }),
       menuOn: menuItems.length > 0, menuItems, menuPos, closeMenu: () => self.setState({ menu: null }),
       period: s.period, onPeriod: (e) => self.setState({ period: e.target.value }), ports, procs, rPort: s.rPort, rProc: s.rProc,
-      onPort: (e) => self.setState({ rPort: e.target.value }), onProc: (e) => self.setState({ rProc: e.target.value }),
+      onPort: (e) => self.setState({ rPort: e.target.value, pg: {} }), onProc: (e) => self.setState({ rProc: e.target.value, pg: {} }),
       rFiltered: !!(s.period || s.rPort || s.rProc || s.rKpi), resetR: () => self.setState({ period: '', rPort: '', rProc: '', rKpi: '' }),
-      kpis, ready, readyEmpty: ready.length === 0, readyEmptyText: READY.length ? 'No B/Ls match these filters' : 'All B/Ls are invoiced. New B/Ls arrive with the next LMS batch run.',
+      kpis, ready, pRdy: PR.p, readyEmpty: ready.length === 0, readyEmptyText: READY.length ? 'No B/Ls match these filters' : 'All B/Ls are invoiced. New B/Ls arrive with the next LMS batch run.',
       rAllOn, rToggleAll: () => { const n = Object.assign({}, s.rsel); selectable.forEach((r) => { n[r.id] = !rAllOn; }); self.setState({ rsel: n }); },
       hasRSel: rSel.length > 0, noRSel: rSel.length === 0, rSelN: rSel.length, genDis: rSel.length === 0 || warnSel > 0,
       genHint: warnSel ? warnSel + ' selected B/L' + (warnSel === 1 ? ' has' : 's have') + ' warnings · review before generating' : (rSel.length ? '' : 'Select Ready B/Ls to generate, or open one to review'),
