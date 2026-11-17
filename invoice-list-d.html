@@ -154,6 +154,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .banner{display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 14px;border-radius:6px;font-size:13px;font-weight:500;box-sizing:border-box}
 .b-warn{background:var(--warnbg);border:1px solid #F1CFA6;color:var(--warn)}
 .b-block{background:var(--badbg);border:1px solid #EDB8BA;color:var(--bad)}
+.b-ok{background:var(--okbg);border:1px solid var(--okbd, #B7DEC8);color:var(--ok)}
 .b-info{background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2)}
 .steps{display:flex;align-items:center;gap:12px;padding:14px 20px}
 .step{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted);white-space:nowrap}
@@ -321,10 +322,6 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </button>
           <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
             <div id="ng-g1" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="invoices-hub.html" class="nav-item" title="{{shell.l.nInvoicesHub}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nInvoicesHub}}</span>
-          </a>
           <a href="invoice-list.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nInvoiceList}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
             <span style="{{shell.hide}}">{{shell.l.nInvoiceList}}</span>
@@ -501,9 +498,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
                   <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
                 </a>
-                <a href="invoices-hub.html" class="mi" role="option" onClick="{{shell.goFind}}">
+                <a href="invoice-list.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
-                  <span>Find “<strong>{{shell.q}}</strong>” in Invoices Hub</span>
+                  <span>Find “<strong>{{shell.q}}</strong>” in Invoice List</span>
                 </a>
               </div>
             </sc-if>
@@ -591,6 +588,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Layout</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="invoice-list.html">A · Tabs</a><a class="lay" href="invoice-list-b.html">B · Separate generate page</a><a class="lay" href="invoice-list-c.html">C · List + detail</a><a class="lay" href="invoice-list-d.html" aria-current="page">D · Work queues</a></div></nav>
           <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
+          <a href="credit-notes.html" class="btn" style="text-decoration: none">Raise credit note</a>
           <button class="btn btn-primary" onClick="{{manual}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Manual invoice</button>
           </div>
         </div>
@@ -730,6 +728,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <div class="kv3"><sc-for list="{{det.fields}}" as="f" hint-placeholder-count="12"><div><span class="l">{{f.k}}</span><span class="v" style="{{f.st}}">{{f.v}}</span></div></sc-for></div>
                   <table class="ctab"><thead><tr><th>Charge Code</th><th class="num">Charge Amount</th><th>Currency</th><th>ROE</th><th>Tax Code</th><th>Audit ID</th></tr></thead><tbody><sc-for list="{{det.lines}}" as="l" hint-placeholder-count="2"><tr><td class="mono">{{l.chg}} <span class="mu" style="font-family: inherit">· {{l.name}}</span></td><td class="mono num">{{l.amt}}</td><td class="mono">{{l.cur}}</td><td class="mono">{{l.roe}}</td><td class="mono">{{l.tax}}</td><td class="mono">{{l.audit}}</td></tr></sc-for></tbody></table>
                 </sc-if>
+                <sc-if value="{{dPrf}}" hint-placeholder-val="{{ false }}">
+                  <div class="kv3"><sc-for list="{{prf.rows}}" as="r" hint-placeholder-count="4"><div><span class="l">{{r.k}}</span><span class="v">{{r.v}}</span></div></sc-for></div>
+                  <div class="banner {{prf.noteCls}}">{{prf.note}}</div>
+                </sc-if>
                 <sc-if value="{{dTable}}" hint-placeholder-val="{{ false }}">
                   <table class="at ctab"><thead><tr><sc-for list="{{tbl.cols}}" as="c" hint-placeholder-count="4"><th>{{c}}</th></sc-for></tr></thead><tbody><sc-for list="{{tbl.rows}}" as="r" hint-placeholder-count="4"><tr><sc-for list="{{r.cells}}" as="c" hint-placeholder-count="4"><td class="{{c.cls}}">{{c.v}}</td></sc-for></tr></sc-for></tbody></table>
                 </sc-if>
@@ -754,6 +756,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 </sc-if>
               </div>
               <sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" aria-haspopup="menu" onClick="{{det.openMenu}}">All actions<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button><sc-if value="{{det.showPrim}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{det.primRun}}">{{det.prim}}</button></sc-if></div></sc-if>
+              <sc-if value="{{dPrf}}" hint-placeholder-val="{{ false }}"><div class="df"><sc-if value="{{prf.canCancel}}" hint-placeholder-val="{{ false }}"><button class="btn dbtn-danger" onClick="{{prf.cancel}}">Cancel proforma</button></sc-if><sc-if value="{{prf.canPaid}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{prf.transfer}}">Booking cancelled · transfer payment</button><button class="btn btn-primary" onClick="{{prf.convert}}">Convert to final + debit note</button></sc-if></div></sc-if>
               <sc-if value="{{dlgDl}}" hint-placeholder-val="{{ false }}"><div class="df"><span class="mu" style="margin-inline-end: auto">Download</span><button class="btn btn-sm" onClick="{{dl.pdf}}">PDF</button><button class="btn btn-sm" onClick="{{dl.xls}}">Excel</button><button class="btn btn-sm" onClick="{{dl.csv}}">CSV</button></div></sc-if>
               <sc-if value="{{dlgAct}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" onClick="{{closeDlg}}">Cancel</button><button class="btn {{okCls}}" onClick="{{dlgOk}}">{{okLabel}}</button></div></sc-if>
             </sc-if>
@@ -872,6 +875,29 @@ function ivRcptData(i) {
     items: order.map((cur) => ({ inv: i.no, bl: i.bl, cur, amt: per[cur] })), cust: { code: i.cust, name: c.name || i.party, tax: c.tax, addr: c.addr } };
 }
 function ivHasJson(i) { return String(i.files).indexOf('JSON') >= 0; }
+function ivHash(s) { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 9973; return h; }
+// Payment status (from the former Invoices Hub): Unpaid / Partially paid / Paid, proforma payment, credited
+function ivPay(i, prf) {
+  if (i.type === 'Proforma') {
+    if (prf === 'converted') return 'Moved to final invoice';
+    if (prf === 'transferred') return 'Held as credit balance';
+    if (i.status === 'Cancelled') return 'Cancelled';
+    return ivHash(i.no) % 3 === 0 ? 'Proforma · paid' : 'Proforma · unpaid';
+  }
+  if (i.status === 'Paid') return 'Paid';
+  if (i.status === 'Credited') return 'Credited';
+  if (i.status === 'Cancelled') return 'Cancelled';
+  if (['Generated', 'Sent', 'Accepted'].includes(i.status)) return ivHash(i.no) % 4 === 0 ? 'Partially paid' : 'Unpaid';
+  return 'Not billed yet';
+}
+// Distribution channels (from the former Invoices Hub)
+function ivDist(i) {
+  const sent = ['Sent', 'Accepted', 'Paid', 'Credited'].includes(i.status), gen = sent || i.status === 'Generated', cc = String(i.port || '').slice(0, 2);
+  const gov = i.gov !== '—' ? (/error|rejected/i.test(i.gov) ? 'Rejected · ' + i.gov : 'Accepted · ' + i.gov) : (['IN', 'MY'].includes(cc) ? (gen ? 'Not submitted yet' : 'Not generated yet') : 'Not required');
+  return [['Email to customer-master contacts', sent ? 'Delivered' : (gen ? 'Not sent yet' : 'Not generated yet')],
+    ['PocketApp / MELL / MSC', sent ? 'Uploaded' : (gen ? 'Not uploaded yet' : 'Not generated yet')],
+    ['ODeX', 'Not applicable'], ['Qwiik / FAM', 'Not applicable'], ['Government tax portal', gov]];
+}
 function ivView(i, toast) { try { window.GirsDocs.invoice(ivDocData(i), { json: ivHasJson(i) ? ivDocData(i) : null, onDone: toast }); } catch (e) {} }
 function ivPdf(i, toast) { try { window.GirsDocs.invoicePdf(ivDocData(i)); toast(i.no + '.pdf downloaded'); } catch (e) {} }
 function ivJsonDl(i, toast) { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); toast(i.no + '.json downloaded'); } catch (e) {} }
@@ -892,7 +918,8 @@ class GirsPage extends DCLogic {
     super(p);
     let q = '';
     try { q = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
-    this.state = { tab: 'inv', view: 'list', q, fs: '', ft: '', fc: '', sel: {}, exp: {}, menu: null, dlg: null, f: {},
+    try { const fq = localStorage.getItem('girs.find'); if (fq) { q = fq; localStorage.removeItem('girs.find'); } } catch (e) {}
+    this.state = { tab: 'inv', view: 'list', q, fs: '', fp: '', ft: '', fc: '', sel: {}, exp: {}, menu: null, dlg: null, f: {},
       period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, rv: null, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
   }
   put(mut, extra) { const d = JSON.parse(JSON.stringify(this.state.store)); mut(d); ivSave(d); if (typeof extra === 'function') extra = extra(); this.setState(Object.assign({ store: d }, extra || {})); if (extra && extra.__toast) this.fade(extra.__toast); }
@@ -901,14 +928,14 @@ class GirsPage extends DCLogic {
   invoices() {
     const d = this.state.store;
     const all = (d.gen || []).concat(IV_ALL);
-    return all.map((i) => Object.assign({}, i, { status: (d.st && d.st[i.no]) || i.status }));
+    return all.map((i) => { const o = Object.assign({}, i, { status: (d.st && d.st[i.no]) || i.status }); o.pay = ivPay(o, (d.prf || {})[i.no]); return o; });
   }
   readyList() { const d = this.state.store; return IV_RDY.filter((r) => !(d.done || []).includes(r.id)); }
   openMenu(no, e) {
     let pos = { x: 0, y: 0, up: false };
     try {
       const z = parseFloat(this.state.__z || 1) || 1, b = e.currentTarget.getBoundingClientRect();
-      const vh = window.innerHeight / z, top = b.bottom / z + 4, h = 510;
+      const vh = window.innerHeight / z, top = b.bottom / z + 4, h = 580;
       pos = { x: Math.max(8, b.right / z - 264), y: top + h > vh ? Math.max(8, b.top / z - h - 4) : top };
     } catch (er) {}
     this.setState({ menu: this.state.menu && this.state.menu.no === no ? null : { no, pos } });
@@ -948,9 +975,9 @@ class GirsPage extends DCLogic {
     const byNo = {}; INV.forEach((i) => { byNo[i.no] = i; });
     const q = s.q.trim().toLowerCase();
     const shown = INV.filter((i) => (!q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q))
-      && (!s.fs || i.status === s.fs) && (!s.ft || i.type === s.ft) && (!s.fc || i.lines.some((l) => l[2] === s.fc)));
+      && (!s.fs || i.status === s.fs) && (!s.fp || i.pay === s.fp) && (!s.ft || i.type === s.ft) && (!s.fc || i.lines.some((l) => l[2] === s.fc)));
     const uniq = (a) => a.filter((v, n) => a.indexOf(v) === n);
-    const fsel = [['Invoice Status', 'fs', uniq(INV.map((i) => i.status))], ['Invoice Type', 'ft', uniq(INV.map((i) => i.type))], ['Currency', 'fc', uniq([].concat(...INV.map((i) => i.lines.map((l) => l[2]))))]]
+    const fsel = [['Invoice Status', 'fs', uniq(INV.map((i) => i.status))], ['Payment Status', 'fp', uniq(INV.map((i) => i.pay))], ['Invoice Type', 'ft', uniq(INV.map((i) => i.type))], ['Currency', 'fc', uniq([].concat(...INV.map((i) => i.lines.map((l) => l[2]))))]]
       .map(([label, k, opts]) => ({ label, val: s[k], opts, on: (e) => self.setState({ [k]: e.target.value, pg: {} }) }));
     shown.sort(sorter);
     const PI = pager('inv', shown, [25, 50, 100]);
@@ -998,8 +1025,10 @@ class GirsPage extends DCLogic {
         it('View receipt', close(() => ivReceipt(i, toast)), !paid, 'No receipt yet'),
         it('Create manual invoice', close(() => ivGo('ManualInvoice.dc.html', i.bl)), false, '', { sep: true }),
         it('View audit trail', () => self.dlg('audit', i)),
+        it('View distribution', () => self.dlg('dist', i)),
+        i.type === 'Proforma' ? it('Proforma lifecycle', () => self.dlg('prf', i)) : null,
         it('Cancel invoice', () => self.dlg('cancel', i, { why: '' }), !cancelOk, st === 'Cancelled' ? 'Already cancelled' : (st === 'Accepted' ? 'E-invoice accepted · raise a credit note instead' : 'Paid or credited invoices are reversed by credit note'), { cls: 'd', sep: true })
-      ];
+      ].filter(Boolean);
     };
     const PRIMARY = { 'Draft': 'View invoice details', 'Pending validation': 'View audit trail', 'Generated': 'e-Mail / Post', 'Sent': 'Download PDF / JSON', 'Accepted': 'Download PDF / JSON',
       'Paid': 'View receipt', 'Rejected': 'View audit trail', 'Credited': 'View credit note', 'Cancelled': 'View audit trail' };
@@ -1010,19 +1039,20 @@ class GirsPage extends DCLogic {
       menuPos = 'left:' + s.menu.pos.x + 'px;top:' + s.menu.pos.y + 'px';
     }
     // ---------------- simple layouts (C, D)
-    const GROUPS = [['all', 'All invoices', null, 'Every invoice in this hub'], ['attention', 'Needs attention', ['Rejected', 'Pending validation'], 'Rejected by the tax portal or still in validation'],
-      ['draft', 'Draft', ['Draft'], 'Proformas and drafts not yet issued'], ['open', 'Awaiting payment', ['Generated', 'Sent', 'Accepted'], 'Generated, sent or accepted and not yet paid'],
+    const GROUPS = [['all', 'All invoices', null, 'Every invoice'], ['attention', 'Needs attention', ['Rejected', 'Pending validation'], 'Rejected by the tax portal or still in validation'],
+      ['draft', 'Draft', ['Draft'], 'Proformas and drafts not yet issued'], ['open', 'Unpaid', ['Generated', 'Sent', 'Accepted'], 'Generated, sent or accepted with no payment yet'], ['part', 'Partially paid', [], 'Part of the amount received; balance outstanding'],
       ['paid', 'Paid', ['Paid'], 'Payment received'], ['closed', 'Credited / cancelled', ['Credited', 'Cancelled'], 'Reversed by credit note or cancelled']];
-    const gOf = (st) => (GROUPS.find((g) => g[2] && g[2].includes(st)) || [])[0];
+    const gOfS = (st) => (GROUPS.find((g) => g[2] && g[2].includes(st)) || [])[0];
+    const gOf = (i) => i.pay === 'Partially paid' ? 'part' : gOfS(i.status);
     const grp = s.grp || 'all';
     const qOnly = INV.filter((i) => !q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q));
-    const gShown = qOnly.filter((i) => grp === 'all' || gOf(i.status) === grp).sort(sorter);
+    const gShown = qOnly.filter((i) => grp === 'all' || gOf(i) === grp).sort(sorter);
     const dRows = s.dview === 'rows';
     const PQ = pager(isD ? (dRows ? 'dr' : 'dc') : 'cq', gShown, isD ? (dRows ? [25, 50, 100] : [12, 24, 48]) : [20, 50, 100]);
     const PILLC = { 'var(--muted)': 'var(--neutral)', 'var(--warn)': 'var(--warnbg)', 'var(--accent2)': 'var(--tint)', 'var(--ok)': 'var(--okbg)', 'var(--bad)': 'var(--badbg)', 'var(--ai)': 'var(--aibg)' };
     const totalOf = (i) => { const per = {}; i.lines.forEach((l) => { per[l[2]] = (per[l[2]] || 0) + l[1]; }); const ks = Object.keys(per);
       return { main: ivFmt(per[ks[0]]) + ' ' + ks[0], extra: ks.slice(1).map((c) => '+ ' + ivFmt(per[c]) + ' ' + c).join(' ') }; };
-    const groups = GROUPS.map(([k, label, sts, hint]) => ({ k, label, hint, n: qOnly.filter((i) => k === 'all' || gOf(i.status) === k).length, on: grp === k && s.tab === 'inv' ? 'true' : 'false',
+    const groups = GROUPS.map(([k, label, sts, hint]) => ({ k, label, hint, n: qOnly.filter((i) => k === 'all' || gOf(i) === k).length, on: grp === k && s.tab === 'inv' ? 'true' : 'false',
       warnCls: k === 'attention' ? 'w' : '', pick: () => self.setState({ grp: k, tab: 'inv', view: 'list', menu: null, pg: {} }) }));
     const curNo = s.cur && gShown.some((i) => i.no === s.cur) ? s.cur : (PQ.rows[0] || {}).no;
     const cards = PQ.rows.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
@@ -1040,7 +1070,7 @@ class GirsPage extends DCLogic {
         prim: pr.label, primRun: pr.run, primDis: pr.dis, sec: sec.map((m) => ({ label: m.label, run: m.run })),
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
         sections: [
-          { t: 'Invoice', f: [F('Invoice No.', i.no, 1), F('Invoice Type', i.type), F('Invoice Status', i.status), F('Due Date', i.due)] },
+          { t: 'Invoice', f: [F('Invoice No.', i.no, 1), F('Invoice Type', i.type), F('Invoice Status', i.status), F('Payment Status', i.pay), F('Due Date', i.due)] },
           { t: 'Shipment', f: [F('Booking No.', i.bkg, 1), F('B/L No.', i.bl, 1), F('Container No.', i.cntr, 1), F('Voyage/VVD', i.vvd)] },
           { t: 'Billing', f: [F('Billing Party', i.party), F('Customer Code', i.cust, 1)] },
           { t: 'Compliance and files', f: [F('Govt. Reference', i.gov, 1), F('PDF/JSON Link', i.files), F('Audit ID', i.lines[0][5], 1)] }],
@@ -1094,7 +1124,7 @@ class GirsPage extends DCLogic {
     // ---------------- dialogs
     const d = s.dlg, f = s.f || {};
     const di = d && d.no ? byNo[d.no] : null;
-    let dlgTitle = '', dlgSub = '', dlgCls = '', det = { fields: [], lines: [] }, tbl = { cols: [], rows: [] }, okLabel = '', okCls = 'btn-primary', dlgOk = () => {}, dl = {};
+    let dlgTitle = '', dlgSub = '', dlgCls = '', det = { fields: [], lines: [] }, tbl = { cols: [], rows: [] }, okLabel = '', okCls = 'btn-primary', dlgOk = () => {}, dl = {}, prf = { rows: [] };
     const tableOf = (cols, rows) => ({ cols, rows: rows.map((r) => ({ cells: r.map((v, n) => ({ v, cls: n === 0 ? 'mono' : '' })) })) });
     const dlFor = (name, cols, rows) => {
       const esc = (v) => '"' + String(v).replace(/"/g, '""') + '"';
@@ -1108,11 +1138,28 @@ class GirsPage extends DCLogic {
       if (d.kind === 'details' && di) {
         dlgTitle = di.no; dlgSub = di.type + ' invoice · ' + di.party; dlgCls = 'wide';
         det.fields = [['Invoice Type', di.type], ['Booking No.', di.bkg], ['B/L No.', di.bl], ['Container No.', di.cntr], ['Voyage/VVD', di.vvd], ['Billing Party', di.party],
-          ['Customer Code', di.cust], ['Invoice Status', di.status, 'color:' + (IV_TONE[di.status] || 'var(--ink)')], ['Due Date', di.due], ['Govt. Reference', di.gov], ['PDF/JSON Link', di.files], ['Audit ID', di.lines[0][5]]].map(([k, v, st]) => ({ k, v, st: st || '' }));
+          ['Customer Code', di.cust], ['Invoice Status', di.status, 'color:' + (IV_TONE[di.status] || 'var(--ink)')], ['Payment Status', di.pay], ['Due Date', di.due], ['Govt. Reference', di.gov], ['PDF/JSON Link', di.files], ['Audit ID', di.lines[0][5]]].map(([k, v, st]) => ({ k, v, st: st || '' }));
         det.lines = di.lines.map((l) => ({ chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], tax: l[4], audit: l[5] }));
         const pr = primaryOf(di);
         det.showPrim = pr.label !== 'View invoice details' && !pr.dis; det.prim = pr.label; det.primRun = () => { self.setState({ dlg: null }); setTimeout(() => pr.run(), 0); };
         det.openMenu = (e) => self.openMenu(di.no, e);
+      } else if (d.kind === 'dist' && di) {
+        dlgTitle = 'Distribution · ' + di.no; dlgSub = 'Where the invoice was sent · ' + di.party;
+        const rows = ivDist(di); tbl = tableOf(['Channel', 'Status'], rows); tbl.rows.forEach((r) => { r.cells[0].cls = ''; }); dl = dlFor('Distribution ' + di.no, ['Channel', 'Status'], rows);
+      } else if (d.kind === 'prf' && di) {
+        dlgTitle = 'Proforma lifecycle · ' + di.no; dlgSub = di.party;
+        const done = (s.store.prf || {})[di.no], paid = di.pay === 'Proforma · paid', amt = Object.entries(di.lines.reduce((a, l) => { a[l[2]] = (a[l[2]] || 0) + l[1]; return a; }, {})).map(([c, v]) => c + ' ' + ivFmt(v)).join(' + ');
+        prf = { rows: [['Validity', '[n] days · until [Date]'], ['Proforma amount', amt], ['Payment', di.pay], ['Final BDR from LMS', done === 'converted' ? 'Final invoice raised' : '[Final BDR amount]']].map(([k, v]) => ({ k, v })),
+          note: done === 'converted' ? 'Final invoice raised from the final BDR; the proforma payment was applied and the difference billed by debit note.'
+            : (done === 'transferred' ? 'Booking cancelled after payment. The payment is held as customer credit balance for transfer or refund.'
+            : (di.status === 'Cancelled' ? 'Proforma cancelled. No credit note is raised for a proforma.'
+            : (paid ? 'Customer paid the proforma. When the final BDR is higher, the payment moves to the final invoice and the difference is billed. The original receipt is not voided.'
+            : 'Auto-cancelled at the end of the validity window if not paid.'))),
+          noteCls: done || di.status === 'Cancelled' ? 'b-ok' : (paid ? 'b-warn' : 'b-info'),
+          canPaid: paid && !done && di.status !== 'Cancelled', canCancel: !paid && !done && di.status !== 'Cancelled',
+          convert: () => self.put((x) => { x.prf = x.prf || {}; x.prf[di.no] = 'converted'; self.ev(x, di.no, 'Converted to final invoice · proforma payment applied · debit note for the difference'); }, { dlg: null, __toast: di.no + ' converted · final invoice and debit note raised' }),
+          transfer: () => self.put((x) => { x.prf = x.prf || {}; x.prf[di.no] = 'transferred'; self.ev(x, di.no, 'Booking cancelled · payment held as customer credit balance'); }, { dlg: null, __toast: di.no + ' payment held as customer credit balance' }),
+          cancel: () => self.put((x) => { x.st = x.st || {}; x.st[di.no] = 'Cancelled'; self.ev(x, di.no, 'Proforma cancelled · no credit note raised'); }, { dlg: null, __toast: di.no + ' cancelled · no credit note is raised for a proforma' }) };
       } else if (d.kind === 'audit' && di) {
         dlgTitle = 'Audit trail · ' + di.no; dlgSub = 'Invoice events, newest last'; dlgCls = 'wide';
         const rows = this.audit(di); tbl = tableOf(['When', 'Event', 'By'], rows); dl = dlFor('Audit trail ' + di.no, ['When', 'Event', 'By'], rows);
@@ -1185,7 +1232,7 @@ class GirsPage extends DCLogic {
     const chans = [['email', 'e-Mail'], ['post', 'Post']].map(([k, label]) => ({ label, on: (f.ch || 'email') === k ? 'true' : 'false', pick: () => self.setF({ ch: k, toErr: false, to: k === 'post' ? ((IV_CUST[di && di.cust] || {}).addr || '') : ((IV_CUST[di && di.cust] || {}).mail || '') }) }));
     const ctypes = [['Full', true], ['Partial', false]].map(([label, full]) => ({ label, on: !!f.full === full ? 'true' : 'false',
       pick: () => self.setF({ full, amountErr: false, amount: full && di ? ivFmt(ivMain(di)) : '' }) }));
-    const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail'];
+    const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail', 'dist', 'prf'];
     return {
       groups, cards, pQ: PQ.p, dCards: !dRows, dRows, views: [['cards', 'Cards'], ['rows', 'Rows']].map(([k, label]) => ({ label, on: (s.dview || 'cards') === k ? 'true' : 'false', pick: () => self.setState({ dview: k, menu: null }) })),
       gCount: gShown.length.toLocaleString('en-US') + ' invoice' + (gShown.length === 1 ? '' : 's'), cardsEmpty: cards.length === 0, dv: dv || {}, hasDv: !!dv, noDv: !dv, stop: (e) => { try { e.stopPropagation(); } catch (er) {} }, gLabel: gNow[1], gHint: gNow[3],
@@ -1196,7 +1243,7 @@ class GirsPage extends DCLogic {
       readyListOn: s.view === 'list' || !cur,
       tabs: [['ready', 'Ready to invoice', READY.length], ['inv', 'Invoices', INV.length]].map(([k, label, n]) => ({ label, n, on: s.tab === k ? 'true' : 'false', pick: () => self.setState({ tab: k, menu: null }) })),
       manual: () => ivGo('ManualInvoice.dc.html'), goGenerate: () => ivGo('InvoiceGenerate.dc.html'), goList: () => ivGo('InvoiceListB.dc.html'),
-      q: s.q, onQ: (e) => self.setState({ q: e.target.value, pg: {} }), fsel, filtered: !!(s.q || s.fs || s.ft || s.fc), clearF: () => self.setState({ q: '', fs: '', ft: '', fc: '', pg: {} }),
+      q: s.q, onQ: (e) => self.setState({ q: e.target.value, pg: {} }), fsel, filtered: !!(s.q || s.fs || s.ft || s.fc), clearF: () => self.setState({ q: '', fs: '', fp: '', ft: '', fc: '', pg: {} }),
       countText: shown.length + ' of ' + INV.length + ' invoices', invs, invEmpty: invs.length === 0,
       allOn, toggleAll: () => { const n = Object.assign({}, s.sel); PI.rows.forEach((i) => { n[i.no] = !allOn; }); self.setState({ sel: n }); },
       pInv: PI.p, sortSel, canSelAll: allOn && selNos.length < shown.length, selAllText: 'Select all ' + shown.length.toLocaleString('en-US') + ' matching invoices',
@@ -1221,8 +1268,8 @@ class GirsPage extends DCLogic {
       viewRoe: () => self.setState({ dlg: { kind: 'roe' } }), viewSrc: () => self.setState({ dlg: { kind: 'src' } }), viewCtx: () => self.setState({ dlg: { kind: 'ctx' } }),
       dlgOn: !!d, dConf: !!d && d.kind === 'confirm', dStd: !!d && d.kind !== 'confirm', dlgTitle, dlgSub, dlgCls,
       confText: d && d.kind === 'confirm' && (d.ids || []).length > 1 ? 'These ' + d.ids.length + ' invoices will be created immediately.' : 'This invoice will be created immediately.',
-      dDetails: !!d && d.kind === 'details', dTable: !!d && ['audit', 'roe', 'src', 'ctx', 'bulkmail'].includes(d.kind), dMail: !!d && d.kind === 'mail', dCn: !!d && d.kind === 'cn', dCancel: !!d && d.kind === 'cancel',
-      dlgDl: !!d && ['audit', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, okLabel, okCls, dlgOk, doGenerate,
+      dDetails: !!d && d.kind === 'details', dTable: !!d && ['audit', 'dist', 'roe', 'src', 'ctx', 'bulkmail'].includes(d.kind), dPrf: !!d && d.kind === 'prf', dMail: !!d && d.kind === 'mail', dCn: !!d && d.kind === 'cn', dCancel: !!d && d.kind === 'cancel',
+      dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, okLabel, okCls, dlgOk, doGenerate,
       closeDlg: () => self.setState({ dlg: null, f: {} }),
       chans, ctypes, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
       toLabel: f.ch === 'post' ? 'Postal address' : 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
