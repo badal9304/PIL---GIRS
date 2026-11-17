@@ -851,6 +851,25 @@ function ivFile(name, text, type) {
   try { const b = new Blob([text], { type }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
 }
 function ivMain(i) { const c = i.lines[0][2]; return i.lines.filter((l) => l[2] === c).reduce((a, l) => a + l[1], 0); }
+function ivRate(t) { if (!t || t === '—') return 0; if (/^ZR/.test(t)) return 0; const m = String(t).match(/-(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : 0; }
+function ivDocData(i) {
+  const c = IV_CUST[i.cust] || {};
+  return { no: i.no, type: i.type, status: i.status, date: i.date, due: i.due, bkg: i.bkg, bl: i.bl, cntr: i.cntr, vvd: i.vvd, port: i.port, gov: i.gov, audit: i.lines[0][5],
+    cust: { code: i.cust, name: c.name || i.party, tax: c.tax, addr: c.addr }, lines: i.lines.map((l) => ({ code: l[0], name: IV_CHG[l[0]] || l[0], amt: l[1], cur: l[2], roe: l[3], tax: l[4] })) };
+}
+function ivRcptData(i) {
+  const per = {}, order = [];
+  i.lines.forEach((l) => { if (!(l[2] in per)) { per[l[2]] = 0; order.push(l[2]); } per[l[2]] += l[1] + Math.round(l[1] * ivRate(l[4])) / 100; });
+  const c = IV_CUST[i.cust] || {};
+  return { no: '[Receipt no.]', date: i.due, inv: i.no, bl: i.bl, port: i.port, cur: order[0], amt: per[order[0]],
+    items: order.map((cur) => ({ inv: i.no, bl: i.bl, cur, amt: per[cur] })), cust: { code: i.cust, name: c.name || i.party, tax: c.tax, addr: c.addr } };
+}
+function ivHasJson(i) { return String(i.files).indexOf('JSON') >= 0; }
+function ivView(i, toast) { try { window.GirsDocs.invoice(ivDocData(i), { json: ivHasJson(i) ? ivDocData(i) : null, onDone: toast }); } catch (e) {} }
+function ivPdf(i, toast) { try { window.GirsDocs.invoicePdf(ivDocData(i)); toast(i.no + '.pdf downloaded'); } catch (e) {} }
+function ivJsonDl(i, toast) { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); toast(i.no + '.json downloaded'); } catch (e) {} }
+function ivDownload(i, toast) { ivPdf(i, toast); if (ivHasJson(i)) setTimeout(() => { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); } catch (e) {} toast(i.no + ' downloaded as PDF and JSON'); }, 500); }
+function ivReceipt(i, toast) { try { window.GirsDocs.receipt(ivRcptData(i), { onDone: toast }); } catch (e) {} }
 function ivReadyCalc(r) {
   const cur = 'USD';
   const lines = r.charges.map(([code, qty, uom, unit, tax, rate], n) => {
@@ -882,7 +901,7 @@ class GirsPage extends DCLogic {
     let pos = { x: 0, y: 0, up: false };
     try {
       const z = parseFloat(this.state.__z || 1) || 1, b = e.currentTarget.getBoundingClientRect();
-      const vh = window.innerHeight / z, top = b.bottom / z + 4, h = 470;
+      const vh = window.innerHeight / z, top = b.bottom / z + 4, h = 510;
       pos = { x: Math.max(8, b.right / z - 264), y: top + h > vh ? Math.max(8, b.top / z - h - 4) : top };
     } catch (er) {}
     this.setState({ menu: this.state.menu && this.state.menu.no === no ? null : { no, pos } });
@@ -936,14 +955,14 @@ class GirsPage extends DCLogic {
         on: !!s.sel[i.no], rowCls: s.sel[i.no] ? 'on' : '', open: !!s.exp[i.no],
         toggle: () => self.setState({ sel: Object.assign({}, s.sel, { [i.no]: !s.sel[i.no] }) }),
         expand: () => self.setState({ exp: Object.assign({}, s.exp, { [i.no]: !s.exp[i.no] }) }),
-        details: () => self.dlg('details', i),
+        details: () => ivView(i, toast),
         chg: i.lines.length === 1 ? i.lines[0][0] : i.lines.length + ' charges',
         amts: Object.keys(per).map((c) => ({ v: ivFmt(per[c]), c })),
         roe, roeSt: roe === '—' ? 'color:var(--muted)' : '', tax: uniq(i.lines.map((l) => l[4])).join(', '),
         audit: i.lines[0][5], stc: IV_TONE[i.status] || 'var(--muted)',
         dueSt: i.due === '—' ? 'color:var(--muted)' : '', govSt: i.gov === '—' ? 'color:var(--muted)' : (/error/.test(i.gov) ? 'color:var(--bad)' : ''),
         hasPdf: files.indexOf('PDF') >= 0, hasJson: files.indexOf('JSON') >= 0, noFile: files === '—',
-        pdf: () => toast(i.no + '.pdf downloaded · sample file'), json: () => toast(i.no + '.json downloaded · sample file'),
+        pdf: () => ivPdf(i, toast), json: () => ivJsonDl(i, toast),
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
         lines: i.lines.map((l, n) => ({ n: n + 1, chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], roeSt: l[3] === '—' ? 'color:var(--muted)' : '', tax: l[4], audit: l[5] }))
       });
@@ -960,15 +979,16 @@ class GirsPage extends DCLogic {
       const close = (fn) => () => { self.setState({ menu: null }); fn(); };
       const it = (label, run, dis, note, extra) => Object.assign({ label, run: dis ? () => {} : run, dis: !!dis, note: dis ? note : '', hasNote: !!(dis && note), cls: '', sep: false }, extra || {});
       return [
+        it('View invoice', close(() => ivView(i, toast)), i.files === '—', 'The invoice is created after validation'),
         it('View invoice details', () => self.dlg('details', i)),
         it('View credit note', close(() => ivGo('CreditNoteList.dc.html', i.no)), !hasCn, 'No credit note for this invoice'),
         it('View SOA', close(() => ivGo('SOADashboard.dc.html', i.cust))),
-        it('Download PDF / JSON', close(() => toast(i.no + ' downloaded as ' + (i.files === '—' ? 'PDF' : i.files.replace(' · ', ' and ')) + ' · sample files')), i.files === '—', 'Files are created after validation'),
+        it('Download PDF / JSON', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
         it('Request credit note', () => self.dlg('cn', i, { full: true, amount: ivFmt(ivMain(i)), reason: '', ref: '' }), !cnOk, st === 'Credited' ? 'Already fully credited' : 'Only for generated, sent, accepted or paid invoices'),
         it('Request refund', close(() => ivGo('Receipting.dc.html', i.no)), !paid, 'Only for paid invoices'),
         it('View payment', close(() => ivGo('CashAppWorkbench.dc.html', i.no)), !paid, 'No payment received yet'),
-        it('View receipt', close(() => ivGo('Receipting.dc.html', i.no)), !paid, 'No receipt yet'),
+        it('View receipt', close(() => ivReceipt(i, toast)), !paid, 'No receipt yet'),
         it('Create manual invoice', close(() => ivGo('ManualInvoice.dc.html', i.bl)), false, '', { sep: true }),
         it('View audit trail', () => self.dlg('audit', i)),
         it('Cancel invoice', () => self.dlg('cancel', i, { why: '' }), !cancelOk, st === 'Cancelled' ? 'Already cancelled' : (st === 'Accepted' ? 'E-invoice accepted · raise a credit note instead' : 'Paid or credited invoices are reversed by credit note'), { cls: 'd', sep: true })
@@ -1001,7 +1021,7 @@ class GirsPage extends DCLogic {
     const cards = PQ.rows.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
       return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
         total: t.main, extra: t.extra, hasExtra: !!t.extra, sel: i.no === curNo ? 'true' : 'false', dueSt: i.due === '—' ? 'color:var(--muted)' : '', lines: i.lines.length === 1 ? '1 charge' : i.lines.length + ' charges',
-        pick: () => self.setState({ cur: i.no }), open: () => self.dlg('details', i), prim: pr.label, primRun: pr.run, primDis: pr.dis,
+        pick: () => self.setState({ cur: i.no }), open: () => ivView(i, toast), prim: pr.label, primRun: pr.run, primDis: pr.dis,
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e) }; });
     let dv = null;
     if (curNo && byNo[curNo]) {
@@ -1009,7 +1029,7 @@ class GirsPage extends DCLogic {
       const dlIt = its.find((m) => m.label === 'Download PDF / JSON'), mailIt = its.find((m) => m.label === 'e-Mail / Post');
       const sec = [dlIt, mailIt, its.find((m) => m.label === 'Request credit note')].filter((m) => m && m.label !== pr.label && !m.dis).slice(0, 2);
       const F = (k, v, mono) => ({ k, v, cls: mono ? 'mono' : '', st: v === '—' ? 'color:var(--muted)' : '' });
-      dv = { no: i.no, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
+      dv = { no: i.no, view: () => ivView(i, toast), status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
         prim: pr.label, primRun: pr.run, primDis: pr.dis, sec: sec.map((m) => ({ label: m.label, run: m.run })),
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
         sections: [
@@ -1175,7 +1195,7 @@ class GirsPage extends DCLogic {
       pInv: PI.p, sortSel, canSelAll: allOn && selNos.length < shown.length, selAllText: 'Select all ' + shown.length.toLocaleString('en-US') + ' matching invoices',
       selAll: () => { const n = {}; shown.forEach((i) => { n[i.no] = true; }); self.setState({ sel: n }); },
       hasSel: selNos.length > 0, selText: selNos.length.toLocaleString('en-US') + ' selected', clearSel: () => self.setState({ sel: {} }),
-      bulkDownload: () => toast(selNos.length + ' invoices downloaded as PDF / JSON · sample files'), bulkMail: () => self.setState({ dlg: { kind: 'bulkmail' }, f: {} }),
+      bulkDownload: () => { const L = selNos.map((n) => byNo[n]).filter((i) => i.files !== '—'); if (!L.length) { toast('Files are created after validation'); return; } try { window.GirsDocs.invoicePdf(L.map(ivDocData), 'Invoices-' + L.length); const J = L.filter(ivHasJson); if (J.length) setTimeout(() => { try { window.GirsDocs.json('Invoices-' + J.length, J.map(ivDocData)); } catch (e) {} }, 500); } catch (e) {} toast(L.length + ' invoice' + (L.length === 1 ? '' : 's') + ' downloaded as one PDF' + (L.some(ivHasJson) ? ' and JSON' : '') + (L.length < selNos.length ? ' · ' + (selNos.length - L.length) + ' skipped (no files yet)' : '')); }, bulkMail: () => self.setState({ dlg: { kind: 'bulkmail' }, f: {} }),
       menuOn: menuItems.length > 0, menuItems, menuPos, closeMenu: () => self.setState({ menu: null }),
       period: s.period, onPeriod: (e) => self.setState({ period: e.target.value }), ports, procs, rPort: s.rPort, rProc: s.rProc,
       onPort: (e) => self.setState({ rPort: e.target.value, pg: {} }), onProc: (e) => self.setState({ rProc: e.target.value, pg: {} }),
@@ -1265,6 +1285,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-docs.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>

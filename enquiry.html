@@ -503,7 +503,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <tbody>
                   <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
                     <tr data-found="{{r.found}}" style="cursor: pointer" onClick="{{r.select}}">
-                      <td style="{{r.edge}}"><button class="rowbtn mono" onClick="{{r.select}}" style="font-weight: 500; color: var(--accent)">{{r.no}}</button></td>
+                      <td style="{{r.edge}}"><button class="rowbtn mono" onClick="{{r.open}}" title="View {{r.doc}}" style="font-weight: 500; color: var(--accent); text-decoration: underline; text-underline-offset: 2px">{{r.no}}</button></td>
                       <td style="{{r.cell}}">{{r.doc}}</td>
                       <td class="mono" style="{{r.cell}}">{{r.bl}}</td>
                       <td style="{{r.cell}}">{{r.cus}}</td>
@@ -529,7 +529,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               </div>
             </div>
             <div class="r-g2m" style="padding: 12px 16px 4px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-              <div><div class="k">Document</div><div class="mono" style="margin-top: 2px">{{sel.no}}</div></div>
+              <div><div class="k">Document</div><div class="mono" style="margin-top: 2px"><sc-if value="{{sel.hasDoc}}" hint-placeholder-val="{{ true }}"><button class="rowbtn mono" onClick="{{sel.open}}" style="font-weight: 500; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; padding: 0">{{sel.no}}</button></sc-if><sc-if value="{{sel.noDoc}}" hint-placeholder-val="{{ false }}">{{sel.no}}</sc-if></div></div>
               <div><div class="k">Correlation ID</div><div class="mono" style="margin-top: 2px">{{sel.corr}}</div></div>
             </div>
             <sc-if value="{{tabTrace}}" hint-placeholder-val="{{ true }}">
@@ -616,9 +616,23 @@ class GirsPage extends DCLogic {
     const vis = base.filter((d) => !s.stage || inStage(d, s.stage));
     const fmtD = (iso) => iso.slice(8) + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][Number(iso.slice(5, 7)) - 1] + ' ' + iso.slice(0, 4);
     const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);';
+    const openDoc = (d) => {
+      try {
+        if (d.no === '—') { this.setState({ notice: 'Not invoiced yet · no document to show for ' + d.bl + '.' }); return; }
+        const cust = { name: d.cus }, amt = Math.abs(d.amt);
+        if (d.doc === 'Receipt') {
+          const inv = D.find((x) => x.doc === 'Invoice' && x.bl === d.bl);
+          window.GirsDocs.receipt({ no: d.no, date: fmtD(d.date), inv: inv ? inv.no : '—', bl: d.bl, port: d.pol, cur: 'USD', amt, cust });
+          return;
+        }
+        const t = d.no.charAt(4), type = t === 'F' ? 'Freight' : (t === 'D' ? 'DET / DEM' : '—');
+        window.GirsDocs.invoice({ kind: d.doc === 'Credit Note' ? 'credit' : 'invoice', no: d.no, type, status: '', date: fmtD(d.date), due: '—', bkg: d.ship, bl: d.bl, vvd: d.ves, port: d.pol,
+          cust, lines: [{ code: '—', name: 'Charges · ' + d.pol + ' → ' + d.pod, amt, cur: 'USD', roe: '—', tax: '—' }] });
+      } catch (e) {}
+    };
     const rows = vis.map((d) => {
       const on = s.selected === d.id;
-      return { ...d, dateText: fmtD(d.date), amtText: (d.amt < 0 ? '− ' : '') + m(Math.abs(d.amt)), stageText: STAGE[d.stage], chip: CHIP[d.stage],
+      return { ...d, open: () => { this.setState({ selected: d.id }); openDoc(d); }, dateText: fmtD(d.date), amtText: (d.amt < 0 ? '− ' : '') + m(Math.abs(d.amt)), stageText: STAGE[d.stage], chip: CHIP[d.stage],
         cell: on ? 'background:var(--tint);' : '', edge: on ? selEdge : '', found: s.foundId === d.id ? 'true' : 'false', select: () => this.setState({ selected: d.id }) };
     });
     const stageDefs = [['invoiced', 'Invoiced'], ['yet', 'Yet to be invoiced'], ['paid', 'Paid'], ['unpaid', 'Unpaid'], ['issued', 'Receipt issued'], ['notissued', 'Receipt not issued']];
@@ -670,7 +684,7 @@ class GirsPage extends DCLogic {
       stages, rows, rowCount: rows.length, empty: rows.length === 0,
       tabs: tabDefs.map(([k, label]) => ({ label, on: s.tab === k ? 'true' : 'false', fg: s.tab === k ? 'var(--accent)' : 'var(--muted)', line: s.tab === k ? 'var(--accent)' : 'transparent', pick: () => this.setState({ tab: k }) })),
       tabTrace: s.tab === 'trace', tabFail: s.tab === 'fail', tabAudit: s.tab === 'audit', tabAi: s.tab === 'ai', aiLog,
-      sel: { no: sd.no === '—' ? sd.bl : sd.no, corr: 'CID-' + sd.bl.replace(/[^0-9]/g, '') + '-' + sd.id.toUpperCase() },
+      sel: { hasDoc: sd.no !== '—', noDoc: sd.no === '—', open: () => openDoc(sd), no: sd.no === '—' ? sd.bl : sd.no, corr: 'CID-' + sd.bl.replace(/[^0-9]/g, '') + '-' + sd.id.toUpperCase() },
       trace, fails, audit,
       pendingText: '2 pending approvals · approvers notified by email',
       hasNotice: !!s.notice, notice: s.notice, closeNotice: () => this.setState({ notice: '' }),
@@ -737,6 +751,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-docs.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>
