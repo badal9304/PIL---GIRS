@@ -740,6 +740,17 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <div class="kv3"><sc-for list="{{prf.rows}}" as="r" hint-placeholder-count="4"><div><span class="l">{{r.k}}</span><span class="v">{{r.v}}</span></div></sc-for></div>
                   <div class="banner {{prf.noteCls}}">{{prf.note}}</div>
                 </sc-if>
+                <sc-if value="{{dGen}}" hint-placeholder-val="{{ false }}">
+                  <sc-if value="{{gen.hasKv}}" hint-placeholder-val="{{ true }}"><div class="kv3"><sc-for list="{{gen.kv}}" as="f" hint-placeholder-count="6"><div><span class="l">{{f.k}}</span><span class="v" style="{{f.st}}">{{f.v}}</span></div></sc-for></div></sc-if>
+                  <sc-if value="{{gen.hasForm}}" hint-placeholder-val="{{ false }}"><div class="g2"><sc-for list="{{gen.fields}}" as="x" hint-placeholder-count="3"><label class="fld" style="{{x.span}}">{{x.label}}<sc-if value="{{x.hasHint}}" hint-placeholder-val="{{ false }}"> <span class="hint">{{x.hint}}</span></sc-if>
+                    <sc-if value="{{x.isInput}}" hint-placeholder-val="{{ true }}"><input class="input {{x.cls}}" value="{{x.val}}" onInput="{{x.on}}"></sc-if>
+                    <sc-if value="{{x.isSelect}}" hint-placeholder-val="{{ false }}"><div style="position: relative"><select class="select" value="{{x.val}}" onChange="{{x.on}}"><sc-if value="{{x.hasPh}}" hint-placeholder-val="{{ false }}"><option value="">{{x.ph}}</option></sc-if><sc-for list="{{x.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></sc-if>
+                    <sc-if value="{{x.isText}}" hint-placeholder-val="{{ false }}"><textarea class="input" style="height: 72px; padding-top: 8px; resize: vertical" value="{{x.val}}" onInput="{{x.on}}"></textarea></sc-if>
+                    <sc-if value="{{x.hasErr}}" hint-placeholder-val="{{ false }}"><span class="err">{{x.err}}</span></sc-if></label></sc-for></div></sc-if>
+                  <sc-if value="{{gen.hasNote}}" hint-placeholder-val="{{ false }}"><div class="banner {{gen.noteCls}}">{{gen.note}}</div></sc-if>
+                  <sc-if value="{{gen.hasTbl}}" hint-placeholder-val="{{ false }}"><span class="l" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted)">{{gen.tblTitle}}</span><table class="at ctab"><thead><tr><sc-for list="{{gen.cols}}" as="c" hint-placeholder-count="4"><th class="{{c.cls}}">{{c.v}}</th></sc-for></tr></thead><tbody><sc-for list="{{gen.rows}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r.cells}}" as="c" hint-placeholder-count="4"><td class="{{c.cls}}" style="{{r.st}}">{{c.v}}</td></sc-for></tr></sc-for></tbody></table></sc-if>
+                  <sc-if value="{{gen.empty}}" hint-placeholder-val="{{ false }}"><span class="mu">{{gen.emptyText}}</span></sc-if>
+                </sc-if>
                 <sc-if value="{{dTable}}" hint-placeholder-val="{{ false }}">
                   <table class="at ctab"><thead><tr><sc-for list="{{tbl.cols}}" as="c" hint-placeholder-count="4"><th>{{c}}</th></sc-for></tr></thead><tbody><sc-for list="{{tbl.rows}}" as="r" hint-placeholder-count="4"><tr><sc-for list="{{r.cells}}" as="c" hint-placeholder-count="4"><td class="{{c.cls}}">{{c.v}}</td></sc-for></tr></sc-for></tbody></table>
                 </sc-if>
@@ -1049,15 +1060,15 @@ class GirsPage extends DCLogic {
       return [
         it('View invoice', close(() => ivView(i, toast)), i.files === '—', 'The invoice is created after validation'),
         it('View invoice details', () => self.dlg('details', i)),
-        it('View credit note', close(() => ivAct(i, 'credit-note-list.html', 'cn', 'Credit note for')), !hasCn, 'No credit note for this invoice'),
-        it('View SOA', close(() => ivAct(i, 'soa-aging.html', 'soa', 'Statement of account · invoice'))),
+        it('View credit note', () => self.dlg('cnv', i), !hasCn, 'No credit note for this invoice'),
+        it('View SOA', () => self.dlg('soa', i)),
         it('Download PDF / JSON', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
         it('Request credit note', () => self.dlg('cn', i, { full: true, amount: ivFmt(ivMain(i)), reason: '', ref: '' }), !cnOk, st === 'Credited' ? 'Already fully credited' : 'Only for generated, sent, accepted or paid invoices'),
-        it('Request refund', close(() => ivAct(i, 'receipting.html', 'refund', 'Refund request for')), !paid, 'Only for paid invoices'),
-        it('View payment', close(() => ivAct(i, 'receipting.html', 'payment', 'Payment for')), !paid, 'No payment received yet'),
+        it('Request refund', () => self.dlg('refund', i, { amount: ivFmt(ivMain(i)), reason: '', note: '' }), !paid, 'Only for paid invoices'),
+        it('View payment', () => self.dlg('pay', i), !paid, 'No payment received yet'),
         it('View receipt', close(() => ivReceipt(i, toast)), !paid, 'No receipt yet'),
-        it('Create manual invoice', close(() => ivAct(i, 'manual-invoice.html', 'manual', 'Manual invoice from')), false, '', { sep: true }),
+        it('Create manual invoice', () => self.dlg('manual', i, { type: 'MISC', reason: 'Ancillary (MISC) charges', bl: i.bl, chg: '', amount: '', cur: i.lines[0][2] }), false, '', { sep: true }),
         it('View audit trail', () => self.dlg('audit', i)),
         it('View distribution', () => self.dlg('dist', i)),
         i.type === 'Proforma' ? it('Proforma lifecycle', () => self.dlg('prf', i)) : null,
@@ -1158,7 +1169,7 @@ class GirsPage extends DCLogic {
     // ---------------- dialogs
     const d = s.dlg, f = s.f || {};
     const di = d && d.no ? byNo[d.no] : null;
-    let dlgTitle = '', dlgSub = '', dlgCls = '', det = { fields: [], lines: [] }, tbl = { cols: [], rows: [] }, okLabel = '', okCls = 'btn-primary', dlgOk = () => {}, dl = {}, prf = { rows: [] };
+    let dlgTitle = '', dlgSub = '', dlgCls = '', det = { fields: [], lines: [] }, tbl = { cols: [], rows: [] }, okLabel = '', okCls = 'btn-primary', dlgOk = () => {}, dl = {}, prf = { rows: [] }, gen = { kv: [], fields: [], rows: [], cols: [], note: '', noteCls: '', tblTitle: '', empty: false, emptyText: '' };
     const tableOf = (cols, rows) => ({ cols, rows: rows.map((r) => ({ cells: r.map((v, n) => ({ v, cls: n === 0 ? 'mono' : '' })) })) });
     const dlFor = (name, cols, rows) => {
       const esc = (v) => '"' + String(v).replace(/"/g, '""') + '"';
@@ -1194,6 +1205,83 @@ class GirsPage extends DCLogic {
           convert: () => self.put((x) => { x.prf = x.prf || {}; x.prf[di.no] = 'converted'; self.ev(x, di.no, 'Converted to final invoice · proforma payment applied · debit note for the difference'); }, { dlg: null, __toast: di.no + ' converted · final invoice and debit note raised' }),
           transfer: () => self.put((x) => { x.prf = x.prf || {}; x.prf[di.no] = 'transferred'; self.ev(x, di.no, 'Booking cancelled · payment held as customer credit balance'); }, { dlg: null, __toast: di.no + ' payment held as customer credit balance' }),
           cancel: () => self.put((x) => { x.st = x.st || {}; x.st[di.no] = 'Cancelled'; self.ev(x, di.no, 'Proforma cancelled · no credit note raised'); }, { dlg: null, __toast: di.no + ' cancelled · no credit note is raised for a proforma' }) };
+      } else if (['pay', 'refund', 'cnv', 'soa', 'manual'].includes(d.kind) && di) {
+        const totals = {}; di.lines.forEach((l) => { totals[l[2]] = (totals[l[2]] || 0) + l[1]; });
+        const totText = Object.keys(totals).map((c) => c + ' ' + ivFmt(totals[c])).join(' + ');
+        const KV = (a) => a.map(([k, v, st]) => ({ k, v, st: st || '' }));
+        const TB = (cols, rows, right) => ({ cols: cols.map((v, n) => ({ v, cls: (right || []).includes(n) ? 'num' : '' })), rows });
+        const C = (v, cls) => ({ v, cls: cls || '' });
+        const fld = (label, key, o) => Object.assign({ label, val: f[key] == null ? '' : f[key], on: (e) => self.setF({ [key]: e.target.value, [key + 'Err']: false }), isInput: true, isSelect: false, isText: false, cls: '', span: '', hasHint: false, hint: '', hasPh: false, ph: '', opts: [], hasErr: !!f[key + 'Err'], err: (o && o.err) || 'Required' }, o || {});
+        const sel = (label, key, opts, o) => fld(label, key, Object.assign({ isInput: false, isSelect: true, opts: opts.map((v) => (typeof v === 'string' ? { v, label: v } : v)) }, o || {}));
+        if (d.kind === 'pay') {
+          dlgTitle = 'Payment · ' + di.no; dlgSub = di.party; dlgCls = 'wide';
+          gen.kv = KV([['Payment ref.', '[Payment ref.]'], ['Source', '[Payment source]'], ['Received', di.due], ['Amount received', totText], ['Matched invoice', di.no], ['Payment Status', di.pay, 'color:var(--ok)']]);
+          gen.tblTitle = 'Reconciliation';
+          Object.assign(gen, TB(['Step', 'Status'], [['GIRS', 'Receipt created'], ['GFS', 'Posted · matched'], ['Bank transaction', 'Cleared funds'], ['Receipt to customer', 'Emailed']].map((r) => ({ cells: [C(r[0]), C(r[1])], st: '' }))));
+        } else if (d.kind === 'refund') {
+          dlgTitle = 'Request refund · ' + di.no; dlgSub = di.party; okLabel = 'Submit refund request';
+          gen.kv = KV([['Payment ref.', '[Payment ref.]'], ['Amount paid', totText], ['Payment Status', di.pay]]);
+          gen.fields = [fld('Refund amount', 'amount', { cls: 'mono', hasHint: true, hint: di.lines[0][2] + ' · up to ' + ivFmt(totals[di.lines[0][2]]), err: 'Enter an amount up to the amount paid' }),
+            sel('Reason', 'reason', ['Overpayment', 'Duplicate payment', 'Booking cancelled', 'Other'], { hasPh: true, ph: 'Select reason', err: 'Select a reason' }),
+            fld('Remarks', 'note', { isInput: false, isText: true, hasHint: true, hint: 'Optional', span: 'grid-column: 1 / -1' })];
+          gen.note = 'The payment is routed to the refund workflow.'; gen.noteCls = 'b-info';
+          dlgOk = () => {
+            const amt = parseFloat(String(f.amount || '').replace(/,/g, '')), max = totals[di.lines[0][2]];
+            const err = { amountErr: !(amt > 0 && amt <= max + 0.001), reasonErr: !f.reason };
+            if (err.amountErr || err.reasonErr) { self.setF(err); return; }
+            self.put((x) => self.ev(x, di.no, 'Refund requested · ' + di.lines[0][2] + ' ' + ivFmt(amt) + ' · ' + f.reason + (f.note ? ' · ' + f.note : '')), { dlg: null, __toast: 'Refund request for ' + di.no + ' submitted · routed to the refund workflow' });
+          };
+        } else if (d.kind === 'cnv') {
+          dlgTitle = 'Credit note · ' + di.no; dlgSub = di.party; dlgCls = 'wide';
+          let cns = (s.store.cn || []).filter((c) => c.orig === di.no);
+          if (!cns.length && di.status === 'Credited') cns = [{ no: '[Credit note no.]', ctype: 'Full', reason: '[Reason]', amount: totals[di.lines[0][2]], cur: di.lines[0][2], appr: 'Approved' }];
+          gen.kv = KV([['Invoice No.', di.no], ['Invoice Status', di.status], ['Invoice amount', totText]]);
+          gen.tblTitle = 'Credit notes against this invoice';
+          Object.assign(gen, TB(['Credit Note No.', 'Credit Type', 'Reason Code', 'Credit Amount', 'Currency', 'Approval Status'], cns.map((c) => ({ cells: [C(c.no, 'mono'), C(c.ctype), C(c.reason), C(ivFmt(c.amount), 'mono num'), C(c.cur, 'mono'), C(c.appr)], st: '' })), [3]));
+          gen.empty = !cns.length; gen.emptyText = 'No credit note for this invoice.';
+        } else if (d.kind === 'soa') {
+          const cu = IV_CUST[di.cust] || {};
+          dlgTitle = 'Statement of account · ' + (cu.name || di.party); dlgSub = 'Customer ' + di.cust + ' · open invoices'; dlgCls = 'wide';
+          const now = Date.parse('17 Nov 2026');
+          const open = INV.filter((x) => x.cust === di.cust && ['Unpaid', 'Partially paid'].includes(x.pay)).sort((a, b) => (Date.parse(a.due) || 0) - (Date.parse(b.due) || 0));
+          const bucket = (dd) => dd <= 0 ? 'Current' : (dd <= 30 ? '1–30 days' : (dd <= 60 ? '31–60 days' : (dd <= 90 ? '61–90 days' : '90+ days')));
+          const byCur = {}; let overdue = 0;
+          const rows = open.map((x) => {
+            const days = Math.round((now - (Date.parse(x.due) || now)) / 864e5); if (days > 0) overdue++;
+            const c = x.lines[0][2], a = ivMain(x); byCur[c] = (byCur[c] || 0) + a;
+            return { cells: [C(x.no, 'mono'), C(x.type), C(x.due), C(days > 0 ? String(days) : '—', 'mono num'), C(bucket(days)), C(ivFmt(a), 'mono num'), C(c, 'mono'), C(x.pay)], st: x.no === di.no ? 'background:var(--tint)' : '' };
+          });
+          gen.kv = KV([['Customer', cu.name || di.party], ['Customer Code', di.cust], ['Open invoices', String(open.length)], ['Overdue', String(overdue), overdue ? 'color:var(--warn)' : ''], ['Outstanding', Object.keys(byCur).map((c) => c + ' ' + ivFmt(byCur[c])).join(' · ') || '—']]);
+          gen.tblTitle = 'Open invoices';
+          Object.assign(gen, TB(['Invoice No.', 'Invoice Type', 'Due Date', 'Days Overdue', 'Aging', 'Amount', 'Currency', 'Payment Status'], rows, [3, 5]));
+          gen.empty = !rows.length; gen.emptyText = 'No open invoices for this customer.';
+        } else if (d.kind === 'manual') {
+          dlgTitle = 'Create manual invoice'; dlgSub = 'From ' + di.no + ' · ' + di.party; okLabel = 'Create draft';
+          const curs = uniq(di.lines.map((l) => l[2]).concat(['USD']));
+          gen.kv = KV([['Billing Party', di.party], ['Customer Code', di.cust], ['Booking No.', di.bkg]]);
+          gen.fields = [sel('Invoice Type', 'type', ['Freight', 'DET / DEM', 'MISC', 'Proforma']),
+            sel('Reason', 'reason', ['Ancillary (MISC) charges', 'Single invoice outside the batch', 'Cancelled booking with applicable charges']),
+            fld('B/L No.', 'bl', { cls: 'mono', err: 'Enter the B/L number' }),
+            sel('Charge', 'chg', Object.keys(IV_CHG).map((k) => ({ v: k, label: k + ' · ' + IV_CHG[k] })), { hasPh: true, ph: 'Select charge', err: 'Select a charge' }),
+            fld('Amount', 'amount', { cls: 'mono', err: 'Enter an amount' }),
+            sel('Currency', 'cur', curs)];
+          gen.note = 'Created as a draft. Validate it to generate the invoice.'; gen.noteCls = 'b-info';
+          dlgOk = () => {
+            const amt = parseFloat(String(f.amount || '').replace(/,/g, ''));
+            const err = { blErr: !(f.bl || '').trim(), chgErr: !f.chg, amountErr: !(amt > 0) };
+            if (err.blErr || err.chgErr || err.amountErr) { self.setF(err); return; }
+            let newNo = '';
+            self.put((x) => {
+              x.gen = x.gen || [];
+              const code = f.type === 'DET / DEM' ? 'OD' : (f.type === 'MISC' ? 'MI' : 'OF');
+              newNo = di.no.slice(0, 3) + code + String(2609500 + (x.gen.length + 1) * 7).slice(-7) + (f.type === 'Proforma' ? 'PRF' : '');
+              x.gen.unshift({ no: newNo, type: f.type, bkg: di.bkg, bl: f.bl.trim(), cntr: di.cntr, vvd: di.vvd, party: di.party, cust: di.cust, status: 'Draft', due: '—', gov: '—', files: '—', date: ivToday(), port: di.port,
+                lines: [[f.chg, amt, f.cur, f.cur === 'USD' ? di.lines[0][3] : '—', di.lines[0][4], 'AUD-26-' + String(106000 + x.gen.length)]] });
+              self.ev(x, newNo, 'Manual ' + f.type + ' invoice created as draft from ' + di.no + ' · ' + f.reason);
+            }, () => ({ dlg: null, __toast: newNo + ' created as a draft · ' + f.type }));
+          };
+        }
+        gen.hasKv = gen.kv.length > 0; gen.hasForm = gen.fields.length > 0; gen.hasTbl = gen.rows.length > 0; gen.hasNote = !!gen.note;
       } else if (d.kind === 'audit' && di) {
         dlgTitle = 'Audit trail · ' + di.no; dlgSub = 'Invoice events, newest last'; dlgCls = 'wide';
         const rows = this.audit(di); tbl = tableOf(['When', 'Event', 'By'], rows); dl = dlFor('Audit trail ' + di.no, ['When', 'Event', 'By'], rows);
@@ -1266,7 +1354,7 @@ class GirsPage extends DCLogic {
     const chans = [['email', 'e-Mail'], ['post', 'Post']].map(([k, label]) => ({ label, on: (f.ch || 'email') === k ? 'true' : 'false', pick: () => self.setF({ ch: k, toErr: false, to: k === 'post' ? ((IV_CUST[di && di.cust] || {}).addr || '') : ((IV_CUST[di && di.cust] || {}).mail || '') }) }));
     const ctypes = [['Full', true], ['Partial', false]].map(([label, full]) => ({ label, on: !!f.full === full ? 'true' : 'false',
       pick: () => self.setF({ full, amountErr: false, amount: full && di ? ivFmt(ivMain(di)) : '' }) }));
-    const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail', 'dist', 'prf'];
+    const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail', 'dist', 'prf', 'pay', 'cnv', 'soa'];
     return {
       groups, cards, pQ: PQ.p, dCards: !dRows, dRows, views: [['cards', 'Cards'], ['rows', 'Rows']].map(([k, label]) => ({ label, on: (s.dview || 'cards') === k ? 'true' : 'false', pick: () => self.setState({ dview: k, menu: null }) })),
       gCount: gShown.length.toLocaleString('en-US') + ' invoice' + (gShown.length === 1 ? '' : 's'), cardsEmpty: cards.length === 0, dv: dv || {}, hasDv: !!dv, noDv: !dv, stop: (e) => { try { e.stopPropagation(); } catch (er) {} }, gLabel: gNow[1], gHint: gNow[3],
@@ -1302,8 +1390,8 @@ class GirsPage extends DCLogic {
       viewRoe: () => self.setState({ dlg: { kind: 'roe' } }), viewSrc: () => self.setState({ dlg: { kind: 'src' } }), viewCtx: () => self.setState({ dlg: { kind: 'ctx' } }),
       dlgOn: !!d, dConf: !!d && d.kind === 'confirm', dStd: !!d && d.kind !== 'confirm', dlgTitle, dlgSub, dlgCls,
       confText: d && d.kind === 'confirm' && (d.ids || []).length > 1 ? 'These ' + d.ids.length + ' invoices will be created immediately.' : 'This invoice will be created immediately.',
-      dDetails: !!d && d.kind === 'details', dTable: !!d && ['audit', 'dist', 'roe', 'src', 'ctx', 'bulkmail'].includes(d.kind), dPrf: !!d && d.kind === 'prf', dMail: !!d && d.kind === 'mail', dCn: !!d && d.kind === 'cn', dCancel: !!d && d.kind === 'cancel',
-      dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, okLabel, okCls, dlgOk, doGenerate,
+      dDetails: !!d && d.kind === 'details', dTable: !!d && ['audit', 'dist', 'roe', 'src', 'ctx', 'bulkmail'].includes(d.kind), dPrf: !!d && d.kind === 'prf', dGen: !!d && ['pay', 'refund', 'cnv', 'soa', 'manual'].includes(d.kind), dMail: !!d && d.kind === 'mail', dCn: !!d && d.kind === 'cn', dCancel: !!d && d.kind === 'cancel',
+      dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, gen, okLabel, okCls, dlgOk, doGenerate,
       closeDlg: () => self.setState({ dlg: null, f: {} }),
       chans, ctypes, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
       toLabel: f.ch === 'post' ? 'Postal address' : 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
