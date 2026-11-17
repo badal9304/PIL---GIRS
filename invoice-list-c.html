@@ -608,7 +608,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <div class="r-wrap" style="flex: 1 1 auto; min-height: 0; display: flex; gap: 16px">
             <section class="card r-col" aria-label="Invoices" style="flex: 0 0 540px; min-width: 0; display: flex; flex-direction: column; overflow: hidden"><div style="flex: 1 1 auto; min-height: 0; overflow: auto">
               <sc-for list="{{cards}}" as="c" hint-placeholder-count="8"><button class="ili" aria-current="{{c.sel}}" onClick="{{c.pick}}">
-                <span class="t"><span class="mono">{{c.no}}</span><span class="pill" style="{{c.pill}}">{{c.status}}</span></span><span class="r mono">{{c.total}}</span>
+                <span class="t"><span class="mono">{{c.no}}</span><span class="pill" style="{{c.pill}}">{{c.status}}</span><span class="pill" style="{{c.payPill}}">{{c.pay}}</span></span><span class="r mono">{{c.total}}</span>
                 <span class="m">{{c.party}}</span><span class="s">Due {{c.due}}</span>
                 <span class="m mu" style="font-size: 12px">{{c.type}} · {{c.bl}} · {{c.lines}}</span><span class="s mono">{{c.extra}}</span></button></sc-for>
               <sc-if value="{{cardsEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No invoices here</div></sc-if>
@@ -616,7 +616,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <section class="card" aria-label="Invoice details" style="flex: 1 1 auto; min-width: 0; overflow: auto">
               <sc-if value="{{hasDv}}" hint-placeholder-val="{{ true }}">
                 <div class="r-wrap" style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 18px 20px">
-                  <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px"><h2 class="mono" style="margin: 0; font-size: 20px; line-height: 26px"><button class="lnk mono" style="font: inherit" onClick="{{dv.view}}" title="View invoice">{{dv.no}}</button></h2><span class="pill" style="{{dv.pill}}">{{dv.status}}</span></span>
+                  <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px"><h2 class="mono" style="margin: 0; font-size: 20px; line-height: 26px"><button class="lnk mono" style="font: inherit" onClick="{{dv.view}}" title="View invoice">{{dv.no}}</button></h2><span class="pill" style="{{dv.pill}}">{{dv.status}}</span><span class="pill" style="{{dv.payPill}}">{{dv.pay}}</span></span>
                     <span style="font-size: 14px">{{dv.party}} <span class="mono mu" style="font-size: 12px">{{dv.cust}}</span></span>
                     <span style="font-size: 22px; font-weight: 600; line-height: 30px" class="mono">{{dv.total}} <span class="mu" style="font-size: 14px; font-weight: 500">{{dv.extra}}</span></span></div>
                   <div style="display: flex; align-items: center; gap: 8px; flex: none">
@@ -875,6 +875,11 @@ function ivRcptData(i) {
 }
 function ivHasJson(i) { return String(i.files).indexOf('JSON') >= 0; }
 function ivHash(s) { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 9973; return h; }
+function ivPayPill(p) {
+  const M = { 'Paid': 'background:var(--okbg);color:var(--ok)', 'Proforma · paid': 'background:var(--okbg);color:var(--ok)', 'Moved to final invoice': 'background:var(--okbg);color:var(--ok)',
+    'Unpaid': 'background:var(--warnbg);color:var(--warn)', 'Partially paid': 'background:var(--tint);color:var(--accent2)', 'Held as credit balance': 'background:var(--tint);color:var(--accent2)' };
+  return M[p] || 'background:var(--neutral);color:var(--muted)';
+}
 // Payment status (from the former Invoices Hub): Unpaid / Partially paid / Paid, proforma payment, credited
 function ivPay(i, prf) {
   if (i.type === 'Proforma') {
@@ -985,7 +990,7 @@ class GirsPage extends DCLogic {
       const roe = (i.lines.find((l) => l[3] !== '—') || ['', '', '', '—'])[3];
       const files = i.status === 'Cancelled' && i.files === '—' ? '—' : i.files;
       return Object.assign({}, i, {
-        on: !!s.sel[i.no], rowCls: s.sel[i.no] ? 'on' : '', open: !!s.exp[i.no],
+        payPill: ivPayPill(i.pay), on: !!s.sel[i.no], rowCls: s.sel[i.no] ? 'on' : '', open: !!s.exp[i.no],
         toggle: () => self.setState({ sel: Object.assign({}, s.sel, { [i.no]: !s.sel[i.no] }) }),
         expand: () => self.setState({ exp: Object.assign({}, s.exp, { [i.no]: !s.exp[i.no] }) }),
         details: () => ivView(i, toast),
@@ -1055,7 +1060,7 @@ class GirsPage extends DCLogic {
       warnCls: k === 'attention' ? 'w' : '', pick: () => self.setState({ grp: k, tab: 'inv', view: 'list', menu: null, pg: {} }) }));
     const curNo = s.cur && gShown.some((i) => i.no === s.cur) ? s.cur : (PQ.rows[0] || {}).no;
     const cards = PQ.rows.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
-      return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
+      return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pay: i.pay, payPill: ivPayPill(i.pay), pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
         total: t.main, extra: t.extra, hasExtra: !!t.extra, sel: i.no === curNo ? 'true' : 'false', dueSt: i.due === '—' ? 'color:var(--muted)' : '', lines: i.lines.length === 1 ? '1 charge' : i.lines.length + ' charges',
         pick: () => self.setState({ cur: i.no }), open: () => ivView(i, toast), prim: pr.label, primRun: pr.run, primDis: pr.dis,
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e) }; });
@@ -1065,7 +1070,7 @@ class GirsPage extends DCLogic {
       const dlIt = its.find((m) => m.label === 'Download PDF / JSON'), mailIt = its.find((m) => m.label === 'e-Mail / Post');
       const sec = [dlIt, mailIt, its.find((m) => m.label === 'Request credit note')].filter((m) => m && m.label !== pr.label && !m.dis).slice(0, 2);
       const F = (k, v, mono) => ({ k, v, cls: mono ? 'mono' : '', st: v === '—' ? 'color:var(--muted)' : '' });
-      dv = { no: i.no, view: () => ivView(i, toast), status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
+      dv = { no: i.no, view: () => ivView(i, toast), status: i.status, pay: i.pay, payPill: ivPayPill(i.pay), pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
         prim: pr.label, primRun: pr.run, primDis: pr.dis, sec: sec.map((m) => ({ label: m.label, run: m.run })),
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
         sections: [

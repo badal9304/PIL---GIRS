@@ -611,16 +611,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <div class="seg2" role="group" aria-label="View"><sc-for list="{{views}}" as="v" hint-placeholder-count="2"><button aria-pressed="{{v.on}}" onClick="{{v.pick}}">{{v.label}}</button></sc-for></div>
               </div>
               <sc-if value="{{dRows}}" hint-placeholder-val="{{ false }}"><section class="card" style="flex: 1 1 auto; min-height: 0; overflow: auto">
-                <table class="lst" style="width: 100%"><thead style="position: sticky; top: 0; z-index: 2"><tr><th>Invoice No.</th><th>Billing Party</th><th class="num">Charge Amount</th><th>Due Date</th><th>Invoice Status</th><th>Next step</th><th class="c-act"><span class="sr">Actions</span></th></tr></thead>
+                <table class="lst" style="width: 100%"><thead style="position: sticky; top: 0; z-index: 2"><tr><th>Invoice No.</th><th>Billing Party</th><th class="num">Charge Amount</th><th>Due Date</th><th>Invoice Status</th><th>Payment Status</th><th>Next step</th><th class="c-act"><span class="sr">Actions</span></th></tr></thead>
                 <tbody><sc-for list="{{cards}}" as="c" hint-placeholder-count="10"><tr class="grp"><td><button class="lnk mono" onClick="{{c.open}}">{{c.no}}</button></td><td>{{c.party}} <span class="mono mu" style="font-size: 12px">{{c.cust}}</span></td>
-                  <td class="mono num" style="font-weight: 600">{{c.total}} <span class="mu" style="font-weight: 400; font-size: 12px">{{c.extra}}</span></td><td style="{{c.dueSt}}">{{c.due}}</td><td><span class="pill" style="{{c.pill}}">{{c.status}}</span></td>
+                  <td class="mono num" style="font-weight: 600">{{c.total}} <span class="mu" style="font-weight: 400; font-size: 12px">{{c.extra}}</span></td><td style="{{c.dueSt}}">{{c.due}}</td><td><span class="pill" style="{{c.pill}}">{{c.status}}</span></td><td><span class="pill" style="{{c.payPill}}">{{c.pay}}</span></td>
                   <td><button class="btn btn-sm" disabled="{{c.primDis}}" onClick="{{c.primRun}}">{{c.prim}}</button></td>
                   <td class="c-act"><button class="dots" aria-label="All actions for {{c.no}}" aria-haspopup="menu" aria-expanded="{{c.menuOpen}}" onClick="{{c.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></td></tr></sc-for></tbody></table>
                 <sc-if value="{{cardsEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">Nothing in this queue</div></sc-if>
               </section></sc-if>
               <sc-if value="{{dCards}}" hint-placeholder-val="{{ true }}"><div class="cgrid" style="flex: 1 1 auto; min-height: 0; overflow: auto; padding: 2px">
                 <sc-for list="{{cards}}" as="c" hint-placeholder-count="6"><article class="icard" tabindex="0" aria-label="{{c.no}}" onClick="{{c.open}}">
-                  <div class="top"><span class="mono" style="font-weight: 600">{{c.no}}</span><span class="pill" style="{{c.pill}}">{{c.status}}</span></div>
+                  <div class="top"><span class="mono" style="font-weight: 600">{{c.no}}</span><span style="display: inline-flex; gap: 6px"><span class="pill" style="{{c.payPill}}">{{c.pay}}</span><span class="pill" style="{{c.pill}}">{{c.status}}</span></span></div>
                   <div style="font-size: 14px">{{c.party}} <span class="mono mu" style="font-size: 12px">{{c.cust}}</span></div>
                   <div class="amt mono">{{c.total}}<sc-if value="{{c.hasExtra}}" hint-placeholder-val="{{ false }}"><span class="mu" style="font-size: 13px; font-weight: 500"> {{c.extra}}</span></sc-if></div>
                   <div class="meta"><span>Due {{c.due}}</span><span>{{c.type}}</span><span class="mono">{{c.bl}}</span><span>{{c.lines}}</span></div>
@@ -876,6 +876,11 @@ function ivRcptData(i) {
 }
 function ivHasJson(i) { return String(i.files).indexOf('JSON') >= 0; }
 function ivHash(s) { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 9973; return h; }
+function ivPayPill(p) {
+  const M = { 'Paid': 'background:var(--okbg);color:var(--ok)', 'Proforma · paid': 'background:var(--okbg);color:var(--ok)', 'Moved to final invoice': 'background:var(--okbg);color:var(--ok)',
+    'Unpaid': 'background:var(--warnbg);color:var(--warn)', 'Partially paid': 'background:var(--tint);color:var(--accent2)', 'Held as credit balance': 'background:var(--tint);color:var(--accent2)' };
+  return M[p] || 'background:var(--neutral);color:var(--muted)';
+}
 // Payment status (from the former Invoices Hub): Unpaid / Partially paid / Paid, proforma payment, credited
 function ivPay(i, prf) {
   if (i.type === 'Proforma') {
@@ -986,7 +991,7 @@ class GirsPage extends DCLogic {
       const roe = (i.lines.find((l) => l[3] !== '—') || ['', '', '', '—'])[3];
       const files = i.status === 'Cancelled' && i.files === '—' ? '—' : i.files;
       return Object.assign({}, i, {
-        on: !!s.sel[i.no], rowCls: s.sel[i.no] ? 'on' : '', open: !!s.exp[i.no],
+        payPill: ivPayPill(i.pay), on: !!s.sel[i.no], rowCls: s.sel[i.no] ? 'on' : '', open: !!s.exp[i.no],
         toggle: () => self.setState({ sel: Object.assign({}, s.sel, { [i.no]: !s.sel[i.no] }) }),
         expand: () => self.setState({ exp: Object.assign({}, s.exp, { [i.no]: !s.exp[i.no] }) }),
         details: () => ivView(i, toast),
@@ -1056,7 +1061,7 @@ class GirsPage extends DCLogic {
       warnCls: k === 'attention' ? 'w' : '', pick: () => self.setState({ grp: k, tab: 'inv', view: 'list', menu: null, pg: {} }) }));
     const curNo = s.cur && gShown.some((i) => i.no === s.cur) ? s.cur : (PQ.rows[0] || {}).no;
     const cards = PQ.rows.map((i) => { const stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i);
-      return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
+      return { no: i.no, party: i.party, cust: i.cust, bl: i.bl, type: i.type, due: i.due, status: i.status, pay: i.pay, payPill: ivPayPill(i.pay), pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc,
         total: t.main, extra: t.extra, hasExtra: !!t.extra, sel: i.no === curNo ? 'true' : 'false', dueSt: i.due === '—' ? 'color:var(--muted)' : '', lines: i.lines.length === 1 ? '1 charge' : i.lines.length + ' charges',
         pick: () => self.setState({ cur: i.no }), open: () => ivView(i, toast), prim: pr.label, primRun: pr.run, primDis: pr.dis,
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e) }; });
@@ -1066,7 +1071,7 @@ class GirsPage extends DCLogic {
       const dlIt = its.find((m) => m.label === 'Download PDF / JSON'), mailIt = its.find((m) => m.label === 'e-Mail / Post');
       const sec = [dlIt, mailIt, its.find((m) => m.label === 'Request credit note')].filter((m) => m && m.label !== pr.label && !m.dis).slice(0, 2);
       const F = (k, v, mono) => ({ k, v, cls: mono ? 'mono' : '', st: v === '—' ? 'color:var(--muted)' : '' });
-      dv = { no: i.no, view: () => ivView(i, toast), status: i.status, pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
+      dv = { no: i.no, view: () => ivView(i, toast), status: i.status, pay: i.pay, payPill: ivPayPill(i.pay), pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
         prim: pr.label, primRun: pr.run, primDis: pr.dis, sec: sec.map((m) => ({ label: m.label, run: m.run })),
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
         sections: [
