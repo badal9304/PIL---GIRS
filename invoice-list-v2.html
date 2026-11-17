@@ -169,6 +169,23 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .kv3 .l,.rv .l{font-size:12px;color:var(--muted)}
 .kv3 .v{font-size:14px;font-weight:500}
 .rv{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.ri{padding:0 32px 28px;max-width:1240px;width:100%;margin:0 auto;box-sizing:border-box;font-size:13px;line-height:19px}
+.ri .k{font-size:11px;line-height:16px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;display:block}
+.ri-hd{text-align:center;padding:24px 0 18px;border-bottom:1px solid var(--line2)}.ri-hd h1{margin:0;font-size:24px;line-height:30px;letter-spacing:.04em;font-weight:700}
+.ri-err{color:var(--bad);letter-spacing:0}.ri-sub{margin-top:6px;font-size:13px}
+.ri-errs{margin-top:18px;padding:10px 14px;border-radius:6px;background:var(--badbg);border:1px solid #EDB8BA;color:var(--bad);font-size:13px}.ri-errs ul{margin:4px 0 0;padding-inline-start:18px}.ri-errs .mu{color:var(--bad);opacity:.8}
+.ri-strip{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;border:1px solid var(--line);border-radius:8px}.ri-strip>div{padding:12px 16px;border-inline-start:1px solid var(--line)}.ri-strip>div:first-child{border-inline-start:0}.ri-strip .v{margin-top:4px;font-weight:600;font-size:15px;line-height:20px}
+.ri-parties{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:24px}.ri-parties .n{font-weight:600;font-size:15px;line-height:21px;margin-top:8px}.ri-parties .l{color:var(--muted2)}
+.ri-kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:8px}.ri-kv span:nth-child(odd){color:var(--muted)}
+.ri-ship{margin-top:24px;padding:16px 20px;border-radius:8px;background:var(--sub);display:grid;grid-template-columns:repeat(3,1fr);gap:14px 32px}.ri-ship .v{margin-top:2px;font-weight:500}
+.ri-tbl{width:100%;border-collapse:collapse;margin-top:24px;font-size:13px}.ri-tbl th{background:var(--bg);text-align:left;font-weight:600;font-size:12px;color:var(--muted2);padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.ri-tbl td{padding:10px 8px;border-bottom:1px solid var(--line2);white-space:nowrap;font-variant-numeric:tabular-nums;vertical-align:middle}.ri-tbl td.w{white-space:normal;min-width:180px;font-weight:500}.ri-tbl .r{text-align:end}
+.ri-tbl th:first-child,.ri-tbl td:first-child{padding-inline-start:12px}.ri-tbl tr.add td{background:var(--tint2)}
+.ri-in{height:32px}.ri-in.num{text-align:end}.ri-in.bad{border-color:var(--bad)!important;box-shadow:0 0 0 1px var(--bad)}.select.bad{border-color:var(--bad)!important;box-shadow:0 0 0 1px var(--bad)}
+.ri-x{width:32px;padding:0;justify-content:center}
+.ri-bt{display:grid;grid-template-columns:1fr 360px;gap:48px;margin-top:20px;align-items:start}
+.ri-tot{display:flex;flex-direction:column;gap:8px}.ri-tot>div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}.ri-tot>div.g{border-top:1px solid var(--ink);padding-top:10px;margin-top:2px;font-weight:700;font-size:16px;line-height:22px}
+.ri-words{margin-top:14px;padding:10px 14px;border-radius:6px;background:var(--sub);color:var(--muted2)}
 .sum{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:8px;background:var(--sub);font-size:13px}
 .sum div{display:flex;justify-content:space-between;gap:16px}
 .ctab{width:100%;border-collapse:collapse}
@@ -697,38 +714,48 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <div style="display: flex; align-items: center; gap: 12px">
             <button class="btn btn-sm" onClick="{{backToList}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back to Ready to invoice</button>
             <span style="font-size: 13px; color: var(--muted)">Final validation and preview before invoice creation</span>
-            <sc-if value="{{rvMany}}" hint-placeholder-val="{{ false }}"><span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 8px">
+            <span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 10px"><button class="lnk" onClick="{{viewRoe}}">View ROE</button><button class="btn btn-sm" onClick="{{viewSrc}}">View source charges</button><button class="btn btn-sm" onClick="{{viewCtx}}">View audit context</button></span>
+            <sc-if value="{{rvMany}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 8px">
               <button class="btn btn-sm" disabled="{{rvFirst}}" onClick="{{rvPrev}}">Previous</button><span class="mono" style="font-size: 13px">{{rvPos}}</span><button class="btn btn-sm" disabled="{{rvLast}}" onClick="{{rvNext}}">Next</button></span></sc-if>
           </div>
-          <section class="card steps" aria-label="Validation steps">
-            <sc-for list="{{steps}}" as="p" hint-placeholder-count="4"><sc-if value="{{p.line}}" hint-placeholder-val="{{ true }}"><span class="sline"></span></sc-if><span class="step {{p.cls}}"><span class="dot">{{p.mark}}</span>{{p.label}}</span></sc-for>
-          </section>
-          <sc-if value="{{rv.hasMsg}}" hint-placeholder-val="{{ false }}"><div class="banner {{rv.bcls}}">{{rv.status}}: {{rv.msg}}</div></sc-if>
-          <div style="flex: 1 1 auto; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 16px">
-            <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px">
-              <div style="display: flex; flex-direction: column; gap: 16px">
-                <section class="card"><div class="card-head"><h2 class="card-title">Invoice information</h2><span class="card-meta mono">{{rv.bl}}</span></div>
-                  <div class="kv3" style="padding: 14px 16px 16px"><sc-for list="{{rv.info}}" as="f" hint-placeholder-count="6"><div><span class="l">{{f.k}}</span><span class="v">{{f.v}}</span></div></sc-for></div></section>
-                <section class="card"><div class="card-head"><h2 class="card-title">Customer</h2></div>
-                  <div class="kv3" style="padding: 14px 16px 16px"><sc-for list="{{rv.custF}}" as="f" hint-placeholder-count="4"><div style="{{f.span}}"><span class="l">{{f.k}}</span><span class="v">{{f.v}}</span></div></sc-for></div></section>
+          <div style="flex: 1 1 auto; min-height: 0; overflow: auto">
+            <section class="card ri" aria-label="Ready to invoice">
+              <div class="ri-hd"><h1>READY TO INVOICE<sc-if value="{{rv.hasErr}}" hint-placeholder-val="{{ true }}"> <span class="ri-err">(Error)</span></sc-if></h1>
+                <div class="ri-sub"><span class="mu">Transaction Name:</span> <b>{{rv.txn}}</b></div></div>
+              <sc-if value="{{rv.hasErr}}" hint-placeholder-val="{{ true }}"><div class="ri-errs" role="alert"><b>{{rv.errTitle}}</b><ul><sc-for list="{{rv.errs}}" as="e" hint-placeholder-count="2"><li><span class="mu">{{e.area}} ·</span> {{e.text}}</li></sc-for></ul></div></sc-if>
+              <div class="ri-strip"><sc-for list="{{rv.strip}}" as="x" hint-placeholder-count="3"><div><div class="k">{{x.k}}</div><div class="v">{{x.v}}</div></div></sc-for></div>
+              <div class="ri-parties">
+                <div><div class="k">From</div><div class="n">{{rv.from0}}</div><sc-for list="{{rv.fromL}}" as="l" hint-placeholder-count="3"><div class="l">{{l}}</div></sc-for></div>
+                <div><label class="k" for="ri-cust">To</label>
+                  <div style="position: relative; margin-top: 6px; max-width: 360px"><select id="ri-cust" class="select {{rv.custCls}}" style="width: 100%; font-weight: 600" value="{{rv.cust}}" onChange="{{rv.onCust}}" aria-label="Customer name"><sc-for list="{{rv.custOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+                  <div class="l" style="margin-top: 6px">{{rv.addr}}</div></div>
+                <div><div class="k">Customer &amp; payment</div><div class="ri-kv"><sc-for list="{{rv.details}}" as="x" hint-placeholder-count="5"><span>{{x.k}}</span><span>{{x.v}}</span></sc-for></div></div>
               </div>
-              <section class="card"><div class="card-head"><h2 class="card-title">Invoice review</h2></div>
-                <div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 12px">
-                  <div class="rv"><sc-for list="{{rv.head}}" as="f" hint-placeholder-count="4"><div><span class="l">{{f.k}}:</span> {{f.v}}</div></sc-for></div>
-                  <div class="sum"><sc-for list="{{rv.sumLines}}" as="l" hint-placeholder-count="3"><div><span class="mu">{{l.k}}</span><span class="mono">{{l.v}}</span></div></sc-for>
-                    <div style="border-top: 1px solid var(--line); padding-top: 8px; font-size: 15px; font-weight: 600"><span>Invoice total</span><span class="mono" style="color: var(--accent)">{{rv.total}}</span></div></div>
-                </div></section>
-            </div>
-            <section class="card"><div class="card-head"><h2 class="card-title">Charges</h2>
-              <span style="display: inline-flex; align-items: center; gap: 10px"><button class="lnk" onClick="{{viewRoe}}">View ROE</button><button class="btn btn-sm" onClick="{{viewSrc}}">View source charges</button><button class="btn btn-sm" onClick="{{viewCtx}}">View audit context</button></span></div>
-              <div style="overflow: auto"><table class="ctab"><thead><tr><th>Charge description</th><th class="num">Quantity</th><th>UOM</th><th class="num">Unit price</th><th>Currency</th><th class="num">Total exc. tax</th><th>Tax applicability</th><th class="num">Tax amount</th><th class="num">Total inc. tax</th></tr></thead>
-                <tbody><sc-for list="{{rv.lines}}" as="l" hint-placeholder-count="3"><tr><td style="font-weight: 500">{{l.name}} <span class="mono mu" style="font-size: 12px">{{l.code}}</span></td><td class="mono num">{{l.qty}}</td><td class="mono">{{l.uom}}</td><td class="mono num">{{l.unit}}</td><td class="mono">{{l.cur}}</td><td class="mono num">{{l.ex}}</td><td style="{{l.taxSt}}">{{l.taxApp}}</td><td class="mono num">{{l.tax}}</td><td class="mono num">{{l.inc}}</td></tr></sc-for></tbody>
-                <tfoot><tr><td>Grand total</td><td></td><td></td><td></td><td class="mono">{{rv.cur}}</td><td class="mono num">{{rv.ex}}</td><td></td><td class="mono num">{{rv.taxT}}</td><td class="mono num">{{rv.inc}}</td></tr></tfoot></table></div></section>
+              <div class="ri-ship"><sc-for list="{{rv.ship}}" as="x" hint-placeholder-count="6"><div><div class="k">{{x.k}}</div><div class="v">{{x.v}}</div></div></sc-for></div>
+              <div style="overflow: auto"><table class="ri-tbl"><thead><tr><th>Charge head</th><th class="r">Quantity</th><th>UOM</th><th class="r">Unit Price</th><th>Currency</th><th class="r">Total excluding Tax</th><th class="r">Tax applicability</th><th class="r">Tax Amount</th><th class="r">Total Incl Tax</th><th aria-label="Row actions"></th></tr></thead>
+                <tbody><sc-for list="{{rv.lines}}" as="l" hint-placeholder-count="3"><tr class="{{l.cls}}">
+                  <td class="w">{{l.name}}</td>
+                  <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><input class="input ri-in num {{l.qErr}}" style="width: 72px" value="{{l.qty}}" onInput="{{l.onQty}}" aria-label="Quantity" inputmode="decimal"></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.qty}}</sc-if></td>
+                  <td><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div style="position: relative; width: 96px"><select class="select ri-in {{l.uErr}}" style="width: 100%" value="{{l.uom}}" onChange="{{l.onUom}}" aria-label="UOM"><option value="">Select</option><sc-for list="{{rv.uoms}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.uom}}</sc-if></td>
+                  <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><input class="input ri-in num {{l.pErr}}" style="width: 104px" value="{{l.unit}}" onInput="{{l.onUnit}}" aria-label="Unit Price" inputmode="decimal"></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.unit}}</sc-if></td>
+                  <td><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div style="position: relative; width: 96px"><select class="select ri-in {{l.cErr}}" style="width: 100%" value="{{l.cur}}" onChange="{{l.onCur}}" aria-label="Currency"><option value="">Select</option><sc-for list="{{rv.curs}}" as="o" hint-placeholder-count="2"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.cur}}</sc-if></td>
+                  <td class="r">{{l.ex}}</td><td class="r" style="{{l.taxSt}}">{{l.taxApp}}</td><td class="r">{{l.tax}}</td><td class="r">{{l.inc}}</td>
+                  <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm ri-x" onClick="{{l.del}}" aria-label="Remove added charge" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></td>
+                </tr></sc-for></tbody></table></div>
+              <div style="margin-top: 12px"><button class="btn btn-sm" onClick="{{rv.addCharge}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add charges</button></div>
+              <div class="ri-bt">
+                <div><div class="k">Bank details</div><div class="ri-kv"><sc-for list="{{rv.bank}}" as="x" hint-placeholder-count="4"><span>{{x.k}}</span><span>{{x.v}}</span></sc-for></div></div>
+                <div class="ri-tot"><sc-for list="{{rv.totals}}" as="t" hint-placeholder-count="3"><div class="{{t.cls}}"><span>{{t.k}}</span><span>{{t.v}}</span></div></sc-for></div>
+              </div>
+              <div class="ri-words">{{rv.words}}</div>
+            </section>
           </div>
           <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 4px">
-            <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 13px"><input type="checkbox" class="cbx" checked="{{decl}}" disabled="{{rv.blocked}}" onChange="{{toggleDecl}}"><span><b style="color: var(--accent2)">Declaration:</b> I confirm the customer, charges, currency and tax details.</span></label>
+            <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 13px"><input type="checkbox" class="cbx" checked="{{decl}}" disabled="{{rv.hasErr}}" onChange="{{toggleDecl}}"><span><b style="color: var(--accent2)">Declaration:</b> I confirm the customer, charges, currency and tax details.</span></label>
             <div style="display: flex; align-items: center; gap: 12px">
-              <button class="btn" onClick="{{backToList}}">Cancel</button>
+              <button class="btn" onClick="{{rvCancel}}">Cancel</button>
+              <button class="btn" onClick="{{rvSave}}">Save</button>
+              <button class="btn" disabled="{{rv.noErr}}" onClick="{{rvResolve}}">Resolve errors</button>
               <button class="btn btn-primary" disabled="{{rvGenDis}}" onClick="{{rvGenerate}}">Generate invoice</button>
               <span style="font-size: 13px; color: var(--muted)">{{rvHint}}</span>
             </div>
@@ -821,7 +848,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
 const IV_SEED = [{"no": "SINOF2602401", "type": "Freight", "bkg": "SINB2610231", "bl": "BL-SG-24001", "cntr": "PILU1000016", "vvd": "Vessel 01 / 012E", "party": "Straits Harbour Logistics (SG)", "cust": "SG-100231", "status": "Sent", "due": "20 Nov 2026", "gov": "—", "files": "PDF · JSON", "date": "06 Nov 2026", "port": "SGSIN", "lines": [["OFT", 1850.0, "USD", "1.3412", "SG-SR-9", "AUD-26-104812"], ["BAF", 320.0, "USD", "1.3412", "SG-SR-9", "AUD-26-104813"], ["THC-O", 305.0, "SGD", "—", "SG-SR-9", "AUD-26-104814"]]}, {"no": "SINOF2602405", "type": "Freight", "bkg": "SINB2610244", "bl": "BL-SG-24006", "cntr": "PILU3000014", "vvd": "Vessel 01 / 012E", "party": "Meridian Agro Exports (SG)", "cust": "SG-100874", "status": "Paid", "due": "17 Nov 2026", "gov": "—", "files": "PDF · JSON", "date": "03 Nov 2026", "port": "SGSIN", "lines": [["OFT", 3200.0, "USD", "1.3412", "ZR-INTL", "AUD-26-104820"]]}, {"no": "SINOF2600118PRF", "type": "Proforma", "bkg": "SINB2610252", "bl": "BL-SG-24002", "cntr": "PILU5000019", "vvd": "Vessel 01 / 012E", "party": "Kinabalu Home Furnishings (SG)", "cust": "SG-101066", "status": "Draft", "due": "—", "gov": "—", "files": "PDF", "date": "10 Nov 2026", "port": "SGSIN", "lines": [["OFT", 2100.0, "USD", "1.3412", "ZR-INTL", "AUD-26-104835"]]}, {"no": "SINOD2602150", "type": "DET / DEM", "bkg": "SINB2609870", "bl": "BL-SG-24004", "cntr": "PILU4000021", "vvd": "Vessel 03 / 108N", "party": "Straits Harbour Logistics (MY)", "cust": "MY-200417", "status": "Credited", "due": "12 Nov 2026", "gov": "—", "files": "PDF · JSON", "date": "29 Oct 2026", "port": "SGSIN", "lines": [["DEM", 4200.0, "SGD", "—", "SG-SR-9", "AUD-26-103977"]]}, {"no": "NSAOF2601044", "type": "Freight", "bkg": "NSAB2610118", "bl": "BL-IN-24005", "cntr": "PILU2000013", "vvd": "Vessel 04 / 021S", "party": "Straits Harbour Logistics (IN)", "cust": "IN-300552", "status": "Accepted", "due": "18 Nov 2026", "gov": "IRN 7c1f…a92e", "files": "PDF · JSON", "date": "04 Nov 2026", "port": "INNSA", "lines": [["OFT", 980.0, "USD", "84.1200", "IN-GST-18", "AUD-26-104402"], ["DOC", 220.0, "INR", "—", "IN-GST-18", "AUD-26-104403"]]}, {"no": "NSAOF2601051", "type": "Freight", "bkg": "NSAB2610126", "bl": "BL-IN-24008", "cntr": "PILU2000027", "vvd": "Vessel 04 / 021S", "party": "Orchid Lane Polymers (IN)", "cust": "IN-300781", "status": "Rejected", "due": "21 Nov 2026", "gov": "IRP error 2150", "files": "PDF", "date": "07 Nov 2026", "port": "INNSA", "lines": [["OFT", 1500.0, "USD", "84.1200", "IN-GST-18", "AUD-26-104451"]]}, {"no": "PKGOF2600917", "type": "Freight", "bkg": "PKGB2610064", "bl": "BL-MY-24003", "cntr": "PILU6000011", "vvd": "Vessel 02 / 044W", "party": "Kinabalu Home Furnishings (MY)", "cust": "MY-200903", "status": "Generated", "due": "24 Nov 2026", "gov": "MyInvois 3F8K…Q2LM", "files": "PDF · JSON", "date": "10 Nov 2026", "port": "MYPKG", "lines": [["OFT", 1650.0, "USD", "4.4710", "MY-SST-8", "AUD-26-104510"]]}, {"no": "LCHOD2600233", "type": "DET / DEM", "bkg": "LCHB2609551", "bl": "BL-TH-24002", "cntr": "PILU7000018", "vvd": "Vessel 05 / 077E", "party": "Andaman Bay Traders (TH)", "cust": "TH-500318", "status": "Pending validation", "due": "—", "gov": "—", "files": "—", "date": "11 Nov 2026", "port": "THLCH", "lines": [["DET", 960.0, "THB", "—", "TH-VAT-7", "AUD-26-104588"]]}, {"no": "SINMI2600042", "type": "MISC", "bkg": "SINB2610231", "bl": "BL-SG-24001", "cntr": "PILU1000016", "vvd": "Vessel 01 / 012E", "party": "Straits Harbour Logistics (SG)", "cust": "SG-100231", "status": "Cancelled", "due": "—", "gov": "—", "files": "PDF", "date": "05 Nov 2026", "port": "SGSIN", "lines": [["SEAL", 15.0, "SGD", "—", "SG-SR-9", "AUD-26-104601"]]}];
 const IV_CUST = {"SG-100231": {"name": "Straits Harbour Logistics (SG)", "tax": "UEN 201812345K", "addr": "21 Pioneer Road, #04-02, Singapore 628491", "mail": "ap@straitsharbour.sg"}, "SG-100874": {"name": "Meridian Agro Exports (SG)", "tax": "UEN 199904417M", "addr": "8 Jurong Port Road, Singapore 619088", "mail": "finance@meridianagro.sg"}, "SG-101066": {"name": "Kinabalu Home Furnishings (SG)", "tax": "UEN 201533018D", "addr": "60 Tuas South Ave 1, Singapore 637611", "mail": "billing@kinabaluhome.sg"}, "MY-200417": {"name": "Straits Harbour Logistics (MY)", "tax": "C20811047090", "addr": "Lot 12, Jalan Pelabuhan, 42000 Port Klang", "mail": "ap@straitsharbour.my"}, "IN-300552": {"name": "Straits Harbour Logistics (IN)", "tax": "GSTIN 27AAGCS4412L1Z5", "addr": "Plot 7, JNPT Road, Navi Mumbai 400707", "mail": "ap@straitsharbour.in"}, "IN-300781": {"name": "Orchid Lane Polymers (IN)", "tax": "GSTIN 24AACCO9021P1ZK", "addr": "Survey 118, Vapi GIDC, Gujarat 396195", "mail": "accounts@orchidlane.in"}, "MY-200903": {"name": "Kinabalu Home Furnishings (MY)", "tax": "C21003391080", "addr": "No. 3, Jalan Perigi, 81700 Pasir Gudang", "mail": "billing@kinabaluhome.my"}, "TH-500318": {"name": "Andaman Bay Traders (TH)", "tax": "TIN 0105559013374", "addr": "88 Moo 3, Laem Chabang, Chonburi 20230", "mail": "ar@andamanbay.co.th"}};
-const IV_CHG = {"OFT": "Ocean Freight", "BAF": "Bunker Adjustment Factor", "THC-O": "Origin THC", "THC-DST": "Destination THC", "DOC": "Documentation", "DEM": "Demurrage", "DET": "Detention", "SEAL": "Seal Fee", "LSS": "Low Sulphur Surcharge"};
+const IV_CHG = {"MISC": "Miscellaneous Charge", "OFT": "Ocean Freight", "BAF": "Bunker Adjustment Factor", "THC-O": "Origin THC", "THC-DST": "Destination THC", "DOC": "Documentation", "DEM": "Demurrage", "DET": "Detention", "SEAL": "Seal Fee", "LSS": "Low Sulphur Surcharge"};
 const IV_READY = [{"id": "r1", "bl": "BL-SG-24011", "bkg": "SINB2610301", "cust": "SG-100231", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000102", "vvd": "Vessel 06 / 031E", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 7000.0, "ZR-INTL", 0], ["THC-O", 1, "BL", 750.0, "SG-SR-9", 9], ["DOC", 1, "BL", 250.0, "SG-SR-9", 9]]}, {"id": "r2", "bl": "BL-SG-24012", "bkg": "SINB2610302", "cust": "SG-100874", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000117", "vvd": "Vessel 06 / 031E", "status": "Warning", "msg": "Charge THC-DST has no tax classification", "checks": [["ok", "Available"], ["ok", "Available"], ["warn", "1 charge requires confirmation"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 2100.0, "ZR-INTL", 0], ["THC-DST", 1, "CNTR", 200.0, "—", 0]]}, {"id": "r3", "bl": "BL-SG-24013", "bkg": "SINB2610303", "cust": "SG-101066", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000125", "vvd": "Vessel 06 / 031E", "status": "Blocked", "msg": "Billing party SG-101066 has no active billing-party record", "checks": [["ok", "Available"], ["block", "Not found in Customer Master"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 6200.0, "ZR-INTL", 0], ["THC-O", 1, "BL", 500.0, "SG-SR-9", 9], ["DOC", 1, "BL", 250.0, "SG-SR-9", 9]]}, {"id": "r4", "bl": "BL-SG-24014", "bkg": "SINB2610304", "cust": "SG-100231", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000133", "vvd": "Vessel 06 / 031E", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 3400.0, "ZR-INTL", 0], ["BAF", 1, "CNTR", 420.0, "ZR-INTL", 0], ["THC-O", 1, "BL", 320.0, "SG-SR-9", 9]]}, {"id": "r5", "bl": "BL-SG-24015", "bkg": "SINB2610305", "cust": "SG-100874", "port": "SGSIN", "type": "DET / DEM", "cntr": "PILU1000148", "vvd": "Vessel 03 / 108N", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["DEM", 6, "DAY", 120.0, "SG-SR-9", 9]]}, {"id": "r6", "bl": "BL-SG-24016", "bkg": "SINB2610306", "cust": "SG-101066", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000156", "vvd": "Vessel 06 / 031E", "status": "Warning", "msg": "ROE USD/SGD 1.3412 is more than 1 day old", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["warn", "Rate dated 11 Nov 2026"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 2850.0, "ZR-INTL", 0], ["LSS", 1, "CNTR", 180.0, "ZR-INTL", 0]]}, {"id": "r7", "bl": "BL-SG-24017", "bkg": "SINB2610307", "cust": "SG-100231", "port": "SGSIN", "type": "MISC", "cntr": "PILU1000164", "vvd": "Vessel 06 / 031E", "status": "Blocked", "msg": "No tax code mapped for SEAL at SGSIN", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["block", "Tax code missing"], ["ok", "Available"]], "charges": [["SEAL", 2, "EA", 15.0, "—", 0]]}, {"id": "r8", "bl": "BL-SG-24018", "bkg": "SINB2610308", "cust": "SG-100874", "port": "SGSIN", "type": "Freight", "cntr": "PILU1000171", "vvd": "Vessel 06 / 031E", "status": "Ready", "msg": "", "checks": [["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"], ["ok", "Available"]], "charges": [["OFT", 1, "CNTR", 4100.0, "ZR-INTL", 0], ["DOC", 1, "BL", 250.0, "SG-SR-9", 9]]}];
 function ivRand(seed) { let x = seed; return () => { x = (x * 1103515245 + 12345) % 2147483648; return x / 2147483648; }; }
 const IV_POOL = { 'SG-100231': 'SGSIN', 'SG-100874': 'SGSIN', 'SG-101066': 'SGSIN', 'MY-200417': 'MYPKG', 'MY-200903': 'MYPKG', 'IN-300552': 'INNSA', 'IN-300781': 'INNSA', 'TH-500318': 'THLCH' };
@@ -985,12 +1012,37 @@ function ivDownload(i, toast) { ivPdf(i, toast); if (ivHasJson(i)) setTimeout(()
 function ivReceipt(i, toast) { try { window.GirsDocs.receipt(ivRcptData(i), { onDone: toast }); } catch (e) {} }
 function ivReadyCalc(r) {
   const cur = 'USD';
-  const lines = r.charges.map(([code, qty, uom, unit, tax, rate], n) => {
+  const lines = r.charges.map(([code, qty, uom, unit, tax, rate, lc], n) => {
+    const lcur = lc || cur, k = lcur === cur ? 1 : 1 / ((IV_FX.USD || {})[lcur] || 1);
     const ex = qty * unit, tx = Math.round(ex * rate) / 100;
-    return { n: n + 1, code, name: IV_CHG[code] || code, qty, uom, unit, cur, ex, tax, rate, tx, inc: ex + tx };
+    return { n: n + 1, code, name: IV_CHG[code] || code, qty, uom, unit, cur: lcur, k, ex, tax, rate, tx, inc: ex + tx };
   });
-  const ex = lines.reduce((a, l) => a + l.ex, 0), tx = lines.reduce((a, l) => a + l.tx, 0);
+  const ex = lines.reduce((a, l) => a + l.ex * l.k, 0), tx = lines.reduce((a, l) => a + l.tx * l.k, 0);
   return { lines, ex, tx, inc: ex + tx, cur };
+}
+// Ready to invoice edits: { cust, add: [{ qty, uom, unit, cur }], fixed }
+function ivStdTax(r) { const code = (IV_LOC[r.port] || IV_LOC.SGSIN)[4], m = String(code).match(/-(\d+(?:\.\d+)?)$/); return [code, m ? Number(m[1]) : 0]; }
+function ivMainTax(r) { const m = r.charges.find((c) => c[5] > 0); return m ? [m[4], m[5]] : ivStdTax(r); }
+function ivAddOk(a) { const q = parseFloat(a.qty), u = parseFloat(String(a.unit).replace(/,/g, '')); return q > 0 && !!a.uom && !!a.cur && String(a.unit).trim() !== '' && u >= 0; }
+function ivRdyErrs(r, ed) {
+  ed = ed || {}; const out = []; let first = true;
+  if (!ed.fixed) r.checks.forEach(([k, t], n) => {
+    if (k === 'ok') return;
+    if (n < 2 && ed.cust && ed.cust !== r.cust) return;
+    out.push({ area: n < 2 ? 'Customer' : (n === 2 || n === 5 ? 'Charges' : 'Tax'), text: first && r.msg ? r.msg : t }); first = false;
+  });
+  (ed.add || []).forEach((a, i) => { if (!ivAddOk(a)) out.push({ area: 'Charges', text: 'Added charge ' + (i + 1) + ': enter Quantity, UOM, Unit Price and Currency' }); });
+  return out;
+}
+function ivRdyEff(r, ed) {
+  if (!ed) return r;
+  const o = Object.assign({}, r), mt = ivMainTax(r);
+  if (ed.cust) o.cust = ed.cust;
+  const st = ivStdTax(r);
+  o.charges = r.charges.map((c) => (ed.fixed && c[4] === '—' ? [c[0], c[1], c[2], c[3], st[0], st[1]] : c))
+    .concat((ed.add || []).filter(ivAddOk).map((a) => ['MISC', parseFloat(a.qty), a.uom, parseFloat(String(a.unit).replace(/,/g, '')), mt[0], mt[1], a.cur]));
+  if (!ivRdyErrs(r, Object.assign({}, ed, { add: [] })).length) { o.status = 'Ready'; o.msg = ''; o.checks = r.checks.map(() => ['ok', 'Available']); }
+  return o;
 }
 
 class GirsPage extends DCLogic {
@@ -1010,7 +1062,7 @@ class GirsPage extends DCLogic {
     const all = (d.gen || []).concat(IV_ALL);
     return all.map((i) => { const o = Object.assign({}, i, { status: (d.st && d.st[i.no]) || i.status }); o.pay = ivPay(o, (d.prf || {})[i.no]); o.st2 = ivSt2(o); o.einv = o.st2 === 'Cancelled' ? 'Cancelled' : 'Active'; o.gfs = o.st2 === 'Unpaid' ? 'Pending' : 'Posted'; o.ctry = (IV_LOC[o.port] || [])[1] || String(o.port).slice(0, 2); return o; });
   }
-  readyList() { const d = this.state.store; return IV_RDY.filter((r) => !(d.done || []).includes(r.id)); }
+  readyList() { const d = this.state.store; return IV_RDY.filter((r) => !(d.done || []).includes(r.id)).map((r) => ivRdyEff(r, (d.rdy || {})[r.id])); }
   openMenu(no, e) {
     let pos = { x: 0, y: 0, up: false };
     try {
@@ -1211,23 +1263,40 @@ class GirsPage extends DCLogic {
     let rv = {}, steps = [], rvGenDis = true, rvHint = '';
     const rvIds = s.rv ? s.rv.ids.filter((id) => READY.some((r) => r.id === id)) : [];
     const cur = s.rv && rvIds.length ? READY.find((r) => r.id === rvIds[Math.min(s.rv.i, rvIds.length - 1)]) : null;
+    let ed = null, orig = null;
     if (cur) {
-      const c = ivReadyCalc(cur), cu = IV_CUST[cur.cust] || {};
-      const chk = (n) => cur.checks[n][0];
-      const stepState = (ns) => { const k = ns.map(chk); return k.includes('block') ? 'block' : (k.includes('warn') ? 'warn' : 'ok'); };
-      const ST = [['Customer', stepState([0, 1])], ['Charges', stepState([2, 5])], ['Tax', stepState([3, 4])]];
-      steps = ST.map(([label, k], n) => ({ label, cls: k, mark: k === 'ok' ? '✓' : (k === 'warn' ? '!' : '×'), line: n > 0 })).concat([{ label: 'Preview', cls: 'cur', mark: '4', line: true }]);
-      const blocked = cur.status === 'Blocked';
-      rv = { bl: cur.bl, status: cur.status, msg: cur.msg, hasMsg: !!cur.msg, bcls: blocked ? 'b-block' : 'b-warn', blocked, cur: c.cur,
-        info: [['Invoice Type', cur.type], ['Country', 'Singapore'], ['Legal Entity', 'PIL'], ['Currency', c.cur], ['Invoice Date', ivToday()], ['Due Date', ivPlus(14)]].map(([k, v]) => ({ k, v })),
-        custF: [['Code', cur.cust, ''], ['Name', cu.name, ''], ['Tax ID', cu.tax, ''], ['Billing Address', cu.addr, 'grid-column: span 3']].map(([k, v, span]) => ({ k, v, span })),
-        head: [['B/L No.', cur.bl], ['Tax invoice', cur.type === 'Proforma' ? 'No' : 'Yes'], ['Invoice from', 'PIL Singapore'], ['Invoice to', cu.name]].map(([k, v]) => ({ k, v })),
-        sumLines: c.lines.map((l) => ({ k: l.name, v: ivFmt(l.ex) + ' ' + c.cur })).concat([{ k: 'Tax', v: ivFmt(c.tx) + ' ' + c.cur }]),
-        total: ivFmt(c.inc) + ' ' + c.cur, ex: ivFmt(c.ex), taxT: ivFmt(c.tx), inc: ivFmt(c.inc),
-        lines: c.lines.map((l) => ({ name: l.name, code: l.code, qty: l.qty, uom: l.uom, unit: ivFmt(l.unit), cur: l.cur, ex: ivFmt(l.ex), taxApp: l.tax === '—' ? 'Not classified' : (l.tax + ' · ' + l.rate + '%'),
-          taxSt: l.tax === '—' ? 'color:var(--warn);font-weight:500' : '', tax: ivFmt(l.tx), inc: ivFmt(l.inc) })) };
-      rvGenDis = blocked || !s.decl;
-      rvHint = blocked ? 'Blocked · fix the source data before generating' : (!s.decl ? 'Tick the declaration to generate' : '');
+      orig = IV_RDY.find((y) => y.id === cur.id);
+      ed = s.rvEd && s.rvEd.id === cur.id ? s.rvEd : Object.assign({ id: cur.id, cust: '', add: [], fixed: false }, JSON.parse(JSON.stringify((s.store.rdy || {})[cur.id] || {})));
+      const setEd = (p) => self.setState({ rvEd: Object.assign({}, ed, p) });
+      const eff = ivRdyEff(orig, ed), c = ivReadyCalc(eff), cu = IV_CUST[eff.cust] || {}, errs = ivRdyErrs(orig, ed), mt = ivMainTax(orig);
+      const loc = IV_LOC[orig.port] || IV_LOC.SGSIN, nOrig = orig.charges.length;
+      const m = window.GirsDocs && GirsDocs.model ? GirsDocs.model({ no: loc[0] + 'OF' + String(orig.bl).replace(/\D/g, ''), type: orig.type, status: 'Ready', date: ivToday(), due: ivPlus(14), bkg: orig.bkg, bl: orig.bl, cntr: orig.cntr, vvd: orig.vvd, port: orig.port,
+        cust: { code: eff.cust, name: cu.name, tax: cu.tax, addr: cu.addr }, lines: c.lines.map((l) => ({ code: l.code, name: l.name, amt: l.ex, cur: l.cur, roe: l.cur === c.cur ? '—' : String(l.k), tax: l.tax })) }) : null;
+      const kv = (a) => a.map(([k, v]) => ({ k, v }));
+      const fx = (a, cur) => { const u = parseFloat(String(a.unit).replace(/,/g, '')), q = parseFloat(a.qty); return ivAddOk(a) ? q * u : null; };
+      const addRows = ed.add.map((a, i) => {
+        const ex = fx(a), tx = ex == null ? null : Math.round(ex * mt[1]) / 100, ok = ivAddOk(a);
+        const upd = (p) => setEd({ add: ed.add.map((y, j) => (j === i ? Object.assign({}, y, p) : y)) });
+        const bad = (v) => (!ok && a.touched && !v ? 'bad' : '');
+        return { cls: 'add', edit: true, ro: false, name: IV_CHG.MISC, qty: a.qty, uom: a.uom, unit: a.unit, cur: a.cur,
+          qErr: bad(parseFloat(a.qty) > 0), uErr: bad(a.uom), pErr: bad(String(a.unit).trim() !== '' && parseFloat(String(a.unit).replace(/,/g, '')) >= 0), cErr: bad(a.cur),
+          onQty: (e) => upd({ qty: e.target.value, touched: true }), onUom: (e) => upd({ uom: e.target.value, touched: true }), onUnit: (e) => upd({ unit: e.target.value, touched: true }), onCur: (e) => upd({ cur: e.target.value, touched: true }),
+          del: () => setEd({ add: ed.add.filter((y, j) => j !== i) }),
+          ex: ex == null ? '—' : ivFmt(ex), taxApp: mt[0] === '—' ? '—' : mt[1] + '%', taxSt: '', tax: tx == null ? '—' : ivFmt(tx), inc: ex == null ? '—' : ivFmt(ex + tx) };
+      });
+      const custErr = errs.some((e) => e.area === 'Customer');
+      rv = { bl: cur.bl, cur: c.cur, hasErr: errs.length > 0, noErr: errs.length === 0, errs, errTitle: errs.length === 1 ? '1 error to resolve before generating the invoice' : errs.length + ' errors to resolve before generating the invoice',
+        txn: m ? m.txn : '', strip: m ? kv(m.strip.slice(1)) : [], from0: m ? m.from[0] : '', fromL: m ? m.from.slice(1) : [],
+        cust: eff.cust, custCls: custErr ? 'bad' : '', addr: cu.addr || '—', onCust: (e) => setEd({ cust: e.target.value }),
+        custOpts: Object.keys(IV_CUST).filter((k) => k.slice(0, 2) === loc[1]).map((k) => ({ v: k, label: IV_CUST[k].name })),
+        details: m ? kv(m.details) : [], ship: m ? kv(m.ship) : [], bank: m ? kv(m.bank) : [], words: m ? m.words : '',
+        uoms: ['CNTR', 'BL', 'Day', 'EA'], curs: c.cur === loc[2] ? [c.cur] : [c.cur, loc[2]],
+        lines: c.lines.slice(0, nOrig).map((l) => ({ cls: '', edit: false, ro: true, name: l.name, qty: l.qty, uom: l.uom, unit: ivFmt(l.unit), cur: l.cur, ex: ivFmt(l.ex),
+          taxApp: l.tax === '—' ? 'Not classified' : l.rate + '%', taxSt: l.tax === '—' ? 'color:var(--bad);font-weight:600' : '', tax: ivFmt(l.tx), inc: ivFmt(l.inc) })).concat(addRows),
+        addCharge: () => setEd({ add: ed.add.concat([{ qty: '', uom: '', unit: '', cur: c.cur }]) }),
+        totals: [['Total excluding Tax', ivFmt(c.ex) + ' ' + c.cur, ''], ['Tax Amount', ivFmt(c.tx) + ' ' + c.cur, ''], ['Invoice Total', ivFmt(c.inc) + ' ' + c.cur, 'g']].map(([k, v, cls]) => ({ k, v, cls })) };
+      rvGenDis = errs.length > 0 || !s.decl;
+      rvHint = errs.length ? 'Resolve the errors to enable Generate invoice' : (!s.decl ? 'Tick the declaration to generate' : '');
     }
     // ---------------- dialogs
     const d = s.dlg, f = s.f || {};
@@ -1403,12 +1472,13 @@ class GirsPage extends DCLogic {
       self.put((x) => {
         x.done = (x.done || []).concat(ids); x.gen = x.gen || [];
         ids.forEach((id) => {
-          const r = IV_RDY.find((y) => y.id === id), c = ivReadyCalc(r), cu = IV_CUST[r.cust] || {};
+          const r0 = IV_RDY.find((y) => y.id === id), r = ivRdyEff(r0, s.view === 'review' && ed && ed.id === id ? ed : (x.rdy || {})[id]), c = ivReadyCalc(r), cu = IV_CUST[r.cust] || {};
           const pre = r.type === 'DET / DEM' ? 'SINOD' : (r.type === 'MISC' ? 'SINMI' : 'SINOF');
           const no = pre + String(2609000 + (x.gen.length + 1) * 7).slice(-7);
           const aud = 105200 + x.gen.length * 10;
           x.gen.unshift({ no, type: r.type, bkg: r.bkg, bl: r.bl, cntr: r.cntr, vvd: r.vvd, party: cu.name, cust: r.cust, status: 'Generated', due: ivPlus(14), gov: '—', files: 'PDF · JSON', date: ivToday(), port: r.port,
-            lines: c.lines.map((l, n) => [l.code, l.inc, l.cur, '1.3412', l.tax === '—' ? 'SG-SR-9' : l.tax, 'AUD-26-' + (aud + n)]) });
+            lines: c.lines.map((l, n) => [l.code, l.inc, l.cur, l.cur === 'USD' ? '—' : String((IV_FX.USD || {})[l.cur] || 1), l.tax === '—' ? 'SG-SR-9' : l.tax, 'AUD-26-' + (aud + n)]) });
+          if (x.rdy) delete x.rdy[id];
           self.ev(x, no, 'Generated by Daniel Tan from Ready to invoice · ' + r.bl);
           made.push(no);
         });
@@ -1445,7 +1515,10 @@ class GirsPage extends DCLogic {
       genHint: warnSel ? warnSel + ' selected B/L' + (warnSel === 1 ? ' has' : 's have') + ' warnings · review before generating' : (rSel.length ? '' : 'Select Ready B/Ls to generate, or open one to review'),
       reviewSel: () => self.setState({ view: 'review', rv: { ids: rSel.map((r) => r.id), i: 0 }, decl: false, __toast: '' }),
       genSel: () => self.setState({ dlg: { kind: 'confirm', ids: rSel.map((r) => r.id) } }),
-      backToList: () => self.setState({ view: 'list', rv: null, decl: false }),
+      backToList: () => self.setState({ view: 'list', rv: null, decl: false, rvEd: null }),
+      rvCancel: () => self.setState({ view: 'list', rv: null, decl: false, rvEd: null, __toast: 'Changes discarded' }),
+      rvSave: () => cur && self.put((x) => { x.rdy = x.rdy || {}; const e = JSON.parse(JSON.stringify(ed)); delete e.id; x.rdy[cur.id] = e; }, { rvEd: null, __toast: 'Changes saved · ' + cur.bl }),
+      rvResolve: () => cur && self.setState({ rvEd: Object.assign({}, ed, { fixed: true, add: ed.add.map((a) => ivAddOk(a) ? a : { qty: parseFloat(a.qty) > 0 ? a.qty : '1', uom: a.uom || 'CNTR', unit: String(a.unit).trim() !== '' && parseFloat(a.unit) >= 0 ? a.unit : '0.00', cur: a.cur || 'USD' }) }), __toast: 'All errors resolved' }),
       rvMany: rvIds.length > 1, rvPos: (s.rv ? Math.min(s.rv.i, rvIds.length - 1) + 1 : 0) + ' of ' + rvIds.length, rvFirst: !s.rv || s.rv.i <= 0, rvLast: !s.rv || s.rv.i >= rvIds.length - 1,
       rvPrev: () => self.setState({ rv: Object.assign({}, s.rv, { i: s.rv.i - 1 }), decl: false }), rvNext: () => self.setState({ rv: Object.assign({}, s.rv, { i: s.rv.i + 1 }), decl: false }),
       steps, rv, decl: !!s.decl, toggleDecl: () => self.setState({ decl: !s.decl }), rvGenDis, rvHint,

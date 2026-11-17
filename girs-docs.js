@@ -648,6 +648,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     invoicePdf: function (list, name) { list = [].concat(list); download(list.map(function (i) { return invoiceModel(i); }), name); },
     receiptPdf: function (rc) { download([receiptModel(rc)]); },
     json: function (name, obj) { saveFile(name + '.json', JSON.stringify(obj, null, 2), 'application/json'); },
+    model: invoiceModel, // the document fields (used by the Ready to invoice screen)
     close: close
   };
 })();
