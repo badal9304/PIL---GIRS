@@ -537,6 +537,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <div style="padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 12px">
               <div style="padding: 12px 14px; border-radius: 6px; {{sel.noteStyle}}">{{sel.note}}</div>
               <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                <sc-if value="{{act.refundReq}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{doRefund}}">Route to refund</button></sc-if>
                 <sc-if value="{{act.receipt}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{doReceipt}}">Create receipt</button></sc-if>
                 <sc-if value="{{act.recon}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{doRecon}}">Run reconciliation</button></sc-if>
                 <sc-if value="{{act.email}}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{doEmail}}">Email customer open-invoice link</button></sc-if>
@@ -565,7 +566,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { selected: 'P-0001', src: 'all', done: {}, notice: '' };
+    const cx = (window.GirsCtx && window.GirsCtx.take('receipting.html')) || null;
+    this.state = { selected: cx ? 'CTX' : 'P-0001', src: 'all', done: {}, notice: '', ctx: cx };
   }
   renderVals() {
     const s = this.state;
@@ -588,6 +590,10 @@ class GirsPage extends DCLogic {
       { id: 'P-0016', src: 'Virtual account (VAN)', payer: '[Customer L]', ref: '[VAN]', ccy: 'USD', amt: 1200, cleared: true, match: 'matched', inv: 'NSAOF2601044', platform: false },
       { id: 'P-0008', src: 'Bulk upload', payer: '[Customer H]', ref: 'SINOF2602144 / 02281', ccy: 'USD', amt: 39726, cleared: true, match: 'multi', inv: '2 invoices', platform: false }
     ];
+    // Opened from Invoice List (Request refund / View payment): show that invoice's payment, selected
+    const cx = s.ctx;
+    if (cx && !PAY.some((x) => x.inv === cx.inv)) PAY.unshift({ id: 'P-' + String(cx.inv).slice(-5), src: '[Payment source]', payer: cx.party, ref: cx.inv, ccy: cx.cur, amt: cx.amt, cleared: true, match: 'matched', inv: cx.inv, platform: false, fromCtx: true });
+    const selId = s.selected === 'CTX' ? (PAY.find((x) => cx && x.inv === cx.inv) || PAY[0]).id : s.selected;
     const MATCH = {
       matched: ['Matched', 'background:var(--okbg);color:var(--ok)'], noref: ['No reference', 'background:var(--badbg);color:var(--bad)'],
       dup: ['Duplicate', 'background:var(--badbg);color:var(--bad)'], short: ['Short payment', 'background:var(--warnbg);color:var(--warn)'],
@@ -602,6 +608,7 @@ class GirsPage extends DCLogic {
     const stOf = (p) => {
       const d = s.done[p.id];
       if (d) return d;
+      if (p.fromCtx) return 'reconciled';
       if (!p.cleared) return 'await';
       if (p.match === 'matched') return 'ready';
       return 'exc';
@@ -609,12 +616,12 @@ class GirsPage extends DCLogic {
     const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);';
     const vis = PAY.filter((p) => s.src === 'all' || p.src === s.src);
     const rows = vis.map((p) => {
-      const st = stOf(p), on = s.selected === p.id;
+      const st = stOf(p), on = selId === p.id;
       return { ...p, amtText: m(p.amt), funds: p.cleared ? 'Cleared' : 'Pending', fundsChip: p.cleared ? 'background:var(--okbg);color:var(--ok)' : 'background:var(--neutral);color:var(--muted)',
         match: MATCH[p.match][0], matchChip: MATCH[p.match][1], status: ST[st][0], stChip: ST[st][1],
         cell: on ? 'background:var(--tint);' : '', edge: on ? selEdge : '', select: () => this.setState({ selected: p.id, notice: '' }) };
     });
-    const p = PAY.find((x) => x.id === s.selected) || PAY[0];
+    const p = PAY.find((x) => x.id === selId) || PAY[0];
     const st = stOf(p);
     const rec = st === 'receipted' || st === 'reconciled';
     const recon = [
@@ -646,7 +653,7 @@ class GirsPage extends DCLogic {
       src: s.src, setSrc: (e) => this.setState({ src: e.target.value }),
       rows, rowCount: rows.length, kpis, recon,
       sel: { ...p, amtText: m(p.amt), status: ST[st][0], stChip: ST[st][1], note: notes[st][0], noteStyle: notes[st][1] },
-      act: { receipt: st === 'ready', recon: st === 'receipted', email: st === 'exc' && p.match === 'noref', dup: st === 'exc' && p.match === 'dup',
+      act: { refundReq: !!(cx && cx.act === 'refund' && p.inv === cx.inv && st !== 'refund'), receipt: st === 'ready', recon: st === 'receipted', email: st === 'exc' && p.match === 'noref', dup: st === 'exc' && p.match === 'dup',
         short: st === 'exc' && (p.match === 'short' || p.match === 'over'), over: st === 'exc' && p.match === 'over', rev: st === 'exc' && p.match === 'reversal', early: st === 'exc' && p.match === 'early', dupnote: st === 'exc' && p.match === 'dupnote', split: st === 'exc' && p.match === 'multi' },
       doReceipt: () => set('receipted', 'Receipt created for ' + p.inv + '.' + (p.cross ? ' Cross-trade B/L: receipt notification emailed to POL / POD.' : '')),
       doRecon: () => set('reconciled', p.id + ' reconciled.'),
@@ -718,6 +725,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>

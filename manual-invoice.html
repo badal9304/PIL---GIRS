@@ -533,7 +533,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { type: 'MISC', reason: 'misc', bl: 'BL-SG-24011', dir: 'O', ccy: 'SGD', idate: 'today', bp: 'shipper', lines: [['Lift on / lift off (LOLO)', 'Catalogue', '180.00'], ['[Ancillary charge A]', 'Catalogue', '']], notice: '', done: 0, rev: 1, reloaded: false, conflict: false };
+    const cx = (window.GirsCtx && window.GirsCtx.take('manual-invoice.html')) || null;
+    this.state = { ctx: cx, type: 'MISC', reason: 'misc', bl: cx && cx.bl ? cx.bl : 'BL-SG-24011', dir: 'O', ccy: 'SGD', idate: 'today', bp: 'shipper', lines: [['Lift on / lift off (LOLO)', 'Catalogue', '180.00'], ['[Ancillary charge A]', 'Catalogue', '']], notice: '', done: 0, rev: 1, reloaded: false, conflict: false };
   }
   renderVals() {
     const s = this.state;
@@ -626,6 +627,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>

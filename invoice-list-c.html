@@ -861,6 +861,16 @@ function ivGo(page, q) {
   if (q) href += '?q=' + encodeURIComponent(q);
   try { window.location.href = href; } catch (e) {}
 }
+// Hand-off to another screen with this invoice pre-selected (see girs-ctx.js)
+function ivAct(i, page, act, label) {
+  try {
+    const cur = i.lines[0][2], usd = i.lines.reduce((a, l) => a + (l[2] === 'USD' ? l[1] : l[1] / ((IV_FX.USD || {})[l[2]] || 1)), 0);
+    let back = 'invoice-list.html'; try { back = location.pathname.split('/').pop() || back; } catch (e) {}
+    window.GirsCtx.put({ page, act, label, inv: i.no, bl: i.bl, bkg: i.bkg, cust: i.cust, party: i.party, cur, amt: ivMain(i), usd: Math.round(usd * 100) / 100,
+      date: i.date, due: i.due, status: i.status, type: i.type, port: i.port, fromName: 'Invoice List', back });
+  } catch (e) {}
+  try { window.location.href = page + '?q=' + encodeURIComponent(act === 'soa' ? i.cust : (act === 'manual' ? i.bl : i.no)); } catch (e) {}
+}
 function ivLoad() { try { return JSON.parse(localStorage.getItem('girs.inv.v1') || '{}') || {}; } catch (e) { return {}; } }
 function ivSave(d) { try { localStorage.setItem('girs.inv.v1', JSON.stringify(d)); } catch (e) {} }
 function ivFmt(n) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -1041,15 +1051,15 @@ class GirsPage extends DCLogic {
       return [
         it('View invoice', close(() => ivView(i, toast)), i.files === '—', 'The invoice is created after validation'),
         it('View invoice details', () => self.dlg('details', i)),
-        it('View credit note', close(() => ivGo('CreditNoteList.dc.html', i.no)), !hasCn, 'No credit note for this invoice'),
-        it('View SOA', close(() => ivGo('SOADashboard.dc.html', i.cust))),
+        it('View credit note', close(() => ivAct(i, 'credit-note-list.html', 'cn', 'Credit note for')), !hasCn, 'No credit note for this invoice'),
+        it('View SOA', close(() => ivAct(i, 'soa-aging.html', 'soa', 'Statement of account · invoice'))),
         it('Download PDF / JSON', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
         it('Request credit note', () => self.dlg('cn', i, { full: true, amount: ivFmt(ivMain(i)), reason: '', ref: '' }), !cnOk, st === 'Credited' ? 'Already fully credited' : 'Only for generated, sent, accepted or paid invoices'),
-        it('Request refund', close(() => ivGo('Receipting.dc.html', i.no)), !paid, 'Only for paid invoices'),
-        it('View payment', close(() => ivGo('CashAppWorkbench.dc.html', i.no)), !paid, 'No payment received yet'),
+        it('Request refund', close(() => ivAct(i, 'receipting.html', 'refund', 'Refund request for')), !paid, 'Only for paid invoices'),
+        it('View payment', close(() => ivAct(i, 'receipting.html', 'payment', 'Payment for')), !paid, 'No payment received yet'),
         it('View receipt', close(() => ivReceipt(i, toast)), !paid, 'No receipt yet'),
-        it('Create manual invoice', close(() => ivGo('ManualInvoice.dc.html', i.bl)), false, '', { sep: true }),
+        it('Create manual invoice', close(() => ivAct(i, 'manual-invoice.html', 'manual', 'Manual invoice from')), false, '', { sep: true }),
         it('View audit trail', () => self.dlg('audit', i)),
         it('View distribution', () => self.dlg('dist', i)),
         i.type === 'Proforma' ? it('Proforma lifecycle', () => self.dlg('prf', i)) : null,
@@ -1366,6 +1376,7 @@ class Component extends GirsPage {
 
 </script>
 <script src="girs-docs.js"></script>
+<script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>

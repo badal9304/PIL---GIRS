@@ -472,7 +472,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <thead style="position: sticky; top: 0; z-index: 2"><tr><th>Credit Note No.</th><th>Original Invoice No.</th><th>Credit Type</th><th>FCA/DAR Reference</th><th>Reason Code</th><th class="num">Credit Amount</th><th>Currency</th><th>Tax Reversal</th><th>Approval Status</th><th>Replacement Invoice No.</th><th>Govt. Reference</th><th>Audit ID</th></tr></thead>
             <tbody>
               <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
-                <tr><td class="mono" style="font-weight: 500">{{r.no}}</td><td class="mono">{{r.orig}}</td><td>{{r.ctype}}</td><td class="mono" style="{{r.refDim}}">{{r.ref}}</td><td>{{r.reason}}</td><td class="mono num">{{r.amt}}</td><td class="mono">{{r.cur}}</td><td class="mono">{{r.taxrev}}</td><td><span style="display: inline-flex; align-items: center; gap: 8px; {{r.stColor}}"><span style="width: 8px; height: 8px; border-radius: 50%; {{r.stDot}}"></span>{{r.appr}}</span></td><td class="mono" style="{{r.replDim}}">{{r.repl}}</td><td class="mono" style="{{r.govDim}}">{{r.gov}}</td><td class="mono">{{r.audit}}</td></tr>
+                <tr style="{{r.rowSt}}"><td class="mono" style="font-weight: 500">{{r.no}}</td><td class="mono">{{r.orig}}</td><td>{{r.ctype}}</td><td class="mono" style="{{r.refDim}}">{{r.ref}}</td><td>{{r.reason}}</td><td class="mono num">{{r.amt}}</td><td class="mono">{{r.cur}}</td><td class="mono">{{r.taxrev}}</td><td><span style="display: inline-flex; align-items: center; gap: 8px; {{r.stColor}}"><span style="width: 8px; height: 8px; border-radius: 50%; {{r.stDot}}"></span>{{r.appr}}</span></td><td class="mono" style="{{r.replDim}}">{{r.repl}}</td><td class="mono" style="{{r.govDim}}">{{r.gov}}</td><td class="mono">{{r.audit}}</td></tr>
               </sc-for>
             </tbody>
           </table>
@@ -494,7 +494,9 @@ class GirsPage extends DCLogic {
     super(p);
     let q0 = '';
     try { q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
-    this.state = { q: q0, st: '' };
+    const cx = (window.GirsCtx && window.GirsCtx.take('credit-note-list.html')) || null;
+    if (cx) q0 = cx.inv;
+    this.state = { q: q0, st: '', ctx: cx };
   }
   renderVals() {
     const s = this.state;
@@ -616,11 +618,13 @@ class GirsPage extends DCLogic {
                 "AUD-26-104640"
           ]
     ].map((a) => { const r = {}; K.forEach((k, i) => { r[k] = a[i]; }); return r; }));
+    const cx = s.ctx;
+    if (cx && !R.some((r) => r.orig === cx.inv)) R.unshift({ no: '[Credit note no.]', orig: cx.inv, ctype: 'Full', ref: '—', reason: '[Reason]', amount: cx.amt, cur: cx.cur, taxrev: '—', appr: 'Approved', repl: '—', gov: '—', audit: '—' });
     const q = s.q.trim().toLowerCase();
     const rows = R.filter((r) => (!q || K.some((k) => String(r[k]).toLowerCase().includes(q))) && (!s.st || r.appr === s.st)).map((r) => {
       const t = TONE[r.appr] || ['var(--muted)', 'var(--neutral)'];
       return Object.assign({}, r, {
-        stDot: 'background:' + t[0], stColor: 'color:' + t[0],
+        rowSt: cx && r.orig === cx.inv ? 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);' : '', stDot: 'background:' + t[0], stColor: 'color:' + t[0],
         refDim: r.ref === '—' ? 'color:var(--muted)' : '', replDim: r.repl === '—' ? 'color:var(--muted)' : '', govDim: r.gov === '—' ? 'color:var(--muted)' : ''
       });
     });
@@ -692,6 +696,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>

@@ -436,7 +436,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Statement of Account &amp; Aging</h1>
-            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">[Customer A] · Consolidated statement in USD alongside local billing currencies</p>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">{{custName}} · Consolidated statement in USD alongside local billing currencies</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
           <div style="position: relative">
@@ -516,7 +516,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   </div>
                 </div>
                 <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; max-width: 760px">
-                  <p style="margin: 0">To: [Customer A] · [Billing contact email]</p>
+                  <p style="margin: 0">To: {{custName}} · [Billing contact email]</p>
                   <p style="margin: 0">Our records show the following overdue amounts on your account. Disputed items under review are excluded from this reminder.</p>
                   <div style="max-width: 420px; display: flex; flex-direction: column">
                     <sc-for list="{{letterRows}}" as="l" hint-placeholder-count="3">
@@ -568,7 +568,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { terms: 30, bucket: null, locked: { i4: true }, prov: false, letter: false, sent: false };
+    const cx = (window.GirsCtx && window.GirsCtx.take('soa-aging.html')) || null;
+    this.state = { terms: 30, bucket: null, locked: { i4: true }, prov: false, letter: false, sent: false, ctx: cx };
   }
   renderVals() {
     const s = this.state;
@@ -589,6 +590,9 @@ class GirsPage extends DCLogic {
       { id: 'i13', no: 'SINOF2601912', charge: 'Documentation Fee', ccy: 'SGD', amt: 950, usd: 706, sail: 95 },
       { id: 'i14', no: 'SINOF2601799', charge: 'Ocean Freight', ccy: 'USD', amt: 12800, usd: 12800, sail: 125 }
     ];
+    // Opened from Invoice List (View SOA): that customer's statement, with the invoice highlighted
+    const cx = s.ctx;
+    if (cx && !inv.some((i) => i.no === cx.inv)) { const d = Date.parse(cx.date); inv.unshift({ id: 'ix', no: cx.inv, charge: cx.type, ccy: cx.cur, amt: cx.amt, usd: cx.usd, sail: isNaN(d) ? 0 : Math.max(0, Math.round((Date.parse('17 Nov 2026') - d) / 864e5)) }); }
     const bk = (over) => over <= 0 ? 'cur' : (over <= 30 ? 'b30' : (over <= 60 ? 'b60' : 'b90'));
     const meta = {
       cur: { label: 'Current', fg: 'var(--ok)', bar: 'var(--okbar)', chip: 'background:var(--okbg);color:var(--ok)' },
@@ -613,7 +617,7 @@ class GirsPage extends DCLogic {
     const rows = visible.map((i) => ({
       no: i.no, charge: i.charge, bucket: meta[i.b].label, bStyle: meta[i.b].chip,
       over: i.over <= 0 ? '—' : String(i.over), ccy: i.ccy, amtText: m(i.amt), usdText: m(i.usd),
-      rowStyle: i.locked ? 'color:var(--muted)' : '',
+      rowStyle: (i.locked ? 'color:var(--muted);' : '') + (cx && i.no === cx.inv ? 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);' : ''),
       lockedAttr: i.locked ? 'true' : 'false',
       lockText: i.locked ? 'Locked — disputed' : 'Isolate',
       lockBg: i.locked ? 'var(--badbg)' : 'var(--surface)', lockFg: i.locked ? 'var(--bad)' : 'var(--ink)', lockBorder: i.locked ? 'var(--badbd)' : 'var(--bd)',
@@ -637,7 +641,7 @@ class GirsPage extends DCLogic {
     return {
       terms: String(s.terms),
       setTerms: (e) => this.setState({ terms: Number(e.target.value), sent: false }),
-      buckets, rows,
+      buckets, rows, custName: cx ? cx.party + ' · ' + cx.cust : '[Customer A]',
       filtered: !!s.bucket,
       clearBucket: () => this.setState({ bucket: null }),
       tableTitle: s.bucket ? meta[s.bucket].label + ' — invoices' : 'Open invoices',
@@ -714,6 +718,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>
