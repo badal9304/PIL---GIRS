@@ -214,6 +214,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .msel-o span:nth-of-type(1){flex:1 1 auto}
 .msel-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
 .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);margin-top:6px;position:sticky;bottom:0;background:var(--surface)}
+.ph-trunc{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.ph-trunc::placeholder{text-overflow:ellipsis}
 .ftb{display:flex;align-items:flex-start;gap:12px}
 .ftb-p{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .fq{position:relative}
@@ -642,7 +643,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <div class="tabs" role="tablist" aria-label="Invoice List views"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="cnt mono">{{t.n}}</span></button></sc-for></div>
         <sc-if value="{{tabInv}}" hint-placeholder-val="{{ true }}">
           <div class="ftb">
-            <input class="input r-w" style="width: 260px; flex: none" placeholder="Search invoice, B/L, booking, container or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
+            <input class="input r-w ph-trunc" style="width: 260px; flex: none" placeholder="Search invoice, B/L, booking, container or customer" title="Search invoice, B/L, booking, container or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
             <div class="ftb-p"><sc-for list="{{fsel}}" as="x" hint-placeholder-count="7"><div class="fq"><button class="fq-b" aria-haspopup="listbox" aria-expanded="{{x.openA}}" aria-label="{{x.aria}}" title="{{x.tip}}" onClick="{{x.toggle}}" style="{{x.bst}}"><span class="fq-t">{{x.text}}</span><sc-if value="{{x.hasN}}" hint-placeholder-val="{{ false }}"><span class="msel-n">{{x.n}}</span></sc-if><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
               <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close filter" onClick="{{closeFs}}"></button><div class="msel-p" role="listbox" aria-multiselectable="true" aria-label="{{x.label}}">
                 <sc-for list="{{x.items}}" as="o" hint-placeholder-count="5"><label class="msel-o" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.v}}</span><span class="mono mu">{{o.n}}</span></label></sc-for>
