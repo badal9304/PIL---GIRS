@@ -435,7 +435,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Underpayment Tolerance &amp; Cargo Release</h1>
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Auto-write-off, unapplied cash staging and automated COREOR release to LMS</p>
           </div>
-          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
           <label for="tol" style="font-size: 12px; font-weight: 600; color: var(--muted)">Auto-write-off tolerance (USD)</label>
           <input id="tol" type="number" min="0" max="20" step="0.5" value="{{tol}}" onChange="{{setTol}}" class="input mono" style="width: 104px">
           </div>
