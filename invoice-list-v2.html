@@ -214,6 +214,20 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .msel-o span:nth-of-type(1){flex:1 1 auto}
 .msel-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
 .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);margin-top:6px;position:sticky;bottom:0;background:var(--surface)}
+.fp-w{position:relative}
+.fp-btn{display:inline-flex;align-items:center;gap:6px}
+.fp-p{position:absolute;z-index:81;top:calc(100% + 6px);left:0;width:860px;max-width:calc(100vw - 260px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.18)}
+.fp-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 20px;padding:16px 18px;max-height:420px;overflow:auto}
+.fp-c{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:2px}
+.fp-c legend{padding:0 0 6px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:flex;align-items:center;gap:6px}
+.fp-gn{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--onaccent);font-size:11px;line-height:18px;text-align:center;letter-spacing:0}
+.fp-o{display:flex;align-items:center;gap:8px;min-height:30px;padding:0 6px;margin:0 -6px;border-radius:6px;font-size:13px;cursor:pointer}
+.fp-o:hover{background:var(--hover2)}.fp-o span:nth-of-type(1){flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fp-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.fp-f{display:flex;align-items:center;gap:8px;padding:10px 18px;border-top:1px solid var(--line2);background:var(--sub);border-radius:0 0 10px 10px}
+.fp-chip{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 4px 0 10px;border-radius:14px;background:var(--tint);color:var(--accent2);font-size:12px;font-weight:500;white-space:nowrap}
+.fp-chip button{width:20px;height:20px;border:0;border-radius:10px;background:transparent;color:inherit;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.fp-chip button:hover{background:rgba(0,113,183,.14)}
 .mback{position:fixed;inset:0;z-index:80;background:transparent;border:0;padding:0;margin:0;cursor:default}
 .dbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .dbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
@@ -622,12 +636,15 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <sc-if value="{{tabInv}}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; align-items: center; gap: 12px">
             <input class="input r-w" style="width: 340px" placeholder="Search invoice, B/L, booking, container or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
-            <sc-for list="{{fsel}}" as="x" hint-placeholder-count="4"><div class="msel"><button class="select r-w msel-b" aria-haspopup="listbox" aria-expanded="{{x.openA}}" aria-label="{{x.label}} filter" onClick="{{x.toggle}}" style="{{x.bst}}"><span class="msel-t">{{x.text}}</span><sc-if value="{{x.hasN}}" hint-placeholder-val="{{ false }}"><span class="msel-n">{{x.n}}</span></sc-if></button><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
-              <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close filter" onClick="{{closeFs}}"></button><div class="msel-p" role="listbox" aria-multiselectable="true" aria-label="{{x.label}}">
-                <sc-for list="{{x.items}}" as="o" hint-placeholder-count="5"><label class="msel-o" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.v}}</span><span class="mono mu">{{o.n}}</span></label></sc-for>
-                <div class="msel-f"><button class="btn btn-sm" onClick="{{x.clear}}" disabled="{{x.none}}">Clear</button><button class="btn btn-sm btn-primary" onClick="{{closeFs}}">Done</button></div>
-              </div></sc-if></div></sc-for>
-            <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{clearF}}">Clear</button></sc-if>
+            <div class="fp-w"><button class="btn fp-btn" aria-haspopup="dialog" aria-expanded="{{fp.openA}}" onClick="{{fp.toggle}}" style="{{fp.btnSt}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"></path></svg>Filters<sc-if value="{{fp.hasN}}" hint-placeholder-val="{{ false }}"><span class="msel-n">{{fp.n}}</span></sc-if></button>
+              <sc-if value="{{fp.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close filters" onClick="{{fp.cancel}}"></button>
+                <div class="fp-p" role="dialog" aria-label="Filters">
+                  <div class="fp-g"><sc-for list="{{fp.groups}}" as="g" hint-placeholder-count="7"><fieldset class="fp-c"><legend>{{g.label}}<sc-if value="{{g.hasN}}" hint-placeholder-val="{{ false }}"><span class="fp-gn">{{g.n}}</span></sc-if></legend>
+                    <sc-for list="{{g.items}}" as="o" hint-placeholder-count="3"><label class="fp-o"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.v}}</span><span class="mono mu">{{o.n}}</span></label></sc-for></fieldset></sc-for></div>
+                  <div class="fp-f"><button class="lnk" onClick="{{fp.clear}}" disabled="{{fp.noDraft}}">Clear all</button><span style="margin-inline-start: auto; font-size: 13px; color: var(--muted)">{{fp.preview}}</span><button class="btn btn-sm" onClick="{{fp.cancel}}">Cancel</button><button class="btn btn-sm btn-primary" onClick="{{fp.done}}">Done</button></div>
+                </div></sc-if></div>
+            <sc-for list="{{fp.chips}}" as="c" hint-placeholder-count="0"><span class="fp-chip">{{c.label}}<button aria-label="Remove {{c.label}}" onClick="{{c.rm}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for>
+            <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button class="lnk" onClick="{{clearF}}">Clear all</button></sc-if>
             <span style="margin-inline-start: auto; font-size: 13px; color: var(--muted)">{{countText}}</span><div style="position: relative"><select class="select r-w" style="width: 190px" aria-label="Sort" value="{{sortSel.val}}" onChange="{{sortSel.on}}"><sc-for list="{{sortSel.opts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">Sort: {{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
           </div>
           <sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}">
@@ -970,7 +987,7 @@ class GirsPage extends DCLogic {
     let q = '';
     try { q = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
     try { const fq = localStorage.getItem('girs.find'); if (fq) { q = fq; localStorage.removeItem('girs.find'); } } catch (e) {}
-    this.state = { tab: 'inv', view: 'list', q, fo: [], fpt: [], fs: [], fe: [], fg: [], fp: [], ft: [], fc: [], fopen: null, sel: {}, exp: {}, menu: null, dlg: null, f: {},
+    this.state = { tab: 'inv', view: 'list', q, fd: null, fo: [], fpt: [], fs: [], fe: [], fg: [], fp: [], ft: [], fc: [], fopen: null, sel: {}, exp: {}, menu: null, dlg: null, f: {},
       period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, rv: null, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
   }
   put(mut, extra) { const d = JSON.parse(JSON.stringify(this.state.store)); mut(d); ivSave(d); if (typeof extra === 'function') extra = extra(); this.setState(Object.assign({ store: d }, extra || {})); if (extra && extra.__toast) this.fade(extra.__toast); }
@@ -1028,6 +1045,24 @@ class GirsPage extends DCLogic {
     const shown = INV.filter((i) => (!q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q))
       && ivIn(s.fo, i.ctry) && ivIn(s.fpt, i.port) && ivIn(s.fs, i.st2) && ivIn(s.fe, i.einv) && ivIn(s.fg, i.gfs) && ivIn(s.ft, i.type) && (!ivArr(s.fc).length || i.lines.some((l) => ivArr(s.fc).includes(l[2]))));
     const uniq = (a) => a.filter((v, n) => a.indexOf(v) === n);
+    // Filters panel (v2): choices are staged in s.fd and applied only on Done
+    const FKEYS = ['fo', 'fpt', 'fs', 'fe', 'fg', 'ft', 'fc'];
+    const FDEF = [['Country', 'fo', uniq(INV.map((i) => i.ctry))], ['Port', 'fpt', uniq(INV.map((i) => i.port))], ['Invoice Status', 'fs', ['Unpaid', 'Paid', 'Receipted', 'Reconciled', 'Cancelled']], ['e-Invoice', 'fe', ['Active', 'Cancelled']], ['GFS Status', 'fg', ['Pending', 'Posted']], ['Invoice Type', 'ft', uniq(INV.map((i) => i.type))], ['Currency', 'fc', uniq([].concat(...INV.map((i) => i.lines.map((l) => l[2]))))]];
+    const FFIELD = { fo: 'ctry', fpt: 'port', fs: 'st2', fe: 'einv', fg: 'gfs', ft: 'type' };
+    const fMatch = (i, src) => ivIn(src.fo, i.ctry) && ivIn(src.fpt, i.port) && ivIn(src.fs, i.st2) && ivIn(src.fe, i.einv) && ivIn(src.fg, i.gfs) && ivIn(src.ft, i.type) && (!ivArr(src.fc).length || i.lines.some((l) => ivArr(src.fc).includes(l[2])));
+    const fApplied = {}; FKEYS.forEach((k) => { fApplied[k] = ivArr(s[k]); });
+    const fd = s.fd || fApplied, fOpen = !!s.fd;
+    const fCnt = (k, v) => INV.filter((i) => k === 'fc' ? i.lines.some((l) => l[2] === v) : i[FFIELD[k]] === v).length;
+    const nApplied = FKEYS.reduce((a, k) => a + fApplied[k].length, 0), nDraft = FKEYS.reduce((a, k) => a + ivArr(fd[k]).length, 0);
+    const fp = { open: fOpen, openA: fOpen ? 'true' : 'false', n: nApplied, hasN: nApplied > 0, btnSt: nApplied ? 'border-color:var(--accent);color:var(--accent2)' : '', noDraft: !nDraft,
+      toggle: () => self.setState({ fd: fOpen ? null : Object.assign({}, fApplied), menu: null }),
+      cancel: () => self.setState({ fd: null }),
+      clear: () => { const z = {}; FKEYS.forEach((k) => { z[k] = []; }); self.setState({ fd: z }); },
+      done: () => { const up = { fd: null, pg: {} }; FKEYS.forEach((k) => { up[k] = ivArr(fd[k]); }); self.setState(up); },
+      preview: fOpen ? INV.filter((i) => fMatch(i, fd)).length.toLocaleString('en-US') + ' invoices match' : '',
+      groups: !fOpen ? [] : FDEF.map(([label, k, opts]) => { const cur = ivArr(fd[k]); return { label, n: cur.length, hasN: cur.length > 0,
+        items: opts.map((v) => ({ v, n: fCnt(k, v).toLocaleString('en-US'), on: cur.includes(v), flip: () => self.setState({ fd: Object.assign({}, fd, { [k]: cur.includes(v) ? cur.filter((x) => x !== v) : cur.concat([v]) }) }) })) }; }),
+      chips: [].concat(...FDEF.map(([label, k]) => fApplied[k].map((v) => ({ label: label + ': ' + v, rm: () => self.setState({ [k]: fApplied[k].filter((x) => x !== v), pg: {} }) })))) };
     const fsel = [['Country', 'fo', uniq(INV.map((i) => i.ctry))], ['Port', 'fpt', uniq(INV.map((i) => i.port))], ['Invoice Status', 'fs', ['Unpaid', 'Paid', 'Receipted', 'Reconciled', 'Cancelled']], ['e-Invoice', 'fe', ['Active', 'Cancelled']], ['GFS Status', 'fg', ['Pending', 'Posted']], ['Invoice Type', 'ft', uniq(INV.map((i) => i.type))], ['Currency', 'fc', uniq([].concat(...INV.map((i) => i.lines.map((l) => l[2]))))]]
       .map(([label, k, opts]) => {
         const cur = ivArr(s[k]), open = s.fopen === k;
@@ -1380,7 +1415,7 @@ class GirsPage extends DCLogic {
       readyListOn: s.view === 'list' || !cur,
       tabs: [['ready', 'Ready to invoice', READY.length], ['inv', 'Invoices', INV.length]].map(([k, label, n]) => ({ label, n, on: s.tab === k ? 'true' : 'false', pick: () => self.setState({ tab: k, menu: null }) })),
       manual: () => ivGo('ManualInvoice.dc.html'), goGenerate: () => ivGo('InvoiceGenerate.dc.html'), goList: () => ivGo('InvoiceListB.dc.html'),
-      q: s.q, onQ: (e) => self.setState({ q: e.target.value, pg: {} }), fsel, closeFs: () => self.setState({ fopen: null }), filtered: !!(s.q || ['fo', 'fpt', 'fs', 'fe', 'fg', 'ft', 'fc'].some((k) => ivArr(s[k]).length)), clearF: () => self.setState({ q: '', fo: [], fpt: [], fs: [], fe: [], fg: [], ft: [], fc: [], fopen: null, pg: {} }),
+      q: s.q, onQ: (e) => self.setState({ q: e.target.value, pg: {} }), fsel, fp, closeFs: () => self.setState({ fopen: null }), filtered: !!(s.q || ['fo', 'fpt', 'fs', 'fe', 'fg', 'ft', 'fc'].some((k) => ivArr(s[k]).length)), clearF: () => self.setState({ q: '', fo: [], fpt: [], fs: [], fe: [], fg: [], ft: [], fc: [], fopen: null, fd: null, pg: {} }),
       countText: shown.length + ' of ' + INV.length + ' invoices', invs, invEmpty: invs.length === 0,
       allOn, toggleAll: () => { const n = Object.assign({}, s.sel); PI.rows.forEach((i) => { n[i.no] = !allOn; }); self.setState({ sel: n }); },
       pInv: PI.p, sortSel, canSelAll: allOn && selNos.length < shown.length, selAllText: 'Select all ' + shown.length.toLocaleString('en-US') + ' matching invoices',
