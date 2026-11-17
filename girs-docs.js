@@ -110,34 +110,33 @@
     };
   }
 
-  // Invoice document · A4 landscape so the charge columns stay readable
+  // Invoice document · A4 portrait
   var INV_CSS = [
-    '.gi{position:relative;width:1123px;min-height:794px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 48px 64px;font-size:13px;line-height:19px;overflow:hidden}',
+    '.gi{position:relative;width:794px;min-height:1123px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 40px 96px;font-size:12px;line-height:18px;overflow:hidden}',
     '.gi *{box-sizing:border-box;letter-spacing:normal}.gi:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:#E31D1A}',
-    '.gi .k{font-size:11px;line-height:16px;text-transform:uppercase;letter-spacing:.07em;color:#5A6170;font-weight:600}.gi .mu{color:#5A6170}',
-    '.gi-hd{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:32px 0 24px;border-bottom:1px solid #ECEEF2}',
-    '.gi-hd img{height:44px;display:block}',
-    '.gi-tt{text-align:right}.gi-tt h1{margin:0;font-size:26px;line-height:32px;letter-spacing:.04em;font-weight:700}',
-    '.gi-tt .sub{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:13px}',
+    '.gi .k{font-size:10px;line-height:15px;text-transform:uppercase;letter-spacing:.07em;color:#5A6170;font-weight:600}.gi .mu{color:#5A6170}',
+    '.gi-hd{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0 20px;border-bottom:1px solid #ECEEF2}',
+    '.gi-hd img{height:38px;display:block}',
+    '.gi-tt{text-align:right}.gi-tt h1{margin:0;font-size:22px;line-height:28px;letter-spacing:.04em;font-weight:700}',
+    '.gi-tt .sub{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:12px}',
     '.gi-badge{padding:3px 10px;border-radius:4px;font-size:11px;line-height:16px;font-weight:700;letter-spacing:.05em}',
-    '.gi-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:24px;border:1px solid #DADDE3;border-radius:8px}',
-    '.gi-strip>div{padding:12px 16px;border-left:1px solid #DADDE3}.gi-strip>div:first-child{border-left:0}.gi-strip .v{margin-top:4px;font-weight:600;font-size:15px;line-height:20px}',
-    '.gi-parties{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:28px}',
-    '.gi-parties .n{font-weight:600;font-size:15px;line-height:21px;margin-top:8px}.gi-parties .l{color:#3A4556}',
-    '.gi-kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:8px}.gi-kv span:nth-child(odd){color:#5A6170}',
-    '.gi-ship{margin-top:24px;padding:16px 20px;border-radius:8px;background:#F7F8FA;display:grid;grid-template-columns:repeat(3,1fr);gap:14px 32px}',
-    '.gi-ship .v{margin-top:2px;font-weight:500}',
-    '.gi table{width:100%;border-collapse:collapse;margin-top:28px;font-size:12.5px;line-height:18px;table-layout:auto}',
-    '.gi th{background:#F4F5F7;text-align:left;font-weight:600;font-size:11px;line-height:15px;color:#3A4556;padding:10px 8px;border:0;border-bottom:1px solid #DADDE3;vertical-align:bottom;height:auto;position:static;white-space:normal;text-transform:none;letter-spacing:0}',
-    '.gi th:first-child,.gi td:first-child{padding-left:12px}.gi th:last-child,.gi td:last-child{padding-right:12px}',
-    '.gi td{padding:11px 8px;border:0;border-bottom:1px solid #ECEEF2;vertical-align:top;height:auto;white-space:nowrap;font-variant-numeric:tabular-nums}.gi td.w{white-space:normal;min-width:190px;font-weight:500}',
+    '.gi-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:20px;border:1px solid #DADDE3;border-radius:8px}',
+    '.gi-strip>div{padding:10px 14px;border-left:1px solid #DADDE3}.gi-strip>div:first-child{border-left:0}.gi-strip .v{margin-top:3px;font-weight:600;font-size:14px;line-height:20px}',
+    '.gi-parties{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px}',
+    '.gi-parties .n{font-weight:600;font-size:14px;line-height:20px;margin-top:6px}.gi-parties .l{color:#3A4556}',
+    '.gi-cust{margin-top:20px;padding-top:16px;border-top:1px solid #ECEEF2;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 24px}.gi-cust .v,.gi-ship .v{margin-top:2px;font-weight:500}',
+    '.gi-ship{margin-top:20px;padding:14px 18px;border-radius:8px;background:#F7F8FA;display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:12px 24px}',
+        '.gi table{width:100%;border-collapse:collapse;margin-top:24px;font-size:11.5px;line-height:16px;table-layout:auto}',
+    '.gi th{background:#F4F5F7;text-align:left;font-weight:600;font-size:10px;line-height:14px;color:#3A4556;padding:9px 6px;border:0;border-bottom:1px solid #DADDE3;vertical-align:bottom;height:auto;position:static;white-space:normal;text-transform:none;letter-spacing:0}',
+    '.gi th:first-child,.gi td:first-child{padding-left:10px}.gi th:last-child,.gi td:last-child{padding-right:10px}',
+    '.gi td{padding:10px 6px;border:0;border-bottom:1px solid #ECEEF2;vertical-align:top;height:auto;white-space:nowrap;font-variant-numeric:tabular-nums}.gi td.w{white-space:normal;min-width:130px;font-weight:500}',
     '.gi tbody tr:hover td{background:none}.gi .r{text-align:right}',
-    '.gi-bt{display:grid;grid-template-columns:1fr 360px;gap:48px;margin-top:24px;align-items:start}',
-    '.gi-bank{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;margin-top:8px}.gi-bank span:nth-child(odd){color:#5A6170}',
-    '.gi-tot{display:flex;flex-direction:column;gap:8px}.gi-tot>div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}',
-    '.gi-tot>div.g{border-top:1px solid #161A21;padding-top:10px;margin-top:2px;font-weight:700;font-size:16px;line-height:22px}',
-    '.gi-words{margin-top:12px;padding:10px 14px;border-radius:6px;background:#F7F8FA;color:#3A4556}',
-    '.gi-ft{position:absolute;left:48px;right:48px;bottom:24px;border-top:1px solid #DADDE3;padding-top:10px;font-size:11px;line-height:16px;color:#5A6170;display:flex;justify-content:space-between;gap:24px}'
+    '.gi-bt{display:grid;grid-template-columns:1fr 290px;gap:32px;margin-top:22px;align-items:start}',
+    '.gi-bank{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;margin-top:8px}.gi-bank span:nth-child(odd){color:#5A6170}',
+    '.gi-tot{display:flex;flex-direction:column;gap:6px}.gi-tot>div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}',
+    '.gi-tot>div.g{border-top:1px solid #161A21;padding-top:10px;margin-top:2px;font-weight:700;font-size:15px;line-height:22px}',
+    '.gi-words{margin-top:16px;padding:10px 14px;border-radius:6px;background:#F7F8FA;color:#3A4556}',
+    '.gi-ft{position:absolute;left:40px;right:40px;bottom:24px;border-top:1px solid #DADDE3;padding-top:10px;font-size:10.5px;line-height:16px;color:#5A6170;display:grid;grid-template-columns:1fr auto;gap:2px 24px}.gi-ft .d{grid-column:1/-1}'
   ].join('');
   var BADGE = { PAID: 'background:#DDF3E6;color:#1F6B45', 'UN-PAID': 'background:#FFF27A;color:#161A21', CANCELLED: 'background:#FBEAEA;color:#A3262A' };
   function invoiceHtml(m) {
@@ -153,63 +152,66 @@
       '<div class="gi-parties">' +
         '<div><div class="k">From</div><div class="n">' + esc(m.from[0]) + '</div>' + m.from.slice(1).map(function (l) { return '<div class="l">' + esc(l) + '</div>'; }).join('') + '</div>' +
         '<div><div class="k">To</div><div class="n">' + esc(m.to[0]) + '</div>' + m.to.slice(1).map(function (l) { return '<div class="l">' + esc(l) + '</div>'; }).join('') + '</div>' +
-        '<div><div class="k">Customer &amp; payment</div>' + kv(m.details, 'gi-kv') + '</div></div>' +
+      '</div><div class="gi-cust">' + m.details.map(function (r) { return '<div><div class="k">' + esc(r[0]) + '</div><div class="v">' + esc(r[1]) + '</div></div>'; }).join('') + '</div>' +
       '<div class="gi-ship">' + m.ship.map(function (r) { return '<div><div class="k">' + esc(r[0]) + '</div><div class="v">' + esc(r[1]) + '</div></div>'; }).join('') + '</div>' +
       '<table><thead>' + head + '</thead><tbody>' + body + '</tbody></table>' +
       '<div class="gi-bt"><div><div class="k">Bank details</div>' + kv(m.bank, 'gi-bank') + '</div>' + tot + '</div>' +
       '<div class="gi-words">' + esc(m.words) + '</div>' +
-      '<div class="gi-ft"><span>Issued By: ' + esc(m.issued) + '</span><span>' + esc(m.disclaimer) + '</span><span>' + esc(m.stamp2) + '</span></div></div>';
+      '<div class="gi-ft"><span>Issued By: ' + esc(m.issued) + '</span><span>' + esc(m.stamp2) + '</span><span class="d">' + esc(m.disclaimer) + '</span></div></div>';
   }
 
-  // PDF: A4 landscape, same layout as the screen
+  // PDF: A4 portrait, same layout as the screen
   function drawInvoice(m) {
-    var W = 842, H = 595, p = new Page(W, H), L = 36, R = W - 36, y, MU = '#5A6170';
+    var W = 595, H = 842, p = new Page(W, H), L = 30, R = W - 30, y, MU = '#5A6170';
     var K = function (x, yy, t) { p.text(x, yy, t.toUpperCase(), { size: 6.5, bold: true, color: MU }); };
     p.rect(0, 0, W, 3, '#E31D1A');
-    p.logo(L, 22, 30);
-    p.text(R, 38, m.title.toUpperCase(), { size: 17, bold: true, align: 'r' });
+    p.logo(L, 22, 27);
+    p.text(R, 36, m.title.toUpperCase(), { size: 15, bold: true, align: 'r' });
     var bx = R;
-    if (m.badge) { var bw = width(m.badge, true, 7) + 12, bc = { PAID: ['#DDF3E6', '#1F6B45'], 'UN-PAID': ['#FFF27A', '#161A21'], CANCELLED: ['#FBEAEA', '#A3262A'] }[m.badge]; bx = R - bw; p.rect(bx, 46, bw, 13, bc[0]); p.text(bx + 6, 55.5, m.badge, { size: 7, bold: true, color: bc[1] }); bx -= 8; }
-    var tw = p.text(bx, 56, m.txn, { size: 8.5, bold: true, align: 'r' }); p.text(bx - tw - 5, 56, 'Transaction Name:', { size: 8.5, color: MU, align: 'r' });
-    p.line(L, 70, R, 70, '#ECEEF2');
+    if (m.badge) { var bw = width(m.badge, true, 6.5) + 10, bc = { PAID: ['#DDF3E6', '#1F6B45'], 'UN-PAID': ['#FFF27A', '#161A21'], CANCELLED: ['#FBEAEA', '#A3262A'] }[m.badge]; bx = R - bw; p.rect(bx, 44, bw, 12, bc[0]); p.text(bx + 5, 52.5, m.badge, { size: 6.5, bold: true, color: bc[1] }); bx -= 7; }
+    var tw = p.text(bx, 53, m.txn, { size: 8, bold: true, align: 'r' }); p.text(bx - tw - 4, 53, 'Transaction Name:', { size: 8, color: MU, align: 'r' });
+    p.line(L, 66, R, 66, '#ECEEF2');
     // strip
-    y = 84; var sw = (R - L) / 4; p.rect(L, y, R - L, 36, null, '#DADDE3');
-    m.strip.forEach(function (r, i) { var x = L + i * sw; if (i) p.line(x, y, x, y + 36); K(x + 10, y + 13, r[0]); p.text(x + 10, y + 28, r[1], { size: 10, bold: true }); });
+    y = 78; var sw = (R - L) / 4; p.rect(L, y, R - L, 34, null, '#DADDE3');
+    m.strip.forEach(function (r, i) { var x = L + i * sw; if (i) p.line(x, y, x, y + 34); K(x + 9, y + 12, r[0]); p.text(x + 9, y + 26, r[1], { size: 9.5, bold: true }); });
     // parties
-    y = 140; var cw = (R - L - 48) / 3, cx = [L, L + cw + 24, L + 2 * (cw + 24)];
-    K(cx[0], y, 'From'); K(cx[1], y, 'To'); K(cx[2], y, 'Customer & payment');
-    var col = function (x, lines) { var yy = y + 14; lines.forEach(function (l, i) { wrap(l, i === 0, i === 0 ? 9.5 : 8.5, cw - 6).forEach(function (t) { p.text(x, yy, t, { size: i === 0 ? 9.5 : 8.5, bold: i === 0, color: i === 0 ? '#161A21' : '#3A4556' }); yy += 12; }); }); return yy; };
-    var y1 = col(cx[0], m.from), y2 = col(cx[1], m.to), y3 = y + 14;
-    m.details.forEach(function (r) { p.text(cx[2], y3, r[0], { size: 8.5, color: MU }); p.text(cx[2] + 92, y3, r[1], { size: 8.5 }); y3 += 12; });
-    y = Math.max(y1, y2, y3) + 8;
+    y = 130; var cw = (R - L - 24) / 2, cx = [L, L + cw + 24];
+    K(cx[0], y, 'From'); K(cx[1], y, 'To');
+    var col = function (x, lines) { var yy = y + 13; lines.forEach(function (l, i) { wrap(l, i === 0, i === 0 ? 9 : 8, cw - 6).forEach(function (t) { p.text(x, yy, t, { size: i === 0 ? 9 : 8, bold: i === 0, color: i === 0 ? '#161A21' : '#3A4556' }); yy += 11; }); }); return yy; };
+    y = Math.max(col(cx[0], m.from), col(cx[1], m.to)) + 6;
+    // customer & payment
+    p.line(L, y, R, y, '#ECEEF2'); y += 14;
+    var c3 = (R - L) / 3, grid = function (items, x0, w, top) { items.forEach(function (r, i) { var x = x0 + (i % 3) * w, yy = top + Math.floor(i / 3) * 24; K(x, yy, r[0]); p.text(x, yy + 11, r[1], { size: 8 }); }); return top + Math.ceil(items.length / 3) * 24; };
+    y = grid(m.details, L, c3, y) + 2;
     // shipment panel
-    var rows = Math.ceil(m.ship.length / 3), ph = 16 + rows * 26; p.rect(L, y, R - L, ph, '#F7F8FA');
-    m.ship.forEach(function (r, i) { var x = L + 14 + (i % 3) * ((R - L - 28) / 3), yy = y + 16 + Math.floor(i / 3) * 26; K(x, yy, r[0]); p.text(x, yy + 12, r[1], { size: 8.5 }); });
+    var rows = Math.ceil(m.ship.length / 3), ph = 12 + rows * 24; p.rect(L, y, R - L, ph, '#F7F8FA');
+    grid(m.ship, L + 12, (R - L - 24) / 3, y + 14);
     y += ph + 14;
     // table
-    var fr = [2.2, 0.62, 0.55, 0.8, 0.66, 0.95, 0.9, 0.8, 0.95], tot = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L];
+    var fr = [2.0, 0.62, 0.55, 0.85, 0.7, 1.0, 0.95, 0.85, 1.0], tot = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L];
     fr.forEach(function (f) { xs.push(xs[xs.length - 1] + f * (R - L) / tot); });
-    var hh = 26; p.rect(L, y, R - L, hh, '#F4F5F7'); p.line(L, y + hh, R, y + hh, '#DADDE3');
-    m.cols.forEach(function (c, i) { var ln = wrap(c, true, 7, xs[i + 1] - xs[i] - 8), yy = y + hh - 7 - (ln.length - 1) * 8.5;
-      ln.forEach(function (t, k) { p.text(m.right_[i] ? xs[i + 1] - 4 : xs[i] + 4, yy + k * 8.5, t, { size: 7, bold: true, color: '#3A4556', align: m.right_[i] ? 'r' : 'l' }); }); });
+    var hh = 24; p.rect(L, y, R - L, hh, '#F4F5F7'); p.line(L, y + hh, R, y + hh, '#DADDE3');
+    m.cols.forEach(function (c, i) { var ln = wrap(c, true, 6.5, xs[i + 1] - xs[i] - 6), yy = y + hh - 6 - (ln.length - 1) * 8;
+      ln.forEach(function (t, k) { p.text(m.right_[i] ? xs[i + 1] - 3 : xs[i] + 3, yy + k * 8, t, { size: 6.5, bold: true, color: '#3A4556', align: m.right_[i] ? 'r' : 'l' }); }); });
     y += hh;
     m.rows.forEach(function (r) {
-      var hl = wrap(r.head, true, 8.5, xs[1] - xs[0] - 8), rh = Math.max(20, 9 + hl.length * 11);
-      hl.forEach(function (t, k) { p.text(xs[0] + 4, y + 13 + k * 11, t, { size: 8.5 }); });
-      m.keys.forEach(function (k, i) { if (k === 'head') return; var s = String(r[k]); while (width(s, false, 8.5) > xs[i + 1] - xs[i] - 8 && s.length > 3) s = s.slice(0, -1); p.text(m.right_[i] ? xs[i + 1] - 4 : xs[i] + 4, y + 13, s, { size: 8.5, align: m.right_[i] ? 'r' : 'l' }); });
+      var hl = wrap(r.head, true, 8, xs[1] - xs[0] - 6), rh = Math.max(19, 8 + hl.length * 10);
+      hl.forEach(function (t, k) { p.text(xs[0] + 3, y + 12 + k * 10, t, { size: 8 }); });
+      m.keys.forEach(function (k, i) { if (k === 'head') return; var s = String(r[k]); while (width(s, false, 8) > xs[i + 1] - xs[i] - 6 && s.length > 3) s = s.slice(0, -1); p.text(m.right_[i] ? xs[i + 1] - 3 : xs[i] + 3, y + 12, s, { size: 8, align: m.right_[i] ? 'r' : 'l' }); });
       y += rh; p.line(L, y, R, y, '#ECEEF2');
     });
     // bank + totals
-    y += 16; var tx = R - 250, ty = y;
+    y += 16; var tx = R - 210, ty = y;
     m.totals.forEach(function (t, i) { var last = i === m.totals.length - 1; if (last) { p.line(tx, ty - 7, R, ty - 7, '#161A21', 0.9); ty += 5; }
-      p.text(tx, ty, t[0], { size: last ? 10.5 : 8.5, bold: last }); p.text(R, ty, t[1], { size: last ? 10.5 : 8.5, bold: last, align: 'r' }); ty += last ? 14 : 13; });
-    K(L, y, 'Bank details'); var by = y + 14;
-    m.bank.forEach(function (b) { p.text(L, by, b[0], { size: 8.5, color: MU }); p.text(L + 130, by, b[1], { size: 8.5 }); by += 12; });
-    y = Math.max(ty, by) + 6; p.rect(L, y, R - L, 20, '#F7F8FA'); p.text(L + 10, y + 13, m.words, { size: 8.5, color: '#3A4556' });
-    var fy = H - 20; p.line(L, fy - 11, R, fy - 11, '#DADDE3');
+      p.text(tx, ty, t[0], { size: last ? 10 : 8, bold: last }); p.text(R, ty, t[1], { size: last ? 10 : 8, bold: last, align: 'r' }); ty += last ? 14 : 12; });
+    K(L, y, 'Bank details'); var by = y + 13;
+    m.bank.forEach(function (b) { p.text(L, by, b[0], { size: 8, color: MU }); p.text(L + 108, by, b[1], { size: 8 }); by += 11; });
+    y = Math.max(ty, by) + 6; var wl = wrap(m.words, false, 8, R - L - 18), wh = 8 + wl.length * 10;
+    p.rect(L, y, R - L, wh, '#F7F8FA'); wl.forEach(function (t, k) { p.text(L + 9, y + 12 + k * 10, t, { size: 8, color: '#3A4556' }); });
+    var fy = H - 30; p.line(L, fy - 11, R, fy - 11, '#DADDE3');
     p.text(L, fy, 'Issued By: ' + m.issued, { size: 7, color: MU });
-    p.text(W / 2, fy, m.disclaimer, { size: 7, color: MU, align: 'c' });
     p.text(R, fy, m.stamp2, { size: 7, color: MU, align: 'r' });
+    p.text(L, fy + 11, m.disclaimer, { size: 7, color: MU });
     return [p];
   }
 
