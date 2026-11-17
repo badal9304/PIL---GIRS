@@ -214,8 +214,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .msel-o span:nth-of-type(1){flex:1 1 auto}
 .msel-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
 .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);margin-top:6px;position:sticky;bottom:0;background:var(--surface)}
+.ftb{display:flex;align-items:flex-start;gap:12px}
+.ftb-p{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .fq{position:relative}
-.fq-b{height:32px;display:inline-flex;align-items:center;gap:6px;padding:0 10px 0 12px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font:500 13px/18px inherit;font-family:inherit;cursor:pointer;white-space:nowrap}
+.fq-b{height:32px;display:inline-flex;align-items:center;gap:6px;padding:0 8px 0 12px;flex:none;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font:500 13px/18px inherit;font-family:inherit;cursor:pointer;white-space:nowrap}
 .fq-b:hover{background:var(--hover2)}.fq-b svg{color:var(--muted)}
 .fq-b[aria-expanded="true"]{border-color:var(--accent)}
 .fq-t{max-width:190px;overflow:hidden;text-overflow:ellipsis}
@@ -639,15 +641,16 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <div class="tabs" role="tablist" aria-label="Invoice List views"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="cnt mono">{{t.n}}</span></button></sc-for></div>
         <sc-if value="{{tabInv}}" hint-placeholder-val="{{ true }}">
-          <div style="display: flex; align-items: center; gap: 12px">
-            <input class="input r-w" style="width: 340px" placeholder="Search invoice, B/L, booking, container or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
-            <sc-for list="{{fsel}}" as="x" hint-placeholder-count="7"><div class="fq"><button class="fq-b" aria-haspopup="listbox" aria-expanded="{{x.openA}}" onClick="{{x.toggle}}" style="{{x.bst}}"><span class="fq-t">{{x.text}}</span><sc-if value="{{x.hasN}}" hint-placeholder-val="{{ false }}"><span class="msel-n">{{x.n}}</span></sc-if><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <div class="ftb">
+            <input class="input r-w" style="width: 260px; flex: none" placeholder="Search invoice, B/L, booking, container or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
+            <div class="ftb-p"><sc-for list="{{fsel}}" as="x" hint-placeholder-count="7"><div class="fq"><button class="fq-b" aria-haspopup="listbox" aria-expanded="{{x.openA}}" aria-label="{{x.aria}}" title="{{x.tip}}" onClick="{{x.toggle}}" style="{{x.bst}}"><span class="fq-t">{{x.text}}</span><sc-if value="{{x.hasN}}" hint-placeholder-val="{{ false }}"><span class="msel-n">{{x.n}}</span></sc-if><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
               <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close filter" onClick="{{closeFs}}"></button><div class="msel-p" role="listbox" aria-multiselectable="true" aria-label="{{x.label}}">
                 <sc-for list="{{x.items}}" as="o" hint-placeholder-count="5"><label class="msel-o" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.v}}</span><span class="mono mu">{{o.n}}</span></label></sc-for>
                 <div class="msel-f"><button class="btn btn-sm" onClick="{{x.clear}}" disabled="{{x.none}}">Clear</button><button class="btn btn-sm btn-primary" onClick="{{x.done}}">Done</button></div>
               </div></sc-if></div></sc-for>
-            <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button class="lnk" onClick="{{clearF}}">Clear all</button></sc-if>
-            <span style="margin-inline-start: auto; font-size: 13px; color: var(--muted)">{{countText}}</span><div style="position: relative"><select class="select r-w" style="width: 190px" aria-label="Sort" value="{{sortSel.val}}" onChange="{{sortSel.on}}"><sc-for list="{{sortSel.opts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">Sort: {{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+            <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button class="lnk" style="white-space: nowrap; height: 32px" onClick="{{clearF}}">Clear all</button></sc-if>
+            </div>
+            <div style="position: relative; flex: none"><select class="select r-w" style="width: 180px" aria-label="Sort" value="{{sortSel.val}}" onChange="{{sortSel.on}}"><sc-for list="{{sortSel.opts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">Sort: {{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
           </div>
           <sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}">
             <div class="bulk" role="region" aria-label="Bulk actions"><span>{{selText}}</span>
@@ -1069,8 +1072,8 @@ class GirsPage extends DCLogic {
       .map(([label, k, opts]) => {
         const applied = ivArr(s[k]), open = s.fopen === k, cur = open && s.fdv ? s.fdv : applied;
         const cnt = (v) => INV.filter((i) => k === 'fc' ? i.lines.some((l) => l[2] === v) : i[{ fo: 'ctry', fpt: 'port', fs: 'st2', fe: 'einv', fg: 'gfs', ft: 'type' }[k]] === v).length;
-        return { label, open, openA: open ? 'true' : 'false', n: applied.length, hasN: applied.length > 1, none: !cur.length,
-          text: applied.length === 1 ? label + ': ' + applied[0] : label,
+        return { label, open, openA: open ? 'true' : 'false', n: applied.length, hasN: applied.length > 0, none: !cur.length, text: label,
+          tip: applied.length ? label + ': ' + applied.join(', ') : label, aria: label + ' filter' + (applied.length ? ', ' + applied.join(', ') : ''),
           bst: applied.length ? 'border-color:var(--accent);background:var(--tint);color:var(--accent2)' : '',
           toggle: () => self.setState(open ? { fopen: null, fdv: null } : { fopen: k, fdv: applied.slice(), menu: null }),
           clear: () => self.setState({ fdv: [] }),
