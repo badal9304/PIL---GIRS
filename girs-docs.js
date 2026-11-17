@@ -100,9 +100,9 @@
       ship: [['Voyage', voyage], ['BL Id/Number', String(60000 + h % 9999) + ' - ' + ph(inv.bl, '—') + ' Dated ' + dShort(bld)],
         ['Loaded', dir === 'I' ? other : ph(port, '—')], ['Discharge', dir === 'I' ? ph(port, '—') : other],
         ['External BL No', extBl], ['Container Nos.', ph(inv.cntr, '—')]],
-      cols: ['Charge head', 'Quantity', 'UOM', 'Unit Price', 'Currency', 'Total excluding Tax', 'Discount %', 'Discount Amount', 'Total Net', 'Tax applicability', 'Tax Amount', 'Total Incl Tax', 'Date'],
-      keys: ['head', 'qty', 'uom', 'unit', 'cur', 'ex', 'dp', 'da', 'net', 'ta', 'tax', 'incl', 'date'],
-      right_: [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+      cols: ['Charge head', 'Quantity', 'UOM', 'Unit Price', 'Currency', 'Total excluding Tax', 'Tax applicability', 'Tax Amount', 'Total Incl Tax'],
+      keys: ['head', 'qty', 'uom', 'unit', 'cur', 'ex', 'ta', 'tax', 'incl'],
+      right_: [0, 1, 0, 1, 0, 1, 1, 1, 1],
       rows: rows, totals: [['Total excluding Tax', fmt(G.ex) + ' ' + cur], ['Discount Amount', '0.00 ' + cur], ['Total Net', fmt(G.net) + ' ' + cur], ['Tax Amount', fmt(G.tax) + ' ' + cur], ['Grand Total (Incl Tax)', fmt(G.incl) + ' ' + cur]], grandLabel: 'Grand Total (' + cur + ')',
       words: 'Total payable amount - ' + cur + ' ' + inWords(Math.abs(G.incl)) + ' only',
       bank: [['Bank Name', bank[0]], ['Virtual Account Number', 'PIL' + cc + digits.slice(-6) + String(h % 1000).padStart(3, '0')], ['IBAN', String(10000000 + h * 13 % 89999999)], ['SWIFT Code', bank[1]]],
@@ -110,7 +110,7 @@
     };
   }
 
-  // Invoice document · A4 landscape so the 13 charge columns stay readable
+  // Invoice document · A4 landscape so the charge columns stay readable
   var INV_CSS = [
     '.gi{position:relative;width:1123px;min-height:794px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 48px 64px;font-size:13px;line-height:19px;overflow:hidden}',
     '.gi *{box-sizing:border-box;letter-spacing:normal}.gi:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:#E31D1A}',
@@ -187,7 +187,7 @@
     m.ship.forEach(function (r, i) { var x = L + 14 + (i % 3) * ((R - L - 28) / 3), yy = y + 16 + Math.floor(i / 3) * 26; K(x, yy, r[0]); p.text(x, yy + 12, r[1], { size: 8.5 }); });
     y += ph + 14;
     // table
-    var fr = [1.75, 0.62, 0.55, 0.8, 0.66, 0.9, 0.7, 0.8, 0.8, 0.88, 0.75, 0.9, 0.72], tot = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L];
+    var fr = [2.2, 0.62, 0.55, 0.8, 0.66, 0.95, 0.9, 0.8, 0.95], tot = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L];
     fr.forEach(function (f) { xs.push(xs[xs.length - 1] + f * (R - L) / tot); });
     var hh = 26; p.rect(L, y, R - L, hh, '#F4F5F7'); p.line(L, y + hh, R, y + hh, '#DADDE3');
     m.cols.forEach(function (c, i) { var ln = wrap(c, true, 7, xs[i + 1] - xs[i] - 8), yy = y + hh - 7 - (ln.length - 1) * 8.5;
