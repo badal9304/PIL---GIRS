@@ -483,7 +483,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <tbody>
                   <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
                     <tr data-found="{{r.found}}" style="cursor: pointer" onClick="{{r.select}}">
-                      <td style="{{r.edge}}"><button class="rowbtn mono" onClick="{{r.select}}" style="font-weight: 500; color: var(--accent)">{{r.no}}</button></td>
+                      <td style="{{r.edge}}"><button class="rowbtn mono" onClick="{{r.open}}" title="Preview invoice" style="font-weight: 500; color: var(--accent); text-decoration: underline; text-underline-offset: 2px">{{r.no}}</button></td>
                       <td style="{{r.cell}}"><span class="chip" style="{{r.typeChip}}">{{r.type}}</span></td>
                       <td style="{{r.cell}}"><div class="mono">{{r.bl}}</div><div class="mono" style="font-size: 12px; line-height: 14px; color: var(--muted)">{{r.cntr}}</div></td>
                       <td style="{{r.cell}}"><div class="mono">{{r.pol}} → {{r.pod}}</div><div style="font-size: 12px; line-height: 14px; color: var(--muted)">{{r.vvd}}</div></td>
@@ -512,7 +512,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div class="r-wrap" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
                 <div>
                   <div class="k">{{sel.type}} · {{sel.doc}}</div>
-                  <div class="mono" style="font-size: 18px; font-weight: 600; line-height: 26px">{{sel.no}}</div>
+                  <div class="mono" style="font-size: 18px; font-weight: 600; line-height: 26px"><button class="rowbtn mono" onClick="{{preview}}" title="Preview invoice" style="font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px">{{sel.no}}</button></div>
                 </div>
                 <div style="text-align: end">
                   <div class="mono" style="font-size: 18px; font-weight: 600; line-height: 26px">{{sel.ccy}} {{sel.amtText}}</div>
@@ -529,6 +529,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <span class="chip" style="{{sel.stChip}}">{{sel.status}}</span>
                 <span class="grow"></span>
                 <sc-if value="{{canCancel}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{cancelPrf}}">Cancel proforma</button></sc-if>
+                <button class="btn btn-sm" onClick="{{preview}}">Preview</button>
                 <button class="btn btn-sm" onClick="{{dlPdf}}">PDF</button>
                 <button class="btn btn-sm" onClick="{{dlJson}}">JSON</button>
                 <button class="btn btn-sm btn-primary" onClick="{{email}}">Email</button>
@@ -644,8 +645,20 @@ class GirsPage extends DCLogic {
     const per = 15, pages = Math.max(1, Math.ceil(list.length / per)), page = Math.min(s.page, pages);
     const view = list.slice((page - 1) * per, page * per);
     const selEdge = 'background:var(--tint);box-shadow:inset 3px 0 0 var(--accent);';
+    // Invoice document for the viewer / PDF: built from the same charges the Charges tab shows
+    const docOf = (i) => {
+      const rt = i.pol === 'INNSA' ? 83.2 : 1.345, sg = i.amt < 0 ? -1 : 1, Ab = Math.abs(i.amt);
+      const sp = i.type === 'DET / DEM' ? [['DET/DEM', 'Detention / Demurrage', Ab, 'Zero-rated']]
+        : (i.type === 'MISC' ? [['MISC', 'Ancillary charge', Ab, 'Tax per country rule']]
+        : [['OFT', 'Ocean Freight', Ab * 0.75, 'Zero-rated'], ['BAF', 'Bunker / Environmental Surcharge', Ab * 0.13, 'Zero-rated'], ['THC', 'Terminal Handling (THC)', Ab * 0.08, 'Local tax'], ['DOC', 'Documentation Fee', Ab * 0.04, 'Local tax']]);
+      const cn = i.pay === 'cn';
+      return { kind: cn ? 'credit' : 'invoice', no: i.no, type: cn ? 'Credit note' : i.type, status: ({ paid: 'Paid', cxl: 'Cancelled' })[i.pay] || '',
+        date: '05 Nov 2026', due: i.due, bl: i.bl, cntr: i.cntr, vvd: i.vvd, port: i.pol, gov: i.pol === 'INNSA' ? 'IRN received' : '—',
+        cust: { name: i.cust }, lines: sp.map(([code, name, v, tax]) => ({ code, name, amt: Math.round(v * 100) / 100, cur: i.ccy, roe: rt.toFixed(4), tax })) };
+    };
+    const docOpen = (i) => { try { window.GirsDocs.invoice(docOf(i), { json: docOf(i) }); } catch (e) {} };
     const rows = view.map((i) => { const on = s.selected === i.id; return { ...i, amtText: (i.amt < 0 ? '− ' : '') + m(Math.abs(i.amt)), typeChip: TYPE[i.type], status: PAY[i.pay][0], stChip: PAY[i.pay][1],
-      cell: on ? 'background:var(--tint);' : '', edge: on ? selEdge : '', found: s.foundId === i.id ? 'true' : 'false', select: () => this.setState({ selected: i.id, notice: '' }) }; });
+      cell: on ? 'background:var(--tint);' : '', edge: on ? selEdge : '', found: s.foundId === i.id ? 'true' : 'false', select: () => this.setState({ selected: i.id, notice: '' }), open: () => { this.setState({ selected: i.id, notice: '' }); docOpen(i); } }; });
     const si = INV.find((i) => i.id === s.selected) || INV[0];
     const rate = si.pol === 'INNSA' ? 83.2 : 1.345, fccy = si.pol === 'INNSA' ? 'INR' : 'SGD';
     const sign = si.amt < 0 ? -1 : 1, A = Math.abs(si.amt);
@@ -694,8 +707,9 @@ class GirsPage extends DCLogic {
           transfer: () => this.setState({ prfDone: 'Booking cancelled after payment — USD 2,100.00 held as customer credit balance for transfer or refund.' }) }
         : { pay: si.pay === 'cxl' ? 'Cancelled' : 'Unpaid', final: 'Not yet published', canConvert: false, note: si.pay === 'cxl' ? 'Proforma cancelled — no credit note raised.' : 'Auto-cancelled at the end of the validity window if not paid.', noteStyle: 'background:var(--neutral);color:var(--muted2)', convert: () => {}, transfer: () => {} },
       cancelPrf: () => this.setState({ cancelled: { ...s.cancelled, [si.id]: true }, notice: si.no + ' cancelled. Proforma invoices are cancelled — no credit note is raised.' }),
-      dlPdf: () => this.setState({ notice: si.no + '.pdf prepared for download.' }),
-      dlJson: () => this.setState({ notice: si.no + '.json prepared for download.' }),
+      preview: () => docOpen(si),
+      dlPdf: () => { try { window.GirsDocs.invoicePdf(docOf(si)); } catch (e) {} this.setState({ notice: si.no + '.pdf downloaded.' }); },
+      dlJson: () => { try { window.GirsDocs.json((si.pay === 'cn' ? 'Credit-note-' : 'Invoice-') + si.no, docOf(si)); } catch (e) {} this.setState({ notice: si.no + '.json downloaded.' }); },
       email: () => this.setState({ notice: si.no + ' emailed to customer-master contacts.' })
     };
   }
@@ -757,6 +771,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-docs.js"></script>
 <script src="runtime.js"></script>
 </body>
 </html>

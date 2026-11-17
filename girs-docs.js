@@ -9,7 +9,7 @@
   // ---------------------------------------------------------------- helpers
   function fmt(n) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function rateOf(code) { if (!code || code === '—') return null; if (/^ZR/.test(code)) return 0; var m = String(code).match(/-(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : 0; }
+  function rateOf(code) { if (!code || code === '—') return null; if (/^(ZR|Zero)/i.test(code)) return 0; var m = String(code).match(/-(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : null; }
   function entityOf(port) { var c = String(port || '').slice(0, 2); return COUNTRY[c] ? 'PIL ' + COUNTRY[c] : 'PIL'; }
 
   // ---------------------------------------------------------------- one model, two renderers (screen + PDF)
