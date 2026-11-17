@@ -643,7 +643,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <div class="tabs" role="tablist" aria-label="Invoice List views"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="cnt mono">{{t.n}}</span></button></sc-for></div>
         <sc-if value="{{tabInv}}" hint-placeholder-val="{{ true }}">
           <div class="ftb">
-            <input class="input r-w ph-trunc" style="width: 260px; flex: none" placeholder="Search invoice, B/L, booking, container or customer" title="Search invoice, B/L, booking, container or customer" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
+            <input class="input r-w ph-trunc" style="width: 260px; flex: none" placeholder="Search any value in the table" title="Search any value in the table: invoice no., status, e-Invoice, GFS status, customer, invoice type, B/L, vessel/voyage, amount, currency, due date" value="{{q}}" onInput="{{onQ}}" aria-label="Search invoices">
             <div class="ftb-p"><sc-for list="{{fsel}}" as="x" hint-placeholder-count="7"><div class="fq"><button class="fq-b" aria-haspopup="listbox" aria-expanded="{{x.openA}}" aria-label="{{x.aria}}" title="{{x.tip}}" onClick="{{x.toggle}}" style="{{x.bst}}"><span class="fq-t">{{x.text}}</span><sc-if value="{{x.hasN}}" hint-placeholder-val="{{ false }}"><span class="msel-n">{{x.n}}</span></sc-if><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
               <sc-if value="{{x.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close filter" onClick="{{closeFs}}"></button><div class="msel-p" role="listbox" aria-multiselectable="true" aria-label="{{x.label}}">
                 <sc-for list="{{x.items}}" as="o" hint-placeholder-count="5"><label class="msel-o" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.v}}</span><span class="mono mu">{{o.n}}</span></label></sc-for>
@@ -938,6 +938,12 @@ function ivSt2(i) {
   if (i.status === 'Paid') return ['Paid', 'Receipted', 'Reconciled'][ivHash(i.no) % 3];
   return 'Unpaid';
 }
+// Search text for v2: every value shown in the table (plus booking, container, customer code)
+function ivHay(i) {
+  const amt = ivMain(i), cur = i.lines[0][2];
+  return [i.no, i.st2, i.einv, i.gfs, i.party, i.cust, i.type, i.bl, i.vvd, ivFmt(amt), String(amt), cur, i.due, i.bkg, i.cntr]
+    .concat(i.lines.map((l) => l[0] + ' ' + l[2])).join(' | ').toLowerCase();
+}
 function ivChip2(v) {
   const M = { Unpaid: 'background:var(--warnbg);color:var(--warn)', Paid: 'background:var(--okbg);color:var(--ok)', Receipted: 'background:var(--tint);color:var(--accent2)',
     Reconciled: 'background:#FFF4D6;color:#8A5A00', Cancelled: 'background:var(--badbg);color:var(--bad)', Active: 'background:var(--okbg);color:var(--ok)',
@@ -1048,7 +1054,7 @@ class GirsPage extends DCLogic {
     const INV = this.invoices();
     const byNo = {}; INV.forEach((i) => { byNo[i.no] = i; });
     const q = s.q.trim().toLowerCase();
-    const shown = INV.filter((i) => (!q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q))
+    const shown = INV.filter((i) => (!q || ivHay(i).includes(q))
       && ivIn(s.fo, i.ctry) && ivIn(s.fpt, i.port) && ivIn(s.fs, i.st2) && ivIn(s.fe, i.einv) && ivIn(s.fg, i.gfs) && ivIn(s.ft, i.type) && (!ivArr(s.fc).length || i.lines.some((l) => ivArr(s.fc).includes(l[2]))));
     const uniq = (a) => a.filter((v, n) => a.indexOf(v) === n);
     // Filters panel (v2): choices are staged in s.fd and applied only on Done
@@ -1147,7 +1153,7 @@ class GirsPage extends DCLogic {
     const gOfS = (st) => (GROUPS.find((g) => g[2] && g[2].includes(st)) || [])[0];
     const gOf = (i) => i.pay === 'Partially paid' ? 'part' : gOfS(i.status);
     const grp = s.grp || 'all';
-    const qOnly = INV.filter((i) => !q || [i.no, i.bkg, i.bl, i.cntr, i.party, i.cust, i.vvd, i.gov].concat(i.lines.map((l) => l[0] + ' ' + l[5])).join(' ').toLowerCase().includes(q));
+    const qOnly = INV.filter((i) => !q || ivHay(i).includes(q));
     const gShown = qOnly.filter((i) => grp === 'all' || gOf(i) === grp).sort(sorter);
     const dRows = s.dview === 'rows';
     const PQ = pager(isD ? (dRows ? 'dr' : 'dc') : 'cq', gShown, isD ? (dRows ? [25, 50, 100] : [12, 24, 48]) : [20, 50, 100]);
