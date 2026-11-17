@@ -860,7 +860,7 @@ function ivMain(i) { const c = i.lines[0][2]; return i.lines.filter((l) => l[2] 
 function ivRate(t) { if (!t || t === '—') return 0; if (/^ZR/.test(t)) return 0; const m = String(t).match(/-(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : 0; }
 function ivDocData(i) {
   const c = IV_CUST[i.cust] || {};
-  return { no: i.no, type: i.type, status: i.status, date: i.date, due: i.due, bkg: i.bkg, bl: i.bl, cntr: i.cntr, vvd: i.vvd, port: i.port, gov: i.gov, audit: i.lines[0][5],
+  return { no: i.no, type: i.type, status: i.status, pay: i.st2 || i.pay, date: i.date, due: i.due, bkg: i.bkg, bl: i.bl, cntr: i.cntr, vvd: i.vvd, port: i.port, gov: i.gov, audit: i.lines[0][5],
     cust: { code: i.cust, name: c.name || i.party, tax: c.tax, addr: c.addr }, lines: i.lines.map((l) => ({ code: l[0], name: IV_CHG[l[0]] || l[0], amt: l[1], cur: l[2], roe: l[3], tax: l[4] })) };
 }
 function ivRcptData(i) {
