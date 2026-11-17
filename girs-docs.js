@@ -88,31 +88,34 @@
     };
   }
 
-  // Screen: same look as the earlier GIRS invoice (logo, red top line, info strip, two blocks, table, totals box, footer)
+  // Invoice document · A4 landscape so the 13 charge columns stay readable
   var INV_CSS = [
-    '.gi{position:relative;width:860px;min-height:1216px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 40px 40px;font-size:12px;line-height:16px;overflow:hidden}',
+    '.gi{position:relative;width:1123px;min-height:794px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 48px 64px;font-size:13px;line-height:19px;overflow:hidden}',
     '.gi *{box-sizing:border-box;letter-spacing:normal}.gi:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:#E31D1A}',
-    '.gi .k{font-size:10px;line-height:14px;text-transform:uppercase;letter-spacing:.06em;color:#5A6170;font-weight:600}.gi .mu{color:#5A6170}',
-    '.gi-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-top:34px}',
-    '.gi-hd img{height:40px;display:block}.gi-from{margin-top:8px;font-size:11px;line-height:15px;color:#3A4556}',
-    '.gi-tt{text-align:right}.gi-tt h1{margin:0;font-size:22px;line-height:28px;letter-spacing:.04em;font-weight:700}.gi-tt .no{font-size:13px;color:#3A4556;margin-top:2px}',
-    '.gi-txn{margin-top:10px;display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:12px}',
-    '.gi-badge{padding:2px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.04em}',
-    '.gi-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:22px;border:1px solid #DADDE3;border-radius:6px}',
-    '.gi-strip>div{padding:10px 12px;border-left:1px solid #DADDE3}.gi-strip>div:first-child{border-left:0}.gi-strip .v{margin-top:2px;font-weight:600;font-size:13px}',
-    '.gi-two{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}',
-    '.gi-two .n{font-weight:600;font-size:14px;margin-top:6px}.gi-two .l{color:#3A4556}',
-    '.gi-kv{display:grid;grid-template-columns:120px 1fr;gap:4px 12px;margin-top:8px}.gi-kv span:nth-child(odd){color:#5A6170}',
-    '.gi table{width:100%;border-collapse:collapse;margin-top:24px;font-size:10px;line-height:13px;table-layout:auto}',
-    '.gi th{background:#F4F5F7;text-align:left;font-weight:600;font-size:9px;line-height:12px;text-transform:uppercase;letter-spacing:.04em;color:#3A4556;padding:7px 3px;border:0;border-top:1px solid #DADDE3;border-bottom:1px solid #DADDE3;vertical-align:bottom;height:auto;position:static;white-space:normal}',
-    '.gi td{padding:7px 3px;border:0;border-bottom:1px solid #ECEEF2;vertical-align:top;height:auto;white-space:nowrap}.gi td.w{white-space:normal}.gi tbody tr:hover td{background:none}.gi .r{text-align:right}',
-    '.gi-bt{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;margin-top:16px}.gi-bt>div:first-child{flex:1 1 auto}',
-    '.gi-tot{min-width:280px;border-collapse:collapse}.gi-tot td{padding:4px 0;border:0;font-size:12px}.gi-tot td:last-child{text-align:right;padding-left:24px}',
-    '.gi-tot tr.g td{border-top:1px solid #161A21;padding-top:8px;font-weight:700;font-size:14px}',
-    '.gi-words{margin-top:14px;font-size:11.5px;color:#3A4556}',
-    '.gi-bank{display:grid;grid-template-columns:150px max-content;gap:4px 12px;margin-top:8px}.gi-bank span{white-space:nowrap}'+
-    '.gi td.w{min-width:104px}.gi-bank span:nth-child(odd){color:#5A6170}',
-    '.gi-ft{position:absolute;left:40px;right:40px;bottom:26px;border-top:1px solid #DADDE3;padding-top:8px;font-size:10px;line-height:14px;color:#5A6170;display:flex;justify-content:space-between;gap:16px}'
+    '.gi .k{font-size:11px;line-height:16px;text-transform:uppercase;letter-spacing:.07em;color:#5A6170;font-weight:600}.gi .mu{color:#5A6170}',
+    '.gi-hd{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:32px 0 24px;border-bottom:1px solid #ECEEF2}',
+    '.gi-hd img{height:44px;display:block}',
+    '.gi-tt{text-align:right}.gi-tt h1{margin:0;font-size:26px;line-height:32px;letter-spacing:.04em;font-weight:700}',
+    '.gi-tt .sub{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:13px}',
+    '.gi-badge{padding:3px 10px;border-radius:4px;font-size:11px;line-height:16px;font-weight:700;letter-spacing:.05em}',
+    '.gi-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:24px;border:1px solid #DADDE3;border-radius:8px}',
+    '.gi-strip>div{padding:12px 16px;border-left:1px solid #DADDE3}.gi-strip>div:first-child{border-left:0}.gi-strip .v{margin-top:4px;font-weight:600;font-size:15px;line-height:20px}',
+    '.gi-parties{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:28px}',
+    '.gi-parties .n{font-weight:600;font-size:15px;line-height:21px;margin-top:8px}.gi-parties .l{color:#3A4556}',
+    '.gi-kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:8px}.gi-kv span:nth-child(odd){color:#5A6170}',
+    '.gi-ship{margin-top:24px;padding:16px 20px;border-radius:8px;background:#F7F8FA;display:grid;grid-template-columns:repeat(3,1fr);gap:14px 32px}',
+    '.gi-ship .v{margin-top:2px;font-weight:500}',
+    '.gi table{width:100%;border-collapse:collapse;margin-top:28px;font-size:12.5px;line-height:18px;table-layout:auto}',
+    '.gi th{background:#F4F5F7;text-align:left;font-weight:600;font-size:11px;line-height:15px;color:#3A4556;padding:10px 8px;border:0;border-bottom:1px solid #DADDE3;vertical-align:bottom;height:auto;position:static;white-space:normal;text-transform:none;letter-spacing:0}',
+    '.gi th:first-child,.gi td:first-child{padding-left:12px}.gi th:last-child,.gi td:last-child{padding-right:12px}',
+    '.gi td{padding:11px 8px;border:0;border-bottom:1px solid #ECEEF2;vertical-align:top;height:auto;white-space:nowrap;font-variant-numeric:tabular-nums}.gi td.w{white-space:normal;min-width:190px;font-weight:500}',
+    '.gi tbody tr:hover td{background:none}.gi .r{text-align:right}',
+    '.gi-bt{display:grid;grid-template-columns:1fr 360px;gap:48px;margin-top:24px;align-items:start}',
+    '.gi-bank{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;margin-top:8px}.gi-bank span:nth-child(odd){color:#5A6170}',
+    '.gi-tot{display:flex;flex-direction:column;gap:8px}.gi-tot>div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}',
+    '.gi-tot>div.g{border-top:1px solid #161A21;padding-top:10px;margin-top:2px;font-weight:700;font-size:16px;line-height:22px}',
+    '.gi-words{margin-top:12px;padding:10px 14px;border-radius:6px;background:#F7F8FA;color:#3A4556}',
+    '.gi-ft{position:absolute;left:48px;right:48px;bottom:24px;border-top:1px solid #DADDE3;padding-top:10px;font-size:11px;line-height:16px;color:#5A6170;display:flex;justify-content:space-between;gap:24px}'
   ].join('');
   var BADGE = { PAID: 'background:#DDF3E6;color:#1F6B45', 'UN-PAID': 'background:#FFF27A;color:#161A21', CANCELLED: 'background:#FBEAEA;color:#A3262A' };
   function invoiceHtml(m) {
@@ -120,66 +123,71 @@
     var strip = m.strip.map(function (r) { return '<div><div class="k">' + esc(r[0]) + '</div><div class="v">' + esc(r[1]) + '</div></div>'; }).join('');
     var head = '<tr>' + m.cols.map(function (c, i) { return '<th class="' + (m.right_[i] ? 'r' : '') + '">' + esc(c) + '</th>'; }).join('') + '</tr>';
     var body = m.rows.map(function (r) { return '<tr>' + m.keys.map(function (k, i) { return '<td class="' + (m.right_[i] ? 'r' : '') + (k === 'head' ? ' w' : '') + '">' + esc(r[k]) + '</td>'; }).join('') + '</tr>'; }).join('');
-    var tot = '<table class="gi-tot">' + m.totals.map(function (t, i) { return '<tr' + (i === m.totals.length - 1 ? ' class="g"' : '') + '><td>' + esc(t[0]) + '</td><td>' + esc(t[1]) + '</td></tr>'; }).join('') + '</table>';
+    var tot = '<div class="gi-tot">' + m.totals.map(function (t, i) { return '<div' + (i === m.totals.length - 1 ? ' class="g"' : '') + '><span>' + esc(t[0]) + '</span><span>' + esc(t[1]) + '</span></div>'; }).join('') + '</div>';
     return '<div class="gi" role="document">' +
-      '<div class="gi-hd"><div><img src="data:image/jpeg;base64,' + LOGO + '" alt="PIL"><div class="gi-from">' + m.from.map(esc).join('<br>') + '</div></div>' +
-      '<div class="gi-tt"><h1>' + esc(m.title.toUpperCase()) + '</h1><div class="no">' + esc(m.no) + '</div>' +
-      '<div class="gi-txn"><span class="mu">Transaction Name:</span><b>' + esc(m.txn) + '</b>' + (m.badge ? '<span class="gi-badge" style="' + BADGE[m.badge] + '">' + esc(m.badge) + '</span>' : '') + '</div></div></div>' +
+      '<div class="gi-hd"><img src="data:image/jpeg;base64,' + LOGO + '" alt="PIL">' +
+      '<div class="gi-tt"><h1>' + esc(m.title.toUpperCase()) + '</h1><div class="sub"><span class="mu">Transaction Name:</span><b>' + esc(m.txn) + '</b>' + (m.badge ? '<span class="gi-badge" style="' + BADGE[m.badge] + '">' + esc(m.badge) + '</span>' : '') + '</div></div></div>' +
       '<div class="gi-strip">' + strip + '</div>' +
-      '<div class="gi-two"><div><div class="k">To</div><div class="n">' + esc(m.to[0]) + '</div>' + m.to.slice(1).map(function (l) { return '<div class="l">' + esc(l) + '</div>'; }).join('') + kv(m.details, 'gi-kv') + '</div>' +
-      '<div><div class="k">Shipment</div>' + kv(m.ship, 'gi-kv') + '</div></div>' +
+      '<div class="gi-parties">' +
+        '<div><div class="k">From</div><div class="n">' + esc(m.from[0]) + '</div>' + m.from.slice(1).map(function (l) { return '<div class="l">' + esc(l) + '</div>'; }).join('') + '</div>' +
+        '<div><div class="k">To</div><div class="n">' + esc(m.to[0]) + '</div>' + m.to.slice(1).map(function (l) { return '<div class="l">' + esc(l) + '</div>'; }).join('') + '</div>' +
+        '<div><div class="k">Customer &amp; payment</div>' + kv(m.details, 'gi-kv') + '</div></div>' +
+      '<div class="gi-ship">' + m.ship.map(function (r) { return '<div><div class="k">' + esc(r[0]) + '</div><div class="v">' + esc(r[1]) + '</div></div>'; }).join('') + '</div>' +
       '<table><thead>' + head + '</thead><tbody>' + body + '</tbody></table>' +
       '<div class="gi-bt"><div><div class="k">Bank details</div>' + kv(m.bank, 'gi-bank') + '</div>' + tot + '</div>' +
       '<div class="gi-words">' + esc(m.words) + '</div>' +
       '<div class="gi-ft"><span>Issued By: ' + esc(m.issued) + '</span><span>' + esc(m.disclaimer) + '</span><span>' + esc(m.stamp2) + '</span></div></div>';
   }
 
-  // PDF: A4 portrait, same look as the screen
+  // PDF: A4 landscape, same layout as the screen
   function drawInvoice(m) {
-    var W = 595, H = 842, p = new Page(W, H), L = 34, R = W - 34, y;
+    var W = 842, H = 595, p = new Page(W, H), L = 36, R = W - 36, y, MU = '#5A6170';
+    var K = function (x, yy, t) { p.text(x, yy, t.toUpperCase(), { size: 6.5, bold: true, color: MU }); };
     p.rect(0, 0, W, 3, '#E31D1A');
-    p.logo(L, 26, 28);
-    m.from.forEach(function (l, i) { p.text(L, 68 + i * 10, l, { size: 7, color: '#3A4556' }); });
-    p.text(R, 44, m.title.toUpperCase(), { size: 15, bold: true, align: 'r' });
-    p.text(R, 58, m.no, { size: 9, color: '#3A4556', align: 'r' });
+    p.logo(L, 22, 30);
+    p.text(R, 38, m.title.toUpperCase(), { size: 17, bold: true, align: 'r' });
     var bx = R;
-    if (m.badge) { var bw = width(m.badge, true, 7.5) + 12, bc = { PAID: ['#DDF3E6', '#1F6B45'], 'UN-PAID': ['#FFF27A', '#161A21'], CANCELLED: ['#FBEAEA', '#A3262A'] }[m.badge]; bx = R - bw; p.rect(bx, 66, bw, 13, bc[0]); p.text(bx + 6, 75.5, m.badge, { size: 7.5, bold: true, color: bc[1] }); bx -= 6; }
-    var tw = p.text(bx, 76, m.txn, { size: 8, bold: true, align: 'r' }); p.text(bx - tw - 4, 76, 'Transaction Name:', { size: 8, color: '#5A6170', align: 'r' });
+    if (m.badge) { var bw = width(m.badge, true, 7) + 12, bc = { PAID: ['#DDF3E6', '#1F6B45'], 'UN-PAID': ['#FFF27A', '#161A21'], CANCELLED: ['#FBEAEA', '#A3262A'] }[m.badge]; bx = R - bw; p.rect(bx, 46, bw, 13, bc[0]); p.text(bx + 6, 55.5, m.badge, { size: 7, bold: true, color: bc[1] }); bx -= 8; }
+    var tw = p.text(bx, 56, m.txn, { size: 8.5, bold: true, align: 'r' }); p.text(bx - tw - 5, 56, 'Transaction Name:', { size: 8.5, color: MU, align: 'r' });
+    p.line(L, 70, R, 70, '#ECEEF2');
     // strip
-    y = 116; var sw = (R - L) / 4; p.rect(L, y, R - L, 32, null, '#DADDE3');
-    m.strip.forEach(function (r, i) { var x = L + i * sw; if (i) p.line(x, y, x, y + 32); p.text(x + 7, y + 12, r[0].toUpperCase(), { size: 6, bold: true, color: '#5A6170' }); p.text(x + 7, y + 25, r[1], { size: 8.5, bold: true }); });
-    // to + shipment
-    y = 166; var c2 = L + (R - L) / 2 + 12;
-    p.text(L, y, 'TO', { size: 6, bold: true, color: '#5A6170' }); p.text(c2, y, 'SHIPMENT', { size: 6, bold: true, color: '#5A6170' });
-    var ly = y + 13; p.text(L, ly, m.to[0], { size: 9.5, bold: true }); ly += 12;
-    m.to.slice(1).forEach(function (l) { wrap(l, false, 8, c2 - L - 24).forEach(function (t) { p.text(L, ly, t, { size: 8, color: '#3A4556' }); ly += 10; }); });
-    ly += 4; m.details.forEach(function (r) { p.text(L, ly, r[0], { size: 8, color: '#5A6170' }); p.text(L + 86, ly, r[1], { size: 8 }); ly += 11; });
-    var ry = y + 13; m.ship.forEach(function (r) { p.text(c2, ry, r[0], { size: 8, color: '#5A6170' }); wrap(r[1], false, 8, R - c2 - 86).forEach(function (t, k) { p.text(c2 + 86, ry, t, { size: 8 }); ry += 11; }); });
-    y = Math.max(ly, ry) + 12;
+    y = 84; var sw = (R - L) / 4; p.rect(L, y, R - L, 36, null, '#DADDE3');
+    m.strip.forEach(function (r, i) { var x = L + i * sw; if (i) p.line(x, y, x, y + 36); K(x + 10, y + 13, r[0]); p.text(x + 10, y + 28, r[1], { size: 10, bold: true }); });
+    // parties
+    y = 140; var cw = (R - L - 48) / 3, cx = [L, L + cw + 24, L + 2 * (cw + 24)];
+    K(cx[0], y, 'From'); K(cx[1], y, 'To'); K(cx[2], y, 'Customer & payment');
+    var col = function (x, lines) { var yy = y + 14; lines.forEach(function (l, i) { wrap(l, i === 0, i === 0 ? 9.5 : 8.5, cw - 6).forEach(function (t) { p.text(x, yy, t, { size: i === 0 ? 9.5 : 8.5, bold: i === 0, color: i === 0 ? '#161A21' : '#3A4556' }); yy += 12; }); }); return yy; };
+    var y1 = col(cx[0], m.from), y2 = col(cx[1], m.to), y3 = y + 14;
+    m.details.forEach(function (r) { p.text(cx[2], y3, r[0], { size: 8.5, color: MU }); p.text(cx[2] + 92, y3, r[1], { size: 8.5 }); y3 += 12; });
+    y = Math.max(y1, y2, y3) + 8;
+    // shipment panel
+    var rows = Math.ceil(m.ship.length / 3), ph = 16 + rows * 26; p.rect(L, y, R - L, ph, '#F7F8FA');
+    m.ship.forEach(function (r, i) { var x = L + 14 + (i % 3) * ((R - L - 28) / 3), yy = y + 16 + Math.floor(i / 3) * 26; K(x, yy, r[0]); p.text(x, yy + 12, r[1], { size: 8.5 }); });
+    y += ph + 14;
     // table
-    var fr = [1.75, 0.66, 0.5, 0.78, 0.68, 0.84, 0.7, 0.78, 0.78, 0.95, 0.72, 0.84, 0.68], tot = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L];
+    var fr = [1.75, 0.62, 0.55, 0.8, 0.66, 0.9, 0.7, 0.8, 0.8, 0.88, 0.75, 0.9, 0.72], tot = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L];
     fr.forEach(function (f) { xs.push(xs[xs.length - 1] + f * (R - L) / tot); });
-    var hh = 28; p.rect(L, y, R - L, hh, '#F4F5F7'); p.line(L, y, R, y, '#DADDE3'); p.line(L, y + hh, R, y + hh, '#DADDE3');
-    m.cols.forEach(function (c, i) { var ln = wrap(c, true, 6, xs[i + 1] - xs[i] - 4), yy = y + hh - 5 - (ln.length - 1) * 7.5;
-      ln.forEach(function (t, k) { p.text(m.right_[i] ? xs[i + 1] - 2 : xs[i] + 2, yy + k * 7.5, t, { size: 6, bold: true, color: '#3A4556', align: m.right_[i] ? 'r' : 'l' }); }); });
+    var hh = 26; p.rect(L, y, R - L, hh, '#F4F5F7'); p.line(L, y + hh, R, y + hh, '#DADDE3');
+    m.cols.forEach(function (c, i) { var ln = wrap(c, true, 7, xs[i + 1] - xs[i] - 8), yy = y + hh - 7 - (ln.length - 1) * 8.5;
+      ln.forEach(function (t, k) { p.text(m.right_[i] ? xs[i + 1] - 4 : xs[i] + 4, yy + k * 8.5, t, { size: 7, bold: true, color: '#3A4556', align: m.right_[i] ? 'r' : 'l' }); }); });
     y += hh;
     m.rows.forEach(function (r) {
-      var hl = wrap(r.head, false, 7, xs[1] - xs[0] - 4), rh = Math.max(16, 7 + hl.length * 9);
-      hl.forEach(function (t, k) { p.text(xs[0] + 2, y + 11 + k * 9, t, { size: 7 }); });
-      m.keys.forEach(function (k, i) { if (k === 'head') return; var s = String(r[k]); while (width(s, false, 7) > xs[i + 1] - xs[i] - 4 && s.length > 3) s = s.slice(0, -1); p.text(m.right_[i] ? xs[i + 1] - 2 : xs[i] + 2, y + 11, s, { size: 7, align: m.right_[i] ? 'r' : 'l' }); });
+      var hl = wrap(r.head, true, 8.5, xs[1] - xs[0] - 8), rh = Math.max(20, 9 + hl.length * 11);
+      hl.forEach(function (t, k) { p.text(xs[0] + 4, y + 13 + k * 11, t, { size: 8.5 }); });
+      m.keys.forEach(function (k, i) { if (k === 'head') return; var s = String(r[k]); while (width(s, false, 8.5) > xs[i + 1] - xs[i] - 8 && s.length > 3) s = s.slice(0, -1); p.text(m.right_[i] ? xs[i + 1] - 4 : xs[i] + 4, y + 13, s, { size: 8.5, align: m.right_[i] ? 'r' : 'l' }); });
       y += rh; p.line(L, y, R, y, '#ECEEF2');
     });
-    // bank (left) + totals (right)
-    y += 16; var tx = R - 190, ty = y;
-    m.totals.forEach(function (t, i) { var last = i === m.totals.length - 1; if (last) { p.line(tx, ty - 7, R, ty - 7, '#161A21', 0.9); ty += 4; }
-      p.text(tx, ty, t[0], { size: last ? 9.5 : 8, bold: last }); p.text(R, ty, t[1], { size: last ? 9.5 : 8, bold: last, align: 'r' }); ty += last ? 14 : 12; });
-    p.text(L, y, 'BANK DETAILS', { size: 6, bold: true, color: '#5A6170' }); var by = y + 13;
-    m.bank.forEach(function (b) { p.text(L, by, b[0], { size: 8, color: '#5A6170' }); p.text(L + 110, by, b[1], { size: 8 }); by += 11; });
-    y = Math.max(ty, by) + 10; wrap(m.words, false, 8, R - L).forEach(function (t) { p.text(L, y, t, { size: 8, color: '#3A4556' }); y += 10; });
-    var fy = H - 26; p.line(L, fy - 11, R, fy - 11, '#DADDE3');
-    p.text(L, fy, 'Issued By: ' + m.issued, { size: 6.5, color: '#5A6170' });
-    p.text(W / 2 + 10, fy, m.disclaimer, { size: 6.5, color: '#5A6170', align: 'c' });
-    p.text(R, fy, m.stamp2, { size: 6.5, color: '#5A6170', align: 'r' });
+    // bank + totals
+    y += 16; var tx = R - 250, ty = y;
+    m.totals.forEach(function (t, i) { var last = i === m.totals.length - 1; if (last) { p.line(tx, ty - 7, R, ty - 7, '#161A21', 0.9); ty += 5; }
+      p.text(tx, ty, t[0], { size: last ? 10.5 : 8.5, bold: last }); p.text(R, ty, t[1], { size: last ? 10.5 : 8.5, bold: last, align: 'r' }); ty += last ? 14 : 13; });
+    K(L, y, 'Bank details'); var by = y + 14;
+    m.bank.forEach(function (b) { p.text(L, by, b[0], { size: 8.5, color: MU }); p.text(L + 130, by, b[1], { size: 8.5 }); by += 12; });
+    y = Math.max(ty, by) + 6; p.rect(L, y, R - L, 20, '#F7F8FA'); p.text(L + 10, y + 13, m.words, { size: 8.5, color: '#3A4556' });
+    var fy = H - 20; p.line(L, fy - 11, R, fy - 11, '#DADDE3');
+    p.text(L, fy, 'Issued By: ' + m.issued, { size: 7, color: MU });
+    p.text(W / 2, fy, m.disclaimer, { size: 7, color: MU, align: 'c' });
+    p.text(R, fy, m.stamp2, { size: 7, color: MU, align: 'r' });
     return [p];
   }
 
