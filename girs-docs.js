@@ -91,7 +91,7 @@
     });
     return {
       kind: credit ? 'credit' : 'invoice', no: inv.no, file: (credit ? 'Credit-note-' : 'Invoice-') + inv.no,
-      title: credit ? 'Credit Note' : (inv.type === 'Proforma' ? 'Proforma Invoice' : 'Tax Invoice'),
+      title: credit ? 'Credit Note' : 'Proforma Invoice',
       txn: credit ? 'Credit Note Approved' : (TXN[inv.type] || 'B/L Released'), badge: credit ? '' : badge,
       from: ['Pacific International Lines (China) Ltd. / PIL Logistics', 'Block 5, PIL Building, No. 18 Gongping Road,', 'Hongkou District, Shanghai 200082, China', 'Phone: +86-21-80138801 / +86-21-61235709'],
       to: [ph(cust.name, '—')].concat(cust.addr ? [cust.addr] : []),
@@ -103,7 +103,7 @@
       cols: ['Charge head', 'Quantity', 'UOM', 'Unit Price', 'Currency', 'Total excluding Tax', 'Tax applicability', 'Tax Amount', 'Total Incl Tax'],
       keys: ['head', 'qty', 'uom', 'unit', 'cur', 'ex', 'ta', 'tax', 'incl'],
       right_: [0, 1, 0, 1, 0, 1, 1, 1, 1],
-      rows: rows, totals: [['Total excluding Tax', fmt(G.ex) + ' ' + cur], ['Discount Amount', '0.00 ' + cur], ['Total Net', fmt(G.net) + ' ' + cur], ['Tax Amount', fmt(G.tax) + ' ' + cur], ['Grand Total (Incl Tax)', fmt(G.incl) + ' ' + cur]], grandLabel: 'Grand Total (' + cur + ')',
+      rows: rows, totals: [['Total excluding Tax', fmt(G.ex) + ' ' + cur], ['Tax Amount', fmt(G.tax) + ' ' + cur], ['Invoice Total', fmt(G.incl) + ' ' + cur]], grandLabel: 'Grand Total (' + cur + ')',
       words: 'Total payable amount - ' + cur + ' ' + inWords(Math.abs(G.incl)) + ' only',
       bank: [['Bank Name', bank[0]], ['Virtual Account Number', 'PIL' + cc + digits.slice(-6) + String(h % 1000).padStart(3, '0')], ['IBAN', String(10000000 + h * 13 % 89999999)], ['SWIFT Code', bank[1]]],
       issued: 'Daniel Tan', disclaimer: 'Disclaimer: This is a computer generated invoice and further authorization is not required.', stamp2: 'Page 1 of 1 Date ' + nowStamp()
@@ -115,10 +115,10 @@
     '.gi{position:relative;width:794px;min-height:1123px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 40px 96px;font-size:12px;line-height:18px;overflow:hidden}',
     '.gi *{box-sizing:border-box;letter-spacing:normal}.gi:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:#E31D1A}',
     '.gi .k{font-size:10px;line-height:15px;text-transform:uppercase;letter-spacing:.07em;color:#5A6170;font-weight:600}.gi .mu{color:#5A6170}',
-    '.gi-hd{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0 20px;border-bottom:1px solid #ECEEF2}',
+    '.gi-hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:28px 0 20px;border-bottom:1px solid #ECEEF2}',
     '.gi-hd img{height:38px;display:block}',
-    '.gi-tt{text-align:right}.gi-tt h1{margin:0;font-size:22px;line-height:28px;letter-spacing:.04em;font-weight:700}',
-    '.gi-tt .sub{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:12px}',
+    '.gi-tt{text-align:center}.gi-tt h1{margin:0;font-size:22px;line-height:28px;letter-spacing:.04em;font-weight:700}',
+    '.gi-tt .sub{margin-top:6px;display:flex;justify-content:center;align-items:center;gap:8px;font-size:12px}',
     '.gi-badge{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;font-size:12px;line-height:16px;font-weight:500;white-space:nowrap}',
     '.gi-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:20px;border:1px solid #DADDE3;border-radius:8px}',
     '.gi-strip>div{padding:10px 14px;border-left:1px solid #DADDE3}.gi-strip>div:first-child{border-left:0}.gi-strip .v{margin-top:3px;font-weight:600;font-size:14px;line-height:20px}',
@@ -143,10 +143,10 @@
     '.gl{position:relative;width:1123px;min-height:794px;margin:0 auto;background:#fff;color:#161A21;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 48px 64px;font-size:13px;line-height:19px;overflow:hidden}',
     '.gl *{box-sizing:border-box;letter-spacing:normal}.gl:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:#E31D1A}',
     '.gl .k{font-size:11px;line-height:16px;text-transform:uppercase;letter-spacing:.07em;color:#5A6170;font-weight:600}.gl .mu{color:#5A6170}',
-    '.gl-hd{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:32px 0 24px;border-bottom:1px solid #ECEEF2}',
+    '.gl-hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:32px 0 24px;border-bottom:1px solid #ECEEF2}',
     '.gl-hd img{height:44px;display:block}',
-    '.gl-tt{text-align:right}.gl-tt h1{margin:0;font-size:26px;line-height:32px;letter-spacing:.04em;font-weight:700}',
-    '.gl-tt .sub{margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:13px}',
+    '.gl-tt{text-align:center}.gl-tt h1{margin:0;font-size:26px;line-height:32px;letter-spacing:.04em;font-weight:700}',
+    '.gl-tt .sub{margin-top:6px;display:flex;justify-content:center;align-items:center;gap:10px;font-size:13px}',
     '.gl-badge{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;font-size:12px;line-height:16px;font-weight:500;white-space:nowrap}',
     '.gl-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:24px;border:1px solid #DADDE3;border-radius:8px}',
     '.gl-strip>div{padding:12px 16px;border-left:1px solid #DADDE3}.gl-strip>div:first-child{border-left:0}.gl-strip .v{margin-top:4px;font-weight:600;font-size:15px;line-height:20px}',
@@ -218,10 +218,11 @@
     var K = function (x, yy, t) { p.text(x, yy, t.toUpperCase(), { size: 6.5, bold: true, color: MU }); };
     p.rect(0, 0, W, 3, '#E31D1A');
     p.logo(L, 22, 27);
-    p.text(R, 36, m.title.toUpperCase(), { size: 15, bold: true, align: 'r' });
-    var bx = R;
-    if (m.badge) { var bw = width(m.badge, false, 7) + 14, bc = CHIP[m.badge]; bx = R - bw; p.pill(bx, 43, bw, 14, bc[0]); p.text(bx + 7, 52.6, m.badge, { size: 7, color: bc[1] }); bx -= 8; }
-    var tw = p.text(bx, 53, m.txn, { size: 8, bold: true, align: 'r' }); p.text(bx - tw - 4, 53, 'Transaction Name:', { size: 8, color: MU, align: 'r' });
+    p.text(W / 2, 36, m.title.toUpperCase(), { size: 15, bold: true, align: 'c' });
+    var lw = width('Transaction Name:', false, 8), vw = width(m.txn, true, 8), bw = m.badge ? width(m.badge, false, 7) + 14 : 0;
+    var sx = W / 2 - (lw + 4 + vw + (bw ? 8 + bw : 0)) / 2;
+    p.text(sx, 53, 'Transaction Name:', { size: 8, color: MU }); p.text(sx + lw + 4, 53, m.txn, { size: 8, bold: true });
+    if (m.badge) { var bx = sx + lw + 4 + vw + 8, bc = CHIP[m.badge]; p.pill(bx, 53 - 9.6, bw, 14, bc[0]); p.text(bx + 7, 53 - 0.4, m.badge, { size: 7, color: bc[1] }); }
     p.line(L, 66, R, 66, '#ECEEF2');
     // strip
     y = 78; var sw = (R - L) / 4; p.rect(L, y, R - L, 34, null, '#DADDE3');
@@ -273,10 +274,11 @@
     var K = function (x, yy, t) { p.text(x, yy, t.toUpperCase(), { size: 6.5, bold: true, color: MU }); };
     p.rect(0, 0, W, 3, '#E31D1A');
     p.logo(L, 22, 30);
-    p.text(R, 38, m.title.toUpperCase(), { size: 17, bold: true, align: 'r' });
-    var bx = R;
-    if (m.badge) { var bw = width(m.badge, false, 7.5) + 14, bc = CHIP[m.badge]; bx = R - bw; p.pill(bx, 45, bw, 15, bc[0]); p.text(bx + 7, 55.2, m.badge, { size: 7.5, color: bc[1] }); bx -= 8; }
-    var tw = p.text(bx, 56, m.txn, { size: 8.5, bold: true, align: 'r' }); p.text(bx - tw - 5, 56, 'Transaction Name:', { size: 8.5, color: MU, align: 'r' });
+    p.text(W / 2, 38, m.title.toUpperCase(), { size: 17, bold: true, align: 'c' });
+    var lw = width('Transaction Name:', false, 8.5), vw = width(m.txn, true, 8.5), bw = m.badge ? width(m.badge, false, 7) + 14 : 0;
+    var sx = W / 2 - (lw + 4 + vw + (bw ? 8 + bw : 0)) / 2;
+    p.text(sx, 56, 'Transaction Name:', { size: 8.5, color: MU }); p.text(sx + lw + 4, 56, m.txn, { size: 8.5, bold: true });
+    if (m.badge) { var bx = sx + lw + 4 + vw + 8, bc = CHIP[m.badge]; p.pill(bx, 56 - 9.6, bw, 14, bc[0]); p.text(bx + 7, 56 - 0.4, m.badge, { size: 7, color: bc[1] }); }
     p.line(L, 70, R, 70, '#ECEEF2');
     // strip
     y = 84; var sw = (R - L) / 4; p.rect(L, y, R - L, 36, null, '#DADDE3');
