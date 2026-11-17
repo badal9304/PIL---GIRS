@@ -52,39 +52,61 @@
   function ph(v, p) { return v && v !== '—' ? v : p; }
 
   // inv: { kind?, no, type, status, pay?, date, due, bkg, bl, cntr, vvd, port, orig?, cust: { code, name, tax, addr }, lines: [{ code, name, amt, cur, roe, tax }] }
+  // ---- sample (dummy) values, derived from the invoice so they stay consistent every time it opens
+  function hsh(x) { var h = 7; x = String(x || ''); for (var i = 0; i < x.length; i++) h = (h * 31 + x.charCodeAt(i)) % 1000003; return h; }
+  var VESSEL = { '01': 'KOTA LAYANG', '02': 'KOTA PEKARANG', '03': 'KOTA SATRIA', '04': 'KOTA CARUM', '05': 'KOTA HAKIM', '06': 'KOTA LUMAYAN' };
+  var OTHER_PORT = { SGSIN: ['SHANGHAI', 'JEBEL ALI', 'MOMBASA', 'NHAVA SHEVA'], MYPKG: ['SHANGHAI', 'SINGAPORE', 'JEBEL ALI', 'LAEM CHABANG'], INNSA: ['SHANGHAI', 'SINGAPORE', 'JEBEL ALI', 'PORT KLANG'], THLCH: ['SHANGHAI', 'SINGAPORE', 'PORT KLANG', 'NHAVA SHEVA'] };
+  var BANK = { SG: ['DBS Bank Ltd', 'DBSSSGSG'], MY: ['Malayan Banking Berhad (Maybank)', 'MBBEMYKL'], IN: ['HDFC Bank Ltd', 'HDFCINBB'], TH: ['Bangkok Bank Public Company Ltd', 'BKKBTHBK'] };
+  var TXN = { Proforma: 'Booking Created', Freight: 'B/L Released', 'DET / DEM': 'Container Returned', MISC: 'Additional Service Requested' };
+  function goodsOf(name) {
+    var n = String(name || '').toLowerCase();
+    if (/polymer/.test(n)) return 'Polymer granules'; if (/furnish/.test(n)) return 'Home furniture'; if (/agro/.test(n)) return 'Agricultural produce';
+    if (/trader/.test(n)) return 'Rice'; return 'General cargo';
+  }
+  var BL_UNIT = { DOC: 1, AMD: 1, SEAL: 0, ADMIN: 1 };
+  function qtyOf(l, h) {
+    if (/^(DET|DEM)/.test(l.code)) { var d = [2, 3, 4, 5, 6, 8, 10].filter(function (x) { return Math.round(l.amt * 100) % x === 0; }).pop() || 1; return [d, 'Day']; }
+    if (BL_UNIT[l.code] === 1) return [1, 'BL'];
+    var n = [3, 2].filter(function (x) { return Math.round(l.amt * 100) % x === 0; })[(h % 2)] || 1; return [n, 'CNTR'];
+  }
+  function minusDays(s, n) { var d = new Date(s); if (isNaN(d)) return null; d.setDate(d.getDate() - n); return d; }
+
   function invoiceModel(inv) {
     var credit = inv.kind === 'credit', sign = credit ? -1 : 1, cust = inv.cust || {};
-    var dir = String(inv.no || '').charAt(3), port = PORT[inv.port] || inv.port || '';
+    var dir = String(inv.no || '').charAt(3), port = PORT[inv.port] || inv.port || '', h = hsh(inv.no), cc = String(inv.port || 'SG').slice(0, 2);
     var cur = ((inv.lines || []).filter(function (l) { return l.roe === '—' || !l.roe; })[0] || (inv.lines || [])[0] || {}).cur || 'USD';
     var pay = inv.pay || inv.status || '';
     var badge = /cancel/i.test(pay) || /cancel/i.test(inv.status) ? 'CANCELLED' : (/^(Paid|Receipted|Reconciled|Proforma · paid)$/.test(pay) || inv.status === 'Paid' ? 'PAID' : 'UN-PAID');
+    var other = (OTHER_PORT[inv.port] || ['SHANGHAI', 'SINGAPORE'])[h % 4] || 'SHANGHAI';
+    var vm = String(inv.vvd || '').match(/Vessel (\d+) \/ (\w+)/), sail = minusDays(inv.date, 4 + h % 6), bld = minusDays(inv.date, 2 + h % 3);
+    var voyage = vm ? vm[2] + ' ' + dShort(sail) + '  ' + (VESSEL[vm[1]] || 'KOTA LAYANG') : ph(inv.vvd, '—');
+    var extBl = String(inv.port || 'SGSIN').slice(2, 5) + 'SL' + String(60000000 + h * 37 % 39999999);
+    var bank = BANK[cc] || BANK.SG, digits = String(cust.code || '').replace(/\D/g, '') || String(h);
     var G = { ex: 0, disc: 0, net: 0, tax: 0, incl: 0 };
-    var rows = (inv.lines || []).map(function (l) {
+    var rows = (inv.lines || []).map(function (l, i) {
       var r = rateOf(l.tax), amt = sign * l.amt, tx = r == null ? 0 : Math.round(amt * r) / 100, roe = parseFloat(l.roe), k = l.cur === cur || isNaN(roe) ? 1 : roe;
+      var q = qtyOf(l, h + i);
       G.ex += amt * k; G.net += amt * k; G.tax += tx * k; G.incl += (amt + tx) * k;
-      return { head: l.name || l.code, qty: '1', uom: '[UOM]', unit: fmt(amt), cur: l.cur, ex: fmt(amt), dp: '0%', da: '0.00', net: fmt(amt), ta: r == null ? '—' : r + '%', tax: fmt(tx), incl: fmt(amt + tx), date: dShort(inv.date) };
+      return { head: l.name || l.code, qty: String(q[0]), uom: q[1], unit: fmt(amt / q[0]), cur: l.cur, ex: fmt(amt), dp: '0%', da: '0.00', net: fmt(amt), ta: r == null ? '0%' : r + '%', tax: fmt(tx), incl: fmt(amt + tx), date: dShort(inv.date) };
     });
     return {
       kind: credit ? 'credit' : 'invoice', no: inv.no, file: (credit ? 'Credit-note-' : 'Invoice-') + inv.no,
       title: credit ? 'Credit Note' : (inv.type === 'Proforma' ? 'Proforma Invoice' : 'Tax Invoice'),
-      txn: inv.type === 'Proforma' ? 'Booking Created' : '[Transaction name]', badge: credit ? '' : badge,
-      from: ['Pacific International Lines (China) Ltd. / PIL Logistics', 'Block 5, PIL Building, No. 18 Gongping Road,', 'Hongkou District, ShanClearing Agenti 200082, China', 'Phone: +86-21-80138801 / +86-21-61235709'],
-      to: [ph(cust.name, '[Customer name]')].concat(cust.addr ? [cust.addr] : ['[Customer address]']),
+      txn: credit ? 'Credit Note Approved' : (TXN[inv.type] || 'B/L Released'), badge: credit ? '' : badge,
+      from: ['Pacific International Lines (China) Ltd. / PIL Logistics', 'Block 5, PIL Building, No. 18 Gongping Road,', 'Hongkou District, Shanghai 200082, China', 'Phone: +86-21-80138801 / +86-21-61235709'],
+      to: [ph(cust.name, '—')].concat(cust.addr ? [cust.addr] : []),
       strip: [[credit ? 'Credit Note No.' : 'Invoice No.', inv.no], [credit ? 'Credit Note Date' : 'Invoice Date', dShort(inv.date)], ['Invoice Due Date', dShort(inv.due)], ['Currency', cur]],
-      details: [['Customer Code', ph(cust.code, '[Customer code]')], ['Customer Ref', '[Customer ref.]'], ['Document Type', 'BL'], ['Nature of goods', '[Nature of goods]'], ['Mode of Payment', '[Mode of payment]']].concat(inv.orig ? [['Against Invoice', inv.orig]] : []),
-      right: [[credit ? 'Credit Note No.:' : 'Invoice No.:', inv.no], [credit ? 'Credit Note Date:' : 'Invoice Date:', dShort(inv.date)], ['Invoice Due Date:', dShort(inv.due)],
-        ['Customer Ref:', '[Customer ref.]'], ['Customer Code:', ph(cust.code, '[Customer code]')], ['Document Type :', 'BL'], ['Nature of goods :', '[Nature of goods]'],
-        ['Currency', cur], ['Mode of Payment', '[Mode of payment]']].concat(inv.orig ? [['Against Invoice:', inv.orig]] : []),
-      ship: [['Voyage', ph(inv.vvd, '[Voyage]')], ['BL Id/Number', '[BL Id] - ' + ph(inv.bl, '[BL no.]') + ' Dated [BL date]'],
-        ['Loaded', dir === 'I' ? '[Port of loading]' : ph(port, '[Port of loading]')], ['Discharge', dir === 'I' ? ph(port, '[Port of discharge]') : '[Port of discharge]'],
-        ['External BL No', '[External BL no.]'], ['Container Nos.', ph(inv.cntr, '[Container nos.]')]],
+      details: [['Customer Code', ph(cust.code, '—')], ['Customer Ref', extBl], ['Document Type', 'BL'], ['Nature of goods', goodsOf(cust.name)], ['Mode of Payment', 'Credit / Cash / Bank Transfer']].concat(inv.orig ? [['Against Invoice', inv.orig]] : []),
+      ship: [['Voyage', voyage], ['BL Id/Number', String(60000 + h % 9999) + ' - ' + ph(inv.bl, '—') + ' Dated ' + dShort(bld)],
+        ['Loaded', dir === 'I' ? other : ph(port, '—')], ['Discharge', dir === 'I' ? ph(port, '—') : other],
+        ['External BL No', extBl], ['Container Nos.', ph(inv.cntr, '—')]],
       cols: ['Charge head', 'Quantity', 'UOM', 'Unit Price', 'Currency', 'Total excluding Tax', 'Discount %', 'Discount Amount', 'Total Net', 'Tax applicability', 'Tax Amount', 'Total Incl Tax', 'Date'],
       keys: ['head', 'qty', 'uom', 'unit', 'cur', 'ex', 'dp', 'da', 'net', 'ta', 'tax', 'incl', 'date'],
       right_: [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
-      rows: rows, totals: [['Total excluding Tax', fmt(G.ex) + ' ' + cur], ['Discount Amount', '0.00 ' + cur], ['Total Net', fmt(G.net) + ' ' + cur], ['Tax Amount', fmt(G.tax) + ' ' + cur], ['Grand Total (Incl Tax)', fmt(G.incl) + ' ' + cur]], grandLabel: 'Grand Total (' + cur + ')', grand: { ex: fmt(G.ex), disc: '0.00', net: fmt(G.net), tax: fmt(G.tax), incl: fmt(G.incl) },
+      rows: rows, totals: [['Total excluding Tax', fmt(G.ex) + ' ' + cur], ['Discount Amount', '0.00 ' + cur], ['Total Net', fmt(G.net) + ' ' + cur], ['Tax Amount', fmt(G.tax) + ' ' + cur], ['Grand Total (Incl Tax)', fmt(G.incl) + ' ' + cur]], grandLabel: 'Grand Total (' + cur + ')',
       words: 'Total payable amount - ' + cur + ' ' + inWords(Math.abs(G.incl)) + ' only',
-      bank: [['Bank Name', '[Bank name]'], ['Virtual Account Number', '[Virtual account no.]'], ['IBAN', '[IBAN]'], ['SWIFT Code', '[SWIFT code]']],
-      issued: '[Issued by]', disclaimer: 'Disclaimer: This is a computer generated invoice and further authorization is not required.', stamp2: 'Page 1 of 1 Date ' + nowStamp()
+      bank: [['Bank Name', bank[0]], ['Virtual Account Number', 'PIL' + cc + digits.slice(-6) + String(h % 1000).padStart(3, '0')], ['IBAN', String(10000000 + h * 13 % 89999999)], ['SWIFT Code', bank[1]]],
+      issued: 'Daniel Tan', disclaimer: 'Disclaimer: This is a computer generated invoice and further authorization is not required.', stamp2: 'Page 1 of 1 Date ' + nowStamp()
     };
   }
 
