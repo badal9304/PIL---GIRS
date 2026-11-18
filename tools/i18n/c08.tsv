@@ -27,3 +27,18 @@ Charges	费用	Cargos	الرسوم
 Tax	税务	Impuesto	الضريبة
 Added charge #: enter Charge head, Quantity, UOM, Unit Price and Currency	新增费用 #：请填写费用项目、数量、单位、单价及币种	Cargo añadido #: indique concepto, cantidad, UdM, precio unitario y moneda	الرسم المضاف #: أدخل بند الرسم والكمية والوحدة وسعر الوحدة والعملة
 Total payable amount - USD	应付总额 - USD	Importe total a pagar - USD	إجمالي المبلغ المستحق - USD
+PROFORMA INVOICE	形式发票	FACTURA PROFORMA	فاتورة مبدئية
+TAX INVOICE	税务发票	FACTURA FISCAL	فاتورة ضريبية
+CREDIT NOTE	贷项通知单	NOTA DE CRÉDITO	إشعار دائن
+RECEIPT	收据	RECIBO	إيصال
+Page # of #	第 # 页，共 # 页	Página # de #	الصفحة # من #
+Issued By	开具人	Emitido por	صادر عن
+Disclaimer: This is a computer generated invoice and further authorization is not required.	免责声明：本发票由计算机生成，无需另行授权。	Aviso: esta es una factura generada por computadora y no requiere autorización adicional.	إخلاء مسؤولية: هذه فاتورة صادرة آليًا ولا تتطلب اعتمادًا إضافيًا.
+Reference Proforma Inv. No.	参考形式发票号	N.º de factura proforma de referencia	رقم الفاتورة المبدئية المرجعية
+Against Invoice	对应发票	Contra la factura	مقابل الفاتورة
+Grand Total	总计	Total general	الإجمالي الكلي
+Credit Note No.	贷项通知单号	N.º de nota de crédito	رقم الإشعار الدائن
+Credit Note Date	贷项通知单日期	Fecha de la nota de crédito	تاريخ الإشعار الدائن
+Discharge	卸货港	Descarga	التفريغ
+IBAN	IBAN	IBAN	IBAN
+CNTR	箱	CNTR	حاوية

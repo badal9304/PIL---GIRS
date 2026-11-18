@@ -116,7 +116,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       rows: rows, totals: [['Total excluding Tax', fmt(G.ex) + ' ' + cur], ['Tax Amount', fmt(G.tax) + ' ' + cur], ['Invoice Total', fmt(G.incl) + ' ' + cur]], grandLabel: 'Grand Total (' + cur + ')',
       words: 'Total payable amount - ' + cur + ' ' + inWords(Math.abs(G.incl)) + ' only',
       bank: [['Bank Name', bank[0]], ['Virtual Account Number', 'PIL' + cc + digits.slice(-6) + String(h % 1000).padStart(3, '0')], ['IBAN', String(10000000 + h * 13 % 89999999)], ['SWIFT Code', bank[1]]],
-      issued: 'Daniel Tan', disclaimer: 'Disclaimer: This is a computer generated invoice and further authorization is not required.', stamp2: 'Page 1 of 1 Date ' + nowStamp()
+      issued: 'Daniel Tan', disclaimer: 'Disclaimer: This is a computer generated invoice and further authorization is not required.', stamp2: T('Page 1 of 1') + ' · ' + T('Date') + ' ' + (docLang() === 'ar' ? '\u2066' + nowStamp() + '\u2069' : nowStamp())
     };
   }
 
@@ -225,7 +225,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   // PDF: A4 portrait, same layout as the screen
   function drawInvoice(m) {
     var W = 595, H = 842, p = new Page(W, H), L = 30, R = W - 30, y, MU = '#5A6170';
-    var K = function (x, yy, t) { p.text(x, yy, t.toUpperCase(), { size: 6.5, bold: true, color: MU }); };
+    var K = function (x, yy, t) { p.text(x, yy, T(t).toUpperCase(), { size: 6.5, bold: true, color: MU }); };
     p.rect(0, 0, W, 3, '#E31D1A');
     p.logo(L, 22, 27);
     p.text(W / 2, 36, m.title.toUpperCase(), { size: 15, bold: true, align: 'c' });
@@ -282,7 +282,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   // PDF: A4 landscape variant
   function drawInvoiceL(m) {
     var W = 842, H = 595, p = new Page(W, H), L = 36, R = W - 36, y, MU = '#5A6170';
-    var K = function (x, yy, t) { p.text(x, yy, t.toUpperCase(), { size: 6.5, bold: true, color: MU }); };
+    var K = function (x, yy, t) { p.text(x, yy, T(t).toUpperCase(), { size: 6.5, bold: true, color: MU }); };
     p.rect(0, 0, W, 3, '#E31D1A');
     p.logo(L, 22, 30);
     p.text(W / 2, 38, m.title.toUpperCase(), { size: 17, bold: true, align: 'c' });
@@ -464,9 +464,18 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   var HW = [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
   var HB = [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584];
   var WIN = { '—': [151, 1000], '–': [150, 556], '·': [183, 278], '×': [215, 584], '’': [146, 222], '‘': [145, 222], '•': [149, 350], '→': null, '−': null };
-  function winChar(ch) { var c = ch.charCodeAt(0); if (c >= 32 && c < 127) return [c, null]; if (ch === '→') return [null, '->']; if (ch === '−') return [45, null]; var w = WIN[ch]; return w ? [w[0], w[1]] : [63, null]; }
+  function winChar(ch) { var c = ch.charCodeAt(0); if (c >= 32 && c < 127) return [c, null]; if (c >= 160 && c <= 255) return [c, null]; if (ch === '→') return [null, '->']; if (ch === '−') return [45, null]; var w = WIN[ch]; return w ? [w[0], w[1]] : [63, null]; }
+  // ---- language: documents follow the system language (girs-i18n.js). Chinese and Arabic need glyphs the
+  // built-in PDF fonts do not have, so those PDFs are drawn on a canvas at print resolution and embedded as page images.
+  function T(str) { try { return window.GirsI18n ? window.GirsI18n.tr(String(str)) : String(str); } catch (e) { return String(str); } }
+  function docLang() { try { return localStorage.getItem('girs.lang') || 'en'; } catch (e) { return 'en'; } }
+  var RASTER = null, RS = 3, FONT = '"IBM Plex Sans","Noto Sans SC","PingFang SC","Microsoft YaHei","Noto Naskh Arabic","Geeza Pro","Segoe UI",Arial,sans-serif';
+  var LOGO_IMG = null; try { LOGO_IMG = new Image(); LOGO_IMG.src = 'data:image/jpeg;base64,' + LOGO; } catch (e) {}
+  function cfont(bold, size) { return (bold ? '700 ' : '400 ') + (size * RS).toFixed(2) + 'px ' + FONT; }
   function width(str, bold, size) {
-    var t = bold ? HB : HW, w = 0; str = String(str);
+    str = T(str);
+    if (RASTER) { RASTER.font = cfont(bold, size); return RASTER.measureText(str).width / RS; }
+    var t = bold ? HB : HW, w = 0;
     for (var i = 0; i < str.length; i++) {
       var c = str.charCodeAt(i);
       if (c >= 32 && c < 127) w += t[c - 32]; else { var x = winChar(str[i]); w += x[1] && typeof x[1] === 'number' ? x[1] : (x[1] === '->' ? 833 : 556); }
@@ -487,20 +496,37 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   function rgb(hex) { var n = parseInt(hex.slice(1), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255].map(function (v) { return v.toFixed(3); }).join(' '); }
   function wrap(text, bold, size, maxW) {
+    text = T(text);
+    if (RASTER && !/ /.test(text.trim())) {   // CJK: no spaces, break by character
+      var out = [], c = ''; Array.from(text).forEach(function (ch) { if (width(c + ch, bold, size) > maxW && c) { out.push(c); c = ch; } else c += ch; }); if (c) out.push(c); return out;
+    }
     var words = String(text).split(' '), lines = [], cur = '';
     words.forEach(function (w) { var t = cur ? cur + ' ' + w : w; if (width(t, bold, size) > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
     if (cur) lines.push(cur); return lines;
   }
 
   var PH = 842, PW = 595;
-  function Page(w, h) { this.ops = []; this.w = w || PW; this.h = h || PH; }
+  function Page(w, h) {
+    this.ops = []; this.w = w || PW; this.h = h || PH;
+    if (RASTER) {
+      this.cv = document.createElement('canvas'); this.cv.width = Math.round(this.w * RS); this.cv.height = Math.round(this.h * RS);
+      this.cx = this.cv.getContext('2d'); this.cx.fillStyle = '#fff'; this.cx.fillRect(0, 0, this.cv.width, this.cv.height);
+      this.cx.textBaseline = 'alphabetic';
+    }
+  }
   Page.prototype.text = function (x, y, s, o) {
-    o = o || {}; var size = o.size || 9, bold = !!o.bold, w = width(s, bold, size);
+    o = o || {}; var size = o.size || 9, bold = !!o.bold; s = T(s); var w = width(s, bold, size);
+    if (this.cx) {
+      if (o.align === 'r') x -= w; else if (o.align === 'c') x -= w / 2;
+      var c = this.cx; c.font = cfont(bold, size); c.fillStyle = o.color || '#161A21'; c.direction = 'ltr'; c.textAlign = 'left'; c.fillText(s, x * RS, y * RS);
+      return w;
+    }
     if (o.align === 'r') x -= w; else if (o.align === 'c') x -= w / 2;
     this.ops.push('BT ' + rgb(o.color || '#161A21') + ' rg /' + (bold ? 'F2' : 'F1') + ' ' + size + ' Tf ' + x.toFixed(2) + ' ' + (this.h - y).toFixed(2) + ' Td ' + pdfStr(s) + ' Tj ET');
     return w;
   };
   Page.prototype.rect = function (x, y, w, h, fill, stroke, lw) {
+    if (this.cx) { var c = this.cx; if (fill) { c.fillStyle = fill; c.fillRect(x * RS, y * RS, w * RS, h * RS); } if (stroke) { c.strokeStyle = stroke; c.lineWidth = (lw || 0.75) * RS; c.strokeRect(x * RS, y * RS, w * RS, h * RS); } return; }
     var s = 'q ';
     if (fill) s += rgb(fill) + ' rg ';
     if (stroke) s += rgb(stroke) + ' RG ' + (lw || 0.75) + ' w ';
@@ -508,6 +534,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     this.ops.push(s);
   };
   Page.prototype.pill = function (x, y, w, h, fill) {
+    if (this.cx) { var c = this.cx; c.fillStyle = fill; c.beginPath(); c.roundRect(x * RS, y * RS, w * RS, h * RS, h * RS / 2); c.fill(); return; }
     var r = h / 2, k = r * 0.5523, Y = this.h - y - h, f = function (n) { return n.toFixed(2); };
     this.ops.push('q ' + rgb(fill) + ' rg ' + f(x + r) + ' ' + f(Y) + ' m ' + f(x + w - r) + ' ' + f(Y) + ' l ' +
       f(x + w - r + k) + ' ' + f(Y) + ' ' + f(x + w) + ' ' + f(Y + r - k) + ' ' + f(x + w) + ' ' + f(Y + r) + ' c ' +
@@ -515,9 +542,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       f(x + r) + ' ' + f(Y + h) + ' l ' + f(x + r - k) + ' ' + f(Y + h) + ' ' + f(x) + ' ' + f(Y + r + k) + ' ' + f(x) + ' ' + f(Y + r) + ' c ' +
       f(x) + ' ' + f(Y + r - k) + ' ' + f(x + r - k) + ' ' + f(Y) + ' ' + f(x + r) + ' ' + f(Y) + ' c f Q');
   };
-  Page.prototype.line = function (x1, y1, x2, y2, color, lw) { this.ops.push('q ' + rgb(color || '#DADDE3') + ' RG ' + (lw || 0.75) + ' w ' + x1.toFixed(2) + ' ' + (this.h - y1).toFixed(2) + ' m ' + x2.toFixed(2) + ' ' + (this.h - y2).toFixed(2) + ' l S Q'); };
-  Page.prototype.logo = function (x, y, h) { var w = h * LOGO_W / LOGO_H; this.ops.push('q ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + x.toFixed(2) + ' ' + (this.h - y - h).toFixed(2) + ' cm /Im1 Do Q'); };
+  Page.prototype.line = function (x1, y1, x2, y2, color, lw) {
+    if (this.cx) { var c = this.cx; c.strokeStyle = color || '#DADDE3'; c.lineWidth = (lw || 0.75) * RS; c.beginPath(); c.moveTo(x1 * RS, y1 * RS); c.lineTo(x2 * RS, y2 * RS); c.stroke(); return; }
+    this.ops.push('q ' + rgb(color || '#DADDE3') + ' RG ' + (lw || 0.75) + ' w ' + x1.toFixed(2) + ' ' + (this.h - y1).toFixed(2) + ' m ' + x2.toFixed(2) + ' ' + (this.h - y2).toFixed(2) + ' l S Q'); };
+  Page.prototype.logo = function (x, y, h) { var w = h * LOGO_W / LOGO_H; if (this.cx) { try { this.cx.drawImage(LOGO_IMG, x * RS, y * RS, w * RS, h * RS); } catch (e) {} return; } this.ops.push('q ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + x.toFixed(2) + ' ' + (this.h - y - h).toFixed(2) + ' cm /Im1 Do Q'); };
   Page.prototype.stamp = function (label, color) {
+    label = T(label);
+    if (this.cx) {
+      var c = this.cx, sz = 18, ww = width(label, true, sz) + 20; c.save(); c.globalAlpha = 0.25; c.translate(335 * RS, 50 * RS); c.rotate(-14 * Math.PI / 180);
+      c.strokeStyle = color; c.lineWidth = 2.5 * RS; c.strokeRect(-ww / 2 * RS, -15 * RS, ww * RS, 30 * RS); c.fillStyle = color; c.font = cfont(true, sz); c.fillText(label, (-ww / 2 + 10) * RS, 6.3 * RS); c.restore(); return;
+    }
     var size = 18, w = width(label, true, size) + 20, h = 30, cx = 335, cy = 50, a = -14 * Math.PI / 180, c = Math.cos(a), s = Math.sin(a);
     this.ops.push('q /GS1 gs ' + c.toFixed(4) + ' ' + (-s).toFixed(4) + ' ' + s.toFixed(4) + ' ' + c.toFixed(4) + ' ' + cx + ' ' + (this.h - cy) + ' cm ' + rgb(color) + ' RG 2.5 w ' + (-w / 2).toFixed(2) + ' ' + (-h / 2) + ' ' + w.toFixed(2) + ' ' + h + ' re S ' +
       'BT ' + rgb(color) + ' rg /F2 ' + size + ' Tf ' + (-w / 2 + 10).toFixed(2) + ' -6.3 Td ' + pdfStr(label) + ' Tj ET Q');
@@ -594,7 +628,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   var LOGO_BYTES = null;
 
   function buildPdf(models, title) {
-    var pages = []; models.forEach(function (m) { pages = pages.concat(drawDoc(m)); });
+    var lg = docLang();
+    RASTER = (lg === 'zh' || lg === 'ar') ? document.createElement('canvas').getContext('2d') : null;
+    var pages = []; try { models.forEach(function (m) { pages = pages.concat(drawDoc(m)); }); } finally { var raster = !!RASTER; RASTER = null; }
+    if (raster) pages.forEach(function (pg) {
+      pg.img = b64bytes(pg.cv.toDataURL('image/jpeg', 0.92).split(',')[1]); pg.iw = pg.cv.width; pg.ih = pg.cv.height;
+      pg.ops = ['q ' + pg.w + ' 0 0 ' + pg.h + ' 0 0 cm /Pg Do Q'];
+    });
     if (!LOGO_BYTES) LOGO_BYTES = b64bytes(LOGO);
     var enc = function (s) { var a = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i) & 255; return a; };
     var objs = []; // each: array of Uint8Array parts
@@ -611,9 +651,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     var d = new Date(), pad = function (n) { return ('0' + n).slice(-2); };
     add([enc('<< /Title ' + pdfStr(title) + ' /Producer (GIRS prototype) /CreationDate (D:' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + pad(d.getHours()) + pad(d.getMinutes()) + '00) >>')]);
     pages.forEach(function (pg, n) {
-      var content = pg.ops.join('\n');
-      add([enc('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pg.w + ' ' + pg.h + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << /Im1 5 0 R >> /ExtGState << /GS1 6 0 R >> >> /Contents ' + (firstPage + n * 2 + 1) + ' 0 R >>')]);
+      var content = pg.ops.join('\n'), img = '';
+      if (pg.img) img = ' /Pg ' + (firstPage + nPages * 2 + n) + ' 0 R';
+      add([enc('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pg.w + ' ' + pg.h + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << /Im1 5 0 R' + img + ' >> /ExtGState << /GS1 6 0 R >> >> /Contents ' + (firstPage + n * 2 + 1) + ' 0 R >>')]);
       add([enc('<< /Length ' + content.length + ' >>\nstream\n' + content + '\nendstream')]);
+    });
+    pages.forEach(function (pg) {
+      if (pg.img) add([enc('<< /Type /XObject /Subtype /Image /Width ' + pg.iw + ' /Height ' + pg.ih + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + pg.img.length + ' >>\nstream\n'), pg.img, enc('\nendstream')]);
     });
     var chunks = [enc('%PDF-1.4\n%\xe2\xe3\xcf\xd3\n')], off = chunks[0].length, xref = [];
     objs.forEach(function (parts, n) {

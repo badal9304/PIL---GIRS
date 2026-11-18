@@ -2,17 +2,19 @@
    English is the source. For another language it loads i18n-<lang>.js (built from tools/i18n/*.tsv)
    and translates visible text, placeholders, tooltips and accessible labels as the page renders,
    including pop-ups, menus and anything added later. Arabic also switches the layout to right-to-left.
-   Data (codes, numbers, names, amounts) and the printed invoice document stay as they are. */
+   Data (codes, numbers, names, amounts) stays as it is; invoice and receipt documents (screen and PDF) follow the language too. */
 (function () {
   'use strict';
   var lang = 'en';
   try { lang = localStorage.getItem('girs.lang') || 'en'; } catch (e) {}
   if (lang === 'en') return;
   document.documentElement.lang = lang;
-  if (lang === 'ar') document.documentElement.dir = 'rtl';
+  if (lang === 'ar') {
+    document.documentElement.dir = 'rtl';
+  }
 
   var D = null, T = [], NUM = /\d+(?:[.,]\d+)*/g, ATTR = ['placeholder', 'title', 'aria-label'];
-  var SKIP = 'script,style,textarea,code,.gi,.gl,.gd-paper,[translate="no"]';
+  var SKIP = 'script,style,textarea,code,[translate="no"]';
 
   function look(t) {
     if (Object.prototype.hasOwnProperty.call(D, t)) return D[t];
@@ -41,9 +43,15 @@
     return raw.match(/^\s*/)[0] + r + raw.match(/\s*$/)[0];
   }
   function skip(el) { return !el || (el.closest && el.closest(SKIP)); }
+  // Arabic: wrap Latin data runs (dates, codes, "Vessel 01 / 073N") in a left-to-right isolate so they keep their reading
+  // order inside the right-to-left layout without changing alignment
+  var LRI = '\u2066', PDI = '\u2069';
+  function iso(v) { return lang === 'ar' && v.charAt(0) !== LRI && /[A-Za-z0-9]/.test(v) && !/[\u0600-\u06FF]/.test(v) && /\S[\s\-\/:.,]+\S/.test(v) ? LRI + v + PDI : v; }
   function doText(n) {
     if (skip(n.parentElement)) return;
-    var r = tr(n.nodeValue); if (r != null && r !== n.nodeValue) n.nodeValue = r;
+    var v = n.nodeValue, r = tr(v); if (r != null) v = r;
+    v = iso(v);
+    if (v !== n.nodeValue) n.nodeValue = v;
   }
   function doAttrs(el) {
     if (skip(el)) return;
@@ -78,6 +86,7 @@
       var re = new RegExp('^' + p[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('\\{x\\}', '(.+)') + '$');
       return [p[0], p[1], re];
     });
+    window.GirsI18n = { lang: lang, tr: function (x) { var r = tr(x); return r == null ? x : r; } };
     mo = new MutationObserver(run);
     walk(document.body); var t = tr(document.title); if (t) document.title = t;
     observe();

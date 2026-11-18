@@ -43,7 +43,7 @@ The search box in the top bar (Ctrl/⌘ K or `/` from any screen) searches scree
 
 ## Language and appearance
 
-Language and Light/Dark live in the profile menu and apply to every screen. English is the source; `girs-i18n.js` translates the interface into Chinese (Simplified), Spanish and Arabic (right-to-left) from `i18n-<lang>.js`. To add or fix a phrase, edit `tools/i18n/*.tsv` (English, Chinese, Spanish, Arabic; `#` stands for any number) and run `python3 tools/build-i18n.py`.
+Language and Light/Dark live in the profile menu and apply to every screen. English is the source; `girs-i18n.js` translates the interface — including the invoice / receipt documents on screen and in the downloaded PDF — into Chinese (Simplified), Spanish and Arabic (right-to-left) from `i18n-<lang>.js`. Chinese and Arabic PDFs are rendered as print-resolution page images because the built-in PDF fonts have no glyphs for those scripts. To add or fix a phrase, edit `tools/i18n/*.tsv` (English, Chinese, Spanish, Arabic; `#` stands for any number) and run `python3 tools/build-i18n.py`.
 
 ## Run locally
 
