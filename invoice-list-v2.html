@@ -175,7 +175,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .ri-err{color:var(--bad);letter-spacing:0}.ri-sub{margin-top:6px;font-size:13px}
 .ri-errs{margin-top:18px;padding:10px 14px;border-radius:6px;background:var(--badbg);border:1px solid #EDB8BA;color:var(--bad);font-size:13px}.ri-errs ul{margin:4px 0 0;padding-inline-start:18px}.ri-errs .mu{color:var(--bad);opacity:.8}
 .ri-strip{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;border:1px solid var(--line);border-radius:8px}.ri-strip>div{padding:12px 16px;border-inline-start:1px solid var(--line)}.ri-strip>div:first-child{border-inline-start:0}.ri-strip .v{margin-top:4px;font-weight:600;font-size:15px;line-height:20px}
-.ri-parties{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:24px}.ri-parties .n{font-weight:600;font-size:15px;line-height:21px;margin-top:8px}.ri-parties .l{color:var(--muted2)}
+.ri-parties{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:24px}.ri-parties .n{font-weight:600;font-size:15px;line-height:21px}.ri-parties .k+.n,.ri-parties .k+sc-for+.n{margin-top:8px}.ri-parties .l{color:var(--muted2)}
 .ri-kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:8px}.ri-kv span:nth-child(odd){color:var(--muted)}
 .ri-ship{margin-top:24px;padding:16px 20px;border-radius:8px;background:var(--sub);display:grid;grid-template-columns:repeat(3,1fr);gap:14px 32px}.ri-ship .v{margin-top:2px;font-weight:500}
 .ri-tbl{width:100%;border-collapse:collapse;margin-top:24px;font-size:13px}.ri-tbl th{background:var(--bg);text-align:left;font-weight:600;font-size:12px;color:var(--muted2);padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -661,7 +661,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <sc-if value="{{rv.hasErr}}" hint-placeholder-val="{{ true }}"><div class="ri-errs" role="alert"><b>{{rv.errTitle}}</b><ul><sc-for list="{{rv.errs}}" as="e" hint-placeholder-count="2"><li><span class="mu">{{e.area}} ·</span> {{e.text}}</li></sc-for></ul></div></sc-if>
               <div class="ri-strip"><sc-for list="{{rv.strip}}" as="x" hint-placeholder-count="3"><div><div class="k">{{x.k}}</div><div class="v">{{x.v}}</div></div></sc-for></div>
               <div class="ri-parties">
-                <div><div class="k">From</div><div class="n">{{rv.from0}}</div><sc-for list="{{rv.fromL}}" as="l" hint-placeholder-count="3"><div class="l">{{l}}</div></sc-for></div>
+                <div><div class="k">From</div><sc-for list="{{rv.fromN}}" as="n" hint-placeholder-count="2"><div class="n">{{n}}</div></sc-for><sc-for list="{{rv.fromL}}" as="l" hint-placeholder-count="3"><div class="l">{{l}}</div></sc-for></div>
                 <div><label class="k" for="ri-cust">To</label>
                   <div style="position: relative; margin-top: 6px; max-width: 360px"><select id="ri-cust" class="select {{rv.custCls}}" style="width: 100%; font-weight: 600" value="{{rv.cust}}" onChange="{{rv.onCust}}" aria-label="Customer name"><sc-for list="{{rv.custOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
                   <div class="l" style="margin-top: 6px">{{rv.addr}}</div></div>
@@ -1250,7 +1250,7 @@ class GirsPage extends DCLogic {
       });
       const custErr = errs.some((e) => e.area === 'Customer');
       rv = { bl: cur.bl, cur: c.cur, hasErr: errs.length > 0, noErr: errs.length === 0, errs, errTitle: errs.length === 1 ? '1 error to resolve before generating the invoice' : errs.length + ' errors to resolve before generating the invoice',
-        txn: m ? m.txn : '', strip: m ? kv(m.strip.slice(1)) : [], from0: m ? m.from[0] : '', fromL: m ? m.from.slice(1) : [],
+        txn: m ? m.txn : '', strip: m ? kv(m.strip.slice(1)) : [], fromN: m ? m.from[0].split(/ \/ /).map((x, i, a) => (i < a.length - 1 ? x + ' /' : x)) : [], fromL: m ? m.from.slice(1) : [],
         cust: eff.cust, custCls: custErr ? 'bad' : '', addr: cu.addr || '—', onCust: (e) => setEd({ cust: e.target.value }),
         custOpts: Object.keys(IV_CUST).filter((k) => k.slice(0, 2) === loc[1]).map((k) => ({ v: k, label: IV_CUST[k].name })),
         details: m ? kv(m.details) : [], ship: m ? kv(m.ship) : [], bank: m ? kv(m.bank) : [], words: m ? m.words : '',
