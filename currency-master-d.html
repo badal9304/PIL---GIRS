@@ -292,13 +292,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </button>
           <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
             <div id="ng-g1" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="invoice-list.html" class="nav-item" title="Invoice List v1" style="{{shell.item}}">
+          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
-            <span style="{{shell.hide}}">Invoice List v1</span>
-          </a>
-          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List v2" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
-            <span style="{{shell.hide}}">Invoice List v2</span>
+            <span style="{{shell.hide}}">Invoice List</span>
           </a>
           <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
@@ -472,7 +468,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
                   <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
                 </a>
-                <a href="invoice-list.html" class="mi" role="option" onClick="{{shell.goFind}}">
+                <a href="invoice-list-v2.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
                   <span>Find “<strong>{{shell.q}}</strong>” in Invoice List</span>
                 </a>

@@ -9,8 +9,8 @@ Clickable prototype of the GIRS Live Build UI Showcase screens. Designed for 192
 | D&D Engine | `dd-engine.html` |
 | Integration Monitor | `integration-monitor.html` |
 | Document Intake | `document-intake.html` |
-| Invoice List v1 (includes the former Invoices Hub) | `invoice-list.html` (layouts `-b`, `-c`, `-d`) |
-| Invoice List v2 (compact columns) | `invoice-list-v2.html` |
+| Invoice List | `invoice-list-v2.html` |
+| Invoice List v1 (hidden from the nav; kept for reference) | `invoice-list.html` (layouts `-b`, `-c`, `-d`) |
 | Split B/L & Billed-To | `split-billing.html` |
 | Manual & MISC Invoice | `manual-invoice.html` |
 | Invoice Template Previewer | `invoice-previewer.html` |

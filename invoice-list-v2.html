@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GIRS Invoice List v2</title>
+<title>GIRS Invoice List</title>
 <link rel="icon" href="pil-logo.png">
 </head>
 <body>
@@ -372,13 +372,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </button>
           <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
             <div id="ng-g1" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="invoice-list.html" class="nav-item" title="Invoice List v1" style="{{shell.item}}">
+          <a href="invoice-list-v2.html" class="nav-item nav-on" aria-current="page" title="Invoice List" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
-            <span style="{{shell.hide}}">Invoice List v1</span>
-          </a>
-          <a href="invoice-list-v2.html" class="nav-item nav-on" aria-current="page" title="Invoice List v2" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
-            <span style="{{shell.hide}}">Invoice List v2</span>
+            <span style="{{shell.hide}}">Invoice List</span>
           </a>
           <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
@@ -552,7 +548,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
                   <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
                 </a>
-                <a href="invoice-list.html" class="mi" role="option" onClick="{{shell.goFind}}">
+                <a href="invoice-list-v2.html" class="mi" role="option" onClick="{{shell.goFind}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
                   <span>Find “<strong>{{shell.q}}</strong>” in Invoice List</span>
                 </a>
@@ -636,7 +632,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         </div>
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
-            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Invoice List v2</h1>
+            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Invoice List</h1>
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Rule-driven invoicing automation using LMS booking, B/L and container data</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
@@ -912,7 +908,7 @@ const IV_ALL = IV_SEED.concat(ivGen(491));
 const IV_CHECKS = ["Customer", "Billing Party", "Charges", "Currency/ROE", "Tax Configuration", "B/L Data"];
 const IV_LINK = { 'CreditNoteList.dc.html': 'credit-note-list.html', 'SOADashboard.dc.html': 'soa-aging.html', 'Receipting.dc.html': 'receipting.html',
   'CashAppWorkbench.dc.html': 'cashapp-workbench.html', 'ManualInvoice.dc.html': 'manual-invoice.html', 'InvoiceGenerate.dc.html': 'invoice-generate.html',
-  'InvoiceListB.dc.html': 'invoice-list-b.html', 'InvoiceListC.dc.html': 'invoice-list-c.html', 'InvoiceListD.dc.html': 'invoice-list-d.html', 'InvoiceList.dc.html': 'invoice-list.html' };
+  'InvoiceListB.dc.html': 'invoice-list-b.html', 'InvoiceListC.dc.html': 'invoice-list-c.html', 'InvoiceListD.dc.html': 'invoice-list-d.html', 'InvoiceList.dc.html': 'invoice-list-v2.html' };
 const IV_TONE = { 'Draft': 'var(--muted)', 'Pending validation': 'var(--warn)', 'Generated': 'var(--accent2)', 'Sent': 'var(--accent2)', 'Accepted': 'var(--ok)', 'Paid': 'var(--ok)',
   'Rejected': 'var(--bad)', 'Credited': 'var(--ai)', 'Cancelled': 'var(--muted)' };
 const IV_PILL = { Ready: 'background:var(--okbg);color:var(--ok)', Warning: 'background:var(--warnbg);color:var(--warn)', Blocked: 'background:var(--badbg);color:var(--bad)' };
@@ -927,7 +923,7 @@ function ivGo(page, q) {
 function ivAct(i, page, act, label) {
   try {
     const cur = i.lines[0][2], usd = i.lines.reduce((a, l) => a + (l[2] === 'USD' ? l[1] : l[1] / ((IV_FX.USD || {})[l[2]] || 1)), 0);
-    let back = 'invoice-list.html'; try { back = location.pathname.split('/').pop() || back; } catch (e) {}
+    let back = 'invoice-list-v2.html'; try { back = location.pathname.split('/').pop() || back; } catch (e) {}
     window.GirsCtx.put({ page, act, label, inv: i.no, bl: i.bl, bkg: i.bkg, cust: i.cust, party: i.party, cur, amt: ivMain(i), usd: Math.round(usd * 100) / 100,
       date: i.date, due: i.due, status: i.status, type: i.type, port: i.port, fromName: 'Invoice List', back });
   } catch (e) {}
@@ -959,7 +955,7 @@ function ivRcptData(i) {
 function ivHasJson(i) { return String(i.files).indexOf('JSON') >= 0; }
 function ivArr(v) { return Array.isArray(v) ? v : (v ? [v] : []); }
 function ivIn(v, x) { const a = ivArr(v); return !a.length || a.includes(x); }
-// Invoice List v2 statuses: Invoice Status (Unpaid / Paid / Receipted / Reconciled / Cancelled), e-Invoice, GFS Status
+// Invoice List statuses: Invoice Status (Unpaid / Paid / Receipted / Reconciled / Cancelled), e-Invoice, GFS Status
 function ivSt2(i) {
   if (i.status === 'Cancelled' || i.status === 'Credited') return 'Cancelled';
   if (i.status === 'Paid') return ['Paid', 'Receipted', 'Reconciled'][ivHash(i.no) % 3];

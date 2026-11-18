@@ -32,7 +32,7 @@
     if (!document.getElementById('gx-css')) { var st = document.createElement('style'); st.id = 'gx-css'; st.textContent = CSS; document.head.appendChild(st); }
     var el = document.createElement('div'); el.id = 'gx-bar'; el.className = 'gx-bar'; el.setAttribute('role', 'status');
     el.innerHTML = '<span>Opened from <b>' + esc(c.fromName || 'Invoice List') + '</b> · ' + esc(c.label || '') + ' <span class="m">' + esc(c.inv || '') + '</span></span>' +
-      '<a href="' + esc(c.back || 'invoice-list.html') + (c.inv ? '?q=' + encodeURIComponent(c.inv) : '') + '">Back to ' + esc(c.fromName || 'Invoice List') + '</a>' +
+      '<a href="' + esc(c.back || 'invoice-list-v2.html') + (c.inv ? '?q=' + encodeURIComponent(c.inv) : '') + '">Back to ' + esc(c.fromName || 'Invoice List') + '</a>' +
       '<button class="x" aria-label="Dismiss"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
     el.querySelector('button.x').addEventListener('click', function () { el.remove(); });
     document.body.appendChild(el);
