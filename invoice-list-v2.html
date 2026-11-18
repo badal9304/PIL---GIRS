@@ -663,7 +663,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div class="ri-parties">
                 <div><div class="k">From</div><div class="n">{{rv.from0}}</div><sc-for list="{{rv.fromL}}" as="l" hint-placeholder-count="3"><div class="l">{{l}}</div></sc-for></div>
                 <div><label class="k" for="ri-cust">To</label>
-                  <div style="position: relative; margin-top: 6px; max-width: 360px"><select id="ri-cust" class="select {{rv.custCls}}" style="width: 100%; font-weight: 600" value="{{rv.cust}}" onChange="{{rv.onCust}}" aria-label="Customer name"><sc-for list="{{rv.custOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.label}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+                  <div class="ri-cb" style="margin-top: 6px; max-width: 360px"><input id="ri-cust" class="input {{rv.custCls}}" style="width: 100%; font-weight: 600" role="combobox" aria-autocomplete="list" aria-expanded="{{rv.cuA}}" aria-controls="ri-cust-l" aria-activedescendant="{{rv.cuAct}}" aria-label="Customer name" placeholder="Search customer" autocomplete="off" value="{{rv.cuQ}}" onInput="{{rv.cuOnQ}}" onFocus="{{rv.cuFocus}}" onBlur="{{rv.cuBlur}}" onKeyDown="{{rv.cuKey}}">
+                    <sc-if value="{{rv.cuOpen}}" hint-placeholder-val="{{ false }}"><ul class="ri-sug" role="listbox" id="ri-cust-l"><sc-for list="{{rv.cuOpts}}" as="o" hint-placeholder-count="3"><li role="option" id="{{o.id}}" aria-selected="{{o.on}}" onMouseDown="{{o.pick}}"><span class="mono">{{o.code}}</span>{{o.name}}</li></sc-for><sc-if value="{{rv.cuNone}}" hint-placeholder-val="{{ false }}"><li class="none" role="option" aria-disabled="true">No matching customer</li></sc-if></ul></sc-if></div>
                   <div class="l" style="margin-top: 6px">{{rv.addr}}</div></div>
                 <div><div class="k">Customer &amp; payment</div><div class="ri-kv"><sc-for list="{{rv.details}}" as="x" hint-placeholder-count="5"><span>{{x.k}}</span><span>{{x.v}}</span></sc-for></div></div>
               </div>
@@ -1251,7 +1252,24 @@ class GirsPage extends DCLogic {
       const custErr = errs.some((e) => e.area === 'Customer');
       rv = { bl: cur.bl, cur: c.cur, hasErr: errs.length > 0, noErr: errs.length === 0, errs, errTitle: errs.length === 1 ? '1 error to resolve before generating the invoice' : errs.length + ' errors to resolve before generating the invoice',
         txn: m ? m.txn : '', strip: m ? kv(m.strip.slice(1)) : [], from0: m ? m.from[0] : '', fromL: m ? m.from.slice(1) : [],
-        cust: eff.cust, custCls: custErr ? 'bad' : '', addr: cu.addr || '—', onCust: (e) => setEd({ cust: e.target.value }),
+        cust: eff.cust, custCls: custErr ? 'bad' : '', addr: cu.addr || '—',
+        // To: type-ahead customer search (same pattern as Charge head)
+        ...(() => {
+          const cs = s.riCu, open = !!cs, qq = open ? String(cs.q || '').trim().toLowerCase() : '';
+          const keys = Object.keys(IV_CUST).filter((k) => k.slice(0, 2) === loc[1]).filter((k) => !qq || k.toLowerCase().includes(qq) || IV_CUST[k].name.toLowerCase().includes(qq));
+          const hi = open ? Math.min(cs.hi || 0, keys.length - 1) : -1;
+          const pick = (k) => self.setState({ riCu: null, rvEd: Object.assign({}, ed, { cust: k }) });
+          return { cuQ: open ? cs.q : (cu.name || eff.cust), cuOpen: open, cuA: open ? 'true' : 'false', cuNone: open && !keys.length, cuAct: hi >= 0 ? 'ri-cu-' + hi : '',
+            cuOpts: keys.map((k, n) => ({ id: 'ri-cu-' + n, code: k, name: IV_CUST[k].name, on: n === hi ? 'true' : 'false', pick: (e) => { e.preventDefault(); pick(k); } })),
+            cuOnQ: (e) => self.setState({ riCu: { q: e.target.value, hi: 0 } }),
+            cuFocus: (e) => { self.setState({ riCu: { q: '', hi: Math.max(0, keys.indexOf(eff.cust)) } }); },
+            cuBlur: () => setTimeout(() => { if (self.state.riCu) self.setState({ riCu: null }); }, 120),
+            cuKey: (e) => {
+              if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = keys.length || 1; self.setState({ riCu: { q: open ? cs.q : '', hi: open ? (hi + (e.key === 'ArrowDown' ? 1 : n - 1)) % n : 0 } }); }
+              else if (e.key === 'Enter' && open && keys[hi]) { e.preventDefault(); pick(keys[hi]); e.target.blur(); }
+              else if (e.key === 'Escape') { self.setState({ riCu: null }); e.target.blur(); }
+            } };
+        })(),
         custOpts: Object.keys(IV_CUST).filter((k) => k.slice(0, 2) === loc[1]).map((k) => ({ v: k, label: IV_CUST[k].name })),
         details: m ? kv(m.details) : [], ship: m ? kv(m.ship) : [], bank: m ? kv(m.bank) : [], words: m ? m.words : '',
         uoms: ['CNTR', 'BL', 'Day', 'EA'], curs: c.cur === loc[2] ? [c.cur] : [c.cur, loc[2]],
