@@ -183,6 +183,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .ri-tbl th:first-child,.ri-tbl td:first-child{padding-inline-start:12px}.ri-tbl tr.add td{background:var(--tint2)}
 .ri-in{height:32px}.ri-in.num{text-align:end}.ri-in.bad{border-color:var(--bad)!important;box-shadow:0 0 0 1px var(--bad)}.select.bad{border-color:var(--bad)!important;box-shadow:0 0 0 1px var(--bad)}
 .ri-x{width:32px;padding:0;justify-content:center}
+.ri-cb{position:relative;min-width:220px}.ri-sug{position:absolute;z-index:30;left:0;right:0;top:calc(100% + 4px);margin:0;padding:4px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:280px;overflow:auto}
+.ri-sug li{display:flex;gap:10px;align-items:center;min-height:32px;padding:5px 10px;border-radius:6px;cursor:pointer;font-weight:400;white-space:nowrap}.ri-sug li .mono{min-width:44px;color:var(--muted);font-size:12px}
+.ri-sug li:hover,.ri-sug li[aria-selected=true]{background:var(--hover)}.ri-sug li[aria-selected=true]{box-shadow:inset 0 0 0 2px var(--accent)}.ri-sug li.none{color:var(--muted);cursor:default;background:none;box-shadow:none}
 .ri-bt{display:grid;grid-template-columns:1fr 360px;gap:48px;margin-top:20px;align-items:start}
 .ri-tot{display:flex;flex-direction:column;gap:8px}.ri-tot>div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}.ri-tot>div.g{border-top:1px solid var(--ink);padding-top:10px;margin-top:2px;font-weight:700;font-size:16px;line-height:22px}
 .ri-words{margin-top:14px;padding:10px 14px;border-radius:6px;background:var(--sub);color:var(--muted2)}
@@ -728,9 +731,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <div><div class="k">Customer &amp; payment</div><div class="ri-kv"><sc-for list="{{rv.details}}" as="x" hint-placeholder-count="5"><span>{{x.k}}</span><span>{{x.v}}</span></sc-for></div></div>
               </div>
               <div class="ri-ship"><sc-for list="{{rv.ship}}" as="x" hint-placeholder-count="6"><div><div class="k">{{x.k}}</div><div class="v">{{x.v}}</div></div></sc-for></div>
-              <div style="overflow: auto"><table class="ri-tbl"><thead><tr><th>Charge head</th><th class="r">Quantity</th><th>UOM</th><th class="r">Unit Price</th><th>Currency</th><th class="r">Total excluding Tax</th><th class="r">Tax applicability</th><th class="r">Tax Amount</th><th class="r">Total Incl Tax</th><th aria-label="Row actions"></th></tr></thead>
+              <div><table class="ri-tbl"><thead><tr><th>Charge head</th><th class="r">Quantity</th><th>UOM</th><th class="r">Unit Price</th><th>Currency</th><th class="r">Total excluding Tax</th><th class="r">Tax applicability</th><th class="r">Tax Amount</th><th class="r">Total Incl Tax</th><th aria-label="Row actions"></th></tr></thead>
                 <tbody><sc-for list="{{rv.lines}}" as="l" hint-placeholder-count="3"><tr class="{{l.cls}}">
-                  <td class="w">{{l.name}}</td>
+                  <td class="w"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div class="ri-cb"><input class="input ri-in {{l.hErr}}" style="width: 100%" role="combobox" aria-autocomplete="list" aria-expanded="{{l.sugA}}" aria-controls="{{l.lid}}" aria-activedescendant="{{l.act}}" aria-label="Charge head" placeholder="Search charge head" autocomplete="off" value="{{l.q}}" onInput="{{l.onQ}}" onFocus="{{l.onFocus}}" onBlur="{{l.onBlur}}" onKeyDown="{{l.onKey}}">
+                    <sc-if value="{{l.sug}}" hint-placeholder-val="{{ false }}"><ul class="ri-sug" role="listbox" id="{{l.lid}}"><sc-for list="{{l.opts}}" as="o" hint-placeholder-count="4"><li role="option" id="{{o.id}}" aria-selected="{{o.on}}" onMouseDown="{{o.pick}}"><span class="mono">{{o.code}}</span>{{o.name}}</li></sc-for><sc-if value="{{l.none}}" hint-placeholder-val="{{ false }}"><li class="none" role="option" aria-disabled="true">No matching charge head</li></sc-if></ul></sc-if></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.name}}</sc-if></td>
                   <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><input class="input ri-in num {{l.qErr}}" style="width: 72px" value="{{l.qty}}" onInput="{{l.onQty}}" aria-label="Quantity" inputmode="decimal"></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.qty}}</sc-if></td>
                   <td><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div style="position: relative; width: 96px"><select class="select ri-in {{l.uErr}}" style="width: 100%" value="{{l.uom}}" onChange="{{l.onUom}}" aria-label="UOM"><option value="">Select</option><sc-for list="{{rv.uoms}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.uom}}</sc-if></td>
                   <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><input class="input ri-in num {{l.pErr}}" style="width: 104px" value="{{l.unit}}" onInput="{{l.onUnit}}" aria-label="Unit Price" inputmode="decimal"></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.unit}}</sc-if></td>
@@ -1019,7 +1023,7 @@ function ivReadyCalc(r) {
 // Ready to invoice edits: { cust, add: [{ qty, uom, unit, cur }], fixed }
 function ivStdTax(r) { const code = (IV_LOC[r.port] || IV_LOC.SGSIN)[4], m = String(code).match(/-(\d+(?:\.\d+)?)$/); return [code, m ? Number(m[1]) : 0]; }
 function ivMainTax(r) { const m = r.charges.find((c) => c[5] > 0); return m ? [m[4], m[5]] : ivStdTax(r); }
-function ivAddOk(a) { const q = parseFloat(a.qty), u = parseFloat(String(a.unit).replace(/,/g, '')); return q > 0 && !!a.uom && !!a.cur && String(a.unit).trim() !== '' && u >= 0; }
+function ivAddOk(a) { const q = parseFloat(a.qty), u = parseFloat(String(a.unit).replace(/,/g, '')); return !!a.code && q > 0 && !!a.uom && !!a.cur && String(a.unit).trim() !== '' && u >= 0; }
 function ivRdyErrs(r, ed) {
   ed = ed || {}; const out = []; let first = true;
   if (!ed.fixed) r.checks.forEach(([k, t], n) => {
@@ -1027,7 +1031,7 @@ function ivRdyErrs(r, ed) {
     if (n < 2 && ed.cust && ed.cust !== r.cust) return;
     out.push({ area: n < 2 ? 'Customer' : (n === 2 || n === 5 ? 'Charges' : 'Tax'), text: first && r.msg ? r.msg : t }); first = false;
   });
-  (ed.add || []).forEach((a, i) => { if (!ivAddOk(a)) out.push({ area: 'Charges', text: 'Added charge ' + (i + 1) + ': enter Quantity, UOM, Unit Price and Currency' }); });
+  (ed.add || []).forEach((a, i) => { if (!ivAddOk(a)) out.push({ area: 'Charges', text: 'Added charge ' + (i + 1) + ': enter Charge head, Quantity, UOM, Unit Price and Currency' }); });
   return out;
 }
 function ivRdyEff(r, ed) {
@@ -1036,7 +1040,7 @@ function ivRdyEff(r, ed) {
   if (ed.cust) o.cust = ed.cust;
   const st = ivStdTax(r);
   o.charges = r.charges.map((c) => (ed.fixed && c[4] === '—' ? [c[0], c[1], c[2], c[3], st[0], st[1]] : c))
-    .concat((ed.add || []).filter(ivAddOk).map((a) => ['MISC', parseFloat(a.qty), a.uom, parseFloat(String(a.unit).replace(/,/g, '')), mt[0], mt[1], a.cur]));
+    .concat((ed.add || []).filter(ivAddOk).map((a) => [a.code, parseFloat(a.qty), a.uom, parseFloat(String(a.unit).replace(/,/g, '')), mt[0], mt[1], a.cur]));
   if (!ivRdyErrs(r, Object.assign({}, ed, { add: [] })).length) { o.status = 'Ready'; o.msg = ''; o.checks = r.checks.map(() => ['ok', 'Available']); }
   return o;
 }
@@ -1273,10 +1277,25 @@ class GirsPage extends DCLogic {
       const addRows = ed.add.map((a, i) => {
         const ex = fx(a), tx = ex == null ? null : Math.round(ex * mt[1]) / 100, ok = ivAddOk(a);
         const upd = (p) => setEd({ add: ed.add.map((y, j) => (j === i ? Object.assign({}, y, p) : y)) });
-        const bad = (v) => (!ok && a.touched && !v ? 'bad' : '');
-        return { cls: 'add', edit: true, ro: false, name: IV_CHG.MISC, qty: a.qty, uom: a.uom, unit: a.unit, cur: a.cur,
-          qErr: bad(parseFloat(a.qty) > 0), uErr: bad(a.uom), pErr: bad(String(a.unit).trim() !== '' && parseFloat(String(a.unit).replace(/,/g, '')) >= 0), cErr: bad(a.cur),
-          onQty: (e) => upd({ qty: e.target.value, touched: true }), onUom: (e) => upd({ uom: e.target.value, touched: true }), onUnit: (e) => upd({ unit: e.target.value, touched: true }), onCur: (e) => upd({ cur: e.target.value, touched: true }),
+        const bad = (v, t) => (!ok && (a.t || {})[t] && !v ? 'bad' : '');
+        const sg = s.riSug && s.riSug.i === i ? s.riSug : null, qq = String(a.q || '').trim().toLowerCase();
+        const opts = !sg ? [] : Object.keys(IV_CHG).filter((k) => !qq || k.toLowerCase().includes(qq) || IV_CHG[k].toLowerCase().includes(qq)).slice(0, 8);
+        const pick = (k) => self.setState({ riSug: null, rvEd: Object.assign({}, ed, { add: ed.add.map((y, j) => (j === i ? Object.assign({}, y, { code: k, q: IV_CHG[k] }) : y)) }) });
+        const hi = sg ? Math.min(sg.hi, opts.length - 1) : -1;
+        return { cls: 'add', edit: true, ro: false, name: a.code ? IV_CHG[a.code] : '', q: a.q || '', lid: 'ri-sug-' + i, sug: !!sg, sugA: sg ? 'true' : 'false', none: !!sg && !opts.length,
+          act: hi >= 0 ? 'ri-o-' + i + '-' + hi : '', hErr: !ok && (a.t || {}).q && !a.code && !sg ? 'bad' : '',
+          opts: opts.map((k, n) => ({ id: 'ri-o-' + i + '-' + n, code: k, name: IV_CHG[k], on: n === hi ? 'true' : 'false', pick: (e) => { e.preventDefault(); pick(k); } })),
+          onQ: (e) => self.setState({ riSug: { i, hi: 0 }, rvEd: Object.assign({}, ed, { add: ed.add.map((y, j) => (j === i ? Object.assign({}, y, { q: e.target.value, code: IV_CHG[y.code] === e.target.value ? y.code : '', t: Object.assign({}, y.t, { q: 1 }) }) : y)) }) }),
+          onFocus: () => self.setState({ riSug: { i, hi: 0 } }),
+          onBlur: () => setTimeout(() => { if (self.state.riSug && self.state.riSug.i === i) self.setState({ riSug: null }); }, 120),
+          onKey: (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = opts.length || 1; self.setState({ riSug: { i, hi: sg ? (hi + (e.key === 'ArrowDown' ? 1 : n - 1)) % n : 0 } }); }
+            else if (e.key === 'Enter' && sg && opts[hi]) { e.preventDefault(); pick(opts[hi]); }
+            else if (e.key === 'Escape') self.setState({ riSug: null });
+          },
+          qty: a.qty, uom: a.uom, unit: a.unit, cur: a.cur,
+          qErr: bad(parseFloat(a.qty) > 0, 'qty'), uErr: bad(a.uom, 'uom'), pErr: bad(String(a.unit).trim() !== '' && parseFloat(String(a.unit).replace(/,/g, '')) >= 0, 'unit'), cErr: bad(a.cur, 'cur'),
+          onQty: (e) => upd({ qty: e.target.value, t: Object.assign({}, a.t, { qty: 1 }) }), onUom: (e) => upd({ uom: e.target.value, t: Object.assign({}, a.t, { uom: 1 }) }), onUnit: (e) => upd({ unit: e.target.value, t: Object.assign({}, a.t, { unit: 1 }) }), onCur: (e) => upd({ cur: e.target.value, t: Object.assign({}, a.t, { cur: 1 }) }),
           del: () => setEd({ add: ed.add.filter((y, j) => j !== i) }),
           ex: ex == null ? '—' : ivFmt(ex), taxApp: mt[0] === '—' ? '—' : mt[1] + '%', taxSt: '', tax: tx == null ? '—' : ivFmt(tx), inc: ex == null ? '—' : ivFmt(ex + tx) };
       });
@@ -1289,7 +1308,7 @@ class GirsPage extends DCLogic {
         uoms: ['CNTR', 'BL', 'Day', 'EA'], curs: c.cur === loc[2] ? [c.cur] : [c.cur, loc[2]],
         lines: c.lines.slice(0, nOrig).map((l) => ({ cls: '', edit: false, ro: true, name: l.name, qty: l.qty, uom: l.uom, unit: ivFmt(l.unit), cur: l.cur, ex: ivFmt(l.ex),
           taxApp: l.tax === '—' ? 'Not classified' : l.rate + '%', taxSt: l.tax === '—' ? 'color:var(--bad);font-weight:600' : '', tax: ivFmt(l.tx), inc: ivFmt(l.inc) })).concat(addRows),
-        addCharge: () => setEd({ add: ed.add.concat([{ qty: '', uom: '', unit: '', cur: c.cur }]) }),
+        addCharge: () => { self.setState({ riSug: { i: ed.add.length, hi: 0 }, rvEd: Object.assign({}, ed, { add: ed.add.concat([{ code: '', q: '', qty: '', uom: '', unit: '', cur: c.cur }]) }) }); setTimeout(() => { const l = document.querySelectorAll('.ri-tbl tr.add input[role=combobox]'); if (l.length) l[l.length - 1].focus(); }, 30); },
         totals: [['Total excluding Tax', ivFmt(c.ex) + ' ' + c.cur, ''], ['Tax Amount', ivFmt(c.tx) + ' ' + c.cur, ''], ['Invoice Total', ivFmt(c.inc) + ' ' + c.cur, 'g']].map(([k, v, cls]) => ({ k, v, cls })) };
       rvGenDis = errs.length > 0 || !s.decl;
       rvHint = errs.length ? 'Resolve the errors to enable Generate invoice' : (!s.decl ? 'Tick the declaration to generate' : '');
@@ -1514,7 +1533,7 @@ class GirsPage extends DCLogic {
       backToList: () => self.setState({ view: 'list', rv: null, decl: false, rvEd: null }),
       rvCancel: () => self.setState({ view: 'list', rv: null, decl: false, rvEd: null, __toast: 'Changes discarded' }),
       rvSave: () => cur && self.put((x) => { x.rdy = x.rdy || {}; const e = JSON.parse(JSON.stringify(ed)); delete e.id; x.rdy[cur.id] = e; }, { rvEd: null, __toast: 'Changes saved · ' + cur.bl }),
-      rvResolve: () => cur && self.setState({ rvEd: Object.assign({}, ed, { fixed: true, add: ed.add.map((a) => ivAddOk(a) ? a : { qty: parseFloat(a.qty) > 0 ? a.qty : '1', uom: a.uom || 'CNTR', unit: String(a.unit).trim() !== '' && parseFloat(a.unit) >= 0 ? a.unit : '0.00', cur: a.cur || 'USD' }) }), __toast: 'All errors resolved' }),
+      rvResolve: () => cur && self.setState({ rvEd: Object.assign({}, ed, { fixed: true, add: ed.add.map((a) => ivAddOk(a) ? a : { code: a.code || 'MISC', q: a.code ? a.q : IV_CHG.MISC, qty: parseFloat(a.qty) > 0 ? a.qty : '1', uom: a.uom || 'CNTR', unit: String(a.unit).trim() !== '' && parseFloat(a.unit) >= 0 ? a.unit : '0.00', cur: a.cur || 'USD' }) }), __toast: 'All errors resolved' }),
       rvMany: rvIds.length > 1, rvPos: (s.rv ? Math.min(s.rv.i, rvIds.length - 1) + 1 : 0) + ' of ' + rvIds.length, rvFirst: !s.rv || s.rv.i <= 0, rvLast: !s.rv || s.rv.i >= rvIds.length - 1,
       rvPrev: () => self.setState({ rv: Object.assign({}, s.rv, { i: s.rv.i - 1 }), decl: false }), rvNext: () => self.setState({ rv: Object.assign({}, s.rv, { i: s.rv.i + 1 }), decl: false }),
       steps, rv, decl: !!s.decl, toggleDecl: () => self.setState({ decl: !s.decl }), rvGenDis, rvHint,
