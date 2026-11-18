@@ -119,7 +119,7 @@
     };
     if (!q.trim()) {
       var rc = recent();
-      if (rc.length) { html += '<div class="gs-h">Recent</div>'; rc.forEach(function (r) { r.recent = true; html += row(r); }); }
+      if (rc.length) { html += '<div class="gs-h">Recent<button type="button" class="gs-clear" aria-label="Clear recent searches" title="Clear recent searches">Clear</button></div>'; rc.forEach(function (r) { r.recent = true; html += row(r); }); }
       html += '<div class="gs-tip">Search invoice no., B/L, booking, container, vessel/voyage, customer, charge code, port, tax code, currency or any screen.</div>';
     } else if (!IDX) {
       html += '<div class="gs-tip">Loading…</div>';
@@ -153,7 +153,7 @@
     if (!panel) {
       panel = document.createElement('div'); panel.id = 'gs-panel'; panel.setAttribute('role', 'listbox'); panel.setAttribute('aria-label', 'Search results');
       panel.addEventListener('mousedown', function (e) { e.preventDefault(); });
-      panel.addEventListener('click', function (e) { var a = e.target.closest('.gs-row'); if (!a) return; e.preventDefault(); go(items[+a.getAttribute('data-i')]); });
+      panel.addEventListener('click', function (e) { if (e.target.closest('.gs-clear')) { e.preventDefault(); try { localStorage.removeItem('girs.recent'); } catch (x) {} render(); return; } var a = e.target.closest('.gs-row'); if (!a) return; e.preventDefault(); go(items[+a.getAttribute('data-i')]); });
       panel.addEventListener('mousemove', function (e) { var a = e.target.closest('.gs-row'); if (a && +a.getAttribute('data-i') !== act) { act = +a.getAttribute('data-i'); highlight(); } });
       document.body.appendChild(panel);
     }
@@ -198,6 +198,7 @@
   css.textContent = [
     '.gs-panel{position:fixed;z-index:1000;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 40px rgba(22,26,33,.18);padding:6px;box-sizing:border-box;font:13px/18px "IBM Plex Sans",system-ui,sans-serif}',
     '.gs-panel[hidden]{display:none}',
+    '.gs-clear{all:unset;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--accent);padding:2px 6px;border-radius:4px}.gs-clear:hover{background:var(--hover);text-decoration:underline}.gs-clear:focus-visible{outline:2px solid var(--accent)}',
     '.gs-h{display:flex;justify-content:space-between;align-items:center;padding:10px 10px 4px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.gs-h span{font-weight:500;letter-spacing:0}',
     '.gs-row{display:flex;align-items:center;gap:10px;min-height:40px;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none;cursor:pointer}',
     '.gs-row[aria-selected=true]{background:var(--hover);box-shadow:inset 3px 0 0 var(--accent)}',
