@@ -1,0 +1,29 @@
+Documentation	单证费	Documentación	المستندات
+Billing party SG-# has no active billing-party record	收票方 SG-# 无有效收票方记录	La parte facturada SG-# no tiene un registro activo	الطرف المفوتر SG-# ليس له سجل نشط
+Charge THC-DST has no tax classification	费用 THC-DST 无税务分类	El cargo THC-DST no tiene clasificación fiscal	الرسم THC-DST بلا تصنيف ضريبي
+No tax code mapped for SEAL at SGSIN	SGSIN 的 SEAL 未映射税码	No hay código de impuesto para SEAL en SGSIN	لا يوجد رمز ضريبي لـ SEAL في SGSIN
+ROE USD/SGD # is more than # day old	USD/SGD 汇率 # 已超过 # 天	El tipo USD/SGD # tiene más de # día	سعر الصرف USD/SGD # أقدم من # يوم
+Not found in Customer Master	客户主数据中未找到	No encontrado en el maestro de clientes	غير موجود في بيانات العملاء الرئيسية
+Tax code missing	缺少税码	Falta el código de impuesto	الرمز الضريبي مفقود
+# charge requires confirmation	# 项费用需确认	# cargo requiere confirmación	# رسم يحتاج إلى تأكيد
+Rate dated # Nov #	汇率日期 # Nov #	Tipo con fecha # Nov #	سعر بتاريخ # Nov #
+Available	可用	Disponible	متاح
+Billing Party	收票方	Parte facturada	الطرف المفوتر
+Currency/ROE	币种/汇率	Moneda/tipo de cambio	العملة/سعر الصرف
+Tax Configuration	税务配置	Configuración fiscal	التهيئة الضريبية
+B/L Released	提单已放行	B/L liberado	تم الإفراج عن البوليصة
+Booking Created	订舱已创建	Reserva creada	تم إنشاء الحجز
+Container Returned	集装箱已归还	Contenedor devuelto	تمت إعادة الحاوية
+Additional Service Requested	已申请附加服务	Servicio adicional solicitado	تم طلب خدمة إضافية
+Credit Note Approved	贷项通知单已批准	Nota de crédito aprobada	تمت الموافقة على الإشعار الدائن
+Home furniture	家具	Muebles para el hogar	أثاث منزلي
+Polymer granules	聚合物颗粒	Gránulos de polímero	حبيبات بوليمر
+Agricultural produce	农产品	Productos agrícolas	منتجات زراعية
+Rice	大米	Arroz	أرز
+General cargo	普通货物	Carga general	بضائع عامة
+Day	天	Día	يوم
+Customer	客户	Cliente	العميل
+Charges	费用	Cargos	الرسوم
+Tax	税务	Impuesto	الضريبة
+Added charge #: enter Charge head, Quantity, UOM, Unit Price and Currency	新增费用 #：请填写费用项目、数量、单位、单价及币种	Cargo añadido #: indique concepto, cantidad, UdM, precio unitario y moneda	الرسم المضاف #: أدخل بند الرسم والكمية والوحدة وسعر الوحدة والعملة
+Total payable amount - USD	应付总额 - USD	Importe total a pagar - USD	إجمالي المبلغ المستحق - USD

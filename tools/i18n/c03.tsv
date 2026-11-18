@@ -1,0 +1,173 @@
+Attempts	尝试次数	Intentos	المحاولات
+Attracted by charge codes	适用的费用代码	Aplicado por códigos de cargo	تنطبق على رموز الرسوم
+Audience	受众	Destinatarios	الجمهور
+Audit	审计	Auditoría	التدقيق
+Audit trail extract	审计记录导出	Extracto del registro de auditoría	مستخرج سجل التدقيق
+Authorization matrix	授权矩阵	Matriz de autorización	مصفوفة التفويض
+Auto re-submit	自动重新提交	Reenvío automático	إعادة إرسال تلقائية
+Auto-invoiced	自动开票	Facturado automáticamente	مفوتر تلقائيًا
+Auto-matched	自动匹配	Conciliado automáticamente	مطابق تلقائيًا
+Auto-process at ≥ #% confidence	置信度 ≥ #% 时自动处理	Procesar automáticamente con confianza ≥ #%	معالجة تلقائية عند ثقة ≥ #%
+Auto-processed	已自动处理	Procesado automáticamente	تمت معالجته تلقائيًا
+Auto-processed · ≥ #%	已自动处理 · ≥ #%	Procesado automáticamente · ≥ #%	تمت معالجته تلقائيًا · ≥ #%
+Auto-write-off tolerance (USD)	自动核销容差（USD）	Tolerancia de cancelación automática (USD)	حد الشطب التلقائي (USD)
+Auto-write-off, unapplied cash staging and automated COREOR release to LMS	自动核销、未分配现金暂存及自动 COREOR 放行至 LMS	Cancelación automática, preparación de efectivo no aplicado y liberación COREOR automática a LMS	الشطب التلقائي وتجهيز النقد غير المخصص والإفراج التلقائي COREOR إلى LMS
+Awaiting clearance	等待清算	Pendiente de compensación	بانتظار التسوية
+B/L Type	提单类型	Tipo de B/L	نوع البوليصة
+B/L no.	提单号	N.º de B/L	رقم البوليصة
+B/L term (prepaid / collect)	提单条款（预付/到付）	Condición del B/L (prepagado / por cobrar)	شرط البوليصة (مدفوع مسبقًا / عند الاستلام)
+BDR schema validation	BDR 结构校验	Validación del esquema BDR	التحقق من مخطط BDR
+BDRs ingested today	今日接收 BDR	BDR recibidos hoy	BDR المستلمة اليوم
+Back	返回	Volver	رجوع
+Backdating not permitted	不允许倒签	No se permite retrofechar	لا يُسمح بالتأريخ بأثر رجعي
+Backend reconciliation of invoices and receipts across LMS, GIRS, GFS and third-party platforms · backfeed between GFS, GIRS and LMS	跨 LMS、GIRS、GFS 及第三方平台的发票与收据后台对账 · GFS、GIRS 与 LMS 之间的数据回传	Conciliación de facturas y recibos entre LMS, GIRS, GFS y plataformas de terceros · retroalimentación entre GFS, GIRS y LMS	تسوية خلفية للفواتير والإيصالات عبر LMS و GIRS و GFS والمنصات الخارجية · تغذية راجعة بين GFS و GIRS و LMS
+Balanced to the cent	精确平衡到分	Cuadrado al céntimo	متوازن حتى السنت
+Bank account details	银行账户信息	Datos de la cuenta bancaria	تفاصيل الحساب المصرفي
+Bank and third-party payments matched to invoices · cleared-funds recognition · reconciliation across GIRS, GFS, bank and customer platforms	银行及第三方付款与发票匹配 · 清算资金确认 · 跨 GIRS、GFS、银行及客户平台对账	Pagos bancarios y de terceros conciliados con facturas · reconocimiento de fondos compensados · conciliación entre GIRS, GFS, banco y plataformas de clientes	مطابقة المدفوعات المصرفية والخارجية مع الفواتير · الاعتراف بالأموال المسوّاة · التسوية عبر GIRS و GFS والبنك ومنصات العملاء
+Bank reversal	银行冲正	Reversión bancaria	عكس مصرفي
+Bank statement line	银行对账单行	Línea del extracto bancario	سطر كشف الحساب المصرفي
+Bank transaction	银行交易	Transacción bancaria	معاملة مصرفية
+Banks	银行	Bancos	البنوك
+Basis	基准	Base	الأساس
+Before start point	起算点之前	Antes del punto de inicio	قبل نقطة البداية
+Billed next period (USD)	下期开票（USD）	Facturado el próximo período (USD)	يُفوتر في الفترة التالية (USD)
+Billed to	收票方	Facturado a	مفوتر إلى
+Billed-To party determined	已确定收票方	Parte facturada determinada	تم تحديد الطرف المفوتر إليه
+Billed-to conflict	收票方冲突	Conflicto de facturar a	تعارض في الطرف المفوتر إليه
+Billed-to determination	收票方判定	Determinación de facturar a	تحديد الطرف المفوتر إليه
+Billing	开票	Facturación	الفوترة
+Billing & delivery	开票与交付	Facturación y entrega	الفوترة والتسليم
+Billing amount	开票金额	Importe facturado	مبلغ الفوترة
+Billing configuration	开票配置	Configuración de facturación	تهيئة الفوترة
+Billing cut-off for the period	本期开票截止	Corte de facturación del período	موعد إقفال الفوترة للفترة
+Billing parties	收票方	Partes facturadas	الأطراف المفوترة
+Billing party details	收票方详情	Detalles de la parte facturada	تفاصيل الطرف المفوتر
+Billing team leads	开票团队主管	Jefes de equipos de facturación	قادة فرق الفوترة
+Billing teams	开票团队	Equipos de facturación	فرق الفوترة
+Blocked B/Ls cannot be generated	受阻提单无法生成	Los B/L bloqueados no se pueden generar	لا يمكن إنشاء البوالص المحظورة
+Booking	订舱	Reserva	الحجز
+Booking / shipment	订舱/货运	Reserva / envío	الحجز / الشحنة
+Breached	已超时	Incumplido	تم تجاوزه
+Bucket	区间	Tramo	الفئة
+Bulk receipt upload	批量上传收据	Carga masiva de recibos	رفع الإيصالات دفعة واحدة
+Bulk upload	批量上传	Carga masiva	رفع جماعي
+By VVD, location and invoice type	按 VVD、地点及发票类型	Por VVD, ubicación y tipo de factura	حسب VVD والموقع ونوع الفاتورة
+By billing currency	按开票币种	Por moneda de facturación	حسب عملة الفوترة
+Calculated on the last day of the fiscal month	于会计月最后一天计算	Calculado el último día del mes fiscal	يُحسب في آخر يوم من الشهر المالي
+Calendar days	日历天	Días naturales	أيام تقويمية
+Cancelled booking with applicable charges	已取消订舱（含适用费用）	Reserva cancelada con cargos aplicables	حجز ملغى مع رسوم منطبقة
+Cards	卡片	Tarjetas	بطاقات
+Cargo gross weight	货物毛重	Peso bruto de la carga	الوزن الإجمالي للبضاعة
+Cargo volume (CBM)	货物体积 (CBM)	Volumen de carga (CBM)	حجم البضاعة (CBM)
+Carrier	承运人	Transportista	الناقل
+CashApp AI Allocation Workbench	CashApp AI 分配工作台	Banco de trabajo de asignación con IA CashApp	منصة تخصيص النقد بالذكاء الاصطناعي
+Catalogue	目录	Catálogo	الكتالوج
+Channel	渠道	Canal	القناة
+Charge holds	费用暂扣	Retenciones de cargos	تعليق الرسوم
+Charge sections	费用分区	Secciones de cargos	أقسام الرسوم
+Charge type	费用类型	Tipo de cargo	نوع الرسم
+Charges applicable at this port	本港适用费用	Cargos aplicables en este puerto	الرسوم المنطبقة في هذا الميناء
+Charges not invoiced after sailing	开船后未开票费用	Cargos no facturados tras la salida	رسوم لم تُفوتر بعد الإبحار
+Charges received from LMS	从 LMS 接收的费用	Cargos recibidos de LMS	الرسوم المستلمة من LMS
+Child invoice	子发票	Factura hija	فاتورة فرعية
+Chinese (Simplified)	中文（简体）	Chino (simplificado)	الصينية (المبسطة)
+Cities	城市	Ciudades	المدن
+Clear filters	清除筛选	Borrar filtros	مسح المرشحات
+Clear all	全部清除	Borrar todo	مسح الكل
+Cleared	已清算	Compensado	تمت التسوية
+Cleared funds	已清算资金	Fondos compensados	الأموال المسوّاة
+Clock	计时	Reloj	المؤقت
+Clock start	计时起点	Inicio del cómputo	بدء الاحتساب
+Close period	关闭期间	Cerrar período	إقفال الفترة
+Collect	到付	Por cobrar	عند الاستلام
+Collect · billed to consignee	到付 · 向收货人开票	Por cobrar · facturado al consignatario	عند الاستلام · يُفوتر إلى المرسل إليه
+Columns	列	Columnas	الأعمدة
+Combined DET + DEM	DET + DEM 合并	DET + DEM combinados	DET + DEM مجتمعة
+Commodity certification	货物品类认证	Certificación de mercancía	شهادة السلعة
+Compact	紧凑	Compacto	مضغوط
+Completed	已完成	Completado	مكتمل
+Compliance	合规	Cumplimiento	الامتثال
+Confidence threshold	置信度阈值	Umbral de confianza	حد الثقة
+Configurable per country	可按国家配置	Configurable por país	قابل للتهيئة لكل دولة
+Confirm extraction	确认提取	Confirmar extracción	تأكيد الاستخراج
+Confirmed by user	用户已确认	Confirmado por el usuario	تم التأكيد من المستخدم
+Connected	已连接	Conectado	متصل
+Contact & terms	联系人与条款	Contacto y condiciones	جهة الاتصال والشروط
+Container count	集装箱数量	Número de contenedores	عدد الحاويات
+Container milestone clashes	集装箱节点冲突	Conflictos de hitos de contenedores	تعارضات مراحل الحاويات
+Container no.	集装箱号	N.º de contenedor	رقم الحاوية
+Containers beyond free time without an invoice	超出免费期且未开票的集装箱	Contenedores fuera del tiempo libre sin factura	حاويات تجاوزت الفترة المجانية دون فاتورة
+Containers in D&D	滞期/滞箱中的集装箱	Contenedores en D&D	حاويات في D&D
+Continue	继续	Continuar	متابعة
+Contract override	合同覆盖	Excepción por contrato	تجاوز العقد
+Contract sections	合同分区	Secciones del contrato	أقسام العقد
+Contracts	合同	Contratos	العقود
+Contracts by customer	按客户的合同	Contratos por cliente	العقود حسب العميل
+Contracts using this charge	使用此费用的合同	Contratos que usan este cargo	العقود التي تستخدم هذا الرسم
+Correlation ID	关联 ID	ID de correlación	معرّف الارتباط
+Country / Tax / Currency	国家/税务/币种	País / Impuesto / Moneda	الدولة / الضريبة / العملة
+Country / Tax / Currency set-up	国家/税务/币种设置	Configuración de país / impuesto / moneda	إعداد الدولة / الضريبة / العملة
+Country and entity follow the selection in the top bar	国家和实体跟随顶部栏的选择	El país y la entidad siguen la selección de la barra superior	تتبع الدولة والكيان الاختيار في الشريط العلوي
+Country filter	国家筛选	Filtro de país	مرشح الدولة
+Cozy	宽松	Cómodo	مريح
+Create receipt	创建收据	Crear recibo	إنشاء إيصال
+Credit	贷记	Crédito	دائن
+Credit Amount	贷记金额	Importe del crédito	المبلغ الدائن
+Credit Management System	信用管理系统	Sistema de gestión de crédito	نظام إدارة الائتمان
+Credit Note No.	贷项通知单号	N.º de nota de crédito	رقم الإشعار الدائن
+Credit Type	贷记类型	Tipo de crédito	نوع الائتمان
+Credit control	信用控制	Control de crédito	مراقبة الائتمان
+Credit controller	信用管控员	Controlador de crédito	مراقب الائتمان
+Credit hold	信用冻结	Bloqueo de crédito	تعليق ائتماني
+Credit hold release	解除信用冻结	Liberación del bloqueo de crédito	رفع التعليق الائتماني
+Credit note and waiver register	贷项通知单及豁免登记	Registro de notas de crédito y exenciones	سجل الإشعارات الدائنة والإعفاءات
+Credit note date	贷项通知单日期	Fecha de la nota de crédito	تاريخ الإشعار الدائن
+Credit note issued	已开具贷项通知单	Nota de crédito emitida	تم إصدار إشعار دائن
+Credit note request	贷项通知单申请	Solicitud de nota de crédito	طلب إشعار دائن
+Credit note value	贷项通知单金额	Valor de la nota de crédito	قيمة الإشعار الدائن
+Credit type	贷记类型	Tipo de crédito	نوع الائتمان
+Cross-system reconciliation	跨系统对账	Conciliación entre sistemas	التسوية بين الأنظمة
+Currency revaluation	外币重估	Revaluación de divisas	إعادة تقييم العملات
+Current	当前	Actual	الحالي
+Customer (Billing Party)	客户（收票方）	Cliente (parte facturada)	العميل (الطرف المفوتر)
+Customer ageing (SOA)	客户账龄（对账单）	Antigüedad de clientes (estado de cuenta)	أعمار ديون العملاء (كشف الحساب)
+Customer codes	客户代码	Códigos de cliente	رموز العملاء
+Customer credit position	客户信用状况	Posición crediticia del cliente	المركز الائتماني للعميل
+Customer details valid	客户信息有效	Datos del cliente válidos	بيانات العميل صحيحة
+Customer distribution	客户分发	Distribución al cliente	التوزيع على العميل
+Customer groups	客户组	Grupos de clientes	مجموعات العملاء
+Customer portal	客户门户	Portal del cliente	بوابة العميل
+Customer reference no.	客户参考号	N.º de referencia del cliente	الرقم المرجعي للعميل
+Customer state code	客户州代码	Código de estado del cliente	رمز ولاية العميل
+Customers	客户	Clientes	العملاء
+Customise KPIs	自定义 KPI	Personalizar KPI	تخصيص مؤشرات الأداء
+Customs hold	海关扣留	Retención aduanera	حجز جمركي
+D&D invoices	滞期/滞箱发票	Facturas D&D	فواتير D&D
+Daily ROE feed unavailable	每日汇率数据不可用	Carga diaria de tipos de cambio no disponible	تغذية أسعار الصرف اليومية غير متاحة
+Damaged Cargo	货损	Carga dañada	بضاعة تالفة
+Date	日期	Fecha	التاريخ
+Date range — from	日期范围 — 起	Rango de fechas — desde	نطاق التاريخ — من
+Date range — to	日期范围 — 止	Rango de fechas — hasta	نطاق التاريخ — إلى
+Day count	天数	Número de días	عدد الأيام
+Days overdue	逾期天数	Días de atraso	أيام التأخير
+Days used	已用天数	Días utilizados	الأيام المستخدمة
+Debit Note	借项通知单	Nota de débito	إشعار مدين
+Decided	已决定	Decididas	تم البت
+Decimal precision	小数精度	Precisión decimal	الدقة العشرية
+Default	默认	Predeterminado	افتراضي
+Delayed	延迟	Retrasado	متأخر
+Delta	差值	Diferencia	الفرق
+Depot	堆场	Depósito	المستودع
+Description	描述	Descripción	الوصف
+Detention & Demurrage (D&D) Engine	滞箱及滞期 (D&D) 引擎	Motor de detención y demora (D&D)	محرك الاحتجاز والتأخير (D&D)
+Detention / Demurrage	滞箱/滞期	Detención / Demora	الاحتجاز / التأخير
+Determined	已确定	Determinado	محدد
+Discharge	卸货港	Descarga	التفريغ
+Dispute	争议	Disputa	النزاع
+Dispute & Approval Request (DAR) Console	争议与审批申请 (DAR) 控制台	Consola de disputas y solicitudes de aprobación (DAR)	وحدة النزاعات وطلبات الموافقة (DAR)
+Dispute reason code	争议原因代码	Código de motivo de disputa	رمز سبب النزاع
+Disputed — isolated	争议中 — 已隔离	En disputa — aislado	متنازع عليه — معزول
+Distribution	分发	Distribución	التوزيع
+Doc type	单据类型	Tipo de doc.	نوع المستند
+Document #	单据号	Documento #	المستند #
+Document kind	单据种类	Clase de documento	نوع المستند

@@ -1,0 +1,192 @@
+Done	完成	Listo	تم
+Downstream impact	下游影响	Impacto posterior	الأثر اللاحق
+Draft catalogue · to validate against PIL's report list	草稿目录 · 待对照 PIL 报表清单校验	Catálogo borrador · validar con la lista de informes de PIL	كتالوج مسودة · للتحقق مقابل قائمة تقارير PIL
+Due date	到期日	Fecha de vencimiento	تاريخ الاستحقاق
+Duplicate	重复	Duplicado	مكرر
+Duplicate notification	重复通知	Notificación duplicada	إشعار مكرر
+Dynamic Invoice Template Previewer	动态发票模板预览	Vista previa dinámica de plantillas de factura	معاينة قوالب الفواتير الديناميكية
+E-invoice mandatory	强制电子发票	Factura electrónica obligatoria	الفاتورة الإلكترونية إلزامية
+E-invoice status	电子发票状态	Estado de la factura electrónica	حالة الفاتورة الإلكترونية
+e-Invoice	电子发票	Factura electrónica	الفاتورة الإلكترونية
+Email delivery	邮件发送	Envío por correo	التسليم بالبريد الإلكتروني
+Equipment / D&D	设备/滞期滞箱	Equipos / D&D	المعدات / D&D
+Error	错误	Error	خطأ
+(Error)	（错误）	(Error)	(خطأ)
+Errors	错误	Errores	الأخطاء
+Errors today	今日错误	Errores de hoy	أخطاء اليوم
+Every invoice	每张发票	Cada factura	كل فاتورة
+Exact Amount	金额完全一致	Importe exacto	المبلغ المطابق
+Exceeds tolerance — manual review	超出容差 — 人工复核	Supera la tolerancia — revisión manual	يتجاوز التفاوت — مراجعة يدوية
+Exception	异常	Excepción	استثناء
+Exception ageing	异常账龄	Antigüedad de excepciones	أعمار الاستثناءات
+Exception reason	异常原因	Motivo de la excepción	سبب الاستثناء
+Exception staging	异常暂存	Preparación de excepciones	تجهيز الاستثناءات
+Exception triage queue	异常分拣队列	Cola de clasificación de excepciones	قائمة فرز الاستثناءات
+Exceptions	异常	Excepciones	الاستثناءات
+Exchange rate available	汇率可用	Tipo de cambio disponible	سعر الصرف متاح
+Export results	导出结果	Exportar resultados	تصدير النتائج
+Exposure	风险敞口	Exposición	التعرض
+Exposure (USD)	风险敞口（USD）	Exposición (USD)	التعرض (USD)
+Exposure exceeds approved credit limit	风险敞口超出批准信用额度	La exposición supera el límite de crédito aprobado	التعرض يتجاوز الحد الائتماني المعتمد
+Extracted fields	提取字段	Campos extraídos	الحقول المستخرجة
+Failed transactions	失败交易	Transacciones fallidas	المعاملات الفاشلة
+Field to correct	待更正字段	Campo a corregir	الحقل المطلوب تصحيحه
+Filter bar	筛选栏	Barra de filtros	شريط المرشحات
+Filter reports	筛选报表	Filtrar informes	تصفية التقارير
+Finance	财务	Finanzas	المالية
+Financial	财务	Financiero	مالي
+Flag dispute	标记争议	Marcar disputa	الإبلاغ عن نزاع
+Flagged for dispute	已标记争议	Marcado en disputa	تم الإبلاغ عن نزاع
+Formats	格式	Formatos	التنسيقات
+Free days	免费天数	Días libres	الأيام المجانية
+Freight (F)	运费 (F)	Flete (F)	الشحن (F)
+Frequency	频率	Frecuencia	التكرار
+Full	完整	Completo	كامل
+Full credit	全额贷记	Crédito total	ائتمان كامل
+Funds	资金	Fondos	الأموال
+Funds not yet cleared	资金尚未清算	Fondos aún no compensados	الأموال لم تُسوَّ بعد
+GFS Status	GFS 状态	Estado GFS	حالة GFS
+GFS Status filter	GFS 状态筛选	Filtro de estado GFS	مرشح حالة GFS
+Generate	生成	Generar	إنشاء
+Generate Invoices	生成发票	Generar facturas	إنشاء الفواتير
+Generate dunning letter	生成催款函	Generar carta de cobro	إنشاء خطاب مطالبة
+Generate invoice	生成发票	Generar factura	إنشاء الفاتورة
+Generate invoices	生成发票	Generar facturas	إنشاء الفواتير
+Generate replacement invoice after approval	审批后生成替换发票	Generar factura de reemplazo tras la aprobación	إنشاء فاتورة بديلة بعد الموافقة
+Government portal validation failed	政府门户校验失败	Falló la validación del portal gubernamental	فشل التحقق في البوابة الحكومية
+Government tax portal	政府税务门户	Portal fiscal gubernamental	البوابة الضريبية الحكومية
+Government tax portals	政府税务门户	Portales fiscales gubernamentales	البوابات الضريبية الحكومية
+Gross weight (kg)	毛重（千克）	Peso bruto (kg)	الوزن الإجمالي (كغ)
+Hazardous cert.	危险品认证	Cert. de mercancía peligrosa	شهادة المواد الخطرة
+Held	暂扣	Retenido	معلّق
+Hide filter bar	隐藏筛选栏	Ocultar barra de filtros	إخفاء شريط المرشحات
+Hold reason	暂扣原因	Motivo de retención	سبب التعليق
+Human review	人工复核	Revisión humana	مراجعة بشرية
+Human review required	需人工复核	Se requiere revisión humana	تتطلب مراجعة بشرية
+In exception staging	异常暂存中	En preparación de excepciones	في تجهيز الاستثناءات
+In free time	免费期内	En tiempo libre	ضمن الفترة المجانية
+Inbound	进口	Entrada	وارد
+Incoming payments	收到的付款	Pagos entrantes	المدفوعات الواردة
+Ingested	已接收	Recibido	مستلم
+Integration views	集成视图	Vistas de integración	عروض التكامل
+Investigate	调查	Investigar	تحقيق
+Invoice Amount	发票金额	Importe de la factura	مبلغ الفاتورة
+Invoice currency	发票币种	Moneda de la factura	عملة الفاتورة
+Invoice not yet generated	发票尚未生成	Factura aún no generada	لم يتم إنشاء الفاتورة بعد
+Invoice number	发票号	Número de factura	رقم الفاتورة
+Invoice preview	发票预览	Vista previa de la factura	معاينة الفاتورة
+Invoice register	发票登记簿	Registro de facturas	سجل الفواتير
+Invoice status	发票状态	Estado de la factura	حالة الفاتورة
+Invoices & credit notes	发票及贷项通知单	Facturas y notas de crédito	الفواتير والإشعارات الدائنة
+Invoices settled	已结清发票	Facturas liquidadas	الفواتير المسددة
+Invoicing mode	开票模式	Modo de facturación	وضع الفوترة
+Invoicing stopped	已停止开票	Facturación detenida	توقفت الفوترة
+Isolate	隔离	Aislar	عزل
+Issue	问题	Incidencia	المشكلة
+Issued	已开具	Emitido	صادر
+Issued by	开具人	Emitido por	صادر عن
+Items	项目	Elementos	العناصر
+Journal	日记账	Asiento	القيد
+Journal balance	日记账余额	Saldo del asiento	رصيد القيد
+Last message	最近消息	Último mensaje	آخر رسالة
+Late payment notification	逾期付款通知	Notificación de pago atrasado	إشعار تأخر الدفع
+Lifecycle	生命周期	Ciclo de vida	دورة الحياة
+Linked	已关联	Vinculado	مرتبط
+Live from LMS	实时来自 LMS	En vivo desde LMS	مباشر من LMS
+Load plan	配载计划	Plan de carga	خطة التحميل
+Load plans and remittances awaiting human review	待人工复核的配载计划和汇款单	Planes de carga y remesas pendientes de revisión humana	خطط التحميل والحوالات بانتظار المراجعة البشرية
+Local	本地	Local	محلي
+Local delegation limit	本地授权额度	Límite de delegación local	حد التفويض المحلي
+Locked — disputed	已锁定 — 争议中	Bloqueado — en disputa	مقفل — متنازع عليه
+Long-dwell containers not invoiced	长期滞留未开票集装箱	Contenedores de larga permanencia sin facturar	حاويات طويلة البقاء لم تُفوتر
+Management	管理层	Dirección	الإدارة
+Mandatory legal fields	法定必填字段	Campos legales obligatorios	الحقول القانونية الإلزامية
+Mapping	映射	Mapeo	الربط
+Mark corrected & re-submit	标记已更正并重新提交	Marcar como corregido y reenviar	وضع علامة "مصحح" وإعادة الإرسال
+Match	匹配	Coincidencia	مطابقة
+Match factors	匹配因素	Factores de coincidencia	عوامل المطابقة
+Matched by invoice reference with cleared funds.	已按发票参考号与清算资金匹配。	Conciliado por referencia de factura con fondos compensados.	تمت المطابقة بمرجع الفاتورة مع أموال مسوّاة.
+Back to Ready to invoice	返回待开票	Volver a Listo para facturar	العودة إلى جاهز للفوترة
+Final validation and preview before invoice creation	开票前的最终校验与预览	Validación final y vista previa antes de crear la factura	التحقق النهائي والمعاينة قبل إنشاء الفاتورة
+View ROE	查看汇率	Ver tipo de cambio	عرض سعر الصرف
+View source charges	查看源费用	Ver cargos de origen	عرض الرسوم المصدرية
+View audit context	查看审计上下文	Ver contexto de auditoría	عرض سياق التدقيق
+Transaction Name:	交易名称：	Nombre de la transacción:	اسم المعاملة:
+Invoice Date	发票日期	Fecha de factura	تاريخ الفاتورة
+Invoice Due Date	发票到期日	Vencimiento de la factura	تاريخ استحقاق الفاتورة
+From	开票方	De	من
+To	收票方	Para	إلى
+Customer & payment	客户与付款	Cliente y pago	العميل والدفع
+Customer Ref	客户参考号	Ref. del cliente	مرجع العميل
+Document Type	单据类型	Tipo de documento	نوع المستند
+Nature of goods	货物性质	Naturaleza de la mercancía	طبيعة البضاعة
+Mode of Payment	付款方式	Forma de pago	طريقة الدفع
+Credit / Cash / Bank Transfer	信用/现金/银行转账	Crédito / Efectivo / Transferencia bancaria	ائتمان / نقدًا / تحويل مصرفي
+Voyage	航次	Viaje	الرحلة
+BL Id/Number	提单 ID/编号	ID/Número de B/L	معرّف/رقم البوليصة
+Loaded	装货港	Cargado	التحميل
+External BL No	外部提单号	N.º de B/L externo	رقم البوليصة الخارجي
+Container Nos.	集装箱号	N.º de contenedores	أرقام الحاويات
+Charge head	费用项目	Concepto	بند الرسم
+Quantity	数量	Cantidad	الكمية
+UOM	单位	UdM	الوحدة
+Unit Price	单价	Precio unitario	سعر الوحدة
+Total excluding Tax	不含税合计	Total sin impuestos	الإجمالي بدون ضريبة
+Tax Amount	税额	Importe del impuesto	مبلغ الضريبة
+Total Incl Tax	含税合计	Total con impuestos	الإجمالي شامل الضريبة
+Invoice Total	发票总额	Total de la factura	إجمالي الفاتورة
+Add charges	添加费用	Añadir cargos	إضافة رسوم
+Bank Details	银行信息	Datos bancarios	التفاصيل المصرفية
+Bank details	银行信息	Datos bancarios	التفاصيل المصرفية
+Bank Name	银行名称	Nombre del banco	اسم البنك
+Virtual Account Number	虚拟账号	Número de cuenta virtual	رقم الحساب الافتراضي
+SWIFT Code	SWIFT 代码	Código SWIFT	رمز SWIFT
+Declaration:	声明：	Declaración:	إقرار:
+I confirm the customer, charges, currency and tax details.	我确认客户、费用、币种及税务信息无误。	Confirmo los datos del cliente, cargos, moneda e impuestos.	أؤكد صحة بيانات العميل والرسوم والعملة والضريبة.
+Cancel	取消	Cancelar	إلغاء
+Save	保存	Guardar	حفظ
+Resolve errors	解决错误	Resolver errores	حل الأخطاء
+Resolve the errors to enable Generate invoice	解决错误后即可生成发票	Resuelva los errores para habilitar Generar factura	عالج الأخطاء لتفعيل إنشاء الفاتورة
+Tick the declaration to generate	勾选声明后即可生成	Marque la declaración para generar	ضع علامة على الإقرار للإنشاء
+Search charge head	搜索费用项目	Buscar concepto	ابحث عن بند الرسم
+Search customer	搜索客户	Buscar cliente	ابحث عن عميل
+Select	请选择	Seleccionar	اختر
+Review selected	复核所选	Revisar selección	مراجعة المحدد
+Select Ready B/Ls to generate, or open one to review	选择就绪提单以生成，或打开一个进行复核	Seleccione B/L listos para generar o abra uno para revisar	اختر البوالص الجاهزة لإنشائها أو افتح واحدة لمراجعتها
+Search any value in the table	搜索表格中的任意值	Buscar cualquier valor de la tabla	ابحث عن أي قيمة في الجدول
+Period	期间	Período	الفترة
+Process	流程	Proceso	العملية
+Reset filters	重置筛选	Restablecer filtros	إعادة تعيين المرشحات
+Ready	就绪	Listo	جاهز
+Showing #–# of #	显示第 #–# 条，共 # 条	Mostrando #–# de #	عرض #–# من #
+selected	已选	seleccionado(s)	محدد
+# selected	已选 # 项	# seleccionados	تم تحديد #
+Clear selection	清除选择	Borrar selección	مسح التحديد
+e-Mail / Post	邮件/邮寄	Correo / Correo postal	البريد الإلكتروني / البريد
+Portrait	纵向	Vertical	عمودي
+Landscape	横向	Horizontal	أفقي
+Download JSON	下载 JSON	Descargar JSON	تنزيل JSON
+Download PDF	下载 PDF	Descargar PDF	تنزيل PDF
+Print	打印	Imprimir	طباعة
+Switch login	切换登录	Cambiar de acceso	تبديل تسجيل الدخول
+Sign out	退出登录	Cerrar sesión	تسجيل الخروج
+Request temporary elevated access	申请临时提升权限	Solicitar acceso elevado temporal	طلب صلاحيات مرتفعة مؤقتة
+Time-bound · manager approval	限时 · 需经理批准	Por tiempo limitado · aprobación del responsable	محدد زمنيًا · بموافقة المدير
+Single sign-on · MFA for financial approvals	单点登录 · 财务审批需 MFA	Inicio de sesión único · MFA para aprobaciones financieras	تسجيل دخول موحد · MFA للموافقات المالية
+Idle timeout # min, then automatic logout	闲置 # 分钟后自动退出	Tiempo de inactividad # min, luego cierre de sesión automático	مهلة خمول # دقيقة ثم تسجيل خروج تلقائي
+# logins · roles from LMS IAM	# 个登录 · 角色来自 LMS IAM	# accesos · roles de LMS IAM	# عمليات دخول · أدوار من LMS IAM
+Search language	搜索语言	Buscar idioma	ابحث عن لغة
+Back to profile menu	返回个人菜单	Volver al menú de perfil	العودة إلى قائمة الملف الشخصي
+Notifications	通知	Notificaciones	الإشعارات
+Malaysia · PKG	马来西亚 · PKG	Malasia · PKG	ماليزيا · PKG
+Recent	最近	Recientes	الأخيرة
+Screens	页面	Pantallas	الشاشات
+Customers	客户	Clientes	العملاء
+Bookings	订舱	Reservas	الحجوزات
+Vessel / Voyage	船名/航次	Buque / Viaje	السفينة / الرحلة
+Charge codes	费用代码	Códigos de cargo	رموز الرسوم
+Master data	主数据	Datos maestros	البيانات الرئيسية
+move	移动	mover	تنقل
+open	打开	abrir	فتح
+close	关闭	cerrar	إغلاق
+search from anywhere	随处搜索	buscar desde cualquier lugar	البحث من أي مكان

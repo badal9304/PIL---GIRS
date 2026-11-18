@@ -1,0 +1,127 @@
+SLA # h · oldest # h	SLA # 小时 · 最久 # 小时	SLA # h · más antiguo # h	SLA # ساعة · الأقدم # ساعة
+SLA breaches this week	本周 SLA 超时	Incumplimientos de SLA esta semana	تجاوزات SLA هذا الأسبوع
+SLA monitoring	SLA 监控	Monitoreo de SLA	مراقبة SLA
+STP auto-invoiced / released	STP 自动开票/已放行	STP facturado automáticamente / liberado	STP مفوتر تلقائيًا / مفرج عنه
+STP auto-invoicing rate	STP 自动开票率	Tasa de facturación automática STP	معدل الفوترة التلقائية STP
+STP status	STP 状态	Estado STP	حالة STP
+STP validation gates	STP 校验关卡	Controles de validación STP	بوابات التحقق STP
+Sailed, not yet invoiced	已开船，尚未开票	Zarpado, aún sin facturar	أبحرت ولم تُفوتر بعد
+Sample	示例	Ejemplo	نموذج
+Sample · all queues	示例 · 所有队列	Ejemplo · todas las colas	نموذج · جميع القوائم
+Sample · this week	示例 · 本周	Ejemplo · esta semana	نموذج · هذا الأسبوع
+Sanction / Blacklist	制裁/黑名单	Sanción / lista negra	العقوبات / القائمة السوداء
+Saudi Arabia	沙特阿拉伯	Arabia Saudita	المملكة العربية السعودية
+Save draft	保存草稿	Guardar borrador	حفظ المسودة
+Saved view	已保存视图	Vista guardada	العرض المحفوظ
+Schedule report	计划报表	Programar informe	جدولة التقرير
+Seal numbers	封条号	Números de precinto	أرقام الأختام
+Search any value in the table: invoice no., status, e-Invoice, GFS status, customer, invoice type, B/L, vessel/voyage, amount, currency, due date	搜索表格中的任意值：发票号、状态、电子发票、GFS 状态、客户、发票类型、提单、船名/航次、金额、币种、到期日	Buscar cualquier valor de la tabla: n.º de factura, estado, factura electrónica, estado GFS, cliente, tipo de factura, B/L, buque/viaje, importe, moneda, vencimiento	ابحث عن أي قيمة في الجدول: رقم الفاتورة، الحالة، الفاتورة الإلكترونية، حالة GFS، العميل، نوع الفاتورة، البوليصة، السفينة/الرحلة، المبلغ، العملة، تاريخ الاستحقاق
+Search code or name	搜索代码或名称	Buscar código o nombre	ابحث بالرمز أو الاسم
+Search code, name or LMS code	搜索代码、名称或 LMS 代码	Buscar código, nombre o código LMS	ابحث بالرمز أو الاسم أو رمز LMS
+Search code, name or legal entity	搜索代码、名称或法人实体	Buscar código, nombre o entidad legal	ابحث بالرمز أو الاسم أو الكيان القانوني
+Search credit note, invoice, FCA / DAR reference	搜索贷项通知单、发票、FCA/DAR 参考号	Buscar nota de crédito, factura, referencia FCA / DAR	ابحث بالإشعار الدائن أو الفاتورة أو مرجع FCA / DAR
+Search customer code, name or tax ID	搜索客户代码、名称或税号	Buscar código, nombre o NIF del cliente	ابحث برمز العميل أو اسمه أو رقمه الضريبي
+Search group, code or name	搜索组、代码或名称	Buscar grupo, código o nombre	ابحث بالمجموعة أو الرمز أو الاسم
+Select all	全选	Seleccionar todo	تحديد الكل
+Select all selectable B/Ls	全选可选提单	Seleccionar todos los B/L seleccionables	تحديد كل البوالص القابلة للتحديد
+Select reason code	选择原因代码	Seleccionar código de motivo	اختر رمز السبب
+Select the disputed charge	选择争议费用	Seleccionar el cargo en disputa	اختر الرسم المتنازع عليه
+Separate DET and DEM	DET 与 DEM 分开	DET y DEM por separado	DET و DEM منفصلان
+Settled	已结清	Liquidado	مسدد
+Shipment no.	货运号	N.º de envío	رقم الشحنة
+Shipper	发货人	Embarcador	الشاحن
+Short payment	少付	Pago insuficiente	دفعة ناقصة
+Show	显示	Mostrar	عرض
+Show all checks	显示所有检查	Mostrar todas las comprobaciones	عرض كل الفحوصات
+Skipped	已跳过	Omitido	تم التخطي
+Sold	已出售	Vendido	مباع
+Source rule	来源规则	Regla de origen	قاعدة المصدر
+Split invoicing	拆分开票	Facturación dividida	الفوترة المقسمة
+Split-payer	拆分付款方	Pagador dividido	الدافع المقسم
+Split-payer confirmed	拆分付款方已确认	Pagador dividido confirmado	تم تأكيد الدافع المقسم
+Split-payer unconfirmed at vessel departure	开船时拆分付款方未确认	Pagador dividido sin confirmar a la salida del buque	الدافع المقسم غير مؤكد عند مغادرة السفينة
+Staged since	暂存起始	En preparación desde	في التجهيز منذ
+Standard tax invoice	标准税务发票	Factura fiscal estándar	فاتورة ضريبية قياسية
+Statement intake	对账单接收	Recepción de extractos	استلام الكشوف
+Statement of Account & Aging	对账单及账龄	Estado de cuenta y antigüedad	كشف الحساب والأعمار
+Statement total	对账单合计	Total del extracto	إجمالي الكشف
+Straight-Through Processing (STP) auto-invoicing from confirmed BDRs	基于已确认 BDR 的直通式处理 (STP) 自动开票	Facturación automática de procesamiento directo (STP) a partir de BDR confirmados	الفوترة التلقائية بالمعالجة المباشرة (STP) من BDR المؤكدة
+Sub-status	子状态	Subestado	الحالة الفرعية
+Submit for approval	提交审批	Enviar para aprobación	إرسال للموافقة
+Subtotal SGD	小计 SGD	Subtotal SGD	المجموع الفرعي SGD
+Subtotal USD	小计 USD	Subtotal USD	المجموع الفرعي USD
+Surcharges	附加费	Recargos	الرسوم الإضافية
+System	系统	Sistema	النظام
+Tax & currency	税务与币种	Impuestos y moneda	الضريبة والعملة
+Tax breakdown & totals	税额明细及合计	Desglose de impuestos y totales	تفصيل الضريبة والإجماليات
+Tax codes	税码	Códigos de impuesto	الرموز الضريبية
+Tax validation	税务校验	Validación fiscal	التحقق الضريبي
+Taxable	应税	Gravable	خاضع للضريبة
+Template	模板	Plantilla	القالب
+Terminal	码头	Terminal	المحطة
+Terminal / Depot	码头/堆场	Terminal / Depósito	المحطة / المستودع
+Terms & conditions	条款与条件	Términos y condiciones	الشروط والأحكام
+Third-party	第三方	Terceros	طرف ثالث
+Total SGD	合计 SGD	Total SGD	الإجمالي SGD
+Total USD	合计 USD	Total USD	الإجمالي USD
+Transaction trace	交易追踪	Traza de la transacción	تتبع المعاملة
+Unapplied cash	未分配现金	Efectivo no aplicado	النقد غير المخصص
+Unbilled D&D (USD)	未开票滞期/滞箱费（USD）	D&D sin facturar (USD)	D&D غير المفوترة (USD)
+Unbilled days	未开票天数	Días sin facturar	الأيام غير المفوترة
+Unbilled revenue accrual	未开票收入预提	Devengo de ingresos no facturados	استحقاق الإيرادات غير المفوترة
+Upload document	上传单据	Subir documento	رفع مستند
+Uploaded	已上传	Subido	تم الرفع
+Utilisation	使用率	Utilización	الاستخدام
+Variance	差异	Variación	الفرق
+Vessel	船名	Buque	السفينة
+Vessel/Voyage	船名/航次	Buque/Viaje	السفينة/الرحلة
+View	查看	Ver	عرض
+View Credit Note	查看贷项通知单	Ver nota de crédito	عرض الإشعار الدائن
+View Invoice	查看发票	Ver factura	عرض الفاتورة
+View Receipt	查看收据	Ver recibo	عرض الإيصال
+View audit trail	查看审计记录	Ver registro de auditoría	عرض سجل التدقيق
+View credit note	查看贷项通知单	Ver nota de crédito	عرض الإشعار الدائن
+View invoice	查看发票	Ver factura	عرض الفاتورة
+View invoice details	查看发票详情	Ver detalles de la factura	عرض تفاصيل الفاتورة
+View receipt	查看收据	Ver recibo	عرض الإيصال
+View distribution	查看分发	Ver distribución	عرض التوزيع
+Virtual Account	虚拟账户	Cuenta virtual	الحساب الافتراضي
+Virtual account	虚拟账户	Cuenta virtual	الحساب الافتراضي
+Voyage (VVD)	航次 (VVD)	Viaje (VVD)	الرحلة (VVD)
+Waiver	豁免	Exención	إعفاء
+Weekly	每周	Semanal	أسبوعي
+Weight (kg)	重量（千克）	Peso (kg)	الوزن (كغ)
+Withholding tax	预提税	Retención fiscal	ضريبة الاستقطاع
+Within SLA	SLA 内	Dentro del SLA	ضمن SLA
+Within limit	额度内	Dentro del límite	ضمن الحد
+Within tolerance	容差内	Dentro de la tolerancia	ضمن التفاوت
+Workflow	工作流	Flujo de trabajo	سير العمل
+Year	年份	Año	السنة
+Yet to be invoiced	待开票	Pendiente de facturar	لم تُفوتر بعد
+days	天	días	أيام
+e-Invoice filter	电子发票筛选	Filtro de factura electrónica	مرشح الفاتورة الإلكترونية
+queues	个队列	colas	قوائم
+required to reject	拒绝时必填	obligatorio para rechazar	مطلوب للرفض
+— at the scheduled midnight auto-invoicing batch run. Affected BDRs are held in exception staging.	— 发生于午夜定时自动开票批处理。受影响的 BDR 已暂存于异常队列。	— en el lote de facturación automática programado a medianoche. Los BDR afectados quedan en preparación de excepciones.	— أثناء دفعة الفوترة التلقائية المجدولة عند منتصف الليل. تم تعليق BDR المتأثرة في تجهيز الاستثناءات.
+Origin THC	起运港码头操作费	THC de origen	THC المنشأ
+Destination THC	目的港码头操作费	THC de destino	THC الوجهة
+Origin local charges	起运港本地费用	Cargos locales en origen	الرسوم المحلية في المنشأ
+Load plan	配载计划	Plan de carga	خطة التحميل
+split total USD	拆分合计 USD	total dividido USD	إجمالي التقسيم USD
+Miscellaneous Charge	杂项费用	Cargo misceláneo	رسوم متنوعة
+No matching charge head	无匹配的费用项目	Ningún concepto coincide	لا يوجد بند رسم مطابق
+No matching customer	无匹配客户	Ningún cliente coincide	لا يوجد عميل مطابق
+Remove added charge	移除已添加费用	Quitar cargo añadido	إزالة الرسم المضاف
+Remove	移除	Quitar	إزالة
+Customer name	客户名称	Nombre del cliente	اسم العميل
+Charges · Charge THC-DST has no tax classification	费用 · 费用 THC-DST 无税务分类	Cargos · El cargo THC-DST no tiene clasificación fiscal	الرسوم · الرسم THC-DST بلا تصنيف ضريبي
+Not classified	未分类	Sin clasificar	غير مصنف
+# error to resolve before generating the invoice	生成发票前需解决 # 个错误	# error por resolver antes de generar la factura	# خطأ يجب حله قبل إنشاء الفاتورة
+# errors to resolve before generating the invoice	生成发票前需解决 # 个错误	# errores por resolver antes de generar la factura	# أخطاء يجب حلها قبل إنشاء الفاتورة
+Total payable amount	应付总额	Importe total a pagar	إجمالي المبلغ المستحق
+Changes saved	更改已保存	Cambios guardados	تم حفظ التغييرات
+Changes discarded	更改已放弃	Cambios descartados	تم تجاهل التغييرات
+All errors resolved	所有错误已解决	Todos los errores resueltos	تم حل جميع الأخطاء
+Export to Excel	导出为 Excel	Exportar a Excel	تصدير إلى Excel
+Dark mode	深色模式	Modo oscuro	الوضع الداكن
+Light mode	浅色模式	Modo claro	الوضع الفاتح

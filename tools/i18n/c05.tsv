@@ -1,0 +1,151 @@
+Matched invoice	匹配的发票	Factura conciliada	الفاتورة المطابقة
+Message log	消息日志	Registro de mensajes	سجل الرسائل
+Mexico	墨西哥	México	المكسيك
+Milestone clash	节点冲突	Conflicto de hitos	تعارض المراحل
+Milestone clashes	节点冲突	Conflictos de hitos	تعارضات المراحل
+Mismatch	不一致	Discrepancia	عدم تطابق
+Mismatches	不一致项	Discrepancias	حالات عدم التطابق
+Missing	缺失	Faltante	مفقود
+Missing in GFS	GFS 中缺失	Falta en GFS	مفقود في GFS
+Month-end accrual, reversal and delta	月末预提、冲回及差额	Devengo, reversión y diferencia de fin de mes	استحقاق نهاية الشهر والعكس والفرق
+Month-end rate	月末汇率	Tipo de fin de mes	سعر نهاية الشهر
+Monthly	每月	Mensual	شهري
+More filters (#)	更多筛选（#）	Más filtros (#)	مرشحات إضافية (#)
+Multi-factor authentication is required to approve financial actions. The requester is notified by email of the decision.	批准财务操作需要多因素认证，申请人将通过邮件收到审批结果。	Se requiere autenticación multifactor para aprobar acciones financieras. El solicitante recibe la decisión por correo.	تتطلب الموافقة على الإجراءات المالية مصادقة متعددة العوامل. يُخطر مقدم الطلب بالقرار عبر البريد الإلكتروني.
+Multi-party B/Ls	多方提单	B/L con varias partes	بوالص متعددة الأطراف
+Multiple invoices	多张发票	Varias facturas	فواتير متعددة
+Needs another approver	需另一位审批人	Requiere otro aprobador	يحتاج إلى معتمِد آخر
+New invoice issuance	新开发票	Emisión de nueva factura	إصدار فاتورة جديدة
+Next action	下一步操作	Siguiente acción	الإجراء التالي
+Next charge	下一项费用	Cargo siguiente	الرسم التالي
+Next contract	下一份合同	Contrato siguiente	العقد التالي
+No credit account	无信用账户	Sin cuenta de crédito	لا يوجد حساب ائتماني
+No reference	无参考号	Sin referencia	بدون مرجع
+Not invoiced	未开票	No facturado	غير مفوتر
+Not issued	未开具	No emitido	غير صادر
+Not posted	未过账	No contabilizado	غير مرحّل
+Not ready	未就绪	No listo	غير جاهز
+Not required	无需	No requerido	غير مطلوب
+Not set	未设置	Sin definir	غير محدد
+Not started	未开始	No iniciado	لم يبدأ
+Not uploaded	未上传	No subido	لم يُرفع
+Notification pending	通知待发送	Notificación pendiente	الإشعار معلق
+Notify customer	通知客户	Notificar al cliente	إخطار العميل
+Notify responsible team	通知负责团队	Notificar al equipo responsable	إخطار الفريق المسؤول
+On hold · Billing party customer code missing	暂扣 · 缺少收票方客户代码	En espera · falta el código de cliente de la parte facturada	معلّق · رمز عميل الطرف المفوتر مفقود
+On hold · Credit hold — credit limit exceeded	暂扣 · 信用冻结 — 超出信用额度	En espera · bloqueo de crédito — límite superado	معلّق · تعليق ائتماني — تجاوز الحد
+On hold · Customer details incomplete	暂扣 · 客户信息不完整	En espera · datos del cliente incompletos	معلّق · بيانات العميل غير مكتملة
+On hold · Exchange rate not available	暂扣 · 汇率不可用	En espera · tipo de cambio no disponible	معلّق · سعر الصرف غير متاح
+On hold · Pending FCA	暂扣 · 待 FCA	En espera · FCA pendiente	معلّق · بانتظار FCA
+On hold · Tax structure not resolved	暂扣 · 税务结构未确定	En espera · estructura fiscal sin resolver	معلّق · الهيكل الضريبي غير محدد
+Open	开放	Abierto	مفتوح
+Open B/L in LMS	在 LMS 中打开提单	Abrir B/L en LMS	فتح البوليصة في LMS
+Open USD	未结 USD	Pendiente USD	المفتوح بالدولار
+Open exceptions	未结异常	Excepciones abiertas	الاستثناءات المفتوحة
+Open in Enquiry	在查询中打开	Abrir en Consulta	فتح في الاستعلام
+Open invoices	未结发票	Facturas abiertas	الفواتير المفتوحة
+Operational	运营	Operativo	تشغيلي
+Original Invoice No.	原发票号	N.º de factura original	رقم الفاتورة الأصلية
+Original invoice	原发票	Factura original	الفاتورة الأصلية
+Over # days	超过 # 天	Más de # días	أكثر من # يومًا
+Overpayment	多付	Sobrepago	دفعة زائدة
+Override & release selected (#)	覆盖并放行所选（#）	Anular y liberar selección (#)	تجاوز وإفراج المحدد (#)
+Owner	负责人	Responsable	المسؤول
+Parent group	上级组	Grupo principal	المجموعة الأم
+Partial	部分	Parcial	جزئي
+Partial credit	部分贷记	Crédito parcial	ائتمان جزئي
+Party	参与方	Parte	الطرف
+Payer	付款人	Pagador	الدافع
+Payment detail	付款详情	Detalle del pago	تفاصيل الدفعة
+Payment ref.	付款参考号	Ref. de pago	مرجع الدفع
+Payments received	已收付款	Pagos recibidos	المدفوعات المستلمة
+Pending hazardous commodity certification	待危险品认证	Certificación de mercancía peligrosa pendiente	بانتظار شهادة المواد الخطرة
+Pending review	待复核	Pendiente de revisión	بانتظار المراجعة
+Platform	平台	Plataforma	المنصة
+Port filter	港口筛选	Filtro de puerto	مرشح الميناء
+Port of loading	装货港	Puerto de carga	ميناء التحميل
+Portal error	门户错误	Error del portal	خطأ في البوابة
+Ports	港口	Puertos	الموانئ
+Post journals to GFS	向 GFS 过账日记账	Contabilizar asientos en GFS	ترحيل القيود إلى GFS
+Posted to GFS	已过账至 GFS	Contabilizado en GFS	مرحّل إلى GFS
+Pre-generation validation	生成前校验	Validación previa a la generación	التحقق قبل الإنشاء
+Prepaid	预付	Prepagado	مدفوع مسبقًا
+Prerequisites	前提条件	Requisitos previos	المتطلبات المسبقة
+Previous charge	上一项费用	Cargo anterior	الرسم السابق
+Previous contract	上一份合同	Contrato anterior	العقد السابق
+Progressive	阶段性	Progresiva	مرحلية
+Protocol	协议	Protocolo	البروتوكول
+Queue	队列	Cola	قائمة الانتظار
+Queues	队列	Colas	قوائم الانتظار
+ROE available	汇率可用	Tipo de cambio disponible	سعر الصرف متاح
+Rate Error	费率错误	Error de tarifa	خطأ في السعر
+Re-send status to LMS	向 LMS 重发状态	Reenviar estado a LMS	إعادة إرسال الحالة إلى LMS
+Re-send to GFS	重发至 GFS	Reenviar a GFS	إعادة الإرسال إلى GFS
+Re-upload	重新上传	Volver a subir	إعادة الرفع
+Re-validate now	立即重新校验	Revalidar ahora	إعادة التحقق الآن
+Ready to close	可关闭	Listo para cerrar	جاهز للإقفال
+Ready to receipt	可开收据	Listo para recibo	جاهز للإيصال
+Ready to split	可拆分	Listo para dividir	جاهز للتقسيم
+Real-time BDR ingestion feed	实时 BDR 接收数据流	Flujo de recepción de BDR en tiempo real	تغذية استلام BDR الفورية
+Reason Code	原因代码	Código de motivo	رمز السبب
+Reason code	原因代码	Código de motivo	رمز السبب
+Receipt	收据	Recibo	إيصال
+Receipt allocation	收据分配	Asignación de recibos	تخصيص الإيصال
+Receipt backdating	收据倒签	Retrofechado de recibos	تأريخ الإيصال بأثر رجعي
+Receipt issued	已开收据	Recibo emitido	تم إصدار الإيصال
+Receipt not issued	未开收据	Recibo no emitido	لم يُصدر الإيصال
+Receipt to customer	向客户开收据	Recibo al cliente	إيصال للعميل
+Receipting & Reconciliation	收款与对账	Recibos y conciliación	الإيصالات والتسوية
+Receipts	收据	Recibos	الإيصالات
+Receipts and allocation	收据与分配	Recibos y asignación	الإيصالات والتخصيص
+Received (USD)	已收（USD）	Recibido (USD)	المستلم (USD)
+Received USD	已收 USD	Recibido USD	المستلم USD
+Record detail	记录详情	Detalle del registro	تفاصيل السجل
+Reference	参考号	Referencia	المرجع
+Refresh	刷新	Actualizar	تحديث
+Reject	拒绝	Rechazar	رفض
+Release in LMS	在 LMS 中放行	Liberar en LMS	الإفراج في LMS
+Release requested	已申请放行	Liberación solicitada	تم طلب الإفراج
+Release status	放行状态	Estado de liberación	حالة الإفراج
+Released	已放行	Liberado	تم الإفراج
+Released cargo with unpaid D&D	已放行但滞期/滞箱费未付的货物	Carga liberada con D&D impagado	بضاعة مفرج عنها مع D&D غير مدفوعة
+Remarks	备注	Observaciones	ملاحظات
+Remittance ref.	汇款参考号	Ref. de remesa	مرجع الحوالة
+Remittance slip	汇款单	Comprobante de remesa	إشعار الحوالة
+Remitter	汇款人	Remitente	المحوِّل
+Replacement Invoice No.	替换发票号	N.º de factura de reemplazo	رقم الفاتورة البديلة
+Replacement invoice	替换发票	Factura de reemplazo	فاتورة بديلة
+Report	报表	Informe	التقرير
+Report category	报表类别	Categoría del informe	فئة التقرير
+Request conditional release	申请有条件放行	Solicitar liberación condicional	طلب إفراج مشروط
+Request credit note	申请贷项通知单	Solicitar nota de crédito	طلب إشعار دائن
+Request override	申请覆盖	Solicitar anulación	طلب تجاوز
+Request release	申请放行	Solicitar liberación	طلب إفراج
+Request type	申请类型	Tipo de solicitud	نوع الطلب
+Requested by	申请人	Solicitado por	مقدم الطلب
+Resolve hold	解除暂扣	Resolver retención	معالجة التعليق
+Responsible	负责方	Responsable	المسؤول
+Responsible team notified	已通知负责团队	Equipo responsable notificado	تم إخطار الفريق المسؤول
+Restricted	受限	Restringido	مقيد
+Results	结果	Resultados	النتائج
+Retry	重试	Reintentar	إعادة المحاولة
+Retry ROE feed	重试汇率数据	Reintentar carga de tipos de cambio	إعادة محاولة تغذية سعر الصرف
+Revaluation (USD)	重估（USD）	Revaluación (USD)	إعادة التقييم (USD)
+Revenue leakage	收入流失	Fuga de ingresos	تسرب الإيرادات
+Revenue leakage watch	收入流失监控	Vigilancia de fuga de ingresos	مراقبة تسرب الإيرادات
+Review	复核	Revisar	مراجعة
+Review and generate	复核并生成	Revisar y generar	مراجعة وإنشاء
+Review write-off	复核核销	Revisar cancelación	مراجعة الشطب
+Role	角色	Rol	الدور
+Routed to CCO	已转 CCO	Derivado al CCO	محال إلى CCO
+Row density	行密度	Densidad de filas	كثافة الصفوف
+Rows	行	Filas	الصفوف
+Rule	规则	Regla	القاعدة
+Run auto-invoicing batch	运行自动开票批处理	Ejecutar lote de facturación automática	تشغيل دفعة الفوترة التلقائية
+Run daily D&D run	运行每日滞期/滞箱计算	Ejecutar proceso diario de D&D	تشغيل حساب D&D اليومي
+Run date	运行日期	Fecha de ejecución	تاريخ التشغيل
+Run progressive invoice	运行阶段性发票	Ejecutar factura progresiva	تشغيل الفاتورة المرحلية
+Run reconciliation	运行对账	Ejecutar conciliación	تشغيل التسوية
+Running	运行中	En curso	قيد التشغيل
+Running no.	流水号	N.º correlativo	الرقم التسلسلي
+Payment Status	付款状态	Estado de pago	حالة الدفع

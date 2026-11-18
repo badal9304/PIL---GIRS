@@ -1,0 +1,199 @@
+Local / Third currency	本地/第三币种	Moneda local / tercera	العملة المحلية / الثالثة
+Local currency	本地币种	Moneda local	العملة المحلية
+Location hierarchy	地点层级	Jerarquía de ubicación	تسلسل المواقع
+Location type	地点类型	Tipo de ubicación	نوع الموقع
+Location: Singapore	地点：新加坡	Ubicación: Singapur	الموقع: سنغافورة
+Middle East	中东	Oriente Medio	الشرق الأوسط
+New charge	新建费用	Nuevo cargo	رسم جديد
+New city	新建城市	Nueva ciudad	مدينة جديدة
+New contract	新建合同	Nuevo contrato	عقد جديد
+New country	新建国家	Nuevo país	دولة جديدة
+New currency	新建币种	Nueva moneda	عملة جديدة
+New port	新建港口	Nuevo puerto	ميناء جديد
+New tax code	新建税码	Nuevo código de impuesto	رمز ضريبي جديد
+Not billed yet	尚未开票	Aún no facturado	لم تتم فوترته بعد
+Not listed	未列出	No listado	غير مدرج
+Origin local charges	起运港本地费用	Cargos locales en origen	الرسوم المحلية في المنشأ
+Parent customer group	上级客户组	Grupo de clientes principal	مجموعة العملاء الأم
+Partially paid	部分付款	Pagado parcialmente	مدفوعة جزئيًا
+Payment terms	付款条款	Condiciones de pago	شروط الدفع
+Pending validation	待校验	Pendiente de validación	بانتظار التحقق
+Port / Country	港口/国家	Puerto / País	الميناء / الدولة
+Port city · Office	港口城市 · 办事处	Ciudad portuaria · Oficina	مدينة الميناء · المكتب
+Ports with terminal / depot mapping for origin, destination, shipment and invoice data	含码头/堆场映射的港口，用于起运地、目的地、货运及发票数据	Puertos con mapeo de terminal / depósito para datos de origen, destino, envío y factura	موانئ مع ربط المحطات / المستودعات لبيانات المنشأ والوجهة والشحنة والفاتورة
+Precision & rounding	精度与舍入	Precisión y redondeo	الدقة والتقريب
+Previous rates	历史汇率	Tipos anteriores	الأسعار السابقة
+Proforma	形式发票	Proforma	مبدئية
+Proforma Invoice	形式发票	Factura proforma	فاتورة مبدئية
+Tax Invoice	税务发票	Factura fiscal	فاتورة ضريبية
+ROE applied automatically per location (ref. # Exchange Rate Set-Up) · rates are maintained in LMS only · read-only	按地点自动应用汇率（参考 # 汇率设置）· 汇率仅在 LMS 维护 · 只读	Tipo de cambio aplicado automáticamente por ubicación (ref. # Configuración de tipos de cambio) · los tipos solo se mantienen en LMS · solo lectura	يُطبَّق سعر الصرف تلقائيًا لكل موقع (مرجع # إعداد أسعار الصرف) · تُدار الأسعار في LMS فقط · للقراءة فقط
+ROE source	汇率来源	Fuente del tipo de cambio	مصدر سعر الصرف
+Rate type	汇率类型	Tipo de tarifa	نوع السعر
+Ready to invoice	待开票	Listo para facturar	جاهز للفوترة
+READY TO INVOICE	待开票	LISTO PARA FACTURAR	جاهز للفوترة
+Reason	原因	Motivo	السبب
+Region	区域	Región	المنطقة
+Region: South-East Asia	区域：东南亚	Región: Sudeste Asiático	المنطقة: جنوب شرق آسيا
+Registration / Tax ID	注册号/税号	Registro / NIF	رقم التسجيل / الرقم الضريبي
+Regulatory & govt. portal	监管与政府门户	Regulación y portal gubernamental	التنظيم والبوابة الحكومية
+Rounding rule	舍入规则	Regla de redondeo	قاعدة التقريب
+SGD # per DD invoice	每张 DD 发票 SGD #	SGD # por factura DD	SGD # لكل فاتورة DD
+Seal Fee	封条费	Cargo por precinto	رسوم الختم
+Search city code or name	搜索城市代码或名称	Buscar código o nombre de ciudad	ابحث برمز المدينة أو اسمها
+Search contract no., customer or trade lane	搜索合同号、客户或航线	Buscar n.º de contrato, cliente o ruta comercial	ابحث برقم العقد أو العميل أو الخط التجاري
+Search country code or name	搜索国家代码或名称	Buscar código o nombre de país	ابحث برمز الدولة أو اسمها
+Search currency code or name	搜索币种代码或名称	Buscar código o nombre de moneda	ابحث برمز العملة أو اسمها
+Search currency pair, location or LMS reference	搜索货币对、地点或 LMS 参考号	Buscar par de divisas, ubicación o referencia LMS	ابحث بزوج العملات أو الموقع أو مرجع LMS
+Search port code, name or UN/LOCODE	搜索港口代码、名称或 UN/LOCODE	Buscar código, nombre o UN/LOCODE del puerto	ابحث برمز الميناء أو اسمه أو UN/LOCODE
+Search tax code, description, ledger or GFS code	搜索税码、描述、分类账或 GFS 代码	Buscar código de impuesto, descripción, libro o código GFS	ابحث بالرمز الضريبي أو الوصف أو الدفتر أو رمز GFS
+Sent	已发送	Enviado	مُرسلة
+Source	来源	Origen	المصدر
+Source & location	来源与地点	Origen y ubicación	المصدر والموقع
+South Asia	南亚	Asia del Sur	جنوب آسيا
+South-East Asia	东南亚	Sudeste Asiático	جنوب شرق آسيا
+Split	拆分	Dividir	تقسيم
+State / Province	州/省	Estado / Provincia	الولاية / المقاطعة
+Surcharge	附加费	Recargo	رسوم إضافية
+Tax & invoice format	税务与发票格式	Impuestos y formato de factura	الضريبة وتنسيق الفاتورة
+Tax Currency	计税币种	Moneda fiscal	عملة الضريبة
+Tax Level	税务级别	Nivel de impuesto	مستوى الضريبة
+Tax Long Description	税码详细描述	Descripción larga del impuesto	الوصف الطويل للضريبة
+Tax Percentage	税率	Porcentaje de impuesto	نسبة الضريبة
+Tax Short Description	税码简称	Descripción corta del impuesto	الوصف المختصر للضريبة
+Tax Type	税种	Tipo de impuesto	نوع الضريبة
+Tax codes, rates, ledgers and GFS mapping (ref. # Tax Set-Up)	税码、税率、分类账及 GFS 映射（参考 # 税务设置）	Códigos de impuesto, tipos, libros y mapeo GFS (ref. # Configuración de impuestos)	الرموز والنسب الضريبية والدفاتر وربط GFS (مرجع # إعداد الضرائب)
+Tax regime	税制	Régimen fiscal	النظام الضريبي
+Terminal / Depot mapping	码头/堆场映射	Mapeo de terminal / depósito	ربط المحطة / المستودع
+Terminal Handling (THC)	码头操作费 (THC)	Manipulación en terminal (THC)	مناولة المحطة (THC)
+Third currency	第三币种	Tercera moneda	العملة الثالثة
+Third currency flag	第三币种标识	Indicador de tercera moneda	مؤشر العملة الثالثة
+Time zone	时区	Zona horaria	المنطقة الزمنية
+Trade lane	航线	Ruta comercial	الخط التجاري
+US Dollar	美元	Dólar estadounidense	الدولار الأمريكي
+Usage & LMS mapping	使用与 LMS 映射	Uso y mapeo LMS	الاستخدام وربط LMS
+Zero	零税率	Cero	صفر
+Yes	是	Sí	نعم
+No	否	No	لا
+# charges	# 项费用	# cargos	# رسوم
+# of # charges	# / # 项费用	# de # cargos	# من # رسم
+# of # contracts	# / # 份合同	# de # contratos	# من # عقد
+All countries	所有国家	Todos los países	جميع الدول
+Applied	已应用	Aplicado	مُطبَّق
+Billing Party	收票方	Parte facturada	الطرف المفوتر
+Booking No.	订舱号	N.º de reserva	رقم الحجز
+CMD set-up · all parties to be invoiced come from Customer Master Data in LMS	CMD 设置 · 所有开票对象均来自 LMS 客户主数据	Configuración CMD · todas las partes a facturar provienen de los datos maestros de clientes en LMS	إعداد CMD · جميع الأطراف المفوترة مأخوذة من بيانات العملاء الرئيسية في LMS
+Charge Amount	费用金额	Importe del cargo	مبلغ الرسم
+Charge Code	费用代码	Código de cargo	رمز الرسم
+Charge codes	费用代码	Códigos de cargo	رموز الرسوم
+Coastal	沿海	Cabotaje	ساحلي
+Container	集装箱	Contenedor	الحاوية
+Container No.	集装箱号	N.º de contenedor	رقم الحاوية
+Contract no.	合同号	N.º de contrato	رقم العقد
+Currency filter	币种筛选	Filtro de moneda	مرشح العملة
+Customer Code	客户代码	Código de cliente	رمز العميل
+Customer-specific rates	客户专属费率	Tarifas específicas del cliente	أسعار خاصة بالعميل
+DAR waiver	DAR 豁免	Exención DAR	إعفاء DAR
+Decimals	小数位	Decimales	الخانات العشرية
+Destination	目的地	Destino	الوجهة
+Direction	方向	Dirección	الاتجاه
+Document	单据	Documento	المستند
+Effective to	生效截止	Vigente hasta	ساري حتى
+Failed	失败	Fallido	فشل
+Generated	已生成	Generado	تم الإنشاء
+Hierarchy	层级	Jerarquía	التسلسل
+Identity	身份	Identidad	الهوية
+Invoice #	发票号	Factura #	فاتورة #
+Invoice Status filter	发票状态筛选	Filtro de estado de factura	مرشح حالة الفاتورة
+Invoice Type filter	发票类型筛选	Filtro de tipo de factura	مرشح نوع الفاتورة
+Invoice amendment	发票修改	Modificación de factura	تعديل الفاتورة
+Invoice format rule	发票格式规则	Regla de formato de factura	قاعدة تنسيق الفاتورة
+Invoiced	已开票	Facturado	تمت الفوترة
+LMS CMD reference	LMS CMD 参考号	Referencia CMD de LMS	مرجع CMD في LMS
+LMS port mapping	LMS 港口映射	Mapeo de puertos LMS	ربط موانئ LMS
+LMS rate reference	LMS 汇率参考号	Referencia de tipo LMS	مرجع سعر LMS
+Maximum Tax	最高税额	Impuesto máximo	الحد الأقصى للضريبة
+Minimum Tax	最低税额	Impuesto mínimo	الحد الأدنى للضريبة
+Open-ended	无截止期	Sin fecha de fin	مفتوح المدة
+Origin / Destination	起运地/目的地	Origen / Destino	المنشأ / الوجهة
+PDF/JSON Link	PDF/JSON 链接	Enlace PDF/JSON	رابط PDF/JSON
+Payment Status	付款状态	Estado de pago	حالة الدفع
+Rates	费率	Tarifas	الأسعار
+Result	结果	Resultado	النتيجة
+Sanction / Blacklist status	制裁/黑名单状态	Estado de sanción / lista negra	حالة العقوبات / القائمة السوداء
+Sanctioned	受制裁	Sancionado	خاضع للعقوبات
+Search charge code, name or LMS code	搜索费用代码、名称或 LMS 代码	Buscar código, nombre o código LMS del cargo	ابحث برمز الرسم أو اسمه أو رمز LMS
+Search contracts	搜索合同	Buscar contratos	البحث في العقود
+Search customers	搜索客户	Buscar clientes	البحث في العملاء
+Select all invoices	全选发票	Seleccionar todas las facturas	تحديد كل الفواتير
+Sri Lanka	斯里兰卡	Sri Lanka	سريلانكا
+Tax Base	计税基础	Base imponible	الوعاء الضريبي
+Tax Order	计税顺序	Orden del impuesto	ترتيب الضريبة
+Tax Rounding Decimal	税额舍入小数位	Decimales de redondeo fiscal	خانات تقريب الضريبة
+Tax invoice · GST-registered layout	税务发票 · GST 注册版式	Factura fiscal · formato registrado en GST	فاتورة ضريبية · تخطيط مسجل في GST
+Tax on Tax	税上税	Impuesto sobre impuesto	ضريبة على الضريبة
+Tax set-up	税务设置	Configuración de impuestos	إعداد الضرائب
+This Tax is Taxable	此税应税	Este impuesto es gravable	هذه الضريبة خاضعة للضريبة
+Version	版本	Versión	الإصدار
+Voyage/VVD	航次/VVD	Viaje/VVD	الرحلة/VVD
+With Hold	预扣	Con retención	مع الاستقطاع
+# countries	# 个国家	# países	# دول
+# entries	# 条	# entradas	# إدخالات
+# of # customer codes	# / # 个客户代码	# de # códigos de cliente	# من # رمز عميل
+# of # invoices	# / # 张发票	# de # facturas	# من # فاتورة
+# ready · # need review · # blocked	# 项就绪 · # 项需复核 · # 项受阻	# listos · # requieren revisión · # bloqueados	# جاهز · # بحاجة لمراجعة · # محظور
+# terminal / depot	# 个码头/堆场	# terminal / depósito	# محطة / مستودع
+# terminals / depots	# 个码头/堆场	# terminales / depósitos	# محطات / مستودعات
+# · Half up · #	# · 四舍五入 · #	# · Redondeo hacia arriba · #	# · تقريب نصفي للأعلى · #
+AI-extracted	AI 提取	Extraído por IA	مستخرج بالذكاء الاصطناعي
+Actions	操作	Acciones	الإجراءات
+Agency Ops	代理运营	Operaciones de agencia	عمليات الوكالة
+All approval statuses	所有审批状态	Todos los estados de aprobación	جميع حالات الموافقة
+All invoices	所有发票	Todas las facturas	جميع الفواتير
+All ports	所有港口	Todos los puertos	جميع الموانئ
+All ports · SG	所有港口 · SG	Todos los puertos · SG	جميع الموانئ · SG
+All trade lanes	所有航线	Todas las rutas comerciales	جميع الخطوط التجارية
+Any validity	任意有效期	Cualquier vigencia	أي صلاحية
+Applicable	适用	Aplicable	منطبق
+Applies to	适用于	Aplica a	ينطبق على
+Approval status: All	审批状态：全部	Estado de aprobación: Todos	حالة الموافقة: الكل
+B/L Amendment Fee	提单修改费	Cargo por modificación de B/L	رسوم تعديل البوليصة
+Billing configuration & distribution	开票配置与分发	Configuración y distribución de facturación	تهيئة الفوترة والتوزيع
+Billing party	收票方	Parte facturada	الطرف المفوتر
+Billing party customer code	收票方客户代码	Código de cliente de la parte facturada	رمز عميل الطرف المفوتر
+Blocked	受阻	Bloqueado	محظور
+Both	两者	Ambos	كلاهما
+Cash · pay before invoice	现金 · 开票前付款	Contado · pagar antes de facturar	نقدًا · الدفع قبل الفاتورة
+Charged	已计费	Cobrado	مُحتسب
+Chief Commercial Officer (CCO)	首席商务官 (CCO)	Director comercial ejecutivo (CCO)	الرئيس التجاري (CCO)
+Chinese Yuan	人民币	Yuan chino	اليوان الصيني
+Clear	清除	Borrar	مسح
+Commercial Director	商务总监	Director comercial	المدير التجاري
+Confidence	置信度	Confianza	مستوى الثقة
+Contact	联系人	Contacto	جهة الاتصال
+Container Cleaning Fee	洗箱费	Cargo por limpieza de contenedor	رسوم تنظيف الحاوية
+Containers	集装箱	Contenedores	الحاويات
+Credit Note	贷项通知单	Nota de crédito	إشعار دائن
+Credit note	贷项通知单	Nota de crédito	إشعار دائن
+Credited / cancelled	已贷记/已取消	Acreditado / cancelado	مقيد دائنًا / ملغى
+Currency type	币种类型	Tipo de moneda	نوع العملة
+Currency: All	币种：全部	Moneda: Todas	العملة: الكل
+Customer details	客户详情	Detalles del cliente	تفاصيل العميل
+Customer group	客户组	Grupo de clientes	مجموعة العملاء
+Customer sections	客户分区	Secciones del cliente	أقسام العميل
+Customs ROE	海关汇率	Tipo de cambio aduanero	سعر الصرف الجمركي
+DD invoices	DD 发票	Facturas DD	فواتير DD
+Decimals: All	小数位：全部	Decimales: Todos	الخانات العشرية: الكل
+Default billing party	默认收票方	Parte facturada por defecto	الطرف المفوتر الافتراضي
+Difference	差额	Diferencia	الفرق
+Document no.	单据号	N.º de documento	رقم المستند
+Document type	单据类型	Tipo de documento	نوع المستند
+Download PDF / JSON	下载 PDF / JSON	Descargar PDF / JSON	تنزيل PDF / JSON
+Due —	到期 —	Vence —	الاستحقاق —
+E-invoice rejections	电子发票被拒	Rechazos de factura electrónica	رفض الفواتير الإلكترونية
+Emergency Bunker Surcharge	紧急燃油附加费	Recargo de combustible de emergencia	رسوم الوقود الطارئة
+Exchange rates	汇率	Tipos de cambio	أسعار الصرف
+Expiry Date	失效日期	Fecha de caducidad	تاريخ الانتهاء
+Export only	仅出口	Solo exportación	تصدير فقط
+FCA approval	FCA 审批	Aprobación FCA	موافقة FCA
+GST · Tax invoice · GST-registered layout	GST · 税务发票 · GST 注册版式	GST · Factura fiscal · formato registrado en GST	GST · فاتورة ضريبية · تخطيط مسجل في GST
+Govt. portal: All	政府门户：全部	Portal gubernamental: Todos	البوابة الحكومية: الكل

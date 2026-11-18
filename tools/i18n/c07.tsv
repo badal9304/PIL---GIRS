@@ -1,0 +1,223 @@
+OP · picked up	OP · 已提箱	OP · recogido	OP · تم الاستلام
+MT · returned empty	MT · 空箱已还	MT · devuelto vacío	MT · أعيدت فارغة
+Accrued · reversed	已预提 · 已冲回	Devengado · revertido	مستحق · معكوس
+Held — payment variance	暂扣 — 付款差异	Retenido — diferencia de pago	معلّق — فرق في الدفع
+Held — awaiting clearance	暂扣 — 等待清算	Retenido — pendiente de compensación	معلّق — بانتظار التسوية
+NSA billing	NSA 开票	Facturación NSA	فوترة NSA
+SIN billing	SIN 开票	Facturación SIN	فوترة SIN
+PKG billing	PKG 开票	Facturación PKG	فوترة PKG
+JED billing	JED 开票	Facturación JED	فوترة JED
+ZLO billing	ZLO 开票	Facturación ZLO	فوترة ZLO
+Progressive due	阶段性应开	Progresiva pendiente	المرحلية مستحقة
+Final DD due	最终 DD 应开	DD final pendiente	DD النهائية مستحقة
+Provisional · portal outage	临时 · 门户中断	Provisional · caída del portal	مؤقت · انقطاع البوابة
+API · events	API · 事件	API · eventos	API · أحداث
+Freight · voyages underway	运费 · 航行中航次	Flete · viajes en curso	الشحن · رحلات جارية
+D&D · unbilled days	滞期/滞箱 · 未开票天数	D&D · días sin facturar	D&D · أيام غير مفوترة
+Unbilled days to month-end	至月末未开票天数	Días sin facturar hasta fin de mes	الأيام غير المفوترة حتى نهاية الشهر
+Stowage manifest	积载清单	Manifiesto de estiba	بيان التستيف
+Bay plan pages	贝位图页	Páginas del plano de bahías	صفحات مخطط الحجرات
+Discharge sequence	卸货顺序	Secuencia de descarga	تسلسل التفريغ
+Country · portal	国家 · 门户	País · portal	الدولة · البوابة
+Corrected · queued	已更正 · 排队中	Corregido · en cola	تم التصحيح · في قائمة الانتظار
+Portal unavailable — no response	门户不可用 — 无响应	Portal no disponible — sin respuesta	البوابة غير متاحة — لا استجابة
+International — zero-rated	国际 — 零税率	Internacional — tasa cero	دولي — نسبة صفرية
+Virtual account (VAN)	虚拟账户 (VAN)	Cuenta virtual (VAN)	الحساب الافتراضي (VAN)
+# inv.	# 张发票	# fact.	# فواتير
+Split buyer	拆分买方	Comprador dividido	المشتري المقسم
+Credit notes, invoice amendments, DAR waivers, credit holds and receipt backdating awaiting decision · segregation of duties · MFA	待决的贷项通知单、发票修改、DAR 豁免、信用冻结及收据倒签 · 职责分离 · MFA	Notas de crédito, modificaciones de factura, exenciones DAR, bloqueos de crédito y retrofechado de recibos pendientes de decisión · segregación de funciones · MFA	إشعارات دائنة وتعديلات فواتير وإعفاءات DAR وتعليقات ائتمانية وتأريخ إيصالات بأثر رجعي بانتظار القرار · فصل المهام · MFA
+FCA approved upstream — Demurrage charge amended.	FCA 已在上游批准 — 滞期费已修改。	FCA aprobado previamente — cargo de demora modificado.	تمت الموافقة على FCA مسبقًا — تم تعديل رسوم التأخير.
+· required to reject	· 拒绝时必填	· obligatorio para rechazar	· مطلوب للرفض
+Multi-factor matching: Virtual Account → Invoice Ref → Exact Amount → Customer BDR	多因素匹配：虚拟账户 → 发票参考号 → 金额完全一致 → 客户 BDR	Conciliación multifactor: cuenta virtual → ref. de factura → importe exacto → BDR del cliente	مطابقة متعددة العوامل: الحساب الافتراضي ← مرجع الفاتورة ← المبلغ المطابق ← BDR العميل
+Remittance slip — OCR extraction	汇款单 — OCR 提取	Comprobante de remesa — extracción OCR	إشعار الحوالة — استخراج OCR
+Invoice ref · #%	发票参考号 · #%	Ref. de factura · #%	مرجع الفاتورة · #%
+Invoice Ref	发票参考号	Ref. de factura	مرجع الفاتورة
+Invoice Ref (fuzzy)	发票参考号（模糊）	Ref. de factura (aproximada)	مرجع الفاتورة (تقريبي)
+ROE match EUR → USD	汇率匹配 EUR → USD	Coincidencia de tipo EUR → USD	مطابقة سعر الصرف EUR ← USD
+Open invoice reconciliation	未结发票对账	Conciliación de facturas abiertas	تسوية الفواتير المفتوحة
+Match suggestions are AI-generated. No allocation is made until a user confirms it.	匹配建议由 AI 生成，用户确认前不会进行分配。	Las sugerencias de conciliación las genera la IA. No se asigna nada hasta que un usuario lo confirma.	اقتراحات المطابقة مولدة بالذكاء الاصطناعي. لا يتم أي تخصيص حتى يؤكده مستخدم.
+Confirm allocation (#)	确认分配（#）	Confirmar asignación (#)	تأكيد التخصيص (#)
+Origin & destination	起运地与目的地	Origen y destino	المنشأ والوجهة
+Country / Tax / Currency setup	国家/税务/币种设置	Configuración de país / impuesto / moneda	إعداد الدولة / الضريبة / العملة
+Charges received from LMS · pre-generation validation, invoice holds and sanction screening before invoice generation	从 LMS 接收的费用 · 生成发票前的校验、发票暂扣及制裁筛查	Cargos recibidos de LMS · validación previa, retenciones de factura y control de sanciones antes de generar la factura	الرسوم المستلمة من LMS · التحقق المسبق وتعليق الفواتير وفحص العقوبات قبل إنشاء الفاتورة
+Generate invoices (# eligible)	生成发票（# 项符合条件）	Generar facturas (# aptas)	إنشاء الفواتير (# مؤهلة)
+Sanction / blacklist match — warning, invoice can proceed	制裁/黑名单匹配 — 警告，发票可继续	Coincidencia de sanción / lista negra — advertencia, la factura puede continuar	تطابق مع العقوبات / القائمة السوداء — تحذير، يمكن متابعة الفاتورة
+On hold · Generic PC linked on B/L	暂扣 · 提单关联通用 PC	En espera · PC genérico vinculado al B/L	معلّق · PC عام مرتبط بالبوليصة
+Held · Generic PC linked on B/L	暂扣 · 提单关联通用 PC	Retenido · PC genérico vinculado al B/L	معلّق · PC عام مرتبط بالبوليصة
+Cancelled booking — excluded from batch	已取消订舱 — 不纳入批处理	Reserva cancelada — excluida del lote	حجز ملغى — مستبعد من الدفعة
+On hold · Mandatory field missing (HSN code)	暂扣 · 缺少必填字段（HSN 代码）	En espera · falta un campo obligatorio (código HSN)	معلّق · حقل إلزامي مفقود (رمز HSN)
+Reefer monitoring surcharge	冷箱监控附加费	Recargo de monitoreo reefer	رسوم مراقبة الحاويات المبردة
+Late surcharge after sailing — billing rule to be confirmed by PIL	开船后补收附加费 — 开票规则待 PIL 确认	Recargo tardío tras la salida — regla de facturación por confirmar por PIL	رسوم متأخرة بعد الإبحار — قاعدة الفوترة بانتظار تأكيد PIL
+Ocean Freight · promotional spot rate	海运费 · 促销现货价	Flete marítimo · tarifa spot promocional	الشحن البحري · سعر فوري ترويجي
+Zero-value line (#% discount) — accepted, balance check passed	零值行（#% 折扣）— 已接受，余额校验通过	Línea de valor cero (#% de descuento) — aceptada, verificación de saldo superada	بند بقيمة صفرية (خصم #%) — مقبول، اجتاز فحص الرصيد
+On hold · Negative charge line not allowed	暂扣 · 不允许负数费用行	En espera · no se permite una línea de cargo negativa	معلّق · لا يُسمح ببند رسوم سالب
+Invoice on hold — prerequisite not met. Fix it in the owning system shown below, then re-validate.	发票暂扣 — 前提条件未满足。请在下方所示的源系统中修正后重新校验。	Factura en espera — requisito no cumplido. Corríjalo en el sistema propietario indicado abajo y vuelva a validar.	الفاتورة معلّقة — لم يتحقق شرط مسبق. صححه في النظام المالك الموضح أدناه ثم أعد التحقق.
+Field to fix	待修正字段	Campo a corregir	الحقل المطلوب إصلاحه
+LMS · booking and customer master (CMD)	LMS · 订舱及客户主数据 (CMD)	LMS · reservas y maestro de clientes (CMD)	LMS · الحجوزات وبيانات العملاء (CMD)
+Hold raised with reason code	已按原因代码暂扣	Retención registrada con código de motivo	تم تسجيل التعليق برمز السبب
+Corrected in LMS and synced	已在 LMS 更正并同步	Corregido en LMS y sincronizado	تم التصحيح في LMS والمزامنة
+Re-validated · released to generation	已重新校验 · 已放行生成	Revalidado · liberado para generación	أعيد التحقق · أُفرج عنه للإنشاء
+GIRS does not edit source data. The correction is made in the owning system and synced back; the held charge then re-enters validation — no new invoice is created. Held charges are also re-checked automatically on the next batch run.	GIRS 不修改源数据。更正在源系统中完成并同步回来，暂扣费用随后重新进入校验 — 不会创建新发票。暂扣费用在下一次批处理时也会自动重新检查。	GIRS no edita los datos de origen. La corrección se hace en el sistema propietario y se sincroniza; el cargo retenido vuelve a validación — no se crea una factura nueva. Los cargos retenidos también se revisan automáticamente en el siguiente lote.	لا يعدّل GIRS بيانات المصدر. يتم التصحيح في النظام المالك ثم المزامنة؛ ثم يعود الرسم المعلّق إلى التحقق — دون إنشاء فاتورة جديدة. كما يُعاد فحص الرسوم المعلقة تلقائيًا في الدفعة التالية.
+Customer credit status from the Credit Management System · exposure against approved limits · credit holds on invoicing and receipt allocation · release with segregation of duties	来自信用管理系统的客户信用状态 · 风险敞口对比批准额度 · 开票及收据分配的信用冻结 · 职责分离下解除	Estado crediticio del cliente desde el sistema de gestión de crédito · exposición frente a límites aprobados · bloqueos de crédito en facturación y asignación de recibos · liberación con segregación de funciones	الحالة الائتمانية للعميل من نظام إدارة الائتمان · التعرض مقابل الحدود المعتمدة · تعليقات ائتمانية على الفوترة وتخصيص الإيصالات · رفع التعليق مع فصل المهام
+Sample values — source system in development	示例数据 — 源系统开发中	Valores de ejemplo — sistema de origen en desarrollo	قيم نموذجية — نظام المصدر قيد التطوير
+Status refreshed before invoice release, payment processing and receipting	在发票放行、付款处理及开具收据前刷新状态	Estado actualizado antes de liberar facturas, procesar pagos y emitir recibos	يتم تحديث الحالة قبل إصدار الفاتورة ومعالجة الدفع وإصدار الإيصال
+Shipment-related billing	货运相关开票	Facturación relacionada con envíos	الفوترة المرتبطة بالشحنات
+LMS container release	LMS 集装箱放行	Liberación de contenedores en LMS	الإفراج عن الحاويات في LMS
+Hold sent to LMS	暂扣已发送至 LMS	Retención enviada a LMS	تم إرسال التعليق إلى LMS
+Credit status refreshed	信用状态已刷新	Estado crediticio actualizado	تم تحديث الحالة الائتمانية
+Credit hold applied · limit exceeded	已应用信用冻结 · 超出额度	Bloqueo de crédito aplicado · límite superado	تم تطبيق تعليق ائتماني · تجاوز الحد
+Controlled credit-note issuance for FCA approvals, DAR waivers, pricing corrections and invoice amendments	针对 FCA 审批、DAR 豁免、价格更正及发票修改的受控贷项通知单开具	Emisión controlada de notas de crédito para aprobaciones FCA, exenciones DAR, correcciones de precio y modificaciones de factura	إصدار مضبوط للإشعارات الدائنة لموافقات FCA وإعفاءات DAR وتصحيحات الأسعار وتعديلات الفواتير
+Full and partial credits against the original invoice · same exchange rate · approval with segregation of duties	针对原发票的全额及部分贷记 · 相同汇率 · 职责分离审批	Créditos totales y parciales contra la factura original · mismo tipo de cambio · aprobación con segregación de funciones	ائتمانات كاملة وجزئية مقابل الفاتورة الأصلية · نفس سعر الصرف · موافقة مع فصل المهام
+FCA / top-level DAR waiver on an invoiced bill raises the credit note automatically · team leads notified by email	已开票账单的 FCA/高级 DAR 豁免将自动生成贷项通知单 · 已通过邮件通知团队主管	Una FCA / exención DAR de nivel superior sobre una factura emitida genera la nota de crédito automáticamente · jefes de equipo notificados por correo	موافقة FCA / إعفاء DAR من المستوى الأعلى على فاتورة صادرة يُنشئ الإشعار الدائن تلقائيًا · يُخطر قادة الفرق بالبريد
+No standalone credit note — original invoice required	不允许单独贷项通知单 — 需原发票	Sin nota de crédito independiente — se requiere la factura original	لا إشعار دائن مستقل — الفاتورة الأصلية مطلوبة
+Exchange rate (from original invoice)	汇率（来自原发票）	Tipo de cambio (de la factura original)	سعر الصرف (من الفاتورة الأصلية)
+Locked — same rate as original invoice	已锁定 — 与原发票汇率相同	Bloqueado — mismo tipo que la factura original	مقفل — نفس سعر الفاتورة الأصلية
+Supporting evidence · mandatory	证明材料 · 必填	Evidencia de respaldo · obligatoria	المستندات الداعمة · إلزامية
+No file attached — required before submitting	未附加文件 — 提交前必需	Sin archivo adjunto — obligatorio antes de enviar	لم يُرفق ملف — مطلوب قبل الإرسال
+Full / partial: configured per country	全额/部分：按国家配置	Total / parcial: configurado por país	كامل / جزئي: مهيأ لكل دولة
+Manual alternative approver	手动指定替代审批人	Aprobador alternativo manual	معتمِد بديل يدوي
+Request prepared	申请已准备	Solicitud preparada	تم تجهيز الطلب
+Charge codes released for new invoice	费用代码已释放用于新发票	Códigos de cargo liberados para nueva factura	تم الإفراج عن رموز الرسوم لفاتورة جديدة
+Operational waivers, multi-tier authorization and automated credit note triggering	运营豁免、多级授权及自动触发贷项通知单	Exenciones operativas, autorización multinivel y generación automática de notas de crédito	إعفاءات تشغيلية وتفويض متعدد المستويات وإطلاق تلقائي للإشعارات الدائنة
+Commercial GM waiver threshold	商务总经理豁免阈值	Umbral de exención del GM comercial	حد إعفاء المدير التجاري العام
+Waivers above this limit follow the escalation runbook.	超过此限额的豁免按升级手册处理。	Las exenciones por encima de este límite siguen el procedimiento de escalamiento.	تتبع الإعفاءات فوق هذا الحد دليل التصعيد.
+Event-triggered D&D invoicing from LMS container events · free time and tariff tiers · progressive and final invoices	由 LMS 集装箱事件触发的滞期/滞箱开票 · 免费期及费率档 · 阶段性及最终发票	Facturación D&D activada por eventos de contenedores de LMS · tiempo libre y tramos tarifarios · facturas progresivas y finales	فوترة D&D تُطلقها أحداث الحاويات في LMS · الفترة المجانية وشرائح التعرفة · فواتير مرحلية ونهائية
+Invoicing mode · per country	开票模式 · 按国家	Modo de facturación · por país	وضع الفوترة · لكل دولة
+Progressive start	阶段性起点	Inicio progresivo	بداية المرحلية
+Free time +	免费期 +	Tiempo libre +	الفترة المجانية +
+Recurring interval	循环间隔	Intervalo recurrente	الفاصل المتكرر
+Free-time basis	免费期基准	Base del tiempo libre	أساس الفترة المجانية
+Working days · port holiday calendar	工作日 · 港口节假日日历	Días hábiles · calendario de festivos del puerto	أيام العمل · تقويم عطلات الميناء
+Stop triggers	停止触发条件	Disparadores de parada	محفزات الإيقاف
+Returned empty · Sold · Damaged · Abandoned · Customs hold	空箱已还 · 已出售 · 已损坏 · 已弃置 · 海关扣留	Devuelto vacío · Vendido · Dañado · Abandonado · Retención aduanera	أعيدت فارغة · مباعة · تالفة · متروكة · حجز جمركي
+Clock starts at OP (picked up) · ends at MT (returned)	从 OP（提箱）开始计时 · 至 MT（还箱）结束	El cómputo empieza en OP (recogido) · termina en MT (devuelto)	يبدأ الاحتساب عند OP (الاستلام) · وينتهي عند MT (الإرجاع)
+Equipment milestones · from LMS	设备节点 · 来自 LMS	Hitos del equipo · desde LMS	مراحل المعدات · من LMS
+Gate-out full	重箱出闸	Salida llena	خروج ممتلئة
+Gate-in empty	空箱进闸	Entrada vacía	دخول فارغة
+Tariff tiers	费率档	Tramos tarifarios	شرائح التعرفة
+Sample tariff — rates to be provided by PIL	示例费率 — 费率待 PIL 提供	Tarifa de ejemplo — tarifas a proporcionar por PIL	تعرفة نموذجية — الأسعار يقدمها PIL
+· days #–#	· 第 #–# 天	· días #–#	· الأيام #–#
+· day #+	· 第 # 天起	· día #+	· اليوم #+
+Total D&D to date	迄今滞期/滞箱合计	Total D&D a la fecha	إجمالي D&D حتى تاريخه
+Load plans, stowage manifests and remittances from email, PDF, Excel and scans · AI extraction with confidence · human review below threshold · original kept with extracted data	来自邮件、PDF、Excel 及扫描件的配载计划、积载清单和汇款单 · 带置信度的 AI 提取 · 低于阈值需人工复核 · 原件与提取数据一并保存	Planes de carga, manifiestos de estiba y remesas de correo, PDF, Excel y escaneos · extracción por IA con confianza · revisión humana bajo el umbral · original conservado con los datos extraídos	خطط التحميل وبيانات التستيف والحوالات من البريد وPDF وExcel والمسح الضوئي · استخراج بالذكاء الاصطناعي مع مستوى ثقة · مراجعة بشرية دون الحد · يُحفظ الأصل مع البيانات المستخرجة
+Non-standard EDI	非标准 EDI	EDI no estándar	EDI غير قياسي
+Lockbox image	锁箱影像	Imagen de lockbox	صورة صندوق الإيداع
+Original document · retained for audit	原始单据 · 留存供审计	Documento original · conservado para auditoría	المستند الأصلي · محفوظ للتدقيق
+Low-contrast scan · handwritten bay note on page #	低对比度扫描 · 第 # 页有手写贝位备注	Escaneo de bajo contraste · nota manuscrita en la página #	مسح منخفض التباين · ملاحظة مكتوبة يدويًا في الصفحة #
+Reject · return to sender	拒绝 · 退回发件人	Rechazar · devolver al remitente	رفض · إعادة إلى المرسل
+Fields below #% are outlined for review. Prompt, response and your decision are kept in the AI activity log.	低于 #% 的字段已标出待复核。提示、回复及您的决定均记录在 AI 活动日志中。	Los campos por debajo del #% se resaltan para revisión. La consulta, la respuesta y su decisión se guardan en el registro de actividad de IA.	الحقول دون #% محددة للمراجعة. تُحفظ المطالبة والرد وقرارك في سجل نشاط الذكاء الاصطناعي.
+Invoices and credit notes rejected by government tax portals · responsible office notified · correct and re-submit · validation references stored	被政府税务门户拒绝的发票及贷项通知单 · 已通知负责办事处 · 更正后重新提交 · 已保存校验参考号	Facturas y notas de crédito rechazadas por portales fiscales · oficina responsable notificada · corregir y reenviar · referencias de validación guardadas	فواتير وإشعارات دائنة رفضتها البوابات الضريبية الحكومية · تم إخطار المكتب المسؤول · صحح وأعد الإرسال · مراجع التحقق محفوظة
+Re-submit all corrected (#)	重新提交所有已更正项（#）	Reenviar todos los corregidos (#)	إعادة إرسال كل المصحح (#)
+Failed · office notified	失败 · 已通知办事处	Fallido · oficina notificada	فشل · تم إخطار المكتب
+Corrected · awaiting re-submit	已更正 · 等待重新提交	Corregido · pendiente de reenvío	تم التصحيح · بانتظار إعادة الإرسال
+Validation reference	校验参考号	Referencia de validación	مرجع التحقق
+Country exception rules	国家例外规则	Reglas de excepción por país	قواعد الاستثناء لكل دولة
+Read-only search across invoices, credit notes and receipts · end-to-end transaction trace · audit trail	跨发票、贷项通知单及收据的只读搜索 · 端到端交易追踪 · 审计记录	Búsqueda de solo lectura en facturas, notas de crédito y recibos · traza completa de transacciones · registro de auditoría	بحث للقراءة فقط عبر الفواتير والإشعارات الدائنة والإيصالات · تتبع كامل للمعاملات · سجل التدقيق
+LMS charge	LMS 费用	Cargo LMS	رسم LMS
+Gate-out without discharge · conflicting gate timestamps	未卸货即出闸 · 闸口时间冲突	Salida sin descarga · marcas de tiempo de puerta en conflicto	خروج دون تفريغ · طوابع زمنية متعارضة للبوابة
+API / EDI interfaces with LMS, GFS, banks, tax portals and third-party platforms · inbound event triggers · status flow-back to LMS for B/L and cargo release	与 LMS、GFS、银行、税务门户及第三方平台的 API/EDI 接口 · 入站事件触发 · 状态回传 LMS 用于提单及货物放行	Interfaces API / EDI con LMS, GFS, bancos, portales fiscales y plataformas de terceros · disparadores de eventos entrantes · retorno de estado a LMS para liberación de B/L y carga	واجهات API / EDI مع LMS و GFS والبنوك والبوابات الضريبية والمنصات الخارجية · محفزات الأحداث الواردة · إعادة الحالة إلى LMS للإفراج عن البوليصة والبضاعة
+Sample monitoring data	示例监控数据	Datos de monitoreo de ejemplo	بيانات مراقبة نموذجية
+# err	# 个错误	# err.	# أخطاء
+API / EDI · per country	API / EDI · 按国家	API / EDI · por país	API / EDI · لكل دولة
+Inbound invoice requests	入站开票请求	Solicitudes de facturación entrantes	طلبات الفوترة الواردة
+Status flow-back to LMS	状态回传 LMS	Retorno de estado a LMS	إعادة الحالة إلى LMS
+Failed messages · replay	失败消息 · 重放	Mensajes fallidos · reproducir	الرسائل الفاشلة · إعادة التشغيل
+Failed · Billing party code not in LMS CMD	失败 · 收票方代码不在 LMS CMD 中	Fallido · código de parte facturada no está en LMS CMD	فشل · رمز الطرف المفوتر غير موجود في LMS CMD
+In / out	入/出	Entrada / salida	وارد / صادر
+Charges, booking, B/L and container data in	费用、订舱、提单及集装箱数据流入	Entrada de cargos, reservas, B/L y contenedores	ورود بيانات الرسوم والحجز والبوليصة والحاويات
+LMS lifecycle events trigger D&D invoicing	LMS 生命周期事件触发滞期/滞箱开票	Los eventos del ciclo de vida de LMS activan la facturación D&D	أحداث دورة الحياة في LMS تُطلق فوترة D&D
+Invoice / payment status flows back for B/L and cargo release	发票/付款状态回传用于提单及货物放行	El estado de factura / pago se devuelve para liberar B/L y carga	تُعاد حالة الفاتورة / الدفع للإفراج عن البوليصة والبضاعة
+Interfaces use HTTPS APIs (via the API gateway), EDI, SFTP or AS# with OAuth # / OpenID Connect. No direct database access.	接口使用 HTTPS API（经 API 网关）、EDI、SFTP 或 AS#，并采用 OAuth # / OpenID Connect，不直接访问数据库。	Las interfaces usan API HTTPS (mediante la pasarela de API), EDI, SFTP o AS# con OAuth # / OpenID Connect. Sin acceso directo a la base de datos.	تستخدم الواجهات HTTPS API (عبر بوابة API) أو EDI أو SFTP أو AS# مع OAuth # / OpenID Connect. لا وصول مباشر إلى قاعدة البيانات.
+Invoice, credit note and debit note rendering with mandatory legal fields, statutory QR and gapless numbering	发票、贷项及借项通知单渲染，含法定必填字段、法定二维码及连续编号	Generación de facturas, notas de crédito y débito con campos legales obligatorios, QR legal y numeración sin huecos	عرض الفواتير والإشعارات الدائنة والمدينة مع الحقول القانونية الإلزامية ورمز QR النظامي وترقيم متصل
+Country template	国家模板	Plantilla de país	قالب الدولة
+Highlight mandatory legal fields	突出显示法定必填字段	Resaltar campos legales obligatorios	إبراز الحقول القانونية الإلزامية
+# of # named	已命名 # / #	# de # nombrados	# من # مسماة
+Invoice number & sequence	发票号及序列	Número y secuencia de factura	رقم الفاتورة وتسلسلها
+Character capacity must be accepted by LMS, GIRS, GFS and third-party platforms.	字符长度须为 LMS、GIRS、GFS 及第三方平台所接受。	La longitud de caracteres debe ser aceptada por LMS, GIRS, GFS y plataformas de terceros.	يجب أن تقبل LMS و GIRS و GFS والمنصات الخارجية سعة الأحرف.
+Next number in this series	本系列下一个编号	Siguiente número de esta serie	الرقم التالي في هذه السلسلة
+ETD (export)	预计开航 (出口)	ETD (exportación)	موعد المغادرة المتوقع (تصدير)
+Agency mandatory text	代理必填文字	Texto obligatorio de la agencia	نص الوكالة الإلزامي
+Single invoice outside the batch · cancelled bookings with applicable charges · ancillary (MISC) charges from LMS or the catalogue	批处理之外的单张发票 · 含适用费用的已取消订舱 · 来自 LMS 或目录的附加（杂项）费用	Factura individual fuera del lote · reservas canceladas con cargos aplicables · cargos auxiliares (MISC) de LMS o del catálogo	فاتورة منفردة خارج الدفعة · حجوزات ملغاة برسوم منطبقة · رسوم إضافية (متنوعة) من LMS أو الكتالوج
+Number on generation:	生成时编号：	Número al generar:	الرقم عند الإنشاء:
+Single invoice outside the batch	批处理之外的单张发票	Factura individual fuera del lote	فاتورة منفردة خارج الدفعة
+# day back · # Nov #	回溯 # 天 · # Nov #	# día atrás · # Nov #	قبل # يوم · # Nov #
+Sub-total (SGD)	小计（SGD）	Subtotal (SGD)	المجموع الفرعي (SGD)
+Tax structure resolved	税务结构已确定	Estructura fiscal resuelta	تم تحديد الهيكل الضريبي
+No Generic PC linked on B/L	提单未关联通用 PC	Sin PC genérico vinculado al B/L	لا PC عام مرتبط بالبوليصة
+Charges available with amounts	费用及金额可用	Cargos disponibles con importes	الرسوم متاحة مع المبالغ
+Credit status · no hold	信用状态 · 无冻结	Estado crediticio · sin bloqueo	الحالة الائتمانية · لا تعليق
+Sanction / blacklist screening	制裁/黑名单筛查	Control de sanciones / lista negra	فحص العقوبات / القائمة السوداء
+Sanction / blacklist match is a warning only — the invoice can still proceed.	制裁/黑名单匹配仅为警告 — 发票仍可继续。	La coincidencia con sanciones / lista negra es solo una advertencia — la factura puede continuar.	التطابق مع العقوبات / القائمة السوداء تحذير فقط — يمكن متابعة الفاتورة.
+After generation the invoice goes to the government tax portal where required, is distributed by the set rules and its status flows back to LMS.	生成后，发票按需提交至政府税务门户，按设定规则分发，并将状态回传至 LMS。	Tras generarse, la factura va al portal fiscal cuando corresponde, se distribuye según las reglas definidas y su estado vuelve a LMS.	بعد الإنشاء تُرسل الفاتورة إلى البوابة الضريبية الحكومية عند الحاجة، وتُوزع وفق القواعد المحددة، وتعود حالتها إلى LMS.
+Unbilled revenue accruals for voyages underway and unbilled D&D days · reversal journals · actual vs accrual · currency revaluation · intercompany D&D · GFS tie-out	航行中航次及未开票滞期/滞箱天数的未开票收入预提 · 冲回日记账 · 实际与预提对比 · 外币重估 · 公司间滞期/滞箱 · GFS 核对	Devengos de ingresos no facturados de viajes en curso y días D&D sin facturar · asientos de reversión · real vs devengo · revaluación de divisas · D&D intercompañía · cuadre con GFS	استحقاقات الإيرادات غير المفوترة للرحلات الجارية وأيام D&D غير المفوترة · قيود العكس · الفعلي مقابل الاستحقاق · إعادة تقييم العملات · D&D بين الشركات · مطابقة GFS
+Unbilled revenue accrued	未开票收入已预提	Ingresos no facturados devengados	الإيرادات غير المفوترة المستحقة
+Unbilled revenue · October #	未开票收入 · # 年 10 月	Ingresos no facturados · octubre #	الإيرادات غير المفوترة · أكتوبر #
+Accrual rate vs month-end rate	预提汇率与月末汇率对比	Tipo de devengo vs tipo de fin de mes	سعر الاستحقاق مقابل سعر نهاية الشهر
+Intercompany D&D · transshipment	公司间滞期/滞箱 · 转运	D&D intercompañía · transbordo	D&D بين الشركات · إعادة الشحن
+Origin and destination agency share	起运地与目的地代理分成	Participación de agencias de origen y destino	حصة وكالتي المنشأ والوجهة
+Close checklist · October #	结账清单 · # 年 10 月	Lista de cierre · octubre #	قائمة الإقفال · أكتوبر #
+D&D daily run complete to month-end	滞期/滞箱每日计算已完成至月末	Proceso diario D&D completado hasta fin de mes	اكتمل تشغيل D&D اليومي حتى نهاية الشهر
+Unbilled revenue accrual run	未开票收入预提运行	Ejecución del devengo de ingresos no facturados	تشغيل استحقاق الإيرادات غير المفوترة
+Intercompany D&D shares calculated	公司间滞期/滞箱分成已计算	Participaciones D&D intercompañía calculadas	تم حساب حصص D&D بين الشركات
+Summary journals balanced (debits = credits)	汇总日记账已平衡（借 = 贷）	Asientos resumen cuadrados (débitos = créditos)	قيود الملخص متوازنة (المدين = الدائن)
+Journals posted to GFS and acknowledged	日记账已过账至 GFS 并已确认	Asientos contabilizados en GFS y confirmados	تم ترحيل القيود إلى GFS وتأكيدها
+Prior-month accruals reversed	上月预提已冲回	Devengos del mes anterior revertidos	تم عكس استحقاقات الشهر السابق
+GFS tie-out: summary journals must balance to USD # before transmission. Closed GFS periods reject journals.	GFS 核对：汇总日记账在传输前须平衡至 USD #。已关闭的 GFS 期间将拒收日记账。	Cuadre con GFS: los asientos resumen deben cuadrar a USD # antes de enviarse. Los períodos cerrados de GFS rechazan asientos.	مطابقة GFS: يجب أن تتوازن قيود الملخص إلى USD # قبل الإرسال. الفترات المغلقة في GFS ترفض القيود.
+VAN routing · funds allocated to customer accounts	VAN 路由 · 资金已分配至客户账户	Enrutamiento VAN · fondos asignados a cuentas de clientes	توجيه VAN · تخصيص الأموال لحسابات العملاء
+Sample counts	示例计数	Conteos de ejemplo	أعداد نموذجية
+Document counts by system · invoices & credit notes	各系统单据数量 · 发票及贷项通知单	Recuento de documentos por sistema · facturas y notas de crédito	أعداد المستندات حسب النظام · الفواتير والإشعارات الدائنة
+Not updated	未更新	No actualizado	لم يُحدَّث
+Status not flowed back to LMS	状态未回传 LMS	Estado no devuelto a LMS	لم تُعد الحالة إلى LMS
+Posted · amount differs	已过账 · 金额不一致	Contabilizado · el importe difiere	مرحّل · المبلغ مختلف
+Amount differs (sample)	金额不一致（示例）	El importe difiere (ejemplo)	المبلغ مختلف (نموذج)
+Operational, management and financial reports · exception ageing and SLA views · revenue leakage · export to Excel, CSV and PDF	运营、管理及财务报表 · 异常账龄及 SLA 视图 · 收入流失 · 导出 Excel、CSV 及 PDF	Informes operativos, de gestión y financieros · antigüedad de excepciones y vistas SLA · fuga de ingresos · exportación a Excel, CSV y PDF	تقارير تشغيلية وإدارية ومالية · أعمار الاستثناءات وعروض SLA · تسرب الإيرادات · تصدير إلى Excel وCSV وPDF
+Invoiced vs yet to be invoiced	已开票与待开票对比	Facturado vs pendiente de facturar	المفوتر مقابل غير المفوتر
+All invoices, credit notes and proformas by period	按期间列出的所有发票、贷项通知单及形式发票	Todas las facturas, notas de crédito y proformas por período	جميع الفواتير والإشعارات الدائنة والفواتير المبدئية حسب الفترة
+Open exceptions by queue and age	按队列及账龄的未结异常	Excepciones abiertas por cola y antigüedad	الاستثناءات المفتوحة حسب القائمة والعمر
+Turnaround against queue SLAs	对比队列 SLA 的处理时效	Tiempo de respuesta frente a SLA de colas	زمن الإنجاز مقابل SLA للقوائم
+D&D unbilled and long-dwell containers	滞期/滞箱未开票及长期滞留集装箱	Contenedores D&D sin facturar y de larga permanencia	حاويات D&D غير المفوترة وطويلة البقاء
+Released cargo with unpaid D&D · unbilled charges	已放行但滞期/滞箱费未付的货物 · 未开票费用	Carga liberada con D&D impagado · cargos sin facturar	بضاعة مفرج عنها مع D&D غير مدفوعة · رسوم غير مفوترة
+Credit notes and DAR waivers with approver and reason code	含审批人及原因代码的贷项通知单和 DAR 豁免	Notas de crédito y exenciones DAR con aprobador y código de motivo	الإشعارات الدائنة وإعفاءات DAR مع المعتمِد ورمز السبب
+Finance / audit	财务/审计	Finanzas / auditoría	المالية / التدقيق
+Receipts by source, matched and unapplied	按来源的收据、已匹配及未分配	Recibos por origen, conciliados y no aplicados	الإيصالات حسب المصدر، المطابقة وغير المخصصة
+Unapplied and credit balances by customer	按客户的未分配及贷方余额	Saldos no aplicados y acreedores por cliente	الأرصدة غير المخصصة والدائنة حسب العميل
+Current, #, #, #+ days	当前、#、#、# 天以上	Corriente, #, #, más de # días	الحالي، #، #، أكثر من # يومًا
+Submitted, accepted, rejected and provisional e-invoices	已提交、已接受、已拒绝及临时电子发票	Facturas electrónicas enviadas, aceptadas, rechazadas y provisionales	الفواتير الإلكترونية المرسلة والمقبولة والمرفوضة والمؤقتة
+Tax / compliance	税务/合规	Impuestos / cumplimiento	الضرائب / الامتثال
+LMS, GIRS, GFS and third-party counts and mismatches	LMS、GIRS、GFS 及第三方的数量与不一致	Recuentos y discrepancias de LMS, GIRS, GFS y terceros	أعداد LMS و GIRS و GFS والأطراف الخارجية وحالات عدم التطابق
+Share of invoices raised without manual touch	无需人工干预开具的发票占比	Proporción de facturas emitidas sin intervención manual	نسبة الفواتير الصادرة دون تدخل يدوي
+Invoice, credit note and approval events	发票、贷项通知单及审批事件	Eventos de facturas, notas de crédito y aprobaciones	أحداث الفواتير والإشعارات الدائنة والموافقات
+Ops Cockpit exceptions	运营驾驶舱异常	Excepciones de la cabina de operaciones	استثناءات لوحة قيادة العمليات
+Dispute isolation	争议隔离	Aislamiento de disputas	عزل النزاعات
+Statement summary (USD)	对账单汇总（USD）	Resumen del extracto (USD)	ملخص الكشف (USD)
+Unapplied cash receipts	未分配现金收据	Recibos de efectivo no aplicado	إيصالات النقد غير المخصص
+Apply provisional credit allocation for unapplied cash	对未分配现金应用临时贷记分配	Aplicar asignación provisional de crédito al efectivo no aplicado	تطبيق تخصيص ائتماني مؤقت للنقد غير المخصص
+Billed-to party determination · one B/L billed to several parties · allocation and cent rounding · parent-child invoices · release of paid containers only	收票方判定 · 一份提单向多方开票 · 分摊及分位舍入 · 母子发票 · 仅放行已付款集装箱	Determinación de facturar a · un B/L facturado a varias partes · asignación y redondeo al céntimo · facturas padre-hijo · solo se liberan contenedores pagados	تحديد الطرف المفوتر إليه · بوليصة واحدة لعدة أطراف · التوزيع وتقريب السنتات · فواتير أم وفرعية · الإفراج عن الحاويات المدفوعة فقط
+Sample B/Ls and amounts	示例提单及金额	B/L e importes de ejemplo	بوالص ومبالغ نموذجية
+Generate # split invoices	生成 # 张拆分发票	Generar # facturas divididas	إنشاء # فواتير مقسمة
+# parties · # containers · USD #	# 方 · # 个集装箱 · USD #	# partes · # contenedores · USD #	# أطراف · # حاويات · USD #
+Charge split ·	费用拆分 ·	División del cargo ·	تقسيم الرسم ·
+Primary booking debtor	主订舱债务人	Deudor principal de la reserva	المدين الرئيسي للحجز
++# rounding	+# 舍入	+# redondeo	+# تقريب
+Banker's rounding · odd cents go to the primary booking debtor	银行家舍入 · 零头分计入主订舱债务人	Redondeo bancario · los céntimos sobrantes van al deudor principal	تقريب مصرفي · السنتات الفردية تذهب إلى المدين الرئيسي
+No contract override for this B/L	此提单无合同覆盖	Sin excepción por contrato para este B/L	لا تجاوز للعقد لهذه البوليصة
+Booking-specific debtor	订舱指定债务人	Deudor específico de la reserva	مدين خاص بالحجز
+Split buyers named on the booking	订舱中指定的拆分买方	Compradores divididos indicados en la reserva	المشترون المقسمون المذكورون في الحجز
+Default consignee	默认收货人	Consignatario por defecto	المرسل إليه الافتراضي
+Used only when no earlier rule applies	仅在无前序规则适用时使用	Se usa solo si no aplica ninguna regla anterior	يُستخدم فقط عند عدم انطباق قاعدة سابقة
+Master amendment	主单修改	Modificación del maestro	تعديل البوليصة الرئيسية
+When master B/L charges change after the split invoices are sent, each affected child invoice is credited and re-issued with the new share. The parent-child link is kept for audit.	拆分发票发出后若主提单费用变更，每张受影响的子发票将被贷记并按新分摊重新开具，母子关联保留以供审计。	Si los cargos del B/L maestro cambian tras enviar las facturas divididas, cada factura hija afectada se acredita y se vuelve a emitir con la nueva participación. El vínculo padre-hijo se conserva para auditoría.	عند تغير رسوم البوليصة الرئيسية بعد إرسال الفواتير المقسمة، يُقيد كل فاتورة فرعية متأثرة دائنًا وتُعاد إصدارها بالحصة الجديدة. يُحتفظ بالرابط بين الأم والفرعية للتدقيق.
+Generate the split invoices first.	请先生成拆分发票。	Genere primero las facturas divididas.	أنشئ الفواتير المقسمة أولاً.
+Simulate master amendment	模拟主单修改	Simular modificación del maestro	محاكاة تعديل البوليصة الرئيسية
+Settlement check	结算检查	Comprobación de liquidación	فحص التسوية
+Settled · overpayment staged	已结清 · 多付款已暂存	Liquidado · sobrepago en preparación	مسدد · الدفعة الزائدة قيد التجهيز
+COREOR cargo release → LMS	COREOR 货物放行 → LMS	Liberación de carga COREOR → LMS	إفراج COREOR عن البضاعة ← LMS
+COREOR sent · ACK #	COREOR 已发送 · ACK #	COREOR enviado · ACK #	تم إرسال COREOR · ACK #
+Unapplied cash staging queue	未分配现金暂存队列	Cola de preparación de efectivo no aplicado	قائمة تجهيز النقد غير المخصص
+Overpayment staged as unapplied cash	多付款已作为未分配现金暂存	Sobrepago preparado como efectivo no aplicado	الدفعة الزائدة مجهزة كنقد غير مخصص
+Underpayment Tolerance & Cargo Release	少付容差与货物放行	Tolerancia de pago insuficiente y liberación de carga	تفاوت الدفع الناقص والإفراج عن البضاعة
+Batch run: [Timing anchor] + [n] days · configured per country	批处理运行：[时间锚点] + [n] 天 · 按国家配置	Ejecución del lote: [ancla temporal] + [n] días · configurado por país	تشغيل الدفعة: [مرجع التوقيت] + [n] أيام · مهيأ لكل دولة
+Warning at [x]% · hold at [y]% of limit · LMS release hold when overdue > # days	额度 [x]% 时警告 · [y]% 时冻结 · 逾期超过 # 天时 LMS 暂停放行	Advertencia al [x]% · bloqueo al [y]% del límite · retención de liberación en LMS si el atraso > # días	تحذير عند [x]% · تعليق عند [y]% من الحد · تعليق الإفراج في LMS عند التأخر > # أيام
+Min [n] · Max [n] invoices	最少 [n] · 最多 [n] 张发票	Mín. [n] · Máx. [n] facturas	الحد الأدنى [n] · الحد الأقصى [n] فواتير
+Paying on behalf of: [Consignee]	代付：[收货人]	Pagando en nombre de: [Consignatario]	الدفع نيابة عن: [المرسل إليه]
+Draft · revision # · also open by [User #]	草稿 · 修订 # · [User #] 也在编辑	Borrador · revisión # · también abierto por [User #]	مسودة · المراجعة # · مفتوحة أيضًا لدى [User #]
