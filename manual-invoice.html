@@ -84,7 +84,7 @@ input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cur
 }
 .select + svg{transition:transform .15s ease}
 .menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
-.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
+.lg-list{max-height:280px;overflow-y:auto;overscroll-behavior:contain}.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
 .mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
 .mi:hover{background:var(--hover);color:var(--ink)}
 .mi:active{background:var(--neutral)}
@@ -338,6 +338,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
               <div aria-hidden="true" onClick="{{shell.closeUm}}" style="position: fixed; inset: 0; z-index: 29"></div>
               <div class="menu" role="menu" aria-label="User menu">
+                <sc-if value="{{shell.menuMain}}" hint-placeholder-val="{{ true }}">
                 <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px">
                   <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex: none">{{shell.initials}}</span>
                   <span class="mi-txt"><span style="font-weight: 600; line-height: 20px">{{shell.userName}}</span><span class="mi-sub">2 logins · roles from LMS IAM</span></span>
@@ -352,19 +353,11 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   </button>
                 </sc-for>
                 <div class="menu-sep"></div>
-                <button class="mi" role="menuitem" aria-haspopup="true" aria-expanded="{{shell.langA}}" onClick="{{shell.toggleLang}}">
+                <button class="mi" role="menuitem" aria-haspopup="true" onClick="{{shell.toggleLang}}">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
                   <span class="mi-txt"><span class="mi-lbl">Language</span><span class="mi-sub">{{shell.langName}}</span></span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; color: var(--muted); transition: transform .15s; transform: rotate({{shell.langR}})"><path d="M6 9l6 6 6-6"></path></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; color: var(--muted)"><path d="M9 6l6 6-6 6"></path></svg>
                 </button>
-                <sc-if value="{{shell.langOpen}}" hint-placeholder-val="{{ false }}"><div role="group" aria-label="Language">
-                  <sc-for list="{{shell.langs}}" as="g" hint-placeholder-count="4">
-                    <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" lang="{{g.code}}" onClick="{{g.pick}}" style="padding-inline-start: 36px; min-height: 36px">
-                      <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span></span><span class="mi-sub" style="margin-inline-start: auto">{{g.en}}</span>
-                      <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
-                    </button>
-                  </sc-for>
-                </div></sc-if>
                 <div class="menu-sep"></div>
                 <div style="display: flex; gap: 10px; padding: 6px 10px; color: var(--muted)">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg>
@@ -379,6 +372,23 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
                   <span class="mi-lbl">Sign out</span>
                 </button>
+                </sc-if>
+                <sc-if value="{{shell.langOpen}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; align-items: center; gap: 6px; padding: 2px 4px 8px">
+                    <button class="btn btn-icon btn-sm" aria-label="Back to profile menu" onClick="{{shell.toggleLang}}" style="width: 32px; padding: 0; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                    <span style="font-weight: 600">Language</span>
+                  </div>
+                  <div style="padding: 0 6px 6px"><input class="input lg-q" style="width: 100%; height: 34px" placeholder="Search language" aria-label="Search language" autocomplete="off" value="{{shell.lgQ}}" onInput="{{shell.setLgQ}}"></div>
+                  <div class="lg-list" role="group" aria-label="Languages">
+                    <sc-for list="{{shell.langs}}" as="g" hint-placeholder-count="4">
+                      <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                        <span class="mi-txt"><span class="mi-lbl" lang="{{g.code}}">{{g.label}}</span><span class="mi-sub">{{g.en}}</span></span>
+                        <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                      </button>
+                    </sc-for>
+                    <sc-if value="{{shell.lgNone}}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 10px; color: var(--muted)">No language matches “{{shell.lgQ}}”</div></sc-if>
+                  </div>
+                </sc-if>
               </div>
             </sc-if>
           </div>
@@ -571,13 +581,15 @@ class Component extends GirsPage {
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
       pending: 10, l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
-      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
+      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um, __lgo: false, __lgq: '' }), closeUm: () => this.setState({ __um: false, __lgo: false, __lgq: '' }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
-      langOpen: !!s.__lgo, langA: s.__lgo ? 'true' : 'false', langR: s.__lgo ? '180deg' : '0deg', toggleLang: () => this.setState({ __lgo: !s.__lgo }),
+      menuMain: !s.__lgo, langOpen: !!s.__lgo, lgQ: s.__lgq || '', setLgQ: (e) => this.setState({ __lgq: e.target.value }),
+      toggleLang: () => { this.setState({ __lgo: !s.__lgo, __lgq: '' }); if (!s.__lgo) setTimeout(() => { const i = document.querySelector('.lg-q'); if (i) i.focus(); }, 30); },
       langName: (GIRS_LANGS.find((x) => x[0] === s.__lang) || GIRS_LANGS[0])[1],
-      langs: GIRS_LANGS.map(([code, label, en]) => ({ code, label, en, on: s.__lang === code ? 'true' : 'false', mark: s.__lang === code ? '✓' : '',
-        pick: () => { save('girs.lang', code); this.setState({ __lang: code, __lgo: false, __um: false, __toast: code === 'en' ? '' : 'Language set to ' + en + '. The Operations Cockpit is translated in this prototype; other screens stay in English.' }); } })),
+      lgNone: !GIRS_LANGS.some(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())),
+      langs: GIRS_LANGS.filter(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())).map(([code, label, en]) => ({ code, label, en, on: s.__lang === code ? 'true' : 'false', mark: s.__lang === code ? '✓' : '',
+        pick: () => { save('girs.lang', code); this.setState({ __lang: code, __lgo: false, __lgq: '', __um: false, __toast: code === 'en' ? '' : 'Language set to ' + en + '. The Operations Cockpit is translated in this prototype; other screens stay in English.' }); } })),
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
