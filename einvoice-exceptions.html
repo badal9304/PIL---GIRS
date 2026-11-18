@@ -354,6 +354,20 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   </button>
                 </sc-for>
                 <div class="menu-sep"></div>
+                <button class="mi" role="menuitem" aria-haspopup="true" aria-expanded="{{shell.langA}}" onClick="{{shell.toggleLang}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Language</span><span class="mi-sub">{{shell.langName}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; color: var(--muted); transition: transform .15s; transform: rotate({{shell.langR}})"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
+                <sc-if value="{{shell.langOpen}}" hint-placeholder-val="{{ false }}"><div role="group" aria-label="Language">
+                  <sc-for list="{{shell.langs}}" as="g" hint-placeholder-count="4">
+                    <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" lang="{{g.code}}" onClick="{{g.pick}}" style="padding-inline-start: 36px; min-height: 36px">
+                      <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span></span><span class="mi-sub" style="margin-inline-start: auto">{{g.en}}</span>
+                      <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                    </button>
+                  </sc-for>
+                </div></sc-if>
+                <div class="menu-sep"></div>
                 <div style="display: flex; gap: 10px; padding: 6px 10px; color: var(--muted)">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg>
                   <span class="mi-txt"><span class="mi-sub">Single sign-on · MFA for financial approvals</span><span class="mi-sub">Idle timeout 15 min, then automatic logout</span></span>
@@ -525,19 +539,20 @@ class GirsPage extends DCLogic {
 }
 
 const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
+const GIRS_LANGS = [['en', 'English', 'English'], ['zh', '中文（简体）', 'Chinese (Simplified)'], ['ar', 'العربية', 'Arabic'], ['es', 'Español', 'Spanish']];
 const LOGINS = [{ role: 'Billing Executive', agency: 'Singapore · SIN', code: 'SIN' }, { role: 'Team Lead', agency: 'Malaysia · PKG', code: 'PKG' }];
 class Component extends GirsPage {
   constructor(p) {
     super(p);
-    let sb = false, th = 'light', hub = 'SIN', ent = 'PIL';
-    try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
+    let sb = false, th = 'light', hub = 'SIN', ent = 'PIL', lang = 'en';
+    try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; lang = localStorage.getItem('girs.lang') || 'en'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
     let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
     const narrow = false;
     const fit = () => { try { const z = Math.max(0.1, window.innerWidth / 1920); return { z, h: window.innerHeight / z }; } catch (e) { return { z: 1, h: 1080 }; } };
     const f0 = fit();
     try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
     try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
-    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g1' });
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __lang: lang, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g1' });
   }
   renderVals() {
     const v = super.renderVals();
@@ -573,6 +588,10 @@ class Component extends GirsPage {
       um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
+      langOpen: !!s.__lgo, langA: s.__lgo ? 'true' : 'false', langR: s.__lgo ? '180deg' : '0deg', toggleLang: () => this.setState({ __lgo: !s.__lgo }),
+      langName: (GIRS_LANGS.find((x) => x[0] === s.__lang) || GIRS_LANGS[0])[1],
+      langs: GIRS_LANGS.map(([code, label, en]) => ({ code, label, en, on: s.__lang === code ? 'true' : 'false', mark: s.__lang === code ? '✓' : '',
+        pick: () => { save('girs.lang', code); this.setState({ __lang: code, __lgo: false, __um: false, __toast: code === 'en' ? '' : 'Language set to ' + en + '. The Operations Cockpit is translated in this prototype; other screens stay in English.' }); } })),
       userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
       exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
       hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
