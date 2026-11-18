@@ -41,6 +41,10 @@ Clickable prototype of the GIRS Live Build UI Showcase screens. Designed for 192
 
 The search box in the top bar (Ctrl/⌘ K or `/` from any screen) searches screens, invoices (with status), B/Ls ready to invoice, bookings, containers, vessel/voyages, customers, charge codes and master data. It lives in `girs-search.js`; its sample-data index `girs-index.js` is generated — after changing sample data run `node tools/build-search-index.js`.
 
+## Language and appearance
+
+Language and Light/Dark live in the profile menu and apply to every screen. English is the source; `girs-i18n.js` translates the interface into Chinese (Simplified), Spanish and Arabic (right-to-left) from `i18n-<lang>.js`. To add or fix a phrase, edit `tools/i18n/*.tsv` (English, Chinese, Spanish, Arabic; `#` stands for any number) and run `python3 tools/build-i18n.py`.
+
 ## Run locally
 
 Open `index.html` through a local web server (for example the VS Code "Live Server" extension), or simply open it in a browser.
