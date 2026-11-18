@@ -37,6 +37,10 @@ Clickable prototype of the GIRS Live Build UI Showcase screens. Designed for 192
 | Month-End Close | `month-end.html` |
 | Reports & Analytics | `reports.html` |
 
+## Global search
+
+The search box in the top bar (Ctrl/⌘ K or `/` from any screen) searches screens, invoices (with status), B/Ls ready to invoice, bookings, containers, vessel/voyages, customers, charge codes and master data. It lives in `girs-search.js`; its sample-data index `girs-index.js` is generated — after changing sample data run `node tools/build-search-index.js`.
+
 ## Run locally
 
 Open `index.html` through a local web server (for example the VS Code "Live Server" extension), or simply open it in a browser.

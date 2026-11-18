@@ -461,19 +461,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <div class="gsearch">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
             <label for="gq" class="sr">Search</label>
-            <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
-            <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
-              <div class="menu" role="listbox" aria-label="Search suggestions" style="inset-inline: 0; width: auto; top: 42px">
-                <a href="enquiry.html" class="mi" role="option" onClick="{{shell.goFind}}">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
-                  <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
-                </a>
-                <a href="invoice-list-v2.html" class="mi" role="option" onClick="{{shell.goFind}}">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
-                  <span>Find “<strong>{{shell.q}}</strong>” in Invoice List</span>
-                </a>
-              </div>
-            </sc-if>
+            <input id="gq" class="input" placeholder="{{shell.ph}}" autocomplete="off" spellcheck="false">
           </div>
           <div class="grow"></div>
           <div class="gctx" style="position: relative">
@@ -1044,7 +1032,7 @@ class Component extends GirsPage {
       hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
-      pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
+      pending: 10, l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
       um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
@@ -1059,5 +1047,6 @@ class Component extends GirsPage {
 
 </script>
 <script src="runtime.js"></script>
+<script src="girs-search.js"></script>
 </body>
 </html>

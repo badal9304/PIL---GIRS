@@ -544,19 +544,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <div class="gsearch">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
             <label for="gq" class="sr">Search</label>
-            <input id="gq" class="input" value="{{shell.q}}" onInput="{{shell.setQ}}" placeholder="{{shell.ph}}" autocomplete="off">
-            <sc-if value="{{shell.hasQ}}" hint-placeholder-val="{{ false }}">
-              <div class="menu" role="listbox" aria-label="Search suggestions" style="inset-inline: 0; width: auto; top: 42px">
-                <a href="enquiry.html" class="mi" role="option" onClick="{{shell.goFind}}">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
-                  <span>Search “<strong>{{shell.q}}</strong>” in Enquiry &amp; Monitoring</span>
-                </a>
-                <a href="invoice-list-v2.html" class="mi" role="option" onClick="{{shell.goFind}}">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M9 9v10"></path></svg>
-                  <span>Find “<strong>{{shell.q}}</strong>” in Invoice List</span>
-                </a>
-              </div>
-            </sc-if>
+            <input id="gq" class="input" placeholder="{{shell.ph}}" autocomplete="off" spellcheck="false">
           </div>
           <div class="grow"></div>
           <div class="gctx" style="position: relative">
@@ -965,6 +953,12 @@ function ivSt2(i) {
   if (i.status === 'Paid') return ['Paid', 'Receipted', 'Reconciled'][ivHash(i.no) % 3];
   return 'Unpaid';
 }
+// Search: every word typed must match; plain words match the start of a word ("paid" finds Paid, not Unpaid), codes and numbers match anywhere
+function ivMatch(h, q) {
+  const t = String(q || '').trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length) return true;
+  const w = h.split(/[^a-z0-9]+/);
+  return t.every((k) => (/[^a-z]/.test(k) ? h.includes(k) : w.some((x) => x.startsWith(k))));
+}
 // Search text for v2: every value shown in the table (plus booking, container, customer code)
 function ivHay(i) {
   const amt = ivMain(i), cur = i.lines[0][2];
@@ -1051,9 +1045,15 @@ class GirsPage extends DCLogic {
     let q = '';
     try { q = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
     try { const fq = localStorage.getItem('girs.find'); if (fq) { q = fq; localStorage.removeItem('girs.find'); } } catch (e) {}
-    this.state = { tab: 'inv', view: 'list', q, fd: null, fo: [], fpt: [], fs: [], fe: [], fg: [], fp: [], ft: [], fc: [], fopen: null, sel: {}, exp: {}, menu: null, dlg: null, f: {},
-      period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, rv: null, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
+    // deep links from the global search: ?rv=<ready id> opens that B/L's review, ?open=<invoice no> opens the invoice
+    let rvId = '', tab = 'inv';
+    try { const P = new URLSearchParams(location.search); rvId = P.get('rv') || ''; this.__open = P.get('open') || ''; if (P.get('tab') === 'ready') tab = 'ready'; } catch (e) {}
+    const rvOk = rvId && IV_RDY.some((r) => r.id === rvId);
+    if (rvOk) tab = 'ready';
+    this.state = { tab, view: rvOk ? 'review' : 'list', rv: rvOk ? { ids: [rvId], i: 0 } : null, q, fd: null, fo: [], fpt: [], fs: [], fe: [], fg: [], fp: [], ft: [], fc: [], fopen: null, sel: {}, exp: {}, menu: null, dlg: null, f: {},
+      period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
   }
+  componentDidMount() { if (this.__open) { const i = this.invoices().find((x) => x.no === this.__open); if (i) setTimeout(() => ivView(i), 50); } }
   put(mut, extra) { const d = JSON.parse(JSON.stringify(this.state.store)); mut(d); ivSave(d); if (typeof extra === 'function') extra = extra(); this.setState(Object.assign({ store: d }, extra || {})); if (extra && extra.__toast) this.fade(extra.__toast); }
   fade(t) { try { clearTimeout(this.__ft); this.__ft = setTimeout(() => { if (this.state.__toast === t) this.setState({ __toast: '' }); }, 5000); } catch (e) {} }
   ev(d, no, what) { d.ev = d.ev || {}; (d.ev[no] = d.ev[no] || []).push([ivStamp(), what, 'Daniel Tan']); }
@@ -1106,7 +1106,7 @@ class GirsPage extends DCLogic {
     const INV = this.invoices();
     const byNo = {}; INV.forEach((i) => { byNo[i.no] = i; });
     const q = s.q.trim().toLowerCase();
-    const shown = INV.filter((i) => (!q || ivHay(i).includes(q))
+    const shown = INV.filter((i) => (!q || ivMatch(ivHay(i), q))
       && ivIn(s.fo, i.ctry) && ivIn(s.fpt, i.port) && ivIn(s.fs, i.st2) && ivIn(s.fe, i.einv) && ivIn(s.fg, i.gfs) && ivIn(s.ft, i.type) && (!ivArr(s.fc).length || i.lines.some((l) => ivArr(s.fc).includes(l[2]))));
     const uniq = (a) => a.filter((v, n) => a.indexOf(v) === n);
     // Filters panel (v2): choices are staged in s.fd and applied only on Done
@@ -1205,7 +1205,7 @@ class GirsPage extends DCLogic {
     const gOfS = (st) => (GROUPS.find((g) => g[2] && g[2].includes(st)) || [])[0];
     const gOf = (i) => i.pay === 'Partially paid' ? 'part' : gOfS(i.status);
     const grp = s.grp || 'all';
-    const qOnly = INV.filter((i) => !q || ivHay(i).includes(q));
+    const qOnly = INV.filter((i) => !q || ivMatch(ivHay(i), q));
     const gShown = qOnly.filter((i) => grp === 'all' || gOf(i) === grp).sort(sorter);
     const dRows = s.dview === 'rows';
     const PQ = pager(isD ? (dRows ? 'dr' : 'dc') : 'cq', gShown, isD ? (dRows ? [25, 50, 100] : [12, 24, 48]) : [20, 50, 100]);
@@ -1598,7 +1598,7 @@ class Component extends GirsPage {
       hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
-      pending: 10, l: L, ph: s.__narrow ? 'Search B/L, invoice…' : 'Search B/L, VVD, invoice no., container no.',
+      pending: 10, l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
       um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um }), closeUm: () => this.setState({ __um: false }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
@@ -1615,5 +1615,6 @@ class Component extends GirsPage {
 <script src="girs-docs.js"></script>
 <script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
+<script src="girs-search.js"></script>
 </body>
 </html>
