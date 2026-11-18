@@ -169,7 +169,6 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .kv3 .l,.rv .l{font-size:12px;color:var(--muted)}
 .kv3 .v{font-size:14px;font-weight:500}
 .rv{display:flex;flex-direction:column;gap:6px;font-size:13px}
-.gm-white{background:var(--surface)}.gm-white .ri{box-shadow:none}.ri-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 0 0;border-top:1px solid var(--line2)}
 .ri{padding:0 32px 28px;max-width:1240px;width:100%;margin:0 auto;box-sizing:border-box;font-size:13px;line-height:19px}
 .ri .k{font-size:11px;line-height:16px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;display:block}
 .ri-hd{text-align:center;padding:24px 0 18px;border-bottom:1px solid var(--line2)}.ri-hd h1{margin:0;font-size:24px;line-height:30px;letter-spacing:.04em;font-weight:700}
@@ -593,7 +592,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </div>
         </div>
       </div>
-      <main class="gmain {{mainCls}}" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+      <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <div class="tabs" role="tablist" aria-label="Invoice List views"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="cnt mono">{{t.n}}</span></button></sc-for></div>
         <sc-if value="{{tabInv}}" hint-placeholder-val="{{ true }}">
           <div class="ftb">
@@ -688,14 +687,14 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div class="ri-words">{{rv.words}}</div>
             </section>
           </div>
-          <div class="ri-foot">
+          <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 4px">
             <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 13px"><input type="checkbox" class="cbx" checked="{{decl}}" disabled="{{rv.hasErr}}" onChange="{{toggleDecl}}"><span><b style="color: var(--accent2)">Declaration:</b> I confirm the customer, charges, currency and tax details.</span></label>
-            <div style="margin-inline-start: auto; display: flex; align-items: center; gap: 12px">
-              <span style="font-size: 13px; color: var(--muted)">{{rvHint}}</span>
+            <div style="display: flex; align-items: center; gap: 12px">
               <button class="btn" onClick="{{rvCancel}}">Cancel</button>
               <button class="btn" onClick="{{rvSave}}">Save</button>
               <button class="btn" disabled="{{rv.noErr}}" onClick="{{rvResolve}}">Resolve errors</button>
               <button class="btn btn-primary" disabled="{{rvGenDis}}" onClick="{{rvGenerate}}">Generate invoice</button>
+              <span style="font-size: 13px; color: var(--muted)">{{rvHint}}</span>
             </div>
           </div>
         </sc-if></sc-if>
@@ -1459,7 +1458,7 @@ class GirsPage extends DCLogic {
       readyN: READY.length, hasReady: READY.length > 0, readyOn: s.tab === 'ready' ? 'true' : 'false',
       readySummary: ['Ready', 'Warning', 'Blocked'].map((k) => READY.filter((r) => r.status === k).length + ' ' + ({ Ready: 'ready', Warning: 'need review', Blocked: 'blocked' })[k]).join(' · '),
       openReady: () => self.setState({ tab: 'ready', view: 'list', menu: null }), backInv: () => self.setState({ tab: 'inv', view: 'list', rv: null }),
-      isA, isB, isG, mainCls: s.tab === 'ready' ? 'gm-white' : '', tabReady: s.tab === 'ready', tabInv: s.tab === 'inv', inList: s.view === 'list', inReview: s.view === 'review' && !!cur,
+      isA, isB, isG, tabReady: s.tab === 'ready', tabInv: s.tab === 'inv', inList: s.view === 'list', inReview: s.view === 'review' && !!cur,
       readyListOn: s.view === 'list' || !cur,
       tabs: [['ready', 'Ready to invoice', READY.length], ['inv', 'Invoices', INV.length]].map(([k, label, n]) => ({ label, n, on: s.tab === k ? 'true' : 'false', pick: () => self.setState({ tab: k, menu: null }) })),
       manual: () => ivGo('ManualInvoice.dc.html'), goGenerate: () => ivGo('InvoiceGenerate.dc.html'), goList: () => ivGo('InvoiceListB.dc.html'),
