@@ -19,12 +19,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',
 a{color:var(--accent)}a:hover{color:var(--accent2)}
 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.nav-item{display:flex;align-items:center;gap:12px;height:32px;padding-inline:12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.nav-item{position:relative;display:flex;align-items:center;height:32px;padding-inline:42px 12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:400;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nav-item:hover{background:var(--hover);color:var(--ink)}
-.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 10px 0 12px;border-radius:6px;color:var(--muted)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;height:36px;padding:0 8px 0 12px;border-radius:6px;color:var(--muted2);font-size:13px;font-weight:600;line-height:18px}.nav-grp .ng-ic{flex:none;color:var(--muted)}.nav-grp .ng-l{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:start}.nav-grp .ng-ch{flex:none;color:var(--muted);transition:transform .15s}.nav-grp:hover .ng-ic,.nav-grp-on .ng-ic{color:var(--accent)}.nav-grp-on{color:var(--ink)}.ng-sub{display:flex;flex-direction:column;gap:2px}.ng-fly{position:fixed;left:72px;z-index:61;width:232px;overflow:auto;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(22,26,33,.18);box-sizing:border-box}.ng-fly .nav-item{padding-inline:12px}.ng-fly .nav-on::before{display:none}.ng-fh{padding:6px 12px 6px;font-size:11px;line-height:16px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.ng-bd{position:fixed;top:0;right:0;bottom:0;left:64px;z-index:60}nav[data-c=true] .nav-grp[aria-expanded=true]{background:var(--hover)}nav[data-c=true] .nav-grp-on{background:var(--tint)}nav[data-c=true] .nav-grp-on .ng-ic{color:var(--accent)}
 .nav-grp:hover{background:var(--hover);color:var(--ink)}
 .nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}
+.nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}.nav-on::before{content:"";position:absolute;inset-inline-start:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:var(--accent)}
 .nav-item svg{flex:none}
 .sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:36px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
 .sbtoggle:hover{background:var(--hover);color:var(--ink)}
@@ -254,191 +254,140 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </div>
         </div>
       </div>
-      <nav aria-label="Screens" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
+      <nav aria-label="Screens" data-c="{{shell.cA}}" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
+        <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-bd" onClick="{{shell.flyClose}}" aria-hidden="true"></div></sc-if>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" style="{{shell.hide}}">
-            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g0}}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" title="{{shell.l.g0}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g0}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
-            <div id="ng-g0" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="index.html" class="nav-item" title="{{shell.l.nMain}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.3 19a10 10 0 1 1 17.4 0"></path><path d="M12 14l4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nMain}}</span>
+            <div id="ng-g0" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g0}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g0}}</div></sc-if>
+          <a href="index.html" class="nav-item" title="{{shell.l.nMain}}">{{shell.l.nMain}}
           </a>
-          <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"></path><circle cx="19" cy="18" r="2"></circle></svg>
-            <span style="{{shell.hide}}">{{shell.l.nChargeProcessing}}</span>
+          <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}">{{shell.l.nChargeProcessing}}
           </a>
-          <a href="dd-engine.html" class="nav-item" title="{{shell.l.nDDEngine}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="12" rx="2"></rect><path d="M7 7v12M12 7v12M17 7v12"></path><path d="M12 3v2"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nDDEngine}}</span>
+          <a href="dd-engine.html" class="nav-item" title="{{shell.l.nDDEngine}}">{{shell.l.nDDEngine}}
           </a>
-          <a href="integration-monitor.html" class="nav-item" title="{{shell.l.nIntegrationMonitor}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"></circle><circle cx="19" cy="5" r="2.5"></circle><circle cx="19" cy="19" r="2.5"></circle><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nIntegrationMonitor}}</span>
+          <a href="integration-monitor.html" class="nav-item" title="{{shell.l.nIntegrationMonitor}}">{{shell.l.nIntegrationMonitor}}
           </a>
-          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nDocumentIntake}}</span>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}">{{shell.l.nDocumentIntake}}
           </a>
             </div>
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" style="{{shell.hide}}">
-            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g1}}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" title="{{shell.l.g1}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h6"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g1}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
-            <div id="ng-g1" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
-            <span style="{{shell.hide}}">Invoice List</span>
+            <div id="ng-g1" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g1}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g1}}</div></sc-if>
+          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List">Invoice List
           </a>
-          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 6 6h0a6 6 0 0 1 6 6"></path><path d="M18 3v6a6 6 0 0 1-6 6"></path><circle cx="6" cy="21" r="1.5"></circle></svg>
-            <span style="{{shell.hide}}">{{shell.l.nSplitBilling}}</span>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}">{{shell.l.nSplitBilling}}
           </a>
-          <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v6M9 15h6"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nManualInvoice}}</span>
+          <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}">{{shell.l.nManualInvoice}}
           </a>
-          <a href="invoice-previewer.html" class="nav-item" title="{{shell.l.nInvoicePreviewer}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nInvoicePreviewer}}</span>
+          <a href="invoice-previewer.html" class="nav-item" title="{{shell.l.nInvoicePreviewer}}">{{shell.l.nInvoicePreviewer}}
           </a>
-          <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M9 15h6"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCreditNotes}}</span>
+          <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}">{{shell.l.nCreditNotes}}
           </a>
-          <a href="credit-note-list.html" class="nav-item" title="{{shell.l.nCreditNoteList}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"></path><path d="M9 12h6"></path><path d="M9 16h4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCreditNoteList}}</span>
+          <a href="credit-note-list.html" class="nav-item" title="{{shell.l.nCreditNoteList}}">{{shell.l.nCreditNoteList}}
           </a>
-          <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nDARConsole}}</span>
+          <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}">{{shell.l.nDARConsole}}
           </a>
-          <a href="einvoice-exceptions.html" class="nav-item" title="{{shell.l.nEInvoiceExceptions}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M12 12v3M12 18h.01"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nEInvoiceExceptions}}</span>
+          <a href="einvoice-exceptions.html" class="nav-item" title="{{shell.l.nEInvoiceExceptions}}">{{shell.l.nEInvoiceExceptions}}
           </a>
             </div>
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" style="{{shell.hide}}">
-            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g2}}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" title="{{shell.l.g2}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="13" rx="2"></rect><circle cx="12" cy="12.5" r="2.5"></circle><path d="M6 10v5M18 10v5"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g2}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{shell.acc.g2}}" hint-placeholder-val="{{ true }}">
-            <div id="ng-g2" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h7"></path><path d="M15 17l2 2 4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nReceipting}}</span>
+            <div id="ng-g2" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g2}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g2}}</div></sc-if>
+          <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}">{{shell.l.nReceipting}}
           </a>
-          <a href="cashapp-workbench.html" class="nav-item" title="{{shell.l.nCashAppWorkbench}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"></rect><path d="M3 10h18M16 15h2"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCashAppWorkbench}}</span>
+          <a href="cashapp-workbench.html" class="nav-item" title="{{shell.l.nCashAppWorkbench}}">{{shell.l.nCashAppWorkbench}}
           </a>
-          <a href="tolerance-coreor.html" class="nav-item" title="{{shell.l.nToleranceCOREOR}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nToleranceCOREOR}}</span>
+          <a href="tolerance-coreor.html" class="nav-item" title="{{shell.l.nToleranceCOREOR}}">{{shell.l.nToleranceCOREOR}}
           </a>
-          <a href="soa-aging.html" class="nav-item" title="{{shell.l.nSOADashboard}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nSOADashboard}}</span>
+          <a href="soa-aging.html" class="nav-item" title="{{shell.l.nSOADashboard}}">{{shell.l.nSOADashboard}}
           </a>
-          <a href="credit-management.html" class="nav-item" title="{{shell.l.nCreditManagement}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"></path><path d="M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCreditManagement}}</span>
+          <a href="credit-management.html" class="nav-item" title="{{shell.l.nCreditManagement}}">{{shell.l.nCreditManagement}}
           </a>
             </div>
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" style="{{shell.hide}}">
-            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g3}}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" title="{{shell.l.g3}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-4.5"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g3}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{shell.acc.g3}}" hint-placeholder-val="{{ true }}">
-            <div id="ng-g3" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H4z"></path><path d="M8 20h8M12 16v4"></path><path d="M9 10l2 2 4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nApprovalsInbox}}</span>
+            <div id="ng-g3" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g3}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g3}}</div></sc-if>
+          <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}">{{shell.l.nApprovalsInbox}}
           </a>
-          <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nEnquiry}}</span>
+          <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}">{{shell.l.nEnquiry}}
           </a>
-          <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h11"></path><path d="M16 11l2 2 4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nReconciliation}}</span>
+          <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}">{{shell.l.nReconciliation}}
           </a>
-          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M9 15l2 2 4-4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nMonthEnd}}</span>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}">{{shell.l.nMonthEnd}}
           </a>
-          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 17v-3M12 17v-5M16 17v-2"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nReports}}</span>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}">{{shell.l.nReports}}
           </a>
             </div>
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" style="{{shell.hide}}">
-            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g4}}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          <button class="nav-grp" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" title="{{shell.l.g4}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g4}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{shell.acc.g4}}" hint-placeholder-val="{{ true }}">
-            <div id="ng-g4" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3 6"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCustomerMaster}}</span>
+            <div id="ng-g4" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g4}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g4}}</div></sc-if>
+          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}">{{shell.l.nCustomerMaster}}
           </a>
-          <a href="contract-master.html" class="nav-item" title="{{shell.l.nContractMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h4"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nContractMaster}}</span>
+          <a href="contract-master.html" class="nav-item" title="{{shell.l.nContractMaster}}">{{shell.l.nContractMaster}}
           </a>
-          <a href="charge-master.html" class="nav-item" title="{{shell.l.nChargeMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg>
-            <span style="{{shell.hide}}">{{shell.l.nChargeMaster}}</span>
+          <a href="charge-master.html" class="nav-item" title="{{shell.l.nChargeMaster}}">{{shell.l.nChargeMaster}}
           </a>
             </div>
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" style="{{shell.hide}}">
-            <span class="k" style="flex: 1 1 auto; display: inline-flex; align-items: center; color: inherit">{{shell.l.g5}}<span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-inline-start: 6px"></span></span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" title="{{shell.l.g5}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g5}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{shell.acc.g5}}" hint-placeholder-val="{{ true }}">
-            <div id="ng-g5" style="display: flex; flex-direction: column; gap: 2px">
-          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCountryMaster}}</span>
+            <div id="ng-g5" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g5}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g5}}</div></sc-if>
+          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}">{{shell.l.nCountryMaster}}
           </a>
-          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCurrencyMaster}}</span>
+          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}">{{shell.l.nCurrencyMaster}}
           </a>
-          <a href="city-master.html" class="nav-item" title="{{shell.l.nCityMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V8l6-3v16M11 21V10h8v11M8 10v.01M8 13v.01M8 16v.01M14 13h2M14 16h2"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nCityMaster}}</span>
+          <a href="city-master.html" class="nav-item" title="{{shell.l.nCityMaster}}">{{shell.l.nCityMaster}}
           </a>
-          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"></circle><path d="M12 7v14M5 13a7 7 0 0 0 14 0M9 10h6"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nPortMaster}}</span>
+          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}">{{shell.l.nPortMaster}}
           </a>
-          <a href="tax-setup.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nTaxSetup}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"></path><circle cx="7" cy="7" r="2.5"></circle><circle cx="17" cy="17" r="2.5"></circle></svg>
-            <span style="{{shell.hide}}">{{shell.l.nTaxSetup}}</span>
+          <a href="tax-setup.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nTaxSetup}}">{{shell.l.nTaxSetup}}
           </a>
-          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}" style="{{shell.item}}">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg>
-            <span style="{{shell.hide}}">{{shell.l.nExchangeRate}}</span>
+          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}">{{shell.l.nExchangeRate}}
           </a>
             </div>
           </sc-if>
@@ -1016,15 +965,18 @@ class Component extends GirsPage {
       theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
       drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
       toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
-      sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '',
+      sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '', grp: c ? 'justify-content:center;padding:0' : '',
       logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
       logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
       sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
-      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, !!c || s.__acc === g])),
-      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, s.__acc === g ? 'true' : 'false'])),
-      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, s.__acc === g ? '180deg' : '0deg'])),
-      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, () => this.setState({ __acc: s.__acc === g ? '' : g })])),
-      toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c }); },
+      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, c ? s.__fly === g : s.__acc === g])),
+      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? 'true' : 'false'])),
+      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? '180deg' : '0deg'])),
+      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (e) => { if (c) { const t = e && e.currentTarget ? Math.round(e.currentTarget.getBoundingClientRect().top) : 0; this.setState({ __fly: s.__fly === g ? '' : g, __flyT: t }); } else this.setState({ __acc: s.__acc === g ? '' : g }); }])),
+      toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c, __fly: '' }); },
+      // collapsed menu: a section icon opens its pages in a flyout beside the rail
+      cA: c ? 'true' : 'false', flyOn: !!c && !!s.__fly, flyClose: () => this.setState({ __fly: '' }), subCls: c ? 'ng-fly' : '',
+      subSt: c ? 'top:' + (s.__flyT || 0) + 'px;max-height:calc(100vh - ' + ((s.__flyT || 0) + 16) + 'px)' : '',
       lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
       lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
       setLight: () => { save('girs.th', 'light'); this.setState({ __th: 'light' }); },

@@ -216,6 +216,8 @@
     var t = e.target, typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
     if (((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) || (e.key === '/' && !typing)) { bind(); if (input) { e.preventDefault(); input.focus(); input.select(); } }
   });
+  // Esc also closes the collapsed side menu's flyout
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var bd = document.querySelector('.ng-bd'); if (bd) bd.click(); } });
   window.addEventListener('resize', place);
   window.addEventListener('scroll', place, true);
   // the page renders after load; keep binding until the top-bar search exists, and re-bind if it is re-created
