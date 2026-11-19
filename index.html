@@ -384,6 +384,70 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-ri small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hm-rt{flex:none;font-size:12px;color:var(--muted)}
 .nav-home{text-decoration:none}
+.hm-tc{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;margin-inline-start:6px;padding:0 6px;border-radius:9px;background:var(--neutral);color:var(--muted2);font-size:11px;font-weight:600;box-sizing:border-box}
+.tabb[aria-selected=true] .hm-tc{background:var(--tint);color:var(--accent2)}
+.hm-days{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px}
+.hm-day{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;min-width:0}
+.hm-day:hover{border-color:var(--bdh)}
+.hm-day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hm-day b{font-size:14px;font-weight:600;line-height:20px}
+.hm-day small{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-dw{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.hm-day.none{background:var(--sub)}
+.hm-day.none b{color:var(--muted2)}
+.hm-day.late{box-shadow:inset 0 3px 0 var(--warn)}
+.hm-day.late small{color:var(--warn)}
+.hm-day.miss{border-color:var(--warnbd);background:var(--warnbg)}
+.hm-day.miss .hm-dw,.hm-day.miss small{color:var(--warn)}
+.hm-day.on{border-color:var(--accent);background:var(--tint2);box-shadow:inset 0 0 0 1px var(--accent)}
+.hm-day.on .hm-dw{color:var(--accent2)}
+.hm-kpis6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.hm-k.ok{box-shadow:inset 3px 0 0 var(--ok)}
+.hm-k.info{box-shadow:inset 3px 0 0 var(--accent)}
+.hm-k.warn{box-shadow:inset 3px 0 0 var(--warn)}
+.hm-k.bad{box-shadow:inset 3px 0 0 var(--bad)}
+.hm-k.bad b{color:var(--bad)}
+.hm-scope{margin-inline-start:8px;font-size:12px;font-weight:400;color:var(--muted)}
+.hm-sw.inv,.hm-stk .inv{background:var(--ok)}
+.hm-sw.rdy,.hm-stk .rdy{background:var(--accent)}
+.hm-sw.blk,.hm-stk .blk{background:var(--warn)}
+.lst .r{text-align:end;font-variant-numeric:tabular-nums}
+.hm-wn{color:var(--warn);font-weight:600}
+.hm-dir{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
+.hm-dir.E{background:var(--tint);color:var(--accent2)}
+.hm-dir.I{background:var(--aibg);color:var(--ai)}
+.hm-prog{display:flex;align-items:center;gap:10px}
+.hm-stk{flex:1 1 auto;display:flex;gap:2px;height:10px;border-radius:5px;background:var(--neutral);overflow:hidden}
+.hm-stk i{display:block;height:100%}
+.hm-rd{flex:none;width:40px;text-align:end;font-size:12px;font-weight:600}
+.hm-rd.ok{color:var(--ok)}
+.hm-rd.warn{color:var(--warn)}
+.hm-rd.bad{color:var(--bad)}
+.hm-btab{width:100%}
+.hm-rs{font-weight:500}
+.hm-va{font-size:12px;color:var(--muted2);white-space:normal !important}
+.hm-ddg{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+.hm-ddg > section:last-child{order:-1}
+.hm-ddg .hm-age{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.hm-ddg .hm-dbr{border-bottom:0;padding-bottom:0}
+.hm-fil{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line2)}
+.hm-fc{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border:1px solid var(--line);border-radius:14px;font-size:12px;font-weight:500;color:var(--muted2);cursor:pointer}
+.hm-fc span{font-weight:600;color:var(--ink)}
+.hm-fc:hover{border-color:var(--bdh)}
+.hm-fc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hm-fc[aria-pressed=true]{border-color:var(--accent);background:var(--tint2);color:var(--accent2)}
+.hm-ss{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500;white-space:nowrap}
+.hm-ss.ok{background:var(--okbg);color:var(--ok)}
+.hm-ss.warn{background:var(--warnbg);color:var(--warn)}
+.hm-ss.info{background:var(--tint);color:var(--accent2)}
+.hm-ss.done{background:var(--neutral);color:var(--muted2)}
+.hm-dbr{display:flex;flex-direction:column;gap:6px;padding-bottom:12px;border-bottom:1px solid var(--line2)}
+.hm-dbr:last-child{border-bottom:0;padding-bottom:0}
+.hm-dbh{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.hm-dbh b{font-weight:500}
+.hm-dbh span{font-weight:600;font-variant-numeric:tabular-nums}
+.hm-dbr small{font-size:12px;color:var(--muted)}
+
 
 .bm-st{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
 .bm-tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;margin-inline-end:4px;border-radius:10px;font-size:12px;font-weight:500;background:var(--tint);color:var(--accent2)}
@@ -761,121 +825,137 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </div>
           <div class="gright" style="display: flex; align-items: center; gap: 8px; margin-inline-start: auto">
             <a class="btn btn-sm" href="enquiry.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Enquiry</a>
-            <a class="btn btn-sm" href="receipting.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h20v10H2zM12 12h.01"></path></svg>Record Receipt</a>
-            <a class="btn btn-sm btn-primary" href="manual-invoice.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Manual Invoice</a>
+            <a class="btn btn-sm" href="invoice-list-v2.html" style="text-decoration: none">Invoice List</a>
           </div>
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <sc-if value="{{alert}}" hint-placeholder-val="{{ true }}">
-          <div class="hm-alert" role="status">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg>
-            <span><b>Daily ROE feed unavailable.</b> BDRs that need today's exchange rate are held in exception staging.</span>
-            <a class="lnk" href="operations-cockpit.html">Open Operations Cockpit</a>
-            <button class="btn btn-icon btn-sm" aria-label="Dismiss" onClick="{{alertOff}}" style="margin-inline-start: auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        <div class="tabs" role="tablist" aria-label="Home">
+          <button class="tabb" role="tab" id="hm-t1" aria-controls="hm-p1" aria-selected="{{tabs.voyA}}" onClick="{{tabs.toVoy}}">Voyage Invoicing <span class="hm-tc">{{tabs.voyN}}</span></button>
+          <button class="tabb" role="tab" id="hm-t2" aria-controls="hm-p2" aria-selected="{{tabs.ddA}}" onClick="{{tabs.toDd}}">D&amp;D Billing <span class="hm-tc">{{tabs.ddN}}</span></button>
+        </div>
+
+        <sc-if value="{{tabs.voy}}" hint-placeholder-val="{{ true }}">
+          <div id="hm-p1" role="tabpanel" aria-labelledby="hm-t1" style="display: flex; flex-direction: column; gap: 16px">
+            <sc-if value="{{alert}}" hint-placeholder-val="{{ true }}">
+              <div class="hm-alert" role="status">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg>
+                <span><b>Daily ROE feed unavailable.</b> Invoices that need today's rate of exchange are on hold until the rate is received.</span>
+                <button class="btn btn-icon btn-sm" aria-label="Dismiss" onClick="{{alertOff}}" style="margin-inline-start: auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+              </div>
+            </sc-if>
+
+            <div class="hm-days" role="group" aria-label="Voyage dates">
+              <button class="{{missChip.cls}}" aria-pressed="{{missChip.cur}}" onClick="{{missChip.pick}}"><span class="hm-dw">Missed</span><b>{{missChip.n}} voyages</b><small>{{missChip.sub}}</small></button>
+              <sc-for list="{{days}}" as="d" hint-placeholder-count="8">
+                <button class="{{d.cls}}" aria-pressed="{{d.cur}}" onClick="{{d.pick}}"><span class="hm-dw">{{d.w}}</span><b>{{d.d}}</b><small>{{d.sub}}</small></button>
+              </sc-for>
+            </div>
+
+            <div class="hm-kpis6">
+              <sc-for list="{{vk}}" as="k" hint-placeholder-count="6"><div class="{{k.cls}}"><span class="hm-kl">{{k.l}}</span><b>{{k.v}}</b><span class="hm-ks">{{k.sub}}</span></div></sc-for>
+            </div>
+
+            <section class="card" aria-labelledby="hm-vt" style="flex: none; overflow: hidden">
+              <div class="card-head">
+                <h2 class="card-title" id="hm-vt">Voyages to Invoice <span class="hm-scope">{{scopeL}}</span></h2>
+                <span style="display: inline-flex; align-items: center; gap: 12px">
+                  <span class="hm-leg"><span><i class="hm-sw inv"></i>Invoiced</span><span><i class="hm-sw rdy"></i>Ready</span><span><i class="hm-sw blk"></i>Blocked</span></span>
+                  <sc-if value="{{hasVoy}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{clearVoy}}">Show all voyages</button></sc-if>
+                  <button class="btn btn-sm btn-primary" disabled="{{genAllDis}}" onClick="{{genAll}}">{{genAllL}}</button>
+                </span>
+              </div>
+              <div style="overflow: auto">
+              <table class="lst hm-vtab">
+                <thead><tr><th scope="col" class="c-no">Voyage No.</th><th scope="col">Vessel</th><th scope="col">Direction</th><th scope="col">Leg</th><th scope="col">Date</th><th scope="col" class="r">Expected</th><th scope="col" class="r">Invoiced</th><th scope="col" class="r">Ready</th><th scope="col" class="r">ROE missing</th><th scope="col" class="r">Data not received</th><th scope="col" style="width: 220px">Readiness</th><th scope="col" class="c-act">Action</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{rows}}" as="r" hint-placeholder-count="3">
+                    <tr class="{{r.cls}}" onClick="{{r.pickV}}">
+                      <td class="c-no"><button class="lnk mono" onClick="{{r.pickV}}" title="Show blockers for {{r.no}}">{{r.no}}</button></td>
+                      <td>{{r.vessel}}</td>
+                      <td><span class="{{r.dirC}}">{{r.dirL}}</span></td>
+                      <td class="mono">{{r.leg}}</td>
+                      <td><span class="mu">{{r.dateL}}</span> {{r.date}}</td>
+                      <td class="r">{{r.exp}}</td><td class="r">{{r.inv}}</td><td class="r">{{r.ready}}</td>
+                      <td class="{{r.roeC}}">{{r.roe}}</td><td class="{{r.nodC}}">{{r.nod}}</td>
+                      <td><div class="hm-prog"><span class="hm-stk"><i class="inv" style="{{r.bI}}"></i><i class="rdy" style="{{r.bR}}"></i><i class="blk" style="{{r.bB}}"></i></span><span class="{{r.rdC}}">{{r.rd}}</span></div></td>
+                      <td class="c-act">
+                        <sc-if value="{{r.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{r.gen}}">{{r.genL}}</button></sc-if>
+                        <sc-if value="{{r.noGen}}" hint-placeholder-val="{{ false }}"><span class="mu" style="font-size: 12px">{{r.noGenL}}</span></sc-if>
+                      </td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+              <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No voyages on this date</div></sc-if>
+              </div>
+            </section>
+
+            <section class="card" aria-labelledby="hm-bk" style="flex: none; overflow: hidden">
+              <div class="card-head"><h2 class="card-title" id="hm-bk">Why invoices are pending <span class="hm-scope">{{scopeL}}</span></h2></div>
+              <table class="lst hm-btab">
+                <thead><tr><th scope="col">Reason</th><th scope="col">Voyages affected</th><th scope="col">Follow up with</th><th scope="col" class="r">Invoices</th><th scope="col" class="r">Pending amount</th><th scope="col" class="c-act">Action</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{blk}}" as="b" hint-placeholder-count="3">
+                    <tr><td><b class="hm-rs">{{b.r}}</b></td><td class="mono hm-va">{{b.d}}</td><td>{{b.own}}</td><td class="r">{{b.n}}</td><td class="r">{{b.amt}}</td>
+                      <td class="c-act"><button class="btn btn-sm" disabled="{{b.done}}" onClick="{{b.go}}">{{b.act}}</button></td></tr>
+                  </sc-for>
+                </tbody>
+              </table>
+              <sc-if value="{{noBlk}}" hint-placeholder-val="{{ false }}"><div style="padding: 28px; text-align: center; color: var(--muted)">Nothing is blocked — every expected invoice has data and a rate of exchange.</div></sc-if>
+            </section>
           </div>
         </sc-if>
 
-        <section aria-labelledby="hm-mw">
-          <div class="hm-sh"><h2 id="hm-mw">My Work</h2><span>Items waiting for you or your team</span></div>
-          <div class="hm-work">
-            <sc-for list="{{work}}" as="w" hint-placeholder-count="8">
-              <a class="{{w.cls}}" href="{{w.href}}" aria-label="{{w.aria}}">
-                <span class="hm-wi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{w.d}}"></path></svg></span>
-                <span class="hm-wt"><b>{{w.n}}</b><span>{{w.l}}</span><small>{{w.sub}}</small></span>
-                <svg class="hm-wa" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
-              </a>
-            </sc-for>
-          </div>
-        </section>
-
-        <section aria-labelledby="hm-kp">
-          <div class="hm-sh"><h2 id="hm-kp">This Period</h2><span>November 2026 · month to date</span></div>
-          <div class="hm-kpis">
-            <sc-for list="{{kpi}}" as="k" hint-placeholder-count="5">
-              <a class="card hm-k" href="{{k.href}}"><span class="hm-kl">{{k.l}}</span><b>{{k.v}}</b><span class="{{k.subCls}}">{{k.sub}}</span></a>
-            </sc-for>
-          </div>
-        </section>
-
-        <div class="hm-row2">
-          <section class="card" aria-labelledby="hm-ch">
-            <div class="card-head">
-              <h2 class="card-title" id="hm-ch">Invoiced vs Collected</h2>
-              <div class="hm-leg"><span><i class="hm-sw a"></i>Invoiced</span><span><i class="hm-sw b"></i>Collected</span><span class="card-meta">USD · last 8 weeks</span></div>
+        <sc-if value="{{tabs.dd}}" hint-placeholder-val="{{ false }}">
+          <div id="hm-p2" role="tabpanel" aria-labelledby="hm-t2" style="display: flex; flex-direction: column; gap: 16px">
+            <div class="hm-kpis">
+              <sc-for list="{{ddk}}" as="k" hint-placeholder-count="5"><div class="{{k.cls}}"><span class="hm-kl">{{k.l}}</span><b>{{k.v}}</b><span class="hm-ks">{{k.sub}}</span></div></sc-for>
             </div>
-            <div class="hm-chart" role="img" aria-label="{{chartAria}}">
-              <div class="hm-grid">
-                <sc-for list="{{grid}}" as="g" hint-placeholder-count="3"><div class="hm-gl" style="{{g.y}}"><span>{{g.l}}</span></div></sc-for>
-              </div>
-              <div class="hm-bars">
-                <sc-for list="{{bars}}" as="b" hint-placeholder-count="8">
-                  <div class="{{b.on}}" onMouseEnter="{{b.enter}}" onMouseLeave="{{b.leave}}" title="{{b.aria}}">
-                    <div class="hm-pair">
-                      <div class="hm-bar a" style="{{b.a}}"><sc-if value="{{b.last}}" hint-placeholder-val="{{ false }}"><span>{{b.av}}</span></sc-if></div>
-                      <div class="hm-bar b" style="{{b.b}}"><sc-if value="{{b.last}}" hint-placeholder-val="{{ false }}"><span>{{b.bv}}</span></sc-if></div>
+            <div class="hm-ddg">
+              <section class="card" aria-labelledby="hm-dc" style="overflow: hidden; min-width: 0">
+                <div class="card-head">
+                  <h2 class="card-title" id="hm-dc">Containers · Detention &amp; Demurrage</h2>
+                  <button class="btn btn-sm btn-primary" disabled="{{ddGenAllDis}}" onClick="{{ddGenAll}}">{{ddGenAllL}}</button>
+                </div>
+                <div class="hm-fil" role="group" aria-label="Filter containers">
+                  <sc-for list="{{ddFil}}" as="f" hint-placeholder-count="5"><button class="hm-fc" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}} <span>{{f.n}}</span></button></sc-for>
+                </div>
+                <div style="overflow: auto">
+                <table class="lst">
+                  <thead><tr><th scope="col" class="c-no">Container</th><th scope="col">Customer</th><th scope="col">B/L</th><th scope="col">Type</th><th scope="col">Gate-out</th><th scope="col">Returned</th><th scope="col" class="r">Days used / free</th><th scope="col" class="r">Over</th><th scope="col" class="r">Amount</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{ddRows}}" as="c" hint-placeholder-count="8">
+                      <tr>
+                        <td class="c-no"><span class="mono">{{c.cn}}</span> <small class="mu">{{c.sz}}</small></td><td>{{c.cust}}</td><td class="mono">{{c.bl}}</td><td><span class="{{c.dirC}}">{{c.dirL}}</span> {{c.type}}</td>
+                        <td>{{c.out}}</td><td>{{c.back}}</td><td class="r">{{c.used}} / {{c.free}}</td><td class="{{c.overC}}">{{c.over}}</td><td class="r">{{c.amt}}</td>
+                        <td><span class="{{c.stC}}">{{c.stL}}</span></td>
+                        <td class="c-act">
+                          <sc-if value="{{c.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{c.gen}}">Generate</button></sc-if>
+                          <sc-if value="{{c.noGen}}" hint-placeholder-val="{{ false }}"><span class="mu" style="font-size: 12px">{{c.why}}</span></sc-if>
+                        </td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+                </div>
+              </section>
+              <section class="card" aria-labelledby="hm-dr" style="min-width: 0">
+                <div class="card-head"><h2 class="card-title" id="hm-dr">Why D&amp;D is pending</h2></div>
+                <div class="hm-age">
+                  <sc-for list="{{ddBlk}}" as="b" hint-placeholder-count="4">
+                    <div class="hm-dbr">
+                      <div class="hm-dbh"><b>{{b.r}}</b><span>{{b.amt}}</span></div>
+                      <span class="hm-track"><span class="hm-ab late" style="{{b.bar}}"></span></span>
+                      <small>{{b.n}} · Follow up with {{b.own}}</small>
                     </div>
-                    <span class="hm-x">{{b.w}}</span>
-                  </div>
-                </sc-for>
-                <sc-if value="{{tip.show}}" hint-placeholder-val="{{ false }}">
-                  <div class="hm-tip" style="{{tip.pos}}" aria-hidden="true">
-                    <b>{{tip.w}}</b>
-                    <span><i class="hm-sw a"></i>Invoiced<em>{{tip.a}}</em></span>
-                    <span><i class="hm-sw b"></i>Collected<em>{{tip.b}}</em></span>
-                    <span class="hm-tg">Difference<em>{{tip.gap}}</em></span>
-                  </div>
-                </sc-if>
-              </div>
+                  </sc-for>
+                  <sc-if value="{{noDdBlk}}" hint-placeholder-val="{{ false }}"><div style="padding: 20px 0; text-align: center; color: var(--muted)">Nothing blocked</div></sc-if>
+                </div>
+              </section>
             </div>
-          </section>
-
-          <section class="card" aria-labelledby="hm-ag">
-            <div class="card-head"><h2 class="card-title" id="hm-ag">Receivables Ageing</h2><a class="lnk" href="soa-aging.html">SOA &amp; Aging</a></div>
-            <div class="hm-age">
-              <div class="hm-at"><span>Total outstanding</span><b>{{ageTot}}</b></div>
-              <sc-for list="{{ageing}}" as="a" hint-placeholder-count="5">
-                <div class="hm-ar"><span class="hm-al">{{a.l}}</span><span class="hm-track"><span class="{{a.cls}}" style="{{a.bar}}"></span></span><span class="hm-av">{{a.v}}</span><span class="hm-ap">{{a.pct}}</span></div>
-              </sc-for>
-            </div>
-          </section>
-        </div>
-
-        <div class="hm-row3">
-          <section class="card" aria-labelledby="hm-oc" style="overflow: hidden">
-            <div class="card-head"><h2 class="card-title" id="hm-oc">Top Overdue Customers</h2><a class="lnk" href="soa-aging.html">View all</a></div>
-            <table class="lst hm-t">
-              <thead><tr><th scope="col">Customer</th><th scope="col" class="r">Overdue</th><th scope="col" class="r">Oldest</th><th scope="col" class="c-act">Action</th></tr></thead>
-              <tbody>
-                <sc-for list="{{cust}}" as="c" hint-placeholder-count="5">
-                  <tr><td>{{c.n}}</td><td class="r mono">{{c.v}}</td><td class="r"><span class="{{c.dCls}}">{{c.d}}</span></td><td class="c-act"><a class="lnk" href="{{c.href}}">View SOA</a></td></tr>
-                </sc-for>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="card" aria-labelledby="hm-cl">
-            <div class="card-head"><h2 class="card-title" id="hm-cl">Month-End Close</h2><a class="lnk" href="month-end.html">Open</a></div>
-            <div class="hm-close">
-              <div class="hm-cp"><b>{{close.done}}</b><span>{{close.left}}</span></div>
-              <div class="hm-track lg"><span class="hm-ab" style="{{close.bar}}"></span></div>
-              <ul>
-                <sc-for list="{{close.steps}}" as="t" hint-placeholder-count="5">
-                  <li><sc-if value="{{t.ok}}" hint-placeholder-val="{{ true }}"><span class="hm-ck ok" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span></sc-if><sc-if value="{{t.todo}}" hint-placeholder-val="{{ false }}"><span class="hm-ck" aria-hidden="true"></span></sc-if><span class="hm-cs">{{t.l}}</span><span class="{{t.cls}}">{{t.st}}</span></li>
-                </sc-for>
-              </ul>
-            </div>
-          </section>
-
-          <section class="card" aria-labelledby="hm-rv">
-            <div class="card-head"><h2 class="card-title" id="hm-rv">Recently Viewed</h2></div>
-            <ul class="hm-rec">
-              <sc-for list="{{recent}}" as="r" hint-placeholder-count="4">
-                <li><a href="{{r.href}}"><span class="hm-ri"><b class="mono">{{r.id}}</b><small>{{r.sub}}</small></span><span class="hm-rt">{{r.t}}</span></a></li>
-              </sc-for>
-            </ul>
-          </section>
-        </div>
+          </div>
+        </sc-if>
       </main>
     </div>
   </div>
@@ -887,81 +967,167 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 </div>
 </script>
 <script type="text/x-dc" id="logic">
-// Home — the landing screen after login: what needs action, how the office is doing, where to go next.
-// Sample figures, varied by the working location in the header.
-const HM_HUB = { SIN: ['Singapore', 1], NSA: ['India', 0.62], LCH: ['Thailand', 0.44], PKG: ['Malaysia', 0.51], JED: ['Saudi Arabia', 0.38], ZLO: ['Mexico', 0.29] };
-const HM_WEEKS = ['W40', 'W41', 'W42', 'W43', 'W44', 'W45', 'W46', 'W47'];
-const HM_INV = [612, 655, 590, 702, 688, 741, 705, 768];   // USD K, invoiced per week (SIN)
-const HM_COL = [540, 598, 611, 620, 664, 650, 701, 690];   // USD K, collected per week (SIN)
-const HM_AGE = [['Current', 2410], ['1–30 days', 1185], ['31–60 days', 512], ['61–90 days', 214], ['Over 90 days', 128]];
-const HM_CUST = [['Straits Harbour Logistics', 186.4, 74], ['Meridian Agro Exports', 142.9, 61], ['Andaman Bay Traders', 98.2, 96], ['Kinabalu Home Furnishings', 64.7, 45], ['Orchid Lane Polymers', 41.3, 38]];
-const HM_CLOSE = [['Billing cut-off for the period', true], ['D&D daily run complete to month-end', true], ['Unbilled revenue accrual run', false], ['Currency revaluation', false], ['Journals posted to GFS and acknowledged', false]];
-const HM_RECENT = [['INV-SG-2611-00482', 'Invoice · Straits Harbour Logistics', 'invoice-list-v2.html?q=INV-SG-2611-00482', '12 min ago'], ['BL-SG-24004', 'B/L · Split-payer unconfirmed', 'operations-cockpit.html', '35 min ago'], ['CN-SG-2611-0031', 'Credit note · Meridian Agro Exports', 'credit-note-list.html', '1 h ago'], ['Charge OFT', 'Charge Master · Ocean Freight', 'charge-master-v2c.html?q=OFT', 'Yesterday']];
-const hmK = (v) => (v >= 1000 ? (v / 1000).toFixed(2) + 'M' : Math.round(v) + 'K');
+// Home — landing workspace for a port / office user. Data arrives from LMS.
+// 1) Voyage Invoicing: voyages loading (Export, …E) or discharging (Import, …I) at my port, invoice readiness and blockers.
+// 2) D&D Billing: containers given to customers, detention / demurrage to invoice, and why amounts are pending.
+// Sample data (Singapore view; other locations swap the port code and scale counts).
+const HM_HUB = { SIN: ['Singapore', 'SGSIN', 'SGD', 1], NSA: ['India', 'INNSA', 'INR', 0.6], LCH: ['Thailand', 'THLCH', 'THB', 0.45], PKG: ['Malaysia', 'MYPKG', 'MYR', 0.55], JED: ['Saudi Arabia', 'SAJED', 'SAR', 0.4], ZLO: ['Mexico', 'MXZLO', 'MXN', 0.3] };
+const HM_TODAY = '2026-11-20';
+const HM_DAYS = ['2026-11-17', '2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21', '2026-11-22', '2026-11-23', '2026-11-24'];
+// date, vessel, voyage no., dir (E/I), other port, expected, invoiced, ready, roe missing, data not received, other hold, ROE pair, avg USD per B/L
+const HM_VOY = [
+  ['2026-11-17', 'KOTA LEMBAH', '0KL2MME', 'E', 'NZAKL', 820, 790, 12, 0, 18, 0, '', 1850],
+  ['2026-11-18', 'KOTA SEJATI', '2KS4NNI', 'I', 'CNSHA', 640, 602, 10, 22, 6, 0, 'USD → SGD', 640],
+  ['2026-11-19', 'NORFOLK', '0NF7QQI', 'I', 'NZTRG', 410, 388, 0, 14, 8, 0, 'NZD → SGD', 610],
+  ['2026-11-20', 'CMA CGM LEKKI', '0LK5SSE', 'E', 'NZAKL', 1000, 0, 935, 25, 40, 0, 'USD → NZD', 1850],
+  ['2026-11-20', 'KOTA PEMIMPIN', '1KP8RRI', 'I', 'INNSA', 520, 310, 154, 30, 20, 6, 'USD → SGD', 620],
+  ['2026-11-21', 'NORFOLK', '0NF8SSE', 'E', 'NZAKL', 700, 0, 0, 0, 700, 0, '', 1850],
+  ['2026-11-21', 'KOTA LEMBAH', '0KL3PPE', 'E', 'MYPKG', 380, 0, 0, 0, 380, 0, '', 980],
+  ['2026-11-23', 'KOTA SEJATI', '2KS5TTE', 'E', 'CNSHA', 560, 0, 0, 0, 560, 0, '', 1420],
+  ['2026-11-24', 'CMA CGM KAURI', '0KR1AAI', 'I', 'NZTRG', 450, 0, 0, 0, 450, 0, '', 610]
+];
+// container, size, customer, I/E, B/L, gate-out, returned, free days, D&D type, USD per day over, status
+const HM_DD = [
+  ['PCIU 812044-7', '40HC', 'Straits Harbour Logistics', 'I', 'BL-SG-23871', '2026-10-28', '2026-11-18', 7, 'Detention', 75, 'ready'],
+  ['PCIU 733120-2', '20GP', 'Meridian Agro Exports', 'E', 'BL-SG-23902', '2026-10-30', '2026-11-17', 5, 'Demurrage', 45, 'ready'],
+  ['TGHU 551902-0', '40HC', 'Andaman Bay Traders', 'I', 'BL-SG-23944', '2026-11-02', '2026-11-19', 7, 'Detention', 75, 'roe'],
+  ['PCIU 690377-5', '40RF', 'Orchid Lane Polymers', 'I', 'BL-SG-23950', '2026-11-01', '2026-11-16', 4, 'Combined', 140, 'tariff'],
+  ['PCIU 802211-9', '20GP', 'Kinabalu Home Furnishings', 'E', 'BL-SG-23961', '2026-11-03', '2026-11-18', 5, 'Detention', 40, 'milestone'],
+  ['TCLU 418820-3', '40HC', 'Straits Harbour Logistics', 'I', 'BL-SG-23977', '2026-11-04', '2026-11-19', 7, 'Detention', 75, 'waiver'],
+  ['PCIU 920014-6', '40HC', 'Meridian Agro Exports', 'I', 'BL-SG-24010', '2026-11-05', '', 7, 'Detention', 75, 'out'],
+  ['PCIU 771536-1', '20GP', 'Andaman Bay Traders', 'E', 'BL-SG-24018', '2026-11-08', '', 5, 'Demurrage', 45, 'out'],
+  ['TGHU 300417-8', '40RF', 'Orchid Lane Polymers', 'I', 'BL-SG-24021', '2026-11-12', '', 4, 'Combined', 140, 'out'],
+  ['PCIU 655801-4', '40HC', 'Kinabalu Home Furnishings', 'I', 'BL-SG-24026', '2026-11-15', '', 7, 'Detention', 75, 'out'],
+  ['PCIU 588190-3', '20GP', 'Straits Harbour Logistics', 'E', 'BL-SG-23890', '2026-10-25', '2026-11-12', 5, 'Demurrage', 45, 'invoiced']
+];
+const HM_DDST = {
+  ready: ['Ready to invoice', 'ok'], roe: ['ROE not received', 'warn'], tariff: ['D&D tariff missing', 'warn'], milestone: ['Milestone conflict', 'warn'],
+  waiver: ['Waiver approval pending', 'warn'], out: ['Still with customer', 'info'], invoiced: ['Invoiced', 'done']
+};
+const HM_DDOWN = { roe: 'Treasury · ROE feed', tariff: 'Pricing · tariff set-up', milestone: 'Equipment control · LMS', waiver: 'Approver · Credit control' };
+const hmN = (n) => Math.round(n).toLocaleString('en-US');
+const hmUsd = (v) => 'USD ' + (v >= 1e6 ? (v / 1e6).toFixed(2) + 'M' : v >= 1e3 ? (v / 1e3).toFixed(1) + 'K' : hmN(v));
+const hmDay = (d) => { const t = new Date(d + 'T00:00:00'); return { w: t.toLocaleDateString('en-GB', { weekday: 'short' }), d: t.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) }; };
+const hmDiff = (a, b) => Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 864e5);
 
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { alertOff: false, hov: -1 };
+    this.state = { tab: 'voy', day: HM_TODAY, voy: '', gen: {}, asked: {}, ddGen: {}, ddF: 'all', alertOff: false };
   }
   renderVals() {
     const s = this.state, self = this;
-    const hub = s.__hub || 'SIN', [cty, f] = HM_HUB[hub] || HM_HUB.SIN;
-    const r = (n) => Math.max(1, Math.round(n * (0.6 + 0.4 * f)));
+    const hub = s.__hub || 'SIN', [cty, port, lcy, f] = HM_HUB[hub] || HM_HUB.SIN;
+    const sc = (n) => (n ? Math.max(1, Math.round(n * f)) : 0);
     const hr = (() => { try { return new Date().getHours(); } catch (e) { return 9; } })();
-    const greet = hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening';
+    const greet = (hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ', ' + (typeof USER_NAME === 'string' ? USER_NAME.split(' ')[0] : 'Daniel');
 
-    const work = [
-      ['Exceptions in staging', r(4), 'Oldest 30 min in queue', 'operations-cockpit.html', 'bad', 'M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z'],
-      ['Invoices with errors', r(12), 'Blocked from release', 'invoice-list-v2.html', 'bad', 'M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9l-6-6zM14 3v6h6M10 13l4 4M14 13l-4 4'],
-      ['Waiting for my approval', r(5), '2 due today', 'approvals-inbox.html', 'warn', 'M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11'],
-      ['E-invoice rejections', r(3), 'Tax authority returned', 'einvoice-exceptions.html', 'warn', 'M4 4h16v16H4zM9 9l6 6M15 9l-6 6'],
-      ['Unapplied receipts', r(8), 'USD ' + hmK(46.2 * f) + ' to match', 'cashapp-workbench.html', 'warn', 'M2 7h20v10H2zM12 12h.01M6 12h.01M18 12h.01'],
-      ['Credit notes in draft', r(3), 'Not yet submitted', 'credit-note-list.html', '', 'M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9l-6-6zM9 15h6'],
-      ['D&D charges to review', r(6), 'Free time exceeded', 'dd-engine.html', '', 'M12 7v5l3 2M12 22a10 10 0 100-20 10 10 0 000 20z'],
-      ['Integration failures', r(1), 'GFS posting retry needed', 'integration-monitor.html', 'bad', 'M10 14a3.5 3.5 0 005 0l4-4a3.5 3.5 0 00-5-5l-.5.5M14 10a3.5 3.5 0 00-5 0l-4 4a3.5 3.5 0 005 5l.5-.5']
-    ].map(([l, n, sub, href, sev, d]) => ({ l, n: String(n), sub, href, cls: 'hm-w ' + sev, d, aria: n + ' ' + l + ' — open' }));
-    const actions = work.reduce((a, w) => a + (+w.n), 0);
+    // ---------- Voyages
+    const V = HM_VOY.map(([date, vessel, no, dir, other, exp, inv, ready, roe, nod, hold, pair, avg]) => {
+      const g = s.gen[no] || 0; // generated in this session
+      const r = { date, vessel, no, dir, exp: sc(exp), inv: sc(inv) + g, ready: Math.max(0, sc(ready) - g), roe: sc(roe), nod: sc(nod), hold: sc(hold), pair: pair.replace('SGD', lcy), avg };
+      r.leg = dir === 'E' ? port + ' → ' + other : other + ' → ' + port;
+      r.past = date < HM_TODAY; r.future = date > HM_TODAY;
+      r.blocked = r.roe + r.nod + r.hold; r.open = r.exp - r.inv;
+      return r;
+    });
+    const days = HM_DAYS.map((d) => {
+      const vs = V.filter((v) => v.date === d), open = vs.reduce((a, v) => a + v.open, 0), t = hmDay(d);
+      return { k: d, w: d === HM_TODAY ? 'Today' : t.w, d: t.d, sub: vs.length ? vs.length + (vs.length === 1 ? ' voyage' : ' voyages') + ' · ' + hmN(open) + ' open' : 'No voyages',
+        cls: 'hm-day' + (d === s.day ? ' on' : '') + (d < HM_TODAY && open ? ' late' : '') + (!vs.length ? ' none' : ''), cur: d === s.day ? 'true' : 'false',
+        pick: () => self.setState({ day: d, voy: '' }) };
+    });
+    const missed = V.filter((v) => v.past && v.open > 0);
+    const missChip = { n: missed.length, sub: hmN(missed.reduce((a, v) => a + v.open, 0)) + ' invoices still open', cls: 'hm-day miss' + (s.day === 'missed' ? ' on' : ''), cur: s.day === 'missed' ? 'true' : 'false', pick: () => self.setState({ day: 'missed', voy: '' }) };
+    const scope = s.day === 'missed' ? missed : V.filter((v) => v.date === s.day);
+    const sel = s.voy ? scope.filter((v) => v.no === s.voy) : scope;
+    const sum = (k) => sel.reduce((a, v) => a + v[k], 0);
+    const E = sum('exp'), I = sum('inv'), R = sum('ready'), B = sum('blocked');
+    const scopeL = s.voy ? 'Voyage ' + s.voy : s.day === 'missed' ? 'Missed voyages (past dates)' : (s.day === HM_TODAY ? 'Today, ' : '') + hmDay(s.day).w + ' ' + hmDay(s.day).d;
+    const vk = [
+      ['Expected invoices', hmN(E), sel.length + (sel.length === 1 ? ' voyage' : ' voyages'), ''],
+      ['Invoiced', hmN(I), E ? Math.round((I / E) * 100) + '% of expected' : '—', 'ok'],
+      ['Ready to invoice', hmN(R), 'Data and ROE received', 'info'],
+      ['ROE not received', hmN(sum('roe')), 'Exchange rate missing', sum('roe') ? 'warn' : ''],
+      ['Data not received', hmN(sum('nod')), 'Not yet sent by LMS', sum('nod') ? 'warn' : ''],
+      ['Pending amount', hmUsd(sel.reduce((a, v) => a + v.blocked * v.avg, 0)), 'Blocked from invoicing', B ? 'bad' : '']
+    ].map(([l, v, sub, tone]) => ({ l, v, sub, cls: 'card hm-k ' + tone }));
+    const pct = (n, e) => (e ? (n / e) * 100 : 0);
+    const rows = scope.map((v) => {
+      const rd = v.exp ? Math.round(((v.inv + v.ready) / v.exp) * 100) : 0;
+      return {
+        no: v.no, vessel: v.vessel, leg: v.leg, dirL: v.dir === 'E' ? 'Export' : 'Import', dirC: 'hm-dir ' + v.dir, date: hmDay(v.date).w + ' ' + hmDay(v.date).d, dateL: v.dir === 'E' ? 'ETD' : 'ETA',
+        exp: hmN(v.exp), inv: hmN(v.inv), ready: hmN(v.ready), roe: v.roe ? hmN(v.roe) : '—', nod: v.nod ? hmN(v.nod) : '—', roeC: v.roe ? 'r hm-wn' : 'r mu', nodC: v.nod ? 'r hm-wn' : 'r mu',
+        bI: 'width: ' + pct(v.inv, v.exp) + '%', bR: 'width: ' + pct(v.ready, v.exp) + '%', bB: 'width: ' + pct(v.blocked, v.exp) + '%', rd: rd + '%', rdC: 'hm-rd ' + (rd >= 90 ? 'ok' : rd >= 80 ? 'warn' : 'bad'),
+        cls: (v.no === s.voy ? 'on ' : '') + 'cmc-row', pickV: () => self.setState({ voy: s.voy === v.no ? '' : v.no }),
+        canGen: v.ready > 0, noGen: v.ready === 0, genL: 'Generate ' + hmN(v.ready), noGenL: v.open === 0 ? 'All invoiced' : v.future && !v.ready ? 'Awaiting data' : 'Nothing ready',
+        gen: () => self.setState({ gen: Object.assign({}, s.gen, { [v.no]: (s.gen[v.no] || 0) + v.ready }), __toast: hmN(v.ready) + ' invoices generated for voyage ' + v.no + '.' })
+      };
+    });
+    // Blockers for the current scope
+    const blk = [];
+    const nodV = sel.filter((v) => v.nod), roeV = sel.filter((v) => v.roe), holdV = sel.filter((v) => v.hold);
+    if (nodV.length) {
+      const n = nodV.reduce((a, v) => a + v.nod, 0), key = 'nod:' + s.day + ':' + s.voy;
+      blk.push({ r: 'Data not received from LMS', d: nodV.map((v) => v.no + ' (' + hmN(v.nod) + ')').join(', '), own: 'Port agency · Documentation', n: hmN(n), amt: hmUsd(nodV.reduce((a, v) => a + v.nod * v.avg, 0)),
+        act: s.asked[key] ? 'Follow-up sent' : 'Send follow-up', done: !!s.asked[key], go: () => self.setState({ asked: Object.assign({}, s.asked, { [key]: 1 }), __toast: 'Follow-up sent to the port agency for ' + hmN(n) + ' B/Ls.' }) });
+    }
+    const pairs = {};
+    roeV.forEach((v) => { pairs[v.pair] = pairs[v.pair] || []; pairs[v.pair].push(v); });
+    Object.keys(pairs).forEach((pr) => {
+      const vs = pairs[pr], n = vs.reduce((a, v) => a + v.roe, 0), key = 'roe:' + pr;
+      blk.push({ r: 'ROE not received · ' + pr, d: vs.map((v) => v.no + ' (' + hmN(v.roe) + ')').join(', '), own: 'Treasury · ROE feed', n: hmN(n), amt: hmUsd(vs.reduce((a, v) => a + v.roe * v.avg, 0)),
+        act: s.asked[key] ? 'ROE requested' : 'Request ROE', done: !!s.asked[key], go: () => self.setState({ asked: Object.assign({}, s.asked, { [key]: 1 }), __toast: 'ROE requested for ' + pr + ' — clears ' + hmN(n) + ' invoices once received.' }) });
+    });
+    if (holdV.length) {
+      const n = holdV.reduce((a, v) => a + v.hold, 0);
+      blk.push({ r: 'Split-payer unconfirmed', d: holdV.map((v) => v.no + ' (' + hmN(v.hold) + ')').join(', '), own: 'Customer service', n: hmN(n), amt: hmUsd(holdV.reduce((a, v) => a + v.hold * v.avg, 0)),
+        act: 'Open Split Billing', done: false, href: 'split-billing.html', go: () => { try { location.href = 'split-billing.html'; } catch (e) {} } });
+    }
 
-    const inv = HM_INV.map((v) => v * f), col = HM_COL.map((v) => v * f);
-    const totInv = inv.slice(-4).reduce((a, b) => a + b, 0) * 1.02, totCol = col.slice(-4).reduce((a, b) => a + b, 0);
-    const age = HM_AGE.map(([l, v]) => [l, v * f]), ageTot = age.reduce((a, b) => a + b[1], 0), over30 = age.slice(2).reduce((a, b) => a + b[1], 0);
-    const kpi = [
-      ['Invoiced this period', 'USD ' + hmK(totInv), '+6.2% vs Oct', 'up', 'invoice-list-v2.html'],
-      ['Unbilled BDRs', String(r(37)), 'USD ' + hmK(318 * f) + ' not yet invoiced', '', 'operations-cockpit.html'],
-      ['Outstanding receivables', 'USD ' + hmK(ageTot), r(214) + ' open invoices', '', 'soa-aging.html'],
-      ['Overdue over 30 days', 'USD ' + hmK(over30), Math.round((over30 / ageTot) * 100) + '% of outstanding', 'warn', 'soa-aging.html'],
-      ['Collected this period', 'USD ' + hmK(totCol), Math.round((totCol / totInv) * 100) + '% of invoiced', '', 'receipting.html']
-    ].map(([l, v, sub, tone, href]) => ({ l, v, sub, href, subCls: 'hm-ks ' + tone }));
-
-    // Invoiced vs collected — grouped bars, 8 weeks
-    const max = 900 * Math.max(f, 0.3) / 1, top = Math.ceil(Math.max(...inv, ...col) * 1.15 / 200) * 200 || 200;
-    const grid = [top, top / 2, 0].map((g) => ({ l: g ? hmK(g) : '0', y: 'bottom: ' + (g / top) * 100 + '%' }));
-    const bars = HM_WEEKS.map((w, i) => ({
-      w, last: i === HM_WEEKS.length - 1, on: s.hov === i ? 'hm-g on' : 'hm-g',
-      a: 'height: ' + (inv[i] / top) * 100 + '%', b: 'height: ' + (col[i] / top) * 100 + '%',
-      av: hmK(inv[i]), bv: hmK(col[i]),
-      enter: () => self.setState({ hov: i }), leave: () => self.setState({ hov: -1 }),
-      aria: w + ': invoiced USD ' + hmK(inv[i]) + ', collected USD ' + hmK(col[i])
+    // ---------- D&D
+    const dd = HM_DD.map(([cn, sz, cust, dir, bl, out, back, free, type, rate, st]) => {
+      const end = back || HM_TODAY, used = hmDiff(out, end), over = Math.max(0, used - free);
+      const status = s.ddGen[cn] ? 'invoiced' : st;
+      return { cn, sz, cust, dir, bl, out, back, free, type, rate, used, over, amt: over * rate * (st === 'out' ? 1 : 1), status };
+    });
+    const cnt = (k) => dd.filter((c) => c.status === k).length;
+    const blockedDD = dd.filter((c) => ['roe', 'tariff', 'milestone', 'waiver'].includes(c.status));
+    const outDD = dd.filter((c) => c.status === 'out'), readyDD = dd.filter((c) => c.status === 'ready');
+    const ddk = [
+      ['Containers with customers', String(outDD.length), outDD.filter((c) => c.over > 0).length + ' beyond free time', ''],
+      ['Charges building up', hmUsd(outDD.reduce((a, c) => a + c.amt, 0)), 'Not billable until return', 'info'],
+      ['Ready to invoice', String(readyDD.length), hmUsd(readyDD.reduce((a, c) => a + c.amt, 0)), 'ok'],
+      ['Pending — blocked', String(blockedDD.length), hmUsd(blockedDD.reduce((a, c) => a + c.amt, 0)) + ' on hold', blockedDD.length ? 'bad' : ''],
+      ['Invoiced this month', String(cnt('invoiced')), hmUsd(dd.filter((c) => c.status === 'invoiced').reduce((a, c) => a + c.amt, 0)), '']
+    ].map(([l, v, sub, tone]) => ({ l, v, sub, cls: 'card hm-k ' + tone }));
+    const F = [['all', 'All'], ['ready', 'Ready to invoice'], ['blocked', 'Blocked'], ['out', 'Still with customer'], ['invoiced', 'Invoiced']];
+    const inF = (c) => s.ddF === 'all' || (s.ddF === 'blocked' ? ['roe', 'tariff', 'milestone', 'waiver'].includes(c.status) : c.status === s.ddF);
+    const ddFil = F.map(([k, l]) => ({ l, n: String(k === 'all' ? dd.length : k === 'blocked' ? blockedDD.length : cnt(k)), cur: s.ddF === k ? 'true' : 'false', pick: () => self.setState({ ddF: k }) }));
+    const ddRows = dd.filter(inF).map((c) => ({
+      cn: c.cn, sz: c.sz, cust: c.cust, bl: c.bl, dirL: c.dir === 'E' ? 'Export' : 'Import', dirC: 'hm-dir ' + c.dir, type: c.type,
+      out: hmDay(c.out).d, back: c.back ? hmDay(c.back).d : '—', free: String(c.free), used: String(c.used), over: c.over ? String(c.over) : '0', overC: c.over ? 'r hm-wn' : 'r mu',
+      amt: hmUsd(c.amt), stL: HM_DDST[c.status][0], stC: 'hm-ss ' + HM_DDST[c.status][1],
+      canGen: c.status === 'ready', noGen: c.status !== 'ready', why: HM_DDOWN[c.status] || (c.status === 'out' ? 'Bill on return' : c.status === 'invoiced' ? 'Done' : ''),
+      gen: () => self.setState({ ddGen: Object.assign({}, s.ddGen, { [c.cn]: 1 }), __toast: 'D&D invoice generated for ' + c.cn + ' — ' + hmUsd(c.amt) + '.' })
     }));
-    const hv = s.hov >= 0 ? s.hov : -1;
-    const tip = hv >= 0 ? { show: true, w: 'Week ' + HM_WEEKS[hv].slice(1) + ', 2026', a: 'USD ' + hmK(inv[hv]), b: 'USD ' + hmK(col[hv]), gap: 'USD ' + hmK(Math.abs(inv[hv] - col[hv])), pos: 'left: ' + ((hv + 0.5) / HM_WEEKS.length) * 100 + '%' } : { show: false };
+    const ddR = {};
+    blockedDD.forEach((c) => { ddR[c.status] = ddR[c.status] || []; ddR[c.status].push(c); });
+    const ddBlk = Object.keys(ddR).map((k) => ({ r: HM_DDST[k][0], own: HM_DDOWN[k], n: ddR[k].length + (ddR[k].length === 1 ? ' container' : ' containers'), amt: hmUsd(ddR[k].reduce((a, c) => a + c.amt, 0)), bar: 'width: ' + (ddR[k].reduce((a, c) => a + c.amt, 0) / Math.max(1, blockedDD.reduce((a, c) => a + c.amt, 0))) * 100 + '%' }));
 
-    const amax = Math.max(...age.map((a) => a[1]));
-    const ageing = age.map(([l, v], i) => ({ l, v: 'USD ' + hmK(v), pct: Math.round((v / ageTot) * 100) + '%', bar: 'width: ' + (v / amax) * 100 + '%', cls: i >= 2 ? 'hm-ab late' : 'hm-ab' }));
-
-    const done = HM_CLOSE.filter((c) => c[1]).length;
+    const voyOpen = V.filter((v) => v.date <= HM_TODAY).reduce((a, v) => a + v.open, 0);
     return {
-      greet: greet + ', ' + (typeof USER_NAME === 'string' ? USER_NAME.split(' ')[0] : 'Daniel'),
-      ctx: cty + ' · ' + hub + ' · ' + (s.__ent || 'PIL') + ' — you have ' + actions + ' items that need action',
-      alert: !s.alertOff, alertOff: () => self.setState({ alertOff: true }),
-      work, kpi, grid, bars, tip,
-      chartAria: 'Invoiced versus collected, weekly, last 8 weeks, in USD',
-      ageing, ageTot: 'USD ' + hmK(ageTot),
-      cust: HM_CUST.map(([n, v, d]) => ({ n, v: 'USD ' + hmK(v * f), d: d + ' days', dCls: d > 60 ? 'hm-d late' : 'hm-d', href: 'soa-aging.html?q=' + encodeURIComponent(n) })),
-      close: { done: done + ' of ' + HM_CLOSE.length + ' steps done', bar: 'width: ' + (done / HM_CLOSE.length) * 100 + '%', left: '11 days to period end',
-        steps: HM_CLOSE.map(([l, ok]) => ({ l, ok, todo: !ok, st: ok ? 'Done' : 'Pending', cls: ok ? 'hm-st ok' : 'hm-st' })) },
-      recent: HM_RECENT.map(([id, sub, href, t]) => ({ id, sub, href, t }))
+      greet, ctx: cty + ' · ' + port + ' · ' + (s.__ent || 'PIL') + ' — data from LMS, last received 2 min ago',
+      tabs: { voy: s.tab === 'voy', dd: s.tab === 'dd', voyA: s.tab === 'voy' ? 'true' : 'false', ddA: s.tab === 'dd' ? 'true' : 'false',
+        voyN: hmN(voyOpen), ddN: String(readyDD.length + blockedDD.length), toVoy: () => self.setState({ tab: 'voy' }), toDd: () => self.setState({ tab: 'dd' }) },
+      alert: !s.alertOff && s.tab === 'voy', alertOff: () => self.setState({ alertOff: true }),
+      days, missChip, vk, rows, noRows: !rows.length, scopeL, hasVoy: !!s.voy, clearVoy: () => self.setState({ voy: '' }),
+      blk, noBlk: !blk.length,
+      genAll: () => { const g = Object.assign({}, s.gen); let n = 0; scope.forEach((v) => { if (v.ready) { g[v.no] = (g[v.no] || 0) + v.ready; n += v.ready; } }); self.setState({ gen: g, __toast: n ? hmN(n) + ' invoices generated across ' + scope.filter((v) => v.ready).length + ' voyages.' : 'Nothing ready to generate.' }); },
+      genAllL: 'Generate all ready (' + hmN(scope.reduce((a, v) => a + v.ready, 0)) + ')', genAllDis: !scope.some((v) => v.ready),
+      ddk, ddFil, ddRows, ddBlk, noDdBlk: !ddBlk.length,
+      ddGenAll: () => { const g = Object.assign({}, s.ddGen); readyDD.forEach((c) => { g[c.cn] = 1; }); self.setState({ ddGen: g, __toast: readyDD.length ? readyDD.length + ' D&D invoices generated.' : 'Nothing ready to invoice.' }); },
+      ddGenAllL: 'Generate all ready (' + readyDD.length + ')', ddGenAllDis: !readyDD.length
     };
   }
 }
