@@ -294,160 +294,109 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cmc-stack .cm2-grid{gap:12px}
 
 
-.hm-alert{display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 8px 6px 16px;border:1px solid var(--warnbd);border-radius:8px;background:var(--warnbg);color:var(--ink);font-size:13px}
-.hm-alert > svg{flex:none;color:var(--warn)}
-.hm-sh{display:flex;align-items:baseline;gap:12px;margin:0 0 10px}
-.hm-sh h2{margin:0;font-size:15px;font-weight:600;line-height:20px}
-.hm-sh span{font-size:12px;color:var(--muted)}
-.hm-work{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.hm-w{display:flex;align-items:center;gap:12px;min-height:76px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-decoration:none;box-sizing:border-box}
-.hm-w:hover{border-color:var(--accent);background:var(--tint2)}
-.hm-w:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.hm-wi{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:var(--neutral);color:var(--muted2)}
-.hm-w.bad .hm-wi{background:var(--badbg);color:var(--bad)}
-.hm-w.warn .hm-wi{background:var(--warnbg);color:var(--warn)}
-.hm-wt{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline}
-.hm-wt b{font-size:22px;font-weight:600;line-height:28px}
-.hm-wt span{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-wt small{grid-column:1 / -1;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-wa{flex:none;color:var(--muted)}
-.hm-w:hover .hm-wa{color:var(--accent)}
-.hm-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.hm-k{display:flex;flex-direction:column;gap:4px;padding:14px 16px;color:var(--ink);text-decoration:none}
-.hm-k:hover{border-color:var(--accent)}
-.hm-k:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.hm-kl{font-size:12px;color:var(--muted)}
-.hm-k b{font-size:24px;font-weight:600;line-height:30px;font-variant-numeric:tabular-nums}
-.hm-ks{font-size:12px;color:var(--muted2)}
-.hm-ks.up{color:var(--ok)}
-.hm-ks.warn{color:var(--warn)}
-.hm-row2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;align-items:stretch}
-.hm-row3{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
-.hm-leg{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--muted2)}
-.hm-leg > span{display:inline-flex;align-items:center;gap:6px}
-.hm-sw{display:inline-block;width:10px;height:10px;border-radius:2px}
-.hm-sw.a,.hm-bar.a{background:#0071B7}
-.hm-sw.b,.hm-bar.b{background:#D9822B}
-[data-theme=dark] .hm-sw.a,[data-theme=dark] .hm-bar.a{background:#3D8FD0}
-[data-theme=dark] .hm-sw.b,[data-theme=dark] .hm-bar.b{background:#C98238}
-.hm-chart{position:relative;height:240px;margin:16px 16px 12px 56px}
-.hm-grid{position:absolute;inset:0 0 22px 0;pointer-events:none}
-.hm-gl{position:absolute;left:0;right:0;border-top:1px solid var(--line2)}
-.hm-gl span{position:absolute;right:100%;margin-right:8px;transform:translateY(-50%);font-size:11px;color:var(--muted);white-space:nowrap}
-.hm-bars{position:absolute;inset:0;display:flex;align-items:stretch}
-.hm-g{flex:1 1 0;display:flex;flex-direction:column;align-items:center;cursor:default;border-radius:4px}
-.hm-g.on{background:var(--hover2)}
-.hm-pair{flex:1 1 auto;display:flex;align-items:flex-end;justify-content:center;gap:2px;width:100%}
-.hm-bar{position:relative;width:18px;border-radius:4px 4px 0 0}
-.hm-bar span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:4px;font-size:11px;font-weight:600;color:var(--ink);white-space:nowrap}
-.hm-bar.a span{transform:translateX(-80%)}
-.hm-bar.b span{transform:translateX(-20%)}
-.hm-x{flex:none;height:22px;line-height:22px;font-size:11px;color:var(--muted)}
-.hm-tip{position:absolute;top:8px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;gap:4px;min-width:180px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 8px 24px rgba(22,26,33,.14);font-size:12px;pointer-events:none}
-.hm-tip b{font-size:12px;font-weight:600;margin-bottom:2px}
-.hm-tip span{display:flex;align-items:center;gap:6px;color:var(--muted2)}
-.hm-tip em{margin-inline-start:auto;font-style:normal;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
-.hm-tip .hm-tg{padding-top:4px;border-top:1px solid var(--line2)}
-.hm-age{display:flex;flex-direction:column;gap:12px;padding:12px 16px 16px}
-.hm-at{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
-.hm-at span{font-size:12px;color:var(--muted)}
-.hm-at b{font-size:20px;font-weight:600}
-.hm-ar{display:grid;grid-template-columns:96px minmax(0,1fr) 84px 36px;align-items:center;gap:10px;font-size:13px}
-.hm-al{color:var(--muted2)}
-.hm-track{display:block;height:10px;border-radius:5px;background:var(--neutral);overflow:hidden}
-.hm-track.lg{height:8px}
-.hm-ab{display:block;height:100%;border-radius:5px;background:var(--accent)}
-.hm-ab.late{background:var(--warn)}
-.hm-av{text-align:end;font-weight:500;font-variant-numeric:tabular-nums}
-.hm-ap{text-align:end;font-size:12px;color:var(--muted)}
-.hm-t{width:100%}
-.hm-t .r{text-align:end}
-.hm-d{display:inline-flex;height:20px;align-items:center;padding:0 8px;border-radius:10px;font-size:12px;background:var(--neutral);color:var(--muted2)}
-.hm-d.late{background:var(--warnbg);color:var(--warn)}
-.hm-close{padding:12px 16px 14px;display:flex;flex-direction:column;gap:10px}
-.hm-cp{display:flex;align-items:baseline;justify-content:space-between}
-.hm-cp b{font-size:15px;font-weight:600}
-.hm-cp span{font-size:12px;color:var(--muted)}
-.hm-close ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column}
-.hm-close li{display:flex;align-items:center;gap:10px;min-height:34px;border-top:1px solid var(--line2);font-size:13px}
-.hm-ck{flex:none;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);box-sizing:border-box}
-.hm-ck.ok{border:0;background:var(--okbg);color:var(--ok)}
-.hm-cs{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-st{font-size:12px;color:var(--muted)}
-.hm-st.ok{color:var(--ok)}
-.hm-rec{list-style:none;margin:0;padding:4px 8px 8px}
-.hm-rec a{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:6px;color:var(--ink);text-decoration:none}
-.hm-rec li + li a{border-top:1px solid var(--line2);border-radius:0}
-.hm-rec a:hover{background:var(--hover2)}
-.hm-ri{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
-.hm-ri b{font-size:13px;font-weight:500;color:var(--accent2)}
-.hm-ri small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-rt{flex:none;font-size:12px;color:var(--muted)}
-.nav-home{text-decoration:none}
-.hm-tc{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;margin-inline-start:6px;padding:0 6px;border-radius:9px;background:var(--neutral);color:var(--muted2);font-size:11px;font-weight:600;box-sizing:border-box}
-.tabb[aria-selected=true] .hm-tc{background:var(--tint);color:var(--accent2)}
-.hm-days{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px}
-.hm-day{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;min-width:0}
+.hm-tabs{margin:0 -20px;padding:0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.hm-tc{margin-inline-start:8px;font-size:12px;font-weight:400;color:var(--muted)}
+.tabb[aria-selected=true] .hm-tc{color:var(--accent2)}
+.hm-panel{display:flex;flex-direction:column;gap:16px}
+.hm-note{display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 8px 6px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:13px}
+.hm-note.warn{border-color:var(--warnbd);background:var(--warnbg)}
+.hm-note.warn > svg{color:var(--warn)}
+.hm-note.ok{border-color:var(--okbd);background:var(--okbg)}
+.hm-note.ok > svg{color:var(--ok)}
+.hm-nx{margin-inline-start:auto}
+.hm-days{display:flex;align-items:stretch;gap:6px}
+.hm-dsep{width:1px;margin:6px 4px;background:var(--line)}
+.hm-day{all:unset;box-sizing:border-box;flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);cursor:pointer;position:relative}
 .hm-day:hover{border-color:var(--bdh)}
 .hm-day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .hm-day b{font-size:14px;font-weight:600;line-height:20px}
-.hm-day small{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-dw{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.hm-day.none{background:var(--sub)}
-.hm-day.none b{color:var(--muted2)}
-.hm-day.late{box-shadow:inset 0 3px 0 var(--warn)}
-.hm-day.late small{color:var(--warn)}
-.hm-day.miss{border-color:var(--warnbd);background:var(--warnbg)}
-.hm-day.miss .hm-dw,.hm-day.miss small{color:var(--warn)}
+.hm-day small{font-size:12px;color:var(--muted)}
+.hm-dw{font-size:12px;color:var(--muted)}
+.hm-day.today .hm-dw{color:var(--accent2);font-weight:600}
+.hm-day.none b,.hm-day.none small{color:var(--muted)}
+.hm-day.late::after{content:"";position:absolute;top:8px;inset-inline-end:8px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
+.hm-day.ov{flex:0 0 112px}
+.hm-day.ov:not(.none) b{color:var(--warn)}
 .hm-day.on{border-color:var(--accent);background:var(--tint2);box-shadow:inset 0 0 0 1px var(--accent)}
-.hm-day.on .hm-dw{color:var(--accent2)}
-.hm-kpis6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.hm-k.ok{box-shadow:inset 3px 0 0 var(--ok)}
-.hm-k.info{box-shadow:inset 3px 0 0 var(--accent)}
-.hm-k.warn{box-shadow:inset 3px 0 0 var(--warn)}
-.hm-k.bad{box-shadow:inset 3px 0 0 var(--bad)}
-.hm-k.bad b{color:var(--bad)}
-.hm-scope{margin-inline-start:8px;font-size:12px;font-weight:400;color:var(--muted)}
-.hm-sw.inv,.hm-stk .inv{background:var(--ok)}
-.hm-sw.rdy,.hm-stk .rdy{background:var(--accent)}
-.hm-sw.blk,.hm-stk .blk{background:var(--warn)}
+.hm-sumh{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px 4px}
+.hm-sumh h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
+.hm-sumh span{font-size:13px;color:var(--muted)}
+.hm-stats{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);padding:12px 20px}
+.hm-stats.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.hm-stat{display:flex;flex-direction:column;gap:2px;padding-inline-end:16px}
+.hm-stat + .hm-stat{padding-inline-start:20px;border-inline-start:1px solid var(--line2)}
+.hm-stat span{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.hm-stat b{font-size:24px;font-weight:600;line-height:32px;font-variant-numeric:tabular-nums}
+.hm-stat small{font-size:12px;color:var(--muted2)}
+.hm-stats.tight{padding:0 0 12px}
+.hm-stats.tight .hm-stat b{font-size:20px;line-height:28px}
+.hm-dot{display:inline-block;width:8px;height:8px;border-radius:2px;flex:none}
+.hm-dot.inv,.hm-stk .inv{background:var(--ok)}
+.hm-dot.rdy,.hm-stk .rdy{background:var(--accent)}
+.hm-dot.blk,.hm-stk .blk{background:var(--warn)}
+.hm-dot.nd,.hm-stk .nd{background:var(--line)}
+.hm-stk{display:flex;gap:2px;height:8px;border-radius:4px;background:var(--neutral);overflow:hidden}
+.hm-stk i{display:block;height:100%}
+.hm-stk.lg{height:10px;margin:0 20px 20px}
+.hm-db .hm-stk.lg{margin:0 0 4px}
+.hm-tools{display:flex;align-items:center;gap:12px}
+.hm-seg{display:inline-flex;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}
+.hm-seg button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:4px;font-size:13px;color:var(--muted2);cursor:pointer}
+.hm-seg button span{font-size:12px;color:var(--muted)}
+.hm-seg button:hover{color:var(--ink)}
+.hm-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.hm-seg button[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:500;box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.hm-seg.sm button{height:24px;padding:0 10px;font-size:12px}
+.hm-srch{position:relative;width:260px}
+.hm-srch svg{position:absolute;inset-inline-start:10px;top:50%;margin-top:-8px;color:var(--muted)}
+.hm-srch .input{height:32px;padding-inline-start:34px;width:100%}
 .lst .r{text-align:end;font-variant-numeric:tabular-nums}
 .hm-wn{color:var(--warn);font-weight:600}
-.hm-dir{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
-.hm-dir.E{background:var(--tint);color:var(--accent2)}
-.hm-dir.I{background:var(--aibg);color:var(--ai)}
-.hm-prog{display:flex;align-items:center;gap:10px}
-.hm-stk{flex:1 1 auto;display:flex;gap:2px;height:10px;border-radius:5px;background:var(--neutral);overflow:hidden}
-.hm-stk i{display:block;height:100%}
-.hm-rd{flex:none;width:40px;text-align:end;font-size:12px;font-weight:600}
-.hm-rd.ok{color:var(--ok)}
-.hm-rd.warn{color:var(--warn)}
-.hm-rd.bad{color:var(--bad)}
+.hm-type{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500;background:var(--neutral);color:var(--ink)}
+.hm-type.E::before,.hm-type.I::before{content:"";width:6px;height:6px;border-radius:50%;margin-inline-end:6px}
+.hm-type.E::before{background:var(--accent)}
+.hm-type.I::before{background:var(--ai)}
+.hm-due{font-size:13px}
+.hm-due.late{color:var(--bad);font-weight:600}
+.hm-due.today{color:var(--warn);font-weight:600}
+.hm-due.ok{color:var(--ok)}
+.hm-na{font-size:12px;color:var(--muted)}
+.hm-empty{padding:32px;text-align:center;color:var(--muted);font-size:13px}
+.hm-legend{display:flex;align-items:center;gap:20px;padding:10px 16px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted2)}
+.hm-legend > span{display:inline-flex;align-items:center;gap:6px}
+.hm-legend .mu{margin-inline-start:auto}
 .hm-btab{width:100%}
-.hm-rs{font-weight:500}
-.hm-va{font-size:12px;color:var(--muted2);white-space:normal !important}
-.hm-ddg{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
-.hm-ddg > section:last-child{order:-1}
-.hm-ddg .hm-age{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
-.hm-ddg .hm-dbr{border-bottom:0;padding-bottom:0}
-.hm-fil{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line2)}
-.hm-fc{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border:1px solid var(--line);border-radius:14px;font-size:12px;font-weight:500;color:var(--muted2);cursor:pointer}
-.hm-fc span{font-weight:600;color:var(--ink)}
-.hm-fc:hover{border-color:var(--bdh)}
-.hm-fc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.hm-fc[aria-pressed=true]{border-color:var(--accent);background:var(--tint2);color:var(--accent2)}
+.hm-va{font-size:12px;color:var(--muted2)}
+.hm-fs{font-size:12px;color:var(--muted)}
+.hm-fs.sent{color:var(--ok)}
 .hm-ss{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500;white-space:nowrap}
 .hm-ss.ok{background:var(--okbg);color:var(--ok)}
 .hm-ss.warn{background:var(--warnbg);color:var(--warn)}
 .hm-ss.info{background:var(--tint);color:var(--accent2)}
 .hm-ss.done{background:var(--neutral);color:var(--muted2)}
-.hm-dbr{display:flex;flex-direction:column;gap:6px;padding-bottom:12px;border-bottom:1px solid var(--line2)}
-.hm-dbr:last-child{border-bottom:0;padding-bottom:0}
-.hm-dbh{display:flex;justify-content:space-between;gap:8px;font-size:13px}
-.hm-dbh b{font-weight:500}
-.hm-dbh span{font-weight:600;font-variant-numeric:tabular-nums}
-.hm-dbr small{font-size:12px;color:var(--muted)}
-
+.hm-sub{display:block;margin-top:2px;font-size:11px;color:var(--muted);font-family:inherit}
+.hm-drw{position:fixed;z-index:201;top:0;right:0;width:760px;height:100%;display:flex;flex-direction:column;background:var(--bg);box-shadow:0 0 0 200vmax rgba(22,26,33,.45)}
+.hm-dh{flex:none;display:flex;align-items:flex-start;gap:12px;padding:16px 16px 14px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.hm-dhi{flex:1 1 auto;min-width:0}
+.hm-dtl{display:flex;align-items:center;gap:10px}
+.hm-dtl h2{margin:0;font-size:17px;font-weight:600}
+.hm-dh p{margin:6px 0 0;font-size:13px;color:var(--muted2)}
+.hm-db{flex:1 1 auto;min-height:0;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
+.hm-dsec h3{margin:0 0 10px;font-size:14px;font-weight:600}
+.hm-dsh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.hm-dsh h3{margin:0}
+.hm-rl{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.hm-rl li{display:grid;grid-template-columns:minmax(0,1fr) 160px 60px;align-items:center;gap:12px;min-height:40px;padding:0 14px;font-size:13px}
+.hm-rl li + li{border-top:1px solid var(--line2)}
+.hm-rl b{text-align:end;color:var(--warn)}
+.hm-blt{width:100%;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.hm-more{margin:8px 0 0;font-size:12px;color:var(--muted)}
+.cmc-modal.hm-cfm{width:min(520px,calc(100vw - 64px));z-index:211}
+.hm-dl{display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px 16px;margin:0 0 16px;font-size:13px}
+.hm-dl dt{color:var(--muted)}
+.hm-dl dd{margin:0;font-weight:500}
+.hm-cn{margin:12px 0 0;font-size:12px;line-height:18px;color:var(--muted2)}
+.hm-cfm .lbl{display:block;margin-bottom:6px}
 
 .bm-st{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
 .bm-tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;margin-inline-end:4px;border-radius:10px;font-size:12px;font-weight:500;background:var(--tint);color:var(--accent2)}
@@ -823,137 +772,170 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">{{greet}}</h1>
             <p style="margin: 2px 0 0; font-size: 13px; line-height: 18px; color: var(--muted)">{{ctx}}</p>
           </div>
-          <div class="gright" style="display: flex; align-items: center; gap: 8px; margin-inline-start: auto">
-            <a class="btn btn-sm" href="enquiry.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Enquiry</a>
-            <a class="btn btn-sm" href="invoice-list-v2.html" style="text-decoration: none">Invoice List</a>
-          </div>
         </div>
       </div>
-      <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <div class="tabs" role="tablist" aria-label="Home">
-          <button class="tabb" role="tab" id="hm-t1" aria-controls="hm-p1" aria-selected="{{tabs.voyA}}" onClick="{{tabs.toVoy}}">Voyage Invoicing <span class="hm-tc">{{tabs.voyN}}</span></button>
-          <button class="tabb" role="tab" id="hm-t2" aria-controls="hm-p2" aria-selected="{{tabs.ddA}}" onClick="{{tabs.toDd}}">D&amp;D Billing <span class="hm-tc">{{tabs.ddN}}</span></button>
+      <main class="gmain" style="flex: 1 0 auto; padding: 0 20px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <div class="tabs hm-tabs" role="tablist" aria-label="Home">
+          <button class="tabb" role="tab" id="hm-t1" aria-controls="hm-p1" aria-selected="{{tabs.voyA}}" onClick="{{tabs.toVoy}}">Voyage Invoicing<span class="hm-tc">{{tabs.voyN}}</span></button>
+          <button class="tabb" role="tab" id="hm-t2" aria-controls="hm-p2" aria-selected="{{tabs.ddA}}" onClick="{{tabs.toDd}}">D&amp;D Billing<span class="hm-tc">{{tabs.ddN}}</span></button>
         </div>
 
+        <sc-if value="{{done.show}}" hint-placeholder-val="{{ false }}">
+          <div class="hm-note ok" role="status">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12l3 3 5-6"></path></svg>
+            <span>{{done.txt}}</span><a class="lnk" href="{{done.href}}">View in Invoice List</a>
+            <button class="btn btn-icon btn-sm hm-nx" aria-label="Dismiss" onClick="{{done.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+        </sc-if>
+
         <sc-if value="{{tabs.voy}}" hint-placeholder-val="{{ true }}">
-          <div id="hm-p1" role="tabpanel" aria-labelledby="hm-t1" style="display: flex; flex-direction: column; gap: 16px">
+          <div id="hm-p1" role="tabpanel" aria-labelledby="hm-t1" class="hm-panel">
             <sc-if value="{{alert}}" hint-placeholder-val="{{ true }}">
-              <div class="hm-alert" role="status">
+              <div class="hm-note warn" role="status">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg>
-                <span><b>Daily ROE feed unavailable.</b> Invoices that need today's rate of exchange are on hold until the rate is received.</span>
-                <button class="btn btn-icon btn-sm" aria-label="Dismiss" onClick="{{alertOff}}" style="margin-inline-start: auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+                <span><b>Daily ROE feed not received.</b> Invoices that need a rate of exchange are blocked. Request the rate from Treasury in the list of reasons below.</span>
+                <button class="btn btn-icon btn-sm hm-nx" aria-label="Dismiss" onClick="{{alertOff}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
               </div>
             </sc-if>
 
-            <div class="hm-days" role="group" aria-label="Voyage dates">
-              <button class="{{missChip.cls}}" aria-pressed="{{missChip.cur}}" onClick="{{missChip.pick}}"><span class="hm-dw">Missed</span><b>{{missChip.n}} voyages</b><small>{{missChip.sub}}</small></button>
-              <sc-for list="{{days}}" as="d" hint-placeholder-count="8">
-                <button class="{{d.cls}}" aria-pressed="{{d.cur}}" onClick="{{d.pick}}"><span class="hm-dw">{{d.w}}</span><b>{{d.d}}</b><small>{{d.sub}}</small></button>
-              </sc-for>
+            <div class="hm-bar">
+              <div class="hm-days" role="group" aria-label="Voyage date">
+                <button class="{{ovChip.cls}}" aria-pressed="{{ovChip.cur}}" onClick="{{ovChip.pick}}"><span class="hm-dw">Overdue</span><b>{{ovChip.n}}</b><small>voyages</small></button>
+                <span class="hm-dsep" aria-hidden="true"></span>
+                <sc-for list="{{days}}" as="d" hint-placeholder-count="8">
+                  <button class="{{d.cls}}" aria-pressed="{{d.cur}}" onClick="{{d.pick}}"><span class="hm-dw">{{d.w}}</span><b>{{d.d}}</b><small>{{d.n}}</small></button>
+                </sc-for>
+              </div>
             </div>
 
-            <div class="hm-kpis6">
-              <sc-for list="{{vk}}" as="k" hint-placeholder-count="6"><div class="{{k.cls}}"><span class="hm-kl">{{k.l}}</span><b>{{k.v}}</b><span class="hm-ks">{{k.sub}}</span></div></sc-for>
-            </div>
+            <section class="card" aria-labelledby="hm-st">
+              <div class="hm-sumh">
+                <div><h2 id="hm-st">{{sum.title}}</h2><span>{{sum.sub}}</span></div>
+                <button class="btn btn-primary" disabled="{{sum.genDis}}" onClick="{{sum.gen}}">{{sum.genL}}</button>
+              </div>
+              <div class="hm-stats">
+                <sc-for list="{{sum.stats}}" as="t" hint-placeholder-count="5">
+                  <div class="hm-stat"><span><sc-if value="{{t.has}}" hint-placeholder-val="{{ true }}"><i class="{{t.k}}"></i></sc-if>{{t.l}}</span><b>{{t.v}}</b></div>
+                </sc-for>
+              </div>
+              <div class="hm-stk lg" aria-hidden="true"><i class="inv" style="{{sum.bI}}"></i><i class="rdy" style="{{sum.bR}}"></i><i class="blk" style="{{sum.bB}}"></i><i class="nd" style="{{sum.bW}}"></i></div>
+            </section>
 
             <section class="card" aria-labelledby="hm-vt" style="flex: none; overflow: hidden">
               <div class="card-head">
-                <h2 class="card-title" id="hm-vt">Voyages to Invoice <span class="hm-scope">{{scopeL}}</span></h2>
-                <span style="display: inline-flex; align-items: center; gap: 12px">
-                  <span class="hm-leg"><span><i class="hm-sw inv"></i>Invoiced</span><span><i class="hm-sw rdy"></i>Ready</span><span><i class="hm-sw blk"></i>Blocked</span></span>
-                  <sc-if value="{{hasVoy}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{clearVoy}}">Show all voyages</button></sc-if>
-                  <button class="btn btn-sm btn-primary" disabled="{{genAllDis}}" onClick="{{genAll}}">{{genAllL}}</button>
-                </span>
+                <h2 class="card-title" id="hm-vt">Voyages</h2>
+                <div class="hm-tools">
+                  <div class="hm-seg" role="group" aria-label="Direction">
+                    <sc-for list="{{dirs}}" as="x" hint-placeholder-count="3"><button aria-pressed="{{x.cur}}" onClick="{{x.pick}}">{{x.l}}</button></sc-for>
+                  </div>
+                  <div class="hm-srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Voyage no., vessel or port" aria-label="Search voyages" value="{{q}}" onInput="{{onQ}}" autocomplete="off" spellcheck="false"></div>
+                </div>
               </div>
               <div style="overflow: auto">
               <table class="lst hm-vtab">
-                <thead><tr><th scope="col" class="c-no">Voyage No.</th><th scope="col">Vessel</th><th scope="col">Direction</th><th scope="col">Leg</th><th scope="col">Date</th><th scope="col" class="r">Expected</th><th scope="col" class="r">Invoiced</th><th scope="col" class="r">Ready</th><th scope="col" class="r">ROE missing</th><th scope="col" class="r">Data not received</th><th scope="col" style="width: 220px">Readiness</th><th scope="col" class="c-act">Action</th></tr></thead>
+                <thead><tr><th scope="col" class="c-no">Voyage No.</th><th scope="col">Vessel</th><th scope="col">Type</th><th scope="col">Route</th><th scope="col">ETD / ETA</th><th scope="col">Invoice due</th><th scope="col" class="r">Invoiced</th><th scope="col" class="r">Ready</th><th scope="col" class="r">Blocked</th><th scope="col" style="width: 160px">Progress</th><th scope="col" class="c-act">Action</th></tr></thead>
                 <tbody>
                   <sc-for list="{{rows}}" as="r" hint-placeholder-count="3">
-                    <tr class="{{r.cls}}" onClick="{{r.pickV}}">
-                      <td class="c-no"><button class="lnk mono" onClick="{{r.pickV}}" title="Show blockers for {{r.no}}">{{r.no}}</button></td>
+                    <tr class="cmc-row" onClick="{{r.open}}">
+                      <td class="c-no"><button class="lnk mono" onClick="{{r.open}}" aria-label="{{r.openL}}">{{r.no}}</button></td>
                       <td>{{r.vessel}}</td>
-                      <td><span class="{{r.dirC}}">{{r.dirL}}</span></td>
-                      <td class="mono">{{r.leg}}</td>
-                      <td><span class="mu">{{r.dateL}}</span> {{r.date}}</td>
-                      <td class="r">{{r.exp}}</td><td class="r">{{r.inv}}</td><td class="r">{{r.ready}}</td>
-                      <td class="{{r.roeC}}">{{r.roe}}</td><td class="{{r.nodC}}">{{r.nod}}</td>
-                      <td><div class="hm-prog"><span class="hm-stk"><i class="inv" style="{{r.bI}}"></i><i class="rdy" style="{{r.bR}}"></i><i class="blk" style="{{r.bB}}"></i></span><span class="{{r.rdC}}">{{r.rd}}</span></div></td>
+                      <td><span class="{{r.typeC}}">{{r.typeL}}</span></td>
+                      <td class="mono">{{r.route}}</td>
+                      <td>{{r.date}}</td>
+                      <td><span class="{{r.dueC}}">{{r.dueL}}</span></td>
+                      <td class="r">{{r.invL}}</td>
+                      <td class="{{r.readyC}}">{{r.ready}}</td>
+                      <td class="{{r.blockedC}}">{{r.blocked}}</td>
+                      <td><span class="hm-stk"><i class="inv" style="{{r.bI}}"></i><i class="rdy" style="{{r.bR}}"></i><i class="blk" style="{{r.bB}}"></i></span></td>
                       <td class="c-act">
                         <sc-if value="{{r.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{r.gen}}">{{r.genL}}</button></sc-if>
-                        <sc-if value="{{r.noGen}}" hint-placeholder-val="{{ false }}"><span class="mu" style="font-size: 12px">{{r.noGenL}}</span></sc-if>
+                        <sc-if value="{{r.noGen}}" hint-placeholder-val="{{ false }}"><span class="hm-na">{{r.noGenL}}</span></sc-if>
                       </td>
                     </tr>
                   </sc-for>
                 </tbody>
               </table>
-              <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No voyages on this date</div></sc-if>
+              <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div class="hm-empty">{{noRowsL}}</div></sc-if>
               </div>
+              <div class="hm-legend"><span><i class="hm-dot inv"></i>Invoiced</span><span><i class="hm-dot rdy"></i>Ready to generate</span><span><i class="hm-dot blk"></i>Blocked</span><span class="mu">Select a voyage to see its B/Ls.</span></div>
             </section>
 
-            <section class="card" aria-labelledby="hm-bk" style="flex: none; overflow: hidden">
-              <div class="card-head"><h2 class="card-title" id="hm-bk">Why invoices are pending <span class="hm-scope">{{scopeL}}</span></h2></div>
-              <table class="lst hm-btab">
-                <thead><tr><th scope="col">Reason</th><th scope="col">Voyages affected</th><th scope="col">Follow up with</th><th scope="col" class="r">Invoices</th><th scope="col" class="r">Pending amount</th><th scope="col" class="c-act">Action</th></tr></thead>
-                <tbody>
-                  <sc-for list="{{blk}}" as="b" hint-placeholder-count="3">
-                    <tr><td><b class="hm-rs">{{b.r}}</b></td><td class="mono hm-va">{{b.d}}</td><td>{{b.own}}</td><td class="r">{{b.n}}</td><td class="r">{{b.amt}}</td>
-                      <td class="c-act"><button class="btn btn-sm" disabled="{{b.done}}" onClick="{{b.go}}">{{b.act}}</button></td></tr>
-                  </sc-for>
-                </tbody>
-              </table>
-              <sc-if value="{{noBlk}}" hint-placeholder-val="{{ false }}"><div style="padding: 28px; text-align: center; color: var(--muted)">Nothing is blocked — every expected invoice has data and a rate of exchange.</div></sc-if>
-            </section>
+            <sc-if value="{{hasReasons}}" hint-placeholder-val="{{ true }}">
+              <section class="card" aria-labelledby="hm-bk" style="flex: none; overflow: hidden">
+                <div class="card-head"><h2 class="card-title" id="hm-bk">Why invoices are blocked</h2><span class="card-meta">{{sum.title}}</span></div>
+                <table class="lst hm-btab">
+                  <thead><tr><th scope="col">Reason</th><th scope="col">Voyages</th><th scope="col">Follow up with</th><th scope="col" class="r">Invoices</th><th scope="col" class="r">Amount</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{reasons}}" as="b" hint-placeholder-count="3">
+                      <tr><td>{{b.r}}</td><td class="mono hm-va">{{b.d}}</td><td>{{b.own}}</td><td class="r">{{b.n}}</td><td class="r">{{b.amt}}</td><td><span class="{{b.stC}}">{{b.st}}</span></td>
+                        <td class="c-act"><button class="btn btn-sm" onClick="{{b.go}}">{{b.act}}</button></td></tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </section>
+            </sc-if>
           </div>
         </sc-if>
 
         <sc-if value="{{tabs.dd}}" hint-placeholder-val="{{ false }}">
-          <div id="hm-p2" role="tabpanel" aria-labelledby="hm-t2" style="display: flex; flex-direction: column; gap: 16px">
-            <div class="hm-kpis">
-              <sc-for list="{{ddk}}" as="k" hint-placeholder-count="5"><div class="{{k.cls}}"><span class="hm-kl">{{k.l}}</span><b>{{k.v}}</b><span class="hm-ks">{{k.sub}}</span></div></sc-for>
-            </div>
-            <div class="hm-ddg">
-              <section class="card" aria-labelledby="hm-dc" style="overflow: hidden; min-width: 0">
-                <div class="card-head">
-                  <h2 class="card-title" id="hm-dc">Containers · Detention &amp; Demurrage</h2>
-                  <button class="btn btn-sm btn-primary" disabled="{{ddGenAllDis}}" onClick="{{ddGenAll}}">{{ddGenAllL}}</button>
-                </div>
-                <div class="hm-fil" role="group" aria-label="Filter containers">
-                  <sc-for list="{{ddFil}}" as="f" hint-placeholder-count="5"><button class="hm-fc" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}} <span>{{f.n}}</span></button></sc-for>
-                </div>
-                <div style="overflow: auto">
-                <table class="lst">
-                  <thead><tr><th scope="col" class="c-no">Container</th><th scope="col">Customer</th><th scope="col">B/L</th><th scope="col">Type</th><th scope="col">Gate-out</th><th scope="col">Returned</th><th scope="col" class="r">Days used / free</th><th scope="col" class="r">Over</th><th scope="col" class="r">Amount</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
+          <div id="hm-p2" role="tabpanel" aria-labelledby="hm-t2" class="hm-panel">
+            <section class="card" aria-labelledby="hm-ds">
+              <div class="hm-sumh">
+                <div><h2 id="hm-ds">Detention &amp; Demurrage</h2><span>Containers given to customers, from LMS gate-out and return dates</span></div>
+                <button class="btn btn-primary" disabled="{{ddGenDis}}" onClick="{{ddGen}}">{{ddGenL}}</button>
+              </div>
+              <div class="hm-stats four">
+                <sc-for list="{{ddSum}}" as="t" hint-placeholder-count="4">
+                  <div class="hm-stat"><span><i class="{{t.k}}"></i>{{t.l}}</span><b>{{t.v}}</b><small>{{t.sub}}</small></div>
+                </sc-for>
+              </div>
+            </section>
+
+            <sc-if value="{{hasDdReasons}}" hint-placeholder-val="{{ true }}">
+              <section class="card" aria-labelledby="hm-dr" style="flex: none; overflow: hidden">
+                <div class="card-head"><h2 class="card-title" id="hm-dr">Why D&amp;D is blocked</h2></div>
+                <table class="lst hm-btab">
+                  <thead><tr><th scope="col">Reason</th><th scope="col">Containers</th><th scope="col">Follow up with</th><th scope="col" class="r">Count</th><th scope="col" class="r">Amount</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
                   <tbody>
-                    <sc-for list="{{ddRows}}" as="c" hint-placeholder-count="8">
-                      <tr>
-                        <td class="c-no"><span class="mono">{{c.cn}}</span> <small class="mu">{{c.sz}}</small></td><td>{{c.cust}}</td><td class="mono">{{c.bl}}</td><td><span class="{{c.dirC}}">{{c.dirL}}</span> {{c.type}}</td>
-                        <td>{{c.out}}</td><td>{{c.back}}</td><td class="r">{{c.used}} / {{c.free}}</td><td class="{{c.overC}}">{{c.over}}</td><td class="r">{{c.amt}}</td>
-                        <td><span class="{{c.stC}}">{{c.stL}}</span></td>
-                        <td class="c-act">
-                          <sc-if value="{{c.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{c.gen}}">Generate</button></sc-if>
-                          <sc-if value="{{c.noGen}}" hint-placeholder-val="{{ false }}"><span class="mu" style="font-size: 12px">{{c.why}}</span></sc-if>
-                        </td>
-                      </tr>
+                    <sc-for list="{{ddReasons}}" as="b" hint-placeholder-count="4">
+                      <tr><td>{{b.r}}</td><td class="mono hm-va">{{b.d}}</td><td>{{b.own}}</td><td class="r">{{b.n}}</td><td class="r">{{b.amt}}</td><td><span class="{{b.stC}}">{{b.st}}</span></td>
+                        <td class="c-act"><button class="btn btn-sm" onClick="{{b.go}}">{{b.act}}</button></td></tr>
                     </sc-for>
                   </tbody>
                 </table>
-                </div>
               </section>
-              <section class="card" aria-labelledby="hm-dr" style="min-width: 0">
-                <div class="card-head"><h2 class="card-title" id="hm-dr">Why D&amp;D is pending</h2></div>
-                <div class="hm-age">
-                  <sc-for list="{{ddBlk}}" as="b" hint-placeholder-count="4">
-                    <div class="hm-dbr">
-                      <div class="hm-dbh"><b>{{b.r}}</b><span>{{b.amt}}</span></div>
-                      <span class="hm-track"><span class="hm-ab late" style="{{b.bar}}"></span></span>
-                      <small>{{b.n}} · Follow up with {{b.own}}</small>
-                    </div>
+            </sc-if>
+
+            <section class="card" aria-labelledby="hm-dc" style="flex: none; overflow: hidden">
+              <div class="card-head">
+                <h2 class="card-title" id="hm-dc">Containers</h2>
+                <div class="hm-seg" role="group" aria-label="Filter containers">
+                  <sc-for list="{{ddFil}}" as="f" hint-placeholder-count="5"><button aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
+                </div>
+              </div>
+              <div style="overflow: auto">
+              <table class="lst">
+                <thead><tr><th scope="col" class="c-no">Container</th><th scope="col">Customer</th><th scope="col">B/L</th><th scope="col">Type</th><th scope="col">Gate-out</th><th scope="col">Returned</th><th scope="col" class="r">Days used / free</th><th scope="col" class="r">Days over</th><th scope="col" class="r">Amount</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{ddRows}}" as="c" hint-placeholder-count="8">
+                    <tr>
+                      <td class="c-no"><span class="mono">{{c.cn}}</span><small class="hm-sub">{{c.sz}}</small></td>
+                      <td>{{c.cust}}</td><td class="mono">{{c.bl}}</td>
+                      <td><span class="{{c.typeC}}">{{c.typeL}}</span><small class="hm-sub">{{c.type}}</small></td>
+                      <td>{{c.out}}</td><td class="{{c.backC}}">{{c.back}}</td>
+                      <td class="r">{{c.days}}</td><td class="{{c.overC}}">{{c.over}}</td>
+                      <td class="r">{{c.amt}}<small class="hm-sub">{{c.slab}}</small></td>
+                      <td><span class="{{c.stC}}">{{c.stL}}</span></td>
+                      <td class="c-act">
+                        <sc-if value="{{c.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{c.gen}}">Generate</button></sc-if>
+                        <sc-if value="{{c.noGen}}" hint-placeholder-val="{{ false }}"><span class="hm-na">{{c.noGenL}}</span></sc-if>
+                      </td>
+                    </tr>
                   </sc-for>
-                  <sc-if value="{{noDdBlk}}" hint-placeholder-val="{{ false }}"><div style="padding: 20px 0; text-align: center; color: var(--muted)">Nothing blocked</div></sc-if>
-                </div>
-              </section>
-            </div>
+                </tbody>
+              </table>
+              </div>
+            </section>
           </div>
         </sc-if>
       </main>
@@ -961,173 +943,392 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
   </div>
 
 
+  <sc-if value="{{drw.show}}" hint-placeholder-val="{{ false }}">
+    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{drw.close}}"></button>
+    <aside class="hm-drw" role="dialog" aria-modal="true" aria-labelledby="hm-dt">
+      <div class="hm-dh">
+        <div class="hm-dhi">
+          <div class="hm-dtl"><span class="cm2-code mono">{{drw.no}}</span><h2 id="hm-dt">{{drw.vessel}}</h2><span class="{{drw.typeC}}">{{drw.typeL}}</span></div>
+          <p><span class="mono">{{drw.route}}</span> · {{drw.date}}</p>
+        </div>
+        <button class="btn btn-icon btn-sm" aria-label="Close" onClick="{{drw.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div class="hm-db">
+        <div class="hm-stats four tight">
+          <sc-for list="{{drw.stats}}" as="t" hint-placeholder-count="4"><div class="hm-stat"><span>{{t.l}}</span><b>{{t.v}}</b></div></sc-for>
+        </div>
+        <div class="hm-stk lg" aria-hidden="true"><i class="inv" style="{{drw.bI}}"></i><i class="rdy" style="{{drw.bR}}"></i><i class="blk" style="{{drw.bB}}"></i></div>
+
+        <sc-if value="{{drw.hasReasons}}" hint-placeholder-val="{{ true }}">
+          <div class="hm-dsec">
+            <h3>Blocked because</h3>
+            <ul class="hm-rl">
+              <sc-for list="{{drw.reasons}}" as="x" hint-placeholder-count="2"><li><span>{{x.l}}</span><span class="mu">{{x.o}}</span><b>{{x.n}}</b></li></sc-for>
+            </ul>
+          </div>
+        </sc-if>
+
+        <div class="hm-dsec">
+          <div class="hm-dsh"><h3>B/Ls</h3>
+            <div class="hm-seg sm" role="group" aria-label="Filter B/Ls"><sc-for list="{{drw.filters}}" as="f" hint-placeholder-count="4"><button aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for></div>
+          </div>
+          <table class="lst hm-blt">
+            <thead><tr><th scope="col">B/L No.</th><th scope="col">Billing party</th><th scope="col" class="r">Ctr</th><th scope="col" class="r">Amount</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <sc-for list="{{drw.bls}}" as="b" hint-placeholder-count="8">
+                <tr><td class="mono">{{b.bl}}</td><td>{{b.cust}}</td><td class="r">{{b.ctr}}</td><td class="r">{{b.amt}}</td><td><span class="{{b.stC}}">{{b.st}}</span><small class="hm-sub">{{b.note}}</small></td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <sc-if value="{{drw.noBls}}" hint-placeholder-val="{{ false }}"><div class="hm-empty">{{drw.noBlsL}}</div></sc-if>
+          <sc-if value="{{drw.hasMore}}" hint-placeholder-val="{{ false }}"><p class="hm-more">{{drw.more}} · <a class="lnk" href="{{drw.list}}">Open in Invoice List</a></p></sc-if>
+        </div>
+      </div>
+      <div class="cmc-mf">
+        <a class="btn" href="{{drw.list}}" style="margin-inline-end: auto; text-decoration: none">Open in Invoice List</a>
+        <button class="btn" onClick="{{drw.close}}">Close</button>
+        <sc-if value="{{drw.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{drw.gen}}">{{drw.genL}}</button></sc-if>
+      </div>
+    </aside>
+  </sc-if>
+
+  <sc-if value="{{cf.show}}" hint-placeholder-val="{{ false }}">
+    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{cf.cancel}}" style="z-index: 210"></button>
+    <div class="cmc-modal hm-cfm" role="dialog" aria-modal="true" aria-labelledby="hm-ct">
+      <div class="cmc-mh"><h2 id="hm-ct">{{cf.title}}</h2></div>
+      <div class="cmc-mb">
+        <dl class="hm-dl"><sc-for list="{{cf.rows}}" as="r" hint-placeholder-count="4"><dt>{{r.l}}</dt><dd>{{r.v}}</dd></sc-for></dl>
+        <p class="hm-cn">{{cf.note}}</p>
+      </div>
+      <div class="cmc-mf"><button class="btn" onClick="{{cf.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{cf.ok}}">Generate</button></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{rate.show}}" hint-placeholder-val="{{ false }}">
+    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{rate.cancel}}" style="z-index: 210"></button>
+    <div class="cmc-modal hm-cfm" role="dialog" aria-modal="true" aria-labelledby="hm-rt">
+      <div class="cmc-mh"><h2 id="hm-rt">Enter rate of exchange</h2></div>
+      <div class="cmc-mb">
+        <dl class="hm-dl"><dt>Currency pair</dt><dd>{{rate.pair}}</dd><dt>Rate date</dt><dd>Fri 20 Nov 2026</dd></dl>
+        <label class="lbl" for="hm-rv">Rate received from Treasury</label>
+        <input id="hm-rv" class="input" inputmode="decimal" placeholder="e.g. 1.6842" value="{{rate.val}}" onInput="{{rate.on}}" autocomplete="off">
+        <p class="hm-cn">{{rate.info}} Entering a rate manually is recorded in the audit trail.</p>
+      </div>
+      <div class="cmc-mf"><button class="btn" onClick="{{rate.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{rate.ok}}">Apply rate</button></div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
     <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
   </sc-if>
 </div>
 </script>
 <script type="text/x-dc" id="logic">
-// Home — landing workspace for a port / office user. Data arrives from LMS.
-// 1) Voyage Invoicing: voyages loading (Export, …E) or discharging (Import, …I) at my port, invoice readiness and blockers.
-// 2) D&D Billing: containers given to customers, detention / demurrage to invoice, and why amounts are pending.
-// Sample data (Singapore view; other locations swap the port code and scale counts).
-const HM_HUB = { SIN: ['Singapore', 'SGSIN', 'SGD', 1], NSA: ['India', 'INNSA', 'INR', 0.6], LCH: ['Thailand', 'THLCH', 'THB', 0.45], PKG: ['Malaysia', 'MYPKG', 'MYR', 0.55], JED: ['Saudi Arabia', 'SAJED', 'SAR', 0.4], ZLO: ['Mexico', 'MXZLO', 'MXN', 0.3] };
+// Home — port / office workspace. All shipment data arrives from LMS.
+// Voyage Invoicing: export voyages (…E) loading at my port, import voyages (…I) discharging at my port.
+// D&D Billing: containers given to customers; detention / demurrage to invoice.
+// Sample data. "Today" is fixed for the prototype.
 const HM_TODAY = '2026-11-20';
 const HM_DAYS = ['2026-11-17', '2026-11-18', '2026-11-19', '2026-11-20', '2026-11-21', '2026-11-22', '2026-11-23', '2026-11-24'];
-// date, vessel, voyage no., dir (E/I), other port, expected, invoiced, ready, roe missing, data not received, other hold, ROE pair, avg USD per B/L
-const HM_VOY = [
-  ['2026-11-17', 'KOTA LEMBAH', '0KL2MME', 'E', 'NZAKL', 820, 790, 12, 0, 18, 0, '', 1850],
-  ['2026-11-18', 'KOTA SEJATI', '2KS4NNI', 'I', 'CNSHA', 640, 602, 10, 22, 6, 0, 'USD → SGD', 640],
-  ['2026-11-19', 'NORFOLK', '0NF7QQI', 'I', 'NZTRG', 410, 388, 0, 14, 8, 0, 'NZD → SGD', 610],
-  ['2026-11-20', 'CMA CGM LEKKI', '0LK5SSE', 'E', 'NZAKL', 1000, 0, 935, 25, 40, 0, 'USD → NZD', 1850],
-  ['2026-11-20', 'KOTA PEMIMPIN', '1KP8RRI', 'I', 'INNSA', 520, 310, 154, 30, 20, 6, 'USD → SGD', 620],
-  ['2026-11-21', 'NORFOLK', '0NF8SSE', 'E', 'NZAKL', 700, 0, 0, 0, 700, 0, '', 1850],
-  ['2026-11-21', 'KOTA LEMBAH', '0KL3PPE', 'E', 'MYPKG', 380, 0, 0, 0, 380, 0, '', 980],
-  ['2026-11-23', 'KOTA SEJATI', '2KS5TTE', 'E', 'CNSHA', 560, 0, 0, 0, 560, 0, '', 1420],
-  ['2026-11-24', 'CMA CGM KAURI', '0KR1AAI', 'I', 'NZTRG', 450, 0, 0, 0, 450, 0, '', 610]
+const HM_HUB = { SIN: ['Singapore', 'SGSIN', 'SG'], NSA: ['India', 'INNSA', 'IN'], LCH: ['Thailand', 'THLCH', 'TH'], PKG: ['Malaysia', 'MYPKG', 'MY'], JED: ['Saudi Arabia', 'SAJED', 'SA'], ZLO: ['Mexico', 'MXZLO', 'MX'] };
+const HM_CCY = { SG: 'SGD', NZ: 'NZD', MY: 'MYR', CN: 'CNY', IN: 'INR', TH: 'THB', SA: 'SAR', MX: 'MXN' };
+// base voyage, vessel, entity, POL, POD, ETD, ETA, B/Ls (one invoice each), USD per B/L
+const HM_LEGS = [
+  ['0KL2MM', 'KOTA LEMBAH', 'PIL', 'SGSIN', 'NZAKL', '2026-11-17', '2026-11-28', 820, 1850],
+  ['0LK5SS', 'CMA CGM LEKKI', 'PIL', 'SGSIN', 'NZAKL', '2026-11-20', '2026-12-01', 1000, 1850],
+  ['0NF8SS', 'NORFOLK', 'PIL', 'SGSIN', 'NZAKL', '2026-11-21', '2026-12-02', 700, 1850],
+  ['0KL3PP', 'KOTA LEMBAH', 'MELL', 'SGSIN', 'MYPKG', '2026-11-21', '2026-11-22', 380, 980],
+  ['1KP9CC', 'KOTA PEMIMPIN', 'PIL', 'SGSIN', 'THLCH', '2026-11-22', '2026-11-24', 340, 1120],
+  ['2KS5TT', 'KOTA SEJATI', 'PIL', 'SGSIN', 'CNSHA', '2026-11-23', '2026-11-28', 560, 1420],
+  ['2KS4NN', 'KOTA SEJATI', 'PIL', 'CNSHA', 'SGSIN', '2026-11-13', '2026-11-18', 640, 640],
+  ['0NF7QQ', 'NORFOLK', 'PIL', 'NZTRG', 'SGSIN', '2026-11-08', '2026-11-19', 410, 610],
+  ['1KP8RR', 'KOTA PEMIMPIN', 'PIL', 'INNSA', 'SGSIN', '2026-11-14', '2026-11-20', 520, 620],
+  ['5KM3EE', 'KOTA MAKMUR', 'PIL', 'THLCH', 'SGSIN', '2026-11-19', '2026-11-21', 290, 560],
+  ['0KR1AA', 'CMA CGM KAURI', 'PIL', 'NZTRG', 'SGSIN', '2026-11-13', '2026-11-24', 450, 610],
+  ['4KG1DD', 'KOTA GEMILANG', 'PIL', 'INNSA', 'SAJED', '2026-11-19', '2026-11-25', 610, 1380],
+  ['4KG0CC', 'KOTA GEMILANG', 'PIL', 'SAJED', 'INNSA', '2026-11-12', '2026-11-18', 480, 1210],
+  ['6KH2FF', 'KOTA HAKIM', 'PIL', 'MYPKG', 'INNSA', '2026-11-14', '2026-11-20', 430, 1150],
+  ['8KC0GG', 'KOTA CAHAYA', 'PIL', 'CNSHA', 'MXZLO', '2026-11-02', '2026-11-20', 720, 2100],
+  ['8KC1HH', 'KOTA CAHAYA', 'PIL', 'MXZLO', 'CNSHA', '2026-11-23', '2026-12-12', 540, 1980]
 ];
-// container, size, customer, I/E, B/L, gate-out, returned, free days, D&D type, USD per day over, status
+// fixed figures from the client scenario (PDF) and a few hand-set voyages: invoiced, ready, roe missing, data not received, split-payer
+const HM_FIX = { '0LK5SSE': [0, 935, 25, 40, 0], '1KP8RRI': [310, 154, 30, 20, 6], '0KL2MME': [790, 12, 0, 18, 0], '2KS4NNI': [602, 10, 22, 6, 0], '0NF7QQI': [388, 0, 14, 8, 0] };
+const HM_CUST = ['Straits Harbour Logistics', 'Meridian Agro Exports', 'Andaman Bay Traders', 'Kinabalu Home Furnishings', 'Orchid Lane Polymers', 'Southern Cross Timber', 'Harbourline Foods', 'Pacific Rim Textiles'];
+const HM_MISS = ['Charges', 'Billing party', 'Customer tax ID', 'Cargo / EDI message'];
+const HM_STATUS = { inv: 'Invoiced', ready: 'Ready to generate', roe: 'ROE not received', nod: 'Data not received', hold: 'Split-payer unconfirmed' };
 const HM_DD = [
-  ['PCIU 812044-7', '40HC', 'Straits Harbour Logistics', 'I', 'BL-SG-23871', '2026-10-28', '2026-11-18', 7, 'Detention', 75, 'ready'],
-  ['PCIU 733120-2', '20GP', 'Meridian Agro Exports', 'E', 'BL-SG-23902', '2026-10-30', '2026-11-17', 5, 'Demurrage', 45, 'ready'],
-  ['TGHU 551902-0', '40HC', 'Andaman Bay Traders', 'I', 'BL-SG-23944', '2026-11-02', '2026-11-19', 7, 'Detention', 75, 'roe'],
-  ['PCIU 690377-5', '40RF', 'Orchid Lane Polymers', 'I', 'BL-SG-23950', '2026-11-01', '2026-11-16', 4, 'Combined', 140, 'tariff'],
-  ['PCIU 802211-9', '20GP', 'Kinabalu Home Furnishings', 'E', 'BL-SG-23961', '2026-11-03', '2026-11-18', 5, 'Detention', 40, 'milestone'],
-  ['TCLU 418820-3', '40HC', 'Straits Harbour Logistics', 'I', 'BL-SG-23977', '2026-11-04', '2026-11-19', 7, 'Detention', 75, 'waiver'],
-  ['PCIU 920014-6', '40HC', 'Meridian Agro Exports', 'I', 'BL-SG-24010', '2026-11-05', '', 7, 'Detention', 75, 'out'],
-  ['PCIU 771536-1', '20GP', 'Andaman Bay Traders', 'E', 'BL-SG-24018', '2026-11-08', '', 5, 'Demurrage', 45, 'out'],
-  ['TGHU 300417-8', '40RF', 'Orchid Lane Polymers', 'I', 'BL-SG-24021', '2026-11-12', '', 4, 'Combined', 140, 'out'],
-  ['PCIU 655801-4', '40HC', 'Kinabalu Home Furnishings', 'I', 'BL-SG-24026', '2026-11-15', '', 7, 'Detention', 75, 'out'],
-  ['PCIU 588190-3', '20GP', 'Straits Harbour Logistics', 'E', 'BL-SG-23890', '2026-10-25', '2026-11-12', 5, 'Demurrage', 45, 'invoiced']
+  ['PCIU 812044-7', '40HC', 'Straits Harbour Logistics', 'I', '23871', '2026-10-28', '2026-11-18', 7, 'Detention', 'ready'],
+  ['PCIU 733120-2', '20GP', 'Meridian Agro Exports', 'E', '23902', '2026-10-30', '2026-11-17', 5, 'Demurrage', 'ready'],
+  ['PCIU 733121-8', '20GP', 'Meridian Agro Exports', 'E', '23902', '2026-10-30', '2026-11-17', 5, 'Demurrage', 'ready'],
+  ['TGHU 551902-0', '40HC', 'Andaman Bay Traders', 'I', '23944', '2026-11-02', '2026-11-19', 7, 'Detention', 'roe'],
+  ['PCIU 690377-5', '40RF', 'Orchid Lane Polymers', 'I', '23950', '2026-11-01', '2026-11-16', 4, 'Combined', 'tariff'],
+  ['PCIU 802211-9', '20GP', 'Kinabalu Home Furnishings', 'E', '23961', '2026-11-03', '2026-11-18', 5, 'Detention', 'milestone'],
+  ['TCLU 418820-3', '40HC', 'Straits Harbour Logistics', 'I', '23977', '2026-11-04', '2026-11-19', 7, 'Detention', 'waiver'],
+  ['PCIU 920014-6', '40HC', 'Meridian Agro Exports', 'I', '24010', '2026-11-05', '', 7, 'Detention', 'out'],
+  ['PCIU 771536-1', '20GP', 'Andaman Bay Traders', 'E', '24018', '2026-11-08', '', 5, 'Demurrage', 'out'],
+  ['TGHU 300417-8', '40RF', 'Orchid Lane Polymers', 'I', '24021', '2026-11-12', '', 4, 'Combined', 'out'],
+  ['PCIU 655801-4', '40HC', 'Kinabalu Home Furnishings', 'I', '24026', '2026-11-15', '', 7, 'Detention', 'out'],
+  ['PCIU 588190-3', '20GP', 'Straits Harbour Logistics', 'E', '23890', '2026-10-25', '2026-11-12', 5, 'Demurrage', 'invoiced']
 ];
-const HM_DDST = {
-  ready: ['Ready to invoice', 'ok'], roe: ['ROE not received', 'warn'], tariff: ['D&D tariff missing', 'warn'], milestone: ['Milestone conflict', 'warn'],
-  waiver: ['Waiver approval pending', 'warn'], out: ['Still with customer', 'info'], invoiced: ['Invoiced', 'done']
+// slab tariff, USD per day after free time: [days in slab, rate]
+const HM_SLAB = { '20GP': [[5, 25], [99, 45]], '40HC': [[5, 40], [99, 75]], '40RF': [[3, 90], [99, 140]] };
+const HM_DDST = { ready: ['Ready to invoice', 'ok'], roe: ['ROE not received', 'warn'], tariff: ['D&D tariff missing', 'warn'], milestone: ['Milestone conflict', 'warn'], waiver: ['Waiver approval pending', 'warn'], out: ['With customer', 'info'], invoiced: ['Invoiced', 'done'] };
+const HM_DDR = {
+  roe: ['Treasury · ROE feed', 'Request ROE'], tariff: ['Pricing · tariff set-up', 'Request tariff'],
+  milestone: ['Equipment control · LMS', 'Raise LMS check'], waiver: ['Credit control · approver', 'Chase approval']
 };
-const HM_DDOWN = { roe: 'Treasury · ROE feed', tariff: 'Pricing · tariff set-up', milestone: 'Equipment control · LMS', waiver: 'Approver · Credit control' };
+
 const hmN = (n) => Math.round(n).toLocaleString('en-US');
-const hmUsd = (v) => 'USD ' + (v >= 1e6 ? (v / 1e6).toFixed(2) + 'M' : v >= 1e3 ? (v / 1e3).toFixed(1) + 'K' : hmN(v));
-const hmDay = (d) => { const t = new Date(d + 'T00:00:00'); return { w: t.toLocaleDateString('en-GB', { weekday: 'short' }), d: t.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) }; };
+const hmUsd = (v) => 'USD ' + (v >= 1e6 ? (v / 1e6).toFixed(2) + 'M' : v >= 1e4 ? (v / 1e3).toFixed(1) + 'K' : hmN(v));
+const hmDay = (d) => { const t = new Date(d + 'T00:00:00'); return { w: t.toLocaleDateString('en-GB', { weekday: 'short' }), d: t.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }; };
 const hmDiff = (a, b) => Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 864e5);
+const hmRnd = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return () => { h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return ((h >>> 0) % 10000) / 10000; }; };
+const hmTime = () => { try { return new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+const hmSlab = (sz, over) => { let left = over, amt = 0; const parts = []; (HM_SLAB[sz] || [[99, 50]]).forEach(([d, r]) => { const n = Math.min(left, d); if (n > 0) { amt += n * r; parts.push(n + ' d × ' + r); left -= n; } }); return { amt, txt: parts.join(' + ') || '—' }; };
+
+// One "side" of a leg = what one port invoices: export at POL (…E), import at POD (…I).
+const hmSides = (port) => {
+  const out = [];
+  HM_LEGS.forEach(([base, vessel, ent, pol, pod, etd, eta, bls, avg]) => {
+    [['E', pol, pod, etd], ['I', pod, pol, eta]].forEach(([dir, here, other, date]) => {
+      if (here !== port) return;
+      const no = base + dir, rnd = hmRnd(no);
+      let st;
+      if (HM_FIX[no]) st = HM_FIX[no].slice();
+      else if (date < HM_TODAY) { const inv = Math.round(bls * (0.94 + rnd() * 0.05)), rest = bls - inv, roe = Math.round(rest * rnd() * 0.5), nod = rest - roe; st = [inv, 0, roe, nod, 0]; }
+      else if (date === HM_TODAY) { const inv = Math.round(bls * rnd() * 0.5), roe = Math.round(bls * 0.03), nod = Math.round(bls * 0.04); st = [inv, bls - inv - roe - nod, roe, nod, 0]; }
+      else st = [0, 0, 0, 0, 0];
+      const cc = (dir === 'E' ? pol : pod).slice(0, 2);
+      out.push({ no, base, dir, vessel, ent, pol, pod, here, other, date, bls, avg, st, pair: 'USD → ' + (HM_CCY[cc] || 'USD') });
+    });
+  });
+  return out;
+};
 
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { tab: 'voy', day: HM_TODAY, voy: '', gen: {}, asked: {}, ddGen: {}, ddF: 'all', alertOff: false };
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('girs.home') || '{}') || {}; } catch (e) {}
+    this.state = {
+      tab: 'voy', day: HM_TODAY, dir: 'all', q: '', alertOff: false,
+      gen: saved.gen || {}, fu: saved.fu || {}, roeReq: saved.roeReq || {}, roeSet: saved.roeSet || {}, ddGen: saved.ddGen || {}, ddAct: saved.ddAct || {},
+      drw: '', drwF: '', confirm: null, rateFor: '', rateVal: '', done: null, ddF: 'all'
+    };
+    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') this.setState({ drw: '', confirm: null, rateFor: '' }); }); } catch (e) {}
+  }
+  save(patch) {
+    const s = Object.assign({}, this.state, patch);
+    try { localStorage.setItem('girs.home', JSON.stringify({ gen: s.gen, fu: s.fu, roeReq: s.roeReq, roeSet: s.roeSet, ddGen: s.ddGen, ddAct: s.ddAct })); } catch (e) {}
+    this.setState(patch);
   }
   renderVals() {
     const s = this.state, self = this;
-    const hub = s.__hub || 'SIN', [cty, port, lcy, f] = HM_HUB[hub] || HM_HUB.SIN;
-    const sc = (n) => (n ? Math.max(1, Math.round(n * f)) : 0);
+    const hub = s.__hub || 'SIN', [cty, port, cc] = HM_HUB[hub] || HM_HUB.SIN, ent = s.__ent || 'PIL';
     const hr = (() => { try { return new Date().getHours(); } catch (e) { return 9; } })();
     const greet = (hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ', ' + (typeof USER_NAME === 'string' ? USER_NAME.split(' ')[0] : 'Daniel');
 
-    // ---------- Voyages
-    const V = HM_VOY.map(([date, vessel, no, dir, other, exp, inv, ready, roe, nod, hold, pair, avg]) => {
-      const g = s.gen[no] || 0; // generated in this session
-      const r = { date, vessel, no, dir, exp: sc(exp), inv: sc(inv) + g, ready: Math.max(0, sc(ready) - g), roe: sc(roe), nod: sc(nod), hold: sc(hold), pair: pair.replace('SGD', lcy), avg };
-      r.leg = dir === 'E' ? port + ' → ' + other : other + ' → ' + port;
-      r.past = date < HM_TODAY; r.future = date > HM_TODAY;
-      r.blocked = r.roe + r.nod + r.hold; r.open = r.exp - r.inv;
-      return r;
+    // ---------- voyages with live status
+    const all = hmSides(port).filter((v) => v.ent === ent).map((v) => {
+      const g = s.gen[v.no] || 0, roeOk = !!s.roeSet[v.pair];
+      let [inv, ready, roe, nod, hold] = v.st;
+      if (roeOk) { ready += roe; roe = 0; }
+      ready = Math.max(0, ready - g); inv += g;
+      const notDue = v.date > HM_TODAY;
+      const blocked = roe + nod + hold, open = v.bls - inv;
+      const late = v.date < HM_TODAY && open > 0;
+      return Object.assign(v, { inv, ready, roe, nod, hold, blocked, open, notDue, late, overdueBy: late ? hmDiff(v.date, HM_TODAY) : 0 });
     });
+    const tally = (vs, k) => vs.reduce((a, v) => a + v[k], 0);
+    const overdue = all.filter((v) => v.late);
+    const inDay = (d) => all.filter((v) => v.date === d);
     const days = HM_DAYS.map((d) => {
-      const vs = V.filter((v) => v.date === d), open = vs.reduce((a, v) => a + v.open, 0), t = hmDay(d);
-      return { k: d, w: d === HM_TODAY ? 'Today' : t.w, d: t.d, sub: vs.length ? vs.length + (vs.length === 1 ? ' voyage' : ' voyages') + ' · ' + hmN(open) + ' open' : 'No voyages',
-        cls: 'hm-day' + (d === s.day ? ' on' : '') + (d < HM_TODAY && open ? ' late' : '') + (!vs.length ? ' none' : ''), cur: d === s.day ? 'true' : 'false',
-        pick: () => self.setState({ day: d, voy: '' }) };
+      const vs = inDay(d), t = hmDay(d);
+      return { k: d, w: d === HM_TODAY ? 'Today' : t.w, d: t.d, n: vs.length ? vs.length + (vs.length === 1 ? ' voyage' : ' voyages') : 'None',
+        cls: 'hm-day' + (d === s.day ? ' on' : '') + (d === HM_TODAY ? ' today' : '') + (!vs.length ? ' none' : '') + (vs.some((v) => v.late) ? ' late' : ''),
+        cur: d === s.day ? 'true' : 'false', pick: () => self.setState({ day: d }) };
     });
-    const missed = V.filter((v) => v.past && v.open > 0);
-    const missChip = { n: missed.length, sub: hmN(missed.reduce((a, v) => a + v.open, 0)) + ' invoices still open', cls: 'hm-day miss' + (s.day === 'missed' ? ' on' : ''), cur: s.day === 'missed' ? 'true' : 'false', pick: () => self.setState({ day: 'missed', voy: '' }) };
-    const scope = s.day === 'missed' ? missed : V.filter((v) => v.date === s.day);
-    const sel = s.voy ? scope.filter((v) => v.no === s.voy) : scope;
-    const sum = (k) => sel.reduce((a, v) => a + v[k], 0);
-    const E = sum('exp'), I = sum('inv'), R = sum('ready'), B = sum('blocked');
-    const scopeL = s.voy ? 'Voyage ' + s.voy : s.day === 'missed' ? 'Missed voyages (past dates)' : (s.day === HM_TODAY ? 'Today, ' : '') + hmDay(s.day).w + ' ' + hmDay(s.day).d;
-    const vk = [
-      ['Expected invoices', hmN(E), sel.length + (sel.length === 1 ? ' voyage' : ' voyages'), ''],
-      ['Invoiced', hmN(I), E ? Math.round((I / E) * 100) + '% of expected' : '—', 'ok'],
-      ['Ready to invoice', hmN(R), 'Data and ROE received', 'info'],
-      ['ROE not received', hmN(sum('roe')), 'Exchange rate missing', sum('roe') ? 'warn' : ''],
-      ['Data not received', hmN(sum('nod')), 'Not yet sent by LMS', sum('nod') ? 'warn' : ''],
-      ['Pending amount', hmUsd(sel.reduce((a, v) => a + v.blocked * v.avg, 0)), 'Blocked from invoicing', B ? 'bad' : '']
-    ].map(([l, v, sub, tone]) => ({ l, v, sub, cls: 'card hm-k ' + tone }));
-    const pct = (n, e) => (e ? (n / e) * 100 : 0);
+    const ovChip = { n: String(overdue.length), cls: 'hm-day ov' + (s.day === 'overdue' ? ' on' : '') + (overdue.length ? '' : ' none'), cur: s.day === 'overdue' ? 'true' : 'false', pick: () => self.setState({ day: 'overdue' }) };
+    const q = s.q.trim().toUpperCase();
+    const scopeAll = s.day === 'overdue' ? overdue : inDay(s.day);
+    const scope = scopeAll.filter((v) => (s.dir === 'all' || v.dir === s.dir) && (!q || (v.no + ' ' + v.vessel + ' ' + v.pol + ' ' + v.pod).toUpperCase().includes(q)));
+    const t = hmDay(s.day === 'overdue' ? HM_TODAY : s.day);
+    const scopeL = s.day === 'overdue' ? 'Overdue voyages' : (s.day === HM_TODAY ? 'Today, ' : '') + t.w + ' ' + t.d;
+    const E = tally(scope, 'bls'), I = tally(scope, 'inv'), R = tally(scope, 'ready'), B = tally(scope, 'blocked');
+    const W = tally(scope.filter((v) => v.notDue), 'bls');
+    const w = (n) => 'width: ' + (E ? (n / E) * 100 : 0) + '%';
+    const sum = {
+      title: scopeL, sub: scope.length + (scope.length === 1 ? ' voyage' : ' voyages') + (s.dir !== 'all' ? (s.dir === 'E' ? ' · export only' : ' · import only') : ''),
+      stats: [['Expected', hmN(E), ''], ['Invoiced', hmN(I), 'inv'], ['Ready to generate', hmN(R), 'rdy'], ['Blocked', hmN(B), 'blk'], ['Not due yet', hmN(W), 'nd']].filter((x) => x[2] !== 'nd' || W > 0).map(([l, v, k]) => ({ l, v, k: 'hm-dot ' + k, has: !!k })),
+      bI: w(I), bR: w(R), bB: w(B), bW: w(W),
+      genL: 'Generate all ready (' + hmN(R) + ')', genDis: !R,
+      gen: () => self.setState({ confirm: { kind: 'voy', nos: scope.filter((v) => v.ready).map((v) => v.no) } })
+    };
     const rows = scope.map((v) => {
-      const rd = v.exp ? Math.round(((v.inv + v.ready) / v.exp) * 100) : 0;
+      const d = hmDay(v.date);
+      const due = v.notDue ? { l: d.w + ' ' + d.d, c: 'mu' } : v.late ? { l: 'Overdue ' + v.overdueBy + (v.overdueBy === 1 ? ' day' : ' days'), c: 'hm-due late' } : v.open ? { l: 'Due today', c: 'hm-due today' } : { l: 'Complete', c: 'hm-due ok' };
       return {
-        no: v.no, vessel: v.vessel, leg: v.leg, dirL: v.dir === 'E' ? 'Export' : 'Import', dirC: 'hm-dir ' + v.dir, date: hmDay(v.date).w + ' ' + hmDay(v.date).d, dateL: v.dir === 'E' ? 'ETD' : 'ETA',
-        exp: hmN(v.exp), inv: hmN(v.inv), ready: hmN(v.ready), roe: v.roe ? hmN(v.roe) : '—', nod: v.nod ? hmN(v.nod) : '—', roeC: v.roe ? 'r hm-wn' : 'r mu', nodC: v.nod ? 'r hm-wn' : 'r mu',
-        bI: 'width: ' + pct(v.inv, v.exp) + '%', bR: 'width: ' + pct(v.ready, v.exp) + '%', bB: 'width: ' + pct(v.blocked, v.exp) + '%', rd: rd + '%', rdC: 'hm-rd ' + (rd >= 90 ? 'ok' : rd >= 80 ? 'warn' : 'bad'),
-        cls: (v.no === s.voy ? 'on ' : '') + 'cmc-row', pickV: () => self.setState({ voy: s.voy === v.no ? '' : v.no }),
-        canGen: v.ready > 0, noGen: v.ready === 0, genL: 'Generate ' + hmN(v.ready), noGenL: v.open === 0 ? 'All invoiced' : v.future && !v.ready ? 'Awaiting data' : 'Nothing ready',
-        gen: () => self.setState({ gen: Object.assign({}, s.gen, { [v.no]: (s.gen[v.no] || 0) + v.ready }), __toast: hmN(v.ready) + ' invoices generated for voyage ' + v.no + '.' })
+        no: v.no, vessel: v.vessel, typeL: v.dir === 'E' ? 'Export' : 'Import', typeC: 'hm-type ' + v.dir, route: v.pol + ' → ' + v.pod,
+        date: (v.dir === 'E' ? 'ETD ' : 'ETA ') + d.w + ' ' + d.d, dueL: due.l, dueC: due.c,
+        invL: hmN(v.inv) + ' / ' + hmN(v.bls), ready: v.notDue ? '—' : hmN(v.ready), readyC: v.ready ? 'r' : 'r mu',
+        blocked: v.notDue ? '—' : hmN(v.blocked), blockedC: v.blocked && !v.notDue ? 'r hm-wn' : 'r mu',
+        bI: 'width: ' + (v.inv / v.bls) * 100 + '%', bR: 'width: ' + (v.ready / v.bls) * 100 + '%', bB: 'width: ' + (v.notDue ? 0 : v.blocked / v.bls) * 100 + '%',
+        canGen: v.ready > 0, genL: 'Generate ' + hmN(v.ready), noGen: !v.ready, noGenL: v.notDue ? 'Awaiting LMS data' : v.open ? 'Blocked' : 'All invoiced',
+        open: () => self.setState({ drw: v.no, drwF: v.blocked && !v.ready ? 'blocked' : '' }), openL: 'Open voyage ' + v.no,
+        gen: () => self.setState({ confirm: { kind: 'voy', nos: [v.no] } })
       };
     });
-    // Blockers for the current scope
-    const blk = [];
-    const nodV = sel.filter((v) => v.nod), roeV = sel.filter((v) => v.roe), holdV = sel.filter((v) => v.hold);
+
+    // ---------- reasons (for current scope, due voyages only)
+    const due = scope.filter((v) => !v.notDue);
+    const reasons = [];
+    const nodV = due.filter((v) => v.nod);
     if (nodV.length) {
-      const n = nodV.reduce((a, v) => a + v.nod, 0), key = 'nod:' + s.day + ':' + s.voy;
-      blk.push({ r: 'Data not received from LMS', d: nodV.map((v) => v.no + ' (' + hmN(v.nod) + ')').join(', '), own: 'Port agency · Documentation', n: hmN(n), amt: hmUsd(nodV.reduce((a, v) => a + v.nod * v.avg, 0)),
-        act: s.asked[key] ? 'Follow-up sent' : 'Send follow-up', done: !!s.asked[key], go: () => self.setState({ asked: Object.assign({}, s.asked, { [key]: 1 }), __toast: 'Follow-up sent to the port agency for ' + hmN(n) + ' B/Ls.' }) });
+      const key = 'nod:' + nodV.map((v) => v.no).join(','), sent = s.fu[key];
+      reasons.push({ r: 'Data not received from LMS', d: nodV.map((v) => v.no).join(', '), own: 'Port agency · Documentation', n: hmN(tally(nodV, 'nod')), amt: hmUsd(nodV.reduce((a, v) => a + v.nod * v.avg, 0)),
+        st: sent ? 'Follow-up sent ' + sent : 'Not followed up', stC: sent ? 'hm-fs sent' : 'hm-fs', act: sent ? 'Remind' : 'Send follow-up',
+        go: () => self.save({ fu: Object.assign({}, s.fu, { [key]: hmTime() }), __toast: (sent ? 'Reminder' : 'Follow-up') + ' sent to the port agency with the list of ' + hmN(tally(nodV, 'nod')) + ' B/Ls.' }) });
     }
     const pairs = {};
-    roeV.forEach((v) => { pairs[v.pair] = pairs[v.pair] || []; pairs[v.pair].push(v); });
+    due.filter((v) => v.roe).forEach((v) => { (pairs[v.pair] = pairs[v.pair] || []).push(v); });
     Object.keys(pairs).forEach((pr) => {
-      const vs = pairs[pr], n = vs.reduce((a, v) => a + v.roe, 0), key = 'roe:' + pr;
-      blk.push({ r: 'ROE not received · ' + pr, d: vs.map((v) => v.no + ' (' + hmN(v.roe) + ')').join(', '), own: 'Treasury · ROE feed', n: hmN(n), amt: hmUsd(vs.reduce((a, v) => a + v.roe * v.avg, 0)),
-        act: s.asked[key] ? 'ROE requested' : 'Request ROE', done: !!s.asked[key], go: () => self.setState({ asked: Object.assign({}, s.asked, { [key]: 1 }), __toast: 'ROE requested for ' + pr + ' — clears ' + hmN(n) + ' invoices once received.' }) });
+      const vs = pairs[pr], req = s.roeReq[pr];
+      reasons.push({ r: 'ROE not received · ' + pr, d: vs.map((v) => v.no).join(', '), own: 'Treasury · ROE feed', n: hmN(tally(vs, 'roe')), amt: hmUsd(vs.reduce((a, v) => a + v.roe * v.avg, 0)),
+        st: req ? 'Requested ' + req : 'Not requested', stC: req ? 'hm-fs sent' : 'hm-fs', act: req ? 'Enter rate' : 'Request ROE',
+        go: () => (req ? self.setState({ rateFor: pr, rateVal: '' }) : self.save({ roeReq: Object.assign({}, s.roeReq, { [pr]: hmTime() }), __toast: 'ROE requested from Treasury for ' + pr + '.' })) });
     });
-    if (holdV.length) {
-      const n = holdV.reduce((a, v) => a + v.hold, 0);
-      blk.push({ r: 'Split-payer unconfirmed', d: holdV.map((v) => v.no + ' (' + hmN(v.hold) + ')').join(', '), own: 'Customer service', n: hmN(n), amt: hmUsd(holdV.reduce((a, v) => a + v.hold * v.avg, 0)),
-        act: 'Open Split Billing', done: false, href: 'split-billing.html', go: () => { try { location.href = 'split-billing.html'; } catch (e) {} } });
+    const holdV = due.filter((v) => v.hold);
+    if (holdV.length) reasons.push({ r: 'Split-payer unconfirmed', d: holdV.map((v) => v.no).join(', '), own: 'Customer service', n: hmN(tally(holdV, 'hold')), amt: hmUsd(holdV.reduce((a, v) => a + v.hold * v.avg, 0)),
+      st: 'Waiting for customer', stC: 'hm-fs', act: 'Open Split Billing', go: () => { try { location.href = 'split-billing.html'; } catch (e) {} } });
+
+    // ---------- voyage panel (drill-down)
+    let drw = { show: false, bls: [], reasons: [], filters: [] };
+    const dv = all.find((v) => v.no === s.drw);
+    if (dv) {
+      const d = hmDay(dv.date);
+      const groups = [['', 'All', dv.bls], ['ready', 'Ready', dv.ready], ['blocked', 'Blocked', dv.notDue ? 0 : dv.blocked], ['inv', 'Invoiced', dv.inv]];
+      const rnd = hmRnd(dv.no + 'bl');
+      const seq = [];
+      const push = (k, n) => { for (let i = 0; i < n; i++) seq.push(k); };
+      push('roe', dv.roe); push('nod', dv.nod); push('hold', dv.hold); push('ready', dv.ready); push('inv', dv.inv);
+      const want = (k) => !s.drwF || (s.drwF === 'blocked' ? ['roe', 'nod', 'hold'].includes(k) : k === s.drwF);
+      const list = [];
+      seq.forEach((k, i) => { if (want(k) && list.length < 40) list.push([k, i]); });
+      const shown = dv.notDue ? 0 : seq.filter(want).length;
+      drw = {
+        show: true, no: dv.no, vessel: dv.vessel, typeL: dv.dir === 'E' ? 'Export' : 'Import', typeC: 'hm-type ' + dv.dir,
+        route: dv.pol + ' → ' + dv.pod, date: (dv.dir === 'E' ? 'ETD ' : 'ETA ') + d.w + ' ' + d.d + ' 2026',
+        notDue: dv.notDue, due: !dv.notDue,
+        stats: [['Expected', hmN(dv.bls)], ['Invoiced', hmN(dv.inv)], ['Ready', hmN(dv.ready)], ['Blocked', hmN(dv.blocked)]].map(([l, v]) => ({ l, v })),
+        bI: 'width: ' + (dv.inv / dv.bls) * 100 + '%', bR: 'width: ' + (dv.ready / dv.bls) * 100 + '%', bB: 'width: ' + (dv.blocked / dv.bls) * 100 + '%',
+        reasons: [['nod', 'Data not received from LMS', 'Port agency'], ['roe', 'ROE not received · ' + dv.pair, 'Treasury'], ['hold', 'Split-payer unconfirmed', 'Customer service']]
+          .filter(([k]) => dv[k] > 0).map(([k, l, o]) => ({ l, o, n: hmN(dv[k]) })),
+        hasReasons: dv.blocked > 0 && !dv.notDue,
+        filters: groups.map(([k, l, n]) => ({ l, n: hmN(n), cur: s.drwF === k ? 'true' : 'false', pick: () => self.setState({ drwF: k }) })),
+        bls: dv.notDue ? [] : list.map(([k, i]) => {
+          const r = hmRnd(dv.no + i);
+          const amt = dv.avg * (0.6 + r() * 0.8);
+          return { bl: dv.here.slice(2) + dv.no.slice(0, 6) + String(i + 1).padStart(4, '0'), cust: HM_CUST[Math.floor(r() * HM_CUST.length)], ctr: String(1 + Math.floor(r() * 3)), amt: hmUsd(amt),
+            st: HM_STATUS[k], stC: 'hm-ss ' + (k === 'inv' ? 'done' : k === 'ready' ? 'ok' : 'warn'),
+            note: k === 'nod' ? 'Missing: ' + HM_MISS[i % HM_MISS.length] : k === 'roe' ? dv.pair + ' rate for ' + d.d : k === 'hold' ? 'Second payer not confirmed' : k === 'inv' ? 'INV-' + dv.here.slice(0, 2) + '-' + dv.no + '-' + String(i + 1).padStart(4, '0') : '' };
+        }),
+        noBls: dv.notDue || !list.length, noBlsL: dv.notDue ? 'LMS sends B/L data for this voyage at cut-off. Nothing to do yet.' : 'No B/Ls in this group.',
+        more: shown > 40 ? 'Showing 40 of ' + hmN(shown) + ' B/Ls' : '', hasMore: shown > 40,
+        canGen: dv.ready > 0, genL: 'Generate ' + hmN(dv.ready) + ' ready invoices',
+        gen: () => self.setState({ confirm: { kind: 'voy', nos: [dv.no] } }),
+        list: 'invoice-list-v2.html?q=' + dv.no,
+        close: () => self.setState({ drw: '' })
+      };
+    }
+
+    // ---------- confirm generate
+    let cf = { show: false };
+    if (s.confirm && s.confirm.kind === 'voy') {
+      const vs = all.filter((v) => s.confirm.nos.includes(v.no) && v.ready);
+      const n = tally(vs, 'ready');
+      cf = {
+        show: true, title: 'Generate ' + hmN(n) + (n === 1 ? ' invoice?' : ' invoices?'),
+        rows: [['Voyages', vs.map((v) => v.no).join(', ')], ['Invoice date', vs.map((v) => hmDay(v.date).d).filter((x, i, a) => a.indexOf(x) === i).join(', ') + ' (ETD / ETA)'], ['Billing parties', String(Math.min(n, 8 + vs.length * 3))], ['Total amount', hmUsd(vs.reduce((a, v) => a + v.ready * v.avg, 0))]].map(([l, v]) => ({ l, v })),
+        note: 'Only B/Ls with complete LMS data and a rate of exchange are included. Blocked B/Ls stay on this screen until they are cleared.',
+        cancel: () => self.setState({ confirm: null }),
+        ok: () => {
+          const g = Object.assign({}, s.gen); vs.forEach((v) => { g[v.no] = (g[v.no] || 0) + v.ready; });
+          self.save({ gen: g, confirm: null, done: { n: hmN(n), q: vs.length === 1 ? vs[0].no : '', nos: vs.map((v) => v.no).join(', ') } });
+        }
+      };
+    }
+    if (s.confirm && s.confirm.kind === 'dd') {
+      const cs = s.confirm.cns;
+      cf = {
+        show: true, title: 'Generate ' + cs.length + ' D&D ' + (cs.length === 1 ? 'invoice?' : 'invoices?'),
+        rows: [['Containers', cs.join(', ')], ['Invoice per', 'B/L — containers on the same B/L share one invoice']].map(([l, v]) => ({ l, v })),
+        note: 'Charges are calculated from the D&D tariff slabs and the dates received from LMS.',
+        cancel: () => self.setState({ confirm: null }),
+        ok: () => { const g = Object.assign({}, s.ddGen); cs.forEach((c) => { g[c] = 1; }); self.save({ ddGen: g, confirm: null, __toast: 'D&D invoices generated for ' + cs.length + (cs.length === 1 ? ' container.' : ' containers.') }); }
+      };
+    }
+    // ---------- enter ROE
+    let rate = { show: false };
+    if (s.rateFor) {
+      const vs = all.filter((v) => v.pair === s.rateFor && v.roe && !v.notDue);
+      rate = { show: true, pair: s.rateFor, val: s.rateVal, on: (e) => self.setState({ rateVal: e.target.value }),
+        info: 'Clears ' + hmN(tally(vs, 'roe')) + ' invoices on ' + vs.map((v) => v.no).join(', ') + '.',
+        cancel: () => self.setState({ rateFor: '' }),
+        ok: () => {
+          const r = parseFloat(s.rateVal);
+          if (!(r > 0)) return self.setState({ __toast: 'Enter the rate received from Treasury.' });
+          self.save({ roeSet: Object.assign({}, s.roeSet, { [s.rateFor]: r }), rateFor: '', __toast: 'Rate ' + r + ' applied for ' + s.rateFor + '. ' + hmN(tally(vs, 'roe')) + ' invoices are now ready to generate.' });
+        } };
     }
 
     // ---------- D&D
-    const dd = HM_DD.map(([cn, sz, cust, dir, bl, out, back, free, type, rate, st]) => {
-      const end = back || HM_TODAY, used = hmDiff(out, end), over = Math.max(0, used - free);
+    const dd = HM_DD.map(([cn, sz, cust, dir, bl, out, back, free, type, st]) => {
+      const end = back || HM_TODAY, used = hmDiff(out, end), over = Math.max(0, used - free), sl = hmSlab(sz, over);
       const status = s.ddGen[cn] ? 'invoiced' : st;
-      return { cn, sz, cust, dir, bl, out, back, free, type, rate, used, over, amt: over * rate * (st === 'out' ? 1 : 1), status };
+      return { cn, sz, cust, dir, bl: 'BL-' + cc + '-' + bl, out, back, free, type, used, over, amt: sl.amt, slab: sl.txt, status };
     });
-    const cnt = (k) => dd.filter((c) => c.status === k).length;
-    const blockedDD = dd.filter((c) => ['roe', 'tariff', 'milestone', 'waiver'].includes(c.status));
-    const outDD = dd.filter((c) => c.status === 'out'), readyDD = dd.filter((c) => c.status === 'ready');
-    const ddk = [
-      ['Containers with customers', String(outDD.length), outDD.filter((c) => c.over > 0).length + ' beyond free time', ''],
-      ['Charges building up', hmUsd(outDD.reduce((a, c) => a + c.amt, 0)), 'Not billable until return', 'info'],
-      ['Ready to invoice', String(readyDD.length), hmUsd(readyDD.reduce((a, c) => a + c.amt, 0)), 'ok'],
-      ['Pending — blocked', String(blockedDD.length), hmUsd(blockedDD.reduce((a, c) => a + c.amt, 0)) + ' on hold', blockedDD.length ? 'bad' : ''],
-      ['Invoiced this month', String(cnt('invoiced')), hmUsd(dd.filter((c) => c.status === 'invoiced').reduce((a, c) => a + c.amt, 0)), '']
-    ].map(([l, v, sub, tone]) => ({ l, v, sub, cls: 'card hm-k ' + tone }));
-    const F = [['all', 'All'], ['ready', 'Ready to invoice'], ['blocked', 'Blocked'], ['out', 'Still with customer'], ['invoiced', 'Invoiced']];
-    const inF = (c) => s.ddF === 'all' || (s.ddF === 'blocked' ? ['roe', 'tariff', 'milestone', 'waiver'].includes(c.status) : c.status === s.ddF);
-    const ddFil = F.map(([k, l]) => ({ l, n: String(k === 'all' ? dd.length : k === 'blocked' ? blockedDD.length : cnt(k)), cur: s.ddF === k ? 'true' : 'false', pick: () => self.setState({ ddF: k }) }));
+    const isBlk = (c) => ['roe', 'tariff', 'milestone', 'waiver'].includes(c.status);
+    const dOut = dd.filter((c) => c.status === 'out'), dReady = dd.filter((c) => c.status === 'ready'), dBlk = dd.filter(isBlk), dInv = dd.filter((c) => c.status === 'invoiced');
+    const am = (cs) => hmUsd(cs.reduce((a, c) => a + c.amt, 0));
+    const ddSum = [['With customers', String(dOut.length), am(dOut) + ' building up'], ['Ready to invoice', String(dReady.length), am(dReady)], ['Blocked', String(dBlk.length), am(dBlk)], ['Invoiced this month', String(dInv.length), am(dInv)]]
+      .map(([l, v, sub], i) => ({ l, v, sub, k: 'hm-dot ' + ['nd', 'rdy', 'blk', 'inv'][i] }));
+    const ddRs = {};
+    dBlk.forEach((c) => { (ddRs[c.status] = ddRs[c.status] || []).push(c); });
+    const ddReasons = Object.keys(ddRs).map((k) => {
+      const done = s.ddAct[k];
+      return { r: HM_DDST[k][0], d: ddRs[k].map((c) => c.cn).join(', '), own: HM_DDR[k][0], n: String(ddRs[k].length), amt: am(ddRs[k]),
+        st: done ? 'Sent ' + done : 'Not followed up', stC: done ? 'hm-fs sent' : 'hm-fs', act: done ? 'Remind' : HM_DDR[k][1],
+        go: () => self.save({ ddAct: Object.assign({}, s.ddAct, { [k]: hmTime() }), __toast: HM_DDR[k][1] + ' sent to ' + HM_DDR[k][0] + '.' }) };
+    });
+    const F = [['all', 'All', dd.length], ['ready', 'Ready to invoice', dReady.length], ['blocked', 'Blocked', dBlk.length], ['out', 'With customer', dOut.length], ['invoiced', 'Invoiced', dInv.length]];
+    const inF = (c) => s.ddF === 'all' || (s.ddF === 'blocked' ? isBlk(c) : c.status === s.ddF);
     const ddRows = dd.filter(inF).map((c) => ({
-      cn: c.cn, sz: c.sz, cust: c.cust, bl: c.bl, dirL: c.dir === 'E' ? 'Export' : 'Import', dirC: 'hm-dir ' + c.dir, type: c.type,
-      out: hmDay(c.out).d, back: c.back ? hmDay(c.back).d : '—', free: String(c.free), used: String(c.used), over: c.over ? String(c.over) : '0', overC: c.over ? 'r hm-wn' : 'r mu',
-      amt: hmUsd(c.amt), stL: HM_DDST[c.status][0], stC: 'hm-ss ' + HM_DDST[c.status][1],
-      canGen: c.status === 'ready', noGen: c.status !== 'ready', why: HM_DDOWN[c.status] || (c.status === 'out' ? 'Bill on return' : c.status === 'invoiced' ? 'Done' : ''),
-      gen: () => self.setState({ ddGen: Object.assign({}, s.ddGen, { [c.cn]: 1 }), __toast: 'D&D invoice generated for ' + c.cn + ' — ' + hmUsd(c.amt) + '.' })
+      cn: c.cn, sz: c.sz, cust: c.cust, bl: c.bl, typeL: c.dir === 'E' ? 'Export' : 'Import', typeC: 'hm-type ' + c.dir, type: c.type,
+      out: hmDay(c.out).d, back: c.back ? hmDay(c.back).d : 'Not returned', backC: c.back ? '' : 'mu', days: c.used + ' / ' + c.free, over: String(c.over), overC: c.over ? 'r hm-wn' : 'r mu',
+      amt: c.status === 'tariff' ? '—' : c.amt ? hmUsd(c.amt) : '—', slab: c.status === 'tariff' ? 'No tariff for ' + c.sz : c.over ? c.slab : 'Within free time',
+      stL: HM_DDST[c.status][0], stC: 'hm-ss ' + HM_DDST[c.status][1],
+      canGen: c.status === 'ready', noGen: c.status !== 'ready', noGenL: c.status === 'out' ? 'Bill on return' : c.status === 'invoiced' ? '' : 'Blocked',
+      gen: () => self.setState({ confirm: { kind: 'dd', cns: dd.filter((x) => x.bl === c.bl && x.status === 'ready').map((x) => x.cn) } })
     }));
-    const ddR = {};
-    blockedDD.forEach((c) => { ddR[c.status] = ddR[c.status] || []; ddR[c.status].push(c); });
-    const ddBlk = Object.keys(ddR).map((k) => ({ r: HM_DDST[k][0], own: HM_DDOWN[k], n: ddR[k].length + (ddR[k].length === 1 ? ' container' : ' containers'), amt: hmUsd(ddR[k].reduce((a, c) => a + c.amt, 0)), bar: 'width: ' + (ddR[k].reduce((a, c) => a + c.amt, 0) / Math.max(1, blockedDD.reduce((a, c) => a + c.amt, 0))) * 100 + '%' }));
 
-    const voyOpen = V.filter((v) => v.date <= HM_TODAY).reduce((a, v) => a + v.open, 0);
+    const voyOpen = tally(all.filter((v) => !v.notDue), 'open');
     return {
-      greet, ctx: cty + ' · ' + port + ' · ' + (s.__ent || 'PIL') + ' — data from LMS, last received 2 min ago',
+      greet, ctx: cty + ' (' + port + ') · ' + ent + ' · LMS data received 2 min ago',
       tabs: { voy: s.tab === 'voy', dd: s.tab === 'dd', voyA: s.tab === 'voy' ? 'true' : 'false', ddA: s.tab === 'dd' ? 'true' : 'false',
-        voyN: hmN(voyOpen), ddN: String(readyDD.length + blockedDD.length), toVoy: () => self.setState({ tab: 'voy' }), toDd: () => self.setState({ tab: 'dd' }) },
-      alert: !s.alertOff && s.tab === 'voy', alertOff: () => self.setState({ alertOff: true }),
-      days, missChip, vk, rows, noRows: !rows.length, scopeL, hasVoy: !!s.voy, clearVoy: () => self.setState({ voy: '' }),
-      blk, noBlk: !blk.length,
-      genAll: () => { const g = Object.assign({}, s.gen); let n = 0; scope.forEach((v) => { if (v.ready) { g[v.no] = (g[v.no] || 0) + v.ready; n += v.ready; } }); self.setState({ gen: g, __toast: n ? hmN(n) + ' invoices generated across ' + scope.filter((v) => v.ready).length + ' voyages.' : 'Nothing ready to generate.' }); },
-      genAllL: 'Generate all ready (' + hmN(scope.reduce((a, v) => a + v.ready, 0)) + ')', genAllDis: !scope.some((v) => v.ready),
-      ddk, ddFil, ddRows, ddBlk, noDdBlk: !ddBlk.length,
-      ddGenAll: () => { const g = Object.assign({}, s.ddGen); readyDD.forEach((c) => { g[c.cn] = 1; }); self.setState({ ddGen: g, __toast: readyDD.length ? readyDD.length + ' D&D invoices generated.' : 'Nothing ready to invoice.' }); },
-      ddGenAllL: 'Generate all ready (' + readyDD.length + ')', ddGenAllDis: !readyDD.length
+        voyN: hmN(voyOpen) + ' open', ddN: (dReady.length + dBlk.length) + ' to bill', toVoy: () => self.setState({ tab: 'voy' }), toDd: () => self.setState({ tab: 'dd' }) },
+      alert: !s.alertOff && !Object.keys(s.roeSet).length && all.some((v) => v.roe && !v.notDue), alertOff: () => self.setState({ alertOff: true }),
+      alertGo: () => self.setState({ day: 'overdue' }),
+      done: s.done ? { show: true, txt: s.done.n + ' invoices generated for ' + s.done.nos + '.', href: 'invoice-list-v2.html' + (s.done.q ? '?q=' + s.done.q : ''), close: () => self.setState({ done: null }) } : { show: false },
+      ovChip, days,
+      dirs: [['all', 'All'], ['E', 'Export'], ['I', 'Import']].map(([k, l]) => ({ l, cur: s.dir === k ? 'true' : 'false', pick: () => self.setState({ dir: k }) })),
+      q: s.q, onQ: (e) => self.setState({ q: e.target.value }),
+      sum, rows, noRows: !rows.length, noRowsL: q ? 'No voyage matches “' + s.q + '”.' : s.day === 'overdue' ? 'Nothing overdue. Every past voyage is fully invoiced.' : 'No ' + (s.dir === 'E' ? 'export ' : s.dir === 'I' ? 'import ' : '') + 'voyages at ' + port + ' on this date.',
+      reasons, hasReasons: !!reasons.length,
+      drw, cf, rate,
+      ddSum, ddReasons, hasDdReasons: !!ddReasons.length,
+      ddFil: F.map(([k, l, n]) => ({ l, n: String(n), cur: s.ddF === k ? 'true' : 'false', pick: () => self.setState({ ddF: k }) })),
+      ddRows, ddGenL: 'Generate all ready (' + dReady.length + ')', ddGenDis: !dReady.length,
+      ddGen: () => self.setState({ confirm: { kind: 'dd', cns: dReady.map((c) => c.cn) } })
     };
   }
 }
