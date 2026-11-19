@@ -78,7 +78,7 @@
     uniq('cntr', inv.map(function (i) { return [i[5], i[4]]; }), function (k) { return 'invoice-list-v2.html?q=' + encodeURIComponent(k); });
     uniq('vvd', inv.map(function (i) { return [i[6], '']; }), function (k) { return 'invoice-list-v2.html?q=' + encodeURIComponent(k); });
     (D.cust || []).forEach(function (c) { R.push({ g: 'cust', main: c[1], sub: c[0] + (c[2] ? ' · ' + c[2] : ''), hay: c.join(' '), href: 'customer-master.html?q=' + encodeURIComponent(c[0]) }); });
-    (D.chg || []).forEach(function (c) { R.push({ g: 'chg', main: c[0], sub: c[1], hay: c.join(' '), href: 'charge-master.html?q=' + encodeURIComponent(c[0]) }); });
+    (D.chg || []).forEach(function (c) { R.push({ g: 'chg', main: c[0], sub: c[1], hay: c.join(' '), href: 'charge-master-v2c.html?q=' + encodeURIComponent(c[0]) }); });
     (D.master || []).forEach(function (m) {
       if (m[0] === 'charge-master.html' && (D.chg || []).some(function (c) { return c[0] === m[2]; })) return;
       R.push({ g: 'master', main: m[3] + (m[2] && m[2] !== m[3] ? '  ' + m[2] : ''), sub: m[1] + (m[4] ? ' · ' + m[4] : ''), hay: m.slice(1).join(' '), href: m[0] + '?q=' + encodeURIComponent(m[2]) });
