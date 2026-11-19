@@ -217,7 +217,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .lst th,.lst td{white-space:nowrap}
 .lst thead th{position:sticky;top:0;z-index:2}
 .lst .c-no{position:sticky;inset-inline-start:0;z-index:1;background:var(--surface);box-shadow:inset -1px 0 0 var(--line2)}
-.lst .c-act{position:sticky;inset-inline-end:0;z-index:1;width:1%;text-align:center;background:var(--surface);box-shadow:inset 1px 0 0 var(--line2)}
+.lst .c-act{position:sticky;inset-inline-end:0;z-index:1;width:1%;padding-inline:16px;text-align:center;background:var(--surface);box-shadow:inset 1px 0 0 var(--line2)}
 .lst thead .c-no,.lst thead .c-act{z-index:3;background:var(--sub)}
 .lst tbody tr:hover td,.lst tbody tr:hover .c-no,.lst tbody tr:hover .c-act{background:var(--hover2)}
 .lst tr.on td,.lst tr.on .c-no,.lst tr.on .c-act{background:var(--tint2)}
@@ -251,6 +251,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cm2-bottom{position:sticky;bottom:0;z-index:5;margin:auto -20px -20px;display:flex;justify-content:flex-end;align-items:center;gap:8px;min-height:64px;padding:0 20px;box-sizing:border-box;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 12px rgba(22,26,33,.06)}
 .cm2-bottom .btn{min-width:96px}
 .cm2-rec{display:flex;align-items:center;gap:12px}
+.cm2-recd{width:1px;height:24px;background:var(--line)}
 .cm2-rec h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
 .cm2-code{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;background:var(--tint);color:var(--accent2);font-size:13px;font-weight:600}
 .cm2-secs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
@@ -585,10 +586,11 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <div class="tabs" role="tablist" aria-label="Charge Master views">
-          <button class="tabb" role="tab" id="cm2-t1" aria-controls="cm2-p1" aria-selected="{{tabs.search}}" onClick="{{tabs.toSearch}}">Search Charge</button>
-          <button class="tabb" role="tab" id="cm2-t2" aria-controls="cm2-p2" aria-selected="{{tabs.detail}}" onClick="{{tabs.toDetail}}">View / Update Charge</button>
+        <sc-if value="{{tabs.isSearch}}" hint-placeholder-val="{{ true }}">
+        <div class="tabs" role="tablist" aria-label="Charge Master">
+          <button class="tabb" role="tab" id="cm2-t1" aria-controls="cm2-p1" aria-selected="true">Search Charge</button>
         </div>
+        </sc-if>
 
         <sc-if value="{{tabs.isSearch}}" hint-placeholder-val="{{ true }}">
         <section id="cm2-p1" role="tabpanel" aria-labelledby="cm2-t1" class="cmb-split">
@@ -640,7 +642,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     <td>{{r.own}}</td>
                     <td class="mono">{{r.gl}}</td>
                     <td>{{r.auto}}</td>
-                    <td class="c-act"><span class="cm2-acts"><button class="lnk" onClick="{{r.view}}" aria-label="{{r.viewLbl}}">View</button><span class="cm2-bar" aria-hidden="true"></span><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">Update</button></span></td>
+                    <td class="c-act"><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">View/Update</button></td>
                   </tr>
                 </sc-for>
               </tbody>
@@ -654,10 +656,12 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </sc-if>
 
         <sc-if value="{{tabs.isDetail}}" hint-placeholder-val="{{ false }}">
-        <section id="cm2-p2" role="tabpanel" aria-labelledby="cm2-t2" class="cm2-detail">
+        <section class="cm2-detail" aria-labelledby="cm2-dt">
           <div class="cm2-rec">
+            <button class="btn btn-sm" onClick="{{det.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>Back</button>
+            <span class="cm2-recd" aria-hidden="true"></span>
             <span class="cm2-code">{{det.code}}</span>
-            <h2>{{det.name}}</h2>
+            <h2 id="cm2-dt">{{det.name}}</h2>
           </div>
           <div class="cmb-detail">
           <nav class="card cmb-nav" aria-label="Sections">
@@ -842,6 +846,7 @@ class GirsPage extends DCLogic {
       sc.addEventListener('scroll', () => { if (this.state.tab !== 'detail' || Date.now() - (this.__navLock || 0) < 900) return; const top = sc.getBoundingClientRect().top + 200; let on = 0;
         for (let i = 0; i < 5; i++) { const el = document.getElementById('cmb-sec' + i); if (el && el.getBoundingClientRect().top <= top) on = i; }
         if (on !== this.state.secOn) this.setState({ secOn: on }); }, { passive: true }); }, 300); } catch (e) {}
+    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.state.tab === 'detail' && !document.querySelector('.menu')) this.setState({ tab: 'search', draft: null }); }); } catch (e) {}
     this.state = { secOn: 0, tab: 'search', crit, applied: Object.assign({}, crit), pg: 1, psz: 25, sel: null, mode: 'view', draft: null, recs: Array.isArray(recs) && recs.length ? recs : cmBuild() };
   }
   renderVals() {
@@ -880,8 +885,8 @@ class GirsPage extends DCLogic {
       cols: [{ l: 'Charge Code', cls: 'c-no' }].concat(['Charge Name', 'Charge Type', 'Charge Rev Type', 'Charge Applying Type', 'Payment Term', 'Rep. Charge', 'Ownership', 'Account (G/L)', 'Auto Rating Flag'].map((l) => ({ l, cls: '' })), [{ l: 'Action', cls: 'c-act' }]),
       rows: list.slice(from, from + size).map((r) => Object.assign({}, r, {
         cls: r.code === s.sel ? 'on' : '',
-        view: () => open(r.code, 'view'), upd: () => open(r.code, 'update'),
-        viewLbl: 'View ' + r.code, updLbl: 'Update ' + r.code
+        view: () => open(r.code, 'update'), upd: () => open(r.code, 'update'),
+        viewLbl: 'View/Update ' + r.code, updLbl: 'View/Update ' + r.code
       })),
       empty: !list.length, p: pgr,
       exportXl: () => self.setState({ __toast: 'Export to Excel prepared — ' + list.length + (list.length === 1 ? ' record.' : ' records.') })
@@ -933,7 +938,7 @@ class GirsPage extends DCLogic {
       })),
       noAlias: !d.alias.length, addFirst: () => setAlias([blankAlias.slice()]),
       manual: d.manual, flipManual: () => put({ manual: !d.manual }),
-      cancel: () => self.setState({ tab: 'search', draft: null }),
+      cancel: () => { self.setState({ tab: 'search', draft: null }); try { document.querySelector('.gcontent').scrollTop = 0; } catch (e) {} },
       save: () => {
         const recs = s.recs.map((r) => (r.code === d.code ? JSON.parse(JSON.stringify(d)) : r));
         try { localStorage.setItem('girs.cm2', JSON.stringify(recs)); } catch (e) {}
