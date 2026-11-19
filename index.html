@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GIRS Operations Cockpit</title>
+<title>GIRS Home</title>
 <link rel="icon" href="pil-logo.png">
 </head>
 <body>
 <div id="app"></div>
 <script type="text/x-dc-template" id="tpl">
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
 :root,.theme{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;--selbg:#0071B7;--selfg:#FFFFFF;--selbd:#0071B7}
 .theme[data-theme=dark]{--ink:#ECEEF1;--muted:#9DA3AC;--muted2:#C5CAD1;--muted3:#C5CAD1;--muted4:#878D96;--line:#2E3135;--line2:#25272A;--bd:#43474D;--bdh:#646A72;--line3:#383B40;--bg:#0D0E0F;--sub:#202225;--hover:#26292D;--hover2:#1E2023;--hover3:#1D1F22;--neutral:#2B2E32;--canvas:#09090A;--accent:#4BA0DD;--accent2:#8FC5EC;--tint:#172636;--tintbd:#264A6B;--tint2:#152230;--ok:#5BC48A;--okbg:#122A1E;--ok2:#86D7A8;--okdot:#3DB471;--okbar:#3DB471;--okbd:#1F4B33;--okrow:#111D16;--warn:#D9A449;--warnbg:#241E13;--warn2:#E6B865;--warnbar:#C08A26;--warnbd:#4A3B18;--bad:#F07A7F;--badbg:#2E1719;--badbar:#E04B51;--bad2:#F7A1A4;--badbd:#5A2629;--badrow:#1E1415;--aibg:#231D36;--ai:#B4A2F0;--surface:#191A1C;--brand:#E31D1A;--onaccent:#0B1620;--accenth:#6CB3E6;--gold:#E2C063;--goldbg:#2A2412;--selbg:#172636;--selfg:#9CCBEE;--selbd:#4BA0DD;color-scheme:dark}
@@ -108,13 +108,380 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
-.pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;box-sizing:border-box}
-.rowbtn{all:unset;cursor:pointer;display:inline-block}
-.kpi-label{font-size:12px;font-weight:500;color:var(--muted);line-height:16px}
-.dl-k{font-size:12px;color:var(--muted);line-height:16px}
-.dl-v{font-size:13px;font-weight:500;line-height:20px;margin-top:2px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+.gmain{flex:1 1 0 !important;min-height:0 !important}
+.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
+.lay:hover{color:var(--ink)}
+.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:500}
+.seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.kv2 .v{display:block;font-size:14px;line-height:20px}
+.kv2 .full{grid-column:1 / -1}
+.mini{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
+.mini:first-child{border-top:0;padding-top:0}
+.tl{position:relative;padding-inline-start:20px;padding-bottom:14px}
+.tl:before{content:"";position:absolute;inset-inline-start:4px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tl:after{content:"";position:absolute;inset-inline-start:7.5px;top:18px;bottom:0;width:1px;background:var(--line)}
+.tl:last-child:after{display:none}
+.tl:last-child{padding-bottom:0}
+.ph{color:var(--muted4)}
+.citem{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:10px 16px}
+.citem:hover{background:#F6F8FA}
+.citem:focus-visible,.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.gbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:40px;padding:0 12px;border-radius:6px;font-weight:600}
+.cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:0 12px 0 34px;border-radius:6px;font-size:13px}
+.gbtn:hover,.cbtn:hover{background:var(--hover)}
+.gbtn:focus-visible,.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;height:48px;padding:0 2px;display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
+.fact{display:flex;flex-direction:column;gap:4px;padding:0 24px;border-inline-start:1px solid var(--line2)}
+.fact:first-child{padding-inline-start:0;border:0}
+.fact .l{font-size:12px;color:var(--muted)}
+.fact .v{font-size:14px;font-weight:500}
+.sech{margin:0 0 12px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.kbar{display:inline-flex;align-items:center;gap:6px;flex:none;margin-inline-start:auto}
+.kbar .btn{gap:6px}
+.kmore{position:relative;display:inline-flex}
+.kmorebtn[aria-expanded=true]{background:var(--hover);border-color:var(--bdh)}
+.kmback{position:fixed;inset:0;z-index:58;background:transparent;border:0;padding:0;margin:0;cursor:default}
+.kmenu{position:absolute;top:calc(100% + 6px);inset-inline-end:0;z-index:59;width:280px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(14,17,22,.16);text-align:start}
+.kmi{display:flex;align-items:flex-start;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--ink);font:inherit;font-size:13px;line-height:18px;text-align:start;cursor:pointer}
+.kmi svg{flex:none;margin-top:2px}
+.kmi:hover:not(:disabled),.kmi:focus-visible{background:var(--hover);outline:0}
+.kmt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kmt>span{font-weight:500}
+.kmt small{font-size:12px;line-height:16px;color:var(--muted);font-weight:400}
+.kmi-d{color:var(--bad)}
+.kmi-d:hover:not(:disabled){background:var(--badbg)}
+.kmi:disabled{cursor:not-allowed;color:var(--bad);opacity:.55}
+.kmenu.up{top:auto;bottom:calc(100% + 6px)}
+section:has(.kmenu.up),.card:has(.kmenu.up){overflow:visible!important;position:relative;z-index:6}
+.ksep{height:1px;margin:4px 0;background:var(--line2)}
+.fct .v{white-space:normal;text-overflow:clip;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:20px}
+.dcol .kvs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 20px}
+table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > td{height:auto;padding-block:8px}
+.kib{width:32px;padding:0}
+.kdanger{color:var(--bad)}
+.kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
+.kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
+.kmodal.sm{width:min(520px,calc(100vw - 48px))}
+.kdrawer{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
+.khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
+.khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
+.khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.kbody{flex:1 1 auto;overflow:auto;padding:20px 24px}
+.kfoot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--sub)}
+.ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
+.ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
+.ktbl td{white-space:normal;padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px;line-height:18px;overflow-wrap:anywhere;vertical-align:top}
+.ktbl tr:first-child td{font-weight:500}
+.kfs{border:0;margin:0 0 22px;padding:0}
+.kfs legend{padding:0;margin-bottom:12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px}
+.kf{display:flex;flex-direction:column;gap:5px;min-width:0}
+.kf.w{grid-column:span 2}
+.kf .kl{font-size:12px;font-weight:500;color:var(--muted2)}
+.kf .kl b{color:var(--bad);font-weight:600;margin-inline-start:2px}
+.kf .input,.kf .select{width:100%;padding-inline-start:12px;background:var(--surface)}
+.kf textarea.input{height:auto;min-height:72px;padding:8px 12px;resize:vertical;line-height:20px}
+.kf .kro{min-height:36px;display:flex;align-items:center;padding:0 12px;border-radius:6px;background:var(--sub);border:1px dashed var(--bd);color:var(--muted2);font-size:13px;box-sizing:border-box}
+.kf .kh{font-size:12px;color:var(--muted)}
+.kf .ke{font-size:12px;color:var(--bad);font-weight:500}
+.kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
+.kbanner.err{background:var(--badbg);color:var(--bad)}
+.kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
+.kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
+.kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
+
+/* ---- Charge Master (revamp) ---- */
+/* shared components, same rules as Invoice List: tabs, table, docked pagination, links, checkbox */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;font-size:14px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabb[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.lnk:focus-visible,.tabb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
+.lnk:hover{text-decoration:underline}
+.mu{color:var(--muted)}
+.cbx{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+.cbx:disabled{cursor:not-allowed}
+.pager{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 4px 0;font-size:13px;color:var(--muted2)}
+.card:has(+ .pager){border-end-start-radius:0;border-end-end-radius:0}
+.card + .pager{margin-top:-17px;min-height:48px;padding:6px 8px 6px 16px;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-top-color:var(--line2);border-radius:0 0 8px 8px}
+.pbtn{min-width:32px;justify-content:center;font-size:15px}
+.lst{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}
+.lst th,.lst td{white-space:nowrap}
+.lst thead th{position:sticky;top:0;z-index:2}
+.lst .c-no{position:sticky;inset-inline-start:0;z-index:1;background:var(--surface);box-shadow:inset -1px 0 0 var(--line2)}
+.lst .c-act{position:sticky;inset-inline-end:0;z-index:1;width:1%;padding-inline:16px;text-align:center;background:var(--surface);box-shadow:inset 1px 0 0 var(--line2)}
+.lst thead .c-no,.lst thead .c-act{z-index:3;background:var(--sub)}
+.lst tbody tr:hover td,.lst tbody tr:hover .c-no,.lst tbody tr:hover .c-act{background:var(--hover2)}
+.lst tr.on td,.lst tr.on .c-no,.lst tr.on .c-act{background:var(--tint2)}
+.cm2-acts{display:inline-flex;align-items:center;gap:0;padding:0 4px}
+.cm2-acts .cm2-bar{width:1px;height:14px;padding:0;margin:0 10px;background:var(--line)}
+/* Search tab fits the window like the Invoice List: the results table scrolls inside its card, pagination stays in view */
+.gmain:has(#bm-p1){flex:1 1 0 !important;min-height:0 !important}
+/* non-editable fields are grey; editable fields are white */
+.input[readonly]{background:var(--sub);color:var(--ink);cursor:default}
+.input[readonly]:hover{border-color:var(--bd)}
+.input[readonly]:focus{border-color:var(--bd);box-shadow:none}
+/* screen layout */
+.card-meta{font-size:12px;color:var(--muted)}
+.cm2-grid{display:grid;gap:16px;align-items:start}
+.cm2-g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cm2-f{min-width:0;display:flex;flex-direction:column}
+.cm2-f .input{width:100%}
+.cm2-f .lbl{margin-bottom:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm2-f > .lbl{margin-bottom:6px}
+.cm2-lr{display:flex;align-items:center;gap:6px;min-height:16px;margin-bottom:6px}
+.cm2-i{display:inline-flex;color:var(--muted4);cursor:help;border-radius:50%}
+.cm2-i:hover,.cm2-i:focus-visible{color:var(--accent)}
+.cm2-i:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cm2-sel{position:relative}
+.cm2-sel .select{width:100%}
+.cm2-sel svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
+.cm2-actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line2)}
+.cm2-bar{color:var(--line);padding:0 8px}
+.cm2-detail{flex:1 0 auto;display:flex;flex-direction:column;gap:16px}
+/* action bar: pinned to the bottom of the screen, actions on the right */
+.cm2-bottom{position:sticky;bottom:0;z-index:5;margin:auto -20px -20px;display:flex;justify-content:flex-end;align-items:center;gap:8px;min-height:64px;padding:0 20px;box-sizing:border-box;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 12px rgba(22,26,33,.06)}
+.cm2-bottom .btn{min-width:96px}
+.cm2-rec{display:flex;align-items:center;gap:12px}
+.cm2-rec h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
+.cm2-code{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;background:var(--tint);color:var(--accent2);font-size:13px;font-weight:600}
+.cm2-secs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.cm2-sec{padding:16px 16px 20px;box-sizing:border-box;min-width:0}
+.cm2-sh{margin-bottom:16px}
+.cm2-sh h3{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.cm2-sh p{margin:2px 0 0;font-size:12px;line-height:16px;color:var(--muted)}
+.cm2-yn{display:inline-flex;align-self:flex-start;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}
+.cm2-yn button{all:unset;box-sizing:border-box;cursor:pointer;min-width:44px;height:32px;padding:0 12px;border-radius:4px;text-align:center;font-size:13px;font-weight:600;line-height:32px;color:var(--muted)}
+.cm2-yn button:hover{color:var(--ink)}
+.cm2-yn button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.cm2-yn button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cm2-checks{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;min-height:36px}
+.cm2-ck{display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.cm2-ck:has(input:disabled){cursor:default}
+.cm2-alias{margin-top:20px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cm2-ah{padding:10px 12px;font-size:13px;font-weight:600;background:var(--surface);border-bottom:1px solid var(--line)}
+.cm2-atw{overflow-x:auto}
+.cm2-atw td{height:48px}
+.cm2-atw tbody tr:last-child td{border-bottom:0}
+.cm2-atw .input{height:32px}
+.cm2-ci{width:72px!important}
+.cm2-pi{width:96px!important}
+.cm2-ac{width:1%;text-align:end}
+.cm2-del{color:var(--bad)}
+.cm2-man{margin-top:16px}
+.cm2-empty{color:var(--muted)}
+
+/* ---- Layout C ---- */
+.cmc-crit{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:end;padding:12px 16px 16px}
+.cmc-crit .lbl{margin-bottom:4px}
+.cmc-crit .input,.cmc-crit .select{height:32px}
+.cmc-crit .select{line-height:30px}
+.cmc-act{grid-column:span 2;display:flex;justify-content:flex-end;gap:8px}
+.cmc-act .btn{min-width:88px}
+.cmc-row{cursor:pointer}
+.cmc-stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+.cmc-row4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.cmc-row4 .cm2-sec,.cmc-stack > .cm2-sec{padding:14px 16px 16px}
+.cmc-stack .cm2-sh{margin-bottom:12px}
+.cmc-stack .cm2-grid{gap:12px}
+
+
+.hm-alert{display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 8px 6px 16px;border:1px solid var(--warnbd);border-radius:8px;background:var(--warnbg);color:var(--ink);font-size:13px}
+.hm-alert > svg{flex:none;color:var(--warn)}
+.hm-sh{display:flex;align-items:baseline;gap:12px;margin:0 0 10px}
+.hm-sh h2{margin:0;font-size:15px;font-weight:600;line-height:20px}
+.hm-sh span{font-size:12px;color:var(--muted)}
+.hm-work{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.hm-w{display:flex;align-items:center;gap:12px;min-height:76px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-decoration:none;box-sizing:border-box}
+.hm-w:hover{border-color:var(--accent);background:var(--tint2)}
+.hm-w:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hm-wi{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:var(--neutral);color:var(--muted2)}
+.hm-w.bad .hm-wi{background:var(--badbg);color:var(--bad)}
+.hm-w.warn .hm-wi{background:var(--warnbg);color:var(--warn)}
+.hm-wt{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline}
+.hm-wt b{font-size:22px;font-weight:600;line-height:28px}
+.hm-wt span{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-wt small{grid-column:1 / -1;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-wa{flex:none;color:var(--muted)}
+.hm-w:hover .hm-wa{color:var(--accent)}
+.hm-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.hm-k{display:flex;flex-direction:column;gap:4px;padding:14px 16px;color:var(--ink);text-decoration:none}
+.hm-k:hover{border-color:var(--accent)}
+.hm-k:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hm-kl{font-size:12px;color:var(--muted)}
+.hm-k b{font-size:24px;font-weight:600;line-height:30px;font-variant-numeric:tabular-nums}
+.hm-ks{font-size:12px;color:var(--muted2)}
+.hm-ks.up{color:var(--ok)}
+.hm-ks.warn{color:var(--warn)}
+.hm-row2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.hm-row3{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.hm-leg{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--muted2)}
+.hm-leg > span{display:inline-flex;align-items:center;gap:6px}
+.hm-sw{display:inline-block;width:10px;height:10px;border-radius:2px}
+.hm-sw.a,.hm-bar.a{background:#0071B7}
+.hm-sw.b,.hm-bar.b{background:#D9822B}
+[data-theme=dark] .hm-sw.a,[data-theme=dark] .hm-bar.a{background:#3D8FD0}
+[data-theme=dark] .hm-sw.b,[data-theme=dark] .hm-bar.b{background:#C98238}
+.hm-chart{position:relative;height:240px;margin:16px 16px 12px 56px}
+.hm-grid{position:absolute;inset:0 0 22px 0;pointer-events:none}
+.hm-gl{position:absolute;left:0;right:0;border-top:1px solid var(--line2)}
+.hm-gl span{position:absolute;right:100%;margin-right:8px;transform:translateY(-50%);font-size:11px;color:var(--muted);white-space:nowrap}
+.hm-bars{position:absolute;inset:0;display:flex;align-items:stretch}
+.hm-g{flex:1 1 0;display:flex;flex-direction:column;align-items:center;cursor:default;border-radius:4px}
+.hm-g.on{background:var(--hover2)}
+.hm-pair{flex:1 1 auto;display:flex;align-items:flex-end;justify-content:center;gap:2px;width:100%}
+.hm-bar{position:relative;width:18px;border-radius:4px 4px 0 0}
+.hm-bar span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:4px;font-size:11px;font-weight:600;color:var(--ink);white-space:nowrap}
+.hm-bar.a span{transform:translateX(-80%)}
+.hm-bar.b span{transform:translateX(-20%)}
+.hm-x{flex:none;height:22px;line-height:22px;font-size:11px;color:var(--muted)}
+.hm-tip{position:absolute;top:8px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;gap:4px;min-width:180px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 8px 24px rgba(22,26,33,.14);font-size:12px;pointer-events:none}
+.hm-tip b{font-size:12px;font-weight:600;margin-bottom:2px}
+.hm-tip span{display:flex;align-items:center;gap:6px;color:var(--muted2)}
+.hm-tip em{margin-inline-start:auto;font-style:normal;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.hm-tip .hm-tg{padding-top:4px;border-top:1px solid var(--line2)}
+.hm-age{display:flex;flex-direction:column;gap:12px;padding:12px 16px 16px}
+.hm-at{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.hm-at span{font-size:12px;color:var(--muted)}
+.hm-at b{font-size:20px;font-weight:600}
+.hm-ar{display:grid;grid-template-columns:96px minmax(0,1fr) 84px 36px;align-items:center;gap:10px;font-size:13px}
+.hm-al{color:var(--muted2)}
+.hm-track{display:block;height:10px;border-radius:5px;background:var(--neutral);overflow:hidden}
+.hm-track.lg{height:8px}
+.hm-ab{display:block;height:100%;border-radius:5px;background:var(--accent)}
+.hm-ab.late{background:var(--warn)}
+.hm-av{text-align:end;font-weight:500;font-variant-numeric:tabular-nums}
+.hm-ap{text-align:end;font-size:12px;color:var(--muted)}
+.hm-t{width:100%}
+.hm-t .r{text-align:end}
+.hm-d{display:inline-flex;height:20px;align-items:center;padding:0 8px;border-radius:10px;font-size:12px;background:var(--neutral);color:var(--muted2)}
+.hm-d.late{background:var(--warnbg);color:var(--warn)}
+.hm-close{padding:12px 16px 14px;display:flex;flex-direction:column;gap:10px}
+.hm-cp{display:flex;align-items:baseline;justify-content:space-between}
+.hm-cp b{font-size:15px;font-weight:600}
+.hm-cp span{font-size:12px;color:var(--muted)}
+.hm-close ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column}
+.hm-close li{display:flex;align-items:center;gap:10px;min-height:34px;border-top:1px solid var(--line2);font-size:13px}
+.hm-ck{flex:none;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);box-sizing:border-box}
+.hm-ck.ok{border:0;background:var(--okbg);color:var(--ok)}
+.hm-cs{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-st{font-size:12px;color:var(--muted)}
+.hm-st.ok{color:var(--ok)}
+.hm-rec{list-style:none;margin:0;padding:4px 8px 8px}
+.hm-rec a{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:6px;color:var(--ink);text-decoration:none}
+.hm-rec li + li a{border-top:1px solid var(--line2);border-radius:0}
+.hm-rec a:hover{background:var(--hover2)}
+.hm-ri{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.hm-ri b{font-size:13px;font-weight:500;color:var(--accent2)}
+.hm-ri small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-rt{flex:none;font-size:12px;color:var(--muted)}
+.nav-home{text-decoration:none}
+
+.bm-st{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
+.bm-tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;margin-inline-end:4px;border-radius:10px;font-size:12px;font-weight:500;background:var(--tint);color:var(--accent2)}
+.bm-tag.p-pay{background:var(--neutral);color:var(--ink)}
+.bm-tag.p-inv{background:var(--okbg);color:var(--ok)}
+.bm-tag.p-ref{background:var(--aibg);color:var(--ai)}
+.bm-gapc{flex:none;display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:11px;font-weight:600;background:var(--warnbg);color:var(--warn)}
+.bm-okc{flex:none;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:10px;background:var(--okbg);color:var(--ok)}
+.bm1-cc{flex:none;display:inline-flex;align-items:center;justify-content:center;width:34px;height:24px;border-radius:4px;background:var(--neutral);font-size:12px;font-weight:600;color:var(--ink)}
+.bm1-cn{display:flex;flex-direction:column;min-width:0;flex:1 1 auto;gap:2px}
+.bm1-cn b{font-size:14px;font-weight:500;line-height:18px}
+.bm1-cn small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bm1{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}
+.bm1-side{position:sticky;top:16px;padding:0;overflow:hidden}
+.bm1-sh{padding:12px;border-bottom:1px solid var(--line2)}
+.bm1-srch{position:relative}
+.bm1-srch svg{position:absolute;inset-inline-start:10px;top:50%;margin-top:-8px;color:var(--muted)}
+.bm1-srch .input{padding-inline-start:34px}
+.bm1-list{list-style:none;margin:0;padding:6px}
+.bm1-c{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:6px;cursor:pointer}
+.bm1-c:hover{background:var(--hover2)}
+.bm1-c:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.bm1-c[aria-current=true]{background:var(--tint2);box-shadow:inset 3px 0 0 var(--accent)}
+.bm1-c[aria-current=true] .bm1-cc{background:var(--accent);color:var(--onaccent)}
+.bm1-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.bm1-head{display:flex;align-items:center;gap:12px}
+.bm1-head h2{margin:0;font-size:18px;font-weight:600;line-height:24px}
+.bm1-head p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.bm1-head p.true{color:var(--warn)}
+.bm-mx{width:100%;table-layout:fixed}
+.bm-mx th small{display:block;margin-top:2px;font-size:11px;font-weight:400;color:var(--muted);white-space:normal}
+.bm-mx td{vertical-align:top;padding:10px 12px;white-space:normal}
+.bm-mx thead th{vertical-align:top;padding-top:10px;padding-bottom:10px}
+.bm-ccy{font-family:'IBM Plex Mono',monospace;font-weight:600;text-align:start;vertical-align:top;padding:16px 12px !important}
+.bm-asg{display:flex;flex-direction:column;gap:4px}
+.bm-asg small{font-size:12px;color:var(--muted)}
+.bm-asg.gap .select{border-color:var(--warnbd);background:var(--warnbg)}
+.bm-asg.gap small{color:var(--warn);font-weight:500}
+.bm2-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.bm2-stat{display:flex;flex-direction:column;gap:4px;padding:14px 16px}
+.bm2-stat span{font-size:12px;color:var(--muted)}
+.bm2-stat b{font-size:24px;font-weight:600;line-height:30px}
+.bm2-stat.warn{box-shadow:inset 3px 0 0 var(--warn)}
+.bm2-stat.warn b{color:var(--warn)}
+.bm2-fil{display:flex;align-items:center;gap:10px}
+.bm2-fil .cm2-sel{width:190px}
+.bm2-fil .cm2-ck{margin:0}
+.bm2-mx td{padding:8px}
+.bm2-mx tr.bm2-grp > *{border-top:1px solid var(--line)}
+.bm2-mx tbody tr:first-child > *{border-top:0}
+.bm2-cty{vertical-align:top;text-align:start;padding:12px !important;background:var(--surface)}
+.bm2-cty{display:table-cell}
+.bm2-cty .bm1-cc{margin-bottom:6px}
+.bm2-cell{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;width:100%;min-height:62px;padding:8px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);cursor:pointer}
+.bm2-cell:hover{border-color:var(--accent);background:var(--tint2)}
+.bm2-cell:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bm2-cell b{font-size:13px;font-weight:500;line-height:18px}
+.bm2-cell span{font-size:12px;color:var(--muted2)}
+.bm2-cell i{font-style:normal;font-size:11px;color:var(--accent2)}
+.bm2-cell.gap{justify-content:center;border-style:dashed;border-color:var(--warnbd);background:var(--warnbg)}
+.bm2-cell.gap b{color:var(--warn)}
+.bm2-cell.gap span{color:var(--warn)}
+.bm-pm{width:min(640px,calc(100vw - 64px))}
+.bm-pms{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.bm-opts{display:flex;flex-direction:column;gap:8px}
+.bm-opt{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);cursor:pointer}
+.bm-opt:hover{border-color:var(--bdh)}
+.bm-opt:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bm-opt[aria-checked=true]{border-color:var(--accent);background:var(--tint2);box-shadow:inset 0 0 0 1px var(--accent)}
+.bm-rd{flex:none;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--bdh);box-sizing:border-box}
+.bm-opt[aria-checked=true] .bm-rd{border:5px solid var(--accent)}
+.bm-ob{flex:1 1 auto;display:flex;flex-direction:column;gap:2px;min-width:0}
+.bm-ob b{font-size:14px;font-weight:500}
+.bm-ob small{font-size:12px;color:var(--muted)}
+.bm-ob .bm-also{color:var(--muted2)}
+.bm-oa{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:13px}
+.bm-oa i{font-style:normal;font-size:11px;color:var(--accent2)}
+.bm-empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}
+
+.bm-row4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cmc-alias{padding:0;overflow:hidden}
+.cmc-alias .cmc-at{margin:0;border:0;border-radius:0}
+.cmc-alias .cm2-ah{padding:14px 16px;font-size:14px}
+.cmc-alias .cm2-man{margin:0;padding:12px 16px;border-top:1px solid var(--line2);display:flex}
+
+/* View/Update popup */
+.cmc-bd{all:unset;position:fixed;inset:0;z-index:200;background:transparent}
+.cmc-modal{position:fixed;z-index:201;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1480px,calc(100vw - 64px));max-height:calc(100% - 64px);display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:12px;box-shadow:0 0 0 200vmax rgba(22,26,33,.45),0 24px 64px rgba(22,26,33,.28);overflow:hidden}
+.theme[data-theme=dark] .cmc-modal{box-shadow:0 0 0 200vmax rgba(0,0,0,.55),0 24px 64px rgba(0,0,0,.6)}
+.cmc-mh{flex:none;display:flex;align-items:center;gap:12px;min-height:60px;padding:0 12px 0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.cmc-mh h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
+.cmc-x{margin-inline-start:auto;width:32px}
+.cmc-mb{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 20px}
+.cmc-mf{flex:none;display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;background:var(--surface);border-top:1px solid var(--line)}
+.cmc-mf .btn{min-width:96px}
+</style>
 </helmet>
-<div class="theme groot" data-theme="{{shell.theme}}" dir="{{dir}}" lang="{{lang}}" style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: {{font}}">
+<div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
   <div style="flex: 1 1 auto; min-height: 0; display: flex">
     <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
@@ -138,8 +505,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
       </div>
       <nav aria-label="Screens" data-c="{{shell.cA}}" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
         <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-bd" onClick="{{shell.flyClose}}" aria-hidden="true"></div></sc-if>
+        <a href="index.html" class="nav-grp nav-grp-on" aria-current="page" title="{{shell.l.nHome}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V9.5"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nHome}}</span></a>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" title="{{shell.l.g0}}" style="{{shell.grp}}">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" title="{{shell.l.g0}}" style="{{shell.grp}}">
             <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>
             <span class="ng-l" style="{{shell.hide}}">{{shell.l.g0}}</span>
             <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
@@ -147,7 +515,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
             <div id="ng-g0" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g0}}">
               <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g0}}</div></sc-if>
-          <a href="index.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nMain}}">{{shell.l.nMain}}
+          <a href="operations-cockpit.html" class="nav-item" title="{{shell.l.nMain}}">{{shell.l.nMain}}
           </a>
           <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}">{{shell.l.nChargeProcessing}}
           </a>
@@ -388,179 +756,124 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         </div>
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
-            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">{{t.title}}</h1>
-            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">{{t.subtitle}}</p>
+            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">{{greet}}</h1>
+            <p style="margin: 2px 0 0; font-size: 13px; line-height: 18px; color: var(--muted)">{{ctx}}</p>
           </div>
-          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
-          <span style="display: inline-flex; align-items: center; gap: 6px; height: 36px; color: var(--muted); font-size: 12px">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-            {{t.tz}}
-          </span>
-          <span aria-hidden="true" style="width: 1px; height: 20px; background: var(--line)"></span>
-          <span style="color: var(--muted); font-size: 12px">{{batchText}}</span>
-          <button class="btn btn-primary" onClick="{{runBatch}}">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13-8z"></path></svg>
-            {{t.runBatch}}
-          </button>
-          <div style="position: relative">
-            <button class="btn" onClick="{{toggleKp}}" aria-expanded="{{kpAria}}" aria-haspopup="true" style="{{kpBtn}}">Customise KPIs</button>
-            <sc-if value="{{kpOpen}}" hint-placeholder-val="{{ false }}">
-              <div aria-hidden="true" onClick="{{toggleKp}}" style="position: fixed; inset: 0; z-index: 24"></div>
-              <div class="menu r-w" style="width: 272px; z-index: 25">
-                <div class="k" style="padding: 6px 10px 4px">Show on cockpit</div>
-                <sc-for list="{{kpiOpts}}" as="o" hint-placeholder-count="4">
-                  <label class="mi" aria-checked="{{o.aria}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}"><span class="mi-lbl">{{o.label}}</span></label>
-                </sc-for>
-                <div class="menu-sep"></div>
-                <div class="mi-sub" style="padding: 4px 10px 6px">Saved per user</div>
-              </div>
-            </sc-if>
-          </div>
+          <div class="gright" style="display: flex; align-items: center; gap: 8px; margin-inline-start: auto">
+            <a class="btn btn-sm" href="enquiry.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Enquiry</a>
+            <a class="btn btn-sm" href="receipting.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h20v10H2zM12 12h.01"></path></svg>Record Receipt</a>
+            <a class="btn btn-sm btn-primary" href="manual-invoice.html" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Manual Invoice</a>
           </div>
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <sc-if value="{{roeDown}}" hint-placeholder-val="{{ true }}">
-          <div role="status" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; min-height: 48px; padding: 8px 8px 8px 16px; border-radius: 8px; background: var(--warnbg); border: 1px solid var(--warnbd); color: var(--warn2); box-sizing: border-box">
-            <div style="display: flex; gap: 10px; align-items: center; min-width: 0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 9v4M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>
-              <span><strong>{{t.roeTitle}}</strong> — {{t.roeBody}}</span>
-            </div>
-            <button class="btn btn-sm" onClick="{{retryRoe}}">{{t.retryRoe}}</button>
+        <sc-if value="{{alert}}" hint-placeholder-val="{{ true }}">
+          <div class="hm-alert" role="status">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg>
+            <span><b>Daily ROE feed unavailable.</b> BDRs that need today's exchange rate are held in exception staging.</span>
+            <a class="lnk" href="operations-cockpit.html">Open Operations Cockpit</a>
+            <button class="btn btn-icon btn-sm" aria-label="Dismiss" onClick="{{alertOff}}" style="margin-inline-start: auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
           </div>
         </sc-if>
 
-        <div class="r-g4" style="display: grid; grid-template-columns: repeat({{kpiCols}}, minmax(0, 1fr)); gap: 16px">
-          <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
-            <div class="card" style="height: 76px; padding: 0 20px; display: flex; flex-direction: column; justify-content: center; gap: 4px; box-sizing: border-box">
-              <span class="kpi-label">{{k.label}}</span>
-              <span class="mono" style="font-size: 24px; font-weight: 500; line-height: 32px; color: {{k.color}}">{{k.value}}</span>
+        <section aria-labelledby="hm-mw">
+          <div class="hm-sh"><h2 id="hm-mw">My Work</h2><span>Items waiting for you or your team</span></div>
+          <div class="hm-work">
+            <sc-for list="{{work}}" as="w" hint-placeholder-count="8">
+              <a class="{{w.cls}}" href="{{w.href}}" aria-label="{{w.aria}}">
+                <span class="hm-wi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{w.d}}"></path></svg></span>
+                <span class="hm-wt"><b>{{w.n}}</b><span>{{w.l}}</span><small>{{w.sub}}</small></span>
+                <svg class="hm-wa" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+
+        <section aria-labelledby="hm-kp">
+          <div class="hm-sh"><h2 id="hm-kp">This Period</h2><span>November 2026 · month to date</span></div>
+          <div class="hm-kpis">
+            <sc-for list="{{kpi}}" as="k" hint-placeholder-count="5">
+              <a class="card hm-k" href="{{k.href}}"><span class="hm-kl">{{k.l}}</span><b>{{k.v}}</b><span class="{{k.subCls}}">{{k.sub}}</span></a>
+            </sc-for>
+          </div>
+        </section>
+
+        <div class="hm-row2">
+          <section class="card" aria-labelledby="hm-ch">
+            <div class="card-head">
+              <h2 class="card-title" id="hm-ch">Invoiced vs Collected</h2>
+              <div class="hm-leg"><span><i class="hm-sw a"></i>Invoiced</span><span><i class="hm-sw b"></i>Collected</span><span class="card-meta">USD · last 8 weeks</span></div>
             </div>
-          </sc-for>
-        </div>
-
-        <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
-          <div class="r-col" style="flex: 999 1 720px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-
-            <section class="card" style="overflow: hidden">
-              <div class="card-head" style="flex-wrap: wrap; padding-block: 10px">
-                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px">
-                  <h2 class="card-title">{{t.queueTitle}}</h2>
-                  <div role="group" aria-label="{{t.queueTitle}}" style="display: flex; flex-wrap: wrap; gap: 8px">
-                    <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
-                      <button class="pill" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="border: 1px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}">{{f.label}}<span class="mono" style="font-size: 12px; opacity: 0.85">{{f.count}}</span></button>
-                    </sc-for>
-                  </div>
-                </div>
-                <button class="btn btn-primary" onClick="{{askRelease}}" disabled="{{noneChecked}}">{{t.release}} ({{checkedCount}})</button>
+            <div class="hm-chart" role="img" aria-label="{{chartAria}}">
+              <div class="hm-grid">
+                <sc-for list="{{grid}}" as="g" hint-placeholder-count="3"><div class="hm-gl" style="{{g.y}}"><span>{{g.l}}</span></div></sc-for>
               </div>
-              <sc-if value="{{confirming}}" hint-placeholder-val="{{ false }}">
-                <div role="group" aria-labelledby="rel-title" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px; background: var(--tint); border-bottom: 1px solid var(--tintbd)">
-                  <div style="min-width: 0">
-                    <strong id="rel-title">{{confirmTitle}}</strong>
-                    <p class="mono" style="margin: 2px 0 0; font-size: 12px; color: var(--muted3)"><bdi>{{checkedBls}}</bdi></p>
+              <div class="hm-bars">
+                <sc-for list="{{bars}}" as="b" hint-placeholder-count="8">
+                  <div class="{{b.on}}" onMouseEnter="{{b.enter}}" onMouseLeave="{{b.leave}}" title="{{b.aria}}">
+                    <div class="hm-pair">
+                      <div class="hm-bar a" style="{{b.a}}"><sc-if value="{{b.last}}" hint-placeholder-val="{{ false }}"><span>{{b.av}}</span></sc-if></div>
+                      <div class="hm-bar b" style="{{b.b}}"><sc-if value="{{b.last}}" hint-placeholder-val="{{ false }}"><span>{{b.bv}}</span></sc-if></div>
+                    </div>
+                    <span class="hm-x">{{b.w}}</span>
                   </div>
-                  <div style="display: flex; gap: 8px">
-                    <button class="btn btn-sm" onClick="{{cancelRelease}}">{{t.cancel}}</button>
-                    <button class="btn btn-sm btn-primary" onClick="{{releaseSelected}}">{{t.confirm}}</button>
+                </sc-for>
+                <sc-if value="{{tip.show}}" hint-placeholder-val="{{ false }}">
+                  <div class="hm-tip" style="{{tip.pos}}" aria-hidden="true">
+                    <b>{{tip.w}}</b>
+                    <span><i class="hm-sw a"></i>Invoiced<em>{{tip.a}}</em></span>
+                    <span><i class="hm-sw b"></i>Collected<em>{{tip.b}}</em></span>
+                    <span class="hm-tg">Difference<em>{{tip.gap}}</em></span>
                   </div>
-                </div>
-              </sc-if>
-              <sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}">
-                <div role="status" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; background: var(--okbg); color: var(--ok2); border-bottom: 1px solid var(--okbd); font-size: 13px">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
-                  {{notice}}
-                </div>
-              </sc-if>
-              <div style="max-height: 236px; overflow: auto">
-                <table>
-                  <thead><tr><th style="width: 44px"><input type="checkbox" checked="{{allChecked}}" onChange="{{toggleAll}}" aria-label="{{t.selectAll}}"></th><th>{{t.cBl}}</th><th>{{t.cReason}}</th><th style="width: 140px">{{t.cStaged}}</th><th style="width: 120px">{{t.cDispute}}</th><th class="r-w" style="width: 150px; text-align: end">{{t.cAction}}</th></tr></thead>
-                  <tbody>
-                    <sc-for list="{{queue}}" as="q" hint-placeholder-count="4">
-                      <tr>
-                        <td style="{{q.edgeStyle}}"><input type="checkbox" checked="{{q.checked}}" onChange="{{q.toggle}}" aria-label="{{t.cSelect}} {{q.bl}}"></td>
-                        <td style="{{q.cellStyle}}"><button class="rowbtn mono" onClick="{{q.select}}" aria-label="{{t.gatesTitle}} {{q.bl}}" style="font-weight: 500; color: var(--accent)"><bdi>{{q.bl}}</bdi></button></td>
-                        <td style="{{q.cellStyle}}"><span class="chip" style="background: var(--warnbg); color: var(--warn)">{{q.reason}}</span></td>
-                        <td class="mono" style="color: var(--muted); {{q.cellStyle}}"><bdi>{{q.time}}</bdi><span style="display: block; font-size: 12px; line-height: 14px; color: {{q.ageColor}}">{{q.age}}</span></td>
-                        <td style="{{q.cellStyle}}"><span class="chip" style="{{q.disputeStyle}}">{{q.disputeText}}</span></td>
-                        <td style="text-align: end; {{q.cellStyle}}"><button class="btn btn-sm" onClick="{{q.flag}}" style="min-width: 112px">{{q.flagLabel}}</button></td>
-                      </tr>
-                    </sc-for>
-                  </tbody>
-                </table>
-                <sc-if value="{{queueEmpty}}" hint-placeholder-val="{{ false }}">
-                  <p style="margin: 0; padding: 32px 16px; text-align: center; color: var(--muted)">{{t.empty}}</p>
                 </sc-if>
               </div>
-            </section>
-
-            <section class="card" style="overflow: hidden">
-              <div class="card-head">
-                <h2 class="card-title">{{t.feedTitle}}</h2>
-                <span class="chip" style="background: var(--okbg); color: var(--ok)"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>{{t.live}}</span>
-              </div>
-              <div style="max-height: 340px; overflow: auto">
-                <table>
-                  <thead><tr><th>{{t.cBl}}</th><th>{{t.cVv}}</th><th>{{t.cPolPod}}</th><th>{{t.cCarrier}}</th><th>{{t.cType}}</th><th>{{t.cIngested}}</th><th>{{t.cStatus}}</th></tr></thead>
-                  <tbody>
-                    <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
-                      <tr style="cursor: pointer" onClick="{{r.select}}">
-                        <td style="{{r.edgeStyle}}"><button class="rowbtn mono" onClick="{{r.select}}" aria-label="{{t.gatesTitle}} {{r.bl}}" style="font-weight: 500; color: var(--accent)"><bdi>{{r.bl}}</bdi></button></td>
-                        <td style="{{r.cellStyle}}"><bdi>{{r.vv}}</bdi></td>
-                        <td class="mono" style="{{r.cellStyle}}"><bdi dir="ltr">{{r.pol}} → {{r.pod}}</bdi></td>
-                        <td style="{{r.cellStyle}}">{{r.carrier}}</td>
-                        <td style="{{r.cellStyle}}">{{r.term}}</td>
-                        <td class="mono" style="color: var(--muted); {{r.cellStyle}}"><bdi>{{r.time}}</bdi></td>
-                        <td style="{{r.cellStyle}}"><span class="chip" style="{{r.chipStyle}}">{{r.status}}</span></td>
-                      </tr>
-                    </sc-for>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-            <section class="card" style="overflow: hidden">
-              <div class="r-g3a" style="display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); align-items: stretch">
-                <div style="display: flex; align-items: center; padding: 0 16px; border-inline-end: 1px solid var(--line2)"><h2 class="card-title" style="font-size: 13px; line-height: 18px">Linked<br>queues</h2></div>
-                <sc-for list="{{linked}}" as="l" hint-placeholder-count="3">
-                  <a href="{{l.href}}" style="display: flex; flex-direction: column; gap: 2px; padding: 8px 14px; border-inline-end: 1px solid var(--line2); text-decoration: none; color: var(--ink)">
-                    <span class="r-wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font-weight: 600">{{l.label}}</span><span class="mono" style="font-size: 20px; font-weight: 500; color: {{l.color}}">{{l.count}}</span></span>
-                    <span style="font-size: 12px; line-height: 16px; color: var(--muted)">{{l.sub}}</span>
-                    <span class="chip" style="align-self: flex-start; height: 20px; font-size: 12px; {{l.chip}}">{{l.sla}}</span>
-                  </a>
-                </sc-for>
-              </div>
-            </section>
-          </div>
-
-          <section class="card r-col" style="flex: 1 1 400px; max-width: 440px; min-width: 0; overflow: hidden">
-            <div class="card-head">
-              <h2 class="card-title">{{t.gatesTitle}}</h2>
-              <span class="chip" style="{{sel.chipStyle}}">{{sel.status}}</span>
             </div>
-            <div style="padding: 16px; border-bottom: 1px solid var(--line2)">
-              <div class="mono" style="font-size: 16px; font-weight: 500; line-height: 24px"><bdi>{{sel.bl}}</bdi></div>
-              <div class="r-g2m" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; margin-top: 12px">
-                <div><div class="dl-k">{{t.cVv}}</div><div class="dl-v"><bdi>{{sel.vv}}</bdi></div></div>
-                <div><div class="dl-k">{{t.cPolPod}}</div><div class="dl-v mono"><bdi dir="ltr">{{sel.pol}} → {{sel.pod}}</bdi></div></div>
-                <div><div class="dl-k">{{t.cCarrier}}</div><div class="dl-v">{{sel.carrier}}</div></div>
-                <div><div class="dl-k">{{t.cType}}</div><div class="dl-v">{{sel.term}}</div></div>
-                <div><div class="dl-k">{{t.cIngested}}</div><div class="dl-v mono"><bdi>{{sel.time}}</bdi></div></div>
-              </div>
-            </div>
-            <ol style="list-style: none; margin: 0; padding: 4px 16px; display: flex; flex-direction: column">
-              <sc-for list="{{gates}}" as="g" hint-placeholder-count="5">
-                <li class="r-wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 48px; border-bottom: 1px solid var(--line2)">
-                  <div style="display: flex; align-items: center; gap: 12px; min-width: 0">
-                    <span class="mono" style="width: 24px; height: 24px; border-radius: 50%; background: {{g.dotBg}}; color: {{g.dotFg}}; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: none">{{g.n}}</span>
-                    <span>{{g.label}}</span>
-                  </div>
-                  <span class="chip" style="{{g.chipStyle}}">{{g.state}}</span>
-                </li>
+          </section>
+
+          <section class="card" aria-labelledby="hm-ag">
+            <div class="card-head"><h2 class="card-title" id="hm-ag">Receivables Ageing</h2><a class="lnk" href="soa-aging.html">SOA &amp; Aging</a></div>
+            <div class="hm-age">
+              <div class="hm-at"><span>Total outstanding</span><b>{{ageTot}}</b></div>
+              <sc-for list="{{ageing}}" as="a" hint-placeholder-count="5">
+                <div class="hm-ar"><span class="hm-al">{{a.l}}</span><span class="hm-track"><span class="{{a.cls}}" style="{{a.bar}}"></span></span><span class="hm-av">{{a.v}}</span><span class="hm-ap">{{a.pct}}</span></div>
               </sc-for>
-            </ol>
-            <div style="padding: 16px">
-              <div style="padding: 12px 14px; border-radius: 6px; font-size: 13px; line-height: 20px; {{sel.outcomeStyle}}">{{sel.outcome}}</div>
             </div>
+          </section>
+        </div>
+
+        <div class="hm-row3">
+          <section class="card" aria-labelledby="hm-oc" style="overflow: hidden">
+            <div class="card-head"><h2 class="card-title" id="hm-oc">Top Overdue Customers</h2><a class="lnk" href="soa-aging.html">View all</a></div>
+            <table class="lst hm-t">
+              <thead><tr><th scope="col">Customer</th><th scope="col" class="r">Overdue</th><th scope="col" class="r">Oldest</th><th scope="col" class="c-act">Action</th></tr></thead>
+              <tbody>
+                <sc-for list="{{cust}}" as="c" hint-placeholder-count="5">
+                  <tr><td>{{c.n}}</td><td class="r mono">{{c.v}}</td><td class="r"><span class="{{c.dCls}}">{{c.d}}</span></td><td class="c-act"><a class="lnk" href="{{c.href}}">View SOA</a></td></tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="card" aria-labelledby="hm-cl">
+            <div class="card-head"><h2 class="card-title" id="hm-cl">Month-End Close</h2><a class="lnk" href="month-end.html">Open</a></div>
+            <div class="hm-close">
+              <div class="hm-cp"><b>{{close.done}}</b><span>{{close.left}}</span></div>
+              <div class="hm-track lg"><span class="hm-ab" style="{{close.bar}}"></span></div>
+              <ul>
+                <sc-for list="{{close.steps}}" as="t" hint-placeholder-count="5">
+                  <li><sc-if value="{{t.ok}}" hint-placeholder-val="{{ true }}"><span class="hm-ck ok" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span></sc-if><sc-if value="{{t.todo}}" hint-placeholder-val="{{ false }}"><span class="hm-ck" aria-hidden="true"></span></sc-if><span class="hm-cs">{{t.l}}</span><span class="{{t.cls}}">{{t.st}}</span></li>
+                </sc-for>
+              </ul>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="hm-rv">
+            <div class="card-head"><h2 class="card-title" id="hm-rv">Recently Viewed</h2></div>
+            <ul class="hm-rec">
+              <sc-for list="{{recent}}" as="r" hint-placeholder-count="4">
+                <li><a href="{{r.href}}"><span class="hm-ri"><b class="mono">{{r.id}}</b><small>{{r.sub}}</small></span><span class="hm-rt">{{r.t}}</span></a></li>
+              </sc-for>
+            </ul>
           </section>
         </div>
       </main>
@@ -574,196 +887,81 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 </div>
 </script>
 <script type="text/x-dc" id="logic">
+// Home — the landing screen after login: what needs action, how the office is doing, where to go next.
+// Sample figures, varied by the working location in the header.
+const HM_HUB = { SIN: ['Singapore', 1], NSA: ['India', 0.62], LCH: ['Thailand', 0.44], PKG: ['Malaysia', 0.51], JED: ['Saudi Arabia', 0.38], ZLO: ['Mexico', 0.29] };
+const HM_WEEKS = ['W40', 'W41', 'W42', 'W43', 'W44', 'W45', 'W46', 'W47'];
+const HM_INV = [612, 655, 590, 702, 688, 741, 705, 768];   // USD K, invoiced per week (SIN)
+const HM_COL = [540, 598, 611, 620, 664, 650, 701, 690];   // USD K, collected per week (SIN)
+const HM_AGE = [['Current', 2410], ['1–30 days', 1185], ['31–60 days', 512], ['61–90 days', 214], ['Over 90 days', 128]];
+const HM_CUST = [['Straits Harbour Logistics', 186.4, 74], ['Meridian Agro Exports', 142.9, 61], ['Andaman Bay Traders', 98.2, 96], ['Kinabalu Home Furnishings', 64.7, 45], ['Orchid Lane Polymers', 41.3, 38]];
+const HM_CLOSE = [['Billing cut-off for the period', true], ['D&D daily run complete to month-end', true], ['Unbilled revenue accrual run', false], ['Currency revaluation', false], ['Journals posted to GFS and acknowledged', false]];
+const HM_RECENT = [['INV-SG-2611-00482', 'Invoice · Straits Harbour Logistics', 'invoice-list-v2.html?q=INV-SG-2611-00482', '12 min ago'], ['BL-SG-24004', 'B/L · Split-payer unconfirmed', 'operations-cockpit.html', '35 min ago'], ['CN-SG-2611-0031', 'Credit note · Meridian Agro Exports', 'credit-note-list.html', '1 h ago'], ['Charge OFT', 'Charge Master · Ocean Freight', 'charge-master-v2c.html?q=OFT', 'Yesterday']];
+const hmK = (v) => (v >= 1000 ? (v / 1000).toFixed(2) + 'M' : Math.round(v) + 'K');
+
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { selected: 'b2', checked: {}, released: {}, flagged: {}, filter: 'all', roeDown: true, batchDone: false, confirming: false, notice: 0, kHide: {}, kpOpen: false };
-  }
-  strings() {
-    return {
-      en: { screens: 'Screens', language: 'Language', nav1: 'Operations Cockpit', nav2: 'Invoice Previewer', nav3: 'DAR Console', nav4: 'SOA & Aging', nav5: 'CashApp Workbench', nav6: 'Tolerance & COREOR', nav7: 'Charge Processing', nav8: 'Credit Notes', nav9: 'Receipting', nav10: 'Enquiry & Monitoring', nav11: 'Invoices Hub', nav12: 'D&D Engine', nav13: 'Approvals Inbox', nav14: 'Tax Rules', gCtl: 'Control', gCfg: 'Configure', gOps: 'Operations', gInv: 'Invoicing', gRec: 'Receivables', gEnq: 'Enquiry',
-        title: 'Operations Cockpit', subtitle: 'Straight-Through Processing (STP) auto-invoicing from confirmed BDRs', tz: 'All times in SGT (UTC+8)',
-        lastBatch: 'Last batch run: ', batchDone: 'Batch run complete · just now', runBatch: 'Run auto-invoicing batch',
-        roeTitle: 'Daily ROE feed unavailable', roeBody: 'at the scheduled midnight auto-invoicing batch run. Affected BDRs are held in exception staging.', retryRoe: 'Retry ROE feed',
-        k1: 'BDRs ingested today', k2: 'STP auto-invoiced / released', k3: 'In exception staging', k4: 'Flagged for dispute',
-        feedTitle: 'Real-time BDR ingestion feed', live: 'Live from LMS',
-        cBl: 'B/L #', cVv: 'Vessel / Voyage', cPolPod: 'POL → POD', cCarrier: 'Carrier', cType: 'B/L Type', cIngested: 'Ingested', cStatus: 'STP status',
-        sAuto: 'Auto-invoiced', sExc: 'Exception staging', sRel: 'Released (override)', prepaid: 'Prepaid', collect: 'Collect',
-        gatesTitle: 'STP validation gates', g1: 'BDR schema validation', g2: 'Billed-To party determined', g3: 'ROE available', g4: 'Commodity certification', g5: 'Split-payer confirmed', passed: 'Passed', failed: 'Failed',
-        held: 'Held in exception staging — ', relOut: 'Manually released via batch override.', allOk: 'All gates passed — 100% automated STP invoice issued.',
-        queueTitle: 'Exception triage queue', fAll: 'All', fHaz: 'Hazardous cert.', fRoe: 'ROE', fSplit: 'Split-payer', release: 'Override & release selected',
-        cSelect: 'Select', cReason: 'Exception reason', cStaged: 'Staged since', cDispute: 'Dispute', cAction: 'Action',
-        rHaz: 'Pending hazardous commodity certification', rRoe: 'Daily ROE feed unavailable', rSplit: 'Split-payer unconfirmed at vessel departure',
-        flagged: 'Flagged', flag: 'Flag dispute', unflag: 'Remove flag', empty: 'No BDRs in exception staging for this filter.',
-        selectAll: 'Select all', cancel: 'Cancel', confirm: 'Confirm release', confirmTitle: 'Release {n} BDR(s) from exception staging via batch override?', releasedMsg: '{n} BDR(s) released via batch override.' },
-      zh: { screens: '页面', language: '语言', nav1: '运营驾驶舱', nav2: '发票模板预览', nav3: '争议审批 (DAR)', nav4: '对账单与账龄', nav5: '现金核销工作台', nav6: '容差与放货 (COREOR)', nav7: '费用处理', nav8: '贷项通知单', nav9: '收款', nav10: '查询与监控', nav11: '发票中心', nav12: '滞箱滞港费引擎', nav13: '审批收件箱', nav14: '税务规则', gCtl: '管控', gCfg: '配置', gOps: '运营', gInv: '开票', gRec: '应收账款', gEnq: '查询',
-        title: '运营驾驶舱', subtitle: '基于已确认 BDR 的直通式处理 (STP) 自动开票', tz: '所有时间均为新加坡时间 (UTC+8)',
-        lastBatch: '上次批处理：', batchDone: '批处理已完成 · 刚刚', runBatch: '运行自动开票批处理',
-        roeTitle: '每日汇率 (ROE) 数据源不可用', roeBody: '发生于午夜定时自动开票批处理。受影响的 BDR 已暂存于异常队列。', retryRoe: '重试汇率数据源',
-        k1: '今日接收 BDR', k2: 'STP 自动开票 / 已放行', k3: '异常暂存中', k4: '已标记争议',
-        feedTitle: '实时 BDR 接收流', live: 'LMS 实时',
-        cBl: '提单号', cVv: '船名 / 航次', cPolPod: '装货港 → 卸货港', cCarrier: '承运人', cType: '提单类型', cIngested: '接收时间', cStatus: 'STP 状态',
-        sAuto: '已自动开票', sExc: '异常暂存', sRel: '已放行（人工覆盖）', prepaid: '预付', collect: '到付',
-        gatesTitle: 'STP 校验关卡', g1: 'BDR 结构校验', g2: '已确定开票对象', g3: '汇率可用', g4: '货物品类认证', g5: '分付方已确认', passed: '通过', failed: '未通过',
-        held: '暂存于异常队列 — ', relOut: '已通过批量覆盖人工放行。', allOk: '所有关卡均已通过 — 已自动签发 STP 发票。',
-        queueTitle: '异常分拣队列', fAll: '全部', fHaz: '危险品认证', fRoe: '汇率', fSplit: '分付方', release: '覆盖并放行所选',
-        cSelect: '选择', cReason: '异常原因', cStaged: '暂存时间', cDispute: '争议', cAction: '操作',
-        rHaz: '危险品认证待处理', rRoe: '每日汇率数据源不可用', rSplit: '开船时分付方未确认',
-        flagged: '已标记', flag: '标记争议', unflag: '取消标记', empty: '此筛选条件下没有异常暂存的 BDR。',
-        selectAll: '全选', cancel: '取消', confirm: '确认放行', confirmTitle: '通过批量覆盖从异常暂存中放行 {n} 条 BDR？', releasedMsg: '已通过批量覆盖放行 {n} 条 BDR。' },
-      ar: { screens: 'الشاشات', language: 'اللغة', nav1: 'لوحة العمليات', nav2: 'معاينة الفواتير', nav3: 'طلبات النزاع (DAR)', nav4: 'كشف الحساب والأعمار', nav5: 'منضدة تخصيص النقد', nav6: 'التسامح والإفراج (COREOR)', nav7: 'معالجة الرسوم', nav8: 'إشعارات دائنة', nav9: 'التحصيل', nav10: 'الاستعلام والمراقبة', nav11: 'مركز الفواتير', nav12: 'محرك رسوم التأخير والتخزين', nav13: 'صندوق الموافقات', nav14: 'قواعد الضرائب', gCtl: 'الرقابة', gCfg: 'الإعداد', gOps: 'العمليات', gInv: 'الفوترة', gRec: 'الذمم المدينة', gEnq: 'الاستعلام',
-        title: 'لوحة العمليات', subtitle: 'الفوترة التلقائية بالمعالجة المباشرة (STP) من سجلات BDR المؤكدة', tz: 'جميع الأوقات بتوقيت سنغافورة (UTC+8)',
-        lastBatch: 'آخر تشغيل للدفعة: ', batchDone: 'اكتمل تشغيل الدفعة · الآن', runBatch: 'تشغيل دفعة الفوترة التلقائية',
-        roeTitle: 'موجز سعر الصرف اليومي (ROE) غير متاح', roeBody: 'عند تشغيل دفعة الفوترة التلقائية المجدولة منتصف الليل. سجلات BDR المتأثرة محتجزة في قائمة الاستثناءات.', retryRoe: 'إعادة محاولة موجز سعر الصرف',
-        k1: 'سجلات BDR المستلمة اليوم', k2: 'مفوترة تلقائياً / مُفرج عنها', k3: 'في قائمة الاستثناءات', k4: 'معلّمة كنزاع',
-        feedTitle: 'موجز استلام BDR المباشر', live: 'مباشر من LMS',
-        cBl: 'رقم البوليصة', cVv: 'السفينة / الرحلة', cPolPod: 'ميناء التحميل ← التفريغ', cCarrier: 'الناقل', cType: 'نوع البوليصة', cIngested: 'وقت الاستلام', cStatus: 'حالة STP',
-        sAuto: 'مفوترة تلقائياً', sExc: 'محتجزة كاستثناء', sRel: 'مُفرج عنها (تجاوز يدوي)', prepaid: 'مدفوع مسبقاً', collect: 'تحصيل عند الوصول',
-        gatesTitle: 'بوابات التحقق STP', g1: 'التحقق من بنية BDR', g2: 'تحديد الطرف المفوتر', g3: 'توفر سعر الصرف', g4: 'شهادة السلعة', g5: 'تأكيد تعدد الدافعين', passed: 'ناجح', failed: 'فاشل',
-        held: 'محتجزة في قائمة الاستثناءات — ', relOut: 'أُفرج عنها يدوياً عبر تجاوز الدفعة.', allOk: 'اجتازت جميع البوابات — صدرت فاتورة STP آلياً بالكامل.',
-        queueTitle: 'قائمة فرز الاستثناءات', fAll: 'الكل', fHaz: 'شهادة المواد الخطرة', fRoe: 'سعر الصرف', fSplit: 'تعدد الدافعين', release: 'تجاوز وإفراج عن المحدد',
-        cSelect: 'تحديد', cReason: 'سبب الاستثناء', cStaged: 'محتجزة منذ', cDispute: 'النزاع', cAction: 'إجراء',
-        rHaz: 'شهادة السلعة الخطرة قيد الانتظار', rRoe: 'موجز سعر الصرف اليومي غير متاح', rSplit: 'تعدد الدافعين غير مؤكد عند مغادرة السفينة',
-        flagged: 'معلّمة', flag: 'تعليم كنزاع', unflag: 'إزالة العلامة', empty: 'لا توجد سجلات BDR محتجزة ضمن هذا التصنيف.',
-        selectAll: 'تحديد الكل', cancel: 'إلغاء', confirm: 'تأكيد الإفراج', confirmTitle: 'الإفراج عن {n} من سجلات BDR من قائمة الاستثناءات عبر تجاوز الدفعة؟', releasedMsg: 'تم الإفراج عن {n} من سجلات BDR عبر تجاوز الدفعة.' },
-      es: { screens: 'Pantallas', language: 'Idioma', nav1: 'Cabina de operaciones', nav2: 'Vista previa de facturas', nav3: 'Consola DAR', nav4: 'Estado de cuenta', nav5: 'Aplicación de cobros', nav6: 'Tolerancia y COREOR', nav7: 'Procesamiento de cargos', nav8: 'Notas de crédito', nav9: 'Recibos', nav10: 'Consulta y monitoreo', nav11: 'Centro de facturas', nav12: 'Motor de D&D', nav13: 'Bandeja de aprobaciones', nav14: 'Reglas fiscales', gCtl: 'Control', gCfg: 'Configuración', gOps: 'Operaciones', gInv: 'Facturación', gRec: 'Cuentas por cobrar', gEnq: 'Consulta',
-        title: 'Cabina de operaciones', subtitle: 'Facturación automática STP (Straight-Through Processing) a partir de BDR confirmados', tz: 'Todas las horas en SGT (UTC+8)',
-        lastBatch: 'Último lote: ', batchDone: 'Lote completado · ahora', runBatch: 'Ejecutar lote de facturación',
-        roeTitle: 'Fuente diaria de tipo de cambio (ROE) no disponible', roeBody: 'en el lote programado de medianoche. Los BDR afectados quedan retenidos en excepciones.', retryRoe: 'Reintentar fuente ROE',
-        k1: 'BDR recibidos hoy', k2: 'Facturados por STP / liberados', k3: 'En excepciones', k4: 'Marcados en disputa',
-        feedTitle: 'Ingesta de BDR en tiempo real', live: 'En vivo desde LMS',
-        cBl: 'N.º B/L', cVv: 'Buque / Viaje', cPolPod: 'POL → POD', cCarrier: 'Transportista', cType: 'Tipo de B/L', cIngested: 'Recibido', cStatus: 'Estado STP',
-        sAuto: 'Facturado automáticamente', sExc: 'En excepción', sRel: 'Liberado (anulación)', prepaid: 'Prepagado', collect: 'Al cobro',
-        gatesTitle: 'Controles de validación STP', g1: 'Validación de esquema BDR', g2: 'Parte facturable determinada', g3: 'Tipo de cambio disponible', g4: 'Certificación de mercancía', g5: 'Pagadores divididos confirmados', passed: 'Superado', failed: 'Fallido',
-        held: 'Retenido en excepciones — ', relOut: 'Liberado manualmente mediante anulación de lote.', allOk: 'Todos los controles superados — factura STP emitida automáticamente.',
-        queueTitle: 'Cola de excepciones', fAll: 'Todas', fHaz: 'Cert. peligrosa', fRoe: 'Tipo de cambio', fSplit: 'Pagadores divididos', release: 'Anular y liberar seleccionados',
-        cSelect: 'Seleccionar', cReason: 'Motivo de excepción', cStaged: 'En espera desde', cDispute: 'Disputa', cAction: 'Acción',
-        rHaz: 'Certificación de mercancía peligrosa pendiente', rRoe: 'Fuente diaria de tipo de cambio no disponible', rSplit: 'Pagadores divididos sin confirmar a la salida del buque',
-        flagged: 'Marcada', flag: 'Marcar disputa', unflag: 'Quitar marca', empty: 'No hay BDR en excepción para este filtro.',
-        selectAll: 'Seleccionar todo', cancel: 'Cancelar', confirm: 'Confirmar liberación', confirmTitle: '¿Liberar {n} BDR de excepciones mediante anulación de lote?', releasedMsg: '{n} BDR liberados mediante anulación de lote.' }
-    };
+    this.state = { alertOff: false, hov: -1 };
   }
   renderVals() {
-    const s = this.state;
-    const lng = this.strings()[s.__lang] ? s.__lang : 'en';
-    const t = this.strings()[lng];
-    const rtl = lng === 'ar';
-    const locale = { en: 'en-SG', zh: 'zh-CN', ar: 'ar-SA-u-nu-latn', es: 'es-MX' }[lng];
-    const fonts = {
-      en: "'IBM Plex Sans', system-ui, sans-serif",
-      zh: "'IBM Plex Sans', 'Noto Sans SC', 'PingFang SC', sans-serif",
-      ar: "'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif",
-      es: "'IBM Plex Sans', system-ui, sans-serif"
-    };
-    const fmtTime = (h, mi) => new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Singapore' }).format(new Date(Date.UTC(2026, 10, 16, (h + 16) % 24, mi)));
-    const fmtN = (n) => n.toLocaleString(locale);
-    const selCell = 'background:var(--tint);';
-    const selEdge = 'background:var(--tint);box-shadow:inset ' + (rtl ? '-3px' : '3px') + ' 0 0 var(--accent);';
+    const s = this.state, self = this;
+    const hub = s.__hub || 'SIN', [cty, f] = HM_HUB[hub] || HM_HUB.SIN;
+    const r = (n) => Math.max(1, Math.round(n * (0.6 + 0.4 * f)));
+    const hr = (() => { try { return new Date().getHours(); } catch (e) { return 9; } })();
+    const greet = hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening';
 
-    const base = [
-      { id: 'b1', bl: 'BL-SG-24001', vv: 'Vessel 01 / 012E', pol: 'SGSIN', pod: 'INNSA', carrier: 'PIL', term: 'prepaid', h: 13, m: 42, fail: null },
-      { id: 'b2', bl: 'BL-SG-24002', vv: 'Vessel 01 / 012E', pol: 'SGSIN', pod: 'AEJEA', carrier: 'PIL', term: 'collect', h: 13, m: 40, fail: 'haz' },
-      { id: 'b3', bl: 'BL-CN-24003', vv: 'Vessel 02 / 044W', pol: 'CNSHA', pod: 'SGSIN', carrier: 'PIL', term: 'prepaid', h: 13, m: 37, fail: 'roe' },
-      { id: 'b4', bl: 'BL-SG-24004', vv: 'Vessel 03 / 108N', pol: 'SGSIN', pod: 'MYPKG', carrier: 'PIL', term: 'collect', h: 13, m: 31, fail: 'split' },
-      { id: 'b5', bl: 'BL-IN-24005', vv: 'Vessel 04 / 021S', pol: 'INNSA', pod: 'SGSIN', carrier: 'PIL', term: 'prepaid', h: 13, m: 28, fail: null },
-      { id: 'b6', bl: 'BL-SG-24006', vv: 'Vessel 01 / 012E', pol: 'SGSIN', pod: 'SAJED', carrier: 'PIL', term: 'prepaid', h: 13, m: 22, fail: null },
-      { id: 'b7', bl: 'BL-TH-24007', vv: 'Vessel 05 / 077E', pol: 'THLCH', pod: 'SGSIN', carrier: 'PIL', term: 'collect', h: 13, m: 15, fail: 'roe' }
-    ];
-    const reasons = { haz: t.rHaz, roe: t.rRoe, split: t.rSplit };
-    const failOf = (b) => (b.fail === 'roe' && !s.roeDown) ? null : b.fail;
-    const isExc = (b) => failOf(b) && !s.released[b.id];
-    const chip = { ok: 'background:var(--okbg);color:var(--ok)', exc: 'background:var(--warnbg);color:var(--warn)', rel: 'background:var(--tint);color:var(--accent2)' };
-    const statusOf = (b) => isExc(b) ? 'exc' : (s.released[b.id] ? 'rel' : 'ok');
-    const statusText = { exc: t.sExc, rel: t.sRel, ok: t.sAuto };
+    const work = [
+      ['Exceptions in staging', r(4), 'Oldest 30 min in queue', 'operations-cockpit.html', 'bad', 'M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z'],
+      ['Invoices with errors', r(12), 'Blocked from release', 'invoice-list-v2.html', 'bad', 'M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9l-6-6zM14 3v6h6M10 13l4 4M14 13l-4 4'],
+      ['Waiting for my approval', r(5), '2 due today', 'approvals-inbox.html', 'warn', 'M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11'],
+      ['E-invoice rejections', r(3), 'Tax authority returned', 'einvoice-exceptions.html', 'warn', 'M4 4h16v16H4zM9 9l6 6M15 9l-6 6'],
+      ['Unapplied receipts', r(8), 'USD ' + hmK(46.2 * f) + ' to match', 'cashapp-workbench.html', 'warn', 'M2 7h20v10H2zM12 12h.01M6 12h.01M18 12h.01'],
+      ['Credit notes in draft', r(3), 'Not yet submitted', 'credit-note-list.html', '', 'M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9l-6-6zM9 15h6'],
+      ['D&D charges to review', r(6), 'Free time exceeded', 'dd-engine.html', '', 'M12 7v5l3 2M12 22a10 10 0 100-20 10 10 0 000 20z'],
+      ['Integration failures', r(1), 'GFS posting retry needed', 'integration-monitor.html', 'bad', 'M10 14a3.5 3.5 0 005 0l4-4a3.5 3.5 0 00-5-5l-.5.5M14 10a3.5 3.5 0 00-5 0l-4 4a3.5 3.5 0 005 5l.5-.5']
+    ].map(([l, n, sub, href, sev, d]) => ({ l, n: String(n), sub, href, cls: 'hm-w ' + sev, d, aria: n + ' ' + l + ' — open' }));
+    const actions = work.reduce((a, w) => a + (+w.n), 0);
 
-    const rows = base.map((b) => {
-      const st = statusOf(b);
-      return { ...b, term: t[b.term], time: fmtTime(b.h, b.m), status: statusText[st], chipStyle: chip[st],
-        cellStyle: s.selected === b.id ? selCell : '', edgeStyle: s.selected === b.id ? selEdge : '',
-        select: () => this.setState({ selected: b.id }) };
-    });
+    const inv = HM_INV.map((v) => v * f), col = HM_COL.map((v) => v * f);
+    const totInv = inv.slice(-4).reduce((a, b) => a + b, 0) * 1.02, totCol = col.slice(-4).reduce((a, b) => a + b, 0);
+    const age = HM_AGE.map(([l, v]) => [l, v * f]), ageTot = age.reduce((a, b) => a + b[1], 0), over30 = age.slice(2).reduce((a, b) => a + b[1], 0);
+    const kpi = [
+      ['Invoiced this period', 'USD ' + hmK(totInv), '+6.2% vs Oct', 'up', 'invoice-list-v2.html'],
+      ['Unbilled BDRs', String(r(37)), 'USD ' + hmK(318 * f) + ' not yet invoiced', '', 'operations-cockpit.html'],
+      ['Outstanding receivables', 'USD ' + hmK(ageTot), r(214) + ' open invoices', '', 'soa-aging.html'],
+      ['Overdue over 30 days', 'USD ' + hmK(over30), Math.round((over30 / ageTot) * 100) + '% of outstanding', 'warn', 'soa-aging.html'],
+      ['Collected this period', 'USD ' + hmK(totCol), Math.round((totCol / totInv) * 100) + '% of invoiced', '', 'receipting.html']
+    ].map(([l, v, sub, tone, href]) => ({ l, v, sub, href, subCls: 'hm-ks ' + tone }));
 
-    const selB = base.find((b) => b.id === s.selected) || base[0];
-    const f = failOf(selB);
-    const gateDefs = [['schema', t.g1], ['billto', t.g2], ['roe', t.g3], ['haz', t.g4], ['split', t.g5]];
-    const gates = gateDefs.map(([k, label], i) => {
-      const bad = f === k;
-      return { n: fmtN(i + 1), label, state: bad ? t.failed : t.passed, chipStyle: bad ? chip.exc : chip.ok,
-        dotBg: bad ? 'var(--warnbg)' : 'var(--neutral)', dotFg: bad ? 'var(--warn)' : 'var(--muted)' };
-    });
-    const selExc = isExc(selB);
-    const selSt = statusOf(selB);
-    const sel = { ...selB, term: t[selB.term], time: fmtTime(selB.h, selB.m), status: statusText[selSt], chipStyle: chip[selSt],
-      outcome: selExc ? t.held + reasons[f] : (s.released[selB.id] ? t.relOut : t.allOk),
-      outcomeStyle: selExc ? 'background:var(--warnbg);color:var(--warn2)' : 'background:var(--okbg);color:var(--ok2)' };
+    // Invoiced vs collected — grouped bars, 8 weeks
+    const max = 900 * Math.max(f, 0.3) / 1, top = Math.ceil(Math.max(...inv, ...col) * 1.15 / 200) * 200 || 200;
+    const grid = [top, top / 2, 0].map((g) => ({ l: g ? hmK(g) : '0', y: 'bottom: ' + (g / top) * 100 + '%' }));
+    const bars = HM_WEEKS.map((w, i) => ({
+      w, last: i === HM_WEEKS.length - 1, on: s.hov === i ? 'hm-g on' : 'hm-g',
+      a: 'height: ' + (inv[i] / top) * 100 + '%', b: 'height: ' + (col[i] / top) * 100 + '%',
+      av: hmK(inv[i]), bv: hmK(col[i]),
+      enter: () => self.setState({ hov: i }), leave: () => self.setState({ hov: -1 }),
+      aria: w + ': invoiced USD ' + hmK(inv[i]) + ', collected USD ' + hmK(col[i])
+    }));
+    const hv = s.hov >= 0 ? s.hov : -1;
+    const tip = hv >= 0 ? { show: true, w: 'Week ' + HM_WEEKS[hv].slice(1) + ', 2026', a: 'USD ' + hmK(inv[hv]), b: 'USD ' + hmK(col[hv]), gap: 'USD ' + hmK(Math.abs(inv[hv] - col[hv])), pos: 'left: ' + ((hv + 0.5) / HM_WEEKS.length) * 100 + '%' } : { show: false };
 
-    const excAll = base.filter(isExc);
-    const filterDefs = [['all', t.fAll], ['haz', t.fHaz], ['roe', t.fRoe], ['split', t.fSplit]];
-    const filters = filterDefs.map(([k, label]) => {
-      const on = s.filter === k;
-      return { label, on: on ? 'true' : 'false',
-        count: fmtN(k === 'all' ? excAll.length : excAll.filter((b) => failOf(b) === k).length),
-        bg: on ? 'var(--selbg)' : 'var(--surface)', fg: on ? 'var(--selfg)' : 'var(--ink)', border: on ? 'var(--selbd)' : 'var(--bd)',
-        pick: () => this.setState({ filter: k }) };
-    });
-    const visible = excAll.filter((b) => s.filter === 'all' || failOf(b) === s.filter);
-    const queue = visible.map((b) => {
-      const fl = !!s.flagged[b.id];
-      const ageMin = (13 * 60 + 45) - (b.h * 60 + b.m);
-      return { bl: b.bl, reason: reasons[failOf(b)], time: fmtTime(b.h, b.m), age: ageMin + ' min in queue', ageColor: ageMin >= 25 ? 'var(--warn)' : 'var(--muted)', checked: !!s.checked[b.id],
-        cellStyle: s.selected === b.id ? selCell : '', edgeStyle: s.selected === b.id ? selEdge : '',
-        disputeText: fl ? t.flagged : '—', disputeStyle: fl ? 'background:var(--badbg);color:var(--bad)' : 'color:var(--muted);padding:0',
-        flagLabel: fl ? t.unflag : t.flag,
-        select: () => this.setState({ selected: b.id }),
-        toggle: () => this.setState({ checked: { ...s.checked, [b.id]: !s.checked[b.id] } }),
-        flag: () => this.setState({ flagged: { ...s.flagged, [b.id]: !fl } }) };
-    });
-    const checkedIds = excAll.filter((b) => s.checked[b.id]).map((b) => b.id);
-    const auto = base.filter((b) => !isExc(b)).length;
-    const kpiAll = [
-      { id: 'k1', label: t.k1, value: fmtN(base.length), color: 'var(--ink)' },
-      { id: 'k2', label: t.k2, value: fmtN(auto), color: 'var(--ok)' },
-      { id: 'k3', label: t.k3, value: fmtN(excAll.length), color: 'var(--warn)' },
-      { id: 'k4', label: t.k4, value: fmtN(Object.values(s.flagged).filter(Boolean).length), color: 'var(--bad)' }
-    ];
-    const kpis = kpiAll.filter((k) => !s.kHide[k.id]);
-    const kpiOpts = kpiAll.map((k) => ({ label: k.label, on: !s.kHide[k.id], aria: s.kHide[k.id] ? 'false' : 'true', toggle: () => this.setState({ kHide: { ...s.kHide, [k.id]: !s.kHide[k.id] } }) }));
+    const amax = Math.max(...age.map((a) => a[1]));
+    const ageing = age.map(([l, v], i) => ({ l, v: 'USD ' + hmK(v), pct: Math.round((v / ageTot) * 100) + '%', bar: 'width: ' + (v / amax) * 100 + '%', cls: i >= 2 ? 'hm-ab late' : 'hm-ab' }));
 
+    const done = HM_CLOSE.filter((c) => c[1]).length;
     return {
-      t, lang: lng, dir: rtl ? 'rtl' : 'ltr', font: fonts[lng],
-      navT: { nMain: t.nav1, nInvoicePreviewer: t.nav2, nDARConsole: t.nav3, nSOADashboard: t.nav4, nCashAppWorkbench: t.nav5, nToleranceCOREOR: t.nav6, nChargeProcessing: t.nav7, nCreditNotes: t.nav8, nReceipting: t.nav9, nEnquiry: t.nav10, nInvoicesHub: t.nav11, nDDEngine: t.nav12, nApprovalsInbox: t.nav13, nTaxRules: t.nav14, g0: t.gOps, g1: t.gInv, g2: t.gRec, g3: t.gCtl },
-      linked: [
-        { label: 'Container milestone clashes', count: 2, sub: 'Gate-out without discharge · conflicting gate timestamps', sla: 'SLA 24 h · oldest 6 h', chip: 'background:var(--okbg);color:var(--ok)', color: 'var(--warn)', href: 'DDEngine.dc.html' },
-        { label: 'AI extraction below 95% confidence', count: 3, sub: 'Load plans and remittances awaiting human review', sla: 'Human review required', chip: 'background:var(--aibg);color:var(--ai)', color: 'var(--ai)', href: 'DocumentIntake.dc.html' },
-        { label: 'E-invoice rejections', count: 5, sub: 'Government portal validation failed', sla: 'Office notified', chip: 'background:var(--badbg);color:var(--bad)', color: 'var(--bad)', href: 'EInvoiceExceptions.dc.html' }
-      ],
-      rows, gates, sel, kpis, filters, queue, kpiOpts, kpiCols: Math.max(1, kpis.length), kpOpen: s.kpOpen, kpAria: s.kpOpen ? 'true' : 'false', kpBtn: s.kpOpen ? 'border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)' : '', toggleKp: () => this.setState({ kpOpen: !s.kpOpen }),
-      queueEmpty: queue.length === 0,
-      roeDown: s.roeDown,
-      batchText: s.batchDone ? t.batchDone : t.lastBatch + fmtTime(0, 0),
-      checkedCount: fmtN(checkedIds.length),
-      noneChecked: checkedIds.length === 0,
-      allChecked: visible.length > 0 && visible.every((b) => s.checked[b.id]),
-      toggleAll: () => {
-        const all = visible.length > 0 && visible.every((b) => s.checked[b.id]);
-        const c = { ...s.checked };
-        visible.forEach((b) => { c[b.id] = !all; });
-        this.setState({ checked: c });
-      },
-      confirming: s.confirming && checkedIds.length > 0,
-      confirmTitle: t.confirmTitle.replace('{n}', fmtN(checkedIds.length)),
-      checkedBls: excAll.filter((b) => s.checked[b.id]).map((b) => b.bl).join(', '),
-      askRelease: () => this.setState({ confirming: true, notice: 0 }),
-      cancelRelease: () => this.setState({ confirming: false }),
-      hasNotice: s.notice > 0,
-      notice: s.notice > 0 ? t.releasedMsg.replace('{n}', fmtN(s.notice)) : '',
-      retryRoe: () => this.setState({ roeDown: false }),
-      runBatch: () => this.setState({ batchDone: true }),
-      releaseSelected: () => {
-        const rel = { ...s.released };
-        checkedIds.forEach((id) => { rel[id] = true; });
-        this.setState({ released: rel, checked: {}, confirming: false, notice: checkedIds.length });
-      }
+      greet: greet + ', ' + (typeof USER_NAME === 'string' ? USER_NAME.split(' ')[0] : 'Daniel'),
+      ctx: cty + ' · ' + hub + ' · ' + (s.__ent || 'PIL') + ' — you have ' + actions + ' items that need action',
+      alert: !s.alertOff, alertOff: () => self.setState({ alertOff: true }),
+      work, kpi, grid, bars, tip,
+      chartAria: 'Invoiced versus collected, weekly, last 8 weeks, in USD',
+      ageing, ageTot: 'USD ' + hmK(ageTot),
+      cust: HM_CUST.map(([n, v, d]) => ({ n, v: 'USD ' + hmK(v * f), d: d + ' days', dCls: d > 60 ? 'hm-d late' : 'hm-d', href: 'soa-aging.html?q=' + encodeURIComponent(n) })),
+      close: { done: done + ' of ' + HM_CLOSE.length + ' steps done', bar: 'width: ' + (done / HM_CLOSE.length) * 100 + '%', left: '11 days to period end',
+        steps: HM_CLOSE.map(([l, ok]) => ({ l, ok, todo: !ok, st: ok ? 'Done' : 'Pending', cls: ok ? 'hm-st ok' : 'hm-st' })) },
+      recent: HM_RECENT.map(([id, sub, href, t]) => ({ id, sub, href, t }))
     };
   }
 }
@@ -782,13 +980,13 @@ class Component extends GirsPage {
     const f0 = fit();
     try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
     try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
-    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __lang: lang, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g0' });
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __lang: lang, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: '' });
   }
   renderVals() {
     const v = super.renderVals();
     const s = this.state;
     const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
-    const L = Object.assign({}, {"g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nInvoiceList": "Invoice List", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nCreditNoteList": "Credit Note List", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master", "nBankMaster": "Bank Master"}, v.navT || {});
+    const L = Object.assign({}, {"nHome": "Home", "g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nInvoiceList": "Invoice List", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nCreditNoteList": "Credit Note List", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCustomerMaster": "Customer Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master", "nBankMaster": "Bank Master"}, v.navT || {});
     const c = s.__sb && !s.__narrow;
     return Object.assign({}, v, { shell: {
       kit: (typeof KIT_VALS === 'function' ? KIT_VALS(this, s, v) : null),
