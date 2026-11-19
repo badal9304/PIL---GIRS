@@ -47,3 +47,8 @@ Search invoice no., B/L, booking, container, vessel/voyage, customer, charge cod
 Due date, soonest	到期日最近	Vencimiento, más próximo	تاريخ الاستحقاق، الأقرب
 Newest first	最新优先	Más recientes primero	الأحدث أولاً
 Amount, highest	金额从高到低	Importe, mayor primero	المبلغ، الأعلى أولاً
+Reset to default	恢复默认	Restablecer valores predeterminados	إعادة التعيين إلى الافتراضي
+Show or hide table columns	显示或隐藏表格列	Mostrar u ocultar columnas de la tabla	إظهار أو إخفاء أعمدة الجدول
+Always shown	始终显示	Siempre visible	يظهر دائمًا
+Close columns	关闭列设置	Cerrar columnas	إغلاق الأعمدة
+# of #	# / #	# de #	# من #
