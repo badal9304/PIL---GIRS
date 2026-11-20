@@ -105,9 +105,17 @@
       cls: 'btn btn-icon ghl-btn' + (iss.length ? (bad ? ' bad' : ' warn') : ''),
       label: iss.length ? 'System health: ' + iss.length + ' of ' + Y.length + ' need attention' : 'System health: all systems connected',
       sum: iss.length ? iss.length + ' of ' + Y.length + ' need attention' : 'All ' + Y.length + ' connected',
-      items: Y.slice().sort(function (a, b) { return order[a[1]] - order[b[1]]; }).map(function (y) {
-        return { name: y[0], detail: y[2], dot: 'ghl-d ' + y[1], state: y[0].indexOf('Treasury') === 0 ? (y[1] === 'ok' ? 'Received' : 'Not received') : ST[y[1]], sc: 'ghl-s ' + y[1] };
-      }),
+      items: (function () {
+        var row = function (y) { return { isHead: false, isRow: true, head: '', name: y[0], detail: y[2], dot: 'ghl-d ' + y[1], state: y[0].indexOf('Treasury') === 0 ? (y[1] === 'ok' ? 'Received' : 'Not received') : ST[y[1]], sc: 'ghl-s ' + y[1] }; };
+        var head = function (t) { return { isHead: true, isRow: false, head: t, name: '', detail: '', dot: '', state: '', sc: '' }; };
+        var okL = Y.filter(function (y) { return y[1] === 'ok'; });
+        var out = [];
+        if (iss.length) { out.push(head('Needs attention')); iss.slice().sort(function (a, b) { return order[a[1]] - order[b[1]]; }).forEach(function (y) { out.push(row(y)); }); }
+        out.push(head('Running normally'));
+        okL.forEach(function (y) { out.push(row(y)); });
+        return out;
+      })(),
+      tone: 'ghl-sum ' + (bad ? 'bad' : iss.length ? 'warn' : 'ok'), upd: 'Updated 2 min ago',
       toggle: function () { comp.setState({ __hl: !s.__hl, __um: false }); },
       close: function () { comp.setState({ __hl: false }); }
     };

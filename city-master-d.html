@@ -435,8 +435,8 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             <sc-if value="{{shell.health.open}}" hint-placeholder-val="{{ false }}">
               <button class="ghl-scrim" tabindex="-1" aria-hidden="true" onClick="{{shell.health.close}}"></button>
               <div class="ghl-p" role="dialog" aria-label="System health">
-                <div class="ghl-h"><b>System health</b><span>{{shell.health.sum}}</span></div>
-                <ul><sc-for list="{{shell.health.items}}" as="h" hint-placeholder-count="10"><li><i class="{{h.dot}}" aria-hidden="true"></i><span class="ghl-b"><b>{{h.name}}</b><small>{{h.detail}}</small></span><span class="{{h.sc}}">{{h.state}}</span></li></sc-for></ul>
+                <div class="ghl-h"><div><b>System health</b><small>{{shell.health.upd}}</small></div><span class="{{shell.health.tone}}">{{shell.health.sum}}</span></div>
+                <ul><sc-for list="{{shell.health.items}}" as="h" hint-placeholder-count="10"><sc-if value="{{h.isHead}}" hint-placeholder-val="{{ false }}"><li class="ghl-g">{{h.head}}</li></sc-if><sc-if value="{{h.isRow}}" hint-placeholder-val="{{ true }}"><li class="ghl-r"><i class="{{h.dot}}" aria-hidden="true"></i><span class="ghl-b"><b>{{h.name}}</b><small>{{h.detail}}</small></span><span class="{{h.sc}}">{{h.state}}</span></li></sc-if></sc-for></ul>
                 <a class="ghl-f lnk" href="integration-monitor.html">Open Integration Monitor</a>
               </div>
             </sc-if>
