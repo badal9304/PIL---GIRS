@@ -110,6 +110,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
 .seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -410,9 +411,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div class="r-g4" style="padding: 14px 16px 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 16px">
                 <div style="grid-column: span 2">
                   <span class="lbl">Invoice type</span>
-                  <div role="radiogroup" aria-label="Invoice type" style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral); width: max-content">
+                  <div class="seg" role="radiogroup" aria-label="Invoice type">
                     <sc-for list="{{types}}" as="t" hint-placeholder-count="4">
-                      <button class="seg" role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}" style="background: {{t.bg}}">{{t.label}}</button>
+                      <button role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button>
                     </sc-for>
                   </div>
                 </div>

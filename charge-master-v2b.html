@@ -115,7 +115,6 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .lay:hover{color:var(--ink)}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 .lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:500}
 .seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
 .kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
@@ -166,15 +165,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kdanger{color:var(--bad)}
 .kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
-.kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.kmodal.sm{width:min(520px,calc(100vw - 48px))}
-.kdrawer{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
-.khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
-.khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.kbody{flex:1 1 auto;overflow:auto;padding:20px 24px}
-.kfoot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--sub)}
 .ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
 .ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
 .ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
@@ -193,8 +183,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kf .kh{font-size:12px;color:var(--muted)}
 .kf .ke{font-size:12px;color:var(--bad);font-weight:500}
 .kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
-.kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
-.kbanner.err{background:var(--badbg);color:var(--bad)}
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
@@ -279,7 +267,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cm2-ac{width:1%;text-align:end}
 .cm2-del{color:var(--bad)}
 .cm2-man{margin-top:16px}
-.cm2-empty{color:var(--muted)}
 
 /* ---- Layout B ---- */
 .cmb-split{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}
@@ -305,7 +292,18 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cmb-secs .cm2-sec{scroll-margin-top:124px}
 .cmb-hn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-inline-end:10px;border-radius:50%;background:var(--tint);color:var(--accent2);font-size:12px;font-weight:600;vertical-align:1px}
 .cmb-secs .cm2-sh p{padding-inline-start:32px}
+
+.dlg.full .dh{align-items:center;min-height:60px;padding:0 12px 0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.dlg.full .db{flex:1 1 auto;min-height:0;background:var(--bg);padding:16px 20px}
+.dlg.full .df .btn{min-width:96px}
+.dh .x{margin-inline-start:auto}
+.dlg.bm-pm{width:min(640px,calc(100vw - 48px))}
+.dlg.dim{z-index:201}
+.scrim{z-index:200}
+.bm1-sh .search .input{height:36px}
+
 </style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -737,7 +735,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                             </tr>
                           </sc-for>
                           <sc-if value="{{det.noAlias}}" hint-placeholder-val="{{ false }}">
-                            <tr><td colspan="3" class="cm2-empty" style="text-align: start">—</td><td class="cm2-ac"><sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{det.addFirst}}">Add</button></sc-if></td></tr>
+                            <tr><td colspan="3" class="empty" style="text-align: start">—</td><td class="cm2-ac"><sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{det.addFirst}}">Add</button></sc-if></td></tr>
                           </sc-if>
                         </tbody>
                       </table>

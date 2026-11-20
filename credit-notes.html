@@ -112,6 +112,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .opt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:4px;width:100%;padding:12px 16px;border-radius:8px}
 .seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;border-radius:4px;font-size:13px;color:var(--ink)}
 .ro{display:flex;align-items:center;height:36px;padding:0 12px;border:1px solid var(--line);border-radius:6px;background:var(--sub);color:var(--muted2);box-sizing:border-box}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -475,9 +476,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             </div>
 
             <div class="r-wrap" style="padding: 0 16px 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
-              <div role="radiogroup" aria-label="Credit type" style="display: grid; grid-template-columns: repeat(2, 120px); gap: 3px; height: 36px; background: var(--neutral); padding: 3px; border-radius: 6px; box-sizing: border-box">
-                <button class="seg" role="radio" aria-checked="{{fullOn}}" onClick="{{pickFull}}" disabled="{{locked}}" style="background: {{fullBg}}; font-weight: {{fullFw}}">Full credit</button>
-                <button class="seg" role="radio" aria-checked="{{partOn}}" onClick="{{pickPart}}" disabled="{{locked}}" style="background: {{partBg}}; font-weight: {{partFw}}">Partial credit</button>
+              <div class="seg" role="radiogroup" aria-label="Credit type">
+                <button role="radio" aria-checked="{{fullOn}}" onClick="{{pickFull}}" disabled="{{locked}}">Full credit</button>
+                <button role="radio" aria-checked="{{partOn}}" onClick="{{pickPart}}" disabled="{{locked}}">Partial credit</button>
               </div>
               <span style="font-size: 12px; color: var(--muted)">Full / partial: configured per country</span>
               <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-inline-start: auto">

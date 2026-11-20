@@ -114,6 +114,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .rowbtn{all:unset;cursor:pointer;display:inline-block}
 .rowbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .cfg{display:flex;flex-direction:column;gap:6px;padding:0 16px;border-inline-start:1px solid var(--line2)}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -416,9 +417,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <section class="card" aria-label="Country D&amp;D configuration" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0; padding: 12px 0">
           <div class="cfg" style="border-inline-start: 0">
             <span class="k">Invoicing mode · per country</span>
-            <div role="radiogroup" aria-label="Invoicing mode" style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral); width: max-content">
-              <button class="seg" role="radio" aria-checked="{{progOn}}" onClick="{{pickProg}}" style="background: {{progBg}}">Progressive</button>
-              <button class="seg" role="radio" aria-checked="{{proOn}}" onClick="{{pickPro}}" style="background: {{proBg}}">Proforma</button>
+            <div class="seg" role="radiogroup" aria-label="Invoicing mode">
+              <button role="radio" aria-checked="{{progOn}}" onClick="{{pickProg}}">Progressive</button>
+              <button role="radio" aria-checked="{{proOn}}" onClick="{{pickPro}}">Proforma</button>
             </div>
           </div>
           <div class="cfg"><span class="k">Progressive start</span><span>Free time + <strong class="mono">7</strong> days</span></div>

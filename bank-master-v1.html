@@ -115,7 +115,6 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .lay:hover{color:var(--ink)}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 .lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:500}
 .seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
 .kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
@@ -166,15 +165,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kdanger{color:var(--bad)}
 .kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
-.kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.kmodal.sm{width:min(520px,calc(100vw - 48px))}
-.kdrawer{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
-.khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
-.khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.kbody{flex:1 1 auto;overflow:auto;padding:20px 24px}
-.kfoot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--sub)}
 .ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
 .ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
 .ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
@@ -193,8 +183,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kf .kh{font-size:12px;color:var(--muted)}
 .kf .ke{font-size:12px;color:var(--bad);font-weight:500}
 .kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
-.kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
-.kbanner.err{background:var(--badbg);color:var(--bad)}
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
@@ -278,7 +266,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cm2-ac{width:1%;text-align:end}
 .cm2-del{color:var(--bad)}
 .cm2-man{margin-top:16px}
-.cm2-empty{color:var(--muted)}
 
 /* ---- Layout C ---- */
 .cmc-crit{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:end;padding:12px 16px 16px}
@@ -294,12 +281,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cmc-stack .cm2-sh{margin-bottom:12px}
 .cmc-stack .cm2-grid{gap:12px}
 
-.bm-st{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
-.bm-tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;margin-inline-end:4px;border-radius:10px;font-size:12px;font-weight:500;background:var(--tint);color:var(--accent2)}
-.bm-tag.p-pay{background:var(--neutral);color:var(--ink)}
-.bm-tag.p-inv{background:var(--okbg);color:var(--ok)}
-.bm-tag.p-ref{background:var(--aibg);color:var(--ai)}
-.bm-gapc{flex:none;display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:11px;font-weight:600;background:var(--warnbg);color:var(--warn)}
 .bm-okc{flex:none;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:10px;background:var(--okbg);color:var(--ok)}
 .bm1-cc{flex:none;display:inline-flex;align-items:center;justify-content:center;width:34px;height:24px;border-radius:4px;background:var(--neutral);font-size:12px;font-weight:600;color:var(--ink)}
 .bm1-cn{display:flex;flex-direction:column;min-width:0;flex:1 1 auto;gap:2px}
@@ -308,9 +289,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .bm1{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}
 .bm1-side{position:sticky;top:16px;padding:0;overflow:hidden}
 .bm1-sh{padding:12px;border-bottom:1px solid var(--line2)}
-.bm1-srch{position:relative}
-.bm1-srch svg{position:absolute;inset-inline-start:10px;top:50%;margin-top:-8px;color:var(--muted)}
-.bm1-srch .input{padding-inline-start:34px}
 .bm1-list{list-style:none;margin:0;padding:6px}
 .bm1-c{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:6px;cursor:pointer}
 .bm1-c:hover{background:var(--hover2)}
@@ -370,7 +348,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .bm-ob .bm-also{color:var(--muted2)}
 .bm-oa{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:13px}
 .bm-oa i{font-style:normal;font-size:11px;color:var(--accent2)}
-.bm-empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}
 
 .bm-row4{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cmc-alias{padding:0;overflow:hidden}
@@ -379,16 +356,18 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cmc-alias .cm2-man{margin:0;padding:12px 16px;border-top:1px solid var(--line2);display:flex}
 
 /* View/Update popup */
-.cmc-bd{all:unset;position:fixed;inset:0;z-index:200;background:transparent}
-.cmc-modal{position:fixed;z-index:201;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1480px,calc(100vw - 64px));max-height:calc(100% - 64px);display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:12px;box-shadow:0 0 0 200vmax rgba(22,26,33,.45),0 24px 64px rgba(22,26,33,.28);overflow:hidden}
-.theme[data-theme=dark] .cmc-modal{box-shadow:0 0 0 200vmax rgba(0,0,0,.55),0 24px 64px rgba(0,0,0,.6)}
-.cmc-mh{flex:none;display:flex;align-items:center;gap:12px;min-height:60px;padding:0 12px 0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
-.cmc-mh h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
-.cmc-x{margin-inline-start:auto;width:32px}
-.cmc-mb{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 20px}
-.cmc-mf{flex:none;display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;background:var(--surface);border-top:1px solid var(--line)}
-.cmc-mf .btn{min-width:96px}
+
+.dlg.full .dh{align-items:center;min-height:60px;padding:0 12px 0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.dlg.full .db{flex:1 1 auto;min-height:0;background:var(--bg);padding:16px 20px}
+.dlg.full .df .btn{min-width:96px}
+.dh .x{margin-inline-start:auto}
+.dlg.bm-pm{width:min(640px,calc(100vw - 48px))}
+.dlg.dim{z-index:201}
+.scrim{z-index:200}
+.bm1-sh .search .input{height:36px}
+
 </style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -676,14 +655,14 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <div class="bm1">
           <aside class="card bm1-side" aria-label="Countries">
             <div class="bm1-sh">
-              <div class="bm1-srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Search country" aria-label="Search country" value="{{side.q}}" onInput="{{side.onQ}}" autocomplete="off" spellcheck="false"></div>
+              <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Search country" aria-label="Search country" value="{{side.q}}" onInput="{{side.onQ}}" autocomplete="off" spellcheck="false"></div>
             </div>
             <ul class="bm1-list">
               <sc-for list="{{side.items}}" as="c" hint-placeholder-count="7">
                 <li><button class="bm1-c" aria-current="{{c.cur}}" onClick="{{c.pick}}">
                   <span class="bm1-cc">{{c.code}}</span>
                   <span class="bm1-cn"><b>{{c.name}}</b><small>{{c.meta}}</small></span>
-                  <sc-if value="{{c.gap}}" hint-placeholder-val="{{ false }}"><span class="bm-gapc">{{c.gapL}}</span></sc-if>
+                  <sc-if value="{{c.gap}}" hint-placeholder-val="{{ false }}"><span class="chip t-warn">{{c.gapL}}</span></sc-if>
                   <sc-if value="{{c.ok}}" hint-placeholder-val="{{ true }}"><span class="bm-okc" title="All purposes assigned" aria-label="All purposes assigned"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span></sc-if>
                 </button></li>
               </sc-for>
@@ -731,7 +710,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <td class="c-no"><button class="lnk mono" onClick="{{r.upd}}" title="{{r.updLbl}}">{{r.code}}</button></td>
                       <td>{{r.bank}}</td><td>{{r.branch}}</td><td class="mono">{{r.acct}}</td><td>{{r.ccy}}</td><td>{{r.type}}</td>
                       <td><sc-for list="{{r.tags}}" as="t" hint-placeholder-count="2"><span class="{{t.cls}}">{{t.l}}</span></sc-for><sc-if value="{{r.none}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if></td>
-                      <td><span class="bm-st" style="{{r.stSt}}">{{r.st}}</span></td>
+                      <td><span class="chip" style="{{r.stSt}}">{{r.st}}</span></td>
                       <td class="c-act"><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">View/Update</button></td>
                     </tr>
                   </sc-for>
@@ -747,14 +726,14 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 
 
   <sc-if value="{{tabs.isDetail}}" hint-placeholder-val="{{ false }}">
-    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{det.cancel}}"></button>
-    <div class="cmc-modal" role="dialog" aria-modal="true" aria-labelledby="cmc-mt">
-      <div class="cmc-mh">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{det.cancel}}"></button>
+    <div class="dlg full dim" role="dialog" aria-modal="true" aria-labelledby="cmc-mt">
+      <div class="dh">
         <span class="cm2-code">{{det.code}}</span>
         <h2 id="cmc-mt">{{det.name}}</h2>
-        <button class="btn btn-icon btn-sm cmc-x" aria-label="Close" onClick="{{det.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        <button class="btn btn-icon btn-sm x" aria-label="Close" onClick="{{det.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
       </div>
-      <div class="cmc-mb">
+      <div class="db">
           <div class="cmc-stack">
             <sc-for list="{{det.main}}" as="sec" hint-placeholder-count="1">
               <section class="card cm2-sec" style="{{sec.span}}" aria-labelledby="{{sec.hid}}">
@@ -850,7 +829,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             </div>
           </div>
       </div>
-      <div class="cmc-mf">
+      <div class="df">
         <button class="btn" onClick="{{det.cancel}}">Cancel</button>
         <sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{det.save}}">Save</button></sc-if>
       </div>
@@ -1027,7 +1006,7 @@ class GirsPage extends DCLogic {
       }),
       accts: accts.map((r) => ({
         code: r.code, bank: r.bank, branch: r.branch, acct: r.acct, ccy: r.ccy, type: r.type, st: r.st, stSt: bmStatSt(r.st), cls: r.code === s.sel ? 'on' : '',
-        tags: bmUses(s.asg, r.code).filter((u) => u.ccy === r.ccy).map((u) => ({ l: u.l, cls: 'bm-tag p-' + u.k })), none: !bmUses(s.asg, r.code).length,
+        tags: bmUses(s.asg, r.code).filter((u) => u.ccy === r.ccy).map((u) => ({ l: u.l, cls: 'chip ' + ({ rec: 't-info', pay: 't-neutral', inv: 't-ok', ref: 't-warn' }[u.k] || 't-neutral') })), none: !bmUses(s.asg, r.code).length,
         upd: () => bmOpen(self, s, r.code), updLbl: 'View/Update ' + r.code
       })),
       addAcct: () => self.setState({ open: true, isNew: true, draft: null })

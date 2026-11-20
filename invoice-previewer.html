@@ -115,6 +115,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .inv th{position:static;height:auto;background:none;font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line3)}
 .inv td{height:auto;padding:9px 10px;vertical-align:top}
 .inv tbody tr:hover td{background:none}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -409,7 +410,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <span class="lbl">Document type</span>
                   <div class="r-g3" role="radiogroup" aria-label="Document type" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; height: 36px; background: var(--neutral); padding: 3px; border-radius: 6px; box-sizing: border-box">
                     <sc-for list="{{docTypes}}" as="d" hint-placeholder-count="3">
-                      <button class="seg" role="radio" aria-checked="{{d.on}}" onClick="{{d.pick}}" style="background: {{d.bg}}; font-weight: {{d.fw}}; box-shadow: {{d.shadow}}">{{d.label}}</button>
+                      <button role="radio" aria-checked="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button>
                     </sc-for>
                   </div>
                 </div>

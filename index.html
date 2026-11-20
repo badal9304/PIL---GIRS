@@ -115,7 +115,6 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .lay:hover{color:var(--ink)}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 .lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:32px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:500}
 .seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
 .kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
@@ -166,15 +165,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kdanger{color:var(--bad)}
 .kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
-.kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.kmodal.sm{width:min(520px,calc(100vw - 48px))}
-.kdrawer{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
-.khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
-.khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.kbody{flex:1 1 auto;overflow:auto;padding:20px 24px}
-.kfoot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--sub)}
 .ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
 .ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
 .ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
@@ -193,8 +183,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kf .kh{font-size:12px;color:var(--muted)}
 .kf .ke{font-size:12px;color:var(--bad);font-weight:500}
 .kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
-.kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
-.kbanner.err{background:var(--badbg);color:var(--bad)}
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
@@ -296,15 +284,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 
 
 .hm-tabs{margin:0 -20px;padding:0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
-.hm-tc{margin-inline-start:8px;font-size:12px;font-weight:400;color:var(--muted)}
-.tabb[aria-selected=true] .hm-tc{color:var(--accent2)}
-.hm-panel{display:flex;flex-direction:column;gap:16px}
-.hm-note{display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 8px 6px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:13px}
-.hm-note.warn{border-color:var(--warnbd);background:var(--warnbg)}
-.hm-note.warn > svg{color:var(--warn)}
-.hm-note.ok{border-color:var(--okbd);background:var(--okbg)}
-.hm-note.ok > svg{color:var(--ok)}
-.hm-nx{margin-inline-start:auto}
+.tabb[aria-selected=true] .hm-panel{display:flex;flex-direction:column;gap:16px}
 .hm-days{display:flex;align-items:stretch;gap:6px}
 .hm-dsep{width:1px;margin:6px 4px;background:var(--line)}
 .hm-day{all:unset;box-sizing:border-box;flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);cursor:pointer;position:relative}
@@ -339,30 +319,14 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-stk{display:flex;gap:2px;height:8px;border-radius:4px;background:var(--neutral);overflow:hidden}
 .hm-stk i{display:block;height:100%}
 .hm-stk.lg{height:10px;margin:0 20px 20px}
-.hm-db .hm-stk.lg{margin:0 0 4px}
 .hm-tools{display:flex;align-items:center;gap:12px}
-.hm-seg{display:inline-flex;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}
-.hm-seg button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:4px;font-size:13px;color:var(--muted2);cursor:pointer}
-.hm-seg button span{font-size:12px;color:var(--muted)}
-.hm-seg button:hover{color:var(--ink)}
-.hm-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.hm-seg button[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:500;box-shadow:0 1px 2px rgba(22,26,33,.12)}
-.hm-seg.sm button{height:24px;padding:0 10px;font-size:12px}
-.hm-srch{position:relative;width:260px}
-.hm-srch svg{position:absolute;inset-inline-start:10px;top:50%;margin-top:-8px;color:var(--muted)}
-.hm-srch .input{height:32px;padding-inline-start:34px;width:100%}
 .lst .r{text-align:end;font-variant-numeric:tabular-nums}
 .hm-wn{color:var(--warn);font-weight:600}
-.hm-type{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500;background:var(--neutral);color:var(--ink)}
-.hm-type.E::before,.hm-type.I::before{content:"";width:6px;height:6px;border-radius:50%;margin-inline-end:6px}
-.hm-type.E::before{background:var(--accent)}
-.hm-type.I::before{background:var(--ai)}
 .hm-due{font-size:13px}
 .hm-due.late{color:var(--bad);font-weight:600}
 .hm-due.today{color:var(--warn);font-weight:600}
 .hm-due.ok{color:var(--ok)}
 .hm-na{font-size:12px;color:var(--muted)}
-.hm-empty{padding:32px;text-align:center;color:var(--muted);font-size:13px}
 .hm-legend{display:flex;align-items:center;gap:20px;padding:10px 16px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted2)}
 .hm-legend > span{display:inline-flex;align-items:center;gap:6px}
 .hm-legend .mu{margin-inline-start:auto}
@@ -370,19 +334,10 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-va{font-size:12px;color:var(--muted2)}
 .hm-fs{font-size:12px;color:var(--muted)}
 .hm-fs.sent{color:var(--ok)}
-.hm-ss{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500;white-space:nowrap}
-.hm-ss.ok{background:var(--okbg);color:var(--ok)}
-.hm-ss.warn{background:var(--warnbg);color:var(--warn)}
-.hm-ss.info{background:var(--tint);color:var(--accent2)}
-.hm-ss.done{background:var(--neutral);color:var(--muted2)}
 .hm-sub{display:block;margin-top:2px;font-size:11px;color:var(--muted);font-family:inherit}
-.hm-drw{position:fixed;z-index:201;top:0;right:0;width:760px;height:100%;display:flex;flex-direction:column;background:var(--bg);box-shadow:0 0 0 200vmax rgba(22,26,33,.45)}
-.hm-dh{flex:none;display:flex;align-items:flex-start;gap:12px;padding:16px 16px 14px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
 .hm-dhi{flex:1 1 auto;min-width:0}
 .hm-dtl{display:flex;align-items:center;gap:10px}
 .hm-dtl h2{margin:0;font-size:17px;font-weight:600}
-.hm-dh p{margin:6px 0 0;font-size:13px;color:var(--muted2)}
-.hm-db{flex:1 1 auto;min-height:0;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
 .hm-dsec h3{margin:0 0 10px;font-size:14px;font-weight:600}
 .hm-dsh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .hm-dsh h3{margin:0}
@@ -392,7 +347,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-rl b{text-align:end;color:var(--warn)}
 .hm-blt{width:100%;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
 .hm-more{margin:8px 0 0;font-size:12px;color:var(--muted)}
-.cmc-modal.hm-cfm{width:min(520px,calc(100vw - 64px));z-index:211}
 .hm-dl{display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px 16px;margin:0 0 16px;font-size:13px}
 .hm-dl dt{color:var(--muted)}
 .hm-dl dd{margin:0;font-weight:500}
@@ -453,11 +407,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-th{display:flex;align-items:center;gap:12px;padding:12px 16px}
 .hm-th .card-title{margin-inline-end:auto}
 .hm-chips{display:flex;align-items:center;gap:8px;padding:0 16px 12px}
-.hm-chip{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border:1px solid var(--line);border-radius:14px;font-size:12px;font-weight:500;color:var(--muted2);cursor:pointer}
-.hm-chip span{font-weight:600;color:var(--ink)}
-.hm-chip:hover{border-color:var(--bdh)}
-.hm-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.hm-chip[aria-pressed=true]{border-color:var(--accent);background:var(--tint2);color:var(--accent2)}
 .hm-gt{margin:0 0 0 auto;font-size:13px}
 .hm-bulk{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--tint2);border-bottom:1px solid var(--tintbd)}
 .hm-bulk b{font-size:13px;margin-inline-end:8px}
@@ -500,10 +449,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-ds4 div{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
 .hm-ds4 span{font-size:12px;color:var(--muted)}
 .hm-ds4 b{font-size:18px;font-weight:600}
-.hm-srch.wide{width:100%;margin-bottom:10px}
-.hm-dpg{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:10px;font-size:12px;color:var(--muted)}
-.hm-dpg span:first-child{margin-inline-end:auto}
-.hm-drw{width:820px}
 
 
 .ri{padding:0 32px 28px;max-width:1240px;width:100%;margin:0 auto;box-sizing:border-box;font-size:13px;line-height:19px}
@@ -526,8 +471,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .ri-bt{display:grid;grid-template-columns:1fr 360px;gap:48px;margin-top:20px;align-items:start}
 .ri-tot{display:flex;flex-direction:column;gap:8px}.ri-tot>div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}.ri-tot>div.g{border-top:1px solid var(--ink);padding-top:10px;margin-top:2px;font-weight:700;font-size:16px;line-height:22px}
 .ri-words{margin-top:14px;padding:10px 14px;border-radius:6px;background:var(--sub);color:var(--muted2)}
-.cmc-modal.hm-rim{z-index:216;width:min(1240px,calc(100vw - 64px));height:calc(100% - 48px);max-height:none;display:flex;flex-direction:column}
-.hm-rim .cmc-mh{display:flex;align-items:center;gap:12px}
+.hm-rim .dh{display:flex;align-items:center;gap:12px}
 .hm-rih{display:flex;flex-direction:column;margin-inline-end:auto}
 .hm-rih h2{margin:0;font-size:16px;font-weight:600}
 .hm-rih span{font-size:12px;color:var(--muted)}
@@ -541,8 +485,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .hm-rl li{grid-template-columns:minmax(0,1fr) 120px 50px auto !important}
 .hm-rla{display:inline-flex;align-items:center;gap:10px;justify-content:flex-end;width:240px}
-.cmc-modal.hm-mail{z-index:226;width:min(900px,calc(100vw - 64px));max-height:calc(100% - 48px);display:flex;flex-direction:column}
-.hm-mail .cmc-mh{display:flex;align-items:center;gap:12px}
+.hm-mail .dh{display:flex;align-items:center;gap:12px}
 .hm-mb{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px}
 .hm-mf{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:12px}
 .hm-mf label{font-size:13px;color:var(--muted)}
@@ -655,7 +598,23 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cmc-mb{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 20px}
 .cmc-mf{flex:none;display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;background:var(--surface);border-top:1px solid var(--line)}
 .cmc-mf .btn{min-width:96px}
+
+.hm-rim .dh,.hm-mail .dh{align-items:center;padding:14px 16px 14px 24px}
+.hm-rim .db{padding:0}
+.search.wide{width:100%;margin-bottom:10px}
+.hm-tools .search{width:260px}
+.hm-tools .search .input,.hm-th .search .input{height:32px}
+.hm-pp{justify-content:flex-end;min-height:0;margin-top:10px;font-size:12px}
+.hm-pp span:first-child{margin-inline-end:auto}
+.seg.sm button{height:24px;padding:0 10px;font-size:12px}
+.seg button span{margin-inline-start:6px;font-size:12px;color:var(--muted)}
+.chipb > span{opacity:.8}
+.panel .hm-dhi{flex:1 1 auto;min-width:0}
+.panel-h p{margin:6px 0 0;font-size:13px;color:var(--muted2)}
+.panel-b .hm-stk.lg{margin:0 0 4px}
+
 </style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -939,17 +898,17 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 0 20px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <div class="tabs hm-tabs" role="tablist" aria-label="Home">
-          <button class="tabb" role="tab" id="hm-t1" aria-controls="hm-p1" aria-selected="{{tabs.voyA}}" onClick="{{tabs.toVoy}}">Voyage Invoicing<span class="hm-tc">{{tabs.voyN}}</span></button>
-          <button class="tabb" role="tab" id="hm-t2" aria-controls="hm-p2" aria-selected="{{tabs.ddA}}" onClick="{{tabs.toDd}}">D&amp;D Billing<span class="hm-tc">{{tabs.ddN}}</span></button>
+          <button class="tabb" role="tab" id="hm-t1" aria-controls="hm-p1" aria-selected="{{tabs.voyA}}" onClick="{{tabs.toVoy}}">Voyage Invoicing<span class="count">{{tabs.voyN}}</span></button>
+          <button class="tabb" role="tab" id="hm-t2" aria-controls="hm-p2" aria-selected="{{tabs.ddA}}" onClick="{{tabs.toDd}}">D&amp;D Billing<span class="count">{{tabs.ddN}}</span></button>
         </div>
         <sc-if value="{{done.show}}" hint-placeholder-val="{{ false }}">
-          <div class="hm-note ok" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12l3 3 5-6"></path></svg><span>{{done.txt}}</span><a class="lnk" href="{{done.href}}">View in Invoice List</a><button class="btn btn-icon btn-sm hm-nx" aria-label="Dismiss" onClick="{{done.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+          <div class="banner b-ok" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12l3 3 5-6"></path></svg><span>{{done.txt}}</span><a class="lnk" href="{{done.href}}">View in Invoice List</a><button class="btn btn-icon btn-sm x" aria-label="Dismiss" onClick="{{done.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
         </sc-if>
 
         <sc-if value="{{tabs.voy}}" hint-placeholder-val="{{ true }}">
           <div id="hm-p1" role="tabpanel" aria-labelledby="hm-t1" class="hm-panel">
             <sc-if value="{{alert}}" hint-placeholder-val="{{ true }}">
-              <div class="hm-note warn" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg><span><b>Daily ROE feed not received.</b> Invoices that need a rate of exchange are blocked. Request the rate from Treasury under “Blocked by reason”.</span><button class="btn btn-icon btn-sm hm-nx" aria-label="Dismiss" onClick="{{alertOff}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+              <div class="banner b-warn" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg><span><b>Daily ROE feed not received.</b> Invoices that need a rate of exchange are blocked. Request the rate from Treasury under “Blocked by reason”.</span><button class="btn btn-icon btn-sm x" aria-label="Dismiss" onClick="{{alertOff}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
             </sc-if>
 
             <div class="hm-nav">
@@ -1001,11 +960,11 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                 </sc-if>
                 <div class="hm-th">
                   <h2 class="card-title" id="hm-vt">Voyages</h2>
-                  <div class="hm-seg" role="group" aria-label="Direction"><sc-for list="{{dirs}}" as="x" hint-placeholder-count="3"><button aria-pressed="{{x.cur}}" onClick="{{x.pick}}">{{x.l}}</button></sc-for></div>
-                  <div class="hm-srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Voyage no., vessel, service or port" aria-label="Search voyages" value="{{q}}" onInput="{{onQ}}" autocomplete="off" spellcheck="false"></div>
+                  <div class="seg" role="group" aria-label="Direction"><sc-for list="{{dirs}}" as="x" hint-placeholder-count="3"><button aria-pressed="{{x.cur}}" onClick="{{x.pick}}">{{x.l}}</button></sc-for></div>
+                  <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Voyage no., vessel, service or port" aria-label="Search voyages" value="{{q}}" onInput="{{onQ}}" autocomplete="off" spellcheck="false"></div>
                 </div>
-                <div class="hm-chips" role="group" aria-label="Status">
-                  <sc-for list="{{stfs}}" as="f" hint-placeholder-count="5"><button class="hm-chip" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
+                <div class="chips" role="group" aria-label="Status">
+                  <sc-for list="{{stfs}}" as="f" hint-placeholder-count="5"><button class="chipb" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
                   <sc-if value="{{grpShow}}" hint-placeholder-val="{{ false }}"><label class="cm2-ck hm-gt"><input type="checkbox" class="cbx" checked="{{grpOn}}" onChange="{{grpT}}"><span>Group by date</span></label></sc-if>
                 </div>
                 <div class="hm-tw">
@@ -1037,7 +996,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     </tbody>
                   </sc-for>
                 </table>
-                <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div class="hm-empty">{{noRowsL}}</div></sc-if>
+                <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div class="empty">{{noRowsL}}</div></sc-if>
                 </div>
                 <div class="pager" role="navigation" aria-label="Pages"><span>{{pager.text}}</span><span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 6px"><span class="mu" style="font-size: 12px">Rows per page</span><div style="position: relative"><select class="select select-sm" style="width: 76px" aria-label="Rows per page" value="{{pager.size}}" onChange="{{pager.onSize}}"><option value="25">25</option><option value="50">50</option><option value="100">100</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div><button class="btn btn-sm pbtn" aria-label="First page" disabled="{{pager.firstDis}}" onClick="{{pager.first}}">«</button><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{pager.prevDis}}" onClick="{{pager.prev}}">‹</button><span class="mono" style="font-size: 13px; min-width: 64px; text-align: center">{{pager.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{pager.nextDis}}" onClick="{{pager.next}}">›</button><button class="btn btn-sm pbtn" aria-label="Last page" disabled="{{pager.lastDis}}" onClick="{{pager.last}}">»</button></span></div>
               </section>
@@ -1063,7 +1022,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       </li>
                     </sc-for>
                   </ul>
-                  <sc-if value="{{noReasons}}" hint-placeholder-val="{{ false }}"><div class="hm-empty">Nothing blocked in this range.</div></sc-if>
+                  <sc-if value="{{noReasons}}" hint-placeholder-val="{{ false }}"><div class="empty">Nothing blocked in this range.</div></sc-if>
                 </section>
               </aside>
             </div>
@@ -1076,10 +1035,10 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
               <section class="card hm-main" aria-labelledby="hm-dc">
                 <div class="hm-th">
                   <h2 class="card-title" id="hm-dc">Containers · Detention &amp; Demurrage</h2>
-                  <div class="hm-srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Container, B/L or customer" aria-label="Search containers" value="{{dd.q}}" onInput="{{dd.onQ}}" autocomplete="off" spellcheck="false"></div>
+                  <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Container, B/L or customer" aria-label="Search containers" value="{{dd.q}}" onInput="{{dd.onQ}}" autocomplete="off" spellcheck="false"></div>
                 </div>
-                <div class="hm-chips" role="group" aria-label="Status">
-                  <sc-for list="{{dd.fil}}" as="f" hint-placeholder-count="5"><button class="hm-chip" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
+                <div class="chips" role="group" aria-label="Status">
+                  <sc-for list="{{dd.fil}}" as="f" hint-placeholder-count="5"><button class="chipb" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
                 </div>
                 <div class="hm-tw">
                 <table class="lst hm-vtab">
@@ -1101,7 +1060,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     </sc-for>
                   </tbody>
                 </table>
-                <sc-if value="{{dd.empty}}" hint-placeholder-val="{{ false }}"><div class="hm-empty">No containers match.</div></sc-if>
+                <sc-if value="{{dd.empty}}" hint-placeholder-val="{{ false }}"><div class="empty">No containers match.</div></sc-if>
                 </div>
                 <div class="pager" role="navigation" aria-label="Pages"><span>{{dd.pg.text}}</span><span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 6px"><span class="mu" style="font-size: 12px">Rows per page</span><div style="position: relative"><select class="select select-sm" style="width: 76px" aria-label="Rows per page" value="{{dd.pg.size}}" onChange="{{dd.pg.onSize}}"><option value="25">25</option><option value="50">50</option><option value="100">100</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div><button class="btn btn-sm pbtn" aria-label="First page" disabled="{{dd.pg.firstDis}}" onClick="{{dd.pg.first}}">«</button><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{dd.pg.prevDis}}" onClick="{{dd.pg.prev}}">‹</button><span class="mono" style="font-size: 13px; min-width: 64px; text-align: center">{{dd.pg.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{dd.pg.nextDis}}" onClick="{{dd.pg.next}}">›</button><button class="btn btn-sm pbtn" aria-label="Last page" disabled="{{dd.pg.lastDis}}" onClick="{{dd.pg.last}}">»</button></span></div>
               </section>
@@ -1136,16 +1095,16 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 
 
   <sc-if value="{{drw.show}}" hint-placeholder-val="{{ false }}">
-    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{drw.close}}"></button>
-    <aside class="hm-drw" role="dialog" aria-modal="true" aria-labelledby="hm-dt">
-      <div class="hm-dh">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{drw.close}}" style="z-index: 200"></button>
+    <aside class="panel" style="z-index: 201" role="dialog" aria-modal="true" aria-labelledby="hm-dt">
+      <div class="panel-h">
         <div class="hm-dhi">
           <div class="hm-dtl"><span class="cm2-code mono">{{drw.no}}</span><h2 id="hm-dt">{{drw.vessel}}</h2><span class="{{drw.typeC}}">{{drw.typeL}}</span><span class="mu">{{drw.svc}}</span></div>
           <p><span class="mono">{{drw.route}}</span> · {{drw.date}}</p>
         </div>
         <button class="btn btn-icon btn-sm" aria-label="Close" onClick="{{drw.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
       </div>
-      <div class="hm-db">
+      <div class="panel-b">
         <div class="hm-ds4"><sc-for list="{{drw.stats}}" as="t" hint-placeholder-count="4"><div><span>{{t.l}}</span><b>{{t.v}}</b></div></sc-for></div>
         <div class="hm-stk lg" aria-hidden="true"><i class="inv" style="{{drw.bI}}"></i><i class="rdy" style="{{drw.bR}}"></i><i class="blk" style="{{drw.bB}}"></i></div>
         <sc-if value="{{drw.hasReasons}}" hint-placeholder-val="{{ true }}">
@@ -1155,18 +1114,18 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </sc-if>
         <div class="hm-dsec">
           <div class="hm-dsh"><h3>B/Ls</h3>
-            <div class="hm-seg sm" role="group" aria-label="Filter B/Ls"><sc-for list="{{drw.filters}}" as="f" hint-placeholder-count="4"><button aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for></div>
+            <div class="seg sm" role="group" aria-label="Filter B/Ls"><sc-for list="{{drw.filters}}" as="f" hint-placeholder-count="4"><button aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for></div>
           </div>
-          <div class="hm-srch wide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Search B/L no. or billing party" aria-label="Search B/Ls" value="{{drw.q}}" onInput="{{drw.onQ}}" autocomplete="off" spellcheck="false"></div>
+          <div class="search wide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Search B/L no. or billing party" aria-label="Search B/Ls" value="{{drw.q}}" onInput="{{drw.onQ}}" autocomplete="off" spellcheck="false"></div>
           <table class="lst hm-blt">
             <thead><tr><th scope="col">B/L No.</th><th scope="col">Billing party</th><th scope="col" class="r">Ctr</th><th scope="col" class="r">Amount</th><th scope="col">Status</th></tr></thead>
             <tbody><sc-for list="{{drw.bls}}" as="b" hint-placeholder-count="8"><tr class="hm-blr" onClick="{{b.open}}"><td><button class="lnk mono" onClick="{{b.open}}" aria-label="{{b.openL}}">{{b.bl}}</button></td><td>{{b.cust}}</td><td class="r">{{b.ctr}}</td><td class="r">{{b.amt}}</td><td><span class="{{b.stC}}">{{b.st}}</span><small class="hm-sub">{{b.note}}</small></td></tr></sc-for></tbody>
           </table>
-          <sc-if value="{{drw.noBls}}" hint-placeholder-val="{{ false }}"><div class="hm-empty">{{drw.noBlsL}}</div></sc-if>
-          <sc-if value="{{drw.pg.show}}" hint-placeholder-val="{{ false }}"><div class="hm-dpg"><span>{{drw.pg.text}}</span><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{drw.pg.prevDis}}" onClick="{{drw.pg.prev}}">‹</button><span class="mono">{{drw.pg.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{drw.pg.nextDis}}" onClick="{{drw.pg.next}}">›</button></div></sc-if>
+          <sc-if value="{{drw.noBls}}" hint-placeholder-val="{{ false }}"><div class="empty">{{drw.noBlsL}}</div></sc-if>
+          <sc-if value="{{drw.pg.show}}" hint-placeholder-val="{{ false }}"><div class="pager hm-pp"><span>{{drw.pg.text}}</span><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{drw.pg.prevDis}}" onClick="{{drw.pg.prev}}">‹</button><span class="mono">{{drw.pg.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{drw.pg.nextDis}}" onClick="{{drw.pg.next}}">›</button></div></sc-if>
         </div>
       </div>
-      <div class="cmc-mf">
+      <div class="panel-f">
         <a class="btn" href="{{drw.list}}" style="margin-inline-end: auto; text-decoration: none">Open in Invoice List</a>
         <button class="btn" onClick="{{drw.close}}">Close</button>
         <sc-if value="{{drw.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{drw.gen}}">{{drw.genL}}</button></sc-if>
@@ -1174,9 +1133,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
     </aside>
   </sc-if>
   <sc-if value="{{ri.show}}" hint-placeholder-val="{{ false }}">
-    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{ri.close}}" style="z-index: 215"></button>
-    <div class="cmc-modal hm-rim" role="dialog" aria-modal="true" aria-labelledby="hm-rit">
-      <div class="cmc-mh">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{ri.close}}" style="z-index: 215"></button>
+    <div class="dlg doc dim hm-rim" style="z-index: 216" role="dialog" aria-modal="true" aria-labelledby="hm-rit">
+      <div class="dh">
         <span class="cm2-code mono">{{ri.bl}}</span>
         <div class="hm-rih"><h2 id="hm-rit">Ready to invoice</h2><span>{{ri.head}}</span></div>
         <span class="{{ri.stC}}">{{ri.stLabel}}</span>
@@ -1218,7 +1177,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <div class="ri-words">{{ri.words}}</div>
         </section>
       </div>
-      <div class="cmc-mf hm-rif">
+      <div class="df hm-rif">
         <sc-if value="{{ri.notDone}}" hint-placeholder-val="{{ true }}"><label class="hm-decl"><input type="checkbox" class="cbx" checked="{{ri.decl}}" disabled="{{ri.hasErr}}" onChange="{{ri.toggleDecl}}"><span><b>Declaration:</b> I have reviewed the charges, party and tax details for this B/L.</span></label></sc-if>
         <span class="hm-rihint">{{ri.hint}}</span>
         <a class="btn" href="{{ri.list}}" style="text-decoration: none">Open in Invoice List</a>
@@ -1229,9 +1188,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
   </sc-if>
 
   <sc-if value="{{mail.show}}" hint-placeholder-val="{{ false }}">
-    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{mail.cancel}}" style="z-index: 225"></button>
-    <div class="cmc-modal hm-mail" role="dialog" aria-modal="true" aria-labelledby="hm-mt">
-      <div class="cmc-mh"><div class="hm-rih"><h2 id="hm-mt">{{mail.title}}</h2><span>{{mail.reason}}</span></div><button class="btn btn-icon btn-sm" aria-label="Close" onClick="{{mail.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{mail.cancel}}" style="z-index: 225"></button>
+    <div class="dlg wide dim hm-mail" style="z-index: 226" role="dialog" aria-modal="true" aria-labelledby="hm-mt">
+      <div class="dh"><div class="hm-rih"><h2 id="hm-mt">{{mail.title}}</h2><span>{{mail.reason}}</span></div><button class="btn btn-icon btn-sm" aria-label="Close" onClick="{{mail.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
       <div class="hm-mb">
         <div class="hm-mf"><label for="hm-mto">To</label><input id="hm-mto" class="input" value="{{mail.to}}" onInput="{{mail.onTo}}" autocomplete="off" spellcheck="false"></div>
         <div class="hm-mf"><label for="hm-mcc">Cc</label><input id="hm-mcc" class="input" value="{{mail.cc}}" onInput="{{mail.onCc}}" autocomplete="off" spellcheck="false"></div>
@@ -1250,33 +1209,33 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <label class="sr-only" for="hm-mbd">Message</label>
         <textarea id="hm-mbd" class="input hm-mbd" value="{{mail.body}}" onInput="{{mail.onBody}}"></textarea>
       </div>
-      <div class="cmc-mf"><span class="hm-rihint">Sent from GIRS · a copy is kept in the audit trail</span><button class="btn" onClick="{{mail.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{mail.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>Send</button></div>
+      <div class="df"><span class="hm-rihint">Sent from GIRS · a copy is kept in the audit trail</span><button class="btn" onClick="{{mail.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{mail.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>Send</button></div>
     </div>
   </sc-if>
 
   <sc-if value="{{cf.show}}" hint-placeholder-val="{{ false }}">
-    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{cf.cancel}}" style="z-index: 210"></button>
-    <div class="cmc-modal hm-cfm" role="dialog" aria-modal="true" aria-labelledby="hm-ct">
-      <div class="cmc-mh"><h2 id="hm-ct">{{cf.title}}</h2></div>
-      <div class="cmc-mb">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{cf.cancel}}" style="z-index: 210"></button>
+    <div class="dlg dim hm-cfm" style="z-index: 211" role="dialog" aria-modal="true" aria-labelledby="hm-ct">
+      <div class="dh"><h2 id="hm-ct">{{cf.title}}</h2></div>
+      <div class="db">
         <dl class="hm-dl"><sc-for list="{{cf.rows}}" as="r" hint-placeholder-count="4"><dt>{{r.l}}</dt><dd>{{r.v}}</dd></sc-for></dl>
         <p class="hm-cn">{{cf.note}}</p>
       </div>
-      <div class="cmc-mf"><button class="btn" onClick="{{cf.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{cf.ok}}">Generate</button></div>
+      <div class="df"><button class="btn" onClick="{{cf.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{cf.ok}}">Generate</button></div>
     </div>
   </sc-if>
 
   <sc-if value="{{rate.show}}" hint-placeholder-val="{{ false }}">
-    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{rate.cancel}}" style="z-index: 210"></button>
-    <div class="cmc-modal hm-cfm" role="dialog" aria-modal="true" aria-labelledby="hm-rt">
-      <div class="cmc-mh"><h2 id="hm-rt">Enter rate of exchange</h2></div>
-      <div class="cmc-mb">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{rate.cancel}}" style="z-index: 210"></button>
+    <div class="dlg dim hm-cfm" style="z-index: 211" role="dialog" aria-modal="true" aria-labelledby="hm-rt">
+      <div class="dh"><h2 id="hm-rt">Enter rate of exchange</h2></div>
+      <div class="db">
         <dl class="hm-dl"><dt>Currency pair</dt><dd>{{rate.pair}}</dd><dt>Rate date</dt><dd>{{rate.date}}</dd></dl>
         <label class="lbl" for="hm-rv">Rate received from Treasury</label>
         <input id="hm-rv" class="input" inputmode="decimal" placeholder="e.g. 1.6842" value="{{rate.val}}" onInput="{{rate.on}}" autocomplete="off">
         <p class="hm-cn">{{rate.info}} Entering a rate manually is recorded in the audit trail.</p>
       </div>
-      <div class="cmc-mf"><button class="btn" onClick="{{rate.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{rate.ok}}">Apply rate</button></div>
+      <div class="df"><button class="btn" onClick="{{rate.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{rate.ok}}">Apply rate</button></div>
     </div>
   </sc-if>
 
@@ -1297,7 +1256,7 @@ const HM_PORTS = ['NZAKL', 'CNSHA', 'INNSA', 'MYPKG', 'THLCH', 'SAJED', 'AEJEA',
 const HM_VSL = [['CMA CGM LEKKI', 'LK', 'NZS'], ['KOTA LEMBAH', 'KL', 'NZS'], ['NORFOLK', 'NF', 'NZS'], ['KOTA PEMIMPIN', 'KP', 'IAX'], ['KOTA SEJATI', 'KS', 'CNS'], ['KOTA MAKMUR', 'KM', 'RGX'], ['KOTA GEMILANG', 'KG', 'RSS'], ['KOTA HAKIM', 'KH', 'IAX'], ['KOTA CAHAYA', 'KC', 'MCS'], ['CMA CGM KAURI', 'KR', 'NZS'], ['KOTA PERDANA', 'PD', 'KCX'], ['KOTA RAKYAT', 'RK', 'CNS'], ['KOTA SATRIA', 'ST', 'RGX'], ['KOTA LAYANG', 'LY', 'IDS'], ['KOTA NASRAT', 'NS', 'RSS'], ['KOTA JUBAH', 'JB', 'KCX']];
 const HM_CUST = ['Straits Harbour Logistics', 'Meridian Agro Exports', 'Andaman Bay Traders', 'Kinabalu Home Furnishings', 'Orchid Lane Polymers', 'Southern Cross Timber', 'Harbourline Foods', 'Pacific Rim Textiles', 'Lion City Electronics', 'Tasman Dairy Co-op', 'Mekong Rice Traders', 'Coral Sea Chemicals'];
 const HM_MISS = ['Charges', 'Billing party', 'Customer tax ID', 'Cargo / EDI message'];
-const HM_BLST = { inv: ['Invoiced', 'done'], ready: ['Ready to generate', 'ok'], roe: ['ROE not received', 'warn'], nod: ['Data not received', 'warn'], hold: ['Split-payer unconfirmed', 'warn'] };
+const HM_BLST = { inv: ['Invoiced', 'neutral'], ready: ['Ready to generate', 'ok'], roe: ['ROE not received', 'warn'], nod: ['Data not received', 'warn'], hold: ['Split-payer unconfirmed', 'warn'] };
 // fixed figures from the client scenario (PDF): invoiced, ready, roe missing, data not received, split-payer
 const HM_LOC = { SGSIN: ['SGD', 1.3412, 'SG-SR-9', 'ZR-INTL'], INNSA: ['INR', 84.12, 'IN-GST-18', 'ZR-INTL'], MYPKG: ['MYR', 4.471, 'MY-SST-8', 'ZR-INTL'], THLCH: ['THB', 34.25, 'TH-VAT-7', 'ZR-INTL'], SAJED: ['SAR', 3.75, 'SA-VAT-15', 'ZR-INTL'], MXZLO: ['MXN', 17.1, 'MX-IVA-16', 'ZR-INTL'] };
 const HM_CHG = { OFT: 'Ocean Freight', BAF: 'Bunker Adjustment Factor', LSS: 'Low Sulphur Surcharge', 'THC-O': 'Origin THC', 'THC-DST': 'Destination THC', DOC: 'Documentation', SEAL: 'Seal Fee', DO: 'Delivery Order Fee', CLN: 'Container Cleaning', DEM: 'Demurrage', DET: 'Detention', MISC: 'Miscellaneous Charge' };
@@ -1355,7 +1314,7 @@ const hmDay = (port, date) => {
 
 // D&D containers (snapshot)
 const HM_SLAB = { '20GP': [[5, 25], [99, 45]], '40HC': [[5, 40], [99, 75]], '40RF': [[3, 90], [99, 140]] };
-const HM_DDST = { ready: ['Ready to invoice', 'ok'], roe: ['ROE not received', 'warn'], tariff: ['D&D tariff missing', 'warn'], milestone: ['Milestone conflict', 'warn'], waiver: ['Waiver approval pending', 'warn'], out: ['With customer', 'info'], invoiced: ['Invoiced', 'done'] };
+const HM_DDST = { ready: ['Ready to invoice', 'ok'], roe: ['ROE not received', 'warn'], tariff: ['D&D tariff missing', 'warn'], milestone: ['Milestone conflict', 'warn'], waiver: ['Waiver approval pending', 'warn'], out: ['With customer', 'info'], invoiced: ['Invoiced', 'neutral'] };
 const HM_DDR = { roe: ['Treasury · ROE feed', 'Request ROE'], tariff: ['Pricing · tariff set-up', 'Request tariff'], milestone: ['Equipment control · LMS', 'Raise LMS check'], waiver: ['Credit control · approver', 'Chase approval'] };
 const hmSlab = (sz, over) => { let left = over, amt = 0; const parts = []; (HM_SLAB[sz] || [[99, 50]]).forEach(([d, r]) => { const n = Math.min(left, d); if (n > 0) { amt += n * r; parts.push(n + ' d × ' + r); left -= n; } }); return { amt, txt: parts.join(' + ') }; };
 const hmDD = (cc) => {
@@ -1530,7 +1489,7 @@ class GirsPage extends DCLogic {
       const due = v.notDue ? { l: 'Not due', c: 'hm-due nd' } : v.late ? { l: 'Overdue ' + v.overdueBy + (v.overdueBy === 1 ? ' day' : ' days'), c: 'hm-due late' } : v.open ? (v.date === HM_TODAY ? { l: 'Due today', c: 'hm-due today' } : { l: 'Open', c: 'hm-due today' }) : { l: 'Complete', c: 'hm-due ok' };
       const why = [v.roe ? 'ROE ' + hmN(v.roe) : '', v.nod ? 'Data ' + hmN(v.nod) : '', v.hold ? 'Split ' + hmN(v.hold) : ''].filter(Boolean).join(' · ');
       return {
-        id: v.id, no: v.no, vessel: v.vessel, svc: v.svc, typeL: v.dir === 'E' ? 'Export' : 'Import', typeC: 'hm-type ' + v.dir, route: v.pol + ' → ' + v.pod,
+        id: v.id, no: v.no, vessel: v.vessel, svc: v.svc, typeL: v.dir === 'E' ? 'Export' : 'Import', typeC: 'chip t-neutral dot-' + v.dir.toLowerCase(), route: v.pol + ' → ' + v.pod,
         date: (v.dir === 'E' ? 'ETD ' : 'ETA ') + hmFmt(v.date, { day: 'numeric', month: 'short' }), dueL: due.l, dueC: due.c,
         invL: v.notDue ? '— / ' + hmN(v.bls) : hmN(v.inv) + ' / ' + hmN(v.bls), bI: 'width: ' + (v.inv / v.bls) * 100 + '%', bR: 'width: ' + (v.ready / v.bls) * 100 + '%', bB: 'width: ' + (v.notDue ? 0 : v.blocked / v.bls) * 100 + '%',
         ready: v.notDue ? '—' : hmN(v.ready), readyC: v.ready ? 'r' : 'r mu', blocked: v.notDue ? '—' : hmN(v.blocked), blockedC: v.blocked && !v.notDue ? 'r hm-wn' : 'r mu', why,
@@ -1657,7 +1616,7 @@ class GirsPage extends DCLogic {
       const dps = 50, dpages = Math.max(1, Math.ceil(idx.length / dps)), dpn = Math.min(s.drwPg, dpages);
       const dgo = (v) => () => self.setState({ drwPg: v });
       drw = {
-        show: true, no: dv.no, vessel: dv.vessel, svc: dv.svc, typeL: dv.dir === 'E' ? 'Export' : 'Import', typeC: 'hm-type ' + dv.dir,
+        show: true, no: dv.no, vessel: dv.vessel, svc: dv.svc, typeL: dv.dir === 'E' ? 'Export' : 'Import', typeC: 'chip t-neutral dot-' + dv.dir.toLowerCase(),
         route: dv.pol + ' → ' + dv.pod, date: (dv.dir === 'E' ? 'ETD ' : 'ETA ') + hmFmt(dv.date, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }),
         stats: [['Expected', hmN(dv.bls)], ['Invoiced', hmN(dv.inv)], ['Ready', hmN(dv.ready)], ['Blocked', hmN(dv.notDue ? 0 : dv.blocked)]].map(([l, v]) => ({ l, v })),
         bI: 'width: ' + (dv.inv / dv.bls) * 100 + '%', bR: 'width: ' + (dv.ready / dv.bls) * 100 + '%', bB: 'width: ' + (dv.notDue ? 0 : dv.blocked / dv.bls) * 100 + '%',
@@ -1672,7 +1631,7 @@ class GirsPage extends DCLogic {
         q: s.drwQ, onQ: (e) => self.setState({ drwQ: e.target.value, drwPg: 1 }),
         bls: idx.slice((dpn - 1) * dps, dpn * dps).map((i, n, pageIdx) => {
           const k = seq[i], r = hmRnd(dv.id + i); r();
-          return { open: () => self.setState({ ri: { vid: dv.id, list: pageIdx.slice(), i: n }, decl: false }), openL: 'Open B/L ' + blno(i) + ' — ' + HM_BLST[k][0], bl: blno(i), cust: custOf(i), ctr: String(1 + Math.floor(r() * 3)), amt: hmUsd(dv.avg * (0.6 + r() * 0.8)), st: HM_BLST[k][0], stC: 'hm-ss ' + HM_BLST[k][1],
+          return { open: () => self.setState({ ri: { vid: dv.id, list: pageIdx.slice(), i: n }, decl: false }), openL: 'Open B/L ' + blno(i) + ' — ' + HM_BLST[k][0], bl: blno(i), cust: custOf(i), ctr: String(1 + Math.floor(r() * 3)), amt: hmUsd(dv.avg * (0.6 + r() * 0.8)), st: HM_BLST[k][0], stC: 'chip t-' + HM_BLST[k][1],
             note: k === 'nod' ? 'Missing: ' + HM_MISS[i % HM_MISS.length] : k === 'roe' ? dv.pair + ' for ' + hmFmt(dv.date, { day: 'numeric', month: 'short' }) : k === 'hold' ? 'Second payer not confirmed' : k === 'inv' ? 'INV-' + dv.here.slice(0, 2) + '-' + dv.no + '-' + String(i + 1).padStart(4, '0') : '' };
         }),
         noBls: !idx.length, noBlsL: dv.notDue ? 'LMS sends B/L data for this voyage at cut-off. Nothing to do yet.' : 'No B/Ls match.',
@@ -1785,7 +1744,7 @@ class GirsPage extends DCLogic {
         head: dv.vessel + ' · ' + dv.no + ' · ' + (dv.dir === 'E' ? 'Export' : 'Import'), pos: (pos + 1) + ' / ' + L.length, first: pos <= 0, last: pos >= L.length - 1, prev: go(-1), next: go(1),
         decl: s.decl, toggleDecl: () => self.setState({ decl: !s.decl }), genDis: !!errs.length || !s.decl || done, gen,
         hint: done ? 'This B/L is already invoiced.' : errs.length ? 'Resolve the errors to generate this invoice.' : !s.decl ? 'Confirm the declaration to generate.' : '',
-        stLabel: HM_BLST[k][0], stC: 'hm-ss ' + HM_BLST[k][1],
+        stLabel: HM_BLST[k][0], stC: 'chip t-' + HM_BLST[k][1],
         list: 'invoice-list-v2.html?q=' + bl, close: () => self.setState({ ri: null, decl: false })
       };
     }
@@ -1885,11 +1844,11 @@ class GirsPage extends DCLogic {
         fil: [['all', 'All', dd.length], ['ready', 'Ready', dReady.length], ['blocked', 'Blocked', dBlk.length], ['out', 'With customer', dOut.length], ['invoiced', 'Invoiced', dInv.length]].map(([k, l, n]) => ({ l, n: String(n), cur: s.ddF === k ? 'true' : 'false', pick: () => self.setState({ ddF: k, ddPg: 1 }) })),
         q: s.ddQ, onQ: (e) => self.setState({ ddQ: e.target.value, ddPg: 1 }),
         rows: ddSorted.slice(doff, doff + dps).map((c) => ({
-          cn: c.cn, sz: c.sz, cust: c.cust, bl: c.bl, typeL: c.dir === 'E' ? 'Export' : 'Import', typeC: 'hm-type ' + c.dir, type: c.type,
+          cn: c.cn, sz: c.sz, cust: c.cust, bl: c.bl, typeL: c.dir === 'E' ? 'Export' : 'Import', typeC: 'chip t-neutral dot-' + c.dir.toLowerCase(), type: c.type,
           out: hmFmt(c.out, { day: 'numeric', month: 'short' }), back: c.back ? hmFmt(c.back, { day: 'numeric', month: 'short' }) : 'Not returned', backC: c.back ? '' : 'mu',
           days: c.used + ' / ' + c.free, over: String(c.over), overC: c.over ? 'r hm-wn' : 'r mu',
           amt: c.status === 'tariff' ? '—' : c.amt ? hmUsd(c.amt) : '—', slab: c.status === 'tariff' ? 'No tariff for ' + c.sz : c.over ? c.slab : 'Within free time',
-          stL: HM_DDST[c.status][0], stC: 'hm-ss ' + HM_DDST[c.status][1],
+          stL: HM_DDST[c.status][0], stC: 'chip t-' + HM_DDST[c.status][1],
           canGen: c.status === 'ready', noGen: c.status !== 'ready', noGenL: c.status === 'out' ? 'Bill on return' : c.status === 'invoiced' ? 'Done' : 'Blocked', gen: () => genBL(c.bl)
         })),
         empty: !ddSorted.length,

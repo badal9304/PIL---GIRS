@@ -391,6 +391,7 @@ html,body{margin:0}
 .kpanelwrap{justify-content:flex-end;min-height:260px;overflow:hidden;padding:0}
 .kpanel{position:relative;width:60%;height:260px;box-shadow:-8px 0 24px rgba(0,0,0,.12)}
 </style>
+<link rel="stylesheet" href="girs-ui.css">
 </head>
 <body>
 <div class="theme kit" data-theme="light" id="kit">
@@ -413,7 +414,7 @@ html,body{margin:0}
 
 <section id="audit" class="ks">
   <h2>Audit — what the screens use today</h2>
-  <p class="kd">72 prototype screens checked. The base pieces are already shared; the rows marked <b>Merge</b> have more than one version built for different screens. The approved version is the one in the “Standard” column.</p>
+  <p class="kd"><b>Status: merged.</b> All 72 screens now load <code>girs-ui.css</code> and use the standard versions below. 72 prototype screens checked. The base pieces are already shared; the rows marked <b>Merge</b> have more than one version built for different screens. The approved version is the one in the “Standard” column.</p>
   <table class="lst ka">
     <thead><tr><th scope="col">Component</th><th scope="col">Standard</th><th scope="col">Other versions found</th><th scope="col">Screens</th><th scope="col">Action</th></tr></thead>
     <tbody>
@@ -421,19 +422,19 @@ html,body{margin:0}
       <tr><td>Text field, Select</td><td class="mono">.input · .select</td><td class="mu">—</td><td>71</td><td><span class="chip t-ok">Shared</span></td></tr>
       <tr><td>Checkbox</td><td class="mono">.cbx</td><td class="mu">—</td><td>13</td><td><span class="chip t-ok">Shared</span></td></tr>
       <tr><td>Card</td><td class="mono">.card</td><td class="mu">—</td><td>71</td><td><span class="chip t-ok">Shared</span></td></tr>
-      <tr><td>Data table</td><td class="mono">.lst</td><td class="mono">hm-vtab, hm-blt, ri-tbl (document)</td><td>14</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Pager</td><td class="mono">.pager</td><td class="mono">hm-dpg (side panel)</td><td>11</td><td><span class="chip t-warn">Merge</span></td></tr>
+      <tr><td>Data table</td><td class="mono">.lst</td><td class="mono">hm-vtab, hm-blt, ri-tbl (document)</td><td>14</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Pager</td><td class="mono">.pager</td><td class="mono">hm-dpg (side panel)</td><td>11</td><td><span class="chip t-ok">Merged</span></td></tr>
       <tr><td>Tabs</td><td class="mono">.tabs · .tabb</td><td class="mu">—</td><td>7</td><td><span class="chip t-ok">Shared</span></td></tr>
-      <tr><td>Status tag</td><td class="mono">.chip + tone</td><td class="mono">pill, bm-st, bm-tag, hm-ss, hm-type, bm-gapc</td><td>71</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Count badge</td><td class="mono">.count</td><td class="mono">msel-n, hm-tc</td><td>7</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Filter chip</td><td class="mono">.chipb</td><td class="mono">hm-chip, hm-fc, cmb-filter, fp-chip</td><td>4</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Segmented control</td><td class="mono">.seg</td><td class="mono">seg2, hm-seg, lay switcher</td><td>32</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Search field</td><td class="mono">.search</td><td class="mono">hm-srch, bm1-srch</td><td>3</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Combobox (type-ahead)</td><td class="mono">.combo + .ri-sug</td><td class="mono">Home “To” and charge pickers (copies)</td><td>71</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Inline notification</td><td class="mono">.banner + tone</td><td class="mono">kbanner, hm-note, hm-alert</td><td>49</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Modal</td><td class="mono">.dlg</td><td class="mono">kmodal, kdrawer, cmc-modal, hm-cfm, hm-mail, hm-rim</td><td>49</td><td><span class="chip t-warn">Merge</span></td></tr>
-      <tr><td>Side panel</td><td class="mono">.panel</td><td class="mono">hm-drw</td><td>1</td><td><span class="chip t-info">New</span></td></tr>
-      <tr><td>Empty state</td><td class="mono">.empty</td><td class="mono">bm-empty, cm2-empty, hm-empty</td><td>7</td><td><span class="chip t-warn">Merge</span></td></tr>
+      <tr><td>Status tag</td><td class="mono">.chip + tone</td><td class="mono">pill, bm-st, bm-tag, hm-ss, hm-type, bm-gapc</td><td>71</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Count badge</td><td class="mono">.count</td><td class="mono">msel-n, hm-tc</td><td>7</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Filter chip</td><td class="mono">.chipb</td><td class="mono">hm-chip, hm-fc, cmb-filter, fp-chip</td><td>4</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Segmented control</td><td class="mono">.seg</td><td class="mono">seg2, hm-seg, lay switcher</td><td>32</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Search field</td><td class="mono">.search</td><td class="mono">hm-srch, bm1-srch</td><td>3</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Combobox (type-ahead)</td><td class="mono">.combo + .ri-sug</td><td class="mono">Home “To” and charge pickers (copies)</td><td>71</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Inline notification</td><td class="mono">.banner + tone</td><td class="mono">kbanner, hm-note, hm-alert</td><td>49</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Modal</td><td class="mono">.dlg</td><td class="mono">kmodal, kdrawer, cmc-modal, hm-cfm, hm-mail, hm-rim</td><td>49</td><td><span class="chip t-ok">Merged</span></td></tr>
+      <tr><td>Side panel</td><td class="mono">.panel</td><td class="mono">hm-drw</td><td>1</td><td><span class="chip t-ok">Added</span></td></tr>
+      <tr><td>Empty state</td><td class="mono">.empty</td><td class="mono">bm-empty, cm2-empty, hm-empty</td><td>7</td><td><span class="chip t-ok">Merged</span></td></tr>
       <tr><td>Toast</td><td class="mono">.gtoast</td><td class="mu">—</td><td>71</td><td><span class="chip t-ok">Shared</span></td></tr>
     </tbody>
   </table>
@@ -490,7 +491,7 @@ html,body{margin:0}
   <h2>Status tag</h2><p class="kd">Shows a record’s state. Five tones only — colour always comes with a word, never alone.</p>
   <div class="kx"><div class="kr">
     <span class="chip t-neutral">Draft</span><span class="chip t-info">With customer</span><span class="chip t-ok">Invoiced</span><span class="chip t-warn">ROE not received</span><span class="chip t-bad">Rejected</span>
-    <span class="chip t-neutral"><i class="dot e"></i>Export</span><span class="chip t-neutral"><i class="dot i"></i>Import</span>
+    <span class="chip t-neutral dot-e">Export</span><span class="chip t-neutral dot-i">Import</span>
   </div></div>
   <table class="lst kt"><thead><tr><th scope="col">Tone</th><th scope="col">Use for</th></tr></thead><tbody>
     <tr><td><span class="chip t-neutral">Neutral</span></td><td>Not started, closed, categories (Export / Import)</td></tr>
@@ -499,7 +500,7 @@ html,body{margin:0}
     <tr><td><span class="chip t-warn">Warning</span></td><td>Blocked but recoverable, due soon</td></tr>
     <tr><td><span class="chip t-bad">Error</span></td><td>Failed, rejected, overdue</td></tr>
   </tbody></table>
-  <p class="kc">Classes <code>.chip</code> + <code>.t-neutral</code> <code>.t-info</code> <code>.t-ok</code> <code>.t-warn</code> <code>.t-bad</code> (replaces <code>pill</code>, <code>bm-st</code>, <code>bm-tag</code>, <code>hm-ss</code>, <code>hm-type</code>)</p>
+  <p class="kc">Category dot: <code>.dot-e</code> <code>.dot-i</code> · Classes <code>.chip</code> + <code>.t-neutral</code> <code>.t-info</code> <code>.t-ok</code> <code>.t-warn</code> <code>.t-bad</code> (replaces <code>pill</code>, <code>bm-st</code>, <code>bm-tag</code>, <code>hm-ss</code>, <code>hm-type</code>)</p>
 </section>
 
 <section id="count" class="ks">
@@ -536,7 +537,7 @@ html,body{margin:0}
 <section id="segmented" class="ks">
   <h2>Segmented control</h2><p class="kd">Switches between 2–4 views of the same data (All / Export / Import, Light / Dark).</p>
   <div class="kx"><div class="seg" role="group" aria-label="Direction" data-single><button aria-pressed="true">All</button><button aria-pressed="false">Export</button><button aria-pressed="false">Import</button></div></div>
-  <p class="kc">Class <code>.seg</code> + <code>aria-pressed</code> (replaces <code>seg2</code>, <code>hm-seg</code>, layout switcher)</p>
+  <p class="kc">Class <code>.seg</code> + <code>aria-pressed</code> (or <code>role="radio"</code> + <code>aria-checked</code>) (replaces <code>seg2</code>, <code>hm-seg</code>, layout switcher)</p>
 </section>
 
 <section id="tabs" class="ks">
@@ -558,8 +559,8 @@ html,body{margin:0}
       <thead><tr><th scope="col" class="c-sel"><input type="checkbox" class="cbx" aria-label="Select all"></th><th scope="col" class="c-no">Voyage No. <span class="ksort">↑</span></th><th scope="col">Vessel</th><th scope="col">Type</th><th scope="col" class="r">Expected</th><th scope="col" class="r">Ready</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
       <tbody>
         <tr class="kgh"><th colspan="8" scope="rowgroup"><b>Today · Friday 20 Nov</b> <span>2 voyages · 1,210 open</span></th></tr>
-        <tr><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select 0LK5SSE"></td><td class="c-no"><button class="lnk mono">0LK5SSE</button></td><td>CMA CGM LEKKI</td><td><span class="chip t-neutral"><i class="dot e"></i>Export</span></td><td class="r">1,000</td><td class="r">935</td><td><span class="chip t-warn">With blockers</span></td><td class="c-act"><button class="btn btn-sm">Generate 935</button></td></tr>
-        <tr><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select 1KP8RRI"></td><td class="c-no"><button class="lnk mono">1KP8RRI</button></td><td>KOTA PEMIMPIN</td><td><span class="chip t-neutral"><i class="dot i"></i>Import</span></td><td class="r">520</td><td class="r">154</td><td><span class="chip t-warn">With blockers</span></td><td class="c-act"><button class="btn btn-sm">Generate 154</button></td></tr>
+        <tr><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select 0LK5SSE"></td><td class="c-no"><button class="lnk mono">0LK5SSE</button></td><td>CMA CGM LEKKI</td><td><span class="chip t-neutral dot-e">Export</span></td><td class="r">1,000</td><td class="r">935</td><td><span class="chip t-warn">With blockers</span></td><td class="c-act"><button class="btn btn-sm">Generate 935</button></td></tr>
+        <tr><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select 1KP8RRI"></td><td class="c-no"><button class="lnk mono">1KP8RRI</button></td><td>KOTA PEMIMPIN</td><td><span class="chip t-neutral dot-i">Import</span></td><td class="r">520</td><td class="r">154</td><td><span class="chip t-warn">With blockers</span></td><td class="c-act"><button class="btn btn-sm">Generate 154</button></td></tr>
       </tbody>
     </table></div>
     <div class="pager" style="padding: 4px 12px"><span>Showing 1–2 of 2 voyages</span></div></div></div>
@@ -579,14 +580,14 @@ html,body{margin:0}
 </section>
 
 <section id="modal" class="ks">
-  <h2>Modal</h2><p class="kd">Asks for a decision or a few fields without leaving the screen. Title is a question or the task; footer has Cancel and one primary action. Esc closes. Three widths: 560px confirm, 880px form or email, 1240px document review.</p>
+  <h2>Modal</h2><p class="kd">Asks for a decision or a few fields without leaving the screen. Title is a question or the task; footer has Cancel and one primary action. Esc closes. Four widths: 560px confirm, 880px form or email, 1240px document review, up to 1480px for dense multi-section forms.</p>
   <div class="kx kmock"><div class="dlg kdlg" role="dialog" aria-labelledby="kmt"><div class="dh"><h3 id="kmt">Generate 1,089 invoices?</h3></div><div class="db"><dl class="kdl"><dt>Voyages</dt><dd>0LK5SSE, 1KP8RRI</dd><dt>Total amount</dt><dd>USD 1.73M</dd></dl></div><div class="df"><button class="btn">Cancel</button><button class="btn btn-primary">Generate</button></div></div></div>
-  <p class="kc">Class <code>.dlg</code> (560px) · <code>.dlg.wide</code> (880px) · <code>.dlg.doc</code> (1240px) with <code>.dh</code> <code>.db</code> <code>.df</code> (replaces <code>kmodal</code>, <code>kdrawer</code>, <code>cmc-modal</code>, <code>hm-cfm</code>, <code>hm-mail</code>, <code>hm-rim</code>)</p>
+  <p class="kc">Class <code>.dlg</code> (560px) · <code>.dlg.wide</code> (880px) · <code>.dlg.doc</code> (1240px) · <code>.dlg.full</code> (up to 1480px, dense forms such as Charge Master View/Update) with <code>.dh</code> <code>.db</code> <code>.df</code> (replaces <code>kmodal</code>, <code>kdrawer</code>, <code>cmc-modal</code>, <code>hm-cfm</code>, <code>hm-mail</code>, <code>hm-rim</code>)</p>
 </section>
 
 <section id="panel" class="ks">
   <h2>Side panel</h2><p class="kd">Details of one row while keeping the list in view (voyage → its B/Ls). Opens from the right, 820px. Header: key, name, status; footer: actions.</p>
-  <div class="kx kmock kpanelwrap"><aside class="panel kpanel" aria-label="Voyage 0LK5SSE"><div class="panel-h"><span class="chip t-info mono">0LK5SSE</span><b>CMA CGM LEKKI</b><span class="chip t-neutral"><i class="dot e"></i>Export</span></div><div class="panel-b"><span class="mu">Summary, reasons, B/L list…</span></div><div class="panel-f"><button class="btn">Close</button><button class="btn btn-primary">Generate 935 ready</button></div></aside></div>
+  <div class="kx kmock kpanelwrap"><aside class="panel kpanel" aria-label="Voyage 0LK5SSE"><div class="panel-h"><span class="chip t-info mono">0LK5SSE</span><b>CMA CGM LEKKI</b><span class="chip t-neutral dot-e">Export</span></div><div class="panel-b"><span class="mu">Summary, reasons, B/L list…</span></div><div class="panel-f"><button class="btn">Close</button><button class="btn btn-primary">Generate 935 ready</button></div></aside></div>
   <p class="kc">Class <code>.panel</code> (replaces <code>hm-drw</code>)</p>
 </section>
 

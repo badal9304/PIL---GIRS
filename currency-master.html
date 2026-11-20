@@ -168,15 +168,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kdanger{color:var(--bad)}
 .kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.kback{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.45);border:0;padding:0;margin:0;cursor:default}
-.kmodal{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 48px));max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.kmodal.sm{width:min(520px,calc(100vw - 48px))}
-.kdrawer{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
-.khead{display:flex;align-items:flex-start;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line)}
-.khead h2{margin:0;font-size:18px;font-weight:600;line-height:26px}
-.khead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.kbody{flex:1 1 auto;overflow:auto;padding:20px 24px}
-.kfoot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--sub)}
 .ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
 .ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
 .ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
@@ -195,12 +186,11 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kf .kh{font-size:12px;color:var(--muted)}
 .kf .ke{font-size:12px;color:var(--bad);font-weight:500}
 .kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
-.kbanner{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;padding:10px 14px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px;line-height:18px}
-.kbanner.err{background:var(--badbg);color:var(--bad)}
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
 </style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -537,9 +527,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
   </div>
 
   <sc-if value="{{shell.kit.isHist}}" hint-placeholder-val="{{ false }}">
-    <button class="kback" aria-label="Close" onClick="{{shell.kit.close}}"></button>
-    <div class="kmodal" role="dialog" aria-modal="true" aria-labelledby="khist-t">
-      <div class="khead">
+    <button class="ov" aria-label="Close" onClick="{{shell.kit.close}}"></button>
+    <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="khist-t">
+      <div class="dh">
         <div style="flex: 1 1 auto; min-width: 0"><h2 id="khist-t">{{shell.kit.hist.title}}</h2><p>{{shell.kit.hist.sub}}</p></div>
         <button class="btn btn-sm kib" onClick="{{shell.kit.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
       </div>
@@ -551,22 +541,22 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <button class="btn btn-sm" onClick="{{shell.kit.hist.csv}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M4 20h16"></path></svg>CSV</button>
         <button class="btn btn-sm" onClick="{{shell.kit.hist.print}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"></path><rect x="3" y="9" width="18" height="8" rx="2"></rect><path d="M6 14h12v7H6z"></path></svg>Print</button>
       </div>
-      <div class="kbody" style="padding: 0">
+      <div class="db" style="padding: 0">
         <table class="ktbl"><thead><tr><sc-for list="{{shell.kit.hist.cols}}" as="c" hint-placeholder-count="3"><th>{{c}}</th></sc-for></tr></thead>
           <tbody><sc-for list="{{shell.kit.hist.rows}}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{r}}" as="c" hint-placeholder-count="3"><td>{{c}}</td></sc-for></tr></sc-for></tbody></table>
       </div>
     </div>
   </sc-if>
   <sc-if value="{{shell.kit.isForm}}" hint-placeholder-val="{{ false }}">
-    <button class="kback" aria-label="Close" onClick="{{shell.kit.close}}"></button>
-    <aside class="kdrawer" role="dialog" aria-modal="true" aria-labelledby="kform-t">
-      <div class="khead">
+    <button class="ov" aria-label="Close" onClick="{{shell.kit.close}}"></button>
+    <aside class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="kform-t">
+      <div class="dh">
         <div style="flex: 1 1 auto; min-width: 0"><h2 id="kform-t">{{shell.kit.form.title}}</h2><p>{{shell.kit.form.sub}}</p></div>
         <button class="btn btn-sm kib" onClick="{{shell.kit.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
       </div>
-      <div class="kbody">
-        <sc-if value="{{shell.kit.form.hasNote}}" hint-placeholder-val="{{ true }}"><div class="kbanner">{{shell.kit.form.note}}</div></sc-if>
-        <sc-if value="{{shell.kit.form.hasErr}}" hint-placeholder-val="{{ false }}"><div class="kbanner err" role="alert">{{shell.kit.form.errText}}</div></sc-if>
+      <div class="db">
+        <sc-if value="{{shell.kit.form.hasNote}}" hint-placeholder-val="{{ true }}"><div class="banner b-info">{{shell.kit.form.note}}</div></sc-if>
+        <sc-if value="{{shell.kit.form.hasErr}}" hint-placeholder-val="{{ false }}"><div class="banner b-block" role="alert">{{shell.kit.form.errText}}</div></sc-if>
         <sc-for list="{{shell.kit.form.secs}}" as="g" hint-placeholder-count="3">
           <fieldset class="kfs"><legend>{{g.title}}</legend><div class="kgrid">
             <sc-for list="{{g.fields}}" as="f" hint-placeholder-count="4">
@@ -582,7 +572,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </div></fieldset>
         </sc-for>
       </div>
-      <div class="kfoot">
+      <div class="df">
         <span style="flex: 1 1 auto; font-size: 12px; color: var(--muted)">{{shell.kit.form.foot}}</span>
         <button class="btn" onClick="{{shell.kit.close}}">Cancel</button>
         <button class="btn btn-primary" onClick="{{shell.kit.form.submit}}">{{shell.kit.form.cta}}</button>
@@ -590,17 +580,17 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
     </aside>
   </sc-if>
   <sc-if value="{{shell.kit.isConfirm}}" hint-placeholder-val="{{ false }}">
-    <button class="kback" aria-label="Close" onClick="{{shell.kit.close}}"></button>
-    <div class="kmodal sm" role="alertdialog" aria-modal="true" aria-labelledby="kconf-t">
-      <div class="khead"><div style="flex: 1 1 auto; min-width: 0"><h2 id="kconf-t">{{shell.kit.conf.title}}</h2><p>{{shell.kit.conf.sub}}</p></div></div>
-      <div class="kbody">
+    <button class="ov" aria-label="Close" onClick="{{shell.kit.close}}"></button>
+    <div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="kconf-t">
+      <div class="dh"><div style="flex: 1 1 auto; min-width: 0"><h2 id="kconf-t">{{shell.kit.conf.title}}</h2><p>{{shell.kit.conf.sub}}</p></div></div>
+      <div class="db">
         <p style="margin: 0 0 14px; font-size: 13px; line-height: 20px">{{shell.kit.conf.text}}</p>
         <label class="kf"><span class="kl">Reason<b aria-hidden="true">*</b></span>
           <textarea class="input" rows="3" value="{{shell.kit.conf.reason}}" onInput="{{shell.kit.conf.onReason}}" placeholder="Why is this needed?" aria-required="true"></textarea>
           <sc-if value="{{shell.kit.conf.hasErr}}" hint-placeholder-val="{{ false }}"><span class="ke">Enter a reason</span></sc-if>
         </label>
       </div>
-      <div class="kfoot">
+      <div class="df">
         <button class="btn" onClick="{{shell.kit.close}}">Cancel</button>
         <button class="btn kbtn-danger" onClick="{{shell.kit.conf.ok}}">{{shell.kit.conf.cta}}</button>
       </div>

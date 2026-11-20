@@ -1,0 +1,100 @@
+/* GIRS UI components — approved versions of the components that existed in more than one form.
+   Reference: ui-kit.html. Every screen links this file after its own styles.
+   Base pieces (button, field, select, checkbox, card, table, tabs, pager, banner, dialog) live in each
+   screen's shared stylesheet; this file adds the merged ones. */
+
+/* Base components (same rules as the Invoice List, the reference screen) */
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;font-size:14px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabb[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.tabb .cnt{font-size:12px;font-weight:600;padding:1px 7px;border-radius:9px;background:var(--neutral);color:var(--muted2)}
+.tabb[aria-selected=true] .cnt{background:var(--tint);color:var(--accent2)}
+.banner{display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 14px;border-radius:6px;font-size:13px;font-weight:500;box-sizing:border-box}
+.b-warn{background:var(--warnbg);border:1px solid var(--warnbd);color:var(--warn)}
+.b-block{background:var(--badbg);border:1px solid var(--badbd);color:var(--bad)}
+.b-ok{background:var(--okbg);border:1px solid var(--okbd, #B7DEC8);color:var(--ok)}
+.b-info{background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2)}
+.ri-sug{position:absolute;z-index:30;left:0;right:0;top:calc(100% + 4px);margin:0;padding:4px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:280px;overflow:auto}
+.ri-sug li{display:flex;gap:10px;align-items:center;min-height:32px;padding:5px 10px;border-radius:6px;cursor:pointer;font-weight:400;white-space:nowrap}
+.ri-sug li .mono{min-width:44px;color:var(--muted);font-size:12px}
+.ri-sug li:hover,.ri-sug li[aria-selected=true]{background:var(--hover)}
+.ri-sug li[aria-selected=true]{box-shadow:inset 0 0 0 2px var(--accent)}
+.ri-sug li.none{color:var(--muted);cursor:default;background:none;box-shadow:none}
+.ov{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.42)}
+.dlg{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
+.dlg.wide{width:min(880px,calc(100vw - 48px))}
+.dh{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 24px 14px;border-bottom:1px solid var(--line2)}
+.dh h2{margin:0;font-size:18px;line-height:24px;font-weight:600}
+.dh p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.db{padding:18px 24px;overflow:auto;display:flex;flex-direction:column;gap:14px;font-size:13px}
+.df{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line2);background:var(--sub)}
+.seg{display:inline-flex;gap:2px;padding:2px;border-radius:6px;background:var(--neutral)}
+.seg button{all:unset;cursor:pointer;height:30px;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted2)}
+.seg button[aria-pressed=true],.seg button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.pager{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 4px 0;font-size:13px;color:var(--muted2)}
+.pbtn{min-width:32px;justify-content:center;font-size:15px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chipb{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--line);border-radius:17px;background:var(--surface);font-size:13px;font-weight:500;color:var(--muted2)}
+.chipb:hover{border-color:var(--bdh)}
+.chipb[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.chipb .cnt{font-size:12px;font-weight:600;opacity:.8}
+.chipb.w:not([aria-pressed=true]) .cnt{color:var(--bad);opacity:1}
+.chipb:focus-visible,.ili:focus-visible,.qitem:focus-visible,.icard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Status tag — .chip + one of five tones; colour always comes with a word */
+.chip.t-neutral{background:var(--neutral);color:var(--ink)}
+.chip.t-info{background:var(--tint);color:var(--accent2)}
+.chip.t-ok{background:var(--okbg);color:var(--ok)}
+.chip.t-warn{background:var(--warnbg);color:var(--warn)}
+.chip.t-bad{background:var(--badbg);color:var(--bad)}
+/* category dot (Export / Import) */
+.chip.dot-e::before,.chip.dot-i::before{content:"";flex:none;width:6px;height:6px;border-radius:50%}
+.chip.dot-e::before{background:var(--accent)}
+.chip.dot-i::before{background:var(--ai)}
+
+/* Count badge — a number next to a label (tabs, filters, selections) */
+.count{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:20px;height:20px;margin-inline-start:6px;padding:0 6px;border-radius:10px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:600;line-height:20px;box-sizing:border-box;font-variant-numeric:tabular-nums}
+.tabb[aria-selected=true] .count{background:var(--tint);color:var(--accent2)}
+.count.on{background:var(--accent);color:var(--onaccent)}
+
+/* Filter chip — .chips > .chipb[aria-pressed] with an optional .cnt */
+.chipb .cnt,.chipb > span{font-size:12px;font-weight:600}
+
+/* Search field */
+.search{position:relative;min-width:220px}
+.search > svg{position:absolute;inset-inline-start:10px;top:50%;margin-top:-8px;color:var(--muted);pointer-events:none}
+.search .input{width:100%;padding-inline-start:34px}
+
+/* Combobox — .combo > input[role=combobox] + .ri-sug listbox */
+.combo{position:relative}
+.combo .input{width:100%}
+
+/* Empty state */
+.empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:40px 24px;text-align:center;font-size:13px;color:var(--muted)}
+.empty b{font-size:14px;font-weight:600;color:var(--ink)}
+.empty .btn{margin-top:8px}
+
+/* Inline notification — .banner + .b-info | .b-ok | .b-warn | .b-block; .x pushes the dismiss button right */
+.banner .x{margin-inline-start:auto}
+.banner > svg{flex:none}
+
+/* Modal — .dlg (560) | .dlg.wide (880) | .dlg.doc (1240, document review) | .dlg.full (up to 1480, dense forms) with .dh / .db / .df.
+   .dim paints the backdrop on the dialog itself (use with a transparent .scrim click-catcher). */
+.dlg.doc{width:min(1240px,calc(100vw - 48px));height:calc(100% - 48px);max-height:none}
+.dlg.full{width:min(1480px,calc(100vw - 64px));max-height:calc(100% - 64px)}
+.dlg.dim{box-shadow:0 0 0 200vmax rgba(22,26,33,.45),0 24px 64px rgba(0,0,0,.28)}
+.scrim{all:unset;position:fixed;inset:0;background:transparent}
+
+/* Side panel — details of one row with the list still in view */
+.panel{position:fixed;z-index:71;top:0;right:0;width:min(820px,100vw);height:100%;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);box-shadow:0 0 0 200vmax rgba(22,26,33,.45)}
+.panel-h{flex:none;display:flex;align-items:flex-start;gap:12px;padding:16px 16px 14px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.panel-b{flex:1 1 auto;min-height:0;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
+.panel-f{flex:none;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line2);background:var(--sub)}
+
+/* Clickable status tags (quick filters on the Invoice List) */
+.chip[aria-pressed]{cursor:pointer}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.seg button:disabled{opacity:.5;cursor:not-allowed}

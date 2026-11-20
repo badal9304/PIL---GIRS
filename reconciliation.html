@@ -110,6 +110,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
 .seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:28px;padding:0 12px;border-radius:4px;font-size:12px;font-weight:500}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+<link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
   <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
@@ -414,9 +415,9 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <section class="card" style="overflow: hidden">
           <div class="card-head">
             <h2 class="card-title">Document counts by system · {{kindLabel}}</h2>
-            <div role="radiogroup" aria-label="Document kind" style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)">
-              <button class="seg" role="radio" aria-checked="{{invOn}}" onClick="{{pickInv}}" style="background: {{invBg}}">Invoices &amp; credit notes</button>
-              <button class="seg" role="radio" aria-checked="{{rcpOn}}" onClick="{{pickRcp}}" style="background: {{rcpBg}}">Receipts</button>
+            <div class="seg" role="radiogroup" aria-label="Document kind">
+              <button role="radio" aria-checked="{{invOn}}" onClick="{{pickInv}}">Invoices &amp; credit notes</button>
+              <button role="radio" aria-checked="{{rcpOn}}" onClick="{{pickRcp}}">Receipts</button>
             </div>
           </div>
           <table>
