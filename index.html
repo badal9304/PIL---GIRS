@@ -416,10 +416,10 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-ch{font-size:12px;font-weight:600;color:var(--muted2);margin-bottom:2px}
 .hm-cust .input{height:32px}
 .hm-cust p{margin:6px 0 0;font-size:12px;color:var(--muted)}
-.hm-ov{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:0;height:36px;padding:0 14px;border:1px solid var(--warnbd);border-radius:6px;background:var(--warnbg);font-size:13px;cursor:pointer}
+.hm-ov{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 14px;border:1px solid var(--warnbd);border-radius:6px;background:var(--warnbg);font-size:13px;cursor:pointer}
 .hm-ov b{color:var(--warn)}
 .hm-ov .mu{font-size:12px}
-.hm-ovd{width:8px;height:8px;border-radius:50%;background:var(--warn);margin-inline-end:8px}
+.hm-ovd{width:8px;height:8px;border-radius:50%;background:var(--warn);margin-inline-end:4px}
 .hm-ov:hover{border-color:var(--warn)}
 .hm-ov:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .hm-ov.on{box-shadow:inset 0 0 0 1px var(--warn)}
@@ -971,7 +971,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                 <button class="btn btn-icon" aria-label="{{nav.nextL}}" title="{{nav.nextL}}" onClick="{{nav.next}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
                 <button class="btn btn-sm" disabled="{{nav.isToday}}" onClick="{{nav.today}}">Today</button>
               </div>
-              <button class="{{nav.ovCls}}" aria-pressed="{{nav.ovOn}}" onClick="{{nav.ovGo}}"><span class="hm-ovd" aria-hidden="true"></span><b>{{nav.ovN}}</b>&#160;overdue voyages<span class="mu">&#160;· {{nav.ovOpen}} invoices open</span></button>
+              <button class="{{nav.ovCls}}" aria-pressed="{{nav.ovOn}}" onClick="{{nav.ovGo}}"><span class="hm-ovd" aria-hidden="true"></span><b>{{nav.ovN}}</b><span>overdue voyages</span><span class="mu">· {{nav.ovOpen}} invoices open</span></button>
             </div>
 
             <div class="hm-rib card">
