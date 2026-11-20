@@ -476,7 +476,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             </div>
 
             <div class="r-wrap" style="padding: 0 16px 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
-              <div class="seg" role="radiogroup" aria-label="Credit type">
+              <div class="seg" role="radiogroup" aria-label="Credit type" style="display: grid; grid-template-columns: repeat(2, 120px)">
                 <button role="radio" aria-checked="{{fullOn}}" onClick="{{pickFull}}" disabled="{{locked}}">Full credit</button>
                 <button role="radio" aria-checked="{{partOn}}" onClick="{{pickPart}}" disabled="{{locked}}">Partial credit</button>
               </div>

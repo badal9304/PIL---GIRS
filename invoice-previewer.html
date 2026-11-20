@@ -408,7 +408,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div style="padding: 16px; display: flex; flex-direction: column; gap: 16px">
                 <div>
                   <span class="lbl">Document type</span>
-                  <div class="r-g3" role="radiogroup" aria-label="Document type" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; height: 36px; background: var(--neutral); padding: 3px; border-radius: 6px; box-sizing: border-box">
+                  <div class="seg" role="radiogroup" aria-label="Document type" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr))">
                     <sc-for list="{{docTypes}}" as="d" hint-placeholder-count="3">
                       <button role="radio" aria-checked="{{d.on}}" onClick="{{d.pick}}">{{d.label}}</button>
                     </sc-for>

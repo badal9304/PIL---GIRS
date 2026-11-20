@@ -22,6 +22,7 @@
 .ri-sug li[aria-selected=true]{box-shadow:inset 0 0 0 2px var(--accent)}
 .ri-sug li.none{color:var(--muted);cursor:default;background:none;box-shadow:none}
 .ov{position:fixed;inset:0;z-index:70;background:rgba(14,17,22,.42)}
+button.ov{display:block;margin:0;padding:0;border:0;cursor:default;appearance:none}
 .dlg{position:fixed;z-index:71;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 48px));max-height:calc(100vh - 64px);display:flex;flex-direction:column;background:var(--surface);border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden;color:var(--ink)}
 .dlg.wide{width:min(880px,calc(100vw - 48px))}
 .dh{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 24px 14px;border-bottom:1px solid var(--line2)}
