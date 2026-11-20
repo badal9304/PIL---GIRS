@@ -16,7 +16,7 @@ ALL = [
 ]
 HOME = [
     ('hm-tc', 'count'), ('hm-note ok', 'banner b-ok'), ('hm-note warn', 'banner b-warn'), ('btn btn-icon btn-sm hm-nx', 'btn btn-icon btn-sm x'),
-    ('hm-chip', 'chipb'), ('hm-chips', 'chips'), ('hm-seg sm', 'seg sm'), ('hm-seg', 'seg'),
+    ('hm-chip', 'chipb'), ('hm-chips', 'chips hm-fbar'), ('hm-seg sm', 'seg sm'), ('hm-seg', 'seg'),
     ('hm-srch wide', 'search wide'), ('hm-srch', 'search'), ('hm-empty', 'empty'), ('hm-dpg', 'pager hm-pp'),
     ('hm-drw', 'panel'), ('hm-dh', 'panel-h'), ('hm-db', 'panel-b'),
     ('cmc-bd', 'scrim'),
@@ -87,8 +87,8 @@ def home(s):
         s = s.replace('<button class="scrim" tabindex="-1" aria-label="Close" onClick="{{%s}}"></button>' % h, '<button class="scrim" tabindex="-1" aria-label="Close" onClick="{{%s}}" style="z-index: %d"></button>' % (h, z))
     a, b = s.find('<style>') + 7, s.find('</style>')
     css = s[a:b]
-    css = re.sub(r'\.(hm-tc|hm-note|hm-nx|hm-chip|hm-seg|hm-srch|hm-empty|hm-ss|hm-type|hm-drw|hm-dh|hm-db|hm-dpg)\b[^{}]*\{[^{}]*\}\n?', '', css)
     css = re.sub(r'\.tabb\[aria-selected=true\] \.hm-tc\{[^{}]*\}\n?', '', css)
+    css = re.sub(r'(?m)^\.(hm-tc|hm-note|hm-nx|hm-chip|hm-seg|hm-srch|hm-empty|hm-ss|hm-type|hm-drw|hm-dh|hm-db|hm-dpg)\b[^{}]*\{[^{}]*\}\n?', '', css)
     css = re.sub(r'\.cmc-modal\.hm-(cfm|rim|mail)\{[^{}]*\}\n?', '', css)
     css = css.replace('.hm-rim .cmc-mh{', '.hm-rim .dh{').replace('.hm-mail .cmc-mh{', '.hm-mail .dh{')
     if '.hm-rim .dh,.hm-mail .dh{' not in css:

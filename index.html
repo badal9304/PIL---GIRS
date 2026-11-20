@@ -284,7 +284,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 
 
 .hm-tabs{margin:0 -20px;padding:0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
-.tabb[aria-selected=true] .hm-panel{display:flex;flex-direction:column;gap:16px}
+.hm-panel{display:flex;flex-direction:column;gap:16px}
+.hm-fbar{padding:0 16px 12px;align-items:center}
+.hm-clr{margin-inline-start:auto}
 .hm-days{display:flex;align-items:stretch;gap:6px}
 .hm-dsep{width:1px;margin:6px 4px;background:var(--line)}
 .hm-day{all:unset;box-sizing:border-box;flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);cursor:pointer;position:relative}
@@ -607,7 +609,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-pp{justify-content:flex-end;min-height:0;margin-top:10px;font-size:12px}
 .hm-pp span:first-child{margin-inline-end:auto}
 .seg.sm button{height:24px;padding:0 10px;font-size:12px}
-.seg button span{margin-inline-start:6px;font-size:12px;color:var(--muted)}
+.seg button span{font-size:12px;color:var(--muted)}
 .chipb > span{opacity:.8}
 .panel .hm-dhi{flex:1 1 auto;min-width:0}
 .panel-h p{margin:6px 0 0;font-size:13px;color:var(--muted2)}
@@ -955,7 +957,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     <button class="btn btn-sm btn-primary" disabled="{{bulk.genDis}}" onClick="{{bulk.gen}}">{{bulk.genL}}</button>
                     <button class="btn btn-sm" disabled="{{bulk.fuDis}}" onClick="{{bulk.fu}}">Send follow-up</button>
                     <button class="btn btn-sm" onClick="{{bulk.exp}}">Export to Excel</button>
-                    <button class="btn btn-sm hm-nx" onClick="{{bulk.clear}}">Clear selection</button>
+                    <button class="btn btn-sm hm-clr" onClick="{{bulk.clear}}">Clear selection</button>
                   </div>
                 </sc-if>
                 <div class="hm-th">
@@ -963,7 +965,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                   <div class="seg" role="group" aria-label="Direction"><sc-for list="{{dirs}}" as="x" hint-placeholder-count="3"><button aria-pressed="{{x.cur}}" onClick="{{x.pick}}">{{x.l}}</button></sc-for></div>
                   <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Voyage no., vessel, service or port" aria-label="Search voyages" value="{{q}}" onInput="{{onQ}}" autocomplete="off" spellcheck="false"></div>
                 </div>
-                <div class="chips" role="group" aria-label="Status">
+                <div class="chips hm-fbar" role="group" aria-label="Status">
                   <sc-for list="{{stfs}}" as="f" hint-placeholder-count="5"><button class="chipb" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
                   <sc-if value="{{grpShow}}" hint-placeholder-val="{{ false }}"><label class="cm2-ck hm-gt"><input type="checkbox" class="cbx" checked="{{grpOn}}" onChange="{{grpT}}"><span>Group by date</span></label></sc-if>
                 </div>
@@ -1037,7 +1039,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                   <h2 class="card-title" id="hm-dc">Containers · Detention &amp; Demurrage</h2>
                   <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Container, B/L or customer" aria-label="Search containers" value="{{dd.q}}" onInput="{{dd.onQ}}" autocomplete="off" spellcheck="false"></div>
                 </div>
-                <div class="chips" role="group" aria-label="Status">
+                <div class="chips hm-fbar" role="group" aria-label="Status">
                   <sc-for list="{{dd.fil}}" as="f" hint-placeholder-count="5"><button class="chipb" aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for>
                 </div>
                 <div class="hm-tw">

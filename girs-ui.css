@@ -30,7 +30,7 @@
 .db{padding:18px 24px;overflow:auto;display:flex;flex-direction:column;gap:14px;font-size:13px}
 .df{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line2);background:var(--sub)}
 .seg{display:inline-flex;gap:2px;padding:2px;border-radius:6px;background:var(--neutral)}
-.seg button{all:unset;cursor:pointer;height:30px;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted2)}
+.seg button{all:unset;cursor:pointer;height:30px;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted2);display:inline-flex;align-items:center;justify-content:center;gap:6px;box-sizing:border-box}
 .seg button[aria-pressed=true],.seg button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 .pager{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 4px 0;font-size:13px;color:var(--muted2)}
 .pbtn{min-width:32px;justify-content:center;font-size:15px}
