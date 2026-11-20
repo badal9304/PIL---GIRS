@@ -74,3 +74,43 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
   window.addEventListener('blur', hide);
 })();
+
+/* System health — top-bar icon next to the approvals bell, on every screen.
+   Names, states and details are the ones shown in the Integration Monitor. The ROE feed follows the
+   port selected in the top bar and turns green once a rate is entered in Voyage Invoicing. */
+(function () {
+  'use strict';
+  var PAIR = { SIN: 'USD → SGD', NSA: 'USD → INR', LCH: 'USD → THB', PKG: 'USD → MYR', JED: 'USD → SAR', ZLO: 'USD → MXN' };
+  window.GIRS_HEALTH = function (comp, s) {
+    var pair = PAIR[s.__hub] || PAIR.SIN, roeOk = false;
+    try { roeOk = !!((JSON.parse(localStorage.getItem('girs.home') || '{}') || {}).roeSet || {})[pair]; } catch (e) {}
+    var Y = [
+      ['LMS', 'ok', 'B/L, booking and container data · last message 11:52'],
+      ['Government tax portals', 'bad', '4 e-invoices rejected in validation · 11:58'],
+      ['Treasury · ROE feed', roeOk ? 'ok' : 'warn', roeOk ? pair + ' rate entered manually' : pair + ' not received today · expected by 08:00'],
+      ['GFS (Oracle Fusion)', 'warn', '1 receipt posting batch retrying · 11:40'],
+      ['Email delivery', 'warn', '2 invoice emails bounced · 11:15'],
+      ['Banks', 'ok', 'CAMT.053 statement imported · 11:22'],
+      ['ODeX', 'ok', 'Invoice request accepted · 11:48'],
+      ['Qwiik', 'ok', 'No errors today'],
+      ['FAM', 'ok', 'Invoice request accepted · 11:02'],
+      ['PowerBI · data lake · AI agents', 'ok', 'Business events delivered · 10:44']
+    ];
+    var ST = { ok: 'Connected', warn: 'Delayed', bad: 'Errors' };
+    var iss = Y.filter(function (y) { return y[1] !== 'ok'; }), bad = Y.some(function (y) { return y[1] === 'bad'; });
+    var order = { bad: 0, warn: 1, ok: 2 };
+    var open = !!s.__hl;
+    return {
+      open: open, aria: open ? 'true' : 'false', n: String(iss.length), hasN: iss.length > 0,
+      cls: 'btn btn-icon ghl-btn' + (iss.length ? (bad ? ' bad' : ' warn') : ''),
+      label: iss.length ? 'System health: ' + iss.length + ' of ' + Y.length + ' need attention' : 'System health: all systems connected',
+      sum: iss.length ? iss.length + ' of ' + Y.length + ' need attention' : 'All ' + Y.length + ' connected',
+      items: Y.slice().sort(function (a, b) { return order[a[1]] - order[b[1]]; }).map(function (y) {
+        return { name: y[0], detail: y[2], dot: 'ghl-d ' + y[1], state: y[0].indexOf('Treasury') === 0 ? (y[1] === 'ok' ? 'Received' : 'Not received') : ST[y[1]], sc: 'ghl-s ' + y[1] };
+      }),
+      toggle: function () { comp.setState({ __hl: !s.__hl, __um: false }); },
+      close: function () { comp.setState({ __hl: false }); }
+    };
+  };
+  try { document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var b = document.querySelector('.ghl-p'); if (b) { var x = document.querySelector('.ghl-scrim'); if (x) x.click(); } } }); } catch (e) {}
+})();

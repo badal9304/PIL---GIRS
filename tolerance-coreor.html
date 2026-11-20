@@ -319,6 +319,20 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
           </div>
           <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="ghl">
+            <button class="{{shell.health.cls}}" aria-haspopup="dialog" aria-expanded="{{shell.health.aria}}" aria-label="{{shell.health.label}}" title="{{shell.health.label}}" onClick="{{shell.health.toggle}}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
+              <sc-if value="{{shell.health.hasN}}" hint-placeholder-val="{{ true }}"><span class="ghl-n">{{shell.health.n}}</span></sc-if>
+            </button>
+            <sc-if value="{{shell.health.open}}" hint-placeholder-val="{{ false }}">
+              <button class="ghl-scrim" tabindex="-1" aria-hidden="true" onClick="{{shell.health.close}}"></button>
+              <div class="ghl-p" role="dialog" aria-label="System health">
+                <div class="ghl-h"><b>System health</b><span>{{shell.health.sum}}</span></div>
+                <ul><sc-for list="{{shell.health.items}}" as="h" hint-placeholder-count="10"><li><i class="{{h.dot}}" aria-hidden="true"></i><span class="ghl-b"><b>{{h.name}}</b><small>{{h.detail}}</small></span><span class="{{h.sc}}">{{h.state}}</span></li></sc-for></ul>
+                <a class="ghl-f lnk" href="integration-monitor.html">Open Integration Monitor</a>
+              </div>
+            </sc-if>
+          </div>
           <a href="approvals-inbox.html" class="btn btn-icon" aria-label="{{shell.pending}} pending approvals" title="{{shell.pending}} pending approvals" style="position: relative; text-decoration: none">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>
             <span class="mono" style="position: absolute; top: -6px; inset-inline-end: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand); color: var(--onaccent); font-size: 12px; line-height: 18px; text-align: center; box-sizing: border-box">{{shell.pending}}</span>
@@ -623,7 +637,7 @@ class Component extends GirsPage {
       hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
       ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
       q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
-      pending: 10, l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
+      pending: 10, health: (typeof GIRS_HEALTH === 'function' ? GIRS_HEALTH(this, s) : { items: [], cls: 'btn btn-icon', n: '', hasN: false, open: false, aria: 'false', label: 'System health', sum: '', toggle: () => {}, close: () => {} }), l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
       um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um, __lgo: false, __lgq: '' }), closeUm: () => this.setState({ __um: false, __lgo: false, __lgq: '' }),
       logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
         pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
