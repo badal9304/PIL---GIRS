@@ -638,66 +638,93 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .panel-b .hm-stk.lg{margin:0 0 4px}
 
 
-/* Home · version 3 — manifest summary */
-.mf-hold{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:6px;background:var(--sub);border:1px solid var(--line2);font-size:13px}
-.mf-hold b{font-weight:600}
-.ij-l{list-style:none;margin:0;padding:20px 24px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:ij}
-.ij-s{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:0 20px 0 0}
-.ij-s + .ij-s{padding-inline-start:20px;border-inline-start:1px solid var(--line2)}
-.ij-s + .ij-s::before{content:"";position:absolute;inset-inline-start:-6px;top:4px;width:10px;height:10px;border-top:1px solid var(--bdh);border-inline-end:1px solid var(--bdh);background:var(--surface);transform:rotate(45deg)}
-.ij-k{font-size:12px;font-weight:500;color:var(--muted)}
-.ij-n{font-size:20px;line-height:28px;font-weight:600;font-variant-numeric:tabular-nums}
-.ij-d{font-size:12px;color:var(--muted)}
-.ij-iss{all:unset;cursor:pointer;margin-top:4px;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:500}
-.ij-iss.bad{background:var(--badbg);color:var(--bad)}.ij-iss.warn{background:var(--warnbg);color:var(--warn)}
-.ij-iss:hover{text-decoration:underline}
-.ij-iss:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.ij-q{font-size:12px;color:var(--muted)}
-.sv{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
-.sv-k{font-size:12px;font-weight:500;color:var(--muted);margin-inline-end:4px}
-.sv a{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:12px;color:var(--muted2);cursor:pointer}
-.sv a:hover{border-color:var(--bdh)}
-.sv a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.sv i{width:7px;height:7px;border-radius:50%;background:var(--okdot)}
-.sv a.warn{border-color:var(--warnbd);background:var(--warnbg)}.sv a.warn i{background:var(--warnbar)}
-.sv a.bad{border-color:var(--badbd);background:var(--badbg)}.sv a.bad i{background:var(--badbar)}
-.sv b{font-weight:600}.sv a.warn b{color:var(--warn)}.sv a.bad b{color:var(--bad)}
-.db-ht{display:flex;flex-direction:column;gap:1px;margin-inline-end:auto;min-width:0}
-.db-ht span{font-size:12px;color:var(--muted)}
-.card-head:has(.db-ht){min-height:60px}
-.mx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
-.mf{min-width:0}
-.mf-s{padding:20px 24px;display:flex;flex-direction:column;gap:12px}
-.mf-s + .mf-s{border-top:1px solid var(--line2)}
-.mf-h{display:flex;flex-direction:column;gap:2px}
-.mf-k{font-size:12px;font-weight:500;color:var(--muted)}
-.mf-n{font-size:26px;line-height:34px;font-weight:600;font-variant-numeric:tabular-nums}
-.mf-d{font-size:13px;color:var(--muted)}
-.mf .hm-stk.lg{margin:0;height:10px}
-.hx-lg{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.hx-lg li{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center}
-.hx-lg i{width:8px;height:8px;border-radius:2px}
-.hx-lg i.inv{background:var(--ok)}.hx-lg i.rdy{background:var(--accent)}.hx-lg i.blk{background:var(--warn)}
-.hx-lg span{font-size:12px;color:var(--muted)}
-.hx-lg b{grid-column:1 / -1;font-size:16px;font-weight:600;line-height:22px;font-variant-numeric:tabular-nums}
-.hx-lg small{grid-column:1 / -1;font-size:12px;color:var(--muted)}
-.mf-st{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-.mf-st h3{margin:0;font-size:13px;font-weight:600}
-.mf-st span{font-size:12px;color:var(--muted)}
-.mf-r{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.mf-r li{display:grid;grid-template-columns:200px minmax(0,1fr) 56px;align-items:center;gap:12px;font-size:13px}
-.mf-r b{text-align:end;font-weight:600;font-variant-numeric:tabular-nums}
-.mf-rb{height:8px;border-radius:4px;background:var(--neutral);overflow:hidden}
-.mf-rb i{display:block;height:100%;border-radius:4px;background:var(--warn)}
-.mf-ok{margin:0;font-size:13px;color:var(--muted)}
-.mf-ch{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;height:132px;align-items:end}
-.mf-c{display:flex;flex-direction:column;align-items:stretch;gap:6px;height:100%}
-.mf-cv{font-size:12px;font-weight:600;text-align:center;font-variant-numeric:tabular-nums}
-.mf-cb{flex:1 1 auto;display:flex;align-items:flex-end;border-bottom:1px solid var(--line)}
-.mf-cb i{display:block;width:100%;min-height:2px;border-radius:4px 4px 0 0;background:var(--line3)}
-.mf-cb i.today{background:var(--accent)}
-.mf-cl{font-size:12px;color:var(--muted);text-align:center;white-space:nowrap}
-.mf-c:first-child .mf-cl{color:var(--accent2);font-weight:600}
+/* Home · version 3 — the port's week */
+.wk{overflow:visible}
+.wk-h{display:flex;align-items:flex-end;gap:24px;padding:18px 20px 14px}
+.wk-ht{margin-inline-end:auto;min-width:0}
+.wk-ht h2{margin:0;font-size:17px;line-height:24px;font-weight:600}
+.wk-ht p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.wk-lg{list-style:none;margin:0;padding:0;display:flex;gap:16px;font-size:12px;color:var(--muted2)}
+.wk-lg li{display:inline-flex;align-items:center;gap:6px}
+.wk-lg i{width:10px;height:10px;border-radius:50%;box-sizing:border-box}
+.wk-lg i.inv{background:var(--ok)}.wk-lg i.rdy{background:var(--accent)}.wk-lg i.blk{background:var(--warn)}
+.wk-lg i.aw{border:1.5px dashed var(--bdh)}
+.wk-nav{display:flex;align-items:center;gap:6px}
+.wk-g{padding:0 8px 8px}
+.wk-row{display:grid;grid-template-columns:132px repeat(10,minmax(0,1fr))}
+.wk-lane{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:0 12px}
+.wk-lane b{font-size:13px;font-weight:600}
+.wk-lane small{font-size:12px;color:var(--muted)}
+.wk-day{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:1px;padding:8px 10px;margin:0 2px;border-radius:6px;cursor:pointer;position:relative;transition:background-color .15s}
+.wk-day span{font-size:11px;color:var(--muted)}
+.wk-day b{font-size:14px;font-weight:600;line-height:20px}
+.wk-day small{font-size:11px;color:var(--muted);min-height:15px;white-space:nowrap}
+.wk-day small.late{color:var(--bad)}
+.wk-day:hover{background:var(--hover2)}
+.wk-day:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.wk-day.today span{color:var(--accent2);font-weight:600}
+.wk-day[aria-pressed=true]{background:var(--tint2);box-shadow:inset 0 0 0 1px var(--accent)}
+.wk-ln{position:relative}
+.wk-ln.ex{border-bottom:2px solid var(--line3)}
+.wk-cell{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:6px;min-height:118px;padding:10px 6px;margin:0 2px;border-radius:6px;transition:background-color .2s}
+.wk-ln.ex .wk-cell{align-content:flex-end}
+.wk-ln.im .wk-cell{align-content:flex-start}
+.wk-cell.sel{background:var(--tint2)}
+.wk-cell.past{background-image:linear-gradient(var(--sub),var(--sub))}
+.wk-cell.sel.past{background-image:none}
+.wk-cell.now{position:relative}
+.wk-ln.ex .wk-cell.now::before{content:"";position:absolute;bottom:-5px;inset-inline-start:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:var(--accent);z-index:2;animation:wk-pulse 2.4s ease-out infinite}
+@keyframes wk-pulse{0%{box-shadow:0 0 0 0 rgba(0,113,183,.35)}70%{box-shadow:0 0 0 8px rgba(0,113,183,0)}100%{box-shadow:0 0 0 0 rgba(0,113,183,0)}}
+.vr{position:relative;display:block;border-radius:50%;flex:none;outline:none;cursor:pointer;animation:vr-in .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--dl,0ms)}
+@keyframes vr-in{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+.vr svg{display:block;width:100%;height:100%;transform:rotate(-90deg);transition:transform .15s}
+.vr circle{fill:none;stroke-width:5}
+.vr .rg-t{stroke:var(--neutral);fill:var(--surface)}
+.vr .rg-i{stroke:var(--ok)}.vr .rg-r{stroke:var(--accent)}.vr .rg-b{stroke:var(--warn)}
+.vr .rg-i,.vr .rg-r,.vr .rg-b{stroke-dasharray:0 100;animation:rg-fill .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--dl,0ms) + 150ms)}
+@keyframes rg-fill{from{stroke-dasharray:0 100}}
+.vr.aw .rg-t{stroke:var(--bdh);stroke-width:2;stroke-dasharray:3 3}
+.vr.late .rg-t{stroke:var(--badbg)}
+.vr:hover svg,.vr:focus-visible svg{transform:rotate(-90deg) scale(1.12)}
+.vr:focus-visible{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--accent)}
+.pv{position:absolute;bottom:calc(100% + 10px);inset-inline-start:50%;z-index:30;width:240px;margin-inline-start:-120px;display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);font-size:12px;color:var(--muted);text-align:start;pointer-events:none;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s,transform .12s,visibility 0s .12s}
+.pv.l{inset-inline-start:0;margin-inline-start:-8px}
+.pv.r{inset-inline-start:auto;inset-inline-end:0;margin-inline-start:0;margin-inline-end:-8px}
+.wk-ln.im .pv{bottom:auto;top:calc(100% + 10px);transform:translateY(-4px)}
+.vr:hover .pv,.vr:focus-visible .pv{opacity:1;visibility:visible;transform:none;transition:opacity .12s,transform .12s}
+.pv > b{font-size:13px;font-weight:600;color:var(--ink)}
+.pv-st{display:flex;flex-direction:column;gap:2px;margin:6px 0 4px;padding-top:6px;border-top:1px solid var(--line2)}
+.pv-st span{display:flex;align-items:center;gap:6px;color:var(--muted2)}
+.pv-st b{margin-inline-start:auto;color:var(--ink);font-variant-numeric:tabular-nums}
+.pv-st i{width:8px;height:8px;border-radius:2px}
+.pv-st i.inv{background:var(--ok)}.pv-st i.rdy{background:var(--accent)}.pv-st i.blk{background:var(--warn)}
+.pv small{color:var(--accent2)}
+.dm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+.dm-c{display:flex;flex-direction:column;gap:16px;padding:20px 24px}
+.dm-h{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.dm-h h2{margin:0;font-size:15px;font-weight:600;line-height:22px}
+.dm-h p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.dm-n{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.dm-n b{font-size:28px;line-height:36px;font-weight:600;font-variant-numeric:tabular-nums}
+.dm-n span{font-size:13px;color:var(--muted)}
+.dm-bar{display:flex;gap:2px;height:12px;border-radius:6px;background:var(--neutral);overflow:hidden}
+.dm-bar i{display:block;height:100%;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.dm-bar .inv{background:var(--ok)}.dm-bar .rdy{background:var(--accent)}.dm-bar .blk{background:var(--warn)}
+.dm-lg{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.dm-lg dt{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.dm-lg dt i{width:8px;height:8px;border-radius:2px}
+.dm-lg dt i.inv{background:var(--ok)}.dm-lg dt i.rdy{background:var(--accent)}.dm-lg dt i.blk{background:var(--warn)}
+.dm-lg dd{margin:2px 0 0;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.dm-lg dd.dm-a{margin:0;font-size:12px;font-weight:400;color:var(--muted)}
+.dm-rs{padding-top:16px;border-top:1px solid var(--line2)}
+.dm-rs h3{margin:0 0 10px;font-size:13px;font-weight:600}
+.dm-rs ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.dm-rs li{display:grid;grid-template-columns:210px minmax(0,1fr) 48px;align-items:center;gap:12px;font-size:13px}
+.dm-rs b{text-align:end;font-variant-numeric:tabular-nums}
+.dm-rb{height:6px;border-radius:3px;background:var(--neutral);overflow:hidden}
+.dm-rb i{display:block;height:100%;border-radius:3px;background:var(--warn);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.dm-note{margin:0;padding:12px 14px;border-radius:6px;background:var(--sub);font-size:13px;color:var(--muted2)}
+@media (prefers-reduced-motion: reduce){.vr,.vr .rg-i,.vr .rg-r,.vr .rg-b,.wk-ln.ex .wk-cell.now::before{animation:none}.dm-bar i,.dm-rb i,.pv{transition:none}}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -998,57 +1025,68 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <sc-if value="{{od.show}}" hint-placeholder-val="{{ true }}">
-          <div class="banner b-warn" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span><b>{{od.t}}</b> {{od.d}}</span><a class="btn btn-sm x" href="voyage-invoicing.html?view=overdue" style="text-decoration: none">Review overdue</a></div>
-        </sc-if>
+        <section class="card wk" aria-labelledby="wk-t">
+          <div class="wk-h">
+            <div class="wk-ht"><h2 id="wk-t">{{wk.title}}</h2><p>Each ring is a voyage. It fills as its invoices are raised. Select a day to see its manifests below.</p></div>
+            <ul class="wk-lg" aria-label="Legend"><li><i class="inv"></i>Invoiced</li><li><i class="rdy"></i>Ready</li><li><i class="blk"></i>Blocked</li><li><i class="aw"></i>Manifest awaited</li></ul>
+            <div class="wk-nav">
+              <button class="btn btn-icon btn-sm" aria-label="Previous week" title="Previous week" onClick="{{wk.prev}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+              <button class="btn btn-sm" disabled="{{wk.atToday}}" onClick="{{wk.today}}">Today</button>
+              <button class="btn btn-icon btn-sm" aria-label="Next week" title="Next week" onClick="{{wk.next}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+            </div>
+          </div>
+          <div class="wk-g" role="grid" aria-label="{{wk.aria}}">
+            <div class="wk-row wk-days" role="row">
+              <span class="wk-lane" role="columnheader"></span>
+              <sc-for list="{{wk.days}}" as="d" hint-placeholder-count="10">
+                <button class="{{d.cls}}" role="columnheader" aria-pressed="{{d.on}}" onClick="{{d.pick}}" aria-label="{{d.aria}}"><span>{{d.w}}</span><b>{{d.n}}</b><small class="{{d.oc}}">{{d.open}}</small></button>
+              </sc-for>
+            </div>
+            <sc-for list="{{wk.lanes}}" as="ln" hint-placeholder-count="2">
+              <div class="{{ln.cls}}" role="row">
+                <span class="wk-lane" role="rowheader"><b>{{ln.l}}</b><small>{{ln.s}}</small></span>
+                <sc-for list="{{ln.cells}}" as="c" hint-placeholder-count="10">
+                  <div class="{{c.cls}}" role="gridcell" style="{{c.st}}">
+                    <sc-for list="{{c.vs}}" as="v" hint-placeholder-count="4">
+                      <a class="{{v.cls}}" href="{{v.href}}" style="{{v.st}}" aria-label="{{v.aria}}">
+                        <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="rg-t" cx="18" cy="18" r="15"></circle><circle class="rg-i" cx="18" cy="18" r="15" pathLength="100" style="{{v.ai}}"></circle><circle class="rg-r" cx="18" cy="18" r="15" pathLength="100" style="{{v.ar}}"></circle><circle class="rg-b" cx="18" cy="18" r="15" pathLength="100" style="{{v.ab}}"></circle></svg>
+                        <span class="{{v.pc}}" role="tooltip">
+                          <b>{{v.no}} · {{v.vessel}}</b>
+                          <span>{{v.route}}</span>
+                          <span>{{v.when}}</span>
+                          <span class="pv-st"><sc-for list="{{v.rows}}" as="r" hint-placeholder-count="3"><span><i class="{{r.k}}"></i>{{r.l}} <b>{{r.n}}</b></span></sc-for></span>
+                          <small>{{v.hint}}</small>
+                        </span>
+                      </a>
+                    </sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </section>
 
-        <div class="mx">
-          <sc-for list="{{mfs}}" as="m" hint-placeholder-count="2">
-            <section class="card mf" aria-labelledby="{{m.id}}">
-              <div class="card-head">
-                <div class="db-ht"><h2 class="card-title" id="{{m.id}}">{{m.title}}</h2><span>{{m.sub}}</span></div>
+        <div class="dm" aria-live="polite">
+          <sc-for list="{{dm}}" as="m" hint-placeholder-count="2">
+            <section class="card dm-c" aria-labelledby="{{m.id}}">
+              <div class="dm-h">
+                <div><h2 id="{{m.id}}">{{m.title}}</h2><p>{{m.sub}}</p></div>
                 <a class="btn btn-sm" href="{{m.href}}" style="text-decoration: none">{{m.open}}</a>
               </div>
-
-              <div class="mf-s">
-                <div class="mf-h"><span class="mf-k">Today</span><b class="mf-n">{{m.n}}</b><span class="mf-d">{{m.d}}</span></div>
-                <div class="hm-stk lg" aria-hidden="true"><i class="inv" style="{{m.bI}}"></i><i class="rdy" style="{{m.bR}}"></i><i class="blk" style="{{m.bB}}"></i></div>
-                <ul class="hx-lg"><sc-for list="{{m.lg}}" as="g" hint-placeholder-count="3"><li><i class="{{g.k}}"></i><span>{{g.l}}</span><b>{{g.n}}</b><small>{{g.a}}</small></li></sc-for></ul>
-                <sc-if value="{{m.hold.show}}" hint-placeholder-val="{{ false }}"><div class="mf-hold"><span><b>{{m.hold.n}}</b> {{m.hold.t}}</span><a class="lnk" href="invoice-list-v2.html">View unpaid</a></div></sc-if>
-              </div>
-
-              <div class="mf-s">
-                <div class="mf-st"><h3>Blocked because</h3><span>{{m.bTot}}</span></div>
-                <ul class="mf-r"><sc-for list="{{m.rs}}" as="r" hint-placeholder-count="3"><li><span>{{r.l}}</span><span class="mf-rb"><i style="{{r.w}}"></i></span><b>{{r.n}}</b></li></sc-for></ul>
-                <sc-if value="{{m.noBlk}}" hint-placeholder-val="{{ false }}"><p class="mf-ok">Nothing blocked today.</p></sc-if>
-              </div>
-
-              <div class="mf-s">
-                <div class="mf-st"><h3>Manifests coming</h3><span>{{m.coming}}</span></div>
-                <div class="mf-ch" role="img" aria-label="{{m.chL}}">
-                  <sc-for list="{{m.week}}" as="w" hint-placeholder-count="7">
-                    <div class="mf-c" title="{{w.tip}}"><span class="mf-cv">{{w.v}}</span><span class="mf-cb"><i class="{{w.cls}}" style="{{w.h}}"></i></span><span class="mf-cl">{{w.l}}</span></div>
-                  </sc-for>
+              <div class="dm-n"><b>{{m.n}}</b><span>{{m.d}}</span></div>
+<sc-if value="{{m.due}}" hint-placeholder-val="{{ true }}">
+              <div class="dm-bar" aria-hidden="true"><i class="inv" style="{{m.bI}}"></i><i class="rdy" style="{{m.bR}}"></i><i class="blk" style="{{m.bB}}"></i></div>
+              <dl class="dm-lg"><sc-for list="{{m.lg}}" as="g" hint-placeholder-count="3"><div><dt><i class="{{g.k}}"></i>{{g.l}}</dt><dd>{{g.n}}</dd><dd class="dm-a">{{g.a}}</dd></div></sc-for></dl>
+              </sc-if>
+              <sc-if value="{{m.hasRs}}" hint-placeholder-val="{{ true }}">
+                <div class="dm-rs"><h3>Blocked because</h3>
+                  <ul><sc-for list="{{m.rs}}" as="r" hint-placeholder-count="3"><li><span>{{r.l}}</span><span class="dm-rb"><i style="{{r.w}}"></i></span><b>{{r.n}}</b></li></sc-for></ul>
                 </div>
-              </div>
+              </sc-if>
+              <sc-if value="{{m.note}}" hint-placeholder-val="{{ false }}"><p class="dm-note">{{m.noteL}}</p></sc-if>
             </section>
           </sc-for>
         </div>
-
-        <section class="card ij" aria-labelledby="ij-t">
-          <div class="card-head"><div class="db-ht"><h2 class="card-title" id="ij-t">Invoices generated today</h2><span>{{ij.sub}}</span></div><a class="btn btn-sm" href="invoice-list-v2.html" style="text-decoration: none">Open Invoice List</a></div>
-          <ol class="ij-l">
-            <sc-for list="{{ij.steps}}" as="j" hint-placeholder-count="5">
-              <li class="ij-s">
-                <span class="ij-k">{{j.l}}</span>
-                <b class="ij-n">{{j.n}}</b>
-                <span class="ij-d">{{j.d}}</span>
-                <sc-if value="{{j.hasIss}}" hint-placeholder-val="{{ false }}"><a class="{{j.ic}}" href="{{j.ih}}">{{j.iss}}</a></sc-if>
-                <sc-if value="{{j.hasQ}}" hint-placeholder-val="{{ false }}"><span class="ij-q">{{j.q}}</span></sc-if>
-              </li>
-            </sc-for>
-          </ol>
-        </section>
       </main>
     </div>
   </div>
@@ -1192,10 +1230,10 @@ const hmSize = (n) => (n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = {};
+    this.state = { win: hmAdd(HM_TODAY, -3), sel: HM_TODAY };
   }
   renderVals() {
-    const s = this.state;
+    const s = this.state, self = this;
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('girs.home') || '{}') || {}; } catch (e) {}
     const gen = saved.gen || {}, blGen = saved.blGen || {}, roeSet = saved.roeSet || {};
@@ -1216,60 +1254,73 @@ class GirsPage extends DCLogic {
     const tally = (vs, k) => vs.reduce((a, v) => a + v[k], 0);
     const usd = (vs, k) => vs.reduce((a, v) => a + v[k] * v.avg, 0);
     const pl = (n, a, b) => hmN(n) + ' ' + (n === 1 ? a : b);
-    const today = day(HM_TODAY);
-    const overdue = [];
-    for (let i = 1; i <= 14; i++) day(hmAdd(HM_TODAY, -i)).forEach((v) => { if (v.late) overdue.push(v); });
+    const fmt = (d, o) => hmFmt(d, o || { weekday: 'short', day: 'numeric', month: 'short' });
+    const N = 10, days = []; for (let i = 0; i < N; i++) days.push(hmAdd(s.win, i));
+    const data = days.map((d) => day(d));
+    const sel = days.includes(s.sel) ? s.sel : days[Math.min(N - 1, Math.max(0, hmDiff(s.win, HM_TODAY)))];
 
-    const pair = (today[0] || {}).pair || 'USD → SGD';
-
-    const oOpen = tally(overdue, 'open');
-    const od = { show: overdue.length > 0, t: pl(overdue.length, 'voyage', 'voyages') + ' from earlier days still have open invoices.', d: hmN(oOpen) + ' invoices · ' + hmUsd(usd(overdue, 'open')) + ' not yet invoiced.' };
-
-    // next 7 days (after today)
-    const days = []; for (let i = 0; i < 7; i++) days.push(hmAdd(HM_TODAY, i));
-    const byDay = days.map((d) => (d === HM_TODAY ? today : day(d)));
-    const mf = (dir) => {
-      const E = dir === 'E';
-      const tv = today.filter((v) => v.dir === dir);
-      const B = tally(tv, 'bls'), I = tally(tv, 'inv'), R = tally(tv, 'ready'), K = tally(tv, 'blocked');
-      const w = (n) => 'width:' + (B ? (n / B) * 100 : 0) + '%';
-      const rs0 = [['Data not received from LMS', tally(tv, 'nod')], ['ROE not received · ' + pair, tally(tv, 'roe')], ['Split-payer unconfirmed', tally(tv, 'hold')]];
-      const rmax = Math.max(1, ...rs0.map((r) => r[1]));
-      const wk = byDay.map((vs) => vs.filter((v) => v.dir === dir));
-      const wb = wk.map((vs) => tally(vs, 'bls')), wmax = Math.max(1, ...wb);
-      const up = wk.slice(1), upV = [].concat(...up);
+    // ---------- the week
+    const ring = (v, di, k) => {
+      const t = v.bls || 1, pi = (v.inv / t) * 100, pr = (v.ready / t) * 100, pb = (v.notDue ? 0 : v.blocked / t) * 100;
+      const size = Math.round(18 + 16 * Math.sqrt(Math.min(1, v.bls / 1100)));
+      const E = v.dir === 'E';
+      const rows = v.notDue ? [] : [['inv', 'Invoiced', v.inv], ['rdy', 'Ready', v.ready], ['blk', 'Blocked', v.blocked]].map(([kk, l, n]) => ({ k: kk, l, n: hmN(n) }));
       return {
-        id: 'mf-' + dir, title: E ? 'Export manifest' : 'Import manifest', sub: (E ? 'Departures from ' : 'Arrivals at ') + port,
-        href: VI + '?dir=' + dir, open: E ? 'Open exports' : 'Open imports',
-        n: pl(B, 'B/L', 'B/Ls'), d: tv.length ? pl(tv.length, 'voyage', 'voyages') + ' · all manifests received · ' + (B ? Math.round((I / B) * 100) : 0) + '% invoiced' : (E ? 'No departures today' : 'No arrivals today'),
-        bI: w(I), bR: w(R), bB: w(K),
-        lg: [['inv', 'Invoiced', I, usd(tv, 'inv')], ['rdy', 'Ready to generate', R, usd(tv, 'ready')], ['blk', 'Blocked', K, usd(tv, 'blocked')]].map(([k, l, n, a]) => ({ k, l, n: hmN(n), a: hmUsd(a) })),
-        bTot: K ? pl(K, 'B/L', 'B/Ls') + ' · ' + hmUsd(usd(tv, 'blocked')) : '',
-        hold: (() => { const n = E ? 0 : Math.round(tally(tv, 'inv') * 0.12); return { show: n > 0, n: hmN(n), t: 'B/Ls invoiced but unpaid · cargo and container release on hold in LMS' }; })(),
-        rs: rs0.filter((r) => r[1]).map(([l, n]) => ({ l, n: hmN(n), w: 'width:' + (n / rmax) * 100 + '%' })), noBlk: !K,
-        coming: pl(upV.length, 'voyage', 'voyages') + ' · ' + pl(tally(upV, 'bls'), 'B/L', 'B/Ls') + ' in the next 6 days',
-        chL: (E ? 'Departures' : 'Arrivals') + ' B/Ls by day: ' + days.map((d, i) => hmFmt(d, { weekday: 'short' }) + ' ' + wb[i]).join(', '),
-        week: days.map((d, i) => ({ l: i === 0 ? 'Today' : hmFmt(d, { weekday: 'short', day: 'numeric' }), v: wb[i] ? hmN(wb[i]) : '–', h: 'height:' + (wb[i] / wmax) * 100 + '%', cls: i === 0 ? 'today' : '',
-          tip: hmFmt(d, { weekday: 'long', day: 'numeric', month: 'short' }) + ' · ' + pl(wk[i].length, 'voyage', 'voyages') + ' · ' + pl(wb[i], 'B/L', 'B/Ls') + (i === 0 ? ' · manifests received' : ' · manifests arrive at cut-off') }))
+        cls: 'vr' + (v.notDue ? ' aw' : '') + (v.late ? ' late' : ''), st: 'width:' + size + 'px;height:' + size + 'px;--dl:' + (di * 45 + k * 25) + 'ms',
+        ai: 'stroke-dasharray:' + pi + ' 100', ar: 'stroke-dasharray:' + pr + ' 100;stroke-dashoffset:' + -pi, ab: 'stroke-dasharray:' + pb + ' 100;stroke-dashoffset:' + -(pi + pr),
+        pc: 'pv' + (di < 2 ? ' l' : di > N - 3 ? ' r' : ''),
+        no: v.no, vessel: v.vessel, route: v.pol + ' → ' + v.pod + ' · ' + v.svc,
+        when: (E ? 'ETD ' : 'ETA ') + fmt(v.date) + ' · ' + pl(v.bls, 'B/L', 'B/Ls') + ' · ' + (v.notDue ? 'manifest awaited' : 'manifest received'),
+        rows, hint: v.late ? hmDiff(v.date, HM_TODAY) + (hmDiff(v.date, HM_TODAY) === 1 ? ' day' : ' days') + ' overdue · open in Voyage Invoicing' : v.notDue ? 'LMS sends the manifest at cut-off' : 'Open in Voyage Invoicing',
+        href: VI + '?d=' + v.date + '&v=' + encodeURIComponent(v.id),
+        aria: 'Voyage ' + v.no + ', ' + v.vessel + ', ' + (E ? 'departs ' : 'arrives ') + fmt(v.date) + ', ' + pl(v.bls, 'B/L', 'B/Ls') + (v.notDue ? ', manifest awaited' : ', ' + hmN(v.inv) + ' invoiced, ' + hmN(v.ready) + ' ready, ' + hmN(v.blocked) + ' blocked')
       };
     };
-    // invoices generated today: where they are now
-    const G = tally(today, 'inv'), jr = hmRnd('ij' + port + ent);
-    const taxQ = Math.round(G * (0.004 + jr() * 0.006)), rej = Math.min(4, G), val = Math.max(0, G - taxQ - rej);
-    const emQ = Math.round(val * (0.01 + jr() * 0.01)), bounce = Math.min(2, val), sent = Math.max(0, val - emQ - bounce);
-    const gfsR = Math.round(sent * (0.015 + jr() * 0.01)), posted = Math.max(0, sent - gfsR);
-    const step = (l, n, d, iss, ic, ih, q) => ({ l, n: hmN(n), d, hasIss: !!iss, iss, ic: 'ij-iss ' + ic, ih: ih || 'integration-monitor.html', hasQ: !!q, q });
-    const ij = {
-      sub: 'Where today’s ' + hmN(G) + ' invoices are now · tax portal, customer email and GFS',
-      steps: [
-        step('Generated', G, 'Invoices raised today', '', '', '', ''),
-        step('Submitted to tax portal', G - taxQ, 'Sent for e-invoice validation', '', '', '', taxQ ? hmN(taxQ) + ' waiting to send' : ''),
-        step('Validated', val, 'IRN / QR received', rej ? hmN(rej) + ' rejected' : '', 'bad', 'einvoice-exceptions.html', ''),
-        step('Emailed to customer', sent, 'Delivered to billing contacts', bounce ? hmN(bounce) + ' bounced' : '', 'warn', 'integration-monitor.html', emQ ? hmN(emQ) + ' in the mail queue' : ''),
-        step('Posted to GFS', posted, 'Accounted in Oracle Fusion', gfsR ? hmN(gfsR) + ' in a retrying batch' : '', 'warn', 'integration-monitor.html', '')
-      ]
+    const lane = (dir) => ({
+      cls: 'wk-row wk-ln ' + (dir === 'E' ? 'ex' : 'im'), l: dir === 'E' ? 'Departures' : 'Arrivals', s: dir === 'E' ? 'Export manifest' : 'Import manifest',
+      cells: days.map((d, di) => ({ cls: 'wk-cell' + (d === sel ? ' sel' : '') + (d < HM_TODAY ? ' past' : '') + (d === HM_TODAY ? ' now' : ''), st: '',
+        vs: data[di].filter((v) => v.dir === dir).sort((a, b) => b.bls - a.bls).map((v, k) => ring(v, di, k)) }))
+    });
+    const wk = {
+      title: 'The week at ' + port,
+      aria: 'Voyages by day, ' + fmt(days[0]) + ' to ' + fmt(days[N - 1]),
+      days: days.map((d, di) => {
+        const vs = data[di], open = tally(vs, 'open'), late = d < HM_TODAY && open > 0;
+        return { cls: 'wk-day' + (d === HM_TODAY ? ' today' : ''), on: d === sel ? 'true' : 'false', pick: () => self.setState({ sel: d }),
+          w: d === HM_TODAY ? 'Today' : fmt(d, { weekday: 'short' }), n: fmt(d, { day: 'numeric', month: 'short' }),
+          open: d > HM_TODAY ? pl(vs.length, 'voyage', 'voyages') : open ? hmN(open) + ' open' : vs.length ? 'All invoiced' : 'No voyages', oc: late ? 'late' : '',
+          aria: fmt(d, { weekday: 'long', day: 'numeric', month: 'long' }) + ', ' + pl(vs.length, 'voyage', 'voyages') + (open ? ', ' + hmN(open) + ' invoices open' : '') };
+      }),
+      lanes: [lane('E'), lane('I')],
+      prev: () => self.setState({ win: hmAdd(s.win, -7) }), next: () => self.setState({ win: hmAdd(s.win, 7) }),
+      today: () => self.setState({ win: hmAdd(HM_TODAY, -3), sel: HM_TODAY }), atToday: s.win === hmAdd(HM_TODAY, -3) && sel === HM_TODAY
     };
-    return { greet, ctx: cty + ' (' + port + ') · ' + ent + ' · LMS data received 2 min ago', od, mfs: [mf('E'), mf('I')], ij };
+
+    // ---------- the selected day, per manifest
+    const sv = data[days.indexOf(sel)] || [];
+    const isToday = sel === HM_TODAY, fut = sel > HM_TODAY, dayL = isToday ? 'today' : fmt(sel, { weekday: 'short', day: 'numeric', month: 'short' });
+    const pair = (sv[0] || {}).pair || 'USD → SGD';
+    const dm = ['E', 'I'].map((dir) => {
+      const E = dir === 'E', vs = sv.filter((v) => v.dir === dir);
+      const B = tally(vs, 'bls'), I = tally(vs, 'inv'), R = tally(vs, 'ready'), K = fut ? 0 : tally(vs, 'blocked');
+      const w = (n) => 'width:' + (B ? (n / B) * 100 : 0) + '%';
+      const rs0 = [['Data not received from LMS', tally(vs, 'nod')], ['ROE not received · ' + pair, tally(vs, 'roe')], ['Split-payer unconfirmed', tally(vs, 'hold')]];
+      const rmax = Math.max(1, ...rs0.map((r) => r[1]));
+      const rs = fut ? [] : rs0.filter((r) => r[1]).map(([l, n]) => ({ l, n: hmN(n), w: 'width:' + (n / rmax) * 100 + '%' }));
+      return {
+        id: 'dm-' + dir, title: E ? 'Export manifest' : 'Import manifest',
+        sub: (E ? 'Departures from ' : 'Arrivals at ') + port + ' · ' + fmt(sel, { weekday: 'long', day: 'numeric', month: 'long' }),
+        href: VI + '?d=' + sel + '&dir=' + dir, open: E ? 'Open exports' : 'Open imports',
+        n: pl(B, 'B/L', 'B/Ls'),
+        d: !vs.length ? (E ? 'No departures ' : 'No arrivals ') + dayL : pl(vs.length, 'voyage', 'voyages') + ' · ' + (fut ? 'manifests awaited' : (B ? Math.round((I / B) * 100) : 0) + '% invoiced'),
+        bI: w(I), bR: w(R), bB: w(K),
+        lg: [['inv', 'Invoiced', I, usd(vs, 'inv')], ['rdy', 'Ready to generate', R, usd(vs, 'ready')], ['blk', 'Blocked', K, fut ? 0 : usd(vs, 'blocked')]].map(([k, l, n, a]) => ({ k, l, n: hmN(n), a: hmUsd(a) })),
+        due: !fut && vs.length > 0, hasRs: rs.length > 0, rs,
+        note: fut || (!rs.length && vs.length > 0),
+        noteL: fut ? 'LMS sends each manifest at cut-off. Invoices for these voyages can be generated from ' + fmt(sel, { weekday: 'long', day: 'numeric', month: 'short' }) + '.' : 'Nothing is blocked for this day.'
+      };
+    });
+    return { greet, ctx: cty + ' (' + port + ') · ' + ent + ' · LMS data received 2 min ago', wk, dm };
   }
 }
 
