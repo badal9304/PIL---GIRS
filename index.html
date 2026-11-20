@@ -504,6 +504,12 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-xn{width:12px;background:var(--sub)}
 .hm-mbd{min-height:240px;padding:10px 12px;line-height:20px;font:inherit;font-size:13px;resize:vertical}
 .hm-blr{cursor:pointer}
+.panel-b .hm-blt thead th{top:-20px}
+.hm-blt .hm-cb{width:40px;padding-inline:12px 0}
+.hm-blsel{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border:1px solid var(--tintbd);border-radius:6px;background:var(--tint2);box-sizing:border-box}
+.hm-blsel b{font-size:13px;margin-inline-end:8px}
+.hm-blsel .hm-clr{margin-inline-start:auto}
+.hm-blsel .hm-why{font-size:12px;color:var(--muted)}
 .hm-blr:hover td{background:var(--hover2)}
 
 .bm-st{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500}
@@ -1118,9 +1124,17 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             <div class="seg sm" role="group" aria-label="Filter B/Ls"><sc-for list="{{drw.filters}}" as="f" hint-placeholder-count="4"><button aria-pressed="{{f.cur}}" onClick="{{f.pick}}">{{f.l}}<span>{{f.n}}</span></button></sc-for></div>
           </div>
           <div class="search wide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Search B/L no. or billing party" aria-label="Search B/Ls" value="{{drw.q}}" onInput="{{drw.onQ}}" autocomplete="off" spellcheck="false"></div>
+          <sc-if value="{{drw.sel.show}}" hint-placeholder-val="{{ false }}">
+            <div class="hm-blsel" role="region" aria-label="Selected B/Ls"><b>{{drw.sel.n}}</b>
+              <button class="btn btn-sm btn-primary" disabled="{{drw.sel.genDis}}" onClick="{{drw.sel.gen}}">{{drw.sel.genL}}</button>
+              <button class="btn btn-sm" disabled="{{drw.sel.fuDis}}" title="{{drw.sel.fuWhy}}" onClick="{{drw.sel.fu}}">{{drw.sel.fuL}}</button>
+              <button class="btn btn-sm" onClick="{{drw.sel.exp}}">Export to Excel</button>
+              <button class="btn btn-sm hm-clr" onClick="{{drw.sel.clear}}">Clear selection</button>
+            </div>
+          </sc-if>
           <table class="lst hm-blt">
-            <thead><tr><th scope="col">B/L No.</th><th scope="col">Billing party</th><th scope="col" class="r">Ctr</th><th scope="col" class="r">Amount</th><th scope="col">Status</th></tr></thead>
-            <tbody><sc-for list="{{drw.bls}}" as="b" hint-placeholder-count="8"><tr class="hm-blr" onClick="{{b.open}}"><td><button class="lnk mono" onClick="{{b.open}}" aria-label="{{b.openL}}">{{b.bl}}</button></td><td>{{b.cust}}</td><td class="r">{{b.ctr}}</td><td class="r">{{b.amt}}</td><td><span class="{{b.stC}}">{{b.st}}</span><small class="hm-sub">{{b.note}}</small></td></tr></sc-for></tbody>
+            <thead><tr><th scope="col" class="hm-cb"><input type="checkbox" class="cbx" aria-label="Select all B/Ls on this page" checked="{{drw.allOn}}" disabled="{{drw.allDis}}" onChange="{{drw.allT}}"></th><th scope="col">B/L No.</th><th scope="col">Billing party</th><th scope="col" class="r">Ctr</th><th scope="col" class="r">Amount</th><th scope="col">Status</th></tr></thead>
+            <tbody><sc-for list="{{drw.bls}}" as="bl" hint-placeholder-count="8"><tr class="hm-blr" onClick="{{bl.open}}"><td class="hm-cb" onClick="{{bl.stop}}"><input type="checkbox" class="cbx" aria-label="{{bl.chkL}}" checked="{{bl.on}}" disabled="{{bl.chkDis}}" onChange="{{bl.chk}}"></td><td><button class="lnk mono" onClick="{{bl.open}}" aria-label="{{bl.openL}}">{{bl.bl}}</button></td><td>{{bl.cust}}</td><td class="r">{{bl.ctr}}</td><td class="r">{{bl.amt}}</td><td><span class="{{bl.stC}}">{{bl.st}}</span><small class="hm-sub">{{bl.note}}</small></td></tr></sc-for></tbody>
           </table>
           <sc-if value="{{drw.noBls}}" hint-placeholder-val="{{ false }}"><div class="empty">{{drw.noBlsL}}</div></sc-if>
           <sc-if value="{{drw.pg.show}}" hint-placeholder-val="{{ false }}"><div class="pager hm-pp"><span>{{drw.pg.text}}</span><button class="btn btn-sm pbtn" aria-label="Previous page" disabled="{{drw.pg.prevDis}}" onClick="{{drw.pg.prev}}">‹</button><span class="mono">{{drw.pg.pos}}</span><button class="btn btn-sm pbtn" aria-label="Next page" disabled="{{drw.pg.nextDis}}" onClick="{{drw.pg.next}}">›</button></div></sc-if>
@@ -1383,7 +1397,7 @@ class GirsPage extends DCLogic {
       tab: 'voy', from: HM_TODAY, to: HM_TODAY, view: 'range', win: hmAdd(HM_TODAY, -6), cal: false,
       dir: 'all', stf: 'all', q: '', sort: 'urgency', sdir: 1, grp: true, pg: 1, psz: 25, sel: {},
       gen: saved.gen || {}, blGen: saved.blGen || {}, ri: null, decl: false, mail: null, mailPrev: false, riEd: saved.riEd || {}, riCu: null, riSug: null, fu: saved.fu || {}, roeReq: saved.roeReq || {}, roeSet: saved.roeSet || {}, ddGen: saved.ddGen || {}, ddAct: saved.ddAct || {},
-      drw: '', drwF: '', drwQ: '', drwPg: 1, confirm: null, rateFor: '', rateVal: '', done: null, alertOff: false,
+      drw: '', drwF: '', drwQ: '', drwPg: 1, blSel: {}, confirm: null, rateFor: '', rateVal: '', done: null, alertOff: false,
       ddF: 'all', ddQ: '', ddPg: 1
     };
     try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.mail) return this.setState({ mail: null }); if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null }); if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
@@ -1496,7 +1510,7 @@ class GirsPage extends DCLogic {
         ready: v.notDue ? '—' : hmN(v.ready), readyC: v.ready ? 'r' : 'r mu', blocked: v.notDue ? '—' : hmN(v.blocked), blockedC: v.blocked && !v.notDue ? 'r hm-wn' : 'r mu', why,
         on: !!s.sel[v.id], chk: () => toggle(v.id), chkL: 'Select ' + v.no, cls: s.sel[v.id] ? 'on' : '',
         canGen: v.ready > 0, genL: 'Generate ' + hmN(v.ready), noGen: !v.ready, noGenL: v.notDue ? 'Awaiting LMS' : v.open ? 'Blocked' : 'Done',
-        open: () => self.setState({ drw: v.id, drwF: v.blocked && !v.ready ? 'blocked' : '', drwQ: '', drwPg: 1 }), openL: 'Open voyage ' + v.no,
+        open: () => self.setState({ drw: v.id, drwF: v.blocked && !v.ready ? 'blocked' : '', drwQ: '', drwPg: 1, blSel: {} }), openL: 'Open voyage ' + v.no,
         gen: () => self.setState({ confirm: { kind: 'voy', ids: [v.id] } })
       };
     };
@@ -1540,7 +1554,7 @@ class GirsPage extends DCLogic {
       const vs = m.ids.map((id) => pool0.find((v) => v.id === id)).filter(Boolean);
       const out = [];
       vs.forEach((v) => blSeq(v).forEach((k, i) => {
-        if (k !== m.reason || (m.pair && v.pair !== m.pair)) return;
+        if (k !== m.reason || (m.pair && v.pair !== m.pair) || (m.idx && !m.idx.includes(i))) return;
         const b = blRow(v, i), d = hmFmt(v.date, { day: '2-digit', month: 'short', year: 'numeric' });
         out.push([v.no, v.vessel, v.dir === 'E' ? 'Export' : 'Import', v.pol, v.pod, d, b.bl, b.cust, b.ctr, b.amt].concat(
           m.reason === 'nod' ? [HM_MISS[i % HM_MISS.length]] : m.reason === 'roe' ? [v.pair, d] : ['Second payer and share not confirmed']));
@@ -1548,7 +1562,7 @@ class GirsPage extends DCLogic {
       return { vs, rows: out };
     };
     const openMail = (reason, vs, opt) => {
-      const o = opt || {}, R = MAILR[reason], m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '' }, mr = mailRows(m0);
+      const o = opt || {}, R = MAILR[reason], m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '', idx: o.idx || null }, mr = mailRows(m0);
       const n = mr.rows.length, amt = mr.rows.reduce((a, r) => a + r[9], 0), nos = vs.map((v) => v.no);
       const voyL = nos.length > 6 ? nos.slice(0, 6).join(', ') + ' and ' + (nos.length - 6) + ' more' : nos.join(', ');
       const sign = '\n\nRegards,\n' + (typeof USER_NAME === 'string' ? USER_NAME : 'Daniel Tan') + '\nBilling Executive · ' + cty + ' (' + port + ')';
@@ -1615,6 +1629,24 @@ class GirsPage extends DCLogic {
       const idx = [];
       seq.forEach((k, i) => { if (want(k) && (!dq || (blno(i) + ' ' + custOf(i)).toUpperCase().includes(dq))) idx.push(i); });
       const dps = 50, dpages = Math.max(1, Math.ceil(idx.length / dps)), dpn = Math.min(s.drwPg, dpages);
+      // B/L selection (invoiced B/Ls cannot be selected)
+      const blSel = s.blSel || {};
+      const pageSel = idx.slice((dpn - 1) * dps, dpn * dps).filter((i) => seq[i] !== 'inv');
+      const selI = Object.keys(blSel).map(Number).filter((i) => seq[i] && seq[i] !== 'inv');
+      const selReady = selI.filter((i) => seq[i] === 'ready'), selBlk = selI.filter((i) => ['roe', 'nod', 'hold'].includes(seq[i]));
+      const blkKinds = Array.from(new Set(selBlk.map((i) => seq[i])));
+      const fk = blkKinds.length === 1 ? blkKinds[0] : '';
+      const fuSent = fk === 'roe' && s.roeReq[dv.pair];
+      const sel = { show: selI.length > 0, n: hmN(selI.length) + (selI.length === 1 ? ' B/L selected' : ' B/Ls selected'),
+        genL: 'Generate ' + hmN(selReady.length) + ' ready', genDis: !selReady.length,
+        gen: () => self.setState({ confirm: { kind: 'bls', vid: dv.id, idx: selReady.slice() } }),
+        fuL: fk === 'roe' ? (fuSent ? 'Enter rate' : 'Request ROE') : 'Send follow-up', fuDis: !fk,
+        fuWhy: !selBlk.length ? 'No blocked B/Ls selected' : !fk ? 'Selected B/Ls are blocked for different reasons — select one reason at a time' : '',
+        fu: () => (fk === 'roe' && fuSent ? self.setState({ rateFor: dv.pair, rateVal: '' })
+          : openMail(fk, [dv], { pair: fk === 'roe' ? dv.pair : '', idx: selBlk.slice(), scope: 'voyage ' + dv.no + ' · ' + selBlk.length + ' selected B/Ls', keys: fk === 'roe' ? [['roeReq', dv.pair]] : [['fu', 'v:' + dv.id + ':' + fk]] })),
+        exp: () => self.setState({ __toast: 'Export to Excel prepared — ' + hmN(selI.length) + ' B/Ls of voyage ' + dv.no + '.' }),
+        clear: () => self.setState({ blSel: {} }) };
+      const allOn = pageSel.length > 0 && pageSel.every((i) => blSel[i]);
       const dgo = (v) => () => self.setState({ drwPg: v });
       drw = {
         show: true, no: dv.no, vessel: dv.vessel, svc: dv.svc, typeL: dv.dir === 'E' ? 'Export' : 'Import', typeC: 'chip t-neutral dot-' + dv.dir.toLowerCase(),
@@ -1632,14 +1664,18 @@ class GirsPage extends DCLogic {
         q: s.drwQ, onQ: (e) => self.setState({ drwQ: e.target.value, drwPg: 1 }),
         bls: idx.slice((dpn - 1) * dps, dpn * dps).map((i, n, pageIdx) => {
           const k = seq[i], r = hmRnd(dv.id + i); r();
-          return { open: () => self.setState({ ri: { vid: dv.id, list: pageIdx.slice(), i: n }, decl: false }), openL: 'Open B/L ' + blno(i) + ' — ' + HM_BLST[k][0], bl: blno(i), cust: custOf(i), ctr: String(1 + Math.floor(r() * 3)), amt: hmUsd(dv.avg * (0.6 + r() * 0.8)), st: HM_BLST[k][0], stC: 'chip t-' + HM_BLST[k][1],
+          return { on: blSel[i] ? 'true' : 'false', chkDis: k === 'inv', chkL: (k === 'inv' ? 'Already invoiced — ' : 'Select B/L ') + blno(i),
+            chk: () => { const n2 = Object.assign({}, blSel); if (n2[i]) delete n2[i]; else n2[i] = 1; self.setState({ blSel: n2 }); }, stop: (e) => e && e.stopPropagation && e.stopPropagation(),
+            open: () => self.setState({ ri: { vid: dv.id, list: pageIdx.slice(), i: n }, decl: false }), openL: 'Open B/L ' + blno(i) + ' — ' + HM_BLST[k][0], bl: blno(i), cust: custOf(i), ctr: String(1 + Math.floor(r() * 3)), amt: hmUsd(dv.avg * (0.6 + r() * 0.8)), st: HM_BLST[k][0], stC: 'chip t-' + HM_BLST[k][1],
             note: k === 'nod' ? 'Missing: ' + HM_MISS[i % HM_MISS.length] : k === 'roe' ? dv.pair + ' for ' + hmFmt(dv.date, { day: 'numeric', month: 'short' }) : k === 'hold' ? 'Second payer not confirmed' : k === 'inv' ? 'INV-' + dv.here.slice(0, 2) + '-' + dv.no + '-' + String(i + 1).padStart(4, '0') : '' };
         }),
         noBls: !idx.length, noBlsL: dv.notDue ? 'LMS sends B/L data for this voyage at cut-off. Nothing to do yet.' : 'No B/Ls match.',
         pg: { text: idx.length ? (((dpn - 1) * dps) + 1) + '–' + Math.min(dpn * dps, idx.length) + ' of ' + hmN(idx.length) : '', pos: dpn + ' / ' + dpages, prevDis: dpn <= 1, nextDis: dpn >= dpages, prev: dgo(dpn - 1), next: dgo(dpn + 1), show: dpages > 1 },
+        sel, allOn: allOn ? 'true' : 'false', allDis: !pageSel.length,
+        allT: () => { const n2 = Object.assign({}, blSel); pageSel.forEach((i) => { if (allOn) delete n2[i]; else n2[i] = 1; }); self.setState({ blSel: n2 }); },
         canGen: dv.ready > 0, genL: 'Generate ' + hmN(dv.ready) + ' ready',
         gen: () => self.setState({ confirm: { kind: 'voy', ids: [dv.id] } }), list: 'invoice-list-v2.html?q=' + dv.no,
-        close: () => self.setState({ drw: '' })
+        close: () => self.setState({ drw: '', blSel: {} })
       };
     }
 
@@ -1761,6 +1797,16 @@ class GirsPage extends DCLogic {
         note: 'Only B/Ls with complete LMS data and a rate of exchange are included. Blocked B/Ls stay here until they are cleared.',
         cancel: () => self.setState({ confirm: null }),
         ok: () => { const g = Object.assign({}, s.gen); vs.forEach((v) => { g[v.id] = (g[v.id] || 0) + v.ready; }); self.save({ gen: g, confirm: null, sel: {}, done: { n: hmN(n), q: vs.length === 1 ? vs[0].no : '', nos: vs.length === 1 ? 'voyage ' + vs[0].no : vs.length + ' voyages' } }); } };
+    }
+    if (s.confirm && s.confirm.kind === 'bls') {
+      const v = pool.find((x) => x.id === s.confirm.vid), ix = s.confirm.idx;
+      const amt = v ? ix.reduce((a, i) => a + blRow(v, i).amt, 0) : 0;
+      cf = { show: !!v, title: 'Generate ' + hmN(ix.length) + (ix.length === 1 ? ' invoice?' : ' invoices?'),
+        rows: [['Voyage', v ? v.no + ' · ' + v.vessel : ''], ['B/Ls', ix.length > 4 ? ix.slice(0, 4).map((i) => blRow(v, i).bl).join(', ') + ' and ' + (ix.length - 4) + ' more' : ix.map((i) => blRow(v, i).bl).join(', ')], ['Invoice date', v && v.dir === 'E' ? 'ETD' : 'ETA'], ['Total amount', hmUsd(amt)]].map(([l, val]) => ({ l, v: val })),
+        note: 'Only the selected B/Ls that are ready are included.',
+        cancel: () => self.setState({ confirm: null }),
+        ok: () => { const bg = JSON.parse(JSON.stringify(s.blGen || {})); bg[v.id] = Object.assign({}, bg[v.id] || {}); ix.forEach((i) => { bg[v.id][i] = 1; });
+          self.save({ blGen: bg, confirm: null, blSel: {}, __toast: hmN(ix.length) + (ix.length === 1 ? ' invoice' : ' invoices') + ' generated for voyage ' + v.no + '.' }); } };
     }
     if (s.confirm && s.confirm.kind === 'dd') {
       const cs = s.confirm.cns;
