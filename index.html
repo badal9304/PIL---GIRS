@@ -537,6 +537,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-decl{display:inline-flex;align-items:center;gap:10px;font-size:13px}
 .hm-decl b{color:var(--accent2)}
 .hm-rihint{margin-inline-end:auto;font-size:12px;color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .hm-blr{cursor:pointer}
 .hm-blr:hover td{background:var(--hover2)}
 
@@ -1170,12 +1171,26 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <div class="ri-strip"><sc-for list="{{ri.strip}}" as="x" hint-placeholder-count="3"><div><div class="k">{{x.k}}</div><div class="v">{{x.v}}</div></div></sc-for></div>
           <div class="ri-parties">
             <div><div class="k">From</div><div class="n">{{ri.from0}}</div><sc-for list="{{ri.fromL}}" as="l" hint-placeholder-count="3"><div class="l">{{l}}</div></sc-for></div>
-            <div><div class="k">To</div><div class="n">{{ri.cust}}</div><div class="l">Customer code {{ri.custCode}}</div></div>
+            <div><label class="k" for="hm-cust">To</label>
+              <sc-if value="{{ri.notDone}}" hint-placeholder-val="{{ true }}"><div class="ri-cb" style="margin-top: 6px; max-width: 360px"><input id="hm-cust" class="input {{ri.to.cls}}" style="width: 100%; font-weight: 600" role="combobox" aria-autocomplete="list" aria-expanded="{{ri.to.exp}}" aria-controls="hm-cust-l" aria-activedescendant="{{ri.to.act}}" placeholder="Search customer name or code" value="{{ri.to.val}}" onInput="{{ri.to.onQ}}" onFocus="{{ri.to.onFocus}}" onBlur="{{ri.to.onBlur}}" onKeyDown="{{ri.to.onKey}}" autocomplete="off" spellcheck="false">
+                <sc-if value="{{ri.to.open}}" hint-placeholder-val="{{ false }}"><ul class="ri-sug" role="listbox" id="hm-cust-l"><sc-for list="{{ri.to.opts}}" as="o" hint-placeholder-count="3"><li role="option" id="{{o.id}}" aria-selected="{{o.on}}" onMouseDown="{{o.pick}}"><span class="mono">{{o.code}}</span>{{o.name}}</li></sc-for><sc-if value="{{ri.to.none}}" hint-placeholder-val="{{ false }}"><li class="none">No customer matches</li></sc-if></ul></sc-if></div></sc-if>
+              <sc-if value="{{ri.done}}" hint-placeholder-val="{{ false }}"><div class="n">{{ri.cust}}</div></sc-if>
+              <div class="l" style="margin-top: 6px">{{ri.to.addr}}</div></div>
             <div><div class="k">Customer &amp; payment</div><div class="ri-kv"><sc-for list="{{ri.details}}" as="x" hint-placeholder-count="5"><span>{{x.k}}</span><span>{{x.v}}</span></sc-for></div></div>
           </div>
           <div class="ri-ship"><sc-for list="{{ri.ship}}" as="x" hint-placeholder-count="6"><div><div class="k">{{x.k}}</div><div class="v">{{x.v}}</div></div></sc-for></div>
-          <table class="ri-tbl"><thead><tr><th>Charge head</th><th class="r">Quantity</th><th>UOM</th><th class="r">Unit Price</th><th>Currency</th><th class="r">Total excluding Tax</th><th class="r">Tax applicability</th><th class="r">Tax Amount</th><th class="r">Total Incl Tax</th></tr></thead>
-            <tbody><sc-for list="{{ri.lines}}" as="l" hint-placeholder-count="4"><tr><td class="w">{{l.head}}</td><td class="r">{{l.qty}}</td><td>{{l.uom}}</td><td class="r">{{l.unit}}</td><td>{{l.cur}}</td><td class="r">{{l.ex}}</td><td class="r">{{l.ta}}</td><td class="r">{{l.tax}}</td><td class="r">{{l.incl}}</td></tr></sc-for></tbody></table>
+          <table class="ri-tbl"><thead><tr><th>Charge head</th><th class="r">Quantity</th><th>UOM</th><th class="r">Unit Price</th><th>Currency</th><th class="r">Total excluding Tax</th><th class="r">Tax applicability</th><th class="r">Tax Amount</th><th class="r">Total Incl Tax</th><th><span class="sr-only">Remove</span></th></tr></thead>
+            <tbody><sc-for list="{{ri.lines}}" as="l" hint-placeholder-count="4"><tr class="{{l.cls}}">
+              <td class="w"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div class="ri-cb"><input class="input ri-in {{l.hErr}}" style="width: 100%" role="combobox" aria-autocomplete="list" aria-expanded="{{l.sugA}}" aria-controls="{{l.lid}}" aria-activedescendant="{{l.act}}" aria-label="Charge head" placeholder="Search charge" value="{{l.q}}" onInput="{{l.onQ}}" onFocus="{{l.onFocus}}" onBlur="{{l.onBlur}}" onKeyDown="{{l.onKey}}" autocomplete="off" spellcheck="false">
+                <sc-if value="{{l.sug}}" hint-placeholder-val="{{ false }}"><ul class="ri-sug" role="listbox" id="{{l.lid}}"><sc-for list="{{l.opts}}" as="o" hint-placeholder-count="4"><li role="option" id="{{o.id}}" aria-selected="{{o.on}}" onMouseDown="{{o.pick}}"><span class="mono">{{o.code}}</span>{{o.name}}</li></sc-for><sc-if value="{{l.none}}" hint-placeholder-val="{{ false }}"><li class="none">No charge matches</li></sc-if></ul></sc-if></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.head}}</sc-if></td>
+              <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><input class="input ri-in num {{l.qErr}}" style="width: 72px" value="{{l.qty}}" onInput="{{l.onQty}}" aria-label="Quantity" inputmode="decimal"></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.qty}}</sc-if></td>
+              <td><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div style="position: relative; width: 96px"><select class="select ri-in {{l.uErr}}" style="width: 100%" value="{{l.uom}}" onChange="{{l.onUom}}" aria-label="UOM"><option value="">Select</option><sc-for list="{{l.uoms}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 8px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.uom}}</sc-if></td>
+              <td class="r"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><input class="input ri-in num {{l.pErr}}" style="width: 104px" value="{{l.unit}}" onInput="{{l.onUnit}}" aria-label="Unit Price" inputmode="decimal"></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.unit}}</sc-if></td>
+              <td><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><div style="position: relative; width: 96px"><select class="select ri-in {{l.cErr}}" style="width: 100%" value="{{l.cur}}" onChange="{{l.onCur}}" aria-label="Currency"><option value="">Select</option><sc-for list="{{l.curs}}" as="o" hint-placeholder-count="2"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 8px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div></sc-if><sc-if value="{{l.ro}}" hint-placeholder-val="{{ true }}">{{l.cur}}</sc-if></td>
+              <td class="r">{{l.ex}}</td><td class="r">{{l.ta}}</td><td class="r">{{l.tax}}</td><td class="r">{{l.inc}}</td>
+              <td class="r" style="width: 44px"><sc-if value="{{l.edit}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm ri-x" onClick="{{l.del}}" aria-label="Remove added charge" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></td>
+            </tr></sc-for></tbody></table>
+          <sc-if value="{{ri.canAdd}}" hint-placeholder-val="{{ true }}"><div style="margin-top: 12px"><button class="btn btn-sm" onClick="{{ri.addCharge}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add charges</button></div></sc-if>
           <div class="ri-bt">
             <div><div class="k">Bank details</div><div class="ri-kv"><sc-for list="{{ri.bank}}" as="x" hint-placeholder-count="4"><span>{{x.k}}</span><span>{{x.v}}</span></sc-for></div></div>
             <div class="ri-tot"><sc-for list="{{ri.totals}}" as="t" hint-placeholder-count="3"><div class="{{t.cls}}"><span>{{t.k}}</span><span>{{t.v}}</span></div></sc-for></div>
@@ -1239,6 +1254,12 @@ const HM_MISS = ['Charges', 'Billing party', 'Customer tax ID', 'Cargo / EDI mes
 const HM_BLST = { inv: ['Invoiced', 'done'], ready: ['Ready to generate', 'ok'], roe: ['ROE not received', 'warn'], nod: ['Data not received', 'warn'], hold: ['Split-payer unconfirmed', 'warn'] };
 // fixed figures from the client scenario (PDF): invoiced, ready, roe missing, data not received, split-payer
 const HM_LOC = { SGSIN: ['SGD', 1.3412, 'SG-SR-9', 'ZR-INTL'], INNSA: ['INR', 84.12, 'IN-GST-18', 'ZR-INTL'], MYPKG: ['MYR', 4.471, 'MY-SST-8', 'ZR-INTL'], THLCH: ['THB', 34.25, 'TH-VAT-7', 'ZR-INTL'], SAJED: ['SAR', 3.75, 'SA-VAT-15', 'ZR-INTL'], MXZLO: ['MXN', 17.1, 'MX-IVA-16', 'ZR-INTL'] };
+const HM_CHG = { OFT: 'Ocean Freight', BAF: 'Bunker Adjustment Factor', LSS: 'Low Sulphur Surcharge', 'THC-O': 'Origin THC', 'THC-DST': 'Destination THC', DOC: 'Documentation', SEAL: 'Seal Fee', DO: 'Delivery Order Fee', CLN: 'Container Cleaning', DEM: 'Demurrage', DET: 'Detention', MISC: 'Miscellaneous Charge' };
+const HM_UOM = ['CNTR', 'BL', 'TEU', 'Day'];
+const HM_CITY = { SG: 'Singapore 609', IN: 'Navi Mumbai 400 7', MY: 'Port Klang 420', TH: 'Chonburi 20', SA: 'Jeddah 21', MX: 'Manzanillo 28' };
+const HM_STREET = ['Pioneer Road', 'Jurong Port Road', 'Tuas South Avenue 1', 'Harbour Front Walk', 'Logistics Park Drive', 'Industrial Estate Road', 'Free Zone Boulevard', 'Container Terminal Way'];
+// customer directory per country (code, name, address)
+const hmDir = (cc) => HM_CUST.map((n, j) => { const r = hmRnd(cc + n); r(); return { code: cc + '-' + (100000 + Math.floor(r() * 899999)), name: n + ' (' + cc + ')', addr: (10 + Math.floor(r() * 90)) + ' ' + HM_STREET[j % HM_STREET.length] + ', ' + (HM_CITY[cc] || '') + String(10 + Math.floor(r() * 89)) }; });
 const HM_FIX = { SGSIN: [['0LK5SS', 'E', 'NZAKL', 1000, 1850, [0, 935, 25, 40, 0]], ['1KP8RR', 'I', 'INNSA', 520, 620, [310, 154, 30, 20, 6]]] };
 
 const hmN = (n) => Math.round(n).toLocaleString('en-US');
@@ -1316,15 +1337,15 @@ class GirsPage extends DCLogic {
     this.state = {
       tab: 'voy', from: HM_TODAY, to: HM_TODAY, view: 'range', win: hmAdd(HM_TODAY, -6), cal: false,
       dir: 'all', stf: 'all', q: '', sort: 'urgency', sdir: 1, grp: true, pg: 1, psz: 25, sel: {},
-      gen: saved.gen || {}, blGen: saved.blGen || {}, ri: null, decl: false, fu: saved.fu || {}, roeReq: saved.roeReq || {}, roeSet: saved.roeSet || {}, ddGen: saved.ddGen || {}, ddAct: saved.ddAct || {},
+      gen: saved.gen || {}, blGen: saved.blGen || {}, ri: null, decl: false, riEd: saved.riEd || {}, riCu: null, riSug: null, fu: saved.fu || {}, roeReq: saved.roeReq || {}, roeSet: saved.roeSet || {}, ddGen: saved.ddGen || {}, ddAct: saved.ddAct || {},
       drw: '', drwF: '', drwQ: '', drwPg: 1, confirm: null, rateFor: '', rateVal: '', done: null, alertOff: false,
       ddF: 'all', ddQ: '', ddPg: 1
     };
-    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
+    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null }); if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
   }
   save(patch) {
     const s = Object.assign({}, this.state, patch);
-    try { localStorage.setItem('girs.home', JSON.stringify({ gen: s.gen, blGen: s.blGen, fu: s.fu, roeReq: s.roeReq, roeSet: s.roeSet, ddGen: s.ddGen, ddAct: s.ddAct })); } catch (e) {}
+    try { localStorage.setItem('girs.home', JSON.stringify({ gen: s.gen, blGen: s.blGen, riEd: s.riEd, fu: s.fu, roeReq: s.roeReq, roeSet: s.roeSet, ddGen: s.ddGen, ddAct: s.ddAct })); } catch (e) {}
     this.setState(patch);
   }
   renderVals() {
@@ -1545,14 +1566,70 @@ class GirsPage extends DCLogic {
         ? [['OFT', 'Ocean Freight', amt * 0.7, 'USD', '—', loc[3]], ['BAF', 'Bunker Adjustment Factor', amt * 0.12, 'USD', '—', loc[3]], ['THC', 'Terminal Handling Charge (Origin)', amt * 0.12 * loc[1], loc[0], roeTxt, loc[2]], ['DOC', 'Documentation Fee', 45 * loc[1], loc[0], roeTxt, loc[2]], ['SEAL', 'Seal Fee', 12 * ctr * loc[1], loc[0], roeTxt, loc[2]]]
         : [['OFT', 'Ocean Freight (Collect)', amt * 0.68, 'USD', '—', loc[3]], ['THC', 'Terminal Handling Charge (Destination)', amt * 0.14 * loc[1], loc[0], roeTxt, loc[2]], ['DO', 'Delivery Order Fee', 60 * loc[1], loc[0], roeTxt, loc[2]], ['CLN', 'Container Cleaning', 25 * ctr * loc[1], loc[0], roeTxt, loc[2]]])
         .map(([code, name, a, cur, roe, tax]) => ({ code, name, amt: Math.round(a * 100) / 100, cur, roe, tax }));
-      const custCode = dv.here.slice(0, 2) + String(10000 + (hmRnd(cust)() * 89999 | 0));
+      const cc2 = dv.here.slice(0, 2), dir = hmDir(cc2), key = dv.id + '#' + i;
+      const dflt = dir.find((c) => c.name.indexOf(cust) === 0) || dir[0];
+      const ed = Object.assign({ cust: dflt.code, add: [] }, (s.riEd || {})[key] || {});
+      const putEd = (p) => self.save({ riEd: Object.assign({}, s.riEd, { [key]: Object.assign({}, ed, p) }) });
+      const cu = dir.find((c) => c.code === ed.cust) || null;
+      const rate = (tax) => { const m2 = String(tax).match(/-(\d+(?:\.\d+)?)$/); return /^ZR/.test(tax) ? 0 : m2 ? Number(m2[1]) : 0; };
+      const okAdd = (a) => !!a.code && parseFloat(a.qty) > 0 && !!a.uom && !!a.cur && String(a.unit).trim() !== '' && parseFloat(String(a.unit).replace(/,/g, '')) >= 0;
+      const addLines = ed.add.filter(okAdd).map((a) => ({ code: a.code, name: HM_CHG[a.code], amt: parseFloat(a.qty) * parseFloat(String(a.unit).replace(/,/g, '')), cur: a.cur, roe: a.cur === 'USD' ? '—' : roeTxt, tax: a.cur === 'USD' ? loc[3] : loc[2] }));
       const due = hmAdd(HM_TODAY, 14);
       const m = window.GirsDocs && GirsDocs.model ? GirsDocs.model({ no: bl, type: 'Freight', status: 'Ready', date: HM_TODAY, due, bl, cntr: String(ctr) + ' × 40HC', vvd: '', port: dv.here,
-        cust: { code: custCode, name: cust, tax: '', addr: '' }, lines }) : null;
+        cust: { code: ed.cust, name: cu ? cu.name : '', tax: '', addr: cu ? cu.addr : '' }, lines: lines.concat(addLines) }) : null;
+      const custCode = ed.cust;
       const kv = (a) => a.map(([kk, v]) => ({ k: kk, v }));
       const errs = k === 'roe' ? [{ area: 'Exchange rate', text: dv.pair + ' rate for ' + hmFmt(dv.date, { day: 'numeric', month: 'short', year: 'numeric' }) + ' not received from Treasury — local charges cannot be converted.' }]
         : k === 'nod' ? [{ area: 'LMS data', text: HM_MISS[i % HM_MISS.length] + ' not received from LMS for this B/L.' }]
         : k === 'hold' ? [{ area: 'Billing party', text: 'Split-payer not confirmed — second payer and share are missing.' }] : [];
+      if (!cu) errs.push({ area: 'Customer', text: 'Select a customer from the list for “To”.' });
+      if (ed.add.some((a) => !okAdd(a))) errs.push({ area: 'Charges', text: 'Complete or remove the added charge — charge head, quantity, UOM, unit price and currency are required.' });
+      // To — type-ahead
+      const cs = s.riCu, qq = cs ? String(cs.q || '').trim().toLowerCase() : '';
+      const cOpts = cs ? dir.filter((c) => !qq || c.name.toLowerCase().includes(qq) || c.code.toLowerCase().includes(qq)) : [];
+      const cHi = cs ? Math.min(cs.hi || 0, cOpts.length - 1) : -1;
+      const pickCu = (code) => { self.setState({ riCu: null }); putEd({ cust: code }); };
+      const toBox = {
+        val: cs ? cs.q : cu ? cu.name : '', cls: cu || cs ? '' : 'bad', open: !!cs, exp: cs ? 'true' : 'false', act: cHi >= 0 ? 'hm-cu-' + cHi : '', none: !!cs && !cOpts.length,
+        addr: cu ? cu.addr : '—', code: cu ? cu.code : '—',
+        opts: cOpts.map((c, n) => ({ id: 'hm-cu-' + n, code: c.code, name: c.name, on: n === cHi ? 'true' : 'false', pick: (e) => { e.preventDefault(); pickCu(c.code); } })),
+        onQ: (e) => self.setState({ riCu: { q: e.target.value, hi: 0 } }),
+        onFocus: () => self.setState({ riCu: { q: '', hi: 0 } }),
+        onBlur: () => setTimeout(() => { if (self.state.riCu) self.setState({ riCu: null }); }, 150),
+        onKey: (e) => {
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = cOpts.length || 1; self.setState({ riCu: { q: cs ? cs.q : '', hi: cs ? (cHi + (e.key === 'ArrowDown' ? 1 : n - 1)) % n : 0 } }); }
+          else if (e.key === 'Enter' && cs && cOpts[cHi]) { e.preventDefault(); pickCu(cOpts[cHi].code); }
+        }
+      };
+      // added charge rows (editable)
+      const curs = ['USD'].concat(loc[0] !== 'USD' ? [loc[0]] : []);
+      const addRows = ed.add.map((a, j) => {
+        const upd = (p) => putEd({ add: ed.add.map((y, n) => (n === j ? Object.assign({}, y, p) : y)) });
+        const ok = okAdd(a), q = parseFloat(a.qty), u = parseFloat(String(a.unit).replace(/,/g, '')), ex = ok ? q * u : null, rt = rate(a.cur === 'USD' ? loc[3] : loc[2]), tx = ex == null ? null : Math.round(ex * rt) / 100;
+        const sg = s.riSug && s.riSug.i === j ? s.riSug : null, sq = sg ? String(a.q || '').trim().toLowerCase() : '';
+        const opts = sg ? Object.keys(HM_CHG).filter((c) => !sq || c.toLowerCase().includes(sq) || HM_CHG[c].toLowerCase().includes(sq)).slice(0, 8) : [];
+        const hi = sg ? Math.min(sg.hi, opts.length - 1) : -1;
+        const pick = (c) => { self.setState({ riSug: null }); upd({ code: c, q: HM_CHG[c], cur: a.cur || (/OFT|BAF|LSS/.test(c) ? 'USD' : loc[0]), uom: a.uom || (/DOC|DO$/.test(c) ? 'BL' : /DEM|DET/.test(c) ? 'Day' : 'CNTR') }); };
+        const fmt2 = (n) => Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const t = a.t || {}, bad = (v, f) => (!ok && t[f] && !v ? 'bad' : '');
+        return { edit: true, cls: 'add', lid: 'hm-cs-' + j, q: a.q || '', sug: !!sg, sugA: sg ? 'true' : 'false', none: !!sg && !opts.length, act: hi >= 0 ? 'hm-co-' + j + '-' + hi : '',
+          hErr: !ok && t.q && !a.code && !sg ? 'bad' : '',
+          opts: opts.map((c, n) => ({ id: 'hm-co-' + j + '-' + n, code: c, name: HM_CHG[c], on: n === hi ? 'true' : 'false', pick: (e) => { e.preventDefault(); pick(c); } })),
+          onQ: (e) => { const v = e.target.value; self.save({ riSug: { i: j, hi: 0 }, riEd: Object.assign({}, s.riEd, { [key]: Object.assign({}, ed, { add: ed.add.map((y, n) => (n === j ? Object.assign({}, y, { q: v, code: HM_CHG[y.code] === v ? y.code : '', t: Object.assign({}, t, { q: 1 }) }) : y)) }) }) }); },
+          onFocus: () => self.setState({ riSug: { i: j, hi: 0 } }),
+          onBlur: () => setTimeout(() => { if (self.state.riSug && self.state.riSug.i === j) self.setState({ riSug: null }); }, 150),
+          onKey: (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = opts.length || 1; self.setState({ riSug: { i: j, hi: sg ? (hi + (e.key === 'ArrowDown' ? 1 : n - 1)) % n : 0 } }); }
+            else if (e.key === 'Enter' && sg && opts[hi]) { e.preventDefault(); pick(opts[hi]); }
+          },
+          qty: a.qty, uom: a.uom, unit: a.unit, cur: a.cur, uoms: HM_UOM, curs,
+          qErr: bad(q > 0, 'qty'), uErr: bad(a.uom, 'uom'), pErr: bad(String(a.unit).trim() !== '' && u >= 0, 'unit'), cErr: bad(a.cur, 'cur'),
+          onQty: (e) => upd({ qty: e.target.value, t: Object.assign({}, t, { qty: 1 }) }), onUom: (e) => upd({ uom: e.target.value, t: Object.assign({}, t, { uom: 1 }) }),
+          onUnit: (e) => upd({ unit: e.target.value, t: Object.assign({}, t, { unit: 1 }) }), onCur: (e) => upd({ cur: e.target.value, t: Object.assign({}, t, { cur: 1 }) }),
+          del: () => putEd({ add: ed.add.filter((y, n) => n !== j) }),
+          ex: ex == null ? '—' : fmt2(ex), ta: ex == null ? '—' : rt + '%', tax: tx == null ? '—' : fmt2(tx), inc: ex == null ? '—' : fmt2(ex + tx) };
+      });
+      const addCharge = () => putEd({ add: ed.add.concat([{ code: '', q: '', qty: '1', uom: '', unit: '', cur: '', t: {} }]) });
       const done = k === 'inv';
       const go = (d) => () => self.setState({ ri: Object.assign({}, s.ri, { i: pos + d }), decl: false });
       const gen = () => {
@@ -1564,10 +1641,11 @@ class GirsPage extends DCLogic {
         show: true, bl, title: done ? 'INVOICE' : 'READY TO INVOICE', hasErr: errs.length > 0, noErr: !errs.length, errs, done, notDone: !done,
         errTitle: errs.length === 1 ? '1 error to resolve before generating the invoice' : errs.length + ' errors to resolve before generating the invoice',
         txn: m ? m.txn : 'B/L Released', strip: m ? kv(done ? [['Invoice No.', 'INV-' + dv.here.slice(0, 2) + '-' + dv.no + '-' + String(i + 1).padStart(4, '0')]].concat(m.strip.slice(1)) : m.strip.slice(1)) : [],
-        from0: m ? m.from[0] : '', fromL: m ? m.from.slice(1) : [], cust, custCode,
+        from0: m ? m.from[0] : '', fromL: m ? m.from.slice(1) : [], cust: cu ? cu.name : '—', custCode,
         details: m ? kv(m.details.map((d) => (d[0] === 'Customer Code' ? [d[0], custCode] : d))) : [],
         ship: kv([['Voyage', dv.no + '  ' + hmFmt(dv.date, { day: 'numeric', month: 'short', year: '2-digit' }) + '  ' + dv.vessel], ['BL Id/Number', bl], ['Loaded', dv.pol], ['Discharge', dv.pod], ['Service', dv.svc], ['Containers', ctr + ' × 40HC']]),
-        lines: m ? m.rows.map((l) => ({ head: l.head, qty: l.qty, uom: l.uom, unit: l.unit, cur: l.cur, ex: l.ex, ta: l.ta, tax: l.tax, incl: l.incl })) : [],
+        lines: (m ? m.rows.slice(0, lines.length).map((l) => ({ edit: false, ro: true, cls: '', head: l.head, qty: l.qty, uom: l.uom, unit: l.unit, cur: l.cur, ex: l.ex, ta: l.ta, tax: l.tax, inc: l.incl })) : []).concat(done ? [] : addRows),
+        to: toBox, addCharge, canAdd: !done,
         bank: m ? kv(m.bank) : [], totals: m ? m.totals.map(([kk, v], n, a) => ({ k: n === a.length - 1 ? m.grandLabel : kk, v, cls: n === a.length - 1 ? 'g' : '' })) : [], words: m ? m.words : '',
         head: dv.vessel + ' · ' + dv.no + ' · ' + (dv.dir === 'E' ? 'Export' : 'Import'), pos: (pos + 1) + ' / ' + L.length, first: pos <= 0, last: pos >= L.length - 1, prev: go(-1), next: go(1),
         decl: s.decl, toggleDecl: () => self.setState({ decl: !s.decl }), genDis: !!errs.length || !s.decl || done, gen,
