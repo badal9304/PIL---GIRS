@@ -1424,6 +1424,7 @@ class GirsPage extends DCLogic {
       if (v) Object.assign(this.state, { drw: v, drwF: '', drwQ: '', drwPg: 1 });
       if (t === 'dd') this.state.tab = 'dd';
       if (q.get('view') === 'overdue') this.state.view = 'overdue';
+      if (q.get('dir') === 'E' || q.get('dir') === 'I') this.state.dir = q.get('dir');
     } catch (e) {}
     try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.mail) return this.setState({ mail: null }); if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null }); if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
   }
