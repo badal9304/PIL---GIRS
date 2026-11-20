@@ -504,6 +504,27 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-xn{width:12px;background:var(--sub)}
 .hm-mbd{min-height:240px;padding:10px 12px;line-height:20px;font:inherit;font-size:13px;resize:vertical}
 .hm-blr{cursor:pointer}
+/* Colour accents — subtle, tokens only (adapt to dark mode) */
+.hm-hello{background:linear-gradient(100deg,var(--tint) 0%,var(--tint2) 28%,var(--surface) 62%) !important}
+.hm-tabs{background:linear-gradient(100deg,var(--tint) 0%,var(--tint2) 28%,var(--surface) 62%)}
+.hm-rd.today:not(.on){background:var(--tint2)}
+.hm-rd.late:not(.on){background:color-mix(in srgb,var(--warnbg) 55%,transparent)}
+.hm-rd.late:not(.on):hover{background:var(--warnbg)}
+.hm-gl .hm-rh{background:linear-gradient(180deg,var(--tint2),transparent);border-radius:8px 8px 0 0}
+.hm-rail > .card:not(.hm-gl) .hm-rh{background:linear-gradient(180deg,color-mix(in srgb,var(--warnbg) 70%,transparent),transparent);border-radius:8px 8px 0 0}
+.hm-rsn li{box-shadow:inset 3px 0 0 var(--warnbd)}
+.hm-rsn li:hover{background:color-mix(in srgb,var(--warnbg) 35%,transparent)}
+.hm-gh th{background:var(--tint2) !important;border-top-color:var(--tintbd) !important}
+.hm-gh b{color:var(--accent2)}
+.hm-vtab tbody tr:has(input.cbx:checked) td{background:var(--tint2)}
+aside.panel > .panel-h{background:linear-gradient(100deg,var(--tint) 0%,var(--tint2) 35%,var(--surface) 75%)}
+.hm-ds4 div{box-shadow:inset 0 3px 0 var(--bdh)}
+.hm-ds4 div:nth-child(2){box-shadow:inset 0 3px 0 var(--okbar)}
+.hm-ds4 div:nth-child(3){box-shadow:inset 0 3px 0 var(--accent)}
+.hm-ds4 div:nth-child(4){box-shadow:inset 0 3px 0 var(--warnbar);background:color-mix(in srgb,var(--warnbg) 45%,var(--surface))}
+.hm-rl li{box-shadow:inset 3px 0 0 var(--warnbd)}
+.hm-blt tbody tr:has(input.cbx:checked) td{background:var(--tint2)}
+
 .panel-b .hm-blt thead th{top:-20px}
 .hm-blt .hm-cb{width:40px;padding-inline:12px 0}
 .hm-blsel{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border:1px solid var(--tintbd);border-radius:6px;background:var(--tint2);box-sizing:border-box}
@@ -897,7 +918,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             </sc-if>
           </div>
         </div>
-        <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
+        <div class="ghead hm-hello" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">{{greet}}</h1>
             <p style="margin: 2px 0 0; font-size: 13px; line-height: 18px; color: var(--muted)">{{ctx}}</p>
