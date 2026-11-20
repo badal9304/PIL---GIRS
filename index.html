@@ -538,6 +538,25 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-decl b{color:var(--accent2)}
 .hm-rihint{margin-inline-end:auto;font-size:12px;color:var(--muted)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hm-rl li{grid-template-columns:minmax(0,1fr) 120px 50px auto !important}
+.hm-rla{display:inline-flex;align-items:center;gap:10px;justify-content:flex-end;width:240px}
+.cmc-modal.hm-mail{z-index:226;width:min(900px,calc(100vw - 64px));max-height:calc(100% - 48px);display:flex;flex-direction:column}
+.hm-mail .cmc-mh{display:flex;align-items:center;gap:12px}
+.hm-mb{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px}
+.hm-mf{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:12px}
+.hm-mf label{font-size:13px;color:var(--muted)}
+.hm-mf .input{height:34px}
+.hm-att{display:flex;align-items:center;gap:12px;margin-top:4px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sub)}
+.hm-atn{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.hm-atn b{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hm-atn span{font-size:12px;color:var(--muted)}
+.hm-xp{border:1px solid var(--line);border-radius:6px;overflow:auto;max-height:260px;background:var(--surface)}
+.hm-xp p{margin:0;padding:8px 10px;font-size:12px;color:var(--muted);border-top:1px solid var(--line2)}
+.hm-xpt{border-collapse:collapse;font-size:12px;white-space:nowrap}
+.hm-xpt th{position:sticky;top:0;background:#E8EEF6;color:#161A21;font-weight:600;text-align:start;padding:6px 10px;border:1px solid #D0D7E2}
+.hm-xpt td{padding:5px 10px;border:1px solid var(--line2)}
+.hm-xn{width:12px;background:var(--sub)}
+.hm-mbd{min-height:240px;padding:10px 12px;line-height:20px;font:inherit;font-size:13px;resize:vertical}
 .hm-blr{cursor:pointer}
 .hm-blr:hover td{background:var(--hover2)}
 
@@ -1130,7 +1149,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <div class="hm-stk lg" aria-hidden="true"><i class="inv" style="{{drw.bI}}"></i><i class="rdy" style="{{drw.bR}}"></i><i class="blk" style="{{drw.bB}}"></i></div>
         <sc-if value="{{drw.hasReasons}}" hint-placeholder-val="{{ true }}">
           <div class="hm-dsec"><h3>Blocked because</h3>
-            <ul class="hm-rl"><sc-for list="{{drw.reasons}}" as="x" hint-placeholder-count="2"><li><span>{{x.l}}</span><span class="mu">{{x.o}}</span><b>{{x.n}}</b></li></sc-for></ul>
+            <ul class="hm-rl"><sc-for list="{{drw.reasons}}" as="x" hint-placeholder-count="2"><li><span>{{x.l}}</span><span class="mu">{{x.o}}</span><b>{{x.n}}</b><span class="hm-rla"><sc-if value="{{x.hasSt}}" hint-placeholder-val="{{ false }}"><span class="hm-fs">{{x.st}}</span></sc-if><button class="btn btn-sm" onClick="{{x.go}}">{{x.act}}</button></span></li></sc-for></ul>
           </div>
         </sc-if>
         <div class="hm-dsec">
@@ -1205,6 +1224,32 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <button class="btn" onClick="{{ri.close}}">Close</button>
         <sc-if value="{{ri.notDone}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" disabled="{{ri.genDis}}" onClick="{{ri.gen}}">Generate invoice</button></sc-if>
       </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{mail.show}}" hint-placeholder-val="{{ false }}">
+    <button class="cmc-bd" tabindex="-1" aria-label="Close" onClick="{{mail.cancel}}" style="z-index: 225"></button>
+    <div class="cmc-modal hm-mail" role="dialog" aria-modal="true" aria-labelledby="hm-mt">
+      <div class="cmc-mh"><div class="hm-rih"><h2 id="hm-mt">{{mail.title}}</h2><span>{{mail.reason}}</span></div><button class="btn btn-icon btn-sm" aria-label="Close" onClick="{{mail.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <div class="hm-mb">
+        <div class="hm-mf"><label for="hm-mto">To</label><input id="hm-mto" class="input" value="{{mail.to}}" onInput="{{mail.onTo}}" autocomplete="off" spellcheck="false"></div>
+        <div class="hm-mf"><label for="hm-mcc">Cc</label><input id="hm-mcc" class="input" value="{{mail.cc}}" onInput="{{mail.onCc}}" autocomplete="off" spellcheck="false"></div>
+        <div class="hm-mf"><label for="hm-msu">Subject</label><input id="hm-msu" class="input" value="{{mail.sub}}" onInput="{{mail.onSub}}" autocomplete="off"></div>
+        <div class="hm-att">
+          <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="2" width="22" height="28" rx="3" fill="#1D6F42"></rect><path d="M10 11l4 5-4 5M18 11l-4 5 4 5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"></path></svg>
+          <div class="hm-atn"><b>{{mail.file}}</b><span>{{mail.meta}}</span></div>
+          <button class="btn btn-sm" aria-expanded="{{mail.prevOn}}" onClick="{{mail.togglePrev}}">{{mail.prevL}}</button>
+          <button class="btn btn-sm" onClick="{{mail.download}}">Download</button>
+        </div>
+        <sc-if value="{{mail.prevOn}}" hint-placeholder-val="{{ false }}">
+          <div class="hm-xp"><table class="hm-xpt"><thead><tr><th></th><sc-for list="{{mail.heads}}" as="h" hint-placeholder-count="11"><th>{{h.h}}</th></sc-for></tr></thead>
+            <tbody><sc-for list="{{mail.prev}}" as="r" hint-placeholder-count="8"><tr><td class="hm-xn"></td><sc-for list="{{r.cells}}" as="c" hint-placeholder-count="11"><td>{{c.v}}</td></sc-for></tr></sc-for></tbody></table>
+            <p>{{mail.more}}</p></div>
+        </sc-if>
+        <label class="sr-only" for="hm-mbd">Message</label>
+        <textarea id="hm-mbd" class="input hm-mbd" value="{{mail.body}}" onInput="{{mail.onBody}}"></textarea>
+      </div>
+      <div class="cmc-mf"><span class="hm-rihint">Sent from GIRS · a copy is kept in the audit trail</span><button class="btn" onClick="{{mail.cancel}}">Cancel</button><button class="btn btn-primary" onClick="{{mail.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>Send</button></div>
     </div>
   </sc-if>
 
@@ -1329,6 +1374,45 @@ const hmDD = (cc) => {
   return out;
 };
 
+// Minimal .xlsx writer (one sheet, bold header, inline strings / numbers) — stored ZIP, no library.
+const hmXlsx = (sheetName, headers, rows) => {
+  const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const col = (n) => { let s = ''; n++; while (n) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; };
+  const cell = (v, r, c, st) => (typeof v === 'number' ? '<c r="' + col(c) + r + '"' + (st ? ' s="' + st + '"' : '') + '><v>' + v + '</v></c>' : '<c r="' + col(c) + r + '" t="inlineStr"' + (st ? ' s="' + st + '"' : '') + '><is><t xml:space="preserve">' + esc(v) + '</t></is></c>');
+  const widths = headers.map((h, c) => Math.min(48, Math.max(String(h).length, ...rows.slice(0, 200).map((r) => String(r[c]).length)) + 2));
+  const sheet = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>' +
+    widths.map((w, i) => '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + w + '" customWidth="1"/>').join('') + '</cols><sheetData>' +
+    '<row r="1">' + headers.map((h, c) => cell(h, 1, c, 1)).join('') + '</row>' +
+    rows.map((r, i) => '<row r="' + (i + 2) + '">' + r.map((v, c) => cell(v, i + 2, c, typeof v === 'number' ? 2 : 0)).join('') + '</row>').join('') +
+    '</sheetData><autoFilter ref="A1:' + col(headers.length - 1) + (rows.length + 1) + '"/></worksheet>';
+  const files = {
+    '[Content_Types].xml': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>',
+    '_rels/.rels': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>',
+    'xl/workbook.xml': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="' + esc(sheetName.slice(0, 31)) + '" sheetId="1" r:id="rId1"/></sheets></workbook>',
+    'xl/_rels/workbook.xml.rels': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>',
+    'xl/styles.xml': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="#,##0.00"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE8EEF6"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>',
+    'xl/worksheets/sheet1.xml': sheet
+  };
+  const enc = new TextEncoder();
+  const crcT = (() => { const t = []; for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  const crc = (b) => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = crcT[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  const parts = [], central = [];
+  let off = 0;
+  const u16 = (v) => [v & 255, (v >>> 8) & 255], u32 = (v) => [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255];
+  Object.keys(files).forEach((name) => {
+    const nm = enc.encode(name), data = enc.encode(files[name]), c = crc(data);
+    const head = [].concat(u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0x21), u32(c), u32(data.length), u32(data.length), u16(nm.length), u16(0));
+    parts.push(new Uint8Array(head), nm, data);
+    central.push(new Uint8Array([].concat(u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0x21), u32(c), u32(data.length), u32(data.length), u16(nm.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(off))), nm);
+    off += head.length + nm.length + data.length;
+  });
+  const cSize = central.reduce((a, b) => a + b.length, 0), n = Object.keys(files).length;
+  const end = new Uint8Array([].concat(u32(0x06054b50), u16(0), u16(0), u16(n), u16(n), u32(cSize), u32(off), u16(0)));
+  return new Blob(parts.concat(central, [end]), { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+};
+const hmDownload = (blob, name) => { try { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); } catch (e) {} };
+const hmSize = (n) => (n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB');
+
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
@@ -1337,11 +1421,11 @@ class GirsPage extends DCLogic {
     this.state = {
       tab: 'voy', from: HM_TODAY, to: HM_TODAY, view: 'range', win: hmAdd(HM_TODAY, -6), cal: false,
       dir: 'all', stf: 'all', q: '', sort: 'urgency', sdir: 1, grp: true, pg: 1, psz: 25, sel: {},
-      gen: saved.gen || {}, blGen: saved.blGen || {}, ri: null, decl: false, riEd: saved.riEd || {}, riCu: null, riSug: null, fu: saved.fu || {}, roeReq: saved.roeReq || {}, roeSet: saved.roeSet || {}, ddGen: saved.ddGen || {}, ddAct: saved.ddAct || {},
+      gen: saved.gen || {}, blGen: saved.blGen || {}, ri: null, decl: false, mail: null, mailPrev: false, riEd: saved.riEd || {}, riCu: null, riSug: null, fu: saved.fu || {}, roeReq: saved.roeReq || {}, roeSet: saved.roeSet || {}, ddGen: saved.ddGen || {}, ddAct: saved.ddAct || {},
       drw: '', drwF: '', drwQ: '', drwPg: 1, confirm: null, rateFor: '', rateVal: '', done: null, alertOff: false,
       ddF: 'all', ddQ: '', ddPg: 1
     };
-    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null }); if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
+    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.mail) return this.setState({ mail: null }); if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null }); if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
   }
   save(patch) {
     const s = Object.assign({}, this.state, patch);
@@ -1475,6 +1559,51 @@ class GirsPage extends DCLogic {
     const glance = { stats: [['Expected', hmN(E), ''], ['Invoiced', hmN(I), 'inv'], ['Ready', hmN(R), 'rdy'], ['Blocked', hmN(B), 'blk']].concat(W ? [['Not due yet', hmN(W), 'nd']] : []).map(([l, v, k]) => ({ l, v, k: 'hm-dot ' + k, has: !!k })),
       bI: pc(I), bR: pc(R), bB: pc(B), bW: pc(W), pct: E ? Math.round(((I) / E) * 100) + '% invoiced' : '', voy: hmN(S.length) + (S.length === 1 ? ' voyage' : ' voyages') };
 
+    const pool0 = scopeAll.concat(overdue);
+    // ---------- B/L enumeration (same order as the voyage panel)
+    const blSeq = (v) => {
+      const q2 = []; const push = (k, n) => { for (let j = 0; j < n; j++) q2.push(k); };
+      if (v.notDue) return q2;
+      push('roe', v.roe); push('nod', v.nod); push('hold', v.hold); const r0 = q2.length; push('ready', v.ready0); push('inv', v.inv0);
+      v.ind.forEach((j) => { if (q2[+j] === 'ready') q2[+j] = 'inv'; });
+      let b = v.bulk; for (let j = r0 + v.ready0 - 1; j >= r0 && b > 0; j--) if (q2[j] === 'ready') { q2[j] = 'inv'; b--; }
+      return q2;
+    };
+    const blRow = (v, i) => { const r = hmRnd(v.id + i); r(); const ctr = 1 + Math.floor(r() * 3); return { bl: v.here.slice(2) + v.no.slice(0, 6) + String(i + 1).padStart(4, '0'), cust: HM_CUST[Math.floor(hmRnd(v.id + i)() * HM_CUST.length)], ctr, amt: Math.round(v.avg * (0.6 + r() * 0.8) * 100) / 100 }; };
+    const MAILR = {
+      nod: { l: 'Data not received from LMS', to: 'Port Agency · Documentation <docs.' + port.toLowerCase() + '@pilship.com>', file: 'Missing_LMS_data', extra: ['Missing data'] },
+      roe: { l: 'ROE not received', to: 'Treasury · ROE desk <treasury.roe@pilship.com>', file: 'ROE_request', extra: ['Currency pair', 'Rate date'] },
+      hold: { l: 'Split-payer unconfirmed', to: 'Customer Service <cs.' + port.toLowerCase() + '@pilship.com>', file: 'Split_payer_confirmation', extra: ['Issue'] }
+    };
+    const mailRows = (m) => {
+      const vs = m.ids.map((id) => pool0.find((v) => v.id === id)).filter(Boolean);
+      const out = [];
+      vs.forEach((v) => blSeq(v).forEach((k, i) => {
+        if (k !== m.reason || (m.pair && v.pair !== m.pair)) return;
+        const b = blRow(v, i), d = hmFmt(v.date, { day: '2-digit', month: 'short', year: 'numeric' });
+        out.push([v.no, v.vessel, v.dir === 'E' ? 'Export' : 'Import', v.pol, v.pod, d, b.bl, b.cust, b.ctr, b.amt].concat(
+          m.reason === 'nod' ? [HM_MISS[i % HM_MISS.length]] : m.reason === 'roe' ? [v.pair, d] : ['Second payer and share not confirmed']));
+      }));
+      return { vs, rows: out };
+    };
+    const openMail = (reason, vs, opt) => {
+      const o = opt || {}, R = MAILR[reason], m0 = { reason, ids: vs.map((v) => v.id), pair: o.pair || '' }, mr = mailRows(m0);
+      const n = mr.rows.length, amt = mr.rows.reduce((a, r) => a + r[9], 0), nos = vs.map((v) => v.no);
+      const voyL = nos.length > 6 ? nos.slice(0, 6).join(', ') + ' and ' + (nos.length - 6) + ' more' : nos.join(', ');
+      const sign = '\n\nRegards,\n' + (typeof USER_NAME === 'string' ? USER_NAME : 'Daniel Tan') + '\nBilling Executive · ' + cty + ' (' + port + ')';
+      const sub = reason === 'nod' ? 'Missing B/L data from LMS — ' + hmN(n) + ' B/Ls on hold · ' + port + ' · ' + (o.scope || rangeL)
+        : reason === 'roe' ? 'ROE request — ' + o.pair + ' for ' + hmFmt(HM_TODAY, { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + hmN(n) + ' invoices waiting'
+        : 'Split-payer confirmation needed — ' + hmN(n) + ' B/Ls · ' + port;
+      const body = reason === 'nod'
+        ? 'Hello team,\n\nThe B/Ls in the attached sheet are blocked from invoicing at ' + port + ' because their data has not been received from LMS. The missing item is listed against each B/L.\n\nVoyages: ' + voyL + '\nB/Ls: ' + hmN(n) + ' · Amount on hold: ' + hmUsd(amt) + '\n\nPlease complete the data in LMS and resend it, or reply with an expected date.' + sign
+        : reason === 'roe'
+          ? 'Hello Treasury,\n\nThe daily rate of exchange for ' + o.pair + ' has not been received in GIRS. ' + hmN(n) + ' invoices on the voyages below cannot be generated until the rate is available. Details are in the attached sheet.\n\nVoyages: ' + voyL + '\nAmount on hold: ' + hmUsd(amt) + '\n\nPlease publish the rate or reply with the approved rate so it can be entered manually.' + sign
+          : 'Hello team,\n\nThe B/Ls in the attached sheet have a split payer that is not confirmed. Please confirm the second payer and the share for each B/L so the invoices can be generated.\n\nVoyages: ' + voyL + '\nB/Ls: ' + hmN(n) + ' · Amount on hold: ' + hmUsd(amt) + sign;
+      const file = R.file + '_' + port + '_' + HM_TODAY.replace(/-/g, '') + '.xlsx';
+      const blob = hmXlsx(R.l, ['Voyage No.', 'Vessel', 'Direction', 'POL', 'POD', 'ETD / ETA', 'B/L No.', 'Billing party', 'Containers', 'Amount (USD)'].concat(R.extra), mr.rows);
+      self.setState({ mail: Object.assign(m0, { to: R.to, cc: (typeof USER_NAME === 'string' ? USER_NAME.toLowerCase().replace(/\s+/g, '.') : 'daniel.tan') + '@pilship.com', sub, body, file, size: hmSize(blob.size), n, keys: o.keys || [] }), mailPrev: false });
+    };
+
     // ---------- reasons (rail)
     const due = S.filter((v) => !v.notDue);
     const reasons = [];
@@ -1483,7 +1612,7 @@ class GirsPage extends DCLogic {
       const key = 'nod:' + port + ':' + rangeL, sent = s.fu[key];
       reasons.push({ r: 'Data not received from LMS', own: 'Port agency · Documentation', n: hmN(tally(nodV, 'nod')), v: nodV.length + (nodV.length === 1 ? ' voyage' : ' voyages'), amt: hmUsd(nodV.reduce((a, v) => a + v.nod * v.avg, 0)),
         st: sent ? 'Follow-up sent ' + sent : '', hasSt: !!sent, act: sent ? 'Remind' : 'Send follow-up',
-        go: () => self.save({ fu: Object.assign({}, s.fu, { [key]: hmTime() }), __toast: (sent ? 'Reminder' : 'Follow-up') + ' sent to the port agency with ' + hmN(tally(nodV, 'nod')) + ' B/Ls.' }) });
+        go: () => openMail('nod', nodV, { keys: [['fu', key]] }) });
     }
     const pairs = {};
     due.filter((v) => v.roe).forEach((v) => { (pairs[v.pair] = pairs[v.pair] || []).push(v); });
@@ -1491,18 +1620,18 @@ class GirsPage extends DCLogic {
       const vs = pairs[pr], req = s.roeReq[pr];
       reasons.push({ r: 'ROE not received · ' + pr, own: 'Treasury · ROE feed', n: hmN(tally(vs, 'roe')), v: vs.length + (vs.length === 1 ? ' voyage' : ' voyages'), amt: hmUsd(vs.reduce((a, v) => a + v.roe * v.avg, 0)),
         st: req ? 'Requested ' + req : '', hasSt: !!req, act: req ? 'Enter rate' : 'Request ROE',
-        go: () => (req ? self.setState({ rateFor: pr, rateVal: '' }) : self.save({ roeReq: Object.assign({}, s.roeReq, { [pr]: hmTime() }), __toast: 'ROE requested from Treasury for ' + pr + '.' })) });
+        go: () => (req ? self.setState({ rateFor: pr, rateVal: '' }) : openMail('roe', vs, { pair: pr, keys: [['roeReq', pr]] })) });
     });
     const holdV = due.filter((v) => v.hold);
-    if (holdV.length) reasons.push({ r: 'Split-payer unconfirmed', own: 'Customer service', n: hmN(tally(holdV, 'hold')), v: holdV.length + (holdV.length === 1 ? ' voyage' : ' voyages'), amt: hmUsd(holdV.reduce((a, v) => a + v.hold * v.avg, 0)),
-      st: '', hasSt: false, act: 'Open Split Billing', go: () => { try { location.href = 'split-billing.html'; } catch (e) {} } });
+    if (holdV.length) { const key = 'hold:' + port + ':' + rangeL, sent = s.fu[key]; reasons.push({ r: 'Split-payer unconfirmed', own: 'Customer service', n: hmN(tally(holdV, 'hold')), v: holdV.length + (holdV.length === 1 ? ' voyage' : ' voyages'), amt: hmUsd(holdV.reduce((a, v) => a + v.hold * v.avg, 0)),
+      st: sent ? 'Follow-up sent ' + sent : '', hasSt: !!sent, act: sent ? 'Remind' : 'Send follow-up', go: () => openMail('hold', holdV, { keys: [['fu', key]] }) }); }
 
     // ---------- bulk
     const selV = scopeAll.filter((v) => s.sel[v.id]);
     const bulk = { show: selIds.length > 0, n: selV.length + (selV.length === 1 ? ' voyage selected' : ' voyages selected'), ready: tally(selV, 'ready'),
       genL: 'Generate ' + hmN(tally(selV, 'ready')) + ' ready', genDis: !tally(selV, 'ready'),
       gen: () => self.setState({ confirm: { kind: 'voy', ids: selV.filter((v) => v.ready).map((v) => v.id) } }),
-      fu: () => self.save({ fu: Object.assign({}, s.fu, { ['sel:' + selIds.join(',')]: hmTime() }), __toast: 'Follow-up sent for ' + hmN(tally(selV, 'nod')) + ' B/Ls missing data on ' + selV.length + ' voyages.' }),
+      fu: () => openMail('nod', selV.filter((v) => v.nod), { scope: selV.length + ' selected voyages' }),
       fuDis: !tally(selV, 'nod'),
       exp: () => self.setState({ __toast: 'Export to Excel prepared — ' + selV.length + ' voyages.' }),
       clear: () => self.setState({ sel: {} }) };
@@ -1531,7 +1660,12 @@ class GirsPage extends DCLogic {
         route: dv.pol + ' → ' + dv.pod, date: (dv.dir === 'E' ? 'ETD ' : 'ETA ') + hmFmt(dv.date, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }),
         stats: [['Expected', hmN(dv.bls)], ['Invoiced', hmN(dv.inv)], ['Ready', hmN(dv.ready)], ['Blocked', hmN(dv.notDue ? 0 : dv.blocked)]].map(([l, v]) => ({ l, v })),
         bI: 'width: ' + (dv.inv / dv.bls) * 100 + '%', bR: 'width: ' + (dv.ready / dv.bls) * 100 + '%', bB: 'width: ' + (dv.notDue ? 0 : dv.blocked / dv.bls) * 100 + '%',
-        reasons: [['nod', 'Data not received from LMS', 'Port agency'], ['roe', 'ROE not received · ' + dv.pair, 'Treasury'], ['hold', 'Split-payer unconfirmed', 'Customer service']].filter(([k]) => dv[k] > 0 && !dv.notDue).map(([k, l, o]) => ({ l, o, n: hmN(dv[k]) })),
+        reasons: [['nod', 'Data not received from LMS', 'Port agency'], ['roe', 'ROE not received · ' + dv.pair, 'Treasury'], ['hold', 'Split-payer unconfirmed', 'Customer service']].filter(([k]) => dv[k] > 0 && !dv.notDue).map(([k, l, o]) => {
+          const key = 'v:' + dv.id + ':' + k, sent = k === 'roe' ? s.roeReq[dv.pair] : s.fu[key];
+          return { l, o, n: hmN(dv[k]), st: sent ? (k === 'roe' ? 'Requested ' : 'Sent ') + sent : '', hasSt: !!sent,
+            act: k === 'roe' ? (sent ? 'Enter rate' : 'Request ROE') : sent ? 'Remind' : 'Send follow-up',
+            go: () => (k === 'roe' && sent ? self.setState({ rateFor: dv.pair, rateVal: '' }) : openMail(k, [dv], { pair: k === 'roe' ? dv.pair : '', scope: 'voyage ' + dv.no, keys: k === 'roe' ? [['roeReq', dv.pair]] : [['fu', key]] })) };
+        }),
         hasReasons: dv.blocked > 0 && !dv.notDue,
         filters: [['', 'All', dv.notDue ? 0 : dv.bls], ['ready', 'Ready', dv.ready], ['blocked', 'Blocked', dv.notDue ? 0 : dv.blocked], ['inv', 'Invoiced', dv.inv]].map(([k, l, n]) => ({ l, n: hmN(n), cur: s.drwF === k ? 'true' : 'false', pick: () => self.setState({ drwF: k, drwPg: 1 }) })),
         q: s.drwQ, onQ: (e) => self.setState({ drwQ: e.target.value, drwPg: 1 }),
@@ -1719,6 +1853,30 @@ class GirsPage extends DCLogic {
       pager, bulk, glance, reasons, noReasons: !reasons.length, rangeL,
       genAllL: 'Generate all ready (' + hmN(R) + ')', genAllDis: !R, genAll: () => self.setState({ confirm: { kind: 'voy', ids: S.filter((v) => v.ready).map((v) => v.id) } }),
       drw, cf, rate, ri,
+      mail: (() => {
+        const m = s.mail;
+        if (!m) return { show: false, prev: [], heads: [] };
+        const R = MAILR[m.reason], mr = mailRows(m), heads = ['Voyage No.', 'Vessel', 'Direction', 'POL', 'POD', 'ETD / ETA', 'B/L No.', 'Billing party', 'Containers', 'Amount (USD)'].concat(R.extra);
+        const put = (k) => (e) => self.setState({ mail: Object.assign({}, m, { [k]: e.target.value }) });
+        return {
+          show: true, title: m.reason === 'roe' ? 'Request ROE' : 'Send follow-up', reason: R.l, to: m.to, cc: m.cc, sub: m.sub, body: m.body,
+          onTo: put('to'), onCc: put('cc'), onSub: put('sub'), onBody: put('body'),
+          file: m.file, meta: hmN(mr.rows.length) + ' B/Ls · ' + heads.length + ' columns · ' + m.size,
+          prevOn: s.mailPrev, prevL: s.mailPrev ? 'Hide preview' : 'Preview', togglePrev: () => self.setState({ mailPrev: !s.mailPrev }),
+          heads: heads.map((h) => ({ h })), prev: mr.rows.slice(0, 8).map((r) => ({ cells: r.map((v) => ({ v: typeof v === 'number' && v % 1 ? v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : String(v) })) })),
+          more: mr.rows.length > 8 ? '+ ' + hmN(mr.rows.length - 8) + ' more rows in the file' : '',
+          download: () => hmDownload(hmXlsx(R.l, heads, mr.rows), m.file),
+          cancel: () => self.setState({ mail: null }),
+          send: () => {
+            if (!String(m.to).trim()) return self.setState({ __toast: 'Add at least one recipient.' });
+            const t = hmTime(), patch = { mail: null, __toast: (m.reason === 'roe' ? 'ROE request' : 'Follow-up') + ' sent to ' + String(m.to).replace(/\s*<.*$/, '') + ' with ' + m.file + ' (' + hmN(mr.rows.length) + ' B/Ls).' };
+            const fu = Object.assign({}, s.fu), rq = Object.assign({}, s.roeReq);
+            (m.keys || []).forEach(([store, k]) => { if (store === 'fu') fu[k] = t; else rq[k] = t; });
+            if (m.reason === 'roe' && m.pair) rq[m.pair] = t;
+            self.save(Object.assign(patch, { fu, roeReq: rq }));
+          }
+        };
+      })(),
       dd: {
         sum: [['With customers', String(dOut.length), am(dOut) + ' building up', 'nd'], ['Ready to invoice', String(dReady.length), am(dReady), 'rdy'], ['Blocked', String(dBlk.length), am(dBlk.filter((c) => c.status !== 'tariff')) + ' + tariff pending', 'blk'], ['Invoiced this month', String(dInv.length), am(dInv), 'inv']].map(([l, v, sub, k]) => ({ l, v, sub, k: 'hm-dot ' + k })),
         reasons: Object.keys(ddRs).map((k) => { const done = s.ddAct[k]; return { r: HM_DDST[k][0], own: HM_DDR[k][0], n: ddRs[k].length + (ddRs[k].length === 1 ? ' container' : ' containers'), amt: k === 'tariff' ? 'Amount unknown' : am(ddRs[k]), st: done ? 'Sent ' + done : '', hasSt: !!done, act: done ? 'Remind' : HM_DDR[k][1],
