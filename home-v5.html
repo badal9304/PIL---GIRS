@@ -1060,7 +1060,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <section class="card pq" aria-labelledby="pq-t">
           <div class="pq-h">
             <div class="pq-ht"><h2 id="pq-t">{{pq.title}}</h2><p>{{pq.sub}}</p></div>
-            <a class="btn btn-primary pq-cta" href="voyage-invoicing.html" style="text-decoration: none">{{pq.cta}}</a>
+            <a class="btn btn-primary pq-cta" href="{{pq.ctaHref}}" style="text-decoration: none">{{pq.cta}}</a>
           </div>
           <div class="pq-sum">
             <sc-for list="{{pq.tiles}}" as="t" hint-placeholder-count="3">
@@ -1113,7 +1113,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                 <li class="bk-r">
                   <div class="bk-b"><b>{{r.l}}</b><span>{{r.d}}</span><sc-if value="{{r.hasSt}}" hint-placeholder-val="{{ false }}"><span class="bk-st">{{r.st}}</span></sc-if></div>
                   <div class="bk-v"><b>{{r.n}}</b><small>{{r.a}}</small></div>
-                  <a class="btn btn-sm" href="voyage-invoicing.html" style="text-decoration: none">{{r.b}}</a>
+                  <a class="btn btn-sm" href="{{r.href}}" style="text-decoration: none">{{r.b}}</a>
                 </li>
               </sc-for>
             </ul>
@@ -1351,6 +1351,7 @@ class GirsPage extends DCLogic {
       title: 'At the quay in ' + cty + ' today',
       sub: pl(today.length, 'vessel', 'vessels') + ' and ' + hmN(B) + ' B/Ls due for invoicing. Each ship carries its B/Ls as containers, coloured by status.',
       cta: R ? 'Generate ' + hmN(R) + ' ready' : 'Open Voyage Invoicing',
+      ctaHref: R ? VI + '?act=gen&back=home-v5.html' : VI,
       tiles: [
         { cls: 'pt inv', l: 'Invoiced', n: hmN(I), s: pctOf(I, B) + '% of today’s B/Ls · ' + hmUsd(usd(today, 'inv')) },
         { cls: 'pt rdy', l: 'Ready to generate', n: hmN(R), s: hmUsd(usd(today, 'ready')) + ' waiting to be invoiced' },
@@ -1365,15 +1366,15 @@ class GirsPage extends DCLogic {
     const sentKey = (k) => Object.keys(fu).find((x) => x.startsWith(k + ':' + port + ':') || (x.startsWith('v:') && x.endsWith(':' + k)));
     const bks = [];
     const roeV = work.filter((v) => v.roe > 0);
-    if (roeV.length) bks.push({ l: 'ROE not received · ' + pair, d: pl(roeV.length, 'voyage', 'voyages') + ' · rate from Treasury', n: tally(roeV, 'roe'), a: usd(roeV, 'roe'), st: roeReq[pair] ? 'Requested at ' + roeReq[pair] : '', b: roeReq[pair] ? 'Enter rate' : 'Request ROE' });
+    if (roeV.length) bks.push({ l: 'ROE not received · ' + pair, d: pl(roeV.length, 'voyage', 'voyages') + ' · rate from Treasury', n: tally(roeV, 'roe'), a: usd(roeV, 'roe'), st: roeReq[pair] ? 'Requested at ' + roeReq[pair] : '', b: roeReq[pair] ? 'Enter rate' : 'Request ROE', act: 'roe' });
     const nodV = work.filter((v) => v.nod > 0);
-    if (nodV.length) { const k = sentKey('nod'); bks.push({ l: 'Data not received from LMS', d: pl(nodV.length, 'voyage', 'voyages') + ' · charges, billing party or tax ID missing', n: tally(nodV, 'nod'), a: usd(nodV, 'nod'), st: k ? 'Follow-up sent at ' + fu[k] : '', b: k ? 'Remind' : 'Send follow-up' }); }
+    if (nodV.length) { const k = sentKey('nod'); bks.push({ l: 'Data not received from LMS', d: pl(nodV.length, 'voyage', 'voyages') + ' · charges, billing party or tax ID missing', n: tally(nodV, 'nod'), a: usd(nodV, 'nod'), st: k ? 'Follow-up sent at ' + fu[k] : '', b: k ? 'Remind' : 'Send follow-up', act: 'nod' }); }
     const holdV = work.filter((v) => v.hold > 0);
-    if (holdV.length) { const k = sentKey('hold'); bks.push({ l: 'Split-payer unconfirmed', d: pl(holdV.length, 'voyage', 'voyages') + ' · second payer and share needed', n: tally(holdV, 'hold'), a: usd(holdV, 'hold'), st: k ? 'Follow-up sent at ' + fu[k] : '', b: k ? 'Remind' : 'Send follow-up' }); }
+    if (holdV.length) { const k = sentKey('hold'); bks.push({ l: 'Split-payer unconfirmed', d: pl(holdV.length, 'voyage', 'voyages') + ' · second payer and share needed', n: tally(holdV, 'hold'), a: usd(holdV, 'hold'), st: k ? 'Follow-up sent at ' + fu[k] : '', b: k ? 'Remind' : 'Send follow-up', act: 'hold' }); }
     bks.sort((a, b) => b.a - a.a);
     const bTot = bks.reduce((a, r) => a + r.n, 0), bUsd = bks.reduce((a, r) => a + r.a, 0);
     const bk = { tot: pl(bTot, 'invoice', 'invoices'), none: !bks.length, foot: hmUsd(bUsd) + ' on hold until these are cleared',
-      rows: bks.map((r) => ({ l: r.l, d: r.d, n: hmN(r.n), a: hmUsd(r.a), b: r.b, hasSt: !!r.st, st: r.st })) };
+      rows: bks.map((r) => ({ l: r.l, d: r.d, n: hmN(r.n), a: hmUsd(r.a), b: r.b, hasSt: !!r.st, st: r.st, href: VI + '?act=' + r.act + '&back=home-v5.html' })) };
 
     // ---------- containers (D&D)
     const dd = hmDD(cc).map((c) => (ddGen[c.cn] ? Object.assign({}, c, { st: 'invoiced' }) : c));

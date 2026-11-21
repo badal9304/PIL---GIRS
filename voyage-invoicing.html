@@ -1439,6 +1439,11 @@ class GirsPage extends DCLogic {
       if (t === 'dd') this.state.tab = 'dd';
       if (q.get('view') === 'overdue') this.state.view = 'overdue';
       if (q.get('dir') === 'E' || q.get('dir') === 'I') this.state.dir = q.get('dir');
+      // ?act=nod|roe|hold opens that follow-up email (or the rate entry once ROE was requested);
+      // &back=<page> returns there after the email is sent or closed
+      if (['nod', 'roe', 'hold', 'gen'].includes(q.get('act'))) this._act = q.get('act');
+      const back = q.get('back');
+      if (back && /^[a-z0-9-]+\.html$/.test(back)) this._back = back;
     } catch (e) {}
     try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.mail) return this.setState({ mail: null }); if (this.state.riCu || this.state.riSug) return this.setState({ riCu: null, riSug: null }); if (this.state.ri) return this.setState({ ri: null, decl: false }); this.setState({ drw: '', confirm: null, rateFor: '', cal: false }); } }); } catch (e) {}
   }
@@ -1618,6 +1623,31 @@ class GirsPage extends DCLogic {
       const blob = hmXlsx(R.l, ['Voyage No.', 'Vessel', 'Direction', 'POL', 'POD', 'ETD / ETA', 'B/L No.', 'Billing party', 'Containers', 'Amount (USD)'].concat(R.extra), mr.rows);
       self.setState({ mail: Object.assign(m0, { to: R.to, cc: (typeof USER_NAME === 'string' ? USER_NAME.toLowerCase().replace(/\s+/g, '.') : 'daniel.tan') + '@pilship.com', sub, body, file, size: hmSize(blob.size), n, keys: o.keys || [] }), mailPrev: false });
     };
+
+    // ---------- action requested from Home (today and overdue voyages, as Home counts them)
+    if (this._act) {
+      const a = this._act; this._act = null;
+      const W = day(HM_TODAY).concat(overdue).filter((v) => !v.notDue), scope = 'today and overdue';
+      setTimeout(() => {
+        if (a === 'gen') {
+          const ids = day(HM_TODAY).filter((v) => v.ready > 0).map((v) => v.id);
+          if (ids.length) self.setState({ confirm: { kind: 'voy', ids } });
+        } else if (a === 'roe') {
+          const pr = (W.find((v) => v.roe) || {}).pair;
+          if (!pr) return;
+          if (s.roeReq[pr]) self.setState({ rateFor: pr, rateVal: '' });
+          else openMail('roe', W.filter((v) => v.roe && v.pair === pr), { pair: pr, keys: [['roeReq', pr]] });
+        } else {
+          const vs = W.filter((v) => v[a]);
+          if (vs.length) openMail(a, vs, { scope, keys: [['fu', a + ':' + port + ':' + scope]] });
+        }
+      }, 0);
+    }
+    if (this._back) {
+      const open = !!(s.mail || s.rateFor || s.confirm);
+      if (this._wasOpen && !open) { const to = this._back; this._back = null; setTimeout(() => { try { location.href = to; } catch (e) {} }, 700); }
+      this._wasOpen = open;
+    }
 
     // ---------- reasons (rail)
     const due = S.filter((v) => !v.notDue);
