@@ -638,98 +638,125 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .panel-b .hm-stk.lg{margin:0 0 4px}
 
 
-/* Home · version 5 — the quay */
+/* Home · version 5 — at the quay today */
 .pq{overflow:visible}
-.pq-h{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:18px 24px 6px}
-.pq-h h2{margin:0;font-size:17px;line-height:24px;font-weight:600}
-.pq-h p{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.pq-lg{list-style:none;margin:0;padding:0;display:flex;gap:16px;font-size:12px;color:var(--muted2)}
-.pq-lg li{display:inline-flex;align-items:center;gap:6px}
-.pq-lg i{width:12px;height:9px;border-radius:2px}
-.pq-lg i.inv{background:var(--ok)}.pq-lg i.rdy{background:var(--accent)}.pq-lg i.blk{background:var(--warn)}
-.pq-q{display:grid;grid-template-columns:168px minmax(0,1fr);margin:0 24px;padding:14px 0 18px}
+.pq-h{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 24px 16px}
+.pq-ht h2{margin:0;font-size:17px;line-height:24px;font-weight:600}
+.pq-ht p{margin:2px 0 0;font-size:13px;line-height:18px;color:var(--muted)}
+.pq-cta{flex:none;text-decoration:none}
+.pq-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 24px;padding-bottom:20px;border-bottom:1px solid var(--line2)}
+.pt{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:8px;border:1px solid transparent}
+.pt.inv{background:var(--okbg);border-color:var(--okbd)}
+.pt.rdy{background:var(--tint2);border-color:var(--tintbd)}
+.pt.blk{background:var(--warnbg);border-color:var(--warnbd)}
+.pt-l{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--muted2)}
+.pt-l i{width:8px;height:8px;border-radius:2px}
+.pt.inv .pt-l i{background:var(--ok)}.pt.rdy .pt-l i{background:var(--accent)}.pt.blk .pt-l i{background:var(--warn)}
+.pt b{font-size:22px;line-height:30px;font-weight:600;font-variant-numeric:tabular-nums}
+.pt.inv b{color:var(--ok)}.pt.rdy b{color:var(--accent2)}.pt.blk b{color:var(--warn)}
+.pt small{font-size:12px;line-height:16px;color:var(--muted)}
+.pt-bar{grid-column:1 / -1;display:flex;gap:2px;height:8px;border-radius:4px;background:var(--neutral);overflow:hidden}
+.pt-bar i,.pq-qb i{display:block;height:100%;animation:bar-in .9s cubic-bezier(.2,.7,.2,1) both .15s;transform-origin:left}
+@keyframes bar-in{from{transform:scaleX(0)}}
+.pt-bar .inv,.pq-qb .inv{background:var(--ok)}.pt-bar .rdy,.pq-qb .rdy{background:var(--accent)}.pt-bar .blk,.pq-qb .blk{background:var(--warn)}
+.pq-q{display:grid;grid-template-columns:176px minmax(0,1fr);gap:24px;margin:0 24px;padding:20px 0}
 .pq-q + .pq-q{border-top:1px solid var(--line2)}
-.pq-q:last-of-type{margin-bottom:6px}
-.pq-ql{display:flex;flex-direction:column;gap:2px;justify-content:center;padding-inline-end:16px}
-.pq-ql b{font-size:14px;font-weight:600}
-.pq-ql span{font-size:12px;color:var(--muted)}
-.pq-ql .lnk{margin-top:6px;font-size:13px}
-.pq-sea{position:relative;display:flex;align-items:flex-start;gap:14px;min-height:150px;padding:0 4px}
-.pq-sea::before{content:"";position:absolute;inset-inline:0;top:58px;height:30px;border-radius:6px;background:var(--tint);box-shadow:inset 0 2px 0 var(--tintbd)}
-.sh{position:relative;z-index:1;flex:0 0 188px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;outline:none;animation:sh-in .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--dl,0ms)}
+.pq-ql{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding-top:6px}
+.pq-ql > b{font-size:14px;line-height:20px;font-weight:600}
+.pq-ql > span{font-size:12px;line-height:16px;color:var(--muted)}
+.pq-qn{margin-top:10px;font-size:12px;color:var(--muted)}
+.pq-qn strong{font-size:18px;line-height:24px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.pq-qb{display:flex;gap:2px;width:100%;height:6px;margin:6px 0 4px;border-radius:3px;background:var(--neutral);overflow:hidden}
+.pq-ql .pq-qp{font-size:12px;color:var(--muted2)}
+.pq-ql .lnk{margin-top:12px;font-size:13px;font-weight:500}
+.pq-sea{position:relative;display:flex;align-items:flex-start;gap:16px;min-width:0}
+.pq-sea::before{content:"";position:absolute;inset-inline:0;top:56px;height:28px;border-radius:6px;background:var(--tint2);box-shadow:inset 0 2px 0 var(--tintbd)}
+.sh{position:relative;z-index:1;flex:1 1 0;min-width:0;max-width:210px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;outline:none;animation:sh-in .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--dl,0ms)}
 .pq-q.im .sh{animation-name:sh-in-r}
-@keyframes sh-in{from{opacity:0;transform:translateX(-36px)}}
-@keyframes sh-in-r{from{opacity:0;transform:translateX(36px)}}
-.sh-svg{display:block;width:188px;height:89px;transition:transform .2s}
+@keyframes sh-in{from{opacity:0;transform:translateX(-32px)}}
+@keyframes sh-in-r{from{opacity:0;transform:translateX(32px)}}
+.sh-svg{display:block;width:100%;height:auto;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .sh:hover .sh-svg,.sh:focus-visible .sh-svg{transform:translateY(-3px)}
-.sh:focus-visible .sh-l b{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
-.sh-hull{fill:var(--muted3)}
-.sh-wl{stroke:var(--brand);stroke-width:2;opacity:.7}
-.sh-br{fill:var(--muted2)}
+.sh:focus-visible .sh-v{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.sh-hull{fill:color-mix(in srgb,var(--muted3) 82%,var(--surface))}
+.sh-br{fill:color-mix(in srgb,var(--muted3) 70%,var(--surface))}
 .sh-win{fill:var(--tint)}
+.sh-wl{stroke:var(--brand);stroke-width:2;opacity:.55}
 .sh-svg rect.inv{fill:var(--ok)}.sh-svg rect.rdy{fill:var(--accent)}.sh-svg rect.blk{fill:var(--warn)}
 .sh-svg rect.inv,.sh-svg rect.rdy,.sh-svg rect.blk{animation:bx-in .35s ease-out both;animation-delay:var(--bd,0ms)}
 @keyframes bx-in{from{opacity:0;transform:translateY(-10px)}}
 .sh-l{display:flex;flex-direction:column;gap:1px;min-width:0}
-.sh-l b{font-size:13px;font-weight:500;color:var(--accent)}
-.sh-l span{font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sh-l small{font-size:12px;color:var(--muted)}
-.sh-more{all:unset;box-sizing:border-box;cursor:pointer;position:relative;z-index:1;flex:0 0 120px;margin-top:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:96px;border:1px dashed var(--bdh);border-radius:8px;color:var(--accent);font-size:12px}
-.sh-more b{font-size:16px;font-weight:600}
-.sh-more span{color:var(--muted)}
-.sh-more:hover{background:var(--hover2)}
+.sh-v{font-size:13px;line-height:18px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sh:hover .sh-v{color:var(--accent2)}
+.sh-no{font-size:12px;line-height:16px;color:var(--accent)}
+.sh-m{margin-top:4px;align-self:flex-start;display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:500;white-space:nowrap}
+.sh-m.lo{background:var(--tint2);color:var(--accent2)}
+.sh-m.mid{background:var(--neutral);color:var(--muted2)}
+.sh-m.hi{background:var(--okbg);color:var(--ok)}
+.sh-more{all:unset;box-sizing:border-box;cursor:pointer;position:relative;z-index:1;flex:0 0 112px;height:84px;margin-top:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1px dashed var(--bdh);border-radius:8px;background:var(--surface);transition:border-color .15s,background-color .15s}
+.sh-more b{font-size:18px;line-height:24px;font-weight:600;color:var(--accent)}
+.sh-more span{font-size:12px;color:var(--muted)}
+.sh-more:hover{border-color:var(--accent);background:var(--tint2)}
 .sh-more:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.pq-none{align-self:center;font-size:13px;color:var(--muted)}
-.pv{position:absolute;bottom:calc(100% - 6px);inset-inline-start:0;z-index:30;width:250px;display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);font-size:12px;color:var(--muted);pointer-events:none;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s,transform .12s,visibility 0s .12s}
+.pq-none{align-self:center;position:relative;z-index:1;margin-top:28px;font-size:13px;color:var(--muted)}
+.pv{position:absolute;bottom:calc(100% - 4px);inset-inline-start:0;z-index:30;width:252px;display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 12px 32px rgba(22,26,33,.16);font-size:12px;line-height:17px;color:var(--muted);pointer-events:none;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s,transform .12s,visibility 0s .12s}
 .sh:hover .pv,.sh:focus-visible .pv{opacity:1;visibility:visible;transform:none;transition:opacity .12s,transform .12s}
-.pv > b{font-size:13px;font-weight:600;color:var(--ink)}
-.pv-st{display:flex;flex-direction:column;gap:2px;margin:6px 0 4px;padding-top:6px;border-top:1px solid var(--line2)}
-.pv-st span{display:flex;align-items:center;gap:6px;color:var(--muted2)}
-.pv-st b{margin-inline-start:auto;color:var(--ink);font-variant-numeric:tabular-nums}
+.pv > b{font-size:13px;line-height:18px;font-weight:600;color:var(--ink)}
+.pv-st{display:flex;flex-direction:column;gap:4px;margin:6px 0 4px;padding-top:8px;border-top:1px solid var(--line2)}
+.pv-st span{display:flex;align-items:center;gap:8px;color:var(--muted2)}
+.pv-st b{margin-inline-start:auto;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 .pv-st i{width:8px;height:8px;border-radius:2px}
 .pv-st i.inv{background:var(--ok)}.pv-st i.rdy{background:var(--accent)}.pv-st i.blk{background:var(--warn)}
-.pv small{color:var(--accent2)}
-.pk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
-.pk-c{display:flex;flex-direction:column;gap:12px;padding:18px 20px 20px}
-.pk-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-.pk-h h2{margin:0;font-size:15px;font-weight:600;line-height:22px}
-.pk-h .lnk{font-size:13px}
-.pk-s{margin:-10px 0 0;font-size:12px;color:var(--muted)}
-.pk-ring{position:relative;width:128px;height:128px;align-self:center;margin:4px 0}
+.pv small{color:var(--accent2);font-weight:500}
+.pk{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.pk-c{display:flex;flex-direction:column;min-width:0}
+.pk-h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 20px 14px}
+.pk-h h2{margin:0;font-size:15px;line-height:22px;font-weight:600}
+.pk-h p{margin:2px 0 0;font-size:12px;line-height:16px;color:var(--muted)}
+.pk-tot{flex:none;display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.pk-tot.bad{background:var(--badbg);color:var(--bad)}
+.pk-f{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 20px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted)}
+.pk-f .lnk{font-size:13px;font-weight:500;white-space:nowrap}
+.pk-empty{margin:0 20px 20px;font-size:13px;color:var(--muted)}
+.bk-l{list-style:none;margin:0;padding:0 20px 16px;display:flex;flex-direction:column;gap:8px}
+.bk-r{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:16px;padding:12px 14px;border:1px solid var(--warnbd);border-radius:8px;background:color-mix(in srgb,var(--warnbg) 55%,var(--surface));box-shadow:inset 3px 0 0 var(--warnbar)}
+.bk-b{display:flex;flex-direction:column;gap:1px;min-width:0}
+.bk-b b{font-size:13px;line-height:18px;font-weight:600}
+.bk-b > span{font-size:12px;line-height:16px;color:var(--muted)}
+.bk-b .bk-st{margin-top:2px;color:var(--accent2);font-weight:500}
+.bk-v{display:flex;flex-direction:column;align-items:flex-end}
+.bk-v b{font-size:15px;line-height:20px;font-weight:600;color:var(--warn);font-variant-numeric:tabular-nums}
+.bk-v small{font-size:12px;color:var(--muted)}
+.bk-r .btn{background:var(--surface);text-decoration:none;white-space:nowrap}
+.ct-b{display:flex;align-items:center;gap:20px;padding:0 20px 16px}
+.pk-ring{position:relative;flex:none;width:112px;height:112px}
 .pk-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.pk-ring circle{fill:none;stroke-width:12}
+.pk-ring circle{fill:none;stroke-width:11}
 .pr-t{stroke:var(--neutral)}
 .pk-ring .out{stroke:var(--accent)}.pk-ring .soon{stroke:var(--warnbar)}.pk-ring .rdy{stroke:var(--okbar)}.pk-ring .blk{stroke:var(--badbar)}
 .pk-ring circle:not(.pr-t){animation:pk-fill 1s cubic-bezier(.2,.7,.2,1) both .2s}
 @keyframes pk-fill{from{stroke-dasharray:0 100}}
 .pk-rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.pk-rc b{font-size:24px;font-weight:600;line-height:30px}
+.pk-rc b{font-size:24px;line-height:30px;font-weight:600;color:var(--ok);font-variant-numeric:tabular-nums}
 .pk-rc span{font-size:12px;color:var(--muted)}
-.pk-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.pk-l li{display:grid;grid-template-columns:10px minmax(0,1fr) auto;align-items:center;gap:10px;font-size:13px}
+.pk-l{flex:1;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pk-l li{display:grid;grid-template-columns:10px minmax(0,1fr) auto;align-items:center;gap:10px;font-size:13px;line-height:18px}
 .pk-l i{width:10px;height:10px;border-radius:3px}
 .pk-l i.out{background:var(--accent)}.pk-l i.soon{background:var(--warnbar)}.pk-l i.rdy{background:var(--okbar)}.pk-l i.blk{background:var(--badbar)}
-.pk-l b{font-variant-numeric:tabular-nums}
-.pk-al{margin:auto 0 0;padding:10px 12px;border-radius:6px;background:var(--warnbg);color:var(--warn);font-size:12px;line-height:17px}
-.pk-al.none{background:var(--sub);color:var(--muted)}
-.nx{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;transition:border-color .15s}
-.nx:hover{border-color:var(--bdh)}
-.nx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.nx-k{font-size:12px;font-weight:500;color:var(--accent2)}
-.nx b{font-size:15px;font-weight:600;line-height:22px}
-.nx-m{font-size:12px;color:var(--muted)}
-.nx-f{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:13px}
-.pk-foot{margin:auto 0 0;padding-top:12px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted)}
-.od-n{display:flex;align-items:baseline;gap:10px}
+.pk-l b{font-weight:600;font-variant-numeric:tabular-nums}
+.pk-al{margin:0 20px 16px;padding:10px 12px;border-radius:6px;border:1px solid var(--warnbd);background:var(--warnbg);color:var(--warn);font-size:12px;line-height:17px}
+.pk-al.none{border-color:var(--line2);background:var(--sub);color:var(--muted)}
+.od-n{display:flex;align-items:baseline;gap:10px;padding:0 20px}
 .od-n b{font-size:28px;line-height:36px;font-weight:600;color:var(--bad);font-variant-numeric:tabular-nums}
 .od-n span{font-size:13px;color:var(--muted2)}
-.od-bars{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:4px;height:96px;align-items:end;margin-top:4px;border-bottom:1px solid var(--line)}
+.od-bars{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:4px;height:88px;align-items:end;margin:12px 20px 0;border-bottom:1px solid var(--line)}
 .od-b{display:flex;align-items:flex-end;height:100%}
-.od-b i{display:block;width:100%;min-height:2px;border-radius:3px 3px 0 0;background:var(--badbar);opacity:.75;animation:od-up .6s cubic-bezier(.2,.7,.2,1) both .3s;transform-origin:bottom}
-.od-b:hover i{opacity:1}
+.od-b i{display:block;width:100%;border-radius:3px 3px 0 0;background:color-mix(in srgb,var(--badbar) 70%,var(--surface));animation:od-up .6s cubic-bezier(.2,.7,.2,1) both .3s;transform-origin:bottom}
+.od-b.z i{height:2px !important;border-radius:1px;background:var(--line)}
+.od-b:hover i{background:var(--badbar)}
 @keyframes od-up{from{transform:scaleY(0)}}
-.od-ax{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
-@media (prefers-reduced-motion: reduce){.sh,.sh-svg rect,.pk-ring circle,.od-b i{animation:none}.sh-svg,.pv{transition:none}}
+.od-ax{display:flex;justify-content:space-between;margin:6px 20px 16px;font-size:11px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.sh,.sh-svg rect,.pk-ring circle,.od-b i,.pt-bar i,.pq-qb i{animation:none}.sh-svg,.pv{transition:none}}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -1032,12 +1059,25 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <section class="card pq" aria-labelledby="pq-t">
           <div class="pq-h">
-            <div><h2 id="pq-t">{{pq.title}}</h2><p>Each ship carries today's B/Ls as containers, coloured by invoicing status. Point at a ship for details.</p></div>
-            <ul class="pq-lg" aria-label="Legend"><li><i class="inv"></i>Invoiced</li><li><i class="rdy"></i>Ready</li><li><i class="blk"></i>Blocked</li></ul>
+            <div class="pq-ht"><h2 id="pq-t">{{pq.title}}</h2><p>{{pq.sub}}</p></div>
+            <a class="btn btn-primary pq-cta" href="voyage-invoicing.html" style="text-decoration: none">{{pq.cta}}</a>
+          </div>
+          <div class="pq-sum">
+            <sc-for list="{{pq.tiles}}" as="t" hint-placeholder-count="3">
+              <div class="{{t.cls}}"><span class="pt-l"><i aria-hidden="true"></i>{{t.l}}</span><b>{{t.n}}</b><small>{{t.s}}</small></div>
+            </sc-for>
+            <div class="pt-bar" role="img" aria-label="{{pq.barL}}"><i class="inv" style="{{pq.bI}}"></i><i class="rdy" style="{{pq.bR}}"></i><i class="blk" style="{{pq.bB}}"></i></div>
           </div>
           <sc-for list="{{pq.quays}}" as="q" hint-placeholder-count="2">
             <div class="{{q.cls}}">
-              <div class="pq-ql"><b>{{q.l}}</b><span>{{q.s}}</span><a class="lnk" href="{{q.href}}">{{q.open}}</a></div>
+              <div class="pq-ql">
+                <b>{{q.l}}</b>
+                <span>{{q.s}}</span>
+                <span class="pq-qn"><strong>{{q.bls}}</strong> B/Ls</span>
+                <span class="pq-qb" aria-hidden="true"><i class="inv" style="{{q.bI}}"></i><i class="rdy" style="{{q.bR}}"></i><i class="blk" style="{{q.bB}}"></i></span>
+                <span class="pq-qp">{{q.pct}}</span>
+                <a class="lnk" href="{{q.href}}">{{q.open}}</a>
+              </div>
               <div class="pq-sea">
                 <sc-for list="{{q.ships}}" as="sh" hint-placeholder-count="5">
                   <a class="sh" href="{{sh.href}}" style="{{sh.st}}" aria-label="{{sh.aria}}">
@@ -1046,19 +1086,19 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <rect class="sh-br" x="178" y="30" width="22" height="40" rx="2"></rect>
                       <rect class="sh-win" x="182" y="36" width="14" height="4" rx="1"></rect>
                       <polygon class="sh-hull" points="6,70 214,70 198,98 22,98"></polygon>
-                      <line class="sh-wl" x1="22" y1="88" x2="198" y2="88"></line>
+                      <line class="sh-wl" x1="24" y1="88" x2="196" y2="88"></line>
                     </svg>
-                    <span class="sh-l"><b class="mono">{{sh.no}}</b><span>{{sh.vessel}}</span><small>{{sh.meta}}</small></span>
-                    <span class="{{sh.pc}}" role="tooltip">
+                    <span class="sh-l"><span class="sh-v">{{sh.vessel}}</span><span class="sh-no mono">{{sh.no}}</span><span class="{{sh.pc}}">{{sh.meta}}</span></span>
+                    <span class="pv" role="tooltip">
                       <b>{{sh.vessel}} · {{sh.no}}</b>
                       <span>{{sh.route}}</span>
                       <span>{{sh.when}}</span>
-                      <span class="pv-st"><sc-for list="{{sh.rows}}" as="r" hint-placeholder-count="3"><span><i class="{{r.k}}"></i>{{r.l}} <b>{{r.n}}</b></span></sc-for></span>
+                      <span class="pv-st"><sc-for list="{{sh.rows}}" as="r" hint-placeholder-count="3"><span><i class="{{r.k}}"></i>{{r.l}}<b>{{r.n}}</b></span></sc-for></span>
                       <small>Open in Voyage Invoicing</small>
                     </span>
                   </a>
                 </sc-for>
-                <sc-if value="{{q.hasMore}}" hint-placeholder-val="{{ true }}"><a class="sh-more" href="{{q.href}}"><b>+ {{q.more}}</b><span>more vessels</span></a></sc-if>
+                <sc-if value="{{q.hasMore}}" hint-placeholder-val="{{ true }}"><a class="sh-more" href="{{q.href}}"><b>+{{q.more}}</b><span>{{q.moreL}}</span></a></sc-if>
                 <sc-if value="{{q.none}}" hint-placeholder-val="{{ false }}"><span class="pq-none">{{q.noneL}}</span></sc-if>
               </div>
             </div>
@@ -1066,38 +1106,40 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </section>
 
         <div class="pk">
-          <section class="card pk-c" aria-labelledby="pk-ct">
-            <div class="pk-h"><h2 id="pk-ct">Containers</h2><a class="lnk" href="voyage-invoicing.html?tab=dd">D&amp;D Billing</a></div>
-            <p class="pk-s">Detention and demurrage from LMS gate-out and return dates</p>
-            <div class="pk-ring">
-              <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="pr-t" cx="60" cy="60" r="48"></circle><sc-for list="{{ct.arcs}}" as="a" hint-placeholder-count="4"><circle class="{{a.c}}" cx="60" cy="60" r="48" pathLength="100" style="{{a.st}}"></circle></sc-for></svg>
-              <div class="pk-rc"><b>{{ct.total}}</b><span>containers</span></div>
-            </div>
-            <ul class="pk-l"><sc-for list="{{ct.rows}}" as="r" hint-placeholder-count="4"><li><i class="{{r.k}}"></i><span>{{r.l}}</span><b>{{r.n}}</b></li></sc-for></ul>
-            <p class="{{ct.alertC}}">{{ct.alert}}</p>
+          <section class="card pk-c" aria-labelledby="pk-bt">
+            <div class="pk-h"><div><h2 id="pk-bt">What's blocking invoices</h2><p>Today and overdue voyages</p></div><span class="pk-tot bad">{{bk.tot}}</span></div>
+            <ul class="bk-l">
+              <sc-for list="{{bk.rows}}" as="r" hint-placeholder-count="3">
+                <li class="bk-r">
+                  <div class="bk-b"><b>{{r.l}}</b><span>{{r.d}}</span><sc-if value="{{r.hasSt}}" hint-placeholder-val="{{ false }}"><span class="bk-st">{{r.st}}</span></sc-if></div>
+                  <div class="bk-v"><b>{{r.n}}</b><small>{{r.a}}</small></div>
+                  <a class="btn btn-sm" href="voyage-invoicing.html" style="text-decoration: none">{{r.b}}</a>
+                </li>
+              </sc-for>
+            </ul>
+            <sc-if value="{{bk.none}}" hint-placeholder-val="{{ false }}"><p class="pk-empty">Nothing is blocked. Every due invoice can be generated.</p></sc-if>
+            <div class="pk-f"><span>{{bk.foot}}</span><a class="lnk" href="voyage-invoicing.html">Voyage Invoicing</a></div>
           </section>
 
-          <section class="card pk-c" aria-labelledby="pk-nt">
-            <div class="pk-h"><h2 id="pk-nt">Next vessel calls</h2><a class="lnk" href="voyage-invoicing.html?d={{nx.d}}">Schedule</a></div>
-            <p class="pk-s">Manifests arrive from LMS at cut-off</p>
-            <sc-for list="{{nx.calls}}" as="c" hint-placeholder-count="2">
-              <a class="nx" href="{{c.href}}">
-                <span class="nx-k">{{c.k}}</span>
-                <b>{{c.vessel}}</b>
-                <span class="nx-m">{{c.no}} · {{c.route}}</span>
-                <span class="nx-f"><span>{{c.when}}</span><span>{{c.bls}}</span></span>
-              </a>
-            </sc-for>
-            <p class="pk-foot">{{nx.week}}</p>
+          <section class="card pk-c" aria-labelledby="pk-ct">
+            <div class="pk-h"><div><h2 id="pk-ct">Containers</h2><p>Detention and demurrage from LMS gate dates</p></div><span class="pk-tot">{{ct.total}}</span></div>
+            <div class="ct-b">
+              <div class="pk-ring">
+                <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="pr-t" cx="60" cy="60" r="50"></circle><sc-for list="{{ct.arcs}}" as="a" hint-placeholder-count="4"><circle class="{{a.c}}" cx="60" cy="60" r="50" pathLength="100" style="{{a.st}}"></circle></sc-for></svg>
+                <div class="pk-rc"><b>{{ct.ready}}</b><span>to bill</span></div>
+              </div>
+              <ul class="pk-l"><sc-for list="{{ct.rows}}" as="r" hint-placeholder-count="4"><li><i class="{{r.k}}"></i><span>{{r.l}}</span><b>{{r.n}}</b></li></sc-for></ul>
+            </div>
+            <p class="{{ct.alertC}}">{{ct.alert}}</p>
+            <div class="pk-f"><span>{{ct.foot}}</span><a class="lnk" href="voyage-invoicing.html?tab=dd">D&amp;D Billing</a></div>
           </section>
 
           <section class="card pk-c" aria-labelledby="pk-ot">
-            <div class="pk-h"><h2 id="pk-ot">Still open from earlier</h2><a class="lnk" href="voyage-invoicing.html?view=overdue">Review</a></div>
-            <p class="pk-s">Voyages from the last 14 days with invoices not raised</p>
+            <div class="pk-h"><div><h2 id="pk-ot">Still open from earlier</h2><p>Voyages from the last 14 days</p></div><span class="pk-tot bad">{{od.tot}}</span></div>
             <div class="od-n"><b>{{od.n}}</b><span>{{od.l}}</span></div>
-            <div class="od-bars" aria-hidden="true"><sc-for list="{{od.days}}" as="d" hint-placeholder-count="14"><span class="od-b" title="{{d.tip}}"><i style="{{d.h}}"></i></span></sc-for></div>
+            <div class="od-bars" role="img" aria-label="{{od.aria}}"><sc-for list="{{od.days}}" as="d" hint-placeholder-count="14"><span class="{{d.c}}" title="{{d.tip}}"><i style="{{d.h}}"></i></span></sc-for></div>
             <div class="od-ax"><span>{{od.from}}</span><span>Yesterday</span></div>
-            <p class="pk-foot">{{od.amt}}</p>
+            <div class="pk-f"><span>{{od.foot}}</span><a class="lnk" href="voyage-invoicing.html?view=overdue">Review overdue</a></div>
           </section>
         </div>
       </main>
@@ -1249,7 +1291,7 @@ class GirsPage extends DCLogic {
     const s = this.state;
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem('girs.home') || '{}') || {}; } catch (e) {}
-    const gen = saved.gen || {}, blGen = saved.blGen || {}, roeSet = saved.roeSet || {}, ddGen = saved.ddGen || {};
+    const gen = saved.gen || {}, blGen = saved.blGen || {}, roeSet = saved.roeSet || {}, ddGen = saved.ddGen || {}, fu = saved.fu || {}, roeReq = saved.roeReq || {};
     const hub = s.__hub || 'SIN', [cty, port, cc] = HM_HUB[hub] || HM_HUB.SIN, ent = s.__ent || 'PIL';
     const hr = (() => { try { return new Date().getHours(); } catch (e) { return 9; } })();
     const greet = (hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ', ' + (typeof USER_NAME === 'string' ? USER_NAME.split(' ')[0] : 'Daniel');
@@ -1267,72 +1309,101 @@ class GirsPage extends DCLogic {
     const tally = (vs, k) => vs.reduce((a, v) => a + v[k], 0);
     const usd = (vs, k) => vs.reduce((a, v) => a + v[k] * v.avg, 0);
     const pl = (n, a, b) => hmN(n) + ' ' + (n === 1 ? a : b);
-    const fmt = (d, o) => hmFmt(d, o || { weekday: 'short', day: 'numeric', month: 'short' });
+    const pctOf = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+    const W = (a, b) => 'width:' + (b ? (a / b) * 100 : 0) + '%';
     const today = day(HM_TODAY);
+    const past = []; for (let i = 14; i >= 1; i--) past.push(hmAdd(HM_TODAY, -i));
+    const lateBy = past.map((d) => day(d).filter((v) => v.late));
+    const overdue = [].concat(...lateBy), work = today.concat(overdue);
 
-    // ---------- the quay
-    const SHOW = 4;
+    // ---------- today at the quay
+    const B = tally(today, 'bls'), I = tally(today, 'inv'), R = tally(today, 'ready'), K = tally(today, 'blocked');
+    const SHOW = 5;
     const ship = (v, i, E) => {
       const n = Math.max(4, Math.min(24, Math.round(v.bls / 45))), t = v.bls || 1;
-      const nI = Math.round((v.inv / t) * n), nR = Math.round((v.ready / t) * n), nB = Math.max(0, n - nI - nR);
+      const nI = Math.round((v.inv / t) * n), nR = Math.round((v.ready / t) * n);
       const boxes = [];
       for (let k = 0; k < n; k++) {
         const c = k < nI ? 'inv' : k < nI + nR ? 'rdy' : 'blk', col = k % 8, row = Math.floor(k / 8);
         boxes.push({ c, x: String(14 + col * 19.5), y: String(56 - row * 15), st: '--bd:' + (i * 140 + 380 + k * 18) + 'ms' });
       }
-      const pct = Math.round((v.inv / t) * 100);
+      const pct = pctOf(v.inv, v.bls);
       return {
         no: v.no, vessel: v.vessel, boxes, st: '--dl:' + i * 140 + 'ms',
-        meta: hmN(v.bls) + ' B/Ls · ' + pct + '% invoiced',
-        route: v.pol + ' → ' + v.pod + ' · service ' + v.svc, when: (E ? 'Departs ' : 'Arrives ') + 'today · manifest received',
+        meta: pct + '% invoiced', pc: 'sh-m ' + (pct >= 67 ? 'hi' : pct > 0 ? 'mid' : 'lo'),
+        route: v.pol + ' → ' + v.pod + ' · service ' + v.svc, when: (E ? 'Departs' : 'Arrives') + ' today · ' + hmN(v.bls) + ' B/Ls · manifest received',
         rows: [['inv', 'Invoiced', v.inv], ['rdy', 'Ready to generate', v.ready], ['blk', 'Blocked', v.blocked]].map(([k, l, nn]) => ({ k, l, n: hmN(nn) })),
-        pc: 'pv', href: VI + '?d=' + v.date + '&v=' + encodeURIComponent(v.id),
+        href: VI + '?d=' + v.date + '&v=' + encodeURIComponent(v.id),
         aria: v.vessel + ', voyage ' + v.no + ', ' + (E ? 'departs' : 'arrives') + ' today, ' + hmN(v.bls) + ' B/Ls, ' + pct + ' percent invoiced, ' + hmN(v.ready) + ' ready, ' + hmN(v.blocked) + ' blocked'
       };
     };
     const quay = (dir) => {
       const E = dir === 'E', vs = today.filter((v) => v.dir === dir).sort((a, b) => b.bls - a.bls);
-      const b = tally(vs, 'bls'), i = tally(vs, 'inv');
-      return { cls: 'pq-q ' + (E ? 'ex' : 'im'), l: E ? 'Departing today' : 'Arriving today', s: (E ? 'Export manifest · ' : 'Import manifest · ') + pl(vs.length, 'vessel', 'vessels') + ' · ' + hmN(b) + ' B/Ls · ' + (b ? Math.round((i / b) * 100) : 0) + '% invoiced',
+      const b = tally(vs, 'bls'), i = tally(vs, 'inv'), r = tally(vs, 'ready'), k = tally(vs, 'blocked');
+      const show = vs.length === SHOW + 1 ? SHOW + 1 : SHOW;
+      return { cls: 'pq-q ' + (E ? 'ex' : 'im'), l: E ? 'Departing today' : 'Arriving today', s: (E ? 'Export manifest · ' : 'Import manifest · ') + pl(vs.length, 'vessel', 'vessels'),
+        bls: hmN(b), bI: W(i, b), bR: W(r, b), bB: W(k, b), pct: pctOf(i, b) + '% invoiced',
         href: VI + '?dir=' + dir, open: E ? 'Open exports' : 'Open imports',
-        ships: vs.slice(0, SHOW).map((v, k) => ship(v, k, E)), hasMore: vs.length > SHOW, more: String(vs.length - SHOW), none: !vs.length, noneL: E ? 'No departures today.' : 'No arrivals today.' };
+        ships: vs.slice(0, show).map((v, n) => ship(v, n, E)), hasMore: vs.length > show, more: String(vs.length - show), moreL: vs.length - show === 1 ? 'more vessel' : 'more vessels',
+        none: !vs.length, noneL: E ? 'No departures today.' : 'No arrivals today.' };
     };
-    const pq = { title: 'At the quay in ' + cty + ' today', quays: [quay('E'), quay('I')] };
+    const pq = {
+      title: 'At the quay in ' + cty + ' today',
+      sub: pl(today.length, 'vessel', 'vessels') + ' and ' + hmN(B) + ' B/Ls due for invoicing. Each ship carries its B/Ls as containers, coloured by status.',
+      cta: R ? 'Generate ' + hmN(R) + ' ready' : 'Open Voyage Invoicing',
+      tiles: [
+        { cls: 'pt inv', l: 'Invoiced', n: hmN(I), s: pctOf(I, B) + '% of today’s B/Ls · ' + hmUsd(usd(today, 'inv')) },
+        { cls: 'pt rdy', l: 'Ready to generate', n: hmN(R), s: hmUsd(usd(today, 'ready')) + ' waiting to be invoiced' },
+        { cls: 'pt blk', l: 'Blocked', n: hmN(K), s: hmUsd(usd(today, 'blocked')) + ' on hold · see below' }
+      ],
+      bI: W(I, B), bR: W(R, B), bB: W(K, B), barL: pctOf(I, B) + '% invoiced, ' + pctOf(R, B) + '% ready, ' + pctOf(K, B) + '% blocked',
+      quays: [quay('E'), quay('I')]
+    };
+
+    // ---------- what's blocking invoices
+    const pair = (today[0] || overdue[0] || {}).pair || 'USD → SGD';
+    const sentKey = (k) => Object.keys(fu).find((x) => x.startsWith(k + ':' + port + ':') || (x.startsWith('v:') && x.endsWith(':' + k)));
+    const bks = [];
+    const roeV = work.filter((v) => v.roe > 0);
+    if (roeV.length) bks.push({ l: 'ROE not received · ' + pair, d: pl(roeV.length, 'voyage', 'voyages') + ' · rate from Treasury', n: tally(roeV, 'roe'), a: usd(roeV, 'roe'), st: roeReq[pair] ? 'Requested at ' + roeReq[pair] : '', b: roeReq[pair] ? 'Enter rate' : 'Request ROE' });
+    const nodV = work.filter((v) => v.nod > 0);
+    if (nodV.length) { const k = sentKey('nod'); bks.push({ l: 'Data not received from LMS', d: pl(nodV.length, 'voyage', 'voyages') + ' · charges, billing party or tax ID missing', n: tally(nodV, 'nod'), a: usd(nodV, 'nod'), st: k ? 'Follow-up sent at ' + fu[k] : '', b: k ? 'Remind' : 'Send follow-up' }); }
+    const holdV = work.filter((v) => v.hold > 0);
+    if (holdV.length) { const k = sentKey('hold'); bks.push({ l: 'Split-payer unconfirmed', d: pl(holdV.length, 'voyage', 'voyages') + ' · second payer and share needed', n: tally(holdV, 'hold'), a: usd(holdV, 'hold'), st: k ? 'Follow-up sent at ' + fu[k] : '', b: k ? 'Remind' : 'Send follow-up' }); }
+    bks.sort((a, b) => b.a - a.a);
+    const bTot = bks.reduce((a, r) => a + r.n, 0), bUsd = bks.reduce((a, r) => a + r.a, 0);
+    const bk = { tot: pl(bTot, 'invoice', 'invoices'), none: !bks.length, foot: hmUsd(bUsd) + ' on hold until these are cleared',
+      rows: bks.map((r) => ({ l: r.l, d: r.d, n: hmN(r.n), a: hmUsd(r.a), b: r.b, hasSt: !!r.st, st: r.st })) };
 
     // ---------- containers (D&D)
     const dd = hmDD(cc).map((c) => (ddGen[c.cn] ? Object.assign({}, c, { st: 'invoiced' }) : c));
-    const soonC = dd.filter((c) => c.st === 'out' && (() => { const left = hmDiff(HM_TODAY, hmAdd(c.out, c.free)); return left >= 0 && left <= 2; })());
+    const isSoon = (c) => { const left = hmDiff(HM_TODAY, hmAdd(c.out, c.free)); return left >= 0 && left <= 2; };
+    const soonC = dd.filter((c) => c.st === 'out' && isSoon(c));
     const outC = dd.filter((c) => c.st === 'out').length - soonC.length;
-    const rdyC = dd.filter((c) => c.st === 'ready').length, blkC = dd.filter((c) => ['roe', 'tariff', 'milestone', 'waiver'].includes(c.st)).length;
-    const parts = [['out', 'With customers', outC], ['soon', 'Free time ends within 2 days', soonC.length], ['rdy', 'Returned · ready to bill', rdyC], ['blk', 'Returned · blocked', blkC]];
+    const rdyL = dd.filter((c) => c.st === 'ready'), blkC = dd.filter((c) => ['roe', 'tariff', 'milestone', 'waiver'].includes(c.st)).length;
+    const rdyAmt = rdyL.reduce((a, c) => { const used = hmDiff(c.out, c.back || HM_TODAY); return a + hmSlab(c.sz, Math.max(0, used - c.free)).amt; }, 0);
+    const parts = [['rdy', 'Returned · ready to bill', rdyL.length], ['blk', 'Returned · blocked', blkC], ['soon', 'Free time ends within 2 days', soonC.length], ['out', 'With customers', outC]];
     const tot = parts.reduce((a, p) => a + p[2], 0) || 1;
     let acc = 0;
     const ct = {
-      total: hmN(tot),
-      arcs: parts.map(([k, , n]) => { const w = (n / tot) * 100, o = acc; acc += w; return { c: k, st: 'stroke-dasharray:' + Math.max(0, w - 0.8) + ' 100;stroke-dashoffset:' + -o }; }),
+      total: pl(tot, 'container', 'containers'), ready: hmN(rdyL.length),
+      arcs: parts.map(([k, , n]) => { const w = (n / tot) * 100, o = acc; acc += w; return { c: k, st: 'stroke-dasharray:' + Math.max(0, w - 1) + ' 100;stroke-dashoffset:' + -o }; }),
       rows: parts.map(([k, l, n]) => ({ k, l, n: hmN(n) })),
-      alert: soonC.length ? pl(soonC.length, 'container starts', 'containers start') + ' charging within 2 days. Let the customers know before charges begin.' : 'No containers start charging in the next 2 days.',
-      alertC: 'pk-al' + (soonC.length ? '' : ' none')
+      alert: soonC.length ? pl(soonC.length, 'container starts', 'containers start') + ' charging within 2 days. Let the customer know before charges begin.' : 'No containers start charging in the next 2 days.',
+      alertC: 'pk-al' + (soonC.length ? '' : ' none'), foot: hmUsd(rdyAmt) + ' ready to bill'
     };
 
-    // ---------- next vessel calls
-    const up = []; for (let i = 1; i <= 6; i++) up.push(...day(hmAdd(HM_TODAY, i)));
-    const firstOf = (dir) => up.filter((v) => v.dir === dir)[0];
-    const call = (v, k) => (v ? { k, vessel: v.vessel, no: v.no, route: v.pol + ' → ' + v.pod, when: (v.dir === 'E' ? 'ETD ' : 'ETA ') + fmt(v.date), bls: pl(v.bls, 'B/L', 'B/Ls'), href: VI + '?d=' + v.date + '&v=' + encodeURIComponent(v.id) } : null);
-    const nx = { d: hmAdd(HM_TODAY, 1), calls: [call(firstOf('E'), 'Next departure'), call(firstOf('I'), 'Next arrival')].filter(Boolean),
-      week: pl(up.filter((v) => v.dir === 'E').length, 'departure', 'departures') + ' and ' + pl(up.filter((v) => v.dir === 'I').length, 'arrival', 'arrivals') + ' in the next 6 days' };
-
     // ---------- still open from earlier
-    const past = []; for (let i = 14; i >= 1; i--) past.push(hmAdd(HM_TODAY, -i));
-    const lateBy = past.map((d) => day(d).filter((v) => v.late));
     const opens = lateBy.map((vs) => tally(vs, 'open')), omax = Math.max(1, ...opens);
-    const allLate = [].concat(...lateBy);
-    const oldest = allLate.length ? Math.max(...allLate.map((v) => hmDiff(v.date, HM_TODAY))) : 0;
-    const od = { n: hmN(allLate.length), l: (allLate.length === 1 ? 'voyage · ' : 'voyages · ') + pl(tally(allLate, 'open'), 'invoice', 'invoices') + ' open',
-      days: past.map((d, i) => ({ h: 'height:' + (opens[i] / omax) * 100 + '%', tip: fmt(d) + ' · ' + (opens[i] ? hmN(opens[i]) + ' invoices open' : 'all invoiced') })),
-      from: fmt(past[0], { day: 'numeric', month: 'short' }), amt: allLate.length ? hmUsd(usd(allLate, 'open')) + ' not yet invoiced · oldest ' + pl(oldest, 'day', 'days') + ' ago' : 'Everything from the last 14 days is invoiced.' };
+    const oldest = overdue.length ? Math.max(...overdue.map((v) => hmDiff(v.date, HM_TODAY))) : 0;
+    const oOpen = tally(overdue, 'open');
+    const fmt = (d, o) => hmFmt(d, o || { weekday: 'short', day: 'numeric', month: 'short' });
+    const od = { tot: pl(overdue.length, 'voyage', 'voyages'), n: hmN(oOpen), l: oOpen === 1 ? 'invoice not yet raised' : 'invoices not yet raised',
+      days: past.map((d, i) => ({ c: 'od-b' + (opens[i] ? '' : ' z'), h: 'height:' + Math.max(2, (opens[i] / omax) * 100) + '%', tip: fmt(d) + ' · ' + (opens[i] ? hmN(opens[i]) + ' invoices open' : 'all invoiced') })),
+      aria: 'Open invoices by sailing day over the last 14 days', from: fmt(past[0], { day: 'numeric', month: 'short' }),
+      foot: overdue.length ? hmUsd(usd(overdue, 'open')) + ' · oldest ' + pl(oldest, 'day', 'days') + ' ago' : 'Everything from the last 14 days is invoiced' };
 
-    return { greet, ctx: cty + ' (' + port + ') · ' + ent + ' · LMS data received 2 min ago', pq, ct, nx, od };
+    return { greet, ctx: cty + ' (' + port + ') · ' + ent + ' · LMS data received 2 min ago', pq, bk, ct, od };
   }
 }
 
