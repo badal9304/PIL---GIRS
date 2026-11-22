@@ -296,6 +296,47 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .scrim{z-index:200}
 .bm1-sh .search .input{height:36px}
 
+.mback{position:fixed;inset:0;z-index:80;background:transparent;border:0;padding:0;margin:0;cursor:default}
+.er-ms{position:relative}
+.er-msb{width:100%;display:flex;align-items:center;gap:6px;text-align:start;cursor:pointer;padding-inline-end:32px;position:relative;box-sizing:border-box}
+.er-msb svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;color:var(--muted);pointer-events:none}
+.er-msb[aria-expanded=true]{border-color:var(--accent)}
+.er-msb .count{margin-inline-start:auto}
+.er-mst{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.er-msp{position:absolute;z-index:81;top:calc(100% + 4px);left:0;min-width:100%;width:240px;max-height:360px;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(22,26,33,.16);overflow:hidden}
+.er-msp>.er-mso:first-child,.er-msp>.cols-s:first-child{margin-top:8px}
+.er-msl{flex:1 1 auto;overflow:auto}
+.er-mso{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 14px;font-size:13px;cursor:pointer;flex:none}
+.er-mso:hover{background:var(--hover2)}
+.er-mso input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.er-msf{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2)}
+.fq{position:relative}
+.cols-b{gap:6px}.cols-b svg{color:var(--muted)}.cols-b[aria-expanded="true"]{border-color:var(--accent)}
+.cols-s{position:relative;padding:4px 12px 8px}.cols-s>svg{position:absolute;inset-inline-start:22px;top:50%;margin-top:-10px;color:var(--muted);pointer-events:none}.cols-q{width:100%;padding-inline:32px 30px;box-sizing:border-box}.cols-x{position:absolute;inset-inline-end:16px;top:50%;margin-top:-14px;width:24px;height:24px;display:grid;place-items:center;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:4px}.cols-x:hover{background:var(--hover2);color:var(--ink)}
+.fq .msel-p{position:absolute;z-index:81;top:calc(100% + 4px);display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(22,26,33,.16);overflow:hidden}
+.cols-p{inset-inline-end:0;width:280px;max-height:480px}.cols-h{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 6px;font-weight:600;font-size:14px}.cols-h .mu{font-weight:400;font-size:12px}.cols-l{flex:1 1 auto;overflow:auto;border-top:1px solid var(--line2);padding-top:4px}
+.fq .msel-o{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 16px;font-size:13px;cursor:pointer;flex:none}
+.fq .msel-o:hover{background:var(--hover2)}
+.fq .msel-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.fq .msel-o input:disabled+span{color:var(--muted)}
+.fq .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);background:var(--surface)}
+/* Charge Master: actions, highlights, labels */
+.card-head .btn{gap:6px}
+.cm-acts{display:inline-flex;align-items:center;gap:2px}
+.cm-ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;color:var(--muted2)}
+.cm-ib:hover{background:var(--hover);color:var(--accent)}
+.cm-ib.d:hover{background:var(--badbg);color:var(--bad)}
+.cm-ib:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.lst td.c-act{padding-block:4px;padding-inline:10px}
+.lst td.c-no .lnk{font-weight:600}
+.cm-tr{display:block;max-width:280px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.lst td.nm{font-weight:500;color:var(--ink)}
+.lst td.gl .cm-tr{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.cm-yn{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:4px;font-size:11px;font-weight:600}
+.cm-yn.y{background:var(--okbg);color:var(--ok)}
+.cm-yn.n{background:var(--neutral);color:var(--muted2)}
+.cm2-f .lbl{white-space:normal;overflow:visible}
+.cm2-grid{align-items:end}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -618,12 +659,17 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                   <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
                     <input class="input" id="{{f.id}}" value="{{f.val}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
                   </sc-if>
-                  <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}">
-                    <div class="cm2-sel">
-                      <select class="select" id="{{f.id}}" value="{{f.val}}" onChange="{{f.on}}">
-                        <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for>
-                      </select>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  <sc-if value="{{f.isMulti}}" hint-placeholder-val="{{ false }}">
+                    <div class="er-ms">
+                      <button type="button" class="select er-msb" id="{{f.id}}" aria-haspopup="listbox" aria-expanded="{{f.openA}}" onClick="{{f.toggle}}"><span class="er-mst">{{f.txt}}</span><sc-if value="{{f.hasN}}" hint-placeholder-val="{{ false }}"><span class="count on">{{f.n}}</span></sc-if><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                      <sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
+                        <button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{f.close}}"></button>
+                        <div class="er-msp" role="listbox" aria-multiselectable="true" aria-label="{{f.label}}">
+                          <label class="er-mso"><input type="checkbox" checked="{{f.all}}" onChange="{{f.allFlip}}"><span style="font-weight: 600">Select all</span></label>
+                          <div class="er-msl"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="4"><label class="er-mso" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.t}}</span></label></sc-for></div>
+                          <div class="er-msf"><button type="button" class="btn btn-sm" onClick="{{f.clear}}">Clear</button><button type="button" class="btn btn-sm btn-primary" onClick="{{f.close}}">Done</button></div>
+                        </div>
+                      </sc-if>
                     </div>
                   </sc-if>
                 </div>
@@ -638,7 +684,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <section class="card" aria-labelledby="cm2-sr" style="flex: 1 1 auto; min-height: 160px; display: flex; flex-direction: column; overflow: hidden">
             <div class="card-head">
               <h2 class="card-title" id="cm2-sr">Search Results</h2>
-              <span style="display: inline-flex; align-items: center; gap: 12px"><span class="card-meta">Records found <b style="color: var(--ink); font-weight: 600">{{res.found}}</b></span><button class="btn btn-sm" onClick="{{res.exportXl}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>Export to Excel</button></span>
+              <span style="display: inline-flex; align-items: center; gap: 12px"><span class="card-meta">Records found <b style="color: var(--ink); font-weight: 600">{{res.found}}</b></span><div class="fq"><button class="btn btn-sm cols-b" aria-haspopup="dialog" aria-expanded="{{cols.openA}}" title="Show or hide table columns" onClick="{{cols.toggle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="1.5"></rect><path d="M9.5 4v16M14.5 4v16"></path></svg><span>Columns</span><span class="count on">{{cols.n}}</span></button><sc-if value="{{cols.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close columns" onClick="{{cols.cancel}}"></button><div class="msel-p cols-p" role="dialog" aria-label="Columns"><div class="cols-h"><span>Columns</span><span class="mu">{{cols.dn}}</span></div><div class="cols-s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input cols-q" placeholder="Search columns" aria-label="Search columns" value="{{cols.q}}" onInput="{{cols.onQ}}"><sc-if value="{{cols.hasQ}}" hint-placeholder-val="{{ false }}"><button class="cols-x" aria-label="Clear search" onClick="{{cols.clrQ}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div><sc-if value="{{cols.noQ}}" hint-placeholder-val="{{ true }}"><label class="msel-o"><input type="checkbox" checked="{{cols.all}}" onChange="{{cols.allFlip}}"><span style="font-weight: 600">Select all</span></label></sc-if><div class="cols-l"><sc-for list="{{cols.list}}" as="c" hint-placeholder-count="8"><label class="msel-o" title="{{c.tip}}"><input type="checkbox" checked="{{c.on}}" disabled="{{c.lock}}" onChange="{{c.flip}}"><span>{{c.label}}</span></label></sc-for><sc-if value="{{cols.none}}" hint-placeholder-val="{{ false }}"><div class="mu" style="padding: 16px; font-size: 13px; text-align: center">No columns match</div></sc-if></div><div class="msel-f"><button class="btn btn-sm" onClick="{{cols.reset}}" disabled="{{cols.isDef}}">Reset to default</button><button class="btn btn-sm btn-primary" onClick="{{cols.done}}">Done</button></div></div></sc-if></div><button class="btn btn-sm" onClick="{{res.exportXl}}" disabled="{{res.empty}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>Export to Excel</button></span>
             </div>
             <div style="flex: 1 1 auto; min-height: 0; overflow: auto">
             <table class="lst">
@@ -647,16 +693,8 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                 <sc-for list="{{res.rows}}" as="r" hint-placeholder-count="10">
                   <tr class="{{r.cls}} cmc-row" onClick="{{r.view}}">
                     <td class="c-no"><button class="lnk mono" onClick="{{r.view}}" title="{{r.viewLbl}}">{{r.code}}</button></td>
-                    <td>{{r.name}}</td>
-                    <td>{{r.type}}</td>
-                    <td>{{r.rev}}</td>
-                    <td>{{r.app}}</td>
-                    <td>{{r.pay}}</td>
-                    <td class="mono">{{r.rep}}</td>
-                    <td>{{r.own}}</td>
-                    <td class="mono">{{r.gl}}</td>
-                    <td>{{r.auto}}</td>
-                    <td class="c-act"><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">View/Update</button></td>
+                    <sc-for list="{{r.cells}}" as="x" hint-placeholder-count="9"><td class="{{x.c}}"><sc-if value="{{x.chip}}" hint-placeholder-val="{{ false }}"><span class="{{x.chipC}}" title="{{x.tip}}">{{x.v}}</span></sc-if><sc-if value="{{x.plain}}" hint-placeholder-val="{{ true }}"><span class="cm-tr" title="{{x.tip}}">{{x.v}}</span></sc-if></td></sc-for>
+                    <td class="c-act"><span class="cm-acts"><button class="cm-ib" onClick="{{r.view}}" aria-label="{{r.viewLbl}}" title="View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></button><button class="cm-ib" onClick="{{r.upd}}" aria-label="{{r.updLbl}}" title="Update"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button></span></td>
                   </tr>
                 </sc-for>
               </tbody>
@@ -790,19 +828,19 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                               <td><input class="input input-sm" aria-label="{{a.nLbl}}" value="{{a.name}}" readonly="{{det.ro}}" onInput="{{a.onN}}"></td>
                               <td class="cm2-ac">
                                 <sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}">
-                                  <button class="lnk" onClick="{{a.copy}}">Copy</button><span class="cm2-bar" aria-hidden="true">|</span><button class="lnk" onClick="{{a.add}}">Add</button><span class="cm2-bar" aria-hidden="true">|</span><button class="lnk cm2-del" onClick="{{a.del}}">Delete</button>
+                                  <span class="cm-acts"><button class="cm-ib" onClick="{{a.copy}}" aria-label="Copy alias" title="Copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button class="cm-ib" onClick="{{a.add}}" aria-label="Add alias below" title="Add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button><button class="cm-ib d" onClick="{{a.del}}" aria-label="Delete alias" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path><path d="M10 11v6M14 11v6"></path></svg></button></span>
                                 </sc-if>
                               </td>
                             </tr>
                           </sc-for>
                           <sc-if value="{{det.noAlias}}" hint-placeholder-val="{{ false }}">
-                            <tr><td colspan="3" class="empty" style="text-align: start">—</td><td class="cm2-ac"><sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{det.addFirst}}">Add</button></sc-if></td></tr>
+                            <tr><td colspan="3" class="empty" style="text-align: start">—</td><td class="cm2-ac"><sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}"><button class="cm-ib" onClick="{{det.addFirst}}" aria-label="Add alias" title="Add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></sc-if></td></tr>
                           </sc-if>
                         </tbody>
                       </table>
                     </div>
                   </div>
-                  <label class="cm2-ck cm2-man"><input type="checkbox" class="cbx" checked="{{det.manual}}" disabled="{{det.fro}}" onChange="{{det.flipManual}}"><span>Manual Addition Allowed</span></label>
+                  <label class="cm2-ck cm2-man"><input type="checkbox" class="cbx" checked="{{det.manual}}" disabled="{{det.ro}}" onChange="{{det.flipManual}}"><span>Manual Addition Allowed</span></label>
                 
             </section>
           </div>
@@ -882,11 +920,17 @@ const CM_SEED = [
 const CM_ALIAS = { OFT: [['CN', 'SHN', 'China Ocean Freight']], BAF: [['CN', 'SHN', 'China Bunker Surcharge']], THO: [['SG', 'SIN', 'Terminal Handling Charge']], DOC: [['IN', 'NSA', 'Documentation Charges']] };
 const cmBuild = () => CM_SEED.map((r, i) => ({
   code: r[0], name: r[1], type: r[2], rev: r[3], app: r[4], pay: r[5], rep: r[6], own: r[7], gl: r[8], auto: r[9],
-  alias: (CM_ALIAS[r[0]] || []).map((a) => a.slice()), manual: false, svc: '',
+  alias: (CM_ALIAS[r[0]] || []).map((a) => a.slice()), manual: r[0] === 'OFT', svc: '',
   rd: r[2] === 'OC' || r[2] === 'DC' || r[2] === 'DT' ? { cy: true, cfs: true, door: false, tackle: false, na: false } : { cy: true, cfs: true, door: true, tackle: true, na: true },
   local: r[7] === 'LOC' ? 'Y' : 'N', office: r[7] === 'LOC' ? 'SIN' : 'N/AP', vvd1: r[7] === 'TRD' ? 'Y' : 'N', vvd2: r[7] === 'TRD' ? 'Y' : 'N',
   seq: String(i + 1), del: 'N'
 }));
+// Table columns the user can show or hide (Charge Code and Action are always shown)
+const CM_COLS = [['name', 'Charge Name'], ['type', 'Charge Type'], ['rev', 'Charge Rev Type'], ['app', 'Charge Applying Type'], ['pay', 'Payment Term'], ['rep', 'Rep. Charge'], ['own', 'Ownership'], ['gl', 'Account (G/L)'], ['auto', 'Auto Rating Flag']];
+const CM_COLS_DEF = CM_COLS.map((c) => c[0]);
+const cmColsLoad = () => { try { const v = JSON.parse(localStorage.getItem('girs.cm.cols') || 'null'); if (Array.isArray(v)) return v.filter((k) => CM_COLS.some((c) => c[0] === k)); } catch (e) {} return CM_COLS_DEF.slice(); };
+const cmColsSave = (arr) => { const v = CM_COLS.map((c) => c[0]).filter((k) => arr.includes(k)); try { localStorage.setItem('girs.cm.cols', JSON.stringify(v)); } catch (e) {} return v; };
+const CM_DESC = { type: CM_TYPE, app: CM_APPLY, pay: CM_PAY };
 const CM_CRIT = [
   ['code', 'Charge Code', 'text'], ['name', 'Charge Name', 'text'], ['type', 'Charge Type', 'sel', Object.keys(CM_TYPE)], ['rev', 'Charge Rev Type', 'sel', CM_REV], ['app', 'Charge Applying Type', 'sel', Object.keys(CM_APPLY)],
   ['pay', 'Payment Term', 'sel', Object.keys(CM_PAY)], ['rep', 'Rep. Charge', 'text'], ['own', 'Ownership', 'sel', CM_OWN], ['gl', 'Account (G/L)', 'text'], ['auto', 'Auto Rating Flag', 'sel', ['Y', 'N']]
@@ -898,18 +942,18 @@ class GirsPage extends DCLogic {
     let recs = null;
     try { recs = JSON.parse(localStorage.getItem('girs.cm2') || 'null'); } catch (e) {}
     const q = (() => { try { return new URLSearchParams(location.search).get('q') || ''; } catch (e) { return ''; } })();
-    const crit = {}; CM_CRIT.forEach(([k]) => { crit[k] = ''; });
+    const crit = {}; CM_CRIT.forEach(([k, , kind]) => { crit[k] = kind === 'sel' ? [] : ''; });
     if (q) crit.code = q;
-    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.state.tab === 'detail' && !document.querySelector('.menu')) this.setState({ tab: 'search', draft: null }); }); } catch (e) {}
-    this.state = { tab: 'search', crit, applied: Object.assign({}, crit), pg: 1, psz: 25, sel: null, mode: 'view', draft: null, recs: Array.isArray(recs) && recs.length ? recs : cmBuild() };
+    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.op || this.state.colsOpen) return this.setState({ op: '', colsOpen: false, colsDraft: null }); if (this.state.tab === 'detail' && !document.querySelector('.menu')) this.setState({ tab: 'search', draft: null }); }); } catch (e) {}
+    this.state = { op: '', cols: cmColsLoad(), colsOpen: false, colsDraft: null, colsQ: '', tab: 'search', crit, applied: JSON.parse(JSON.stringify(crit)), pg: 1, psz: 25, sel: null, mode: 'view', draft: null, recs: Array.isArray(recs) && recs.length ? recs : cmBuild() };
   }
   renderVals() {
     const s = this.state, self = this;
     const setCrit = (k, v) => self.setState({ crit: Object.assign({}, s.crit, { [k]: v }) });
     const match = (r) => CM_CRIT.every(([k, , kind]) => {
+      if (kind === 'sel') { const a = s.applied[k] || []; return !a.length || a.includes(String(r[k])); }
       const q = String(s.applied[k] || '').trim().toUpperCase();
-      if (!q) return true;
-      return kind === 'sel' ? String(r[k]) === q : String(r[k]).toUpperCase().includes(q);
+      return !q || String(r[k]).toUpperCase().includes(q);
     });
     const list = s.recs.filter(match);
     // pagination: same component and behaviour as the Invoice List
@@ -925,25 +969,58 @@ class GirsPage extends DCLogic {
     };
 
     const crit = {
-      fields: CM_CRIT.map(([k, label, kind, opts]) => ({
-        id: 'cm2-q-' + k, label, val: s.crit[k], isText: kind === 'text', isSel: kind === 'sel',
-        opts: [{ v: '', l: '' }].concat((opts || []).map((o) => ({ v: o, l: o }))),
-        on: (e) => setCrit(k, e.target.value)
-      })),
-      submit: (e) => { e.preventDefault(); self.setState({ applied: Object.assign({}, s.crit), pg: 1 }); },
-      clear: () => { const c = {}; CM_CRIT.forEach(([k]) => { c[k] = ''; }); self.setState({ crit: c, applied: Object.assign({}, c), pg: 1 }); }
+      fields: CM_CRIT.map(([k, label, kind, opts]) => {
+        if (kind !== 'sel') return { id: 'cm2-q-' + k, label, val: s.crit[k], isText: true, isMulti: false, on: (e) => setCrit(k, e.target.value) };
+        const v = s.crit[k] || [], open = s.op === k, list = opts || [], desc = CM_DESC[k] || {};
+        const allOn = list.length > 0 && list.every((x) => v.includes(x));
+        return { id: 'cm2-q-' + k, label, isText: false, isMulti: true,
+          txt: v.length ? v.join(', ') : 'All', hasN: v.length > 2, n: String(v.length), open, openA: open ? 'true' : 'false', all: allOn,
+          toggle: () => self.setState({ op: open ? '' : k }), close: () => self.setState({ op: '' }),
+          clear: () => setCrit(k, []), allFlip: () => setCrit(k, allOn ? [] : list.slice()),
+          opts: list.map((x) => ({ t: desc[x] ? x + ' · ' + desc[x] : x, on: v.includes(x) ? 'true' : 'false', flip: () => setCrit(k, v.includes(x) ? v.filter((y) => y !== x) : v.concat([x])) })) };
+      }),
+      submit: (e) => { e.preventDefault(); self.setState({ applied: JSON.parse(JSON.stringify(s.crit)), pg: 1, op: '' }); },
+      clear: () => { const c = {}; CM_CRIT.forEach(([k, , kind]) => { c[k] = kind === 'sel' ? [] : ''; }); self.setState({ crit: c, applied: JSON.parse(JSON.stringify(c)), pg: 1, op: '' }); }
     };
 
+    const vis = CM_COLS.filter(([k]) => s.cols.includes(k));
+    const dr = s.colsDraft || s.cols, cq = String(s.colsQ || '').trim().toLowerCase();
+    const allCols = CM_COLS.every(([k]) => dr.includes(k));
+    const cList = [{ label: 'Charge Code', on: true, lock: true, tip: 'Always shown', flip: () => {} }]
+      .concat(CM_COLS.map(([k, label]) => ({ label, on: dr.includes(k), lock: false, tip: label, flip: () => self.setState({ colsDraft: dr.includes(k) ? dr.filter((x) => x !== k) : dr.concat([k]) }) })),
+        [{ label: 'Action', on: true, lock: true, tip: 'Always shown', flip: () => {} }]);
+    const cShown = cq ? cList.filter((c) => c.label.toLowerCase().includes(cq)) : cList;
+    const cols = { n: (s.cols.length + 2) + ' of ' + (CM_COLS.length + 2), dn: (dr.length + 2) + ' of ' + (CM_COLS.length + 2),
+      open: !!s.colsOpen, openA: s.colsOpen ? 'true' : 'false', list: cShown, none: !cShown.length, q: s.colsQ || '', hasQ: !!cq, noQ: !cq, all: allCols,
+      onQ: (e) => self.setState({ colsQ: e.target.value }), clrQ: () => self.setState({ colsQ: '' }),
+      toggle: () => self.setState({ colsOpen: !s.colsOpen, colsQ: '', colsDraft: s.colsOpen ? null : s.cols.slice(), op: '' }),
+      cancel: () => self.setState({ colsOpen: false, colsDraft: null, colsQ: '' }),
+      done: () => self.setState({ cols: cmColsSave(dr), colsOpen: false, colsDraft: null, colsQ: '' }),
+      allFlip: () => self.setState({ colsDraft: allCols ? [] : CM_COLS.map((c) => c[0]) }),
+      reset: () => self.setState({ colsDraft: CM_COLS_DEF.slice() }), isDef: CM_COLS_DEF.every((k) => dr.includes(k)) };
     const res = {
       found: list.length + (list.length === 1 ? ' Record' : ' Records'),
-      cols: [{ l: 'Charge Code', cls: 'c-no' }].concat(['Charge Name', 'Charge Type', 'Charge Rev Type', 'Charge Applying Type', 'Payment Term', 'Rep. Charge', 'Ownership', 'Account (G/L)', 'Auto Rating Flag'].map((l) => ({ l, cls: '' })), [{ l: 'Action', cls: 'c-act' }]),
+      cols: [{ l: 'Charge Code', cls: 'c-no' }].concat(vis.map(([, l]) => ({ l, cls: '' })), [{ l: 'Action', cls: 'c-act' }]),
       rows: list.slice(from, from + size).map((r) => Object.assign({}, r, {
         cls: r.code === s.sel ? 'on' : '',
-        view: () => open(r.code, 'update'), upd: () => open(r.code, 'update'),
-        viewLbl: 'View/Update ' + r.code, updLbl: 'View/Update ' + r.code
+        cells: vis.map(([k]) => {
+          const desc = (CM_DESC[k] || {})[r[k]] || '';
+          if (k === 'type') return { chip: true, plain: false, chipC: 'chip ' + ({ TF: 't-info', SC: 't-warn', OC: 't-ok', DC: 't-ok', DT: 't-bad', MS: 't-neutral' }[r.type] || 't-neutral'), v: r.type, tip: desc, c: '' };
+          if (k === 'auto') return { chip: true, plain: false, chipC: 'cm-yn ' + (r.auto === 'Y' ? 'y' : 'n'), v: r.auto, tip: r.auto === 'Y' ? 'Auto rating on' : 'Auto rating off', c: '' };
+          return { chip: false, plain: true, v: r[k], tip: desc ? r[k] + ' · ' + desc : r[k], c: k === 'name' ? 'nm' : k === 'gl' ? 'gl' : k === 'rep' ? 'mono' : '' };
+        }),
+        view: () => open(r.code, 'view'), upd: () => open(r.code, 'update'),
+        viewLbl: 'View ' + r.code, updLbl: 'Update ' + r.code
       })),
       empty: !list.length, p: pgr,
-      exportXl: () => self.setState({ __toast: 'Export to Excel prepared — ' + list.length + (list.length === 1 ? ' record.' : ' records.') })
+      exportXl: () => {
+        const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        const head = ['Charge Code', 'Charge Name', 'Charge Type', 'Charge Rev Type', 'Charge Applying Type', 'Payment Term', 'Rep. Charge', 'Ownership', 'Account (G/L)', 'Auto Rating Flag'];
+        const body = list.map((r) => [r.code, r.name, r.type, r.rev, r.app, r.pay, r.rep, r.own, r.gl, r.auto]);
+        const html = '<html><head><meta charset="utf-8"></head><body><table border="1"><tr>' + head.map((x) => '<th>' + esc(x) + '</th>').join('') + '</tr>' + body.map((b) => '<tr>' + b.map((v) => '<td style="mso-number-format:\'\\@\'">' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table></body></html>';
+        try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'application/vnd.ms-excel' })); a.download = 'Charge-Master.xls'; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
+        self.setState({ __toast: 'Exported ' + list.length + (list.length === 1 ? ' charge' : ' charges') + ' to Excel.' });
+      }
     };
 
     // ---- View / Update
@@ -1005,7 +1082,7 @@ class GirsPage extends DCLogic {
         search: s.tab === 'search' ? 'true' : 'false', detail: s.tab === 'detail' ? 'true' : 'false', isSearch: true, isDetail: s.tab === 'detail',
         toSearch: () => self.setState({ tab: 'search' }), toDetail: () => self.setState({ tab: 'detail' })
       },
-      crit, res, det
+      crit, res, det, cols
     };
   }
 }
