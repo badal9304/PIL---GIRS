@@ -462,7 +462,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               </div>
               <div style="flex: 1 1 auto; overflow: auto">
                 <table>
-                  <thead><tr><th>Charge</th><th>Source</th><th style="width: 160px" class="r r-w">Amount</th><th>Tax</th><th style="width: 60px"></th></tr></thead>
+                  <thead><tr><th>Charge</th><th>Source</th><th style="width: 160px" class="r r-w">Amount</th><th>Tax</th><th style="width: 60px">Action</th></tr></thead>
                   <tbody>
                     <sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
                       <tr><td style="font-weight: 500">{{l.desc}}</td><td style="color: var(--muted)">{{l.src}}</td><td class="r"><input class="input mono" value="{{l.amt}}" onInput="{{l.setAmt}}" aria-label="{{l.desc}} amount" style="width: 140px; height: 32px; text-align: end"></td><td style="color: var(--muted)">[Tax per country rule]</td><td><button class="btn btn-sm btn-icon" onClick="{{l.remove}}" aria-label="Remove {{l.desc}}" style="width: 32px">×</button></td></tr>

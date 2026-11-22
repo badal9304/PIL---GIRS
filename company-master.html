@@ -220,6 +220,12 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .wt{width:max-content;min-width:100%;border-collapse:collapse}
 .wt th,.wt td{white-space:nowrap}
 .wt td.wa,.wt th.wa{width:280px;min-width:280px;max-width:280px}
+.ct-em{max-width:240px}
+.ph-f{display:flex;gap:8px}
+.ph-cc{position:relative;flex:0 0 104px}
+.ph-cc .select{width:100%;padding-inline-end:30px}
+.ph-cc svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
+.ph-f .input{flex:1 1 auto;min-width:0}
 .trunc{display:block;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:default}
 .wt .act{position:sticky;inset-inline-end:0;background:var(--surface);box-shadow:inset 1px 0 0 var(--line),-10px 0 12px -10px rgba(22,26,33,.22);text-align:center;width:116px;min-width:116px;padding-inline:8px}
 .wt th.act{background:var(--sub)}
@@ -608,7 +614,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                   <div class="ttl"><h3>Branch / Office Details</h3><button class="btn btn-sm" onClick="{{addBr}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add</button></div>
                   <div class="card tw">
                     <table class="wt">
-                      <thead><tr><th>Port</th><th>Company Code</th><th>Company Name</th><th>Company Alias Name</th><th class="wa">Company Address</th><th>Mobile</th><th>Telephone</th><th>e-mail</th><th>Tax Registration No</th><th>GFS Code</th><th>Active</th><th class="act"><span class="sr">Actions</span></th></tr></thead>
+                      <thead><tr><th>Port</th><th>Company Code</th><th>Company Name</th><th>Company Alias Name</th><th class="wa">Company Address</th><th>Mobile</th><th>Telephone</th><th>e-mail</th><th>Tax Registration No</th><th>GFS Code</th><th>Active</th><th class="act">Action</th></tr></thead>
                       <tbody>
                         <sc-for list="{{brs}}" as="b" hint-placeholder-count="5">
                           <tr><td>{{b.port}}</td><td><button class="lnk mono" onClick="{{b.open}}">{{b.code}}</button></td><td>{{b.name}}</td><td>{{b.alias}}</td><td class="wa"><span class="trunc" title="{{b.addr}}">{{b.addr}}</span></td><td>{{b.mob}}</td><td>{{b.tel}}</td><td>{{b.email}}</td><td class="mono">{{b.tax}}</td><td class="mono">{{b.gfs}}</td><td>{{b.act}}</td>
@@ -623,15 +629,30 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                   <div class="ttl"><h3>Bank Details</h3><button class="btn btn-sm" onClick="{{addBk}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add</button></div>
                   <div class="card tw">
                     <table class="wt">
-                      <thead><tr><th>Country</th><th>Location</th><th>Carrier</th><th>Bank Name</th><th>Currency</th><th>Account Name</th><th>IBAN / Account No.</th><th>Account Type</th><th>Swift Code</th><th>Tax Registration No (PIN No.)</th><th>VAT No.</th><th class="wa">Bank Address</th><th>Bank Code</th><th>Branch Code</th><th class="act"><span class="sr">Actions</span></th></tr></thead>
+                      <thead><tr><th>Country</th><th>Location</th><th>Carrier</th><th>Bank Name</th><th>Currency</th><th>Account Name</th><th>IBAN / Account No.</th><th>Account Type</th><th>Swift Code</th><th>Tax Registration No (PIN No.)</th><th>VAT No.</th><th class="wa">Bank Address</th><th>Bank Code</th><th>Branch Code</th><th>Invoice Type</th><th>Invoice Sub-Type</th><th class="act">Action</th></tr></thead>
                       <tbody>
                         <sc-for list="{{bks}}" as="b" hint-placeholder-count="2">
-                          <tr><td>{{b.ctry}}</td><td>{{b.loc}}</td><td>{{b.carrier}}</td><td>{{b.bank}}</td><td class="mono">{{b.cur}}</td><td>{{b.accName}}</td><td class="mono">{{b.accNo}}</td><td>{{b.accType}}</td><td class="mono">{{b.swift}}</td><td class="mono">{{b.pin}}</td><td class="mono">{{b.vat}}</td><td class="wa"><span class="trunc" title="{{b.addr}}">{{b.addr}}</span></td><td class="mono">{{b.bankCode}}</td><td class="mono">{{b.brCode}}</td>
+                          <tr><td>{{b.ctry}}</td><td>{{b.loc}}</td><td>{{b.carrier}}</td><td>{{b.bank}}</td><td class="mono">{{b.cur}}</td><td>{{b.accName}}</td><td class="mono">{{b.accNo}}</td><td>{{b.accType}}</td><td class="mono">{{b.swift}}</td><td class="mono">{{b.pin}}</td><td class="mono">{{b.vat}}</td><td class="wa"><span class="trunc" title="{{b.addr}}">{{b.addr}}</span></td><td class="mono">{{b.bankCode}}</td><td class="mono">{{b.brCode}}</td><td><span class="chip t-info">{{b.invType}}</span></td><td>{{b.invSub}}</td>
                             <td class="act"><span class="ibs"><button class="ib" onClick="{{b.edit}}" aria-label="Edit bank account {{b.cur}} {{b.accNo}}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button class="ib" onClick="{{b.copy}}" aria-label="Copy bank account {{b.cur}} {{b.accNo}}" title="Copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button class="ib d" onClick="{{b.del}}" aria-label="Delete bank account {{b.cur}} {{b.accNo}}" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path><path d="M10 11v6M14 11v6"></path></svg></button></span></td></tr>
                         </sc-for>
                       </tbody>
                     </table>
                     <sc-if value="{{noBks}}" hint-placeholder-val="{{ false }}"><p class="empty-t">No bank accounts recorded for this company.</p></sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{tab4}}" hint-placeholder-val="{{ false }}">
+                  <div class="ttl"><h3>Contact Details</h3><button class="btn btn-sm" onClick="{{addCt}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add</button></div>
+                  <div class="card tw">
+                    <table class="wt">
+                      <thead><tr><th>Primary Contact</th><th>Department</th><th>Salutation</th><th>First Name</th><th>Last Name</th><th>Phone</th><th>e-mail</th><th class="wa">Address</th><th class="act">Action</th></tr></thead>
+                      <tbody>
+                        <sc-for list="{{cts}}" as="c" hint-placeholder-count="4">
+                          <tr><td><sc-if value="{{c.isPri}}" hint-placeholder-val="{{ false }}"><span class="chip t-ok">Yes</span></sc-if><sc-if value="{{c.notPri}}" hint-placeholder-val="{{ true }}"><span class="mu">No</span></sc-if></td><td>{{c.dept}}</td><td>{{c.sal}}</td><td>{{c.first}}</td><td>{{c.last}}</td><td class="mono">{{c.phone}}</td><td><span class="trunc ct-em" title="{{c.email}}">{{c.email}}</span></td><td class="wa"><span class="trunc" title="{{c.addr}}">{{c.addr}}</span></td>
+                            <td class="act"><span class="ibs"><button class="ib" onClick="{{c.edit}}" aria-label="Update contact {{c.who}}" title="Update"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button></span></td></tr>
+                        </sc-for>
+                      </tbody>
+                    </table>
+                    <sc-if value="{{noCts}}" hint-placeholder-val="{{ false }}"><p class="empty-t">No contacts recorded for this company.</p></sc-if>
                   </div>
                 </sc-if>
               </div>
@@ -657,6 +678,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
               <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}"><input class="input" aria-labelledby="{{f.id}}" value="{{f.v}}" onInput="{{f.on}}" aria-invalid="{{f.bad}}"></sc-if>
               <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}"><textarea class="input" rows="2" aria-labelledby="{{f.id}}" value="{{f.v}}" onInput="{{f.on}}"></textarea></sc-if>
               <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><select class="select" aria-labelledby="{{f.id}}" value="{{f.v}}" onChange="{{f.on}}" disabled="{{f.dis}}"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></span></sc-if>
+              <sc-if value="{{f.isPhone}}" hint-placeholder-val="{{ false }}"><div class="ph-f"><span class="ph-cc"><select class="select" aria-label="Country code" value="{{f.cc}}" onChange="{{f.onCc}}"><sc-for list="{{f.ccOpts}}" as="o" hint-placeholder-count="8"><option value="{{o.v}}">{{o.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span><input class="input mono" aria-labelledby="{{f.id}}" value="{{f.num}}" onInput="{{f.onNum}}" placeholder="Phone number" aria-invalid="{{f.bad}}" inputmode="tel" autocomplete="off"></div></sc-if>
               <sc-if value="{{f.isRadio}}" hint-placeholder-val="{{ false }}"><div class="seg" role="radiogroup" aria-labelledby="{{f.id}}" style="align-self: flex-start"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="2"><button role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.t}}</button></sc-for></div></sc-if>
               <sc-if value="{{f.isChk}}" hint-placeholder-val="{{ false }}"><label class="kchk"><input type="checkbox" class="cbx" checked="{{f.v}}" onChange="{{f.on}}"><span>{{f.label}}</span></label></sc-if>
               <sc-if value="{{f.isFile}}" hint-placeholder-val="{{ false }}"><label class="kfile"><input type="file" accept="image/*" onChange="{{f.on}}"><span class="btn btn-sm">Browse</span><span class="kfn">{{f.v}}</span></label></sc-if>
@@ -702,8 +724,15 @@ const CO_SEED = [
       ['Tuas Port', 'SG01-05', 'PIL-Tuas Port-BO', 'PIL-Tuas Port', '10 Tuas Port Road, #01-20, Tuas Port Administration Building, Singapore 637911', '+65 9123 4505', '+65 6123 4505', 'tuasport@pil.com', 'P051101234A', 'SG01-05', 'Y']
     ],
     bk: [
-      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'SGD', 'PIL Singapore Ltd.', '12345678', 'Current', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001'],
-      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'USD', 'PIL Singapore Ltd.', '87654321', 'Foreign currency', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001']
+      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'SGD', 'PIL Singapore Ltd.', '12345678', 'Current', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001', 'Freight', 'Invoice'],
+      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'USD', 'PIL Singapore Ltd.', '87654321', 'Foreign currency', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001', 'D&D', 'Credit Note'],
+      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'USD', 'PIL Singapore Ltd.', '87654321', 'Foreign currency', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001', 'FORALL', 'FORALL']
+    ],
+    ct: [
+      ['Yes', 'Corporate', 'Mr.', 'XYX', 'ZYX', '+61 4 8123 5590', 'ethan.mcallister@example.com', '22 Collins Street, Melbourne, VIC 3000'],
+      ['No', 'Finance', 'Mr.', 'Ethan', 'McAllister', '+61 4 8123 5590', 'ethan.mcallister@example.com', '22 Collins Street, Melbourne, VIC 3000'],
+      ['No', 'Sales', 'Ms.', 'Harper', 'Winslow', '+61 4 9772 4418', 'harper.winslow@example.com', '14 Rivergum Drive, Brisbane, QLD 4000'],
+      ['No', 'Operations', 'Dr.', 'Oliver', 'Keating', '+61 4 6301 8824', 'oliver.keating@example.com', '8 Kookaburra Lane, Perth, WA 6000']
     ] },
   { id: 'SG02', ent: 'PIL', code: 'SG02', name: 'PIL DJIBOUTI LIMITED', alias: 'PIL DJIBOUTI LTD', loc: 'Djibouti', nBr: 3, active: true,
     addr: 'Boulevard de la République, Immeuble Kalam, 3rd Floor, BP 2101, Djibouti', mob: '+253 77 81 2200', tel: '+253 21 35 2200', email: 'djibouti@pil.com', tax: 'NIF 0011 2207 D', gfs: 'SG02',
@@ -713,8 +742,13 @@ const CO_SEED = [
       ['Tadjourah', 'SG02-03', 'PIL-Tadjourah-BO', 'PIL-Tadjourah', 'Port de Tadjourah, Zone Portuaire, Tadjourah, Djibouti', '+253 77 81 2203', '+253 21 35 2203', 'tadjourah@pil.com', 'NIF 0011 2207 D', 'SG02-03', 'Y']
     ],
     bk: [
-      ['Djibouti', 'Djibouti', 'PIL', 'Bank of Africa Mer Rouge', 'DJF', 'PIL Djibouti Limited', 'DJ21 0001 0000 0102 3456 7890 12', 'Current', 'BMOIDJJD', 'NIF 0011 2207 D', '', '10 Place Lagarde, Djibouti', '00010', '00001'],
-      ['Djibouti', 'Djibouti', 'PIL', 'Bank of Africa Mer Rouge', 'USD', 'PIL Djibouti Limited', 'DJ21 0001 0000 0102 3456 7890 55', 'Current', 'BMOIDJJD', 'NIF 0011 2207 D', '', '10 Place Lagarde, Djibouti', '00010', '00001']
+      ['Djibouti', 'Djibouti', 'PIL', 'Bank of Africa Mer Rouge', 'DJF', 'PIL Djibouti Limited', 'DJ21 0001 0000 0102 3456 7890 12', 'Current', 'BMOIDJJD', 'NIF 0011 2207 D', '', '10 Place Lagarde, Djibouti', '00010', '00001', 'Freight', 'Invoice'],
+      ['Djibouti', 'Djibouti', 'PIL', 'Bank of Africa Mer Rouge', 'USD', 'PIL Djibouti Limited', 'DJ21 0001 0000 0102 3456 7890 55', 'Current', 'BMOIDJJD', 'NIF 0011 2207 D', '', '10 Place Lagarde, Djibouti', '00010', '00001', 'FORALL', 'FORALL']
+    ],
+    ct: [
+      ['Yes', 'Corporate', 'Mr.', 'Ahmed', 'Robleh', '+253 77 81 2210', 'ahmed.robleh@pil.com', 'Boulevard de la République, Immeuble Kalam, Djibouti'],
+      ['No', 'Finance', 'Ms.', 'Amina', 'Hassan', '+253 77 81 2211', 'amina.hassan@pil.com', 'Boulevard de la République, Immeuble Kalam, Djibouti'],
+      ['No', 'Operations', 'Mr.', 'Idriss', 'Farah', '+253 77 81 2212', 'idriss.farah@pil.com', 'Doraleh Multipurpose Port, Office Block B, Doraleh, Djibouti']
     ] },
   { id: 'SG03', ent: 'PIL', code: 'SG03', name: 'PIL TOGO SA', alias: 'PIL TOGO SA', loc: 'Togo', nBr: 2, active: true,
     addr: 'Boulevard du Mono, Zone Portuaire, BP 3412, Lomé, Togo', mob: '+228 90 12 3400', tel: '+228 22 27 3400', email: 'togo@pil.com', tax: 'NIF 1000 4521 78', gfs: 'SG03',
@@ -723,8 +757,12 @@ const CO_SEED = [
       ['Lomé Container Terminal', 'SG03-02', 'PIL-LCT-BO', 'PIL-LCT', 'Lomé Container Terminal, Gate 3 Office, Lomé, Togo', '+228 90 12 3402', '+228 22 27 3402', 'lct@pil.com', 'NIF 1000 4521 78', 'SG03-02', 'Y']
     ],
     bk: [
-      ['Togo', 'Lomé', 'PIL', 'Ecobank Togo', 'XOF', 'PIL Togo SA', 'TG53 TG05 5010 0123 4567 8900 12', 'Current', 'ECOCTGTG', 'NIF 1000 4521 78', 'TVA 1000 4521 78', '20 Avenue Sylvanus Olympio, Lomé, Togo', 'TG055', '01001'],
-      ['Togo', 'Lomé', 'PIL', 'Ecobank Togo', 'USD', 'PIL Togo SA', 'TG53 TG05 5010 0123 4567 8900 34', 'Current', 'ECOCTGTG', 'NIF 1000 4521 78', 'TVA 1000 4521 78', '20 Avenue Sylvanus Olympio, Lomé, Togo', 'TG055', '01001']
+      ['Togo', 'Lomé', 'PIL', 'Ecobank Togo', 'XOF', 'PIL Togo SA', 'TG53 TG05 5010 0123 4567 8900 12', 'Current', 'ECOCTGTG', 'NIF 1000 4521 78', 'TVA 1000 4521 78', '20 Avenue Sylvanus Olympio, Lomé, Togo', 'TG055', '01001', 'Freight', 'Invoice'],
+      ['Togo', 'Lomé', 'PIL', 'Ecobank Togo', 'USD', 'PIL Togo SA', 'TG53 TG05 5010 0123 4567 8900 34', 'Current', 'ECOCTGTG', 'NIF 1000 4521 78', 'TVA 1000 4521 78', '20 Avenue Sylvanus Olympio, Lomé, Togo', 'TG055', '01001', 'FORALL', 'FORALL']
+    ],
+    ct: [
+      ['Yes', 'Corporate', 'Mr.', 'Koffi', 'Mensah', '+228 90 12 3410', 'koffi.mensah@pil.com', 'Boulevard du Mono, Zone Portuaire, Lomé, Togo'],
+      ['No', 'Finance', 'Ms.', 'Ama', 'Agbeko', '+228 90 12 3411', 'ama.agbeko@pil.com', 'Boulevard du Mono, Zone Portuaire, Lomé, Togo']
     ] },
   { id: 'SG04', ent: 'PIL', code: 'SG04', name: 'Pacific International Lines (Hong Kong) Limited', alias: 'PACIFIC INTERNATIONAL LINES PTE LTD', loc: 'Hong Kong', nBr: 2, active: true,
     addr: '31/F, Tower 2, Times Square, 1 Matheson Street, Causeway Bay, Hong Kong', mob: '+852 9123 4400', tel: '+852 2823 4400', email: 'hongkong@pil.com', tax: 'BR 12345678-000', gfs: 'SG04',
@@ -733,8 +771,13 @@ const CO_SEED = [
       ['Tsing Yi', 'SG04-02', 'PIL-Tsing Yi-BO', 'PIL-Tsing Yi', '12/F, Tsing Yi Industrial Centre, 1 Cheung Tat Road, Tsing Yi, Hong Kong', '+852 9123 4402', '+852 2823 4402', 'tsingyi@pil.com', 'BR 12345678-000', 'SG04-02', 'Y']
     ],
     bk: [
-      ['Hong Kong', 'Hong Kong', 'PIL', 'The Hongkong and Shanghai Banking Corporation', 'HKD', 'Pacific International Lines (HK) Ltd', '004-123-456789-001', 'Current', 'HSBCHKHHHKH', 'BR 12345678-000', '', '1 Queen\'s Road Central, Hong Kong', '004', '123'],
-      ['Hong Kong', 'Hong Kong', 'PIL', 'The Hongkong and Shanghai Banking Corporation', 'USD', 'Pacific International Lines (HK) Ltd', '004-123-456789-274', 'Current', 'HSBCHKHHHKH', 'BR 12345678-000', '', '1 Queen\'s Road Central, Hong Kong', '004', '123']
+      ['Hong Kong', 'Hong Kong', 'PIL', 'The Hongkong and Shanghai Banking Corporation', 'HKD', 'Pacific International Lines (HK) Ltd', '004-123-456789-001', 'Current', 'HSBCHKHHHKH', 'BR 12345678-000', '', '1 Queen\'s Road Central, Hong Kong', '004', '123', 'Freight', 'Invoice'],
+      ['Hong Kong', 'Hong Kong', 'PIL', 'The Hongkong and Shanghai Banking Corporation', 'USD', 'Pacific International Lines (HK) Ltd', '004-123-456789-274', 'Current', 'HSBCHKHHHKH', 'BR 12345678-000', '', '1 Queen\'s Road Central, Hong Kong', '004', '123', 'FORALL', 'FORALL']
+    ],
+    ct: [
+      ['Yes', 'Corporate', 'Mr.', 'Kelvin', 'Chan', '+852 9123 4410', 'kelvin.chan@pil.com', '31/F, Tower 2, Times Square, Causeway Bay, Hong Kong'],
+      ['No', 'Finance', 'Ms.', 'Grace', 'Leung', '+852 9123 4411', 'grace.leung@pil.com', '31/F, Tower 2, Times Square, Causeway Bay, Hong Kong'],
+      ['No', 'Sales', 'Mr.', 'Tony', 'Wong', '+852 9123 4412', 'tony.wong@pil.com', 'Container Terminal 9, Office Tower, Kwai Chung, Hong Kong']
     ] },
   { id: 'SG05', ent: 'MEL', code: 'SG05', name: 'MARIANA EXPRESS LINES PTE LTD', alias: 'MELL Singapore', loc: 'Singapore', nBr: 2, active: true,
     addr: '140 Robinson Road, #12-01, Crown @ Robinson, Singapore 068907', mob: '+65 9234 5600', tel: '+65 6234 5600', email: 'corporate@mell.example.com', tax: '199801234M', gfs: 'SG02',
@@ -745,8 +788,12 @@ const CO_SEED = [
       ['Tuas Port', 'SG02-04', 'MELL-Tuas Port-BO', 'MELL-Tuas Port', '10 Tuas Port Road, #02-14, Tuas Port Administration Building, Singapore 637911', '+65 9234 5604', '+65 6234 5604', 'tuasport@mell.example.com', '199801234M', 'SG02-04', 'Y']
     ],
     bk: [
-      ['Singapore', 'Singapore', 'MEL', 'DBS Bank Ltd', 'SGD', 'Mariana Express Lines Pte Ltd', '072-901234-5', 'Current', 'DBSSSGSG', '199801234M', 'M90-3456789-0', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072'],
-      ['Singapore', 'Singapore', 'MEL', 'DBS Bank Ltd', 'USD', 'Mariana Express Lines Pte Ltd', '072-901234-9', 'Foreign currency', 'DBSSSGSG', '199801234M', 'M90-3456789-0', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072']
+      ['Singapore', 'Singapore', 'MEL', 'DBS Bank Ltd', 'SGD', 'Mariana Express Lines Pte Ltd', '072-901234-5', 'Current', 'DBSSSGSG', '199801234M', 'M90-3456789-0', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072', 'Freight', 'Invoice'],
+      ['Singapore', 'Singapore', 'MEL', 'DBS Bank Ltd', 'USD', 'Mariana Express Lines Pte Ltd', '072-901234-9', 'Foreign currency', 'DBSSSGSG', '199801234M', 'M90-3456789-0', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072', 'FORALL', 'FORALL']
+    ],
+    ct: [
+      ['Yes', 'Corporate', 'Ms.', 'Rachel', 'Lim', '+65 9234 5610', 'rachel.lim@mell.example.com', '140 Robinson Road, #12-01, Crown @ Robinson, Singapore 068907'],
+      ['No', 'Finance', 'Mr.', 'Daniel', 'Ong', '+65 9234 5611', 'daniel.ong@mell.example.com', '140 Robinson Road, #12-01, Crown @ Robinson, Singapore 068907']
     ] },
   { id: 'MY01', ent: 'MSC', code: 'MY01', name: 'MALAYSIA SHIPPING CORPORATION SDN BHD', alias: 'MSCorp Malaysia', loc: 'Malaysia', nBr: 6, active: true,
     addr: 'Level 18, Menara Sample, Jalan Sultan Ismail, 50250 Kuala Lumpur, Malaysia', mob: '+60 12-345 6700', tel: '+60 3-2345 6700', email: 'corporate@mscorp.example.com', tax: 'C 2345678901', gfs: 'MY01',
@@ -759,25 +806,55 @@ const CO_SEED = [
       ['Muara (Brunei)', 'MY01-06', 'MSCorp-Muara-BO', 'MSCorp-Muara', 'Unit 3, Muara Port Complex, Muara BT1728, Brunei Darussalam', '+673 712 3406', '+673 277 3406', 'muara@mscorp.example.com', 'C 2345678901', 'MY01-06', 'Y']
     ],
     bk: [
-      ['Malaysia', 'Kuala Lumpur', 'MSC', 'Malayan Banking Berhad (Maybank)', 'MYR', 'Malaysia Shipping Corporation Sdn Bhd', '5141 2345 6789', 'Current', 'MBBEMYKL', 'C 2345678901', 'W10-1808-32000123', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '514'],
-      ['Malaysia', 'Kuala Lumpur', 'MSC', 'Malayan Banking Berhad (Maybank)', 'USD', 'Malaysia Shipping Corporation Sdn Bhd', '7141 2345 6701', 'Foreign currency', 'MBBEMYKL', 'C 2345678901', 'W10-1808-32000123', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '714'],
-      ['Malaysia', 'Port Klang', 'MSC', 'CIMB Bank Berhad', 'MYR', 'Malaysia Shipping Corporation Sdn Bhd', '8001 2345 67', 'Current', 'CIBBMYKL', 'C 2345678901', 'W10-1808-32000123', 'Jalan Kem, 42000 Pelabuhan Klang, Selangor', '35', '801']
+      ['Malaysia', 'Kuala Lumpur', 'MSC', 'Malayan Banking Berhad (Maybank)', 'MYR', 'Malaysia Shipping Corporation Sdn Bhd', '5141 2345 6789', 'Current', 'MBBEMYKL', 'C 2345678901', 'W10-1808-32000123', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '514', 'Freight', 'Invoice'],
+      ['Malaysia', 'Kuala Lumpur', 'MSC', 'Malayan Banking Berhad (Maybank)', 'USD', 'Malaysia Shipping Corporation Sdn Bhd', '7141 2345 6701', 'Foreign currency', 'MBBEMYKL', 'C 2345678901', 'W10-1808-32000123', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '714', 'FORALL', 'FORALL'],
+      ['Malaysia', 'Port Klang', 'MSC', 'CIMB Bank Berhad', 'MYR', 'Malaysia Shipping Corporation Sdn Bhd', '8001 2345 67', 'Current', 'CIBBMYKL', 'C 2345678901', 'W10-1808-32000123', 'Jalan Kem, 42000 Pelabuhan Klang, Selangor', '35', '801', 'D&D', 'Credit Note']
+    ],
+    ct: [
+      ['Yes', 'Corporate', 'Mr.', 'Ahmad', 'Faizal', '+60 12-345 6710', 'ahmad.faizal@mscorp.example.com', 'Level 18, Menara Sample, Jalan Sultan Ismail, Kuala Lumpur'],
+      ['No', 'Finance', 'Ms.', 'Siti', 'Nurhaliza', '+60 12-345 6711', 'siti.nurhaliza@mscorp.example.com', 'Level 18, Menara Sample, Jalan Sultan Ismail, Kuala Lumpur'],
+      ['No', 'Sales', 'Mr.', 'Raj', 'Kumar', '+60 12-345 6712', 'raj.kumar@mscorp.example.com', 'Lot 12, Jalan Pelabuhan Utara, Pelabuhan Klang, Selangor'],
+      ['No', 'Operations', 'Ms.', 'Mei Ling', 'Tan', '+60 12-345 6713', 'meiling.tan@mscorp.example.com', '25 Lebuh Pantai, George Town, Pulau Pinang']
     ] }
 ];
 const CO_ENT = ['PIL', 'MEL', 'MSC'];
 const CO_BRK = ['port', 'code', 'name', 'alias', 'addr', 'mob', 'tel', 'email', 'tax', 'gfs', 'act'];
-const CO_BKK = ['ctry', 'loc', 'carrier', 'bank', 'cur', 'accName', 'accNo', 'accType', 'swift', 'pin', 'vat', 'addr', 'bankCode', 'brCode'];
-const CO_BKL = ['Country', 'Location', 'Carrier', 'Bank Name', 'Currency', 'Account Name', 'IBAN / Account No.', 'Account Type', 'Swift Code', 'Tax Registration No (PIN No.)', 'VAT No.', 'Bank Address', 'Bank Code', 'Branch Code'];
+const CO_BKK = ['ctry', 'loc', 'carrier', 'bank', 'cur', 'accName', 'accNo', 'accType', 'swift', 'pin', 'vat', 'addr', 'bankCode', 'brCode', 'invType', 'invSub'];
+const CO_INV = ['Freight', 'D&D', 'FORALL'], CO_INVS = ['Invoice', 'Credit Note', 'FORALL'];
+const CO_CTK = ['pri', 'dept', 'sal', 'first', 'last', 'phone', 'email', 'addr'];
+const CO_CTL = ['Primary Contact', 'Department', 'Salutation', 'First Name', 'Last Name', 'Phone', 'e-mail', 'Address'];
+const CO_SAL = ['Mr.', 'Ms.', 'Mrs.', 'Dr.'];
+// Country codes for phone numbers (longest first when reading an existing number)
+const CO_CC = [['+65', 'SG'], ['+60', 'MY'], ['+61', 'AU'], ['+852', 'HK'], ['+86', 'CN'], ['+62', 'ID'], ['+66', 'TH'], ['+84', 'VN'], ['+63', 'PH'],
+  ['+91', 'IN'], ['+94', 'LK'], ['+971', 'AE'], ['+966', 'SA'], ['+253', 'DJ'], ['+254', 'KE'], ['+228', 'TG'], ['+673', 'BN'], ['+44', 'GB'], ['+1', 'US']];
+const CO_CC_BY_LOC = { Singapore: '+65', Malaysia: '+60', 'Hong Kong': '+852', Djibouti: '+253', Togo: '+228' };
+const coSplitPhone = (p, dflt) => { const s = String(p || '').trim(); const hit = CO_CC.map((c) => c[0]).sort((a, b) => b.length - a.length).find((c) => s.startsWith(c + ' ') || s === c);
+  return hit ? { cc: hit, num: s.slice(hit.length).trim() } : { cc: dflt || '+65', num: s }; };
+const CO_BKL = ['Country', 'Location', 'Carrier', 'Bank Name', 'Currency', 'Account Name', 'IBAN / Account No.', 'Account Type', 'Swift Code', 'Tax Registration No (PIN No.)', 'VAT No.', 'Bank Address', 'Bank Code', 'Branch Code', 'Invoice Type', 'Invoice Sub-Type'];
+// Branch offices: the corporate office's local-currency account, collected at the branch, and the branch's own contacts (sample values)
+const CO_NAMES = { Singapore: [['Mr.', 'Marcus', 'Tan'], ['Ms.', 'Priya', 'Nair'], ['Mr.', 'Jason', 'Lee'], ['Ms.', 'Hui Min', 'Goh'], ['Mr.', 'Farid', 'Ismail'], ['Ms.', 'Joanne', 'Koh']],
+  Djibouti: [['Mr.', 'Moussa', 'Ali'], ['Ms.', 'Hodan', 'Omar'], ['Mr.', 'Yacin', 'Daher']], Togo: [['Mr.', 'Kodjo', 'Adjovi'], ['Ms.', 'Afi', 'Lawson']],
+  'Hong Kong': [['Mr.', 'Ivan', 'Cheung'], ['Ms.', 'Cindy', 'Lau']], Malaysia: [['Mr.', 'Hafiz', 'Rahman'], ['Ms.', 'Nur', 'Aisyah'], ['Mr.', 'Kelvin', 'Ng'], ['Ms.', 'Janet', 'Wong'], ['Mr.', 'Azlan', 'Yusof'], ['Mr.', 'Hj. Rosli', 'Bakar']] };
+const coBranchSeed = (c, b, bi) => {
+  const corpBk = (c.bk || [])[0];
+  const bk = corpBk ? [Object.assign(Object.fromEntries(CO_BKK.map((k, i) => [k, corpBk[i]])), { loc: b.port, invType: 'Freight', invSub: 'Invoice' })] : [];
+  const pool = CO_NAMES[c.loc] || CO_NAMES.Singapore, n = pool[bi % pool.length], m = pool[(bi + 1) % pool.length];
+  const user = b.email ? b.email.split('@') : ['ops', 'example.com'];
+  const ct = [{ pri: 'Yes', dept: 'Operations', sal: n[0], first: n[1], last: n[2], phone: b.mob || '', email: (n[1].split(' ')[0] + '.' + n[2]).toLowerCase().replace(/[^a-z.]/g, '') + '@' + user[1], addr: b.addr || '' },
+    { pri: 'No', dept: 'Finance', sal: m[0], first: m[1], last: m[2], phone: b.tel || '', email: (m[1].split(' ')[0] + '.' + m[2]).toLowerCase().replace(/[^a-z.]/g, '') + '@' + user[1], addr: b.addr || '' }];
+  return Object.assign(b, { bk, ct });
+};
 const coLoad = () => {
   let d = null;
-  try { d = JSON.parse(localStorage.getItem('girs.company.v2') || 'null'); } catch (e) {}
+  try { d = JSON.parse(localStorage.getItem('girs.company.v4') || 'null'); } catch (e) {}
   if (d && Array.isArray(d)) return d;
   return CO_SEED.map((c) => Object.assign({}, c, {
-    br: c.br.map((r) => Object.fromEntries(CO_BRK.map((k, i) => [k, r[i]]))),
-    bk: c.bk.map((r) => Object.fromEntries(CO_BKK.map((k, i) => [k, r[i]])))
+    br: c.br.map((r, bi) => coBranchSeed(c, Object.fromEntries(CO_BRK.map((k, i) => [k, r[i]])), bi)),
+    bk: c.bk.map((r) => Object.fromEntries(CO_BKK.map((k, i) => [k, r[i]]))),
+    ct: (c.ct || []).map((r) => Object.fromEntries(CO_CTK.map((k, i) => [k, r[i]])))
   }));
 };
-const coStore = (d) => { try { localStorage.setItem('girs.company.v2', JSON.stringify(d)); } catch (e) {} };
+const coStore = (d) => { try { localStorage.setItem('girs.company.v4', JSON.stringify(d)); } catch (e) {} };
 
 class GirsPage extends DCLogic {
   constructor(p) {
@@ -792,6 +869,8 @@ class GirsPage extends DCLogic {
     const corp = D.find((c) => c.id === s.sel) || D[0];
     const br = corp && s.br ? corp.br.find((b) => b.code === s.br) : null;
     const isBr = !!br;
+    const own = isBr ? br : corp;
+    const ownIn = (d) => { const c = d.find((x) => x.id === corp.id); return isBr ? c.br.find((x) => x.code === br.code) : c; };
 
     // ---------- tree (corporate offices with their branch offices)
     const q = s.q.trim().toLowerCase();
@@ -888,12 +967,42 @@ class GirsPage extends DCLogic {
       const V = k.v;
       const setV = (o) => set({ k: Object.assign({}, k, { v: Object.assign({}, V, o) }) });
       let i = 0;
-      const fields = CO_BKK.map((key, j) => ({ id: 'bf' + i++, label: CO_BKL[j], cls: 'kf' + (key === 'addr' ? ' w' : ''), isText: key !== 'addr', isArea: key === 'addr', isSel: false, isRadio: false, isChk: false, isFile: false, isRO: false,
-        v: V[key] || '', opts: [], dis: false, bad: 'false', err: '', hasErr: false, on: (e) => setV({ [key]: e.target.value }) }));
-      form = { on: true, title: k.mode === 'edit' ? 'Update bank details' : k.mode === 'copy' ? 'Copy bank account' : 'Add bank account', sub: corp.code + ' · ' + corp.name, fields, hasErr: false, errText: '',
-        save: () => { const d = JSON.parse(JSON.stringify(D)), c = d.find((x) => x.id === corp.id);
+      const fields = CO_BKK.map((key, j) => { const sel = key === 'invType' || key === 'invSub';
+        return { id: 'bf' + i++, label: CO_BKL[j], cls: 'kf' + (key === 'addr' ? ' w' : ''), isText: key !== 'addr' && !sel, isArea: key === 'addr', isSel: sel, isRadio: false, isChk: false, isFile: false, isRO: false,
+        v: V[key] || '', opts: sel ? [{ v: '', t: 'Select' }].concat((key === 'invType' ? CO_INV : CO_INVS).map((x) => ({ v: x, t: x }))) : [], dis: false, bad: 'false', err: '', hasErr: false, on: (e) => setV({ [key]: e.target.value }) }; });
+      form = { on: true, title: k.mode === 'edit' ? 'Update bank details' : k.mode === 'copy' ? 'Copy bank account' : 'Add bank account', sub: own.code + ' · ' + own.name, fields, hasErr: false, errText: '',
+        save: () => { const d = JSON.parse(JSON.stringify(D)), c = ownIn(d); c.bk = c.bk || [];
           if (k.mode === 'edit') c.bk[k.idx] = V; else c.bk.push(V);
-          save(d, { __toast: 'Bank details saved for ' + corp.code + '.', tab: '3' }); } };
+          save(d, { __toast: 'Bank details saved for ' + own.code + '.', tab: '3' }); } };
+    }
+
+    // contact form
+    if (k && k.m === 'ct') {
+      const V = k.v;
+      const setV = (o) => set({ k: Object.assign({}, k, { v: Object.assign({}, V, o) }) });
+      const need = ['first', 'phone', 'email'];
+      const blank = (x) => (x === 'phone' ? !coSplitPhone(V.phone).num : !String(V[x] || '').trim());
+      const miss = k.tried ? need.filter(blank) : [];
+      let i = 0;
+      const fields = CO_CTK.map((key, j) => {
+        const kind = key === 'pri' ? 'radio' : key === 'sal' ? 'sel' : key === 'addr' ? 'area' : key === 'phone' ? 'phone' : 'text', err = miss.includes(key) ? 'Enter ' + CO_CTL[j] : '';
+        const ph = kind === 'phone' ? coSplitPhone(V.phone, CO_CC_BY_LOC[corp.loc] || (String((own && own.mob) || '').split(' ')[0])) : null;
+        return { id: 'cf' + i++, label: CO_CTL[j], cls: 'kf' + (key === 'addr' ? ' w' : '') + (err ? ' bad' : ''), isText: kind === 'text', isArea: kind === 'area', isSel: kind === 'sel', isRadio: kind === 'radio', isPhone: kind === 'phone', isChk: false, isFile: false, isRO: false,
+          cc: ph ? ph.cc : '', num: ph ? ph.num : '', ccOpts: CO_CC.map(([c, n]) => ({ v: c, t: c + ' ' + n })),
+          onCc: (e) => setV({ phone: (e.target.value + ' ' + (ph ? ph.num : '')).trim(), __cc: e.target.value }),
+          onNum: (e) => setV({ phone: ((V.__cc || (ph ? ph.cc : '+65')) + ' ' + e.target.value).trim() }),
+          v: V[key] || '', dis: false, bad: err ? 'true' : 'false', err, hasErr: !!err,
+          opts: kind === 'sel' ? [{ v: '', t: 'Select' }].concat(CO_SAL.map((x) => ({ v: x, t: x }))) : kind === 'radio' ? ['Yes', 'No'].map((x) => ({ t: x, on: (V.pri || 'No') === x ? 'true' : 'false', pick: () => setV({ pri: x }) })) : [],
+          on: (e) => setV({ [key]: e.target.value }) };
+      });
+      form = { on: true, title: k.mode === 'edit' ? 'Update contact' : 'Add contact', sub: own.code + ' · ' + own.name, fields, hasErr: miss.length > 0, errText: 'Enter First Name, Phone and e-mail.',
+        save: () => {
+          if (need.some(blank)) return set({ k: Object.assign({}, k, { tried: true }) });
+          const d = JSON.parse(JSON.stringify(D)), c = ownIn(d), rec = Object.assign({ pri: 'No' }, V); delete rec.tried; delete rec.__cc;
+          c.ct = c.ct || [];
+          if (rec.pri === 'Yes') c.ct.forEach((x) => { x.pri = 'No'; });
+          if (k.mode === 'edit') c.ct[k.idx] = rec; else c.ct.push(rec);
+          save(d, { __toast: 'Contact ' + [rec.first, rec.last].filter(Boolean).join(' ') + ' saved for ' + own.code + '.', tab: '4' }); } };
     }
 
     // delete confirmation
@@ -906,11 +1015,11 @@ class GirsPage extends DCLogic {
       run: (d) => { d.splice(d.findIndex((c) => c.id === corp.id), 1); }, after: { sel: (D.find((c) => c.id !== corp.id) || {}).id, br: '', __toast: 'Company ' + corp.code + ' deleted.' } } });
     const delBr = (b) => set({ menu: false, k: { m: 'del', title: 'Delete branch office ' + b.code + '?', sub: b.name, text: 'The branch office will be removed from ' + corp.code + '.',
       run: (d) => { const c = d.find((x) => x.id === corp.id); c.br = c.br.filter((x) => x.code !== b.code); }, after: { br: '', __toast: 'Branch office ' + b.code + ' deleted.' } } });
-    const delBk = (b, idx) => set({ k: { m: 'del', title: 'Delete bank account?', sub: b.bank + ' · ' + b.cur + ' · ' + b.accNo, text: 'The bank account will be removed from ' + corp.code + '.',
-      run: (d) => { d.find((x) => x.id === corp.id).bk.splice(idx, 1); }, after: { tab: '3', __toast: 'Bank account deleted.' } } });
+    const delBk = (b, idx) => set({ k: { m: 'del', title: 'Delete bank account?', sub: b.bank + ' · ' + b.cur + ' · ' + b.accNo, text: 'The bank account will be removed from ' + own.code + '.',
+      run: (d) => { ownIn(d).bk.splice(idx, 1); }, after: { tab: '3', __toast: 'Bank account deleted.' } } });
 
     // ---------- tabs
-    const T = isBr ? [['1', 'Company details', '']] : [['1', 'Company details', ''], ['2', 'Branch / Office details', String(corp.br.length)], ['3', 'Bank details', String(corp.bk.length)]];
+    const T = isBr ? [['1', 'Company details', ''], ['3', 'Bank details', String((own.bk || []).length)], ['4', 'Contact Details', String((own.ct || []).length)]] : [['1', 'Company details', ''], ['2', 'Branch / Office details', String(corp.br.length)], ['3', 'Bank details', String(corp.bk.length)], ['4', 'Contact Details', String((corp.ct || []).length)]];
     const tab = T.some((t) => t[0] === s.tab) ? s.tab : '1';
     const tabs = T.map(([key, label, count]) => { const on = tab === key; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => set({ tab: key }) }; });
 
@@ -943,13 +1052,17 @@ class GirsPage extends DCLogic {
         copy: () => openCo('copy', isBr ? brBase(br) : corpBase()), copyL: isBr ? 'Copy branch office' : 'Copy company',
         del: () => (isBr ? delBr(br) : delCorp()), delL: isBr ? 'Delete branch office' : 'Delete company' },
       menuOn: s.menu, menuOpen: s.menu ? 'true' : 'false', toggleMenu: () => set({ menu: !s.menu }), closeMenu: () => set({ menu: false }),
-      tabs, tab1: tab === '1', tab2: tab === '2', tab3: tab === '3', cols,
+      tabs, tab1: tab === '1', tab2: tab === '2', tab3: tab === '3', tab4: tab === '4', cols,
       brs: corp.br.map((b) => ({ port: dash(b.port), code: b.code, name: dash(b.name), alias: dash(b.alias), addr: dash(b.addr), mob: dash(b.mob), tel: dash(b.tel), email: dash(b.email), tax: dash(b.tax), gfs: dash(b.gfs), act: dash(b.act),
         open: () => set({ br: b.code, tab: '1' }), edit: () => openCo('edit', brBase(b)), copy: () => openCo('copy', brBase(b)), del: () => delBr(b) })),
       noBrs: !corp.br.length, addBr: () => openCo('new-br', { cls: 'Branch Office', link: corp.code, ent: corp.ent, tax: corp.tax, active: true }),
-      bks: corp.bk.map((b, idx) => Object.assign(Object.fromEntries(CO_BKK.map((key) => [key, dash(b[key])])), {
+      bks: (own.bk || []).map((b, idx) => Object.assign(Object.fromEntries(CO_BKK.map((key) => [key, dash(b[key])])), {
         edit: () => set({ k: { m: 'bk', mode: 'edit', idx, v: Object.assign({}, b) } }), copy: () => set({ k: { m: 'bk', mode: 'copy', v: Object.assign({}, b, { accNo: '' }) } }), del: () => delBk(b, idx) })),
-      noBks: !corp.bk.length, addBk: () => set({ k: { m: 'bk', mode: 'new', v: { ctry: corp.loc, carrier: corp.ent } } }),
+      noBks: !(own.bk || []).length, addBk: () => set({ k: { m: 'bk', mode: 'new', v: { ctry: corp.loc, loc: isBr ? br.port : '', carrier: corp.ent } } }),
+      cts: (own.ct || []).map((c, idx) => Object.assign(Object.fromEntries(CO_CTK.map((key) => [key, dash(c[key])])), {
+        isPri: c.pri === 'Yes', notPri: c.pri !== 'Yes', who: [c.sal, c.first, c.last].filter(Boolean).join(' '),
+        edit: () => set({ k: { m: 'ct', mode: 'edit', idx, v: Object.assign({}, c) } }) })),
+      noCts: !(own.ct || []).length, addCt: () => set({ k: { m: 'ct', mode: 'new', v: { pri: (own.ct || []).length ? 'No' : 'Yes' } } }),
       create: () => openCo('new', { cls: 'Corporate Office', active: true }),
       form, conf, closeK
     };

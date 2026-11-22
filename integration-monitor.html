@@ -449,7 +449,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <div style="flex: 1 1 auto; overflow: auto">
               <sc-if value="{{tabReq}}" hint-placeholder-val="{{ true }}">
                 <table>
-                  <thead><tr><th>Request</th><th>Platform</th><th>B/L</th><th>Billing party</th><th>Charges</th><th>Currency</th><th>Received</th><th>Result</th><th></th></tr></thead>
+                  <thead><tr><th>Request</th><th>Platform</th><th>B/L</th><th>Billing party</th><th>Charges</th><th>Currency</th><th>Received</th><th>Result</th><th>Action</th></tr></thead>
                   <tbody>
                     <sc-for list="{{reqs}}" as="r" hint-placeholder-count="8">
                       <tr><td class="mono">{{r.id}}</td><td>{{r.pf}}</td><td class="mono">{{r.bl}}</td><td>{{r.party}}</td><td>{{r.kind}}</td><td class="mono">{{r.ccy}}</td><td class="mono" style="color: var(--muted)">{{r.at}}</td><td><span class="chip" style="{{r.chip}}">{{r.st}}</span></td>
@@ -470,7 +470,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               </sc-if>
               <sc-if value="{{tabDlq}}" hint-placeholder-val="{{ false }}">
                 <table>
-                  <thead><tr><th>Message</th><th>Interface</th><th>Reason</th><th>Detail</th><th>Received</th><th>Status</th><th></th></tr></thead>
+                  <thead><tr><th>Message</th><th>Interface</th><th>Reason</th><th>Detail</th><th>Received</th><th>Status</th><th>Action</th></tr></thead>
                   <tbody>
                     <sc-for list="{{dlq}}" as="r" hint-placeholder-count="5">
                       <tr><td class="mono">{{r.id}}</td><td>{{r.ifc}}</td><td><span class="chip" style="{{r.rchip}}">{{r.reason}}</span></td><td style="color: var(--muted)">{{r.detail}}</td><td class="mono" style="color: var(--muted)">{{r.at}}</td><td><span class="chip" style="{{r.chip}}">{{r.st}}</span></td>
