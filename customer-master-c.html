@@ -182,6 +182,28 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
+.ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;color:var(--muted2)}
+.ib:hover{background:var(--hover);color:var(--accent)}
+.ib.d:hover{background:var(--badbg);color:var(--bad)}
+.ib:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.wt td{vertical-align:middle}
+.empty-t{margin:16px;font-size:13px;color:var(--muted)}
+.ttl{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.ttl h3{margin:0;font-size:14px;font-weight:600}
+.ttl .btn,.act .btn{gap:6px}
+.tw{overflow:auto}
+.wt{width:max-content;min-width:100%;border-collapse:collapse}
+.wt th,.wt td{white-space:nowrap}
+.wt td.wa,.wt th.wa{width:280px;min-width:280px;max-width:280px}
+.trunc{display:block;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:default}
+.wt .act{position:sticky;inset-inline-end:0;background:var(--surface);box-shadow:inset 1px 0 0 var(--line),-10px 0 12px -10px rgba(22,26,33,.22);text-align:center;width:116px;min-width:116px;padding-inline:8px}
+.wt th.act{background:var(--sub)}
+.wt td.act{padding-block:4px;white-space:nowrap}
+.wt td.act .ibs{display:inline-flex;gap:2px;vertical-align:middle}
+
+.kgrid .cb-w{grid-column:1 / -1}
+
+.wt tbody tr:hover td{background:var(--hover2)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -592,6 +614,21 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     <div><span class="l">Customer-specific rules</span><span class="v ph">[Customer-specific billing configuration]</span></div>
                   </div>
                 </sc-if>
+                <sc-if value="{{tab5}}" hint-placeholder-val="{{ false }}">
+                  <div class="ttl"><h3>Bank Details</h3><button class="btn btn-sm" onClick="{{cb.add}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add</button></div>
+                  <div class="card tw">
+                    <table class="wt">
+                      <thead><tr><th>Country</th><th>Location</th><th>Carrier</th><th>Bank Name</th><th>Currency</th><th>Account Name</th><th>IBAN / Account No.</th><th>Account Type</th><th>Swift Code</th><th>Tax Registration No (PIN No.)</th><th>VAT No.</th><th class="wa">Bank Address</th><th>Bank Code</th><th>Branch Code</th><th>Invoice Type</th><th>Invoice Sub-Type</th><th class="act">Action</th></tr></thead>
+                      <tbody>
+                        <sc-for list="{{cb.rows}}" as="b" hint-placeholder-count="2">
+                          <tr><td>{{b.ctry}}</td><td>{{b.loc}}</td><td>{{b.carrier}}</td><td>{{b.bank}}</td><td class="mono">{{b.cur}}</td><td>{{b.accName}}</td><td class="mono">{{b.accNo}}</td><td>{{b.accType}}</td><td class="mono">{{b.swift}}</td><td class="mono">{{b.pin}}</td><td class="mono">{{b.vat}}</td><td class="wa"><span class="trunc" title="{{b.addr}}">{{b.addr}}</span></td><td class="mono">{{b.bankCode}}</td><td class="mono">{{b.brCode}}</td><td><span class="chip t-info">{{b.invType}}</span></td><td>{{b.invSub}}</td>
+                            <td class="act"><span class="ibs"><button class="ib" onClick="{{b.edit}}" aria-label="Edit bank account {{b.lbl}}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button class="ib" onClick="{{b.copy}}" aria-label="Copy bank account {{b.lbl}}" title="Copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button class="ib d" onClick="{{b.del}}" aria-label="Delete bank account {{b.lbl}}" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path><path d="M10 11v6M14 11v6"></path></svg></button></span></td></tr>
+                        </sc-for>
+                      </tbody>
+                    </table>
+                    <sc-if value="{{cb.none}}" hint-placeholder-val="{{ false }}"><p class="empty-t">No bank accounts recorded for this customer.</p></sc-if>
+                  </div>
+                </sc-if>
                 <sc-if value="{{tab4}}" hint-placeholder-val="{{ false }}">
                   <div class="g3">
                     <div><span class="l">Document / data delivery</span><span class="v" style="display: flex; gap: 6px"><span class="chip" style="{{pdfChip}}">PDF</span><span class="chip" style="{{jsonChip}}">JSON</span></span></div>
@@ -676,12 +713,103 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
       </div>
     </div>
   </sc-if>
+
+  <sc-if value="{{cb.form.on}}" hint-placeholder-val="{{ false }}">
+    <button class="ov" aria-label="Close" onClick="{{cb.form.close}}"></button>
+    <aside class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="cbf-t">
+      <div class="dh"><div style="flex: 1 1 auto; min-width: 0"><h2 id="cbf-t">{{cb.form.title}}</h2><p>{{cb.form.sub}}</p></div><button class="btn btn-sm kib" onClick="{{cb.form.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <div class="db">
+        <sc-if value="{{cb.form.hasErr}}" hint-placeholder-val="{{ false }}"><div class="banner b-block" role="alert" style="margin-bottom: 16px">{{cb.form.errText}}</div></sc-if>
+        <div class="kgrid">
+          <sc-for list="{{cb.form.fields}}" as="f" hint-placeholder-count="16">
+            <div class="{{f.cls}}"><span class="kl" id="{{f.id}}">{{f.label}}</span>
+              <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}"><input class="input" aria-labelledby="{{f.id}}" value="{{f.v}}" onInput="{{f.on}}" aria-invalid="{{f.bad}}" autocomplete="off"></sc-if>
+              <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}"><textarea class="input" rows="2" aria-labelledby="{{f.id}}" value="{{f.v}}" onInput="{{f.on}}" style="height: auto; padding-block: 8px; resize: vertical"></textarea></sc-if>
+              <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><select class="select" aria-labelledby="{{f.id}}" value="{{f.v}}" onChange="{{f.on}}" style="width: 100%; padding-inline-end: 32px"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.t}}</option></sc-for></select><span style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted); display: flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></span></sc-if>
+              <sc-if value="{{f.hasErr}}" hint-placeholder-val="{{ false }}"><span class="ke">{{f.err}}</span></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div class="df"><span style="flex: 1 1 auto"></span><button class="btn" onClick="{{cb.form.close}}">Cancel</button><button class="btn btn-primary" onClick="{{cb.form.save}}">Save</button></div>
+    </aside>
+  </sc-if>
+  <sc-if value="{{cb.conf.on}}" hint-placeholder-val="{{ false }}">
+    <button class="ov" aria-label="Close" onClick="{{cb.conf.close}}"></button>
+    <aside class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="cbd-t">
+      <div class="dh"><div style="flex: 1 1 auto; min-width: 0"><h2 id="cbd-t">Delete bank account?</h2><p>{{cb.conf.sub}}</p></div><button class="btn btn-sm kib" onClick="{{cb.conf.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <div class="db"><p style="margin: 0; font-size: 14px">{{cb.conf.text}}</p></div>
+      <div class="df"><span style="flex: 1 1 auto"></span><button class="btn" onClick="{{cb.conf.close}}">Cancel</button><button class="btn kbtn-danger" onClick="{{cb.conf.ok}}">Delete</button></div>
+    </aside>
+  </sc-if>
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
     <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
   </sc-if>
 </div>
 </script>
 <script type="text/x-dc" id="logic">
+// ---------- Customer bank details (same columns and actions as Company Master → Bank details)
+const CB_K = ['ctry', 'loc', 'carrier', 'bank', 'cur', 'accName', 'accNo', 'accType', 'swift', 'pin', 'vat', 'addr', 'bankCode', 'brCode', 'invType', 'invSub'];
+const CB_L = ['Country', 'Location', 'Carrier', 'Bank Name', 'Currency', 'Account Name', 'IBAN / Account No.', 'Account Type', 'Swift Code', 'Tax Registration No (PIN No.)', 'VAT No.', 'Bank Address', 'Bank Code', 'Branch Code', 'Invoice Type', 'Invoice Sub-Type'];
+const CB_INV = ['Freight', 'D&D', 'FORALL'], CB_INVS = ['Invoice', 'Credit Note', 'FORALL'];
+// Sample values: each customer's own bank accounts in its country
+const CB_SEED = {
+  k1: [['Singapore', 'Singapore', 'PIL', 'DBS Bank Ltd', 'SGD', 'Straits Harbour Logistics Pte. Ltd.', '072-345678-1', 'Current', 'DBSSSGSG', '201812345K', 'M2-0812345-K', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072', 'Freight', 'Invoice'],
+       ['Singapore', 'Singapore', 'PIL', 'DBS Bank Ltd', 'USD', 'Straits Harbour Logistics Pte. Ltd.', '072-345678-9', 'Foreign currency', 'DBSSSGSG', '201812345K', 'M2-0812345-K', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072', 'FORALL', 'FORALL']],
+  k2: [['Malaysia', 'Kuala Lumpur', 'PIL', 'Malayan Banking Berhad (Maybank)', 'MYR', 'Straits Harbour Logistics Sdn. Bhd.', '5142 7781 2034', 'Current', 'MBBEMYKL', '201812345K', 'W10-1808-31004512', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '514', 'Freight', 'Invoice'],
+       ['Malaysia', 'Kuala Lumpur', 'PIL', 'HSBC Bank Malaysia Berhad', 'USD', 'Straits Harbour Logistics Sdn. Bhd.', '301-457812-725', 'Foreign currency', 'HBMBMYKL', '201812345K', 'W10-1808-31004512', '2 Leboh Ampang, 50100 Kuala Lumpur', '22', '301', 'FORALL', 'FORALL']],
+  k3: [['India', 'Mumbai', 'PIL', 'HDFC Bank Ltd', 'INR', 'Straits Harbour Logistics India Pvt. Ltd.', '50200045671234', 'Current', 'HDFCINBB', 'AAGCS4512K', '27AAGCS4512K1Z3', 'Maneckji Wadia Building, Nanik Motwani Marg, Fort, Mumbai 400001', 'HDFC0000060', '000060', 'Freight', 'Invoice']],
+  k4: [['Singapore', 'Singapore', 'PIL', 'Oversea-Chinese Banking Corporation (OCBC)', 'SGD', 'Meridian Agro Exports Pte. Ltd.', '501-457812-001', 'Current', 'OCBCSGSG', '201534567D', 'M2-0534567-D', '65 Chulia Street, OCBC Centre, Singapore 049513', '7339', '501', 'Freight', 'Invoice'],
+       ['Singapore', 'Singapore', 'PIL', 'Oversea-Chinese Banking Corporation (OCBC)', 'USD', 'Meridian Agro Exports Pte. Ltd.', '501-457812-201', 'Foreign currency', 'OCBCSGSG', '201534567D', 'M2-0534567-D', '65 Chulia Street, OCBC Centre, Singapore 049513', '7339', '501', 'D&D', 'Credit Note']],
+  k5: [['China', 'Shanghai', 'PIL', 'Bank of China', 'CNY', 'Meridian Agro Exports (Shanghai) Co., Ltd.', '4378 6012 4455', 'Current', 'BKCHCNBJ300', '91310115MA1K45678X', '91310115MA1K45678X', '200 Yincheng Middle Road, Pudong, Shanghai 200120', '104', '290003033', 'Freight', 'Invoice'],
+       ['China', 'Shanghai', 'PIL', 'Bank of China', 'USD', 'Meridian Agro Exports (Shanghai) Co., Ltd.', '4378 6012 4471', 'Foreign currency', 'BKCHCNBJ300', '91310115MA1K45678X', '91310115MA1K45678X', '200 Yincheng Middle Road, Pudong, Shanghai 200120', '104', '290003033', 'FORALL', 'FORALL']],
+  k6: [['Thailand', 'Bangkok', 'PIL', 'Kasikornbank Public Company Limited', 'THB', 'Andaman Bay Traders Co., Ltd.', '012-1-45678-9', 'Current', 'KASITHBK', '0105561012345', '0105561012345', '400/22 Phahon Yothin Road, Phaya Thai, Bangkok 10400', '004', '0012', 'Freight', 'Invoice']],
+  k7: [['Singapore', 'Singapore', 'PIL', 'United Overseas Bank (UOB)', 'SGD', 'Kinabalu Home Furnishings Pte. Ltd.', '360-312-457-8', 'Current', 'UOVBSGSG', '200912345W', 'M2-0912345-W', '80 Raffles Place, UOB Plaza 1, Singapore 048624', '7375', '030', 'Freight', 'Invoice']],
+  k8: [['Malaysia', 'Petaling Jaya', 'PIL', 'CIMB Bank Berhad', 'MYR', 'Kinabalu Home Furnishings Sdn. Bhd.', '8007 4512 3398', 'Current', 'CIBBMYKL', '200912345W', 'W10-1808-32004588', 'Jalan Yong Shook Lin, Seksyen 7, 46050 Petaling Jaya, Selangor', '35', '800', 'Freight', 'Invoice'],
+       ['Malaysia', 'Petaling Jaya', 'PIL', 'CIMB Bank Berhad', 'MYR', 'Kinabalu Home Furnishings Sdn. Bhd.', '8007 4512 3398', 'Current', 'CIBBMYKL', '200912345W', 'W10-1808-32004588', 'Jalan Yong Shook Lin, Seksyen 7, 46050 Petaling Jaya, Selangor', '35', '800', 'D&D', 'Credit Note']],
+  k9: [['India', 'Mumbai', 'PIL', 'ICICI Bank Ltd', 'INR', 'Orchid Lane Polymers Pvt. Ltd.', '004505012345', 'Current', 'ICICINBB', 'AABCO1234F', '27AABCO1234F1Z5', 'ICICI Bank Towers, Bandra-Kurla Complex, Mumbai 400051', 'ICIC0000045', '000045', 'Freight', 'Invoice']],
+  k10: [['China', 'Guangzhou', 'PIL', 'Industrial and Commercial Bank of China (ICBC)', 'CNY', 'Orchid Lane Polymers (Guangzhou) Co., Ltd.', '3602 0000 0919 4512 345', 'Current', 'ICBKCNBJGDG', '91440101MA59K1234Q', '91440101MA59K1234Q', '123 Tianhe Road, Tianhe, Guangzhou 510620', '102', '581000123', 'Freight', 'Invoice']]
+};
+const CB_LS = 'girs.cust.bank.v1';
+const cbAll = () => { let x = null; try { x = JSON.parse(localStorage.getItem(CB_LS) || 'null'); } catch (e) {} if (x && typeof x === 'object') return x;
+  const o = {}; Object.keys(CB_SEED).forEach((id) => { o[id] = CB_SEED[id].map((r) => Object.fromEntries(CB_K.map((k, i) => [k, r[i]]))); }); return o; };
+const cbStore = (o) => { try { localStorage.setItem(CB_LS, JSON.stringify(o)); } catch (e) {} };
+// Bank details tab for the selected customer: table rows, Add / Edit / Copy / Delete, the form and the delete confirmation
+function cbView(self, s, cust, ctryName, tabKey) {
+  const set = (o) => self.setState(o);
+  const all = s.cbAll || cbAll(), list = all[cust.id] || [];
+  const dash = (v) => (v === undefined || v === null || String(v).trim() === '' ? '—' : String(v));
+  const put = (rows, extra) => { const o = Object.assign({}, all, { [cust.id]: rows }); cbStore(o); set(Object.assign({ cbAll: o, cbk: null, cbd: null, tab: tabKey }, extra || {})); };
+  const k = s.cbk && s.cbk.id === cust.id ? s.cbk : null;
+  let form = { on: false };
+  if (k) {
+    const V = k.v, setV = (o) => set({ cbk: Object.assign({}, k, { v: Object.assign({}, V, o) }) });
+    const need = ['bank', 'cur', 'accNo'], miss = k.tried ? need.filter((x) => !String(V[x] || '').trim()) : [];
+    let i = 0;
+    const fields = CB_K.map((key, j) => { const sel = key === 'invType' || key === 'invSub', err = miss.includes(key) ? 'Enter ' + CB_L[j] : '';
+      return { id: 'cbf' + i++, label: CB_L[j], cls: 'kf' + (key === 'addr' ? ' cb-w' : '') + (err ? ' bad' : ''), isText: key !== 'addr' && !sel, isArea: key === 'addr', isSel: sel, v: V[key] || '', bad: err ? 'true' : 'false', err, hasErr: !!err,
+        opts: sel ? [{ v: '', t: 'Select' }].concat((key === 'invType' ? CB_INV : CB_INVS).map((x) => ({ v: x, t: x }))) : [], on: (e) => setV({ [key]: e.target.value }) }; });
+    form = { on: true, title: k.mode === 'edit' ? 'Update bank details' : k.mode === 'copy' ? 'Copy bank account' : 'Add bank account', sub: cust.code + ' · ' + cust.name, fields,
+      hasErr: miss.length > 0, errText: 'Enter Bank Name, Currency and IBAN / Account No.', close: () => set({ cbk: null }),
+      save: () => { if (need.some((x) => !String(V[x] || '').trim())) return set({ cbk: Object.assign({}, k, { tried: true }) });
+        const rows = list.slice(), rec = Object.assign({}, V); if (k.mode === 'edit') rows[k.idx] = rec; else rows.push(rec);
+        put(rows, { __toast: 'Bank details saved for ' + cust.code + '.' }); } };
+  }
+  let conf = { on: false };
+  if (s.cbd && s.cbd.id === cust.id) {
+    const b = list[s.cbd.idx] || {};
+    conf = { on: true, sub: [b.bank, b.cur, b.accNo].filter(Boolean).join(' · '), text: 'The bank account will be removed from ' + cust.code + '.', close: () => set({ cbd: null }),
+      ok: () => { const rows = list.slice(); rows.splice(s.cbd.idx, 1); put(rows, { __toast: 'Bank account deleted.' }); } };
+  }
+  return { n: String(list.length), none: !list.length, form, conf,
+    rows: list.map((b, idx) => Object.assign(Object.fromEntries(CB_K.map((key) => [key, dash(b[key])])), {
+      lbl: [b.cur, b.accNo].filter(Boolean).join(' '),
+      edit: () => set({ cbk: { id: cust.id, mode: 'edit', idx, v: Object.assign({}, b) } }),
+      copy: () => set({ cbk: { id: cust.id, mode: 'copy', v: Object.assign({}, b, { accNo: '' }) } }),
+      del: () => set({ cbd: { id: cust.id, idx } }) })),
+    add: () => set({ cbk: { id: cust.id, mode: 'new', v: { ctry: ctryName, carrier: 'PIL', accName: cust.legal || '' } } }) };
+}
+
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
@@ -745,11 +873,12 @@ class GirsPage extends DCLogic {
     const c = C.find((x) => x.id === s.sel) || C[0];
     const g = G[c.g];
     const P = parties(c);
-    const T = [['1', 'Customer details', ''], ['2', 'Billing party details', String(P.length)], ['3', 'Billing configuration', ''], ['4', 'Customer distribution', '']];
+    const cb = cbView(this, s, Object.assign({}, c, { legal: g.legal }), CN[c.ctry], '5');
+    const T = [['1', 'Customer details', ''], ['2', 'Billing party details', String(P.length)], ['3', 'Billing configuration', ''], ['4', 'Customer distribution', ''], ['5', 'Bank Details', cb.n]];
     const tabs = T.map(([k, label, count]) => { const on = s.tab === k; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => this.setState({ tab: k }) }; });
     const yes = 'background:var(--tint);color:var(--accent2)', no = 'background:var(--line2);color:var(--muted4);text-decoration:line-through';
     return {
-      q: s.q, onQ: (e) => this.setState({ q: e.target.value }), tree, groupCount: gids.length, tabs, tab1: s.tab === '1', tab2: s.tab === '2', tab3: s.tab === '3', tab4: s.tab === '4',
+      q: s.q, onQ: (e) => this.setState({ q: e.target.value }), tree, groupCount: gids.length, tabs, tab1: s.tab === '1', tab2: s.tab === '2', tab3: s.tab === '3', tab4: s.tab === '4', tab5: s.tab === '5', cb,
       grp: { name: g.name, legal: g.legal, tax: g.tax, n: String(C.filter((x) => x.g === c.g).length), arr: g.arr, arrChip: ARR[g.arr] },
       c: { ini: initials(c.name), flag: ST[c.st].flag, name: c.name, code: c.code, ctryName: CN[c.ctry], ref: c.ref, tax: g.tax, terms: g.terms, email: c.email, addr: c.addr, st: ST[c.st].t, chip: ST[c.st].chip, defParty: c.name },
       parties: P, pdfChip: yes, jsonChip: jsonOn(c) ? yes : no
