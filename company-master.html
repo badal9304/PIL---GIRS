@@ -648,7 +648,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <tbody>
                         <sc-for list="{{cts}}" as="c" hint-placeholder-count="4">
                           <tr><td><sc-if value="{{c.isPri}}" hint-placeholder-val="{{ false }}"><span class="chip t-ok">Yes</span></sc-if><sc-if value="{{c.notPri}}" hint-placeholder-val="{{ true }}"><span class="mu">No</span></sc-if></td><td>{{c.dept}}</td><td>{{c.sal}}</td><td>{{c.first}}</td><td>{{c.last}}</td><td class="mono">{{c.phone}}</td><td><span class="trunc ct-em" title="{{c.email}}">{{c.email}}</span></td><td class="wa"><span class="trunc" title="{{c.addr}}">{{c.addr}}</span></td>
-                            <td class="act"><span class="ibs"><button class="ib" onClick="{{c.edit}}" aria-label="Update contact {{c.who}}" title="Update"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button></span></td></tr>
+                            <td class="act"><span class="ibs"><button class="ib" onClick="{{c.edit}}" aria-label="Update contact {{c.who}}" title="Update"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button class="ib d" onClick="{{c.del}}" aria-label="Delete contact {{c.who}}" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path><path d="M10 11v6M14 11v6"></path></svg></button></span></td></tr>
                         </sc-for>
                       </tbody>
                     </table>
@@ -1061,7 +1061,10 @@ class GirsPage extends DCLogic {
       noBks: !(own.bk || []).length, addBk: () => set({ k: { m: 'bk', mode: 'new', v: { ctry: corp.loc, loc: isBr ? br.port : '', carrier: corp.ent } } }),
       cts: (own.ct || []).map((c, idx) => Object.assign(Object.fromEntries(CO_CTK.map((key) => [key, dash(c[key])])), {
         isPri: c.pri === 'Yes', notPri: c.pri !== 'Yes', who: [c.sal, c.first, c.last].filter(Boolean).join(' '),
-        edit: () => set({ k: { m: 'ct', mode: 'edit', idx, v: Object.assign({}, c) } }) })),
+        edit: () => set({ k: { m: 'ct', mode: 'edit', idx, v: Object.assign({}, c) } }),
+        del: () => set({ k: { m: 'del', title: 'Delete contact?', sub: [c.sal, c.first, c.last].filter(Boolean).join(' ') + (c.dept ? ' · ' + c.dept : ''),
+          text: 'The contact will be removed from ' + own.code + '.' + (c.pri === 'Yes' ? ' This is the primary contact, so ' + own.code + ' will have no primary contact until you set one.' : ''),
+          run: (d) => { ownIn(d).ct.splice(idx, 1); }, after: { tab: '4', __toast: 'Contact ' + [c.first, c.last].filter(Boolean).join(' ') + ' deleted.' } } }) })),
       noCts: !(own.ct || []).length, addCt: () => set({ k: { m: 'ct', mode: 'new', v: { pri: (own.ct || []).length ? 'No' : 'Yes' } } }),
       create: () => openCo('new', { cls: 'Corporate Office', active: true }),
       form, conf, closeK
