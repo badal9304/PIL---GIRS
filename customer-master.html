@@ -808,7 +808,44 @@ const CU_SEED = [
     bk: [['Sri Lanka', 'Colombo', 'PIL', 'Commercial Bank of Ceylon PLC', 'LKR', 'SALOTA INTERNATIONAL (PRIVATE) LIMITED', '1000245678', 'FPS/RTGS/CROSS BORDER FUNDS TRANSFER', 'CCEYLKLX', '23873984692', '', 'Commercial House, 21 Sir Razik Fareed Mawatha, Colombo 01', '7056', '001']].map(cuBk),
     br: [] }
 ];
-const CU_LS = 'girs.customer.v2';
+
+// Prototype values for fields the sheet leaves blank (filled only where a record has no value)
+const CU_FILL = {
+  'AU00355': { local: 'Australia Sea Freight Pty Ltd', abbr: 'ASF', credit: '30', duns: '75-412-8890', coda: 'AU0035500', ccd: 'AU355', grp: 'AU00355', glob: 'GA-AU-0355', hier: 'Corporate Office',
+    nb1: 'A', nb2: 'B1', nb3: 'C2', vb: 'V1', vendor: 'VAU00355', emp: '120', teu: '4,800', cts: 'CTS-AU-2041', remark: 'Contract party for Australia trade lanes. Invoices issued from Melbourne.',
+    scac: 'ASFP', fmcOrg: '028815', fmcLic: '028815N', ic: 'N', bond: '75,000', bondEff: '2025-01-01', bondExp: '2026-12-31', gfsIc: 'N', iaco: 'AU00', fyw: 'FMC-AU-0355', prl: 'Y', ibr: 'Please quote the invoice number when making payment.' },
+  'AU00355-1': { local: 'Australia Sea Freight Pty Ltd - Melbourne', abbr: 'ASF-MEL', credit: '30', duns: '75-412-8891', coda: 'AU0035501', ccd: 'AU355M', grp: 'AU00355', glob: 'GA-AU-0355', hier: 'Branch Office (Level 2)',
+    nb1: 'A', nb2: 'B1', nb3: 'C1', vb: 'V1', vendor: 'VAU00355M', emp: '45', teu: '2,100', cts: 'CTS-AU-2042', remark: 'Melbourne branch. Shipper and consignee for Port of Melbourne.',
+    scac: 'ASFP', fmcOrg: '028815', fmcLic: '028815N', ic: 'N', bond: '25,000', bondEff: '2025-01-01', bondExp: '2026-12-31', gfsIc: 'N', iaco: 'AU03', fyw: 'FMC-AU-0355-1', prl: 'Y', ibr: 'Please quote the invoice number when making payment.' },
+  'AU00355-2': { local: 'Australia Sea Freight Pty Ltd - Sydney', abbr: 'ASF-SYD', credit: '30', duns: '75-412-8892', coda: 'AU0035502', ccd: 'AU355S', grp: 'AU00355', glob: 'GA-AU-0355', hier: 'Branch Office (Level 2)',
+    nb1: 'A', nb2: 'B2', nb3: 'C1', vb: 'V2', vendor: 'VAU00355S', emp: '38', teu: '1,650', cts: 'CTS-AU-2043', remark: 'Sydney branch. Shipper for Port Botany exports.',
+    scac: 'ASFP', fmcOrg: '028815', fmcLic: '028815N', ic: 'N', bond: '25,000', bondEff: '2025-01-01', bondExp: '2026-12-31', gfsIc: 'N', iaco: 'AU04', fyw: 'FMC-AU-0355-2', prl: 'Y', ibr: 'Please quote the invoice number when making payment.' },
+  'AU00355-3': { local: 'Australia Sea Freight Pty Ltd - Brisbane', abbr: 'ASF-BNE', credit: '21', duns: '75-412-8893', coda: 'AU0035503', ccd: 'AU355B', grp: 'AU00355', glob: 'GA-AU-0355', hier: 'Branch Office (Level 2)',
+    nb1: 'A', nb2: 'B2', nb3: 'C3', vb: 'V2', vendor: 'VAU00355B', emp: '22', teu: '950', cts: 'CTS-AU-2044', remark: 'Brisbane branch. Consignee for Port of Brisbane imports.',
+    scac: 'ASFP', fmcOrg: '028815', fmcLic: '028815N', ic: 'N', bond: '15,000', bondEff: '2025-01-01', bondExp: '2026-12-31', gfsIc: 'N', iaco: 'AU05', fyw: 'FMC-AU-0355-3', prl: 'N', ibr: 'Please quote the invoice number when making payment.' },
+  'HK00288': { local: '香港裕發國際有限公司', abbr: 'HKYF', credit: '45', duns: '66-305-1182', coda: 'HK0028800', ccd: 'HK288', grp: 'HK00288', glob: 'GA-HK-0288', hier: 'Corporate Office',
+    nb1: 'A', nb2: 'B1', nb3: 'C1', vb: 'V1', vendor: 'VHK00288', ka: 'Y', kaEff: '2025-04-01', kaExp: '2027-03-31', emp: '85', teu: '6,200', listed: 'N', cts: 'CTS-HK-1188', remark: 'Key account forwarder for Hong Kong – Southeast Asia lanes.',
+    scac: 'HKYF', fmcOrg: '031247', fmcLic: '031247F', ic: 'N', bond: '50,000', bondEff: '2025-04-01', bondExp: '2027-03-31', gfsIc: 'N', iaco: 'HK00', fyw: 'FMC-HK-0288', prl: 'Y', ibr: 'Payment by telegraphic transfer within 45 days.', ibrc: 'TT45' },
+  'LK09287': { local: 'සලෝටා ඉන්ටර්නැෂනල් (පුද්ගලික) සමාගම', abbr: 'SIPL', credit: '30', duns: '64-918-2207', coda: 'LK0928700', ccd: 'LK9287', grp: 'LK09287', glob: 'GA-LK-9287', hier: 'Corporate Office',
+    nb1: 'B', nb2: 'B1', nb3: 'C2', vb: 'V3', vendor: 'VLK09287', emp: '60', teu: '1,300', cts: 'CTS-LK-0421', remark: 'Clearing agent for Colombo port imports.',
+    scac: 'SIPL', fmcOrg: '029904', fmcLic: '029904N', ic: 'N', bond: '20,000', bondEff: '2025-07-01', bondExp: '2027-06-30', gfsIc: 'N', iaco: 'CB02', fyw: 'FMC-LK-9287', prl: 'Y', ibr: 'Payment in LKR to the account shown on this invoice.', ibrc: 'LKR30' }
+};
+// Bank fields the sheet leaves blank: [VAT No., Bank Address, Bank Code, Branch Code] by bank name
+const CU_BKFILL = {
+  'Bank of Australia': ['AU53086843831', '275 Kent Street, Sydney NSW 2000, Australia', '032', '003-001'],
+  'HSBC': ['AU48006434162', 'Level 36, 1 O\'Connell Street, Sydney NSW 2000, Australia', '342', '342-011'],
+  'The Hongkong and Shanghai Banking Corporation': ['HK89387287620'],
+  'Commercial Bank of Ceylon PLC': ['LK238739846-7000']
+};
+(() => {
+  const empty = (v) => v === undefined || v === null || String(v).trim() === '';
+  const fillRec = (r) => { const f = CU_FILL[r.f.code] || {}; Object.keys(f).forEach((k) => { if (empty(r.f[k]) || ['ka', 'kaEff', 'kaExp'].includes(k)) r.f[k] = f[k]; });
+    (r.bk || []).forEach((b) => { const x = CU_BKFILL[b.bank] || []; ['vat', 'addr', 'bankCode', 'brCode'].forEach((k, i) => { if (empty(b[k]) && x[i]) b[k] = x[i]; }); }); };
+  CU_SEED.forEach((c) => { fillRec(c); c.br.forEach(fillRec); [c].concat(c.br).forEach((r) => { if (empty(r.f.cons)) r.f.cons = 'C' + c.f.code; }); });
+  const b3 = CU_SEED[0].br.find((b) => b.f.code === 'AU00355-3');
+  if (b3 && !b3.bk.length) b3.bk.push(cuBk(['Australia', 'Brisbane', 'PIL', 'Bank of Australia', 'AUD', 'AUSTRALIA SEA FREIGHT PTY LTD-BNE', '12345712', 'FPS/RTGS/CROSS BORDER FUNDS TRANSFER', 'SWFT12345678', '58904782981', 'AU58904782981', '240 Queen Street, Brisbane QLD 4000, Australia', '032', '004-010']));
+})();
+const CU_LS = 'girs.customer.v3';
 const cuLoad = () => { let d = null; try { d = JSON.parse(localStorage.getItem(CU_LS) || 'null'); } catch (e) {} return d && Array.isArray(d) ? d : JSON.parse(JSON.stringify(CU_SEED)); };
 const cuStore = (d) => { try { localStorage.setItem(CU_LS, JSON.stringify(d)); } catch (e) {} };
 // Phone country codes (same picker as Company Master)
