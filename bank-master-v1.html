@@ -352,6 +352,20 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .bm-row4{grid-template-columns:repeat(2,minmax(0,1fr))}
 .bm-ta{width:100%;height:auto;min-height:204px;padding-block:8px;resize:vertical;line-height:20px;box-sizing:border-box}
 .cm2-lr:has(.lbl:empty){display:none}
+.bm-ms{position:relative}
+.bm-ms .msel-b{width:100%;display:flex;align-items:center;text-align:start;cursor:pointer;padding-inline-end:32px;position:relative}
+.bm-ms .msel-b svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;color:var(--muted);pointer-events:none}
+.msel-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.bm-ms .msel-p{position:absolute;z-index:5;top:calc(100% + 4px);left:0;right:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(22,26,33,.16);overflow:hidden}
+.bm-ms .msel-o{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 12px;font-size:13px;cursor:pointer}
+.bm-ms .msel-o:first-child{margin-top:6px}
+.bm-ms .msel-o:hover{background:var(--hover2)}
+.bm-ms .msel-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.bm-ms .msel-o span:nth-of-type(1){flex:1 1 auto}
+.bm-ms-s{font-size:12px;color:var(--muted)}
+.bm-ms .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);margin-top:6px}
+.bm-ms-x{all:unset;position:fixed;inset:0;z-index:4}
+.cm2-sec:has(.bm-ms .msel-p){position:relative;z-index:3;overflow:visible}
 .bm-acts{display:inline-flex;align-items:center;gap:2px}
 .bm-ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;color:var(--muted2)}
 .bm-ib:hover{background:var(--hover);color:var(--accent)}
@@ -792,6 +806,20 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
                         <input class="input" id="{{f.id}}" value="{{f.val}}" readonly="{{f.ro}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
                       </sc-if>
+                      <sc-if value="{{f.isMulti}}" hint-placeholder-val="{{ false }}">
+                        <div class="msel bm-ms">
+                          <button type="button" class="select msel-b" id="{{f.id}}" aria-haspopup="listbox" aria-expanded="{{f.openA}}" onClick="{{f.toggle}}"><span class="msel-t">{{f.txt}}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                          <sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
+                            <button class="bm-ms-x" tabindex="-1" aria-label="Close list" onClick="{{f.close}}"></button>
+                            <div class="msel-p" role="listbox" aria-multiselectable="true" aria-labelledby="{{f.lid}}">
+                              <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="4">
+                                <label class="msel-o" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.l}}</span><span class="bm-ms-s">{{o.sub}}</span></label>
+                              </sc-for>
+                              <div class="msel-f"><button type="button" class="btn btn-sm" onClick="{{f.clear}}">Clear</button><button type="button" class="btn btn-sm btn-primary" onClick="{{f.close}}">Done</button></div>
+                            </div>
+                          </sc-if>
+                        </div>
+                      </sc-if>
                       <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}">
                         <textarea class="input bm-ta" id="{{f.id}}" rows="8" value="{{f.val}}" onInput="{{f.on}}"></textarea>
                       </sc-if>
@@ -840,6 +868,20 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       </div>
                       <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
                         <input class="input" id="{{f.id}}" value="{{f.val}}" readonly="{{f.ro}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
+                      </sc-if>
+                      <sc-if value="{{f.isMulti}}" hint-placeholder-val="{{ false }}">
+                        <div class="msel bm-ms">
+                          <button type="button" class="select msel-b" id="{{f.id}}" aria-haspopup="listbox" aria-expanded="{{f.openA}}" onClick="{{f.toggle}}"><span class="msel-t">{{f.txt}}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                          <sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
+                            <button class="bm-ms-x" tabindex="-1" aria-label="Close list" onClick="{{f.close}}"></button>
+                            <div class="msel-p" role="listbox" aria-multiselectable="true" aria-labelledby="{{f.lid}}">
+                              <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="4">
+                                <label class="msel-o" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.l}}</span><span class="bm-ms-s">{{o.sub}}</span></label>
+                              </sc-for>
+                              <div class="msel-f"><button type="button" class="btn btn-sm" onClick="{{f.clear}}">Clear</button><button type="button" class="btn btn-sm btn-primary" onClick="{{f.close}}">Done</button></div>
+                            </div>
+                          </sc-if>
+                        </div>
                       </sc-if>
                       <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}">
                         <textarea class="input bm-ta" id="{{f.id}}" rows="8" value="{{f.val}}" onInput="{{f.on}}"></textarea>
@@ -991,12 +1033,23 @@ const bmDetail = (self, s) => {
   const plain = (arr) => arr.map((c) => ({ v: c, l: c }));
   const uses = s.isNew ? [] : bmUses(s.asg, d.code);
   const usesTxt = uses.length ? uses.map((u) => u.l + ' (' + u.ccy + ')').join(', ') : 'Not assigned to any purpose';
+  const asgC = ((s.asg || {})[d.country] || {})[d.ccy] || {};
+  const cur0 = BM_PURP.map(([k]) => k).filter((k) => d.code && asgC[k] === d.code);
+  const picked = Array.isArray(d.__uses) ? d.__uses : cur0;
+  const usesF = Object.assign(id('uses'), { label: 'Assigned Purposes', help: '', isMulti: true, span: 'grid-column: 1 / -1',
+    txt: picked.length ? BM_PURP.filter(([k]) => picked.includes(k)).map(([, l]) => l + ' (' + d.ccy + ')').join(', ') : 'Not assigned to any purpose',
+    open: !!s.__pu, openA: s.__pu ? 'true' : 'false',
+    toggle: () => self.setState({ __pu: !s.__pu }), close: () => self.setState({ __pu: false }),
+    clear: () => put({ __uses: [] }),
+    opts: BM_PURP.map(([k, l, desc]) => { const on = picked.includes(k), holder = asgC[k];
+      return { l: l, sub: holder && holder !== d.code ? 'Currently ' + holder : (on ? '' : desc), on: on ? 'true' : 'false',
+        flip: () => put({ __uses: on ? picked.filter((x) => x !== k) : picked.concat([k]) }) }; }) });
   const secs = [
     [txt('code', 'Bank Code', { ro: !s.isNew }), txt('bank', 'Bank Name', { span: 'grid-column: span 2' }), txt('branch', 'Branch Name', { span: 'grid-column: span 2' }), txt('brCode', 'Branch Code'),
       txt('swift', 'SWIFT / BIC'), txt('local', 'Local Bank Code'), sel('country', 'Country', coded(BM_COUNTRY), { ro: !s.isNew }), txt('city', 'City'), txt('addr', 'Branch Address', { span: 'grid-column: span 2' })],
     [txt('holder', 'Account Holder Name', { span: 'grid-column: 1 / -1' }), txt('acct', 'Account No.'), sel('ccy', 'Account Currency', plain(BM_CCY), { ro: !s.isNew }), txt('iban', 'IBAN'), sel('type', 'Account Type', plain(BM_TYPE)),
       txt('pin', 'Tax Registration No (PIN No.)'), txt('vat', 'VAT No.')],
-    [sel('org', 'Organization Type', [{ v: '', l: 'Select' }].concat(plain(BM_ORG))), sel('ent', 'Entity', plain(BM_ENT)), txt('carrier', 'Carrier'), sel('off', 'Office', Object.keys(BM_OFF).map((o) => ({ v: o, l: BM_OFF[o] }))), txt('uses', 'Assigned Purposes', { val: usesTxt, ro: true, span: 'grid-column: 1 / -1' })],
+    [sel('org', 'Organization Type', [{ v: '', l: 'Select' }].concat(plain(BM_ORG))), sel('ent', 'Entity', plain(BM_ENT)), txt('carrier', 'Carrier'), sel('off', 'Office', Object.keys(BM_OFF).map((o) => ({ v: o, l: BM_OFF[o] }))), usesF],
     [txt('gl', 'Bank G/L Account'), txt('cgl', 'Bank Charges G/L'), txt('gfs', 'GFS Bank Code'), sel('fmt', 'Statement Format', plain(BM_FMT))],
     [sel('st', 'Status', plain(BM_STAT), { span: 'grid-column: 1 / -1' }), txt('from', 'Effective From'), txt('to', 'Effective To')],
     [Object.assign(id('tnc'), { label: '', help: '', isArea: true, val: d.tnc || '', ro: false, span: 'grid-column: 1 / -1', on: (e) => put({ tnc: e.target.value }) })]
@@ -1005,18 +1058,22 @@ const bmDetail = (self, s) => {
   return {
     code: s.isNew ? 'New' : d.code, name: s.isNew ? (s.copyOf ? 'Copy of ' + s.copyOf : 'New Bank Account') : d.bank + ' · ' + d.ccy, ro: false, rw: true,
     main: [sec(0)], side: [sec(1), sec(2), sec(3), sec(4), sec(5)],
-    cancel: () => self.setState({ open: false, draft: null, copyOf: '' }),
+    cancel: () => self.setState({ open: false, draft: null, copyOf: '', __pu: false }),
     save: () => {
       const code = String(d.code || '').trim().toUpperCase();
       if (!code || !String(d.bank || '').trim() || !String(d.acct || '').trim()) return self.setState({ __toast: 'Enter Bank Code, Bank Name and Account No.' });
       if (s.isNew && s.recs.some((r) => r.code === code)) return self.setState({ __toast: 'Bank Code ' + code + ' already exists.' });
-      const rec = Object.assign({}, d, { code });
+      const rec = Object.assign({}, d, { code }); delete rec.__uses;
       const recs = s.isNew ? s.recs.concat([rec]) : s.recs.map((r) => (r.code === code ? rec : r));
       const asg = JSON.parse(JSON.stringify(s.asg));
       asg[rec.country] = asg[rec.country] || {};
       asg[rec.country][rec.ccy] = asg[rec.country][rec.ccy] || { rec: '', pay: '', inv: '', ref: '' };
+      if (Array.isArray(d.__uses)) {
+        Object.keys(asg).forEach((c) => Object.keys(asg[c]).forEach((y) => BM_PURP.forEach(([k]) => { if (asg[c][y][k] === code && !(c === rec.country && y === rec.ccy && d.__uses.includes(k))) asg[c][y][k] = ''; })));
+        d.__uses.forEach((k) => { asg[rec.country][rec.ccy][k] = code; });
+      }
       bmStore(recs, asg);
-      self.setState({ recs, asg, draft: null, open: false, copyOf: '', sel: code, cty: rec.country, __toast: 'Bank account ' + code + ' saved.' });
+      self.setState({ recs, asg, draft: null, open: false, copyOf: '', __pu: false, sel: code, cty: rec.country, __toast: 'Bank account ' + code + ' saved.' });
     }
   };
 };
