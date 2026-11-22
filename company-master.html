@@ -197,8 +197,16 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .co-n{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dot-off{width:7px;height:7px;border-radius:50%;background:var(--bdh)}
 .empty-t{margin:16px;font-size:13px;color:var(--muted)}
-.strip{display:flex;flex-wrap:wrap;gap:12px 32px;padding:16px 24px;background:var(--hover2)}
-.sx{display:flex;flex-direction:column;gap:2px;min-width:0;max-width:280px}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 24px;margin:0 28px 4px;padding:14px 18px;border-radius:8px;background:var(--hover2);border:1px solid var(--line2)}
+.sx-e{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.sx-e b{font-size:14px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sx-pen{all:unset;cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;color:var(--accent)}
+.sx-pen:hover{background:var(--tint)}
+.sx-pen:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.sx-in{display:flex;align-items:center;gap:6px;min-width:0}
+.sx-ib{width:32px;padding:0;flex:none;justify-content:center}
+.sx-in .input{height:32px;flex:1 1 auto;min-width:0;width:auto}
+.sx{display:flex;flex-direction:column;gap:2px;min-width:0}
 .sx span{font-size:12px;color:var(--muted)}
 .sx b{font-size:14px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ttl{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -549,9 +557,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </section>
 
           <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-            <section class="card strip">
-              <sc-for list="{{strip}}" as="x" hint-placeholder-count="8"><div class="sx"><span>{{x.l}}</span><b class="{{x.c}}">{{x.v}}</b></div></sc-for>
-            </section>
 
             <section class="card" style="flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden">
               <div class="r-wrap" style="padding: 20px 28px 18px; display: flex; align-items: center; gap: 16px">
@@ -574,6 +579,15 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     </div></sc-if>
                   </span>
                 </span>
+              </div>
+              <div class="strip" role="group" aria-label="Summary">
+                <sc-for list="{{strip}}" as="x" hint-placeholder-count="8">
+                  <div class="sx"><span>{{x.l}}</span>
+                    <sc-if value="{{x.ro}}" hint-placeholder-val="{{ true }}"><b class="{{x.c}}">{{x.v}}</b></sc-if>
+                    <sc-if value="{{x.edView}}" hint-placeholder-val="{{ false }}"><span class="sx-e"><b>{{x.v}}</b><button class="sx-pen" aria-label="Edit Company Alias Name" title="Edit Company Alias Name" onClick="{{x.edit}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button></span></sc-if>
+                    <sc-if value="{{x.edOn}}" hint-placeholder-val="{{ false }}"><span class="sx-in"><input class="input" aria-label="Company Alias Name" value="{{x.val}}" onInput="{{x.onIn}}" onKeyDown="{{x.onKey}}"><button class="btn btn-sm btn-primary sx-ib" aria-label="Save Company Alias Name" title="Save" onClick="{{x.save}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button><button class="btn btn-sm sx-ib" aria-label="Cancel" title="Cancel" onClick="{{x.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-if>
+                  </div>
+                </sc-for>
               </div>
               <div class="r-wrap" role="tablist" aria-label="Company sections" style="display: flex; gap: 28px; padding: 0 28px; border-bottom: 1px solid var(--line)">
                 <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
@@ -686,12 +700,40 @@ const CO_SEED = [
       ['Tuas Port', 'SG01-05', 'PIL-Tuas Port-BO', 'PIL-Tuas Port', '10 Tuas Port Road, #01-20, Tuas Port Administration Building, Singapore 637911', '+65 9123 4505', '+65 6123 4505', 'tuasport@pil.com', 'P051101234A', 'SG01-05', 'Y']
     ],
     bk: [
-      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'SGD', 'PIL Singapore Ltd.', '12345678', '', 'SWFT12345678', 'P051101234A', '', '', '', ''],
-      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'USD', 'PIL Singapore Ltd.', '87654321', '', 'SWFT12345678', 'P051101234A', '', '', '', '']
+      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'SGD', 'PIL Singapore Ltd.', '12345678', 'Current', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001'],
+      ['Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'USD', 'PIL Singapore Ltd.', '87654321', 'Foreign currency', 'SWFT12345678', 'P051101234A', 'M2-0012345-6', '63 Market Street, #22-01, Singapore 048942', '7755', '001']
     ] },
-  { id: 'SG02', ent: 'PIL', code: 'SG02', name: 'PIL DJIBOUTI LIMITED', alias: 'PIL DJIBOUTI LTD', loc: 'Djibouti', nBr: 3, active: true, br: [], bk: [] },
-  { id: 'SG03', ent: 'PIL', code: 'SG03', name: 'PIL TOGO SA', alias: 'PIL TOGO SA', loc: 'Togo', nBr: 2, active: true, br: [], bk: [] },
-  { id: 'SG04', ent: 'PIL', code: 'SG04', name: 'Pacific International Lines (Hong Kong) Limited', alias: 'PACIFIC INTERNATIONAL LINES PTE LTD', loc: 'Hong Kong', nBr: 2, active: true, br: [], bk: [] },
+  { id: 'SG02', ent: 'PIL', code: 'SG02', name: 'PIL DJIBOUTI LIMITED', alias: 'PIL DJIBOUTI LTD', loc: 'Djibouti', nBr: 3, active: true,
+    addr: 'Boulevard de la République, Immeuble Kalam, 3rd Floor, BP 2101, Djibouti', mob: '+253 77 81 2200', tel: '+253 21 35 2200', email: 'djibouti@pil.com', tax: 'NIF 0011 2207 D', gfs: 'SG02',
+    br: [
+      ['Port of Djibouti', 'SG02-01', 'PIL-Port of Djibouti-BO', 'PIL-Port of Djibouti', 'Port Autonome International de Djibouti, Bâtiment Administratif, Djibouti', '+253 77 81 2201', '+253 21 35 2201', 'portdjibouti@pil.com', 'NIF 0011 2207 D', 'SG02-01', 'Y'],
+      ['Doraleh', 'SG02-02', 'PIL-Doraleh-BO', 'PIL-Doraleh', 'Doraleh Multipurpose Port, Office Block B, Doraleh, Djibouti', '+253 77 81 2202', '+253 21 35 2202', 'doraleh@pil.com', 'NIF 0011 2207 D', 'SG02-02', 'Y'],
+      ['Tadjourah', 'SG02-03', 'PIL-Tadjourah-BO', 'PIL-Tadjourah', 'Port de Tadjourah, Zone Portuaire, Tadjourah, Djibouti', '+253 77 81 2203', '+253 21 35 2203', 'tadjourah@pil.com', 'NIF 0011 2207 D', 'SG02-03', 'Y']
+    ],
+    bk: [
+      ['Djibouti', 'Djibouti', 'PIL', 'Bank of Africa Mer Rouge', 'DJF', 'PIL Djibouti Limited', 'DJ21 0001 0000 0102 3456 7890 12', 'Current', 'BMOIDJJD', 'NIF 0011 2207 D', '', '10 Place Lagarde, Djibouti', '00010', '00001'],
+      ['Djibouti', 'Djibouti', 'PIL', 'Bank of Africa Mer Rouge', 'USD', 'PIL Djibouti Limited', 'DJ21 0001 0000 0102 3456 7890 55', 'Current', 'BMOIDJJD', 'NIF 0011 2207 D', '', '10 Place Lagarde, Djibouti', '00010', '00001']
+    ] },
+  { id: 'SG03', ent: 'PIL', code: 'SG03', name: 'PIL TOGO SA', alias: 'PIL TOGO SA', loc: 'Togo', nBr: 2, active: true,
+    addr: 'Boulevard du Mono, Zone Portuaire, BP 3412, Lomé, Togo', mob: '+228 90 12 3400', tel: '+228 22 27 3400', email: 'togo@pil.com', tax: 'NIF 1000 4521 78', gfs: 'SG03',
+    br: [
+      ['Lomé Port', 'SG03-01', 'PIL-Lomé Port-BO', 'PIL-Lomé Port', 'Port Autonome de Lomé, Môle 2, Lomé, Togo', '+228 90 12 3401', '+228 22 27 3401', 'lomeport@pil.com', 'NIF 1000 4521 78', 'SG03-01', 'Y'],
+      ['Lomé Container Terminal', 'SG03-02', 'PIL-LCT-BO', 'PIL-LCT', 'Lomé Container Terminal, Gate 3 Office, Lomé, Togo', '+228 90 12 3402', '+228 22 27 3402', 'lct@pil.com', 'NIF 1000 4521 78', 'SG03-02', 'Y']
+    ],
+    bk: [
+      ['Togo', 'Lomé', 'PIL', 'Ecobank Togo', 'XOF', 'PIL Togo SA', 'TG53 TG05 5010 0123 4567 8900 12', 'Current', 'ECOCTGTG', 'NIF 1000 4521 78', 'TVA 1000 4521 78', '20 Avenue Sylvanus Olympio, Lomé, Togo', 'TG055', '01001'],
+      ['Togo', 'Lomé', 'PIL', 'Ecobank Togo', 'USD', 'PIL Togo SA', 'TG53 TG05 5010 0123 4567 8900 34', 'Current', 'ECOCTGTG', 'NIF 1000 4521 78', 'TVA 1000 4521 78', '20 Avenue Sylvanus Olympio, Lomé, Togo', 'TG055', '01001']
+    ] },
+  { id: 'SG04', ent: 'PIL', code: 'SG04', name: 'Pacific International Lines (Hong Kong) Limited', alias: 'PACIFIC INTERNATIONAL LINES PTE LTD', loc: 'Hong Kong', nBr: 2, active: true,
+    addr: '31/F, Tower 2, Times Square, 1 Matheson Street, Causeway Bay, Hong Kong', mob: '+852 9123 4400', tel: '+852 2823 4400', email: 'hongkong@pil.com', tax: 'BR 12345678-000', gfs: 'SG04',
+    br: [
+      ['Kwai Chung', 'SG04-01', 'PIL-Kwai Chung-BO', 'PIL-Kwai Chung', 'Container Terminal 9, Office Tower, 6/F, Tsing Yi Road, Kwai Chung, Hong Kong', '+852 9123 4401', '+852 2823 4401', 'kwaichung@pil.com', 'BR 12345678-000', 'SG04-01', 'Y'],
+      ['Tsing Yi', 'SG04-02', 'PIL-Tsing Yi-BO', 'PIL-Tsing Yi', '12/F, Tsing Yi Industrial Centre, 1 Cheung Tat Road, Tsing Yi, Hong Kong', '+852 9123 4402', '+852 2823 4402', 'tsingyi@pil.com', 'BR 12345678-000', 'SG04-02', 'Y']
+    ],
+    bk: [
+      ['Hong Kong', 'Hong Kong', 'PIL', 'The Hongkong and Shanghai Banking Corporation', 'HKD', 'Pacific International Lines (HK) Ltd', '004-123-456789-001', 'Current', 'HSBCHKHHHKH', 'BR 12345678-000', '', '1 Queen\'s Road Central, Hong Kong', '004', '123'],
+      ['Hong Kong', 'Hong Kong', 'PIL', 'The Hongkong and Shanghai Banking Corporation', 'USD', 'Pacific International Lines (HK) Ltd', '004-123-456789-274', 'Current', 'HSBCHKHHHKH', 'BR 12345678-000', '', '1 Queen\'s Road Central, Hong Kong', '004', '123']
+    ] },
   { id: 'SG05', ent: 'MEL', code: 'SG05', name: 'MARIANA EXPRESS LINES PTE LTD', alias: 'MELL Singapore', loc: 'Singapore', nBr: 2, active: true,
     addr: '140 Robinson Road, #12-01, Crown @ Robinson, Singapore 068907', mob: '+65 9234 5600', tel: '+65 6234 5600', email: 'corporate@mell.example.com', tax: '199801234M', gfs: 'SG02',
     br: [
@@ -699,7 +741,11 @@ const CO_SEED = [
       ['Brani', 'SG02-02', 'MELL-Brani-BO', 'MELL-Brani', '1 Brani Terminal Avenue, #02-03, Brani Terminal Building, Singapore 098501', '+65 9234 5602', '+65 6234 5602', 'brani@mell.example.com', '199801234M', 'SG02-02', 'Y'],
       ['Pasir Panjang', 'SG02-03', 'MELL-Pasir Panjang-BO', 'MELL-Pasir Panjang', '3 Harbour Drive, #03-11, Pasir Panjang Terminal Building 3, Singapore 117404', '+65 9234 5603', '+65 6234 5603', 'pasirpanjang@mell.example.com', '199801234M', 'SG02-03', 'Y'],
       ['Tuas Port', 'SG02-04', 'MELL-Tuas Port-BO', 'MELL-Tuas Port', '10 Tuas Port Road, #02-14, Tuas Port Administration Building, Singapore 637911', '+65 9234 5604', '+65 6234 5604', 'tuasport@mell.example.com', '199801234M', 'SG02-04', 'Y']
-    ], bk: [] },
+    ],
+    bk: [
+      ['Singapore', 'Singapore', 'MEL', 'DBS Bank Ltd', 'SGD', 'Mariana Express Lines Pte Ltd', '072-901234-5', 'Current', 'DBSSSGSG', '199801234M', 'M90-3456789-0', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072'],
+      ['Singapore', 'Singapore', 'MEL', 'DBS Bank Ltd', 'USD', 'Mariana Express Lines Pte Ltd', '072-901234-9', 'Foreign currency', 'DBSSSGSG', '199801234M', 'M90-3456789-0', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', '7171', '072']
+    ] },
   { id: 'MY01', ent: 'MSC', code: 'MY01', name: 'MALAYSIA SHIPPING CORPORATION SDN BHD', alias: 'MSCorp Malaysia', loc: 'Malaysia', nBr: 6, active: true,
     addr: 'Level 18, Menara Sample, Jalan Sultan Ismail, 50250 Kuala Lumpur, Malaysia', mob: '+60 12-345 6700', tel: '+60 3-2345 6700', email: 'corporate@mscorp.example.com', tax: 'C 2345678901', gfs: 'MY01',
     br: [
@@ -709,7 +755,12 @@ const CO_SEED = [
       ['Kuching', 'MY01-04', 'MSCorp-Kuching-BO', 'MSCorp-Kuching', 'Lot 88, Jalan Pending, 93450 Kuching, Sarawak, Malaysia', '+60 12-345 6704', '+60 82-333 704', 'kuching@mscorp.example.com', 'C 2345678901', 'MY01-04', 'Y'],
       ['Kota Kinabalu', 'MY01-05', 'MSCorp-Kota Kinabalu-BO', 'MSCorp-Kota Kinabalu', 'Block B, Lot 6, Jalan Tun Fuad Stephens, 88000 Kota Kinabalu, Sabah, Malaysia', '+60 12-345 6705', '+60 88-213 705', 'kotakinabalu@mscorp.example.com', 'C 2345678901', 'MY01-05', 'Y'],
       ['Muara (Brunei)', 'MY01-06', 'MSCorp-Muara-BO', 'MSCorp-Muara', 'Unit 3, Muara Port Complex, Muara BT1728, Brunei Darussalam', '+673 712 3406', '+673 277 3406', 'muara@mscorp.example.com', 'C 2345678901', 'MY01-06', 'Y']
-    ], bk: [] }
+    ],
+    bk: [
+      ['Malaysia', 'Kuala Lumpur', 'MSC', 'Malayan Banking Berhad (Maybank)', 'MYR', 'Malaysia Shipping Corporation Sdn Bhd', '5141 2345 6789', 'Current', 'MBBEMYKL', 'C 2345678901', 'W10-1808-32000123', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '514'],
+      ['Malaysia', 'Kuala Lumpur', 'MSC', 'Malayan Banking Berhad (Maybank)', 'USD', 'Malaysia Shipping Corporation Sdn Bhd', '7141 2345 6701', 'Foreign currency', 'MBBEMYKL', 'C 2345678901', 'W10-1808-32000123', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur', '27', '714'],
+      ['Malaysia', 'Port Klang', 'MSC', 'CIMB Bank Berhad', 'MYR', 'Malaysia Shipping Corporation Sdn Bhd', '8001 2345 67', 'Current', 'CIBBMYKL', 'C 2345678901', 'W10-1808-32000123', 'Jalan Kem, 42000 Pelabuhan Klang, Selangor', '35', '801']
+    ] }
 ];
 const CO_ENT = ['PIL', 'MEL', 'MSC'];
 const CO_BRK = ['port', 'code', 'name', 'alias', 'addr', 'mob', 'tel', 'email', 'tax', 'gfs', 'act'];
@@ -717,14 +768,14 @@ const CO_BKK = ['ctry', 'loc', 'carrier', 'bank', 'cur', 'accName', 'accNo', 'ac
 const CO_BKL = ['Country', 'Location', 'Carrier', 'Bank Name', 'Currency', 'Account Name', 'IBAN / Account No.', 'Account Type', 'Swift Code', 'Tax Registration No (PIN No.)', 'VAT No.', 'Bank Address', 'Bank Code', 'Branch Code'];
 const coLoad = () => {
   let d = null;
-  try { d = JSON.parse(localStorage.getItem('girs.company.v1') || 'null'); } catch (e) {}
+  try { d = JSON.parse(localStorage.getItem('girs.company.v2') || 'null'); } catch (e) {}
   if (d && Array.isArray(d)) return d;
   return CO_SEED.map((c) => Object.assign({}, c, {
     br: c.br.map((r) => Object.fromEntries(CO_BRK.map((k, i) => [k, r[i]]))),
     bk: c.bk.map((r) => Object.fromEntries(CO_BKK.map((k, i) => [k, r[i]])))
   }));
 };
-const coStore = (d) => { try { localStorage.setItem('girs.company.v1', JSON.stringify(d)); } catch (e) {} };
+const coStore = (d) => { try { localStorage.setItem('girs.company.v2', JSON.stringify(d)); } catch (e) {} };
 
 class GirsPage extends DCLogic {
   constructor(p) {
@@ -750,11 +801,11 @@ class GirsPage extends DCLogic {
       return { code: c.code, name: c.alias || c.name, n: String(c.br.length || c.nBr || 0), open: open ? 'true' : 'false', isOpen: open && kids.length > 0, rot: open ? '90deg' : '0deg',
         noKids: !c.br.length, chev: c.br.length ? '1' : '0.3', tgL: (open ? 'Collapse ' : 'Expand ') + c.code,
         toggle: () => set({ open: Object.assign({}, s.open, { [c.id]: !s.open[c.id] }) }),
-        pick: () => set({ sel: c.id, br: '', tab: '1', menu: false, open: Object.assign({}, s.open, { [c.id]: true }) }),
+        pick: () => set({ aEd: '', sel: c.id, br: '', tab: '1', menu: false, open: Object.assign({}, s.open, { [c.id]: true }) }),
         cur: cur ? 'page' : 'false', sel: cur ? 'background: var(--tint2); box-shadow: inset 3px 0 0 var(--accent)' : '',
         kids: kids.map((b) => { const on = c.id === corp.id && b.code === s.br;
           return { code: b.code, port: b.port, off: b.act !== 'Y', cur: on ? 'page' : 'false', sel: on ? 'background: var(--tint2); box-shadow: inset 3px 0 0 var(--accent)' : '',
-            pick: () => set({ sel: c.id, br: b.code, tab: '1', menu: false }) }; }) };
+            pick: () => set({ aEd: '', sel: c.id, br: b.code, tab: '1', menu: false }) }; }) };
     });
 
     // ---------- selected record
@@ -869,8 +920,18 @@ class GirsPage extends DCLogic {
         row('Linked Corporate Office (For Branch Office)', isBr ? corp.code + ' · ' + corp.name : ''), row('Company Logo - Small', ''), row('Company Logo - Large', '')]
     ];
 
-    const strip = [['Entity Type', corp.ent], ['Office Type', 'Corporate Office'], ['Company Code', corp.code, 'mono'], ['Entity Name', corp.name], ['Company Alias Name', corp.alias], ['Location', corp.loc], ['No. of Branches', String(corp.br.length || corp.nBr || 0), 'mono'], ['Active', corp.active ? 'Yes' : 'No']]
-      .map(([l, v, c]) => ({ l, v: dash(v), c: c || '' }));
+    const aliasKey = R.code, editing = s.aEd === aliasKey;
+    const saveAlias = () => {
+      const val = String(s.aVal || '').trim(), d = JSON.parse(JSON.stringify(D)), c = d.find((x) => x.id === corp.id);
+      if (isBr) { const b = c.br.find((x) => x.code === br.code); b.alias = val; } else c.alias = val;
+      coStore(d); set({ d, aEd: '', __toast: 'Company Alias Name saved for ' + R.code + '.' });
+    };
+    const strip = [['Entity Type', R.ent], ['Office Type', R.cls], ['Company Code', R.code, 'mono'], ['Entity Name', R.name], ['Company Alias Name', R.alias, '', true], [isBr ? 'Port' : 'Location', R.loc]]
+      .concat(isBr ? [['Linked Corporate Office', corp.code, 'mono']] : [['No. of Branches', String(corp.br.length), 'mono']]).concat([['Active', R.active ? 'Yes' : 'No']])
+      .map(([l, v, c, ed]) => ({ l, v: dash(v), c: c || '', ro: !ed, edView: !!ed && !editing, edOn: !!ed && editing,
+        edit: () => set({ aEd: aliasKey, aVal: R.alias || '' }), val: s.aVal || '', onIn: (e) => set({ aVal: e.target.value }),
+        onKey: (e) => { if (e.key === 'Enter') saveAlias(); if (e.key === 'Escape') set({ aEd: '' }); },
+        save: saveAlias, cancel: () => set({ aEd: '' }) }));
 
     return {
       q: s.q, onQ: (e) => set({ q: e.target.value }), tree, noHits: !tree.length, treeCount: D.length + (D.length === 1 ? ' corporate office' : ' corporate offices'),
