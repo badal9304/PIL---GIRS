@@ -685,11 +685,11 @@ const erBuild = () => {
   const fmt = (v) => (v >= 0.01 ? v.toFixed(4) : v.toPrecision(2).replace(/0+$/, ''));
   // Offices, their local currency, ports and the charge currencies they quote
   const OFF = [
-    { off: 'AU00', lc: 'AUD', ports: ['AUBNE', 'AUSYD', 'AUMEL'], ccs: ER_DAILY.map((x) => x[0]) },
-    { off: 'SG00', lc: 'SGD', ports: ['SGSIN'], ccs: ['SGD', 'USD', 'EUR', 'GBP', 'AUD', 'CNY', 'HKD', 'IDR', 'INR', 'JPY', 'MYR', 'THB'] },
-    { off: 'MY00', lc: 'MYR', ports: ['MYPKG', 'MYPEN'], ccs: ['MYR', 'USD', 'EUR', 'SGD', 'AUD', 'CNY', 'IDR', 'JPY', 'THB'] },
-    { off: 'HK00', lc: 'HKD', ports: ['HKHKG'], ccs: ['HKD', 'USD', 'EUR', 'GBP', 'CNY', 'JPY', 'SGD', 'TWD'] },
-    { off: 'IN00', lc: 'INR', ports: ['INNSA'], ccs: ['INR', 'USD', 'EUR', 'GBP', 'AUD', 'SGD', 'CNY', 'JPY'] }
+    { off: 'AU00', ctry: 'Australia', lc: 'AUD', ports: ['AUBNE', 'AUSYD', 'AUMEL'], ccs: ER_DAILY.map((x) => x[0]) },
+    { off: 'SG00', ctry: 'Singapore', lc: 'SGD', ports: ['SGSIN'], ccs: ['SGD', 'USD', 'EUR', 'GBP', 'AUD', 'CNY', 'HKD', 'IDR', 'INR', 'JPY', 'MYR', 'THB'] },
+    { off: 'MY00', ctry: 'Malaysia', lc: 'MYR', ports: ['MYPKG', 'MYPEN'], ccs: ['MYR', 'USD', 'EUR', 'SGD', 'AUD', 'CNY', 'IDR', 'JPY', 'THB'] },
+    { off: 'HK00', ctry: 'Hong Kong', lc: 'HKD', ports: ['HKHKG'], ccs: ['HKD', 'USD', 'EUR', 'GBP', 'CNY', 'JPY', 'SGD', 'TWD'] },
+    { off: 'IN00', ctry: 'India', lc: 'INR', ports: ['INNSA'], ccs: ['INR', 'USD', 'EUR', 'GBP', 'AUD', 'SGD', 'CNY', 'JPY'] }
   ];
   // one daily rate per office, currency and day (same for every port and bound), drifting a little day to day
   const drift = {};
@@ -707,7 +707,7 @@ const erBuild = () => {
         const sheet = o.off === 'AU00' && day === 17 && port === 'AUBNE' && bound === 'IB';
         const base = (ER_DAILY.find((x) => x[0] === cc) || [])[1];
         const rate = o.off === 'AU00' && base !== undefined ? erFmt(day === 17 ? base : rates[cc], erDec(base)) : fmt(rates[cc]);
-        out.push({ off: o.off, port, type: 'Daily', bound, vvd: ER_NA, eta: ER_NA, scope: ER_NA, cust: ER_NA, date, cc, lc: o.lc, rate, by: 'SYSTEM', upd: sheet ? '2025-09-26' : date });
+        out.push({ ctry: o.ctry, off: o.off, port, type: 'Daily', bound, vvd: ER_NA, eta: ER_NA, scope: ER_NA, cust: ER_NA, date, cc, lc: o.lc, rate, by: 'SYSTEM', upd: sheet ? '2025-09-26' : date });
       })));
     });
   }
@@ -728,7 +728,7 @@ const erBuild = () => {
     const list = sheet ? ER_VVD : o.ccs.map((cc) => [cc, null]);
     list.forEach(([cc, sv]) => {
       const rate = sv !== null && sv !== undefined ? erFmt(sv, erDec(sv)) : fmt(cc === o.lc ? 1 : daily(o, cc, +date.slice(8)) * (1 + (rnd() - 0.5) * 0.006));
-      out.push({ off, port, type: 'VVD Exchange Rate', bound, vvd, eta, scope: 'OTH', cust, date, cc, lc: o.lc, rate, by: 'SYSTEM', upd: sheet ? '2025-09-26' : date });
+      out.push({ ctry: o.ctry, off, port, type: 'VVD Exchange Rate', bound, vvd, eta, scope: 'OTH', cust, date, cc, lc: o.lc, rate, by: 'SYSTEM', upd: sheet ? '2025-09-26' : date });
     });
   });
   return out;
@@ -739,11 +739,11 @@ const ER_UNIQ = (k) => ER_ALL.map((r) => r[k]).filter((v, i, a) => v && v !== ER
 const ER_DEF = { type: ['Daily'], cc: [], lc: ['AUD'], off: ['AU00'], vvd: '', port: [], scope: [], bound: [], cust: '', from: '2026-11-17', to: '2026-11-17' };
 const erCopy = (c) => JSON.parse(JSON.stringify(c));
 // Table columns the user can show or hide; Ex.Rate is always shown
-const ER_COLS = [['off', 'Office', 'mono'], ['port', 'Port', 'mono'], ['type', 'Ex-Rate Type'], ['bound', 'Bound'], ['vvd', 'VVD'], ['eta', 'ETA'], ['scope', 'Scope'], ['cust', 'Customer', 'cust'], ['date', 'Ex.Rate Date'],
+const ER_COLS = [['ctry', 'Country'], ['off', 'Office', 'mono'], ['port', 'Port', 'mono'], ['type', 'Ex-Rate Type'], ['bound', 'Bound'], ['vvd', 'VVD'], ['eta', 'ETA'], ['scope', 'Scope'], ['cust', 'Customer', 'cust'], ['date', 'Ex.Rate Date'],
   ['cc', 'Charge Currency', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['by', 'Updated By'], ['upd', 'Updated Date']];
 const ER_COLS_DEF = ER_COLS.map((c) => c[0]);
-const erColsLoad = () => { try { const v = JSON.parse(localStorage.getItem('girs.er.cols2') || 'null'); if (Array.isArray(v)) return v.filter((k) => ER_COLS.some((c) => c[0] === k) ); } catch (e) {} return ER_COLS_DEF.slice(); };
-const erColsSave = (arr) => { const v = ER_COLS.map((c) => c[0]).filter((k) => arr.includes(k) || k === 'rate'); try { localStorage.setItem('girs.er.cols2', JSON.stringify(v)); } catch (e) {} return v; };
+const erColsLoad = () => { try { const v = JSON.parse(localStorage.getItem('girs.er.cols3') || 'null'); if (Array.isArray(v)) return v.filter((k) => ER_COLS.some((c) => c[0] === k) ); } catch (e) {} return ER_COLS_DEF.slice(); };
+const erColsSave = (arr) => { const v = ER_COLS.map((c) => c[0]).filter((k) => arr.includes(k) || k === 'rate'); try { localStorage.setItem('girs.er.cols3', JSON.stringify(v)); } catch (e) {} return v; };
 const ER_PAGE = 20;
 const erMon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const erDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || '')); return m ? +m[3] + ' ' + erMon[+m[2] - 1] + ' ' + m[1] : s; };
@@ -821,8 +821,8 @@ class GirsPage extends DCLogic {
       isDef: ER_COLS_DEF.every((k) => dr.includes(k)) };
     const exportXls = () => {
       const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-      const head = ['Office', 'Port', 'Ex-Rate Type', 'Bound', 'VVD', 'ETA', 'Scope', 'Customer', 'Ex.Rate Date', 'Charge Currency', 'Local Currency', 'Ex.Rate', 'Updated By', 'Updated Date'];
-      const body = hits.map((r) => [r.off, r.port, r.type, r.bound, r.vvd, r.eta, r.scope, r.cust, r.date, r.cc, r.lc, r.rate, r.by, r.upd]);
+      const head = ['Country', 'Office', 'Port', 'Ex-Rate Type', 'Bound', 'VVD', 'ETA', 'Scope', 'Customer', 'Ex.Rate Date', 'Charge Currency', 'Local Currency', 'Ex.Rate', 'Updated By', 'Updated Date'];
+      const body = hits.map((r) => [r.ctry, r.off, r.port, r.type, r.bound, r.vvd, r.eta, r.scope, r.cust, r.date, r.cc, r.lc, r.rate, r.by, r.upd]);
       const html = '<html><head><meta charset="utf-8"></head><body><table border="1"><tr>' + head.map((h) => '<th>' + esc(h) + '</th>').join('') + '</tr>' +
         body.map((b) => '<tr>' + b.map((v) => '<td style="mso-number-format:\'\\@\'">' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table></body></html>';
       try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'application/vnd.ms-excel' })); a.download = 'Exchange-Rate-Master.xls'; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
