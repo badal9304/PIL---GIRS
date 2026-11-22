@@ -342,12 +342,12 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cm2-f .lbl{white-space:normal;overflow:visible}
 .cm2-grid{align-items:end}
 /* Layout B: search criteria beside the results */
-.cmb-s{flex:0 0 300px;position:sticky;top:0;align-self:flex-start}
+.cmb-s{flex:0 0 300px;position:sticky;top:0;align-self:flex-start;z-index:5}
 .cmb .cmc-crit{grid-template-columns:1fr;gap:12px}
 .cmb .cmc-act{grid-column:auto;justify-content:stretch;padding-top:4px}
 .cmb .cmc-act .btn{flex:1 1 0;justify-content:center}
 .cmb-r{flex:1 1 auto;min-width:0;align-self:stretch;display:flex;flex-direction:column;gap:16px}
-.cmb .er-msp.wide{width:340px}
+.cmb .er-msp,.cmb .er-msp.wide{width:auto;left:0;right:0;min-width:0}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -994,7 +994,7 @@ class GirsPage extends DCLogic {
         const shown = q ? list.filter((x) => (x + ' ' + other(x) + ' ' + (desc[x] || '')).toLowerCase().includes(q)) : list;
         const allOn = list.length > 0 && list.every((x) => v.includes(x));
         return { id: 'cm2-q-' + k, label, isText: false, isMulti: true, pcls: 'er-msp' + (pick ? ' wide' : ''),
-          txt: v.length ? v.map((x) => desc[x] || x).join(', ') : 'All', hasN: v.length > 2, n: String(v.length), open, openA: open ? 'true' : 'false', all: allOn,
+          txt: !v.length || allOn ? 'All' : v.map((x) => desc[x] || x).join(', '), hasN: v.length > 2 && !allOn, n: String(v.length), open, openA: open ? 'true' : 'false', all: allOn,
           findable: pick || list.length > 8, ph: k === 'code' ? 'Search code or name' : k === 'name' ? 'Search name or code' : 'Search', q: s.opQ || '', noQ: !q, none: !shown.length,
           onQ: (e) => self.setState({ opQ: e.target.value }),
           qKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); if (shown.length === 1 && !v.includes(shown[0])) setCrit(k, v.concat([shown[0]])); } },
