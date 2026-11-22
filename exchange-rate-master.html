@@ -665,78 +665,53 @@ input[type=date]::-webkit-calendar-picker-indicator:hover{background:var(--hover
 </div>
 </script>
 <script type="text/x-dc" id="logic">
-// Exchange Rate Master — built from the client sheet "WF_Exchange Rate Master" (2. PIL GIRS Function List).
-// Rates come from LMS: this screen searches and exports them; it does not edit them.
-// Daily rates for AU00 · AUBNE · IB on 17 Nov 2026 and the VVD rates for KLJA061835 are the sheet's values; other rows are sample values
-// worked out from the same rates (cross rates for SG00, MY00, HK00 and IN00).
-const ER_DAILY = [['AUD', 1], ['CNY', 0.2214], ['FJD', 0.684], ['KRW', 0.0011], ['EUR', 1.6067], ['GBP', 2.0308], ['HKD', 0.1968], ['IDR', 0.00008], ['INR', 0.0164],
-  ['JPY', 0.0097], ['MYR', 0.3617], ['USD', 1.5442], ['VND', 0.00006], ['NZD', 0.8492], ['PGK', 0.3544], ['PHP', 0.0242], ['SAR', 0.3904], ['SGD', 1.1901]];
-const ER_VVD = [['AUD', 1], ['CNY', 0.21444], ['EUR', 1.8553], ['FJD', 0.71049], ['GBP', 2.1277], ['HKD', 0.1943], ['IDR', 0.000091], ['INR', 0.0179], ['JPY', 0.0106],
-  ['KRW', 0.001085], ['MYR', 0.39296], ['NZD', 0.9173], ['PHP', 0.0273], ['SGD', 1.2289], ['THB', 0.04697], ['TWD', 0.050056], ['USD', 1.5001], ['VND', 0.000057]];
+// Exchange Rate Master — built from the client sheet "WF_Exchange Rate Master". Rates come from LMS: this screen searches and exports them; it does not edit them.
+// Rows exactly as in the sheet (2. PIL GIRS Function List_1), in its order: VVD rates first, then Daily rates.
+const ER_SHEET = [
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "AUD", "AUD", "1", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "CNY", "AUD", "0.21444", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "EUR", "AUD", "1.8553", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "FJD", "AUD", "0.71049", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "GBP", "AUD", "2.1277", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "HKD", "AUD", "0.1943", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "IDR", "AUD", "0.000091", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "INR", "AUD", "0.0179", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "JPY", "AUD", "0.0106", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "KRW", "AUD", "0.001085", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "MYR", "AUD", "0.39296", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "NZD", "AUD", "0.9173", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "PHP", "AUD", "0.0273", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "SGD", "AUD", "1.2289", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "THB", "AUD", "0.04697", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "TWD", "AUD", "0.050056", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "USD", "AUD", "1.5001", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "VVD Exchange Rate", "IB", "KLJA061835", "2025-10-12", "OTH", "2025-09-26", "VND", "AUD", "0.000057", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "AUD", "AUD", "1", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "CNY", "AUD", "0.2214", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "FJD", "AUD", "0.684", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "KRW", "AUD", "0.0011", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "EUR", "AUD", "1.6067", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "GBP", "AUD", "2.0308", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "HKD", "AUD", "0.1968", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "IDR", "AUD", "0.00008", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "INR", "AUD", "0.0164", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "JPY", "AUD", "0.0097", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "MYR", "AUD", "0.3617", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "USD", "AUD", "1.5442", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "VND", "AUD", "0.00006", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "NZD", "AUD", "0.8492", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "PGK", "AUD", "0.3544", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "PHP", "AUD", "0.0242", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "SAR", "AUD", "0.3904", "SYSTEM", "2025-09-26"],
+  ["AU", "AU00", "AUBNE", "Daily", "IB", "Not Applicable", "Not Applicable", "Not Applicable", "2026-11-17", "SGD", "AUD", "1.1901", "SYSTEM", "2025-09-26"]
+];
 const ER_NA = 'Not Applicable';
-const erDec = (v) => { const s = String(v); if (s.includes('e')) { const m = /e-(\d+)/.exec(s); return m ? +m[1] + 1 : 6; } return (s.split('.')[1] || '').length; };
-const erFmt = (v, d) => (+v).toFixed(Math.max(d, 4));
-const erBuild = () => {
-  const out = [];
-  let seed = 11;
-  const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
-  // AUD value of one unit of each currency (sheet's daily rates for AU00; THB and TWD from the sheet's VVD rates)
-  const AUDV = Object.assign(Object.fromEntries(ER_DAILY), { THB: 0.04697, TWD: 0.050056 });
-  const fmt = (v) => (v >= 0.01 ? v.toFixed(4) : v.toPrecision(2).replace(/0+$/, ''));
-  // Offices, their local currency, ports and the charge currencies they quote
-  const OFF = [
-    { off: 'AU00', ctry: 'Australia', lc: 'AUD', ports: ['AUBNE', 'AUSYD', 'AUMEL'], ccs: ER_DAILY.map((x) => x[0]) },
-    { off: 'SG00', ctry: 'Singapore', lc: 'SGD', ports: ['SGSIN'], ccs: ['SGD', 'USD', 'EUR', 'GBP', 'AUD', 'CNY', 'HKD', 'IDR', 'INR', 'JPY', 'MYR', 'THB'] },
-    { off: 'MY00', ctry: 'Malaysia', lc: 'MYR', ports: ['MYPKG', 'MYPEN'], ccs: ['MYR', 'USD', 'EUR', 'SGD', 'AUD', 'CNY', 'IDR', 'JPY', 'THB'] },
-    { off: 'HK00', ctry: 'Hong Kong', lc: 'HKD', ports: ['HKHKG'], ccs: ['HKD', 'USD', 'EUR', 'GBP', 'CNY', 'JPY', 'SGD', 'TWD'] },
-    { off: 'IN00', ctry: 'India', lc: 'INR', ports: ['INNSA'], ccs: ['INR', 'USD', 'EUR', 'GBP', 'AUD', 'SGD', 'CNY', 'JPY'] }
-  ];
-  // one daily rate per office, currency and day (same for every port and bound), drifting a little day to day
-  const drift = {};
-  const daily = (o, cc, day) => {
-    if (cc === o.lc) return 1;
-    const key = o.off + cc; if (!(key in drift)) drift[key] = (rnd() - 0.5) * 0.004;
-    const base = AUDV[cc] / AUDV[o.lc];
-    return base * (1 + drift[key] * (day - 17) + (day === 17 ? 0 : (rnd() - 0.5) * 0.002));
-  };
-  for (let day = 17; day >= 10; day--) {
-    const date = '2026-11-' + String(day).padStart(2, '0');
-    OFF.forEach((o) => {
-      const rates = Object.fromEntries(o.ccs.map((cc) => [cc, daily(o, cc, day)]));
-      o.ports.forEach((port) => ['IB', 'OB'].forEach((bound) => o.ccs.forEach((cc) => {
-        const sheet = o.off === 'AU00' && day === 17 && port === 'AUBNE' && bound === 'IB';
-        const base = (ER_DAILY.find((x) => x[0] === cc) || [])[1];
-        const rate = o.off === 'AU00' && base !== undefined ? erFmt(day === 17 ? base : rates[cc], erDec(base)) : fmt(rates[cc]);
-        out.push({ ctry: o.ctry, off: o.off, port, type: 'Daily', bound, vvd: ER_NA, eta: ER_NA, scope: ER_NA, cust: ER_NA, date, cc, lc: o.lc, rate, by: 'SYSTEM', upd: sheet ? '2025-09-26' : date });
-      })));
-    });
-  }
-  // VVD exchange rates. KLJA061835 is the sheet's set; customers are from WF_Customer Master and Customer Master.
-  const VVDS = [
-    ['AU00', 'AUBNE', 'IB', 'KLJA061835', '2025-10-12', '2025-09-26', ER_NA, 1],
-    ['AU00', 'AUBNE', 'OB', 'KLJA061936', '2026-11-19', '2026-11-12', 'AU00355-3 · AUSTRALIA SEA FREIGHT PTY LTD-BNE'],
-    ['AU00', 'AUSYD', 'IB', 'KLJA062035', '2026-11-24', '2026-11-14', 'AU00355-2 · AUSTRALIA SEA FREIGHT PTY LTD-SYD'],
-    ['AU00', 'AUMEL', 'IB', 'KTHM052204', '2026-11-21', '2026-11-13', 'AU00355-1 · AUSTRALIA SEA FREIGHT PTY LTD-MEL'],
-    ['SG00', 'SGSIN', 'OB', 'KCLJ019812', '2026-11-18', '2026-11-11', 'SG00412 · STRAITS HARBOUR LOGISTICS PTE. LTD.'],
-    ['SG00', 'SGSIN', 'IB', 'KCLJ019913', '2026-11-25', '2026-11-16', ER_NA],
-    ['MY00', 'MYPKG', 'IB', 'KMWK030607', '2026-11-20', '2026-11-13', 'MY00218 · KINABALU HOME FURNISHINGS PTE. LTD.'],
-    ['HK00', 'HKHKG', 'OB', 'KHOR022415', '2026-11-22', '2026-11-14', ER_NA],
-    ['IN00', 'INNSA', 'IB', 'KSAN041122', '2026-11-23', '2026-11-15', 'IN00671 · ORCHID LANE POLYMERS PVT. LTD.']
-  ];
-  VVDS.forEach(([off, port, bound, vvd, eta, date, cust, sheet]) => {
-    const o = OFF.find((x) => x.off === off);
-    const list = sheet ? ER_VVD : o.ccs.map((cc) => [cc, null]);
-    list.forEach(([cc, sv]) => {
-      const rate = sv !== null && sv !== undefined ? erFmt(sv, erDec(sv)) : fmt(cc === o.lc ? 1 : daily(o, cc, +date.slice(8)) * (1 + (rnd() - 0.5) * 0.006));
-      out.push({ ctry: o.ctry, off, port, type: 'VVD Exchange Rate', bound, vvd, eta, scope: 'OTH', cust, date, cc, lc: o.lc, rate, by: 'SYSTEM', upd: sheet ? '2025-09-26' : date });
-    });
-  });
-  return out;
-};
+// Customer is not in the sheet's table; it stays Not Applicable until the client gives customer-specific rates
+const erBuild = () => ER_SHEET.map(([ctry, off, port, type, bound, vvd, eta, scope, date, cc, lc, rate, by, upd]) => ({ ctry, off, port, type, bound, vvd, eta, scope, cust: ER_NA, date, cc, lc, rate, by, upd }));
 const ER_ALL = erBuild();
 const ER_UNIQ = (k) => ER_ALL.map((r) => r[k]).filter((v, i, a) => v && v !== ER_NA && a.indexOf(v) === i).sort();
 // Search criteria as on the sheet; the sheet's defaults are Daily, AUD, ALL scope and bound, and From Date = To Date
-const ER_DEF = { type: ['Daily'], cc: [], lc: ['AUD'], off: ['AU00'], vvd: '', port: [], scope: [], bound: [], cust: '', from: '2026-11-17', to: '2026-11-17' };
+const ER_DEF = { type: [], cc: [], lc: ['AUD'], off: ['AU00'], vvd: '', port: [], scope: [], bound: [], cust: '', from: '', to: '' };
 const erCopy = (c) => JSON.parse(JSON.stringify(c));
 // Table columns the user can show or hide; Ex.Rate is always shown
 const ER_COLS = [['ctry', 'Country'], ['off', 'Office', 'mono'], ['port', 'Port', 'mono'], ['type', 'Ex-Rate Type'], ['bound', 'Bound'], ['vvd', 'VVD'], ['eta', 'ETA'], ['scope', 'Scope'], ['cust', 'Customer', 'cust'], ['date', 'Ex.Rate Date'],
