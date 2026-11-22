@@ -985,14 +985,14 @@ class GirsPage extends DCLogic {
         const shown = q ? list.filter((x) => (x + ' ' + other(x) + ' ' + (desc[x] || '')).toLowerCase().includes(q)) : list;
         const allOn = list.length > 0 && list.every((x) => v.includes(x));
         return { id: 'cm2-q-' + k, label, isText: false, isMulti: true, pcls: 'er-msp' + (pick ? ' wide' : ''),
-          txt: v.length ? v.join(', ') : 'All', hasN: v.length > 2, n: String(v.length), open, openA: open ? 'true' : 'false', all: allOn,
+          txt: v.length ? v.map((x) => desc[x] || x).join(', ') : 'All', hasN: v.length > 2, n: String(v.length), open, openA: open ? 'true' : 'false', all: allOn,
           findable: pick || list.length > 8, ph: k === 'code' ? 'Search code or name' : k === 'name' ? 'Search name or code' : 'Search', q: s.opQ || '', noQ: !q, none: !shown.length,
           onQ: (e) => self.setState({ opQ: e.target.value }),
           qKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); if (shown.length === 1 && !v.includes(shown[0])) setCrit(k, v.concat([shown[0]])); } },
           toggle: () => { self.setState({ op: open ? '' : k, opQ: '' }); if (!open && (pick || list.length > 8)) setTimeout(() => { const i = document.querySelector('.er-msq'); if (i) i.focus(); }, 30); },
           close: () => self.setState({ op: '', opQ: '' }),
           clear: () => setCrit(k, []), allFlip: () => setCrit(k, allOn ? [] : list.slice()),
-          opts: shown.map((x) => ({ t: desc[x] ? x + ' · ' + desc[x] : x, sub: other(x), hasSub: !!other(x), on: v.includes(x) ? 'true' : 'false', flip: () => setCrit(k, v.includes(x) ? v.filter((y) => y !== x) : v.concat([x])) })) };
+          opts: shown.map((x) => ({ t: desc[x] || x, sub: other(x), hasSub: !!other(x), on: v.includes(x) ? 'true' : 'false', flip: () => setCrit(k, v.includes(x) ? v.filter((y) => y !== x) : v.concat([x])) })) };
       }),
       submit: (e) => { e.preventDefault(); self.setState({ applied: JSON.parse(JSON.stringify(s.crit)), pg: 1, op: '' }); },
       clear: () => { const c = {}; CM_CRIT.forEach(([k, , kind]) => { c[k] = kind === 'sel' ? [] : ''; }); self.setState({ crit: c, applied: JSON.parse(JSON.stringify(c)), pg: 1, op: '' }); }
@@ -1020,9 +1020,9 @@ class GirsPage extends DCLogic {
         cls: r.code === s.sel ? 'on' : '',
         cells: vis.map(([k]) => {
           const desc = (CM_DESC[k] || {})[r[k]] || '';
-          if (k === 'type') return { chip: true, plain: false, chipC: 'chip ' + ({ TF: 't-info', SC: 't-warn', OC: 't-ok', DC: 't-ok', DT: 't-bad', MS: 't-neutral' }[r.type] || 't-neutral'), v: r.type, tip: desc, c: '' };
+          if (k === 'type') return { chip: true, plain: false, chipC: 'chip ' + ({ TF: 't-info', SC: 't-warn', OC: 't-ok', DC: 't-ok', DT: 't-bad', MS: 't-neutral' }[r.type] || 't-neutral'), v: desc || r.type, tip: 'Code ' + r.type, c: '' };
           if (k === 'auto') return { chip: true, plain: false, chipC: 'cm-yn ' + (r.auto === 'Y' ? 'y' : 'n'), v: r.auto, tip: r.auto === 'Y' ? 'Auto rating on' : 'Auto rating off', c: '' };
-          return { chip: false, plain: true, v: r[k], tip: desc ? r[k] + ' · ' + desc : r[k], c: k === 'name' ? 'nm' : k === 'gl' ? 'gl' : k === 'rep' ? 'mono' : '' };
+          return { chip: false, plain: true, v: desc || r[k], tip: desc ? 'Code ' + r[k] : r[k], c: k === 'name' ? 'nm' : k === 'gl' ? 'gl' : k === 'rep' ? 'mono' : '' };
         }),
         view: () => open(r.code, 'view'), upd: () => open(r.code, 'update'),
         viewLbl: 'View ' + r.code, updLbl: 'Update ' + r.code
@@ -1031,7 +1031,7 @@ class GirsPage extends DCLogic {
       exportXl: () => {
         const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;');
         const head = ['Charge Code', 'Charge Name', 'Charge Type', 'Charge Rev Type', 'Charge Applying Type', 'Payment Term', 'Rep. Charge', 'Ownership', 'Account (G/L)', 'Auto Rating Flag'];
-        const body = list.map((r) => [r.code, r.name, r.type, r.rev, r.app, r.pay, r.rep, r.own, r.gl, r.auto]);
+        const body = list.map((r) => [r.code, r.name, CM_TYPE[r.type] || r.type, r.rev, CM_APPLY[r.app] || r.app, CM_PAY[r.pay] || r.pay, r.rep, r.own, r.gl, r.auto]);
         const html = '<html><head><meta charset="utf-8"></head><body><table border="1"><tr>' + head.map((x) => '<th>' + esc(x) + '</th>').join('') + '</tr>' + body.map((b) => '<tr>' + b.map((v) => '<td style="mso-number-format:\'\\@\'">' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table></body></html>';
         try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'application/vnd.ms-excel' })); a.download = 'Charge-Master.xls'; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
         self.setState({ __toast: 'Exported ' + list.length + (list.length === 1 ? ' charge' : ' charges') + ' to Excel.' });
@@ -1050,7 +1050,7 @@ class GirsPage extends DCLogic {
       : Object.assign({ id: 'cm2-d-' + k, lid: 'cm2-l-' + k, label, help: CM_HELP[k] || '', isSel: true, val: d[k], ro, opts, on: (e) => put({ [k]: e.target.value }) }, o || {});
     const yn = (k, label) => ro ? roBox(k, label, d[k])
       : ({ id: 'cm2-d-' + k, lid: 'cm2-l-' + k, label, help: CM_HELP[k] || '', isYN: true, ro, isY: d[k] === 'Y' ? 'true' : 'false', isN: d[k] === 'N' ? 'true' : 'false', setY: () => put({ [k]: 'Y' }), setN: () => put({ [k]: 'N' }) });
-    const coded = (map) => Object.keys(map).map((c) => ({ v: c, l: c + ' · ' + map[c] }));
+    const coded = (map) => Object.keys(map).map((c) => ({ v: c, l: map[c] }));
     const plain = (arr) => arr.map((c) => ({ v: c, l: c }));
     const setAlias = (a) => put({ alias: a });
     const blankAlias = ['', '', ''];
