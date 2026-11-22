@@ -322,6 +322,10 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .fq .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);background:var(--surface)}
 /* Charge Master: actions, highlights, labels */
 .card-head .btn{gap:6px}
+.er-mo{display:flex;flex-direction:column;min-width:0;line-height:16px;padding-block:4px}
+.er-mo b{font-weight:400;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.er-mo small{font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.er-msp.wide{width:340px}
 .cm-acts{display:inline-flex;align-items:center;gap:2px}
 .cm-ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;color:var(--muted2)}
 .cm-ib:hover{background:var(--hover);color:var(--accent)}
@@ -664,9 +668,11 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <button type="button" class="select er-msb" id="{{f.id}}" aria-haspopup="listbox" aria-expanded="{{f.openA}}" onClick="{{f.toggle}}"><span class="er-mst">{{f.txt}}</span><sc-if value="{{f.hasN}}" hint-placeholder-val="{{ false }}"><span class="count on">{{f.n}}</span></sc-if><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
                       <sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
                         <button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{f.close}}"></button>
-                        <div class="er-msp" role="listbox" aria-multiselectable="true" aria-label="{{f.label}}">
-                          <label class="er-mso"><input type="checkbox" checked="{{f.all}}" onChange="{{f.allFlip}}"><span style="font-weight: 600">Select all</span></label>
-                          <div class="er-msl"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="4"><label class="er-mso" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span>{{o.t}}</span></label></sc-for></div>
+                        <div class="{{f.pcls}}" role="listbox" aria-multiselectable="true" aria-label="{{f.label}}">
+                          <sc-if value="{{f.findable}}" hint-placeholder-val="{{ false }}"><div class="cols-s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input cols-q er-msq" placeholder="{{f.ph}}" aria-label="Search {{f.label}}" value="{{f.q}}" onInput="{{f.onQ}}" onKeyDown="{{f.qKey}}"></div></sc-if>
+                          <sc-if value="{{f.noQ}}" hint-placeholder-val="{{ true }}"><label class="er-mso"><input type="checkbox" checked="{{f.all}}" onChange="{{f.allFlip}}"><span style="font-weight: 600">Select all</span></label></sc-if>
+                          <div class="er-msl"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="4"><label class="er-mso" role="option" aria-selected="{{o.on}}"><input type="checkbox" checked="{{o.on}}" onChange="{{o.flip}}"><span class="er-mo"><b>{{o.t}}</b><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span></label></sc-for>
+                            <sc-if value="{{f.none}}" hint-placeholder-val="{{ false }}"><div class="mu" style="padding: 12px 16px; font-size: 13px">No match</div></sc-if></div>
                           <div class="er-msf"><button type="button" class="btn btn-sm" onClick="{{f.clear}}">Clear</button><button type="button" class="btn btn-sm btn-primary" onClick="{{f.close}}">Done</button></div>
                         </div>
                       </sc-if>
@@ -932,7 +938,7 @@ const cmColsLoad = () => { try { const v = JSON.parse(localStorage.getItem('girs
 const cmColsSave = (arr) => { const v = CM_COLS.map((c) => c[0]).filter((k) => arr.includes(k)); try { localStorage.setItem('girs.cm.cols', JSON.stringify(v)); } catch (e) {} return v; };
 const CM_DESC = { type: CM_TYPE, app: CM_APPLY, pay: CM_PAY };
 const CM_CRIT = [
-  ['code', 'Charge Code', 'text'], ['name', 'Charge Name', 'text'], ['type', 'Charge Type', 'sel', Object.keys(CM_TYPE)], ['rev', 'Charge Rev Type', 'sel', CM_REV], ['app', 'Charge Applying Type', 'sel', Object.keys(CM_APPLY)],
+  ['code', 'Charge Code', 'pick'], ['name', 'Charge Name', 'pick'], ['type', 'Charge Type', 'sel', Object.keys(CM_TYPE)], ['rev', 'Charge Rev Type', 'sel', CM_REV], ['app', 'Charge Applying Type', 'sel', Object.keys(CM_APPLY)],
   ['pay', 'Payment Term', 'sel', Object.keys(CM_PAY)], ['rep', 'Rep. Charge', 'text'], ['own', 'Ownership', 'sel', CM_OWN], ['gl', 'Account (G/L)', 'text'], ['auto', 'Auto Rating Flag', 'sel', ['Y', 'N']]
 ];
 
@@ -942,16 +948,16 @@ class GirsPage extends DCLogic {
     let recs = null;
     try { recs = JSON.parse(localStorage.getItem('girs.cm2') || 'null'); } catch (e) {}
     const q = (() => { try { return new URLSearchParams(location.search).get('q') || ''; } catch (e) { return ''; } })();
-    const crit = {}; CM_CRIT.forEach(([k, , kind]) => { crit[k] = kind === 'sel' ? [] : ''; });
-    if (q) crit.code = q;
-    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.op || this.state.colsOpen) return this.setState({ op: '', colsOpen: false, colsDraft: null }); if (this.state.tab === 'detail' && !document.querySelector('.menu')) this.setState({ tab: 'search', draft: null }); }); } catch (e) {}
+    const crit = {}; CM_CRIT.forEach(([k, , kind]) => { crit[k] = kind === 'text' ? '' : []; });
+    if (q) crit.code = [q.toUpperCase()];
+    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.op || this.state.colsOpen) return this.setState({ op: '', opQ: '', colsOpen: false, colsDraft: null }); if (this.state.tab === 'detail' && !document.querySelector('.menu')) this.setState({ tab: 'search', draft: null }); }); } catch (e) {}
     this.state = { op: '', cols: cmColsLoad(), colsOpen: false, colsDraft: null, colsQ: '', tab: 'search', crit, applied: JSON.parse(JSON.stringify(crit)), pg: 1, psz: 25, sel: null, mode: 'view', draft: null, recs: Array.isArray(recs) && recs.length ? recs : cmBuild() };
   }
   renderVals() {
     const s = this.state, self = this;
     const setCrit = (k, v) => self.setState({ crit: Object.assign({}, s.crit, { [k]: v }) });
     const match = (r) => CM_CRIT.every(([k, , kind]) => {
-      if (kind === 'sel') { const a = s.applied[k] || []; return !a.length || a.includes(String(r[k])); }
+      if (kind !== 'text') { const a = s.applied[k] || []; return !a.length || a.includes(String(r[k])); }
       const q = String(s.applied[k] || '').trim().toUpperCase();
       return !q || String(r[k]).toUpperCase().includes(q);
     });
@@ -970,14 +976,23 @@ class GirsPage extends DCLogic {
 
     const crit = {
       fields: CM_CRIT.map(([k, label, kind, opts]) => {
-        if (kind !== 'sel') return { id: 'cm2-q-' + k, label, val: s.crit[k], isText: true, isMulti: false, on: (e) => setCrit(k, e.target.value) };
-        const v = s.crit[k] || [], open = s.op === k, list = opts || [], desc = CM_DESC[k] || {};
+        if (kind === 'text') return { id: 'cm2-q-' + k, label, val: s.crit[k], isText: true, isMulti: false, on: (e) => setCrit(k, e.target.value) };
+        const v = s.crit[k] || [], open = s.op === k, desc = CM_DESC[k] || {}, pick = kind === 'pick';
+        // Charge Code / Charge Name: pick from the charges on record, with a search box
+        const list = pick ? s.recs.map((r) => r[k]).filter((x, i, a) => a.indexOf(x) === i).sort() : (opts || []);
+        const other = (x) => (pick ? s.recs.filter((r) => r[k] === x).map((r) => (k === 'code' ? r.name : r.code)).join(', ') : '');
+        const q = open ? String(s.opQ || '').trim().toLowerCase() : '';
+        const shown = q ? list.filter((x) => (x + ' ' + other(x) + ' ' + (desc[x] || '')).toLowerCase().includes(q)) : list;
         const allOn = list.length > 0 && list.every((x) => v.includes(x));
-        return { id: 'cm2-q-' + k, label, isText: false, isMulti: true,
+        return { id: 'cm2-q-' + k, label, isText: false, isMulti: true, pcls: 'er-msp' + (pick ? ' wide' : ''),
           txt: v.length ? v.join(', ') : 'All', hasN: v.length > 2, n: String(v.length), open, openA: open ? 'true' : 'false', all: allOn,
-          toggle: () => self.setState({ op: open ? '' : k }), close: () => self.setState({ op: '' }),
+          findable: pick || list.length > 8, ph: k === 'code' ? 'Search code or name' : k === 'name' ? 'Search name or code' : 'Search', q: s.opQ || '', noQ: !q, none: !shown.length,
+          onQ: (e) => self.setState({ opQ: e.target.value }),
+          qKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); if (shown.length === 1 && !v.includes(shown[0])) setCrit(k, v.concat([shown[0]])); } },
+          toggle: () => { self.setState({ op: open ? '' : k, opQ: '' }); if (!open && (pick || list.length > 8)) setTimeout(() => { const i = document.querySelector('.er-msq'); if (i) i.focus(); }, 30); },
+          close: () => self.setState({ op: '', opQ: '' }),
           clear: () => setCrit(k, []), allFlip: () => setCrit(k, allOn ? [] : list.slice()),
-          opts: list.map((x) => ({ t: desc[x] ? x + ' · ' + desc[x] : x, on: v.includes(x) ? 'true' : 'false', flip: () => setCrit(k, v.includes(x) ? v.filter((y) => y !== x) : v.concat([x])) })) };
+          opts: shown.map((x) => ({ t: desc[x] ? x + ' · ' + desc[x] : x, sub: other(x), hasSub: !!other(x), on: v.includes(x) ? 'true' : 'false', flip: () => setCrit(k, v.includes(x) ? v.filter((y) => y !== x) : v.concat([x])) })) };
       }),
       submit: (e) => { e.preventDefault(); self.setState({ applied: JSON.parse(JSON.stringify(s.crit)), pg: 1, op: '' }); },
       clear: () => { const c = {}; CM_CRIT.forEach(([k, , kind]) => { c[k] = kind === 'sel' ? [] : ''; }); self.setState({ crit: c, applied: JSON.parse(JSON.stringify(c)), pg: 1, op: '' }); }
