@@ -109,34 +109,38 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 @keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
 .gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
-.lay{white-space:nowrap;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
+.gmain{flex:1 1 0 !important;min-height:0 !important}
+.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
 .lay:hover{color:var(--ink)}
 .lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 .lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.gmain{flex:1 1 0 !important;min-height:0 !important}
-.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.kv2 .v{display:block;font-size:14px;line-height:20px}
+.kv2 .full{grid-column:1 / -1}
+.mini{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
+.mini:first-child{border-top:0;padding-top:0}
+.tl{position:relative;padding-inline-start:20px;padding-bottom:14px}
+.tl:before{content:"";position:absolute;inset-inline-start:4px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tl:after{content:"";position:absolute;inset-inline-start:7.5px;top:18px;bottom:0;width:1px;background:var(--line)}
+.tl:last-child:after{display:none}
+.tl:last-child{padding-bottom:0}
 .ph{color:var(--muted4)}
+.citem{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:10px 16px}
+.citem:hover{background:#F6F8FA}
+.citem:focus-visible,.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .gbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:40px;padding:0 12px;border-radius:6px;font-weight:600}
+.cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:0 12px 0 34px;border-radius:6px;font-size:13px}
 .gbtn:hover,.cbtn:hover{background:var(--hover)}
-.cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:0 12px 0 36px;border-radius:6px;font-size:13px}
-.gbtn:focus-visible,.cbtn:focus-visible,.anc:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.gbtn:focus-visible,.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .tab{all:unset;box-sizing:border-box;cursor:pointer;height:48px;padding:0 2px;display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
-.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.anc{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;height:36px;line-height:36px;padding:0 12px;border-radius:6px;font-size:13px}
-.anc:hover{background:var(--hover)}
-.sect{padding:24px 0;border-bottom:1px solid var(--line2)}
-.sect:last-child{border-bottom:0}
-.sect h3{margin:0 0 16px;font-size:16px;font-weight:600}
-.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px}
-.col{display:flex;flex-direction:column}
-.sech{margin:0 0 4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.row{display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid var(--line2)}
-.row:last-child{border-bottom:0}
-.row .l{font-size:12px;color:var(--muted)}
-.row .v{font-size:14px;line-height:20px}
-.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 32px}
-.g3 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
-.g3 .v{display:block;font-size:14px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.kbar{display:inline-flex;align-items:center;gap:6px;flex:none;margin-inline-start:auto}
+.fact{display:flex;flex-direction:column;gap:4px;padding:0 24px;border-inline-start:1px solid var(--line2)}
+.fact:first-child{padding-inline-start:0;border:0}
+.fact .l{font-size:12px;color:var(--muted)}
+.fact .v{font-size:14px;font-weight:500}
+.sech{margin:0 0 12px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.kbar{display:inline-flex;align-items:center;gap:6px;flex:none;margin-inline-start:auto}
 .kbar .btn{gap:6px}
 .kmore{position:relative;display:inline-flex}
 .kmorebtn[aria-expanded=true]{background:var(--hover);border-color:var(--bdh)}
@@ -182,107 +186,186 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
-/* Company Master */
-.ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;color:var(--muted2)}
-.ib:hover{background:var(--hover);color:var(--accent)}
-.ib.d:hover{background:var(--badbg);color:var(--bad)}
-.ib:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* ---- Charge Master (revamp) ---- */
+/* shared components, same rules as Invoice List: tabs, table, docked pagination, links, checkbox */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;font-size:14px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabb[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.lnk:focus-visible,.tabb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
 .lnk:hover{text-decoration:underline}
-.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
-.wt td{vertical-align:middle}
-.gwrap{display:flex;align-items:center;gap:2px}
-.gtg{all:unset;box-sizing:border-box;cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;width:24px;height:40px;border-radius:6px;color:var(--muted)}
-.gtg:hover:not(:disabled){background:var(--hover)}
-.gtg:disabled{cursor:default}
-.gtg:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.gbtn.co{flex:1 1 auto;min-width:0;padding:0 10px 0 6px;gap:8px}
-.co-c{flex:none;font-weight:500;color:var(--ink)}
-.co-n{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dot-off{width:7px;height:7px;border-radius:50%;background:var(--bdh)}
-.empty-t{margin:16px;font-size:13px;color:var(--muted)}
-.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 24px;margin:0 28px 4px;padding:14px 18px;border-radius:8px;background:var(--hover2);border:1px solid var(--line2)}
-.sx-e{display:inline-flex;align-items:center;gap:6px;min-width:0}
-.sx-e b{font-size:14px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sx-pen{all:unset;cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;color:var(--accent)}
-.sx-pen:hover{background:var(--tint)}
-.sx-pen:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.sx-in{display:flex;align-items:center;gap:6px;min-width:0}
-.sx-ib{width:32px;padding:0;flex:none;justify-content:center}
-.sx-in .input{height:32px;flex:1 1 auto;min-width:0;width:auto}
-.sx{display:flex;flex-direction:column;gap:2px;min-width:0}
-.sx span{font-size:12px;color:var(--muted)}
-.sx b{font-size:14px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ttl{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.ttl h3{margin:0;font-size:14px;font-weight:600}
-.ttl .btn,.act .btn{gap:6px}
-.tw{overflow:auto}
-.wt{width:max-content;min-width:100%;border-collapse:collapse}
-.wt th,.wt td{white-space:nowrap}
-.wt td.wa,.wt th.wa{width:280px;min-width:280px;max-width:280px}
-.trunc{display:block;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:default}
-.wt .act{position:sticky;inset-inline-end:0;background:var(--surface);box-shadow:inset 1px 0 0 var(--line),-10px 0 12px -10px rgba(22,26,33,.22);text-align:center;width:116px;min-width:116px;padding-inline:8px}
-.wt th.act{background:var(--sub)}
-.wt td.act{padding-block:4px;white-space:nowrap}
-.wt td.act .ibs{display:inline-flex;gap:2px;vertical-align:middle}
-.kchk{display:inline-flex;align-items:center;gap:8px;min-height:36px;font-size:13px;cursor:pointer}
-.kf:has(.kchk) .kl{visibility:hidden}
-.kfile{display:inline-flex;align-items:center;gap:10px;min-height:36px;cursor:pointer}
-.kfile input{position:absolute;width:1px;height:1px;opacity:0}
-.kfile:focus-within .btn{outline:2px solid var(--accent);outline-offset:2px}
-.kfn{font-size:13px;color:var(--muted)}
-.kbtn-danger{background:var(--bad);border-color:var(--bad);color:#fff}
-.bm-q{position:relative;display:inline-flex;align-items:center}
-.bm-q svg{position:absolute;inset-inline-start:10px;color:var(--muted);pointer-events:none}
-.bm-q .input{width:320px;padding-inline-start:34px}
-.bm-sel{position:relative;display:inline-block}
-.bm-sel .select{padding-inline-end:32px}
-.bm-sel svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
-.bm-t{max-width:220px}
-.bm-seg{padding:2px}
-.bm-seg button{height:26px;padding:0 10px;font-size:12px}
-.bm-tnc{margin:0;padding-inline-start:18px;display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:20px}
-/* Bank Master · Version 1 (sheet fields) */
-.lc-g{padding:6px 0}
-.lc-g+.lc-g{border-top:1px solid var(--line2)}
-.lc-h{padding:8px 10px 4px;font-size:12px;font-weight:600;color:var(--muted)}
-.lc{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;width:100%;padding:8px 10px;border-radius:6px;position:relative}
-.lc:hover{background:var(--hover)}
-.lc[aria-current=true]{background:var(--tint)}
-.lc[aria-current=true]::before{content:"";position:absolute;inset-inline-start:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--accent)}
-.lc:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.lc-n{font-size:14px;font-weight:500;color:var(--ink)}
-.lc[aria-current=true] .lc-n{color:var(--accent)}
-.lc-s{font-size:12px;color:var(--muted)}
-.bm-q .input{width:100%}
-.bm-q{width:100%}
-.lh{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:2px 4px 0}
-.lh h2{margin:0;font-size:20px;font-weight:600;line-height:28px}
-.lh p{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.lh .btn{gap:6px}
-.bk{flex:none;padding:20px 20px 16px;display:flex;flex-direction:column;gap:16px}
-.bk-h{display:flex;align-items:center;gap:12px}
-.bk-i{flex:none;width:40px;height:40px;border-radius:10px;background:var(--tint);color:var(--accent2);display:flex;align-items:center;justify-content:center}
-.bk-h h3{margin:0;font-size:16px;font-weight:600;line-height:22px}
-.bk-h p{margin:2px 0 0;font-size:12px;color:var(--muted)}
-.bk-d{margin:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 24px;padding:14px 16px;border-radius:8px;background:var(--hover2);border:1px solid var(--line2)}
-.bk-d div{min-width:0}
-.bk-d .w{grid-column:span 3}
-.bk-d dt{font-size:12px;color:var(--muted)}
-.bk-d dd{margin:2px 0 0;font-size:13px;font-weight:500;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bk-d dd.none{color:var(--muted);font-weight:400}
-.bk-tw{border:1px solid var(--line);border-radius:8px}
-.bk-t td{height:44px;padding-block:4px}
-.bk-t .act{width:56px;min-width:56px}
-.bk-t th:nth-child(3),.bk-t td:nth-child(3){width:100%}
-.bk-an{max-width:340px}
-.bk-f{display:flex}
-.bk-f .btn{gap:6px}
-.fs+.fs{margin-top:20px;padding-top:20px;border-top:1px solid var(--line2)}
-.fs h3{margin:0 0 12px;font-size:13px;font-weight:600}
-.kf.w{grid-column:1 / -1}
-.kgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
-.kf .kro{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;line-height:34px}
+.mu{color:var(--muted)}
+.cbx{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+.cbx:disabled{cursor:not-allowed}
+.pager{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 4px 0;font-size:13px;color:var(--muted2)}
+.card:has(+ .pager){border-end-start-radius:0;border-end-end-radius:0}
+.card + .pager{margin-top:-17px;min-height:48px;padding:6px 8px 6px 16px;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-top-color:var(--line2);border-radius:0 0 8px 8px}
+.pbtn{min-width:32px;justify-content:center;font-size:15px}
+.lst{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}
+.lst th,.lst td{white-space:nowrap}
+.lst thead th{position:sticky;top:0;z-index:2}
+.lst .c-no{position:sticky;inset-inline-start:0;z-index:1;background:var(--surface);box-shadow:inset -1px 0 0 var(--line2)}
+.lst .c-act{position:sticky;inset-inline-end:0;z-index:1;width:1%;padding-inline:16px;text-align:center;background:var(--surface);box-shadow:inset 1px 0 0 var(--line2)}
+.lst thead .c-no,.lst thead .c-act{z-index:3;background:var(--sub)}
+.lst tbody tr:hover td,.lst tbody tr:hover .c-no,.lst tbody tr:hover .c-act{background:var(--hover2)}
+.lst tr.on td,.lst tr.on .c-no,.lst tr.on .c-act{background:var(--tint2)}
+.cm2-acts{display:inline-flex;align-items:center;gap:0;padding:0 4px}
+.cm2-acts .cm2-bar{width:1px;height:14px;padding:0;margin:0 10px;background:var(--line)}
+/* Search tab fits the window like the Invoice List: the results table scrolls inside its card, pagination stays in view */
+.gmain:has(#bm-p1){flex:1 1 0 !important;min-height:0 !important}
+/* non-editable fields are grey; editable fields are white */
+.input[readonly]{background:var(--sub);color:var(--ink);cursor:default}
+.input[readonly]:hover{border-color:var(--bd)}
+.input[readonly]:focus{border-color:var(--bd);box-shadow:none}
+/* screen layout */
+.card-meta{font-size:12px;color:var(--muted)}
+.cm2-grid{display:grid;gap:16px;align-items:start}
+.cm2-g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cm2-f{min-width:0;display:flex;flex-direction:column}
+.cm2-f .input{width:100%}
+.cm2-f .lbl{margin-bottom:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm2-f > .lbl{margin-bottom:6px}
+.cm2-lr{display:flex;align-items:center;gap:6px;min-height:16px;margin-bottom:6px}
+.cm2-i{display:inline-flex;color:var(--muted4);cursor:help;border-radius:50%}
+.cm2-i:hover,.cm2-i:focus-visible{color:var(--accent)}
+.cm2-i:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cm2-sel{position:relative}
+.cm2-sel .select{width:100%}
+.cm2-sel svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
+.cm2-actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line2)}
+.cm2-bar{color:var(--line);padding:0 8px}
+.cm2-detail{flex:1 0 auto;display:flex;flex-direction:column;gap:16px}
+/* action bar: pinned to the bottom of the screen, actions on the right */
+.cm2-bottom{position:sticky;bottom:0;z-index:5;margin:auto -20px -20px;display:flex;justify-content:flex-end;align-items:center;gap:8px;min-height:64px;padding:0 20px;box-sizing:border-box;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 12px rgba(22,26,33,.06)}
+.cm2-bottom .btn{min-width:96px}
+.cm2-rec{display:flex;align-items:center;gap:12px}
+.cm2-rec h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
+.cm2-code{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;background:var(--tint);color:var(--accent2);font-size:13px;font-weight:600}
+.cm2-secs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.cm2-sec{padding:16px 16px 20px;box-sizing:border-box;min-width:0}
+.cm2-sh{margin-bottom:16px}
+.cm2-sh h3{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.cm2-sh p{margin:2px 0 0;font-size:12px;line-height:16px;color:var(--muted)}
+.cm2-yn{display:inline-flex;align-self:flex-start;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}
+.cm2-yn button{all:unset;box-sizing:border-box;cursor:pointer;min-width:44px;height:32px;padding:0 12px;border-radius:4px;text-align:center;font-size:13px;font-weight:600;line-height:32px;color:var(--muted)}
+.cm2-yn button:hover{color:var(--ink)}
+.cm2-yn button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.cm2-yn button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cm2-checks{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;min-height:36px}
+.cm2-ck{display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.cm2-ck:has(input:disabled){cursor:default}
+.cm2-alias{margin-top:20px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cm2-ah{padding:10px 12px;font-size:13px;font-weight:600;background:var(--surface);border-bottom:1px solid var(--line)}
+.cm2-atw{overflow-x:auto}
+.cm2-atw td{height:48px}
+.cm2-atw tbody tr:last-child td{border-bottom:0}
+.cm2-atw .input{height:32px}
+.cm2-ci{width:72px!important}
+.cm2-pi{width:96px!important}
+.cm2-ac{width:1%;text-align:end}
+.cm2-del{color:var(--bad)}
+.cm2-man{margin-top:16px}
+
+/* ---- Layout C ---- */
+.cmc-crit{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:end;padding:12px 16px 16px}
+.cmc-crit .lbl{margin-bottom:4px}
+.cmc-crit .input,.cmc-crit .select{height:32px}
+.cmc-crit .select{line-height:30px}
+.cmc-act{grid-column:span 2;display:flex;justify-content:flex-end;gap:8px}
+.cmc-act .btn{min-width:88px}
+.cmc-row{cursor:pointer}
+.cmc-stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+.cmc-row4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.cmc-row4 .cm2-sec,.cmc-stack > .cm2-sec{padding:14px 16px 16px}
+.cmc-stack .cm2-sh{margin-bottom:12px}
+.cmc-stack .cm2-grid{gap:12px}
+
+.bm-okc{flex:none;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:10px;background:var(--okbg);color:var(--ok)}
+.bm1-cc{flex:none;display:inline-flex;align-items:center;justify-content:center;width:34px;height:24px;border-radius:4px;background:var(--neutral);font-size:12px;font-weight:600;color:var(--ink)}
+.bm1-cn{display:flex;flex-direction:column;min-width:0;flex:1 1 auto;gap:2px}
+.bm1-cn b{font-size:14px;font-weight:500;line-height:18px}
+.bm1-cn small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bm1{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}
+.bm1-side{position:sticky;top:16px;padding:0;overflow:hidden}
+.bm1-sh{padding:12px;border-bottom:1px solid var(--line2)}
+.bm1-list{list-style:none;margin:0;padding:6px}
+.bm1-c{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:6px;cursor:pointer}
+.bm1-c:hover{background:var(--hover2)}
+.bm1-c:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.bm1-c[aria-current=true]{background:var(--tint2);box-shadow:inset 3px 0 0 var(--accent)}
+.bm1-c[aria-current=true] .bm1-cc{background:var(--accent);color:var(--onaccent)}
+.bm1-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.bm1-head{display:flex;align-items:center;gap:12px}
+.bm1-head h2{margin:0;font-size:18px;font-weight:600;line-height:24px}
+.bm1-head p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.bm1-head p.true{color:var(--warn)}
+.bm-mx{width:100%;table-layout:fixed}
+.bm-mx th small{display:block;margin-top:2px;font-size:11px;font-weight:400;color:var(--muted);white-space:normal}
+.bm-mx td{vertical-align:top;padding:10px 12px;white-space:normal}
+.bm-mx thead th{vertical-align:top;padding-top:10px;padding-bottom:10px}
+.bm-ccy{font-family:'IBM Plex Mono',monospace;font-weight:600;text-align:start;vertical-align:top;padding:16px 12px !important}
+.bm-asg{display:flex;flex-direction:column;gap:4px}
+.bm-asg small{font-size:12px;color:var(--muted)}
+.bm-asg.gap .select{border-color:var(--warnbd);background:var(--warnbg)}
+.bm-asg.gap small{color:var(--warn);font-weight:500}
+.bm2-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.bm2-stat{display:flex;flex-direction:column;gap:4px;padding:14px 16px}
+.bm2-stat span{font-size:12px;color:var(--muted)}
+.bm2-stat b{font-size:24px;font-weight:600;line-height:30px}
+.bm2-stat.warn{box-shadow:inset 3px 0 0 var(--warn)}
+.bm2-stat.warn b{color:var(--warn)}
+.bm2-fil{display:flex;align-items:center;gap:10px}
+.bm2-fil .cm2-sel{width:190px}
+.bm2-fil .cm2-ck{margin:0}
+.bm2-mx td{padding:8px}
+.bm2-mx tr.bm2-grp > *{border-top:1px solid var(--line)}
+.bm2-mx tbody tr:first-child > *{border-top:0}
+.bm2-cty{vertical-align:top;text-align:start;padding:12px !important;background:var(--surface)}
+.bm2-cty{display:table-cell}
+.bm2-cty .bm1-cc{margin-bottom:6px}
+.bm2-cell{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;width:100%;min-height:62px;padding:8px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);cursor:pointer}
+.bm2-cell:hover{border-color:var(--accent);background:var(--tint2)}
+.bm2-cell:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bm2-cell b{font-size:13px;font-weight:500;line-height:18px}
+.bm2-cell span{font-size:12px;color:var(--muted2)}
+.bm2-cell i{font-style:normal;font-size:11px;color:var(--accent2)}
+.bm2-cell.gap{justify-content:center;border-style:dashed;border-color:var(--warnbd);background:var(--warnbg)}
+.bm2-cell.gap b{color:var(--warn)}
+.bm2-cell.gap span{color:var(--warn)}
+.bm-pm{width:min(640px,calc(100vw - 64px))}
+.bm-pms{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.bm-opts{display:flex;flex-direction:column;gap:8px}
+.bm-opt{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line2);border-radius:6px;background:var(--surface);cursor:pointer}
+.bm-opt:hover{border-color:var(--bdh)}
+.bm-opt:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bm-opt[aria-checked=true]{border-color:var(--accent);background:var(--tint2);box-shadow:inset 0 0 0 1px var(--accent)}
+.bm-rd{flex:none;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--bdh);box-sizing:border-box}
+.bm-opt[aria-checked=true] .bm-rd{border:5px solid var(--accent)}
+.bm-ob{flex:1 1 auto;display:flex;flex-direction:column;gap:2px;min-width:0}
+.bm-ob b{font-size:14px;font-weight:500}
+.bm-ob small{font-size:12px;color:var(--muted)}
+.bm-ob .bm-also{color:var(--muted2)}
+.bm-oa{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:13px}
+.bm-oa i{font-style:normal;font-size:11px;color:var(--accent2)}
+
+.bm-row4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cmc-alias{padding:0;overflow:hidden}
+.cmc-alias .cmc-at{margin:0;border:0;border-radius:0}
+.cmc-alias .cm2-ah{padding:14px 16px;font-size:14px}
+.cmc-alias .cm2-man{margin:0;padding:12px 16px;border-top:1px solid var(--line2);display:flex}
+
+/* View/Update popup */
+
+.dlg.full .dh{align-items:center;min-height:60px;padding:0 12px 0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.dlg.full .db{flex:1 1 auto;min-height:0;background:var(--bg);padding:16px 20px}
+.dlg.full .df .btn{min-width:96px}
+.dh .x{margin-inline-start:auto}
+.dlg.bm-pm{width:min(640px,calc(100vw - 48px))}
+.dlg.dim{z-index:201}
+.scrim{z-index:200}
+.bm1-sh .search .input{height:36px}
+
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -407,7 +490,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" title="{{shell.l.g4}}" style="{{shell.grp}}">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" title="{{shell.l.g4}}" style="{{shell.grp}}">
             <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h10M17 6h4M3 12h4M11 12h10M3 18h12M19 18h2"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
             <span class="ng-l" style="{{shell.hide}}">{{shell.l.g4}}</span>
             <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
@@ -423,7 +506,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </a>
           <a href="customer-branch-master.html" class="nav-item" title="{{shell.l.nCustomerBranchMaster}}">{{shell.l.nCustomerBranchMaster}}
           </a>
-          <a href="bank-master-v1.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nBankMaster}}">{{shell.l.nBankMaster}}
+          <a href="bank-master-v3.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nBankMaster}}">{{shell.l.nBankMaster}}
           </a>
           <a href="charge-master-v2c.html" class="nav-item" title="{{shell.l.nChargeMaster}}">{{shell.l.nChargeMaster}}
           </a>
@@ -435,7 +518,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </sc-if>
         </div>
         <div style="display: flex; flex-direction: column; gap: 2px">
-          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" title="{{shell.l.g5}}" style="{{shell.grp}}">
+          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" title="{{shell.l.g5}}" style="{{shell.grp}}">
             <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
             <span class="ng-l" style="{{shell.hide}}">{{shell.l.g5}}</span>
             <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
@@ -584,275 +667,375 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Bank Master</h1>
           </div>
-          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
-          <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
-          <nav aria-label="Design versions" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Version</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="bank-master-v1.html" aria-current="page">1</a><a class="lay" href="bank-master-v2.html">2</a><a class="lay" href="bank-master-v3.html">3</a></div></nav>
+          <div class="gright" style="display: flex; align-items: center; gap: 10px; margin-inline-start: auto">
+            <nav aria-label="Design versions" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Version</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="bank-master-v1.html" aria-current="page">1</a><a class="lay" href="bank-master-v2.html">2</a><a class="lay" href="bank-master-v3.html">3</a></div></nav><button class="btn btn-sm btn-primary" onClick="{{newBank}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New Bank Account</button>
           </div>
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <div style="flex: 1 1 auto; min-height: 0; display: flex; gap: 16px; align-items: stretch">
-          <section class="card" style="flex: 0 0 280px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
-            <div style="padding: 16px; border-bottom: 1px solid var(--line)"><span class="bm-q"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" placeholder="Search country, location or bank" value="{{q}}" onInput="{{onQ}}" aria-label="Search country, location or bank"></span></div>
-            <nav aria-label="Countries and locations" style="flex: 1 1 auto; overflow: auto; padding: 8px 8px 12px">
-              <sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
-                <div class="lc-g">
-                  <div class="lc-h">{{g.ctry}}</div>
-                  <sc-for list="{{g.locs}}" as="l" hint-placeholder-count="2">
-                    <button class="lc" aria-current="{{l.cur}}" onClick="{{l.pick}}"><span class="lc-n">{{l.loc}}</span><span class="lc-s">{{l.sub}}</span></button>
-                  </sc-for>
-                </div>
-              </sc-for>
-              <sc-if value="{{noHits}}" hint-placeholder-val="{{ false }}"><p class="empty-t">Nothing matches “{{q}}”.</p></sc-if>
-            </nav>
-          </section>
-
-          <div style="flex: 1 1 auto; min-width: 0; overflow: auto; display: flex; flex-direction: column; gap: 16px">
-            <div class="lh">
-              <div style="min-width: 0">
-                <h2>{{L.loc}}</h2>
-                <p>{{L.sub}}</p>
-              </div>
-              <button class="btn btn-primary" onClick="{{addBank}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add new bank</button>
+        <div class="bm1">
+          <aside class="card bm1-side" aria-label="Countries">
+            <div class="bm1-sh">
+              <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input class="input" placeholder="Search country" aria-label="Search country" value="{{side.q}}" onInput="{{side.onQ}}" autocomplete="off" spellcheck="false"></div>
             </div>
-            <sc-for list="{{banks}}" as="b" hint-placeholder-count="2">
-              <section class="card bk" aria-label="{{b.name}}">
-                <div class="bk-h">
-                  <div aria-hidden="true" class="bk-i"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"></path><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"></path><path d="M3 20h18"></path></svg></div>
-                  <div style="min-width: 0; flex: 1 1 auto"><h3>{{b.name}}</h3><p>{{b.nAcc}}</p></div>
-                </div>
-                <dl class="bk-d">
-                  <sc-for list="{{b.facts}}" as="f" hint-placeholder-count="7">
-                    <div class="{{f.cls}}"><dt>{{f.l}}</dt><dd class="{{f.c}}" title="{{f.v}}">{{f.v}}</dd></div>
-                  </sc-for>
-                </dl>
-                <div class="tw bk-tw">
-                  <table class="wt bk-t">
-                    <thead><tr><th>Default</th><th>Currency</th><th>Account Name</th><th>IBAN / Account No.</th><th>Account Type</th><th>Tax Registration No (PIN No.)</th><th>VAT No.</th><th>T&amp;C</th><th class="act"><span class="sr">Actions</span></th></tr></thead>
-                    <tbody>
-                      <sc-for list="{{b.accs}}" as="a" hint-placeholder-count="2">
-                        <tr>
-                          <td><div class="seg bm-seg" role="radiogroup" aria-label="Default, {{a.lbl}}"><sc-for list="{{a.def}}" as="o" hint-placeholder-count="3"><button role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.t}}</button></sc-for></div></td>
-                          <td class="mono">{{a.cur}}</td><td><span class="trunc bk-an" title="{{a.accName}}">{{a.accName}}</span></td><td class="mono">{{a.accNo}}</td><td><span class="trunc bm-t" title="{{a.accType}}">{{a.accType}}</span></td><td class="mono">{{a.pin}}</td><td class="mono">{{a.vat}}</td>
-                          <td><button class="lnk" onClick="{{a.tnc}}" aria-label="View T&amp;C, {{a.lbl}}">View</button></td>
-                          <td class="act"><span class="ibs"><button class="ib" onClick="{{a.copy}}" aria-label="Copy {{a.lbl}}" title="Copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button></span></td>
-                        </tr>
+            <ul class="bm1-list">
+              <sc-for list="{{side.items}}" as="c" hint-placeholder-count="7">
+                <li><button class="bm1-c" aria-current="{{c.cur}}" onClick="{{c.pick}}">
+                  <span class="bm1-cc">{{c.code}}</span>
+                  <span class="bm1-cn"><b>{{c.name}}</b><small>{{c.meta}}</small></span>
+                  <sc-if value="{{c.gap}}" hint-placeholder-val="{{ false }}"><span class="chip t-warn">{{c.gapL}}</span></sc-if>
+                  <sc-if value="{{c.ok}}" hint-placeholder-val="{{ true }}"><span class="bm-okc" title="All purposes assigned" aria-label="All purposes assigned"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span></sc-if>
+                </button></li>
+              </sc-for>
+            </ul>
+            <sc-if value="{{side.none}}" hint-placeholder-val="{{ false }}"><div style="padding: 24px 16px; color: var(--muted); text-align: center">No country matches</div></sc-if>
+          </aside>
+
+          <div class="bm1-main">
+            <div class="bm1-head">
+              <span class="cm2-code">{{cur.code}}</span>
+              <div><h2>{{cur.name}}</h2><p class="{{cur.gap}}">{{cur.sum}}</p></div>
+              <button class="btn btn-sm" style="margin-inline-start: auto" onClick="{{cur.addAcct}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add Account</button>
+            </div>
+
+            <section class="card" aria-labelledby="bm1-pa">
+              <div class="card-head"><h2 class="card-title" id="bm1-pa">Purpose Assignment</h2><span class="card-meta">Which account is used for each purpose, per currency</span></div>
+              <div style="overflow: auto">
+              <table class="lst bm-mx">
+                <thead><tr><th scope="col" style="width: 110px">Currency</th><sc-for list="{{cur.purp}}" as="p" hint-placeholder-count="4"><th scope="col">{{p.l}}<small>{{p.d}}</small></th></sc-for></tr></thead>
+                <tbody>
+                  <sc-for list="{{cur.rows}}" as="r" hint-placeholder-count="2">
+                    <tr>
+                      <th scope="row" class="bm-ccy">{{r.ccy}}</th>
+                      <sc-for list="{{r.cells}}" as="x" hint-placeholder-count="4">
+                        <td><div class="bm-asg {{x.cls}}">
+                          <div class="cm2-sel"><select class="select" aria-label="{{x.lbl}}" value="{{x.val}}" onChange="{{x.on}}"><sc-for list="{{x.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div>
+                          <small class="{{x.subCls}}">{{x.sub}}</small>
+                        </div></td>
                       </sc-for>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="bk-f"><button class="btn btn-sm" onClick="{{b.addAcc}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add new account</button></div>
-              </section>
-            </sc-for>
-            <sc-if value="{{noBanks}}" hint-placeholder-val="{{ false }}"><section class="card"><p class="empty-t">No bank recorded for this location.</p></section></sc-if>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+              </div>
+            </section>
+
+            <section class="card" aria-labelledby="bm1-ba" style="overflow: hidden">
+              <div class="card-head"><h2 class="card-title" id="bm1-ba">Bank Accounts</h2></div>
+              <div style="overflow: auto">
+              <table class="lst">
+                <thead><tr><th scope="col" class="c-no">Bank Code</th><th scope="col">Bank Name</th><th scope="col">Branch</th><th scope="col">Account No.</th><th scope="col">Currency</th><th scope="col">Account Type</th><th scope="col">Used For</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{cur.accts}}" as="r" hint-placeholder-count="5">
+                    <tr class="{{r.cls}} cmc-row" onClick="{{r.upd}}">
+                      <td class="c-no"><button class="lnk mono" onClick="{{r.upd}}" title="{{r.updLbl}}">{{r.code}}</button></td>
+                      <td>{{r.bank}}</td><td>{{r.branch}}</td><td class="mono">{{r.acct}}</td><td>{{r.ccy}}</td><td>{{r.type}}</td>
+                      <td><sc-for list="{{r.tags}}" as="t" hint-placeholder-count="2"><span class="{{t.cls}}">{{t.l}}</span></sc-for><sc-if value="{{r.none}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if></td>
+                      <td><span class="chip" style="{{r.stSt}}">{{r.st}}</span></td>
+                      <td class="c-act"><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">View/Update</button></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+              </div>
+            </section>
           </div>
         </div>
       </main>
     </div>
   </div>
 
-  <sc-if value="{{form.on}}" hint-placeholder-val="{{ false }}">
-    <button class="ov" aria-label="Close" onClick="{{closeK}}"></button>
-    <aside class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="bform-t">
+
+  <sc-if value="{{tabs.isDetail}}" hint-placeholder-val="{{ false }}">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{det.cancel}}"></button>
+    <div class="dlg full dim" role="dialog" aria-modal="true" aria-labelledby="cmc-mt">
       <div class="dh">
-        <div style="flex: 1 1 auto; min-width: 0"><h2 id="bform-t">{{form.title}}</h2><p>{{form.sub}}</p></div>
-        <button class="btn btn-sm kib" onClick="{{closeK}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        <span class="cm2-code">{{det.code}}</span>
+        <h2 id="cmc-mt">{{det.name}}</h2>
+        <button class="btn btn-icon btn-sm x" aria-label="Close" onClick="{{det.cancel}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
       </div>
       <div class="db">
-        <sc-if value="{{form.hasErr}}" hint-placeholder-val="{{ false }}"><div class="banner b-block" role="alert" style="margin-bottom: 16px">{{form.errText}}</div></sc-if>
-        <sc-for list="{{form.secs}}" as="sec" hint-placeholder-count="2">
-          <div class="fs"><h3>{{sec.t}}</h3>
-          <div class="kgrid">
-            <sc-for list="{{sec.fields}}" as="f" hint-placeholder-count="8">
-              <div class="{{f.cls}}"><span class="kl" id="{{f.id}}">{{f.label}}</span>
-                <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}"><input class="input" aria-labelledby="{{f.id}}" value="{{f.v}}" onInput="{{f.on}}" aria-invalid="{{f.bad}}"></sc-if>
-                <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}"><textarea class="input" rows="{{f.rows}}" aria-labelledby="{{f.id}}" value="{{f.v}}" onInput="{{f.on}}"></textarea></sc-if>
-                <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}"><span class="bm-sel" style="display: block"><select class="select" style="width: 100%" aria-labelledby="{{f.id}}" value="{{f.v}}" onChange="{{f.on}}"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></sc-if>
-                <sc-if value="{{f.isRadio}}" hint-placeholder-val="{{ false }}"><div class="seg" role="radiogroup" aria-labelledby="{{f.id}}" style="align-self: flex-start"><sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><button role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.t}}</button></sc-for></div></sc-if>
-                <sc-if value="{{f.isRO}}" hint-placeholder-val="{{ false }}"><span class="kro" title="{{f.v}}">{{f.v}}</span></sc-if>
-                <sc-if value="{{f.hasErr}}" hint-placeholder-val="{{ false }}"><span class="ke">{{f.err}}</span></sc-if>
-              </div>
+          <div class="cmc-stack">
+            <sc-for list="{{det.main}}" as="sec" hint-placeholder-count="1">
+              <section class="card cm2-sec" style="{{sec.span}}" aria-labelledby="{{sec.hid}}">
+                <div class="cm2-sh">
+                  <h3 id="{{sec.hid}}">{{sec.title}}</h3>
+                  <p>{{sec.sub}}</p>
+                </div>
+                <div class="cm2-grid" style="{{sec.cols}}">
+                  <sc-for list="{{sec.fields}}" as="f" hint-placeholder-count="4">
+                    <div class="cm2-f" style="{{f.span}}">
+                      <div class="cm2-lr">
+                        <label class="lbl" for="{{f.id}}" id="{{f.lid}}">{{f.label}}</label>
+                        <sc-if value="{{f.help}}" hint-placeholder-val="{{ true }}">
+                          <span class="cm2-i" tabindex="0" role="img" aria-label="{{f.help}}" title="{{f.help}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></span>
+                        </sc-if>
+                      </div>
+                      <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
+                        <input class="input" id="{{f.id}}" value="{{f.val}}" readonly="{{f.ro}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
+                      </sc-if>
+                      <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}">
+                        <div class="cm2-sel">
+                          <select class="select" id="{{f.id}}" value="{{f.val}}" disabled="{{f.ro}}" onChange="{{f.on}}">
+                            <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for>
+                          </select>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{f.isYN}}" hint-placeholder-val="{{ false }}">
+                        <div class="cm2-yn" role="radiogroup" aria-labelledby="{{f.lid}}">
+                          <button type="button" role="radio" aria-checked="{{f.isY}}" disabled="{{f.ro}}" onClick="{{f.setY}}">Y</button>
+                          <button type="button" role="radio" aria-checked="{{f.isN}}" disabled="{{f.ro}}" onClick="{{f.setN}}">N</button>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{f.isChecks}}" hint-placeholder-val="{{ false }}">
+                        <div class="cm2-checks" role="group" aria-labelledby="{{f.lid}}">
+                          <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="5">
+                            <label class="cm2-ck"><input type="checkbox" class="cbx" checked="{{o.on}}" disabled="{{f.ro}}" onChange="{{o.flip}}"><span>{{o.l}}</span></label>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+
+              </section>
             </sc-for>
-          </div></div>
-        </sc-for>
+            <div class="cmc-row4 bm-row4">
+            <sc-for list="{{det.side}}" as="sec" hint-placeholder-count="4">
+              <section class="card cm2-sec" style="{{sec.span}}" aria-labelledby="{{sec.hid}}">
+                <div class="cm2-sh">
+                  <h3 id="{{sec.hid}}">{{sec.title}}</h3>
+                  <p>{{sec.sub}}</p>
+                </div>
+                <div class="cm2-grid" style="{{sec.cols}}">
+                  <sc-for list="{{sec.fields}}" as="f" hint-placeholder-count="4">
+                    <div class="cm2-f" style="{{f.span}}">
+                      <div class="cm2-lr">
+                        <label class="lbl" for="{{f.id}}" id="{{f.lid}}">{{f.label}}</label>
+                        <sc-if value="{{f.help}}" hint-placeholder-val="{{ true }}">
+                          <span class="cm2-i" tabindex="0" role="img" aria-label="{{f.help}}" title="{{f.help}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></span>
+                        </sc-if>
+                      </div>
+                      <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
+                        <input class="input" id="{{f.id}}" value="{{f.val}}" readonly="{{f.ro}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
+                      </sc-if>
+                      <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}">
+                        <div class="cm2-sel">
+                          <select class="select" id="{{f.id}}" value="{{f.val}}" disabled="{{f.ro}}" onChange="{{f.on}}">
+                            <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for>
+                          </select>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{f.isYN}}" hint-placeholder-val="{{ false }}">
+                        <div class="cm2-yn" role="radiogroup" aria-labelledby="{{f.lid}}">
+                          <button type="button" role="radio" aria-checked="{{f.isY}}" disabled="{{f.ro}}" onClick="{{f.setY}}">Y</button>
+                          <button type="button" role="radio" aria-checked="{{f.isN}}" disabled="{{f.ro}}" onClick="{{f.setN}}">N</button>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{f.isChecks}}" hint-placeholder-val="{{ false }}">
+                        <div class="cm2-checks" role="group" aria-labelledby="{{f.lid}}">
+                          <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="5">
+                            <label class="cm2-ck"><input type="checkbox" class="cbx" checked="{{o.on}}" disabled="{{f.ro}}" onChange="{{o.flip}}"><span>{{o.l}}</span></label>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+
+              </section>
+            </sc-for>
+            </div>
+          </div>
       </div>
       <div class="df">
-        <span style="flex: 1 1 auto"></span>
-        <button class="btn" onClick="{{closeK}}">Cancel</button>
-        <button class="btn btn-primary" onClick="{{form.save}}">Save</button>
+        <button class="btn" onClick="{{det.cancel}}">Cancel</button>
+        <sc-if value="{{det.rw}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{det.save}}">Save</button></sc-if>
       </div>
-    </aside>
+    </div>
   </sc-if>
 
-  <sc-if value="{{tnc.on}}" hint-placeholder-val="{{ false }}">
-    <button class="ov" aria-label="Close" onClick="{{tnc.close}}"></button>
-    <aside class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="tnc-t">
-      <div class="dh">
-        <div style="flex: 1 1 auto; min-width: 0"><h2 id="tnc-t">T&amp;C</h2><p>{{tnc.sub}}</p></div>
-        <button class="btn btn-sm kib" onClick="{{tnc.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-      </div>
-      <div class="db">
-        <ul class="bm-tnc"><sc-for list="{{tnc.lines}}" as="l" hint-placeholder-count="8"><li>{{l.t}}</li></sc-for></ul>
-        <sc-if value="{{tnc.none}}" hint-placeholder-val="{{ false }}"><p class="empty-t" style="margin: 0">No T&amp;C recorded for this account.</p></sc-if>
-      </div>
-      <div class="df"><span style="flex: 1 1 auto"></span><button class="btn" onClick="{{tnc.close}}">Close</button></div>
-    </aside>
-  </sc-if>
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
     <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
   </sc-if>
 </div>
 </script>
 <script type="text/x-dc" id="logic">
-// Bank Master — Version 1 (country / location workspace), built from the client sheet "WF_Bank Master" (2. PIL GIRS Function List)
-const TNC_HK = [
-  'LATE COLLECTION FOR BILL OF LADING / LATE PAYMENT WILL BE CHARGED HKD 1,200 PER BILL OF LADING. ',
-  'FOR NON-HKG EXPORT, LATE CHARGE APPLIED 7 DAYS AFTER THE INVOICE ISSUED DATE. ',
-  'FOR HKG EXPORT, LATE CHARGE APPLIED 7 DAYS AFTER VESSEL SAILED.',
-  'THEREAFTER, AN ADDITION OF HKD 1,200 PER BILL OF LADING / PER WEEK WILL BE CHARGED TILL THE PAYMENT SETTLED.',
-  'HKD 1,000 HANDLING FEE WILL BE CHARGED FOR 1ST DISHONOURED CHEQUE. HANDLING FEE WILL BE INCREASED BY HKD 1,000 FOR EACH',
-  'ADDITIONAL DISHONOURED CHEQUE AND CHEQUE CLEARANCE REQUIRED BEFORE BL RELEASE IF 2ND TIME OCCURS. ',
-  'WE RESERVE THE RIGHT TO REJECT ANY COMPANY CHEQUE FROM COMPANIES WITH DISHONOURED CHEQUE. ',
-  "FOR INBOUND SHIPMENT, CHEQUE OVER HKD 30,000 IS NOT ACCEPTABLE. PLEASE PAY BY CASHIER'S ORDER.",
-  'PLEASE PAY IN FULL AND BANK CHARGES ARE FOR THE REMITTERS ACCOUNT.'
-].map((x) => x.trim());
-// [Default, Organization Type, Entity Type, Country, Location, Carrier, Bank Name, Currency, Account Name, IBAN / Account No., Account Type, Swift Code, Tax Registration No (PIN No.), VAT No., Address, Bank Code, Branch Code]
-const BM_SEED = [
-  ['Yes', 'Company', 'PIL', 'Singapore', 'Singapore', 'PIL', 'Bank of Singapore', 'SGD', 'PIL Singapore Ltd.', '12345678', '', 'SWFT12345678', 'P051101234A', '', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Africa', 'Kenya', 'PIL', 'Standard Chartered Bank Kenya Limited', 'USD', 'PIL DJIBOUTI LTD.', '87060 - 916289-00', '', '', 'P051113106D', '0105244A', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Africa', 'Kenya', 'PIL', 'Standard Chartered Bank Kenya Limited', 'KSH', 'PIL DJIBOUTI LTD.', '01060 - 916289-00', '', '', 'P051113106D', '0105244A', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Africa', 'Kenya', 'PIL', 'M-Pesa', 'KSH', 'PIL DJIBOUTI LTD.', '329373', '', '', 'P051113106D', '0105244A', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Africa', 'DJIBOUTI', 'PIL', 'CAC INTERNATIONAL BANK', 'USD', 'PIL DJIBOUTI LTD.', '1003559489', '', 'CACDDJJD', '', '', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Africa', 'DJIBOUTI', 'PIL', 'CAC INTERNATIONAL BANK', 'DJF', 'PIL DJIBOUTI LTD.', '1003559471', '', 'CACDDJJD', '', '', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Africa', 'Togo', 'PIL', 'ECO BANK', 'FORALL', 'PIL TOGO SA', '70102714950501', '', '', '', '', '', '', ''],
-  ['Yes', 'Company', 'PIL', 'Hong Kong', 'Hong Kong', 'PIL', 'CITIBANK, N.A., HONG KONG BRANCH', 'HKD', 'PACIFIC INTERNATIONAL LINES PTE LTD', '1160760008', 'FPS/RTGS/CROSS BORDER FUNDS TRANSFER', 'CITIHKHX', '', '', 'CHAMPION TOWER, THREE GARDEN ROAD, CENTRAL, HONG KONG', '006', '391'],
-  ['Yes', 'Company', 'PIL', 'Hong Kong', 'Hong Kong', 'PIL', 'CITIBANK, N.A., HONG KONG BRANCH', 'USD', 'PACIFIC INTERNATIONAL LINES PTE LTD', '1160760016', 'FPS/RTGS/CROSS BORDER FUNDS TRANSFER', 'CITIHKHX', '', '', 'CHAMPION TOWER, THREE GARDEN ROAD, CENTRAL, HONG KONG', '006', '391'],
-  ['Yes', 'Company', 'PIL', 'Hong Kong', 'Hong Kong', 'PIL', 'CITIBANK, N.A., HONG KONG BRANCH', 'HKD', 'PACIFIC INTERNATIONAL LINES PTE LTD', '97532495', 'CASH/CHEQUE DEPOSIT MACHINE/ATM', 'CITIHKHX', '', '', 'CHAMPION TOWER, THREE GARDEN ROAD, CENTRAL, HONG KONG', '006', '391'],
-  ['Yes', 'Company', 'PIL', 'Hong Kong', 'Hong Kong', 'PIL', 'CITIBANK, N.A., HONG KONG BRANCH', 'USD', 'PACIFIC INTERNATIONAL LINES PTE LTD', '97532509', 'CASH/CHEQUE DEPOSIT MACHINE/ATM', 'CITIHKHX', '', '', 'CHAMPION TOWER, THREE GARDEN ROAD, CENTRAL, HONG KONG', '006', '391'],
-  ['Yes', 'Company', 'Customer - Contract Party', 'Sri Lanka', 'Colomno', 'PIL', 'NDB Bank', 'LKR', 'Eastern Maritime (Colombo) Ltd', '106590000817', '', 'NDBSLKLX', '', '', 'Eastern Maritime (Colombo) Ltd', '', '']
+// Bank Master — one country can hold several bank accounts, each assigned to a purpose
+// (Receiving, Paying, Invoice, Refund) per currency. Sample data.
+const BM_COUNTRY = { SG: 'Singapore', MY: 'Malaysia', IN: 'India', TH: 'Thailand', SA: 'Saudi Arabia', MX: 'Mexico', CN: 'China' };
+const BM_CCY = ['SGD', 'USD', 'MYR', 'INR', 'THB', 'SAR', 'MXN', 'CNY', 'EUR'];
+const BM_ENT = ['PIL', 'MELL', 'MSC'];
+const BM_OFF = { SIN: 'Singapore · SIN', PKG: 'Malaysia · PKG', NSA: 'India · NSA', LCH: 'Thailand · LCH', JED: 'Saudi Arabia · JED', ZLO: 'Mexico · ZLO', SHA: 'China · SHA' };
+const BM_TYPE = ['Current', 'Collection', 'Virtual'];
+const BM_FMT = ['MT940', 'CAMT.053', 'CSV'];
+const BM_STAT = ['Active', 'Inactive'];
+const BM_PURP = [
+  ['rec', 'Receiving', 'Customer receipts & cash application'],
+  ['pay', 'Paying', 'Vendor, agent & port payments'],
+  ['inv', 'Invoice', 'Remittance details printed on invoices'],
+  ['ref', 'Refund', 'Customer refunds & overpayments']
 ];
-const BM_K = ['def', 'org', 'ent', 'ctry', 'loc', 'carrier', 'bank', 'cur', 'accName', 'accNo', 'accType', 'swift', 'pin', 'vat', 'addr', 'bankCode', 'brCode'];
-const BM_L = ['Default', 'Organization Type', 'Entity Type', 'Country', 'Location', 'Carrier', 'Bank Name', 'Currency', 'Account Name', 'IBAN / Account No.', 'Account Type', 'Swift Code', 'Tax Registration No (PIN No.)', 'VAT No.', 'Address', 'Bank Code', 'Branch Code'];
-// LOVs from the sheet "WF_LOV" (System Master · Bank Master)
-const BM_ORG = ['Company', 'Customer'];
-const BM_ENT = ['PIL', 'MEL', 'MSC', 'Customer - Contract Party', 'Shipper', 'Consignee', 'Notify Party', 'Forwarder', 'Clearing Agent', 'Trucker'];
-const BM_DEF = ['Yes', 'No', 'In-Active'];
-let bmSeq = 0;
-const bmId = () => 'b' + Date.now().toString(36) + (bmSeq++);
-const bmLoad = () => {
-  let d = null;
-  try { d = JSON.parse(localStorage.getItem('girs.bank.v1s') || 'null'); } catch (e) {}
-  if (d && Array.isArray(d)) return d;
-  return BM_SEED.map((r, i) => Object.assign(Object.fromEntries(BM_K.map((k, j) => [k, r[j]])), { id: 's' + i, tnc: TNC_HK.slice() }));
+const BM_PL = Object.fromEntries(BM_PURP.map((p) => [p[0], p[1]]));
+const BM_SECS = [
+  ['Bank Identification', 'Which bank and branch holds the account?'],
+  ['Account Details', 'Which account receives or pays the money?'],
+  ['Usage & Assignment', 'Where is the account used?'],
+  ['Accounting & Integration', 'How is the account posted and reconciled?'],
+  ['Record Control', 'Is the account active and for which period?']
+];
+const BM_KEYS = ['code', 'bank', 'branch', 'swift', 'local', 'country', 'city', 'addr', 'holder', 'acct', 'iban', 'ccy', 'type', 'ent', 'off', 'gl', 'cgl', 'gfs', 'fmt', 'st', 'from', 'to'];
+const SG_A = ['Singapore', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', 'Pacific International Lines (Pte) Ltd'];
+const MY_A = ['Port Klang', 'Jalan Pelabuhan Utara, 42000 Port Klang, Selangor', 'PIL (Malaysia) Sdn Bhd'];
+const IN_A = ['Mumbai', 'Maneckji Wadia Building, Nanik Motwani Marg, Fort, Mumbai 400001', 'PIL India Pvt Ltd'];
+const TH_A = ['Chonburi', 'Sukhumvit Road, Thung Sukhla, Si Racha, Chonburi 20230', 'PIL (Thailand) Co., Ltd'];
+const BM_SEED = [
+  ['DBSSG01', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912345-6', '', 'SGD', 'Collection', 'PIL', 'SIN', '101110', '651110', 'SG-DBS-SGD', 'CAMT.053', 'Active', '2024-01-01', ''],
+  ['DBSSG02', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912350-1', '', 'SGD', 'Current', 'PIL', 'SIN', '101111', '651110', 'SG-DBS-SGD2', 'CAMT.053', 'Active', '2024-01-01', ''],
+  ['OCBCSG01', 'OCBC Bank', 'Chulia Street', 'OCBCSGSG', '7339', 'SG', SG_A[0], '65 Chulia Street, OCBC Centre, Singapore 049513', SG_A[2], '501-234567-001', '', 'SGD', 'Current', 'PIL', 'SIN', '101112', '651130', 'SG-OCBC-SGD', 'MT940', 'Active', '2024-01-01', ''],
+  ['DBSSG03', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912346-4', '', 'USD', 'Current', 'PIL', 'SIN', '101120', '651110', 'SG-DBS-USD', 'CAMT.053', 'Active', '2024-01-01', ''],
+  ['CITISG01', 'Citibank N.A.', 'Singapore Branch', 'CITISGSG', '7214', 'SG', SG_A[0], '8 Marina View, Asia Square Tower 1, Singapore 018960', SG_A[2], '0-104588-019', '', 'USD', 'Collection', 'PIL', 'SIN', '101130', '651120', 'SG-CITI-USD', 'MT940', 'Active', '2024-03-01', ''],
+  ['MBBMY01', 'Malayan Banking Berhad (Maybank)', 'Port Klang Branch', 'MBBEMYKL', '27', 'MY', MY_A[0], MY_A[1], MY_A[2], '5123-4560-0981', '', 'MYR', 'Collection', 'PIL', 'PKG', '102110', '652110', 'MY-MBB-MYR', 'MT940', 'Active', '2024-01-01', ''],
+  ['CIMBMY01', 'CIMB Bank Berhad', 'Klang Branch', 'CIBBMYKL', '35', 'MY', MY_A[0], 'Jalan Tengku Kelana, 41000 Klang, Selangor', MY_A[2], '8001-2233-4455', '', 'MYR', 'Current', 'PIL', 'PKG', '102111', '652110', 'MY-CIMB-MYR', 'MT940', 'Active', '2024-01-01', ''],
+  ['MBBMY02', 'Malayan Banking Berhad (Maybank)', 'Port Klang Branch', 'MBBEMYKL', '27', 'MY', MY_A[0], MY_A[1], MY_A[2], '5123-4560-1173', '', 'USD', 'Current', 'PIL', 'PKG', '102120', '652110', 'MY-MBB-USD', 'MT940', 'Active', '2024-01-01', ''],
+  ['ICICIN01', 'ICICI Bank Ltd', 'Nhava Sheva Branch', 'ICICINBB', 'ICIC0001234', 'IN', 'Navi Mumbai', 'JNPT Township, Sheva, Navi Mumbai 400707', IN_A[2], '123405001122', '', 'INR', 'Virtual', 'PIL', 'NSA', '103130', '653120', 'IN-ICICI-INR', 'CSV', 'Active', '2025-04-01', ''],
+  ['HDFCIN01', 'HDFC Bank Ltd', 'Fort, Mumbai', 'HDFCINBB', 'HDFC0000060', 'IN', IN_A[0], IN_A[1], IN_A[2], '50200012345678', '', 'INR', 'Current', 'PIL', 'NSA', '103110', '653110', 'IN-HDFC-INR', 'CSV', 'Active', '2024-01-01', ''],
+  ['HDFCIN02', 'HDFC Bank Ltd', 'Fort, Mumbai', 'HDFCINBB', 'HDFC0000060', 'IN', IN_A[0], IN_A[1], IN_A[2], '50200098765432', '', 'USD', 'Current', 'PIL', 'NSA', '103120', '653110', 'IN-HDFC-USD', 'CSV', 'Active', '2024-01-01', ''],
+  ['BBLTH01', 'Bangkok Bank Public Company Ltd', 'Laem Chabang Branch', 'BKKBTHBK', '002', 'TH', TH_A[0], TH_A[1], TH_A[2], '219-3-04567-8', '', 'THB', 'Current', 'PIL', 'LCH', '104110', '654110', 'TH-BBL-THB', 'MT940', 'Active', '2024-01-01', ''],
+  ['BBLTH02', 'Bangkok Bank Public Company Ltd', 'Laem Chabang Branch', 'BKKBTHBK', '002', 'TH', TH_A[0], TH_A[1], TH_A[2], '219-3-04568-6', '', 'USD', 'Current', 'PIL', 'LCH', '104120', '654110', 'TH-BBL-USD', 'MT940', 'Active', '2024-01-01', ''],
+  ['SNBSA01', 'Saudi National Bank', 'Jeddah Main Branch', 'NCBKSAJE', '10', 'SA', 'Jeddah', 'King Abdulaziz Road, Al Baghdadiyah Al Gharbiyah, Jeddah 21411', 'PIL Saudi Arabia LLC', '10000123456700', 'SA4410000010000123456700', 'SAR', 'Current', 'PIL', 'JED', '105110', '655110', 'SA-SNB-SAR', 'MT940', 'Active', '2024-01-01', ''],
+  ['BBVAMX01', 'BBVA México', 'Manzanillo', 'BCMRMXMM', '012', 'MX', 'Manzanillo', 'Av. Teniente Azueta 21, Burócrata, 28250 Manzanillo, Colima', 'PIL México S.A. de C.V.', '0123456789', '', 'MXN', 'Current', 'PIL', 'ZLO', '106110', '656110', 'MX-BBVA-MXN', 'CAMT.053', 'Active', '2024-06-01', ''],
+  ['BOCCN01', 'Bank of China', 'Shanghai Branch', 'BKCHCNBJ300', '104290003033', 'CN', 'Shanghai', '200 Yincheng Middle Road, Pudong, Shanghai 200120', 'PIL Shipping (China) Co., Ltd', '4520 6011 8899', '', 'CNY', 'Current', 'PIL', 'SHA', '107110', '657110', 'CN-BOC-CNY', 'MT940', 'Active', '2024-01-01', '']
+];
+// Country → currency → purpose → account code ('' = not assigned yet)
+const BM_ASG = {
+  SG: { SGD: { rec: 'DBSSG01', pay: 'DBSSG02', inv: 'DBSSG01', ref: 'OCBCSG01' }, USD: { rec: 'CITISG01', pay: 'DBSSG03', inv: 'DBSSG03', ref: 'DBSSG03' } },
+  MY: { MYR: { rec: 'MBBMY01', pay: 'CIMBMY01', inv: 'MBBMY01', ref: 'MBBMY01' }, USD: { rec: 'MBBMY02', pay: 'MBBMY02', inv: 'MBBMY02', ref: '' } },
+  IN: { INR: { rec: 'ICICIN01', pay: 'HDFCIN01', inv: 'ICICIN01', ref: 'HDFCIN01' }, USD: { rec: 'HDFCIN02', pay: '', inv: 'HDFCIN02', ref: '' } },
+  TH: { THB: { rec: 'BBLTH01', pay: 'BBLTH01', inv: 'BBLTH01', ref: 'BBLTH01' }, USD: { rec: 'BBLTH02', pay: 'BBLTH02', inv: 'BBLTH02', ref: 'BBLTH02' } },
+  SA: { SAR: { rec: 'SNBSA01', pay: 'SNBSA01', inv: 'SNBSA01', ref: '' } },
+  MX: { MXN: { rec: 'BBVAMX01', pay: 'BBVAMX01', inv: 'BBVAMX01', ref: 'BBVAMX01' } },
+  CN: { CNY: { rec: 'BOCCN01', pay: 'BOCCN01', inv: 'BOCCN01', ref: '' } }
 };
-const bmStore = (d) => { try { localStorage.setItem('girs.bank.v1s', JSON.stringify(d)); } catch (e) {} };
-// fields that belong to the bank (shown once per bank card) and to each account
-const BK_BANK = ['org', 'ent', 'carrier', 'swift', 'bankCode', 'brCode', 'addr'];
-const BK_ACC = ['def', 'cur', 'accName', 'accNo', 'accType', 'pin', 'vat'];
-const bkKey = (r) => ['ctry', 'loc', 'bank'].concat(BK_BANK).map((k) => String(r[k] || '').trim().toLowerCase()).join('|');
-const locKey = (r) => r.ctry + '|' + r.loc;
+const bmBuild = () => BM_SEED.map((r) => { const o = {}; BM_KEYS.forEach((k, i) => { o[k] = r[i]; }); return o; });
+const bmLoad = () => {
+  let v = null;
+  try { v = JSON.parse(localStorage.getItem('girs.bm2') || 'null'); } catch (e) {}
+  return v && Array.isArray(v.recs) && v.asg ? v : { recs: bmBuild(), asg: JSON.parse(JSON.stringify(BM_ASG)) };
+};
+const bmStore = (recs, asg) => { try { localStorage.setItem('girs.bm2', JSON.stringify({ recs, asg })); } catch (e) {} };
+const bmShort = (b) => (/\((.+)\)/.exec(String(b || '')) || [])[1] || String(b || '').replace(/\s*\(.*\)/, '').replace(/ (Public Company|Berhad|Bank Ltd|Ltd|N\.A\.).*$/, '').trim();
+// Currencies a country uses = assigned currencies + currencies of its accounts
+const bmCcys = (recs, asg, c) => { const set = new Set(Object.keys(asg[c] || {})); recs.forEach((r) => { if (r.country === c) set.add(r.ccy); }); return Array.from(set); };
+const bmUses = (asg, code) => {
+  const out = [];
+  Object.keys(asg).forEach((c) => Object.keys(asg[c]).forEach((ccy) => BM_PURP.forEach(([k]) => { if (asg[c][ccy][k] === code) out.push({ k, l: BM_PL[k], ccy }); })));
+  return out;
+};
+const bmGaps = (recs, asg, c) => bmCcys(recs, asg, c).reduce((n, ccy) => n + BM_PURP.filter(([k]) => !((asg[c] || {})[ccy] || {})[k]).length, 0);
+const bmStatSt = (st) => (st === 'Active' ? 'background: var(--okbg); color: var(--ok)' : 'background: var(--neutral); color: var(--muted2)');
 
+// View / Update account popup (shared by both versions)
+const bmDetail = (self, s) => {
+  const blank = () => { const o = {}; BM_KEYS.forEach((k) => { o[k] = ''; }); return Object.assign(o, { country: s.cty || 'SG', ccy: 'USD', type: 'Current', ent: 'PIL', off: 'SIN', fmt: 'MT940', st: 'Active' }); };
+  const d = s.draft || blank();
+  const put = (patch) => self.setState({ draft: Object.assign({}, d, patch) });
+  const id = (k) => ({ id: 'bm-d-' + k, lid: 'bm-l-' + k });
+  const txt = (k, label, o) => Object.assign(id(k), { label, help: '', isText: true, val: d[k], ro: false, on: (e) => put({ [k]: e.target.value }) }, o || {});
+  const sel = (k, label, opts, o) => Object.assign(id(k), { label, help: '', isSel: true, val: d[k], ro: false, opts, on: (e) => put({ [k]: e.target.value }) }, o || {});
+  const coded = (map) => Object.keys(map).map((c) => ({ v: c, l: c + ' · ' + map[c] }));
+  const plain = (arr) => arr.map((c) => ({ v: c, l: c }));
+  const uses = s.isNew ? [] : bmUses(s.asg, d.code);
+  const usesTxt = uses.length ? uses.map((u) => u.l + ' (' + u.ccy + ')').join(', ') : 'Not assigned to any purpose';
+  const secs = [
+    [txt('code', 'Bank Code', { ro: !s.isNew }), txt('bank', 'Bank Name', { span: 'grid-column: span 2' }), txt('branch', 'Branch Name', { span: 'grid-column: span 2' }), txt('swift', 'SWIFT / BIC'),
+      txt('local', 'Local Bank Code'), sel('country', 'Country', coded(BM_COUNTRY), { ro: !s.isNew }), txt('city', 'City'), txt('addr', 'Branch Address', { span: 'grid-column: span 3' })],
+    [txt('holder', 'Account Holder Name', { span: 'grid-column: 1 / -1' }), txt('acct', 'Account No.'), sel('ccy', 'Account Currency', plain(BM_CCY), { ro: !s.isNew }), txt('iban', 'IBAN'), sel('type', 'Account Type', plain(BM_TYPE))],
+    [sel('ent', 'Entity', plain(BM_ENT)), sel('off', 'Office', Object.keys(BM_OFF).map((o) => ({ v: o, l: BM_OFF[o] }))), txt('uses', 'Assigned Purposes', { val: usesTxt, ro: true, span: 'grid-column: 1 / -1' })],
+    [txt('gl', 'Bank G/L Account'), txt('cgl', 'Bank Charges G/L'), txt('gfs', 'GFS Bank Code'), sel('fmt', 'Statement Format', plain(BM_FMT))],
+    [sel('st', 'Status', plain(BM_STAT), { span: 'grid-column: 1 / -1' }), txt('from', 'Effective From'), txt('to', 'Effective To')]
+  ];
+  const sec = (i) => ({ hid: 'bm-s' + i, title: BM_SECS[i][0], sub: BM_SECS[i][1], span: '', cols: i === 0 ? 'grid-template-columns: repeat(6, minmax(0, 1fr))' : 'grid-template-columns: repeat(2, minmax(0, 1fr))', fields: secs[i] });
+  return {
+    code: s.isNew ? 'New' : d.code, name: s.isNew ? 'New Bank Account' : d.bank + ' · ' + d.ccy, ro: false, rw: true,
+    main: [sec(0)], side: [sec(1), sec(2), sec(3), sec(4)],
+    cancel: () => self.setState({ open: false, draft: null }),
+    save: () => {
+      const code = String(d.code || '').trim().toUpperCase();
+      if (!code || !String(d.bank || '').trim() || !String(d.acct || '').trim()) return self.setState({ __toast: 'Enter Bank Code, Bank Name and Account No.' });
+      if (s.isNew && s.recs.some((r) => r.code === code)) return self.setState({ __toast: 'Bank Code ' + code + ' already exists.' });
+      const rec = Object.assign({}, d, { code });
+      const recs = s.isNew ? s.recs.concat([rec]) : s.recs.map((r) => (r.code === code ? rec : r));
+      const asg = JSON.parse(JSON.stringify(s.asg));
+      asg[rec.country] = asg[rec.country] || {};
+      asg[rec.country][rec.ccy] = asg[rec.country][rec.ccy] || { rec: '', pay: '', inv: '', ref: '' };
+      bmStore(recs, asg);
+      self.setState({ recs, asg, draft: null, open: false, sel: code, cty: rec.country, __toast: 'Bank account ' + code + ' saved.' });
+    }
+  };
+};
+const bmOpen = (self, s, code) => { const r = s.recs.find((x) => x.code === code); self.setState({ open: true, isNew: false, sel: code, draft: JSON.parse(JSON.stringify(r)) }); };
+const bmEsc = (self) => { try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !document.querySelector('.menu')) self.setState({ open: false, draft: null, pick: null }); }); } catch (e) {} };
+
+// Version 1 — Country workspace: pick a country, set the account for each purpose per currency, see its accounts.
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    const d = bmLoad();
-    this.state = { d, sel: d.length ? locKey(d[0]) : '', q: '', k: null, tn: null };
+    const v = bmLoad();
+    const q = (() => { try { return (new URLSearchParams(location.search).get('q') || '').toUpperCase(); } catch (e) { return ''; } })();
+    const hit = q ? v.recs.find((r) => r.code.includes(q) || r.country === q) : null;
+    bmEsc(this);
+    this.state = { q: '', cty: hit ? hit.country : 'SG', recs: v.recs, asg: v.asg, open: false, isNew: false, draft: null, sel: hit ? hit.code : null };
   }
   renderVals() {
-    const s = this.state, self = this, D = s.d;
-    const set = (o) => self.setState(o);
-    const dash = (v) => (v === undefined || v === null || String(v).trim() === '' ? '—' : String(v));
-    const store = (d, extra) => { bmStore(d); set(Object.assign({ d, k: null }, extra || {})); };
-    const plural = (n, a, b) => n + ' ' + (n === 1 ? a : b);
-    const uniq = (a) => a.filter((x, i) => x && a.indexOf(x) === i);
-
-    // ---------- left list: countries with their locations
-    const q = (s.q || '').trim().toLowerCase();
-    const ctrys = uniq(D.map((r) => r.ctry));
-    const groups = ctrys.map((ctry) => {
-      const locs = uniq(D.filter((r) => r.ctry === ctry).map((r) => r.loc)).filter((loc) => !q || (ctry + ' ' + loc + ' ' + D.filter((r) => r.ctry === ctry && r.loc === loc).map((r) => r.bank).join(' ')).toLowerCase().includes(q))
-        .map((loc) => { const rs = D.filter((r) => r.ctry === ctry && r.loc === loc), key = ctry + '|' + loc;
-          return { loc, sub: [plural(rs.length, 'account', 'accounts'), uniq(rs.map((r) => r.cur)).join(', ')].filter(Boolean).join(' · '), cur: s.sel === key ? 'true' : 'false', pick: () => set({ sel: key }) }; });
-      return { ctry, locs };
-    }).filter((g) => g.locs.length);
-
-    // ---------- right: banks of the selected location
-    const [sc, sl] = (s.sel || '|').split('|');
-    const rows = D.filter((r) => r.ctry === sc && r.loc === sl);
-    const keys = uniq(rows.map(bkKey));
-    const lbl = (r) => [r.bank, r.cur, r.accNo].filter(Boolean).join(' ');
-    const setDef = (id, t) => { const d = JSON.parse(JSON.stringify(D)), r = d.find((x) => x.id === id); r.def = t; store(d, { __toast: 'Default set to ' + t + ' for ' + lbl(r) + '.' }); };
-    const banks = keys.map((key) => {
-      const rs = rows.filter((r) => bkKey(r) === key), b = rs[0];
-      const fact = (l, k, o) => ({ l, v: dash(b[k]), c: (o && o.mono ? 'mono' : '') + (String(b[k] || '').trim() ? '' : ' none'), cls: o && o.w ? 'w' : '' });
-      return { name: b.bank || '—', nAcc: [plural(rs.length, 'account', 'accounts'), uniq(rs.map((r) => r.cur)).join(', ')].filter(Boolean).join(' · '),
-        facts: [fact('Organization Type', 'org'), fact('Entity Type', 'ent'), fact('Carrier', 'carrier'), fact('Swift Code', 'swift', { mono: true }), fact('Bank Code', 'bankCode', { mono: true }), fact('Branch Code', 'brCode', { mono: true }), fact('Address', 'addr', { w: true })],
-        accs: rs.map((r) => Object.assign(Object.fromEntries(BK_ACC.map((k) => [k, dash(r[k])])), { lbl: lbl(r),
-          def: BM_DEF.map((t) => ({ t, on: r.def === t ? 'true' : 'false', pick: () => { if (r.def !== t) setDef(r.id, t); } })),
-          tnc: () => set({ tn: r.id }), copy: () => open('copy', r) })),
-        addAcc: () => open('acc', b) };
-    });
-
-    // ---------- add / copy form
-    const closeK = () => set({ k: null });
-    function open(mode, base) {
-      const b = base || {};
-      const v = Object.fromEntries(BM_K.map((k) => [k, '']));
-      ['ctry', 'loc', 'bank'].concat(BK_BANK).forEach((k) => { v[k] = b[k] || ''; });
-      if (mode === 'copy') BK_ACC.forEach((k) => { v[k] = b[k] || ''; });
-      v.accNo = ''; v.def = mode === 'copy' ? b.def || 'Yes' : 'Yes';
-      v.tnc = (mode === 'bank' ? [] : (b.tnc || [])).join('\n');
-      if (mode === 'acc') { const sib = rows.find((r) => bkKey(r) === bkKey(b)); v.tnc = sib ? (sib.tnc || []).join('\n') : ''; }
-      set({ k: { mode, v, tried: false, from: lbl(b) } });
-    }
-    let form = { on: false };
-    const k = s.k;
-    if (k) {
-      const V = k.v, lockBank = k.mode === 'acc';
-      const setV = (o) => set({ k: Object.assign({}, k, { v: Object.assign({}, V, o) }) });
-      const errs = {};
-      ['ctry', 'loc', 'bank', 'accNo'].forEach((key) => { if (!String(V[key] || '').trim()) errs[key] = 'Enter ' + BM_L[BM_K.indexOf(key)]; });
-      let i = 0;
-      const F = (key, o) => { o = o || {}; const t = o.t || 'text', err = k.tried ? errs[key] || '' : '', label = o.label || BM_L[BM_K.indexOf(key)];
-        return { id: 'bf' + i++, label, cls: 'kf' + (o.w ? ' w' : '') + (err ? ' bad' : ''), isText: t === 'text', isArea: t === 'area', isSel: t === 'sel', isRadio: t === 'radio', isRO: t === 'ro', rows: o.rows || 2,
-          v: t === 'ro' ? dash(V[key]) : V[key] == null ? '' : V[key], bad: err ? 'true' : 'false', err, hasErr: !!err,
-          opts: t === 'sel' ? [{ v: '', t: 'Select' }].concat(o.list.map((x) => ({ v: x, t: x }))) : t === 'radio' ? BM_DEF.map((x) => ({ t: x, on: V[key] === x ? 'true' : 'false', pick: () => setV({ [key]: x }) })) : [],
-          on: (e) => setV({ [key]: e.target.value }) }; };
-      const ro = lockBank ? { t: 'ro' } : {};
-      const secs = [
-        { t: 'Bank', fields: [F('ctry', ro), F('loc', ro), F('carrier', ro), F('org', lockBank ? ro : { t: 'sel', list: BM_ORG }), F('ent', lockBank ? ro : { t: 'sel', list: BM_ENT }), F('bank', ro),
-          F('swift', ro), F('bankCode', ro), F('brCode', ro), F('addr', lockBank ? { t: 'ro', w: true } : { t: 'area', w: true })] },
-        { t: 'Account', fields: [F('def', { t: 'radio' }), F('cur'), F('accType'), F('accName'), F('accNo'), F('pin'), F('vat'), F('tnc', { t: 'area', w: true, rows: 5, label: 'T&C' })] }
-      ];
-      const nErr = Object.keys(errs).length;
-      form = { on: true, secs,
-        title: k.mode === 'bank' ? 'Add new bank' : k.mode === 'acc' ? 'Add new account' : 'Copy account',
-        sub: k.mode === 'bank' ? 'Bank Master' : k.mode === 'acc' ? [V.bank, V.loc].filter(Boolean).join(' · ') : 'From ' + k.from,
-        hasErr: k.tried && nErr > 0, errText: nErr === 1 ? '1 field needs attention.' : nErr + ' fields need attention.',
-        save: () => {
-          if (nErr) return set({ k: Object.assign({}, k, { tried: true }) });
-          const rec = Object.assign({}, V, { id: bmId(), tnc: String(V.tnc || '').split('\n').map((t) => t.trim()).filter(Boolean) });
-          BM_K.forEach((key) => { rec[key] = String(rec[key] || '').trim(); });
-          const d = JSON.parse(JSON.stringify(D));
-          const last = d.map((r) => bkKey(r)).lastIndexOf(bkKey(rec));
-          if (last >= 0) d.splice(last + 1, 0, rec); else d.push(rec);
-          store(d, { sel: locKey(rec), q: '', __toast: (k.mode === 'bank' ? 'Bank ' + rec.bank + ' added' : 'Account ' + rec.accNo + ' added to ' + rec.bank) + '.' });
-        } };
-    }
-
-    // ---------- T&C
-    let tnc = { on: false };
-    if (s.tn) {
-      const r = D.find((x) => x.id === s.tn) || {}, lines = (r.tnc || []).filter((x) => String(x).trim());
-      tnc = { on: true, sub: lbl(r), lines: lines.map((t) => ({ t })), none: !lines.length, close: () => set({ tn: null }) };
-    }
-
+    const s = this.state, self = this;
+    const q = s.q.trim().toUpperCase();
+    const codes = Object.keys(BM_COUNTRY).filter((c) => !q || c.includes(q) || BM_COUNTRY[c].toUpperCase().includes(q));
+    const side = {
+      q: s.q, onQ: (e) => self.setState({ q: e.target.value }), none: !codes.length,
+      items: codes.map((c) => {
+        const n = s.recs.filter((r) => r.country === c).length, g = bmGaps(s.recs, s.asg, c);
+        return { code: c, name: BM_COUNTRY[c], meta: n + (n === 1 ? ' account' : ' accounts') + ' · ' + bmCcys(s.recs, s.asg, c).join(', '),
+          cur: c === s.cty ? 'true' : 'false', gap: g > 0, gapL: g + (g === 1 ? ' gap' : ' gaps'), ok: g === 0, pick: () => self.setState({ cty: c }) };
+      })
+    };
+    const accts = s.recs.filter((r) => r.country === s.cty);
+    const setAsg = (ccy, k, v) => {
+      const asg = JSON.parse(JSON.stringify(s.asg));
+      asg[s.cty] = asg[s.cty] || {}; asg[s.cty][ccy] = Object.assign({ rec: '', pay: '', inv: '', ref: '' }, asg[s.cty][ccy] || {}, { [k]: v });
+      bmStore(s.recs, asg);
+      self.setState({ asg, __toast: BM_PL[k] + ' account for ' + BM_COUNTRY[s.cty] + ' ' + ccy + (v ? ' set to ' + v + '.' : ' cleared.') });
+    };
+    const g = bmGaps(s.recs, s.asg, s.cty);
+    const cur = {
+      name: BM_COUNTRY[s.cty], code: s.cty,
+      sum: accts.length + (accts.length === 1 ? ' account' : ' accounts') + ' · ' + (g ? g + (g === 1 ? ' purpose not assigned' : ' purposes not assigned') : 'All purposes assigned'),
+      gap: g > 0,
+      purp: BM_PURP.map(([k, l, d]) => ({ l, d })),
+      rows: bmCcys(s.recs, s.asg, s.cty).map((ccy) => {
+        const a = (s.asg[s.cty] || {})[ccy] || {};
+        const cand = accts.filter((r) => r.ccy === ccy);
+        return { ccy, cells: BM_PURP.map(([k, l]) => {
+          const v = a[k] || '', r = cand.find((x) => x.code === v);
+          return { val: v, lbl: l + ' account · ' + ccy, cls: v ? '' : 'gap',
+            sub: r ? r.acct : 'Not assigned', subCls: r ? 'mono' : '',
+            opts: [{ v: '', l: '— Select account —' }].concat(cand.map((x) => ({ v: x.code, l: x.code + ' · ' + bmShort(x.bank) }))),
+            on: (e) => setAsg(ccy, k, e.target.value) };
+        }) };
+      }),
+      accts: accts.map((r) => ({
+        code: r.code, bank: r.bank, branch: r.branch, acct: r.acct, ccy: r.ccy, type: r.type, st: r.st, stSt: bmStatSt(r.st), cls: r.code === s.sel ? 'on' : '',
+        tags: bmUses(s.asg, r.code).filter((u) => u.ccy === r.ccy).map((u) => ({ l: u.l, cls: 'chip ' + ({ rec: 't-info', pay: 't-neutral', inv: 't-ok', ref: 't-warn' }[u.k] || 't-neutral') })), none: !bmUses(s.asg, r.code).length,
+        upd: () => bmOpen(self, s, r.code), updLbl: 'View/Update ' + r.code
+      })),
+      addAcct: () => self.setState({ open: true, isNew: true, draft: null })
+    };
     return {
-      q: s.q, onQ: (e) => set({ q: e.target.value }), groups, noHits: !groups.length,
-      L: { loc: sl || '—', sub: [sc, plural(keys.length, 'bank', 'banks'), plural(rows.length, 'account', 'accounts')].join(' · ') },
-      banks, noBanks: !banks.length,
-      addBank: () => open('bank', { ctry: sc, loc: sl }),
-      form, closeK, tnc, navT: {}
+      tabs: { isDetail: !!s.open },
+      newBank: cur.addAcct,
+      side, cur, det: bmDetail(self, s)
     };
   }
 }
