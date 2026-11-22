@@ -183,6 +183,10 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
 .kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
 /* Company Master */
+.ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;color:var(--muted2)}
+.ib:hover{background:var(--hover);color:var(--accent)}
+.ib.d:hover{background:var(--badbg);color:var(--bad)}
+.ib:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
 .lnk:hover{text-decoration:underline}
 .lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
@@ -218,7 +222,8 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .wt td.wa,.wt th.wa{white-space:normal;min-width:260px;max-width:320px}
 .wt .act{position:sticky;inset-inline-end:0;background:var(--surface);box-shadow:-1px 0 0 var(--line2);text-align:end}
 .wt th.act{background:var(--sub)}
-.wt td.act{display:flex;gap:6px;justify-content:flex-end}
+.wt td.act{padding-block:4px;white-space:nowrap}
+.wt td.act .ibs{display:inline-flex;gap:2px;vertical-align:middle}
 .kchk{display:inline-flex;align-items:center;gap:8px;min-height:36px;font-size:13px;cursor:pointer}
 .kf:has(.kchk) .kl{visibility:hidden}
 .kfile{display:inline-flex;align-items:center;gap:10px;min-height:36px;cursor:pointer}
@@ -610,7 +615,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <tbody>
                         <sc-for list="{{brs}}" as="b" hint-placeholder-count="5">
                           <tr><td>{{b.port}}</td><td><button class="lnk mono" onClick="{{b.open}}">{{b.code}}</button></td><td>{{b.name}}</td><td>{{b.alias}}</td><td class="wa">{{b.addr}}</td><td>{{b.mob}}</td><td>{{b.tel}}</td><td>{{b.email}}</td><td class="mono">{{b.tax}}</td><td class="mono">{{b.gfs}}</td><td>{{b.act}}</td>
-                            <td class="act"><button class="btn btn-sm" onClick="{{b.copy}}">Copy</button><button class="btn btn-sm kdanger" onClick="{{b.del}}">Delete</button></td></tr>
+                            <td class="act"><span class="ibs"><button class="ib" onClick="{{b.edit}}" aria-label="Edit branch office {{b.code}}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button class="ib" onClick="{{b.copy}}" aria-label="Copy branch office {{b.code}}" title="Copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button class="ib d" onClick="{{b.del}}" aria-label="Delete branch office {{b.code}}" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path><path d="M10 11v6M14 11v6"></path></svg></button></span></td></tr>
                         </sc-for>
                       </tbody>
                     </table>
@@ -625,7 +630,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <tbody>
                         <sc-for list="{{bks}}" as="b" hint-placeholder-count="2">
                           <tr><td>{{b.ctry}}</td><td>{{b.loc}}</td><td>{{b.carrier}}</td><td>{{b.bank}}</td><td class="mono">{{b.cur}}</td><td>{{b.accName}}</td><td class="mono">{{b.accNo}}</td><td>{{b.accType}}</td><td class="mono">{{b.swift}}</td><td class="mono">{{b.pin}}</td><td class="mono">{{b.vat}}</td><td class="wa">{{b.addr}}</td><td class="mono">{{b.bankCode}}</td><td class="mono">{{b.brCode}}</td>
-                            <td class="act"><button class="btn btn-sm" onClick="{{b.edit}}">Edit</button><button class="btn btn-sm" onClick="{{b.copy}}">Copy</button><button class="btn btn-sm kdanger" onClick="{{b.del}}">Delete</button></td></tr>
+                            <td class="act"><span class="ibs"><button class="ib" onClick="{{b.edit}}" aria-label="Edit bank account {{b.cur}} {{b.accNo}}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button class="ib" onClick="{{b.copy}}" aria-label="Copy bank account {{b.cur}} {{b.accNo}}" title="Copy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button class="ib d" onClick="{{b.del}}" aria-label="Delete bank account {{b.cur}} {{b.accNo}}" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M6 6l1 14h10l1-14"></path><path d="M10 11v6M14 11v6"></path></svg></button></span></td></tr>
                         </sc-for>
                       </tbody>
                     </table>
@@ -943,7 +948,7 @@ class GirsPage extends DCLogic {
       menuOn: s.menu, menuOpen: s.menu ? 'true' : 'false', toggleMenu: () => set({ menu: !s.menu }), closeMenu: () => set({ menu: false }),
       tabs, tab1: tab === '1', tab2: tab === '2', tab3: tab === '3', cols,
       brs: corp.br.map((b) => ({ port: dash(b.port), code: b.code, name: dash(b.name), alias: dash(b.alias), addr: dash(b.addr), mob: dash(b.mob), tel: dash(b.tel), email: dash(b.email), tax: dash(b.tax), gfs: dash(b.gfs), act: dash(b.act),
-        open: () => set({ br: b.code, tab: '1' }), copy: () => openCo('copy', brBase(b)), del: () => delBr(b) })),
+        open: () => set({ br: b.code, tab: '1' }), edit: () => openCo('edit', brBase(b)), copy: () => openCo('copy', brBase(b)), del: () => delBr(b) })),
       noBrs: !corp.br.length, addBr: () => openCo('new-br', { cls: 'Branch Office', link: corp.code, ent: corp.ent, tax: corp.tax, active: true }),
       bks: corp.bk.map((b, idx) => Object.assign(Object.fromEntries(CO_BKK.map((key) => [key, dash(b[key])])), {
         edit: () => set({ k: { m: 'bk', mode: 'edit', idx, v: Object.assign({}, b) } }), copy: () => set({ k: { m: 'bk', mode: 'copy', v: Object.assign({}, b, { accNo: '' }) } }), del: () => delBk(b, idx) })),
