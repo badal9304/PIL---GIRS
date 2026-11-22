@@ -350,6 +350,20 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .bm-oa i{font-style:normal;font-size:11px;color:var(--accent2)}
 
 .bm-row4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.bm-ta{width:100%;height:auto;min-height:104px;padding-block:8px;resize:vertical;line-height:20px;box-sizing:border-box}
+.cm2-lr:has(.lbl:empty){display:none}
+.bm-acts{display:inline-flex;align-items:center;gap:10px}
+.bm-bar{width:1px;height:14px;background:var(--line)}
+.bm-sw{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 6px 0 2px;border-radius:6px;font-size:12px;font-weight:500;color:var(--muted2)}
+.bm-sw:hover{background:var(--hover)}
+.bm-sw:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bm-tr{position:relative;flex:none;width:28px;height:16px;border-radius:8px;background:var(--bdh);transition:background .15s}
+.bm-tr::after{content:"";position:absolute;top:2px;inset-inline-start:2px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(22,26,33,.25);transition:transform .15s}
+.bm-sw[aria-checked=true]{color:var(--ok)}
+.bm-sw[aria-checked=true] .bm-tr{background:var(--ok)}
+.bm-sw[aria-checked=true] .bm-tr::after{transform:translateX(12px)}
+[dir=rtl] .bm-sw[aria-checked=true] .bm-tr::after{transform:translateX(-12px)}
+@media (prefers-reduced-motion: reduce){.bm-tr,.bm-tr::after{transition:none}}
 .cmc-alias{padding:0;overflow:hidden}
 .cmc-alias .cmc-at{margin:0;border:0;border-radius:0}
 .cmc-alias .cm2-ah{padding:14px 16px;font-size:14px}
@@ -731,8 +745,8 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <td class="c-no"><button class="lnk mono" onClick="{{r.upd}}" title="{{r.updLbl}}">{{r.code}}</button></td>
                       <td>{{r.bank}}</td><td>{{r.branch}}</td><td class="mono">{{r.acct}}</td><td>{{r.ccy}}</td><td>{{r.type}}</td>
                       <td><sc-for list="{{r.tags}}" as="t" hint-placeholder-count="2"><span class="{{t.cls}}">{{t.l}}</span></sc-for><sc-if value="{{r.none}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if></td>
-                      <td><span class="chip" style="{{r.stSt}}">{{r.st}}</span></td>
-                      <td class="c-act"><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">View/Update</button></td>
+                      <td><button class="bm-sw" role="switch" aria-checked="{{r.stOn}}" aria-label="Status, {{r.code}}" title="Change status" onClick="{{r.flip}}"><span class="bm-tr" aria-hidden="true"></span><span>{{r.st}}</span></button></td>
+                      <td class="c-act"><span class="bm-acts"><button class="lnk" onClick="{{r.upd}}" aria-label="{{r.updLbl}}">View/Update</button><span class="bm-bar" aria-hidden="true"></span><button class="lnk" onClick="{{r.copy}}" aria-label="Copy {{r.code}}">Copy</button></span></td>
                     </tr>
                   </sc-for>
                 </tbody>
@@ -773,6 +787,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       </div>
                       <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
                         <input class="input" id="{{f.id}}" value="{{f.val}}" readonly="{{f.ro}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
+                      </sc-if>
+                      <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}">
+                        <textarea class="input bm-ta" id="{{f.id}}" rows="5" value="{{f.val}}" onInput="{{f.on}}"></textarea>
                       </sc-if>
                       <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}">
                         <div class="cm2-sel">
@@ -819,6 +836,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       </div>
                       <sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}">
                         <input class="input" id="{{f.id}}" value="{{f.val}}" readonly="{{f.ro}}" onInput="{{f.on}}" autocomplete="off" spellcheck="false">
+                      </sc-if>
+                      <sc-if value="{{f.isArea}}" hint-placeholder-val="{{ false }}">
+                        <textarea class="input bm-ta" id="{{f.id}}" rows="5" value="{{f.val}}" onInput="{{f.on}}"></textarea>
                       </sc-if>
                       <sc-if value="{{f.isSel}}" hint-placeholder-val="{{ false }}">
                         <div class="cm2-sel">
@@ -884,30 +904,33 @@ const BM_SECS = [
   ['Account Details', 'Which account receives or pays the money?'],
   ['Usage & Assignment', 'Where is the account used?'],
   ['Accounting & Integration', 'How is the account posted and reconciled?'],
-  ['Record Control', 'Is the account active and for which period?']
+  ['Record Control', 'Is the account active and for which period?'],
+  ['T&C', 'Terms and conditions for this account']
 ];
-const BM_KEYS = ['code', 'bank', 'branch', 'swift', 'local', 'country', 'city', 'addr', 'holder', 'acct', 'iban', 'ccy', 'type', 'ent', 'off', 'gl', 'cgl', 'gfs', 'fmt', 'st', 'from', 'to'];
+const BM_KEYS = ['code', 'bank', 'branch', 'swift', 'local', 'country', 'city', 'addr', 'holder', 'acct', 'iban', 'ccy', 'type', 'ent', 'off', 'gl', 'cgl', 'gfs', 'fmt', 'st', 'from', 'to', 'org', 'carrier', 'brCode', 'pin', 'vat', 'tnc'];
+// Fields from the client sheet WF_Bank Master: Organization Type, Carrier, Branch Code, Tax Registration No (PIN No.), VAT No., T&C
+const BM_ORG = ['Company', 'Customer'];
 const SG_A = ['Singapore', '12 Marina Boulevard, DBS Asia Central, Singapore 018982', 'Pacific International Lines (Pte) Ltd'];
 const MY_A = ['Port Klang', 'Jalan Pelabuhan Utara, 42000 Port Klang, Selangor', 'PIL (Malaysia) Sdn Bhd'];
 const IN_A = ['Mumbai', 'Maneckji Wadia Building, Nanik Motwani Marg, Fort, Mumbai 400001', 'PIL India Pvt Ltd'];
 const TH_A = ['Chonburi', 'Sukhumvit Road, Thung Sukhla, Si Racha, Chonburi 20230', 'PIL (Thailand) Co., Ltd'];
 const BM_SEED = [
-  ['DBSSG01', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912345-6', '', 'SGD', 'Collection', 'PIL', 'SIN', '101110', '651110', 'SG-DBS-SGD', 'CAMT.053', 'Active', '2024-01-01', ''],
-  ['DBSSG02', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912350-1', '', 'SGD', 'Current', 'PIL', 'SIN', '101111', '651110', 'SG-DBS-SGD2', 'CAMT.053', 'Active', '2024-01-01', ''],
-  ['OCBCSG01', 'OCBC Bank', 'Chulia Street', 'OCBCSGSG', '7339', 'SG', SG_A[0], '65 Chulia Street, OCBC Centre, Singapore 049513', SG_A[2], '501-234567-001', '', 'SGD', 'Current', 'PIL', 'SIN', '101112', '651130', 'SG-OCBC-SGD', 'MT940', 'Active', '2024-01-01', ''],
-  ['DBSSG03', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912346-4', '', 'USD', 'Current', 'PIL', 'SIN', '101120', '651110', 'SG-DBS-USD', 'CAMT.053', 'Active', '2024-01-01', ''],
-  ['CITISG01', 'Citibank N.A.', 'Singapore Branch', 'CITISGSG', '7214', 'SG', SG_A[0], '8 Marina View, Asia Square Tower 1, Singapore 018960', SG_A[2], '0-104588-019', '', 'USD', 'Collection', 'PIL', 'SIN', '101130', '651120', 'SG-CITI-USD', 'MT940', 'Active', '2024-03-01', ''],
-  ['MBBMY01', 'Malayan Banking Berhad (Maybank)', 'Port Klang Branch', 'MBBEMYKL', '27', 'MY', MY_A[0], MY_A[1], MY_A[2], '5123-4560-0981', '', 'MYR', 'Collection', 'PIL', 'PKG', '102110', '652110', 'MY-MBB-MYR', 'MT940', 'Active', '2024-01-01', ''],
-  ['CIMBMY01', 'CIMB Bank Berhad', 'Klang Branch', 'CIBBMYKL', '35', 'MY', MY_A[0], 'Jalan Tengku Kelana, 41000 Klang, Selangor', MY_A[2], '8001-2233-4455', '', 'MYR', 'Current', 'PIL', 'PKG', '102111', '652110', 'MY-CIMB-MYR', 'MT940', 'Active', '2024-01-01', ''],
-  ['MBBMY02', 'Malayan Banking Berhad (Maybank)', 'Port Klang Branch', 'MBBEMYKL', '27', 'MY', MY_A[0], MY_A[1], MY_A[2], '5123-4560-1173', '', 'USD', 'Current', 'PIL', 'PKG', '102120', '652110', 'MY-MBB-USD', 'MT940', 'Active', '2024-01-01', ''],
-  ['ICICIN01', 'ICICI Bank Ltd', 'Nhava Sheva Branch', 'ICICINBB', 'ICIC0001234', 'IN', 'Navi Mumbai', 'JNPT Township, Sheva, Navi Mumbai 400707', IN_A[2], '123405001122', '', 'INR', 'Virtual', 'PIL', 'NSA', '103130', '653120', 'IN-ICICI-INR', 'CSV', 'Active', '2025-04-01', ''],
-  ['HDFCIN01', 'HDFC Bank Ltd', 'Fort, Mumbai', 'HDFCINBB', 'HDFC0000060', 'IN', IN_A[0], IN_A[1], IN_A[2], '50200012345678', '', 'INR', 'Current', 'PIL', 'NSA', '103110', '653110', 'IN-HDFC-INR', 'CSV', 'Active', '2024-01-01', ''],
-  ['HDFCIN02', 'HDFC Bank Ltd', 'Fort, Mumbai', 'HDFCINBB', 'HDFC0000060', 'IN', IN_A[0], IN_A[1], IN_A[2], '50200098765432', '', 'USD', 'Current', 'PIL', 'NSA', '103120', '653110', 'IN-HDFC-USD', 'CSV', 'Active', '2024-01-01', ''],
-  ['BBLTH01', 'Bangkok Bank Public Company Ltd', 'Laem Chabang Branch', 'BKKBTHBK', '002', 'TH', TH_A[0], TH_A[1], TH_A[2], '219-3-04567-8', '', 'THB', 'Current', 'PIL', 'LCH', '104110', '654110', 'TH-BBL-THB', 'MT940', 'Active', '2024-01-01', ''],
-  ['BBLTH02', 'Bangkok Bank Public Company Ltd', 'Laem Chabang Branch', 'BKKBTHBK', '002', 'TH', TH_A[0], TH_A[1], TH_A[2], '219-3-04568-6', '', 'USD', 'Current', 'PIL', 'LCH', '104120', '654110', 'TH-BBL-USD', 'MT940', 'Active', '2024-01-01', ''],
-  ['SNBSA01', 'Saudi National Bank', 'Jeddah Main Branch', 'NCBKSAJE', '10', 'SA', 'Jeddah', 'King Abdulaziz Road, Al Baghdadiyah Al Gharbiyah, Jeddah 21411', 'PIL Saudi Arabia LLC', '10000123456700', 'SA4410000010000123456700', 'SAR', 'Current', 'PIL', 'JED', '105110', '655110', 'SA-SNB-SAR', 'MT940', 'Active', '2024-01-01', ''],
-  ['BBVAMX01', 'BBVA México', 'Manzanillo', 'BCMRMXMM', '012', 'MX', 'Manzanillo', 'Av. Teniente Azueta 21, Burócrata, 28250 Manzanillo, Colima', 'PIL México S.A. de C.V.', '0123456789', '', 'MXN', 'Current', 'PIL', 'ZLO', '106110', '656110', 'MX-BBVA-MXN', 'CAMT.053', 'Active', '2024-06-01', ''],
-  ['BOCCN01', 'Bank of China', 'Shanghai Branch', 'BKCHCNBJ300', '104290003033', 'CN', 'Shanghai', '200 Yincheng Middle Road, Pudong, Shanghai 200120', 'PIL Shipping (China) Co., Ltd', '4520 6011 8899', '', 'CNY', 'Current', 'PIL', 'SHA', '107110', '657110', 'CN-BOC-CNY', 'MT940', 'Active', '2024-01-01', '']
+  ['DBSSG01', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912345-6', '', 'SGD', 'Collection', 'PIL', 'SIN', '101110', '651110', 'SG-DBS-SGD', 'CAMT.053', 'Active', '2024-01-01', '', 'Company', 'PIL', '001', 'P051101234A', 'M2-0012345-6', ''],
+  ['DBSSG02', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912350-1', '', 'SGD', 'Current', 'PIL', 'SIN', '101111', '651110', 'SG-DBS-SGD2', 'CAMT.053', 'Active', '2024-01-01', '', 'Company', 'PIL', '001', 'P051101234A', 'M2-0012345-6', ''],
+  ['OCBCSG01', 'OCBC Bank', 'Chulia Street', 'OCBCSGSG', '7339', 'SG', SG_A[0], '65 Chulia Street, OCBC Centre, Singapore 049513', SG_A[2], '501-234567-001', '', 'SGD', 'Current', 'PIL', 'SIN', '101112', '651130', 'SG-OCBC-SGD', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '501', 'P051101234A', 'M2-0012345-6', ''],
+  ['DBSSG03', 'DBS Bank Ltd', 'Marina Bay Financial Centre', 'DBSSSGSG', '7171', 'SG', SG_A[0], SG_A[1], SG_A[2], '003-912346-4', '', 'USD', 'Current', 'PIL', 'SIN', '101120', '651110', 'SG-DBS-USD', 'CAMT.053', 'Active', '2024-01-01', '', 'Company', 'PIL', '001', 'P051101234A', 'M2-0012345-6', ''],
+  ['CITISG01', 'Citibank N.A.', 'Singapore Branch', 'CITISGSG', '7214', 'SG', SG_A[0], '8 Marina View, Asia Square Tower 1, Singapore 018960', SG_A[2], '0-104588-019', '', 'USD', 'Collection', 'PIL', 'SIN', '101130', '651120', 'SG-CITI-USD', 'MT940', 'Active', '2024-03-01', '', 'Company', 'PIL', '001', 'P051101234A', 'M2-0012345-6', ''],
+  ['MBBMY01', 'Malayan Banking Berhad (Maybank)', 'Port Klang Branch', 'MBBEMYKL', '27', 'MY', MY_A[0], MY_A[1], MY_A[2], '5123-4560-0981', '', 'MYR', 'Collection', 'PIL', 'PKG', '102110', '652110', 'MY-MBB-MYR', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '514', 'C 1234567890', 'W10-1808-31000456', ''],
+  ['CIMBMY01', 'CIMB Bank Berhad', 'Klang Branch', 'CIBBMYKL', '35', 'MY', MY_A[0], 'Jalan Tengku Kelana, 41000 Klang, Selangor', MY_A[2], '8001-2233-4455', '', 'MYR', 'Current', 'PIL', 'PKG', '102111', '652110', 'MY-CIMB-MYR', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '800', 'C 1234567890', 'W10-1808-31000456', ''],
+  ['MBBMY02', 'Malayan Banking Berhad (Maybank)', 'Port Klang Branch', 'MBBEMYKL', '27', 'MY', MY_A[0], MY_A[1], MY_A[2], '5123-4560-1173', '', 'USD', 'Current', 'PIL', 'PKG', '102120', '652110', 'MY-MBB-USD', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '514', 'C 1234567890', 'W10-1808-31000456', ''],
+  ['ICICIN01', 'ICICI Bank Ltd', 'Nhava Sheva Branch', 'ICICINBB', 'ICIC0001234', 'IN', 'Navi Mumbai', 'JNPT Township, Sheva, Navi Mumbai 400707', IN_A[2], '123405001122', '', 'INR', 'Virtual', 'PIL', 'NSA', '103130', '653120', 'IN-ICICI-INR', 'CSV', 'Active', '2025-04-01', '', 'Company', 'PIL', '001234', 'AABCP1234C', '27AABCP1234C1Z5', ''],
+  ['HDFCIN01', 'HDFC Bank Ltd', 'Fort, Mumbai', 'HDFCINBB', 'HDFC0000060', 'IN', IN_A[0], IN_A[1], IN_A[2], '50200012345678', '', 'INR', 'Current', 'PIL', 'NSA', '103110', '653110', 'IN-HDFC-INR', 'CSV', 'Active', '2024-01-01', '', 'Company', 'PIL', '000060', 'AABCP1234C', '27AABCP1234C1Z5', ''],
+  ['HDFCIN02', 'HDFC Bank Ltd', 'Fort, Mumbai', 'HDFCINBB', 'HDFC0000060', 'IN', IN_A[0], IN_A[1], IN_A[2], '50200098765432', '', 'USD', 'Current', 'PIL', 'NSA', '103120', '653110', 'IN-HDFC-USD', 'CSV', 'Active', '2024-01-01', '', 'Company', 'PIL', '000060', 'AABCP1234C', '27AABCP1234C1Z5', ''],
+  ['BBLTH01', 'Bangkok Bank Public Company Ltd', 'Laem Chabang Branch', 'BKKBTHBK', '002', 'TH', TH_A[0], TH_A[1], TH_A[2], '219-3-04567-8', '', 'THB', 'Current', 'PIL', 'LCH', '104110', '654110', 'TH-BBL-THB', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '0219', '0105536000123', '0105536000123', ''],
+  ['BBLTH02', 'Bangkok Bank Public Company Ltd', 'Laem Chabang Branch', 'BKKBTHBK', '002', 'TH', TH_A[0], TH_A[1], TH_A[2], '219-3-04568-6', '', 'USD', 'Current', 'PIL', 'LCH', '104120', '654110', 'TH-BBL-USD', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '0219', '0105536000123', '0105536000123', ''],
+  ['SNBSA01', 'Saudi National Bank', 'Jeddah Main Branch', 'NCBKSAJE', '10', 'SA', 'Jeddah', 'King Abdulaziz Road, Al Baghdadiyah Al Gharbiyah, Jeddah 21411', 'PIL Saudi Arabia LLC', '10000123456700', 'SA4410000010000123456700', 'SAR', 'Current', 'PIL', 'JED', '105110', '655110', 'SA-SNB-SAR', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '001', '300123456700003', '300123456700003', ''],
+  ['BBVAMX01', 'BBVA México', 'Manzanillo', 'BCMRMXMM', '012', 'MX', 'Manzanillo', 'Av. Teniente Azueta 21, Burócrata, 28250 Manzanillo, Colima', 'PIL México S.A. de C.V.', '0123456789', '', 'MXN', 'Current', 'PIL', 'ZLO', '106110', '656110', 'MX-BBVA-MXN', 'CAMT.053', 'Active', '2024-06-01', '', 'Company', 'PIL', '0171', 'PME950101AB1', 'PME950101AB1', ''],
+  ['BOCCN01', 'Bank of China', 'Shanghai Branch', 'BKCHCNBJ300', '104290003033', 'CN', 'Shanghai', '200 Yincheng Middle Road, Pudong, Shanghai 200120', 'PIL Shipping (China) Co., Ltd', '4520 6011 8899', '', 'CNY', 'Current', 'PIL', 'SHA', '107110', '657110', 'CN-BOC-CNY', 'MT940', 'Active', '2024-01-01', '', 'Company', 'PIL', '300', '91310000MA1FL12345', '91310000MA1FL12345', '']
 ];
 // Country → currency → purpose → account code ('' = not assigned yet)
 const BM_ASG = {
@@ -923,7 +946,12 @@ const bmBuild = () => BM_SEED.map((r) => { const o = {}; BM_KEYS.forEach((k, i) 
 const bmLoad = () => {
   let v = null;
   try { v = JSON.parse(localStorage.getItem('girs.bm2') || 'null'); } catch (e) {}
-  return v && Array.isArray(v.recs) && v.asg ? v : { recs: bmBuild(), asg: JSON.parse(JSON.stringify(BM_ASG)) };
+  if (v && Array.isArray(v.recs) && v.asg) {
+    const seed = bmBuild();
+    v.recs = v.recs.map((r) => { const s0 = seed.find((x) => x.code === r.code) || {}; const o = Object.assign({}, r); ['org', 'carrier', 'brCode', 'pin', 'vat', 'tnc'].forEach((k) => { if (o[k] === undefined) o[k] = s0[k] || ''; }); return o; });
+    return v;
+  }
+  return { recs: bmBuild(), asg: JSON.parse(JSON.stringify(BM_ASG)) };
 };
 const bmStore = (recs, asg) => { try { localStorage.setItem('girs.bm2', JSON.stringify({ recs, asg })); } catch (e) {} };
 const bmShort = (b) => (/\((.+)\)/.exec(String(b || '')) || [])[1] || String(b || '').replace(/\s*\(.*\)/, '').replace(/ (Public Company|Berhad|Bank Ltd|Ltd|N\.A\.).*$/, '').trim();
@@ -950,18 +978,20 @@ const bmDetail = (self, s) => {
   const uses = s.isNew ? [] : bmUses(s.asg, d.code);
   const usesTxt = uses.length ? uses.map((u) => u.l + ' (' + u.ccy + ')').join(', ') : 'Not assigned to any purpose';
   const secs = [
-    [txt('code', 'Bank Code', { ro: !s.isNew }), txt('bank', 'Bank Name', { span: 'grid-column: span 2' }), txt('branch', 'Branch Name', { span: 'grid-column: span 2' }), txt('swift', 'SWIFT / BIC'),
-      txt('local', 'Local Bank Code'), sel('country', 'Country', coded(BM_COUNTRY), { ro: !s.isNew }), txt('city', 'City'), txt('addr', 'Branch Address', { span: 'grid-column: span 3' })],
-    [txt('holder', 'Account Holder Name', { span: 'grid-column: 1 / -1' }), txt('acct', 'Account No.'), sel('ccy', 'Account Currency', plain(BM_CCY), { ro: !s.isNew }), txt('iban', 'IBAN'), sel('type', 'Account Type', plain(BM_TYPE))],
-    [sel('ent', 'Entity', plain(BM_ENT)), sel('off', 'Office', Object.keys(BM_OFF).map((o) => ({ v: o, l: BM_OFF[o] }))), txt('uses', 'Assigned Purposes', { val: usesTxt, ro: true, span: 'grid-column: 1 / -1' })],
+    [txt('code', 'Bank Code', { ro: !s.isNew }), txt('bank', 'Bank Name', { span: 'grid-column: span 2' }), txt('branch', 'Branch Name', { span: 'grid-column: span 2' }), txt('brCode', 'Branch Code'),
+      txt('swift', 'SWIFT / BIC'), txt('local', 'Local Bank Code'), sel('country', 'Country', coded(BM_COUNTRY), { ro: !s.isNew }), txt('city', 'City'), txt('addr', 'Branch Address', { span: 'grid-column: span 2' })],
+    [txt('holder', 'Account Holder Name', { span: 'grid-column: 1 / -1' }), txt('acct', 'Account No.'), sel('ccy', 'Account Currency', plain(BM_CCY), { ro: !s.isNew }), txt('iban', 'IBAN'), sel('type', 'Account Type', plain(BM_TYPE)),
+      txt('pin', 'Tax Registration No (PIN No.)'), txt('vat', 'VAT No.')],
+    [sel('org', 'Organization Type', [{ v: '', l: 'Select' }].concat(plain(BM_ORG))), sel('ent', 'Entity', plain(BM_ENT)), txt('carrier', 'Carrier'), sel('off', 'Office', Object.keys(BM_OFF).map((o) => ({ v: o, l: BM_OFF[o] }))), txt('uses', 'Assigned Purposes', { val: usesTxt, ro: true, span: 'grid-column: 1 / -1' })],
     [txt('gl', 'Bank G/L Account'), txt('cgl', 'Bank Charges G/L'), txt('gfs', 'GFS Bank Code'), sel('fmt', 'Statement Format', plain(BM_FMT))],
-    [sel('st', 'Status', plain(BM_STAT), { span: 'grid-column: 1 / -1' }), txt('from', 'Effective From'), txt('to', 'Effective To')]
+    [sel('st', 'Status', plain(BM_STAT), { span: 'grid-column: 1 / -1' }), txt('from', 'Effective From'), txt('to', 'Effective To')],
+    [Object.assign(id('tnc'), { label: '', help: '', isArea: true, val: d.tnc || '', ro: false, span: 'grid-column: 1 / -1', on: (e) => put({ tnc: e.target.value }) })]
   ];
-  const sec = (i) => ({ hid: 'bm-s' + i, title: BM_SECS[i][0], sub: BM_SECS[i][1], span: '', cols: i === 0 ? 'grid-template-columns: repeat(6, minmax(0, 1fr))' : 'grid-template-columns: repeat(2, minmax(0, 1fr))', fields: secs[i] });
+  const sec = (i) => ({ hid: 'bm-s' + i, title: BM_SECS[i][0], sub: BM_SECS[i][1], span: i === 5 ? 'grid-column: 1 / -1' : '', cols: i === 0 ? 'grid-template-columns: repeat(6, minmax(0, 1fr))' : 'grid-template-columns: repeat(2, minmax(0, 1fr))', fields: secs[i] });
   return {
-    code: s.isNew ? 'New' : d.code, name: s.isNew ? 'New Bank Account' : d.bank + ' · ' + d.ccy, ro: false, rw: true,
-    main: [sec(0)], side: [sec(1), sec(2), sec(3), sec(4)],
-    cancel: () => self.setState({ open: false, draft: null }),
+    code: s.isNew ? 'New' : d.code, name: s.isNew ? (s.copyOf ? 'Copy of ' + s.copyOf : 'New Bank Account') : d.bank + ' · ' + d.ccy, ro: false, rw: true,
+    main: [sec(0)], side: [sec(1), sec(2), sec(3), sec(4), sec(5)],
+    cancel: () => self.setState({ open: false, draft: null, copyOf: '' }),
     save: () => {
       const code = String(d.code || '').trim().toUpperCase();
       if (!code || !String(d.bank || '').trim() || !String(d.acct || '').trim()) return self.setState({ __toast: 'Enter Bank Code, Bank Name and Account No.' });
@@ -972,11 +1002,11 @@ const bmDetail = (self, s) => {
       asg[rec.country] = asg[rec.country] || {};
       asg[rec.country][rec.ccy] = asg[rec.country][rec.ccy] || { rec: '', pay: '', inv: '', ref: '' };
       bmStore(recs, asg);
-      self.setState({ recs, asg, draft: null, open: false, sel: code, cty: rec.country, __toast: 'Bank account ' + code + ' saved.' });
+      self.setState({ recs, asg, draft: null, open: false, copyOf: '', sel: code, cty: rec.country, __toast: 'Bank account ' + code + ' saved.' });
     }
   };
 };
-const bmOpen = (self, s, code) => { const r = s.recs.find((x) => x.code === code); self.setState({ open: true, isNew: false, sel: code, draft: JSON.parse(JSON.stringify(r)) }); };
+const bmOpen = (self, s, code) => { const r = s.recs.find((x) => x.code === code); self.setState({ open: true, isNew: false, copyOf: '', sel: code, draft: JSON.parse(JSON.stringify(r)) }); };
 const bmEsc = (self) => { try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !document.querySelector('.menu')) self.setState({ open: false, draft: null, pick: null }); }); } catch (e) {} };
 
 // Version 1 — Country workspace: pick a country, set the account for each purpose per currency, see its accounts.
@@ -1028,9 +1058,12 @@ class GirsPage extends DCLogic {
       accts: accts.map((r) => ({
         code: r.code, bank: r.bank, branch: r.branch, acct: r.acct, ccy: r.ccy, type: r.type, st: r.st, stSt: bmStatSt(r.st), cls: r.code === s.sel ? 'on' : '',
         tags: bmUses(s.asg, r.code).filter((u) => u.ccy === r.ccy).map((u) => ({ l: u.l, cls: 'chip ' + ({ rec: 't-info', pay: 't-neutral', inv: 't-ok', ref: 't-warn' }[u.k] || 't-neutral') })), none: !bmUses(s.asg, r.code).length,
-        upd: () => bmOpen(self, s, r.code), updLbl: 'View/Update ' + r.code
+        upd: () => bmOpen(self, s, r.code), updLbl: 'View/Update ' + r.code,
+        stOn: r.st === 'Active' ? 'true' : 'false',
+        flip: (e) => { if (e && e.stopPropagation) e.stopPropagation(); const st = r.st === 'Active' ? 'Inactive' : 'Active'; const recs = s.recs.map((x) => (x.code === r.code ? Object.assign({}, x, { st }) : x)); bmStore(recs, s.asg); self.setState({ recs, __toast: r.code + ' is now ' + st + '.' }); },
+        copy: (e) => { if (e && e.stopPropagation) e.stopPropagation(); self.setState({ open: true, isNew: true, copyOf: r.code, sel: r.code, draft: Object.assign(JSON.parse(JSON.stringify(r)), { code: '', acct: '', iban: '', st: 'Active' }) }); }
       })),
-      addAcct: () => self.setState({ open: true, isNew: true, draft: null })
+      addAcct: () => self.setState({ open: true, isNew: true, copyOf: '', draft: null })
     };
     return {
       tabs: { isDetail: !!s.open },
