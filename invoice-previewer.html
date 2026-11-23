@@ -114,6 +114,20 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .ar{font-family:'IBM Plex Sans Arabic',sans-serif}
 .inv th{position:static;height:auto;background:none;font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line3)}
 .inv td{height:auto;padding:9px 10px;vertical-align:top}
+.inv table{width:100%}.inv .fx-t th,.inv .fx-t td{padding-inline:6px}
+.mk .fx{outline:2px dashed var(--accent);outline-offset:2px;border-radius:4px}
+.ivgrid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:16px 0}
+.ivbill{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ivship{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 14px;align-content:start}
+.ivf{display:flex;flex-direction:column;gap:3px;min-width:0;padding:2px}
+.ivf b{font-size:12px;font-weight:500;line-height:17px;overflow-wrap:anywhere}
+.ivf small,.route small,.roe small{font-size:12px;color:var(--muted)}
+.ivf.w3{grid-column:1 / -1}
+.route{display:flex;gap:0;flex-wrap:wrap}
+.rt{display:flex;flex-direction:column;padding-inline-end:22px;margin-inline-end:10px;position:relative}
+.rt:not(:last-child)::after{content:'→';position:absolute;inset-inline-end:0;top:8px;color:var(--muted)}
+.roe{display:flex;gap:28px;flex-wrap:wrap}.roe span{display:flex;flex-direction:column}
+.bkr{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;margin-top:4px}.bkr span:nth-child(odd){color:var(--muted)}
 .inv tbody tr:hover td{background:none}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -413,7 +427,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Invoice, credit note and debit note rendering with mandatory legal fields, statutory QR and gapless numbering</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
-
+            <a class="btn" href="invoice-pdf.html" target="_blank" rel="noopener" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>View PDF</a>
+            <a class="btn btn-primary" href="PIL-Tax-Invoice-NSAIF2601042.pdf" download="PIL-Tax-Invoice-NSAIF2601042.pdf" style="text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M5 21h14"></path></svg>Download PDF</a>
           </div>
         </div>
       </div>
@@ -475,13 +490,12 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <section class="card">
               <div class="card-head">
                 <h2 class="card-title">Mandatory legal fields</h2>
-                <span class="mono card-meta">8 of 19 named</span>
+                <span class="mono card-meta">19 fields</span>
               </div>
               <ol class="r-g2m" style="margin: 0; padding: 8px 16px 12px; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 8px">
-                <sc-for list="{{fields}}" as="f" hint-placeholder-count="8">
-                  <li style="display: flex; align-items: center; height: 28px; font-size: 12px"><span class="badge">{{f.n}}</span>{{f.label}}</li>
+                <sc-for list="{{fields}}" as="f" hint-placeholder-count="19">
+                  <li style="display: flex; align-items: center; min-height: 28px; font-size: 12px; line-height: 16px"><span class="badge" style="flex: none">{{f.n}}</span>{{f.label}}</li>
                 </sc-for>
-                <li style="grid-column: span 2; display: flex; align-items: center; height: 28px; font-size: 12px; color: var(--muted)"><span class="badge" style="background: var(--muted4)">9–19</span>[11 fields — to be confirmed in T1-06]</li>
               </ol>
             </section>
 
@@ -517,98 +531,100 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </aside>
 
           <section class="r-col" style="flex: 999 1 720px; min-width: 0; background: var(--canvas); border-radius: 8px; padding: 16px 24px; display: flex; justify-content: center; align-items: flex-start; overflow: auto; box-sizing: border-box">
-            <article class="paper r-paper" aria-label="Invoice preview" style="width: 100%; max-width: 820px; min-width: 640px; background: var(--surface); box-shadow: 0 1px 3px rgba(22,26,33,.12), 0 8px 24px rgba(22,26,33,.08); padding: 28px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+            <article class="paper r-paper {{mkCls}}" aria-label="Invoice preview" style="width: 100%; max-width: 860px; min-width: 640px; background: var(--surface); box-shadow: 0 1px 3px rgba(22,26,33,.12), 0 8px 24px rgba(22,26,33,.08); padding: 32px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
               <div class="r-wrap" style="display: flex; justify-content: space-between; gap: 24px; align-items: flex-start">
-                <div style="display: flex; flex-direction: column; gap: 6px; padding: 4px; border-radius: 4px; outline: {{hl}}">
-                  <div style="font-size: 18px; font-weight: 700; letter-spacing: .02em"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">1</span></sc-if>Pacific International Lines</div>
-                  <div style="font-size: 12px; color: var(--muted)">[Local company name &amp; address]</div>
+                <div class="fx" style="display: flex; flex-direction: column; gap: 3px; max-width: 440px">
+                  <div style="font-size: 16px; font-weight: 700"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">1</span></sc-if>{{co.name}}</div>
+                  <div style="font-size: 12px; line-height: 17px; color: var(--muted2)">{{co.agency}}</div>
+                  <div style="font-size: 12px; line-height: 17px; color: var(--muted2)">{{co.addr}}</div>
+                  <sc-for list="{{co.tax}}" as="t" hint-placeholder-count="1"><div style="font-size: 12px; line-height: 17px"><span style="color: var(--muted)">{{t.l}}: </span><span class="mono">{{t.v}}</span></div></sc-for>
                 </div>
                 <div style="text-align: end; display: flex; flex-direction: column; gap: 4px">
-                  <div style="font-size: 20px; font-weight: 700; color: var(--ink)">{{docTitle}}</div>
+                  <div style="font-size: 22px; font-weight: 700; color: var(--ink)">{{docTitle}}</div>
                   <sc-if value="{{bilingual}}" hint-placeholder-val="{{ false }}">
                     <div class="{{altClass}}" style="font-size: 16px; font-weight: 600; color: var(--ink)">{{docTitleAlt}}</div>
                   </sc-if>
-                  <div class="mono" style="font-size: 13px">{{currentNo}}</div>
+                  <div class="mono" style="font-size: 14px; font-weight: 500">{{currentNo}}</div>
                   <sc-if value="{{isCredit}}" hint-placeholder-val="{{ false }}">
                     <div class="mono" style="font-size: 12px; color: var(--muted)">Ref. invoice: {{refNo}}</div>
                   </sc-if>
                 </div>
               </div>
 
-              <div class="r-g2m" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 4px; border-radius: 4px; outline: {{hl}}">
-                <div><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">2</span></sc-if>Tax ID — Corporate HQ</span><div class="mono" style="font-size: 13px; margin-top: 4px">[HQ tax registration no.]</div></div>
-                <sc-if value="{{dualTax}}" hint-placeholder-val="{{ true }}">
-                  <div><span class="k">Tax ID — Local Agency GSTIN</span><div class="mono" style="font-size: 13px; margin-top: 4px">[Local agency GSTIN]</div></div>
-                </sc-if>
-              </div>
-
-              <div class="r-gs" style="display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 16px; border-top: 1px solid var(--line2); border-bottom: 1px solid var(--line2); padding: 16px 0">
-                <div style="display: flex; flex-direction: column; gap: 4px">
+              <div class="ivgrid">
+                <div class="ivbill">
                   <span class="k">Billed to</span>
-                  <span style="font-size: 13px">[Billed-To party]</span>
-                  <span class="mono" style="font-size: 12px; color: var(--muted)">Customer code: [Customer code]</span>
-                  <span class="mono" style="font-size: 12px; color: var(--muted)">[Customer tax ID]</span>
-                  <span class="k" style="margin-top: 8px">Customer reference no.</span>
-                  <span class="mono" style="font-size: 12px">[Customer reference]</span>
-                  <span class="k" style="margin-top: 8px">Due date</span>
-                  <span class="mono" style="font-size: 12px">[Due date]</span>
+                  <span style="font-size: 14px; font-weight: 600">{{cust.name}}</span>
+                  <span style="font-size: 12px; line-height: 17px; color: var(--muted2)">{{cust.addr}}</span>
+                  <span style="font-size: 12px"><span style="color: var(--muted)">Tax ID: </span><span class="mono">{{cust.tax}}</span></span>
+                  <div class="fx ivf" style="margin-top: 6px"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">7</span></sc-if>Customer code</span><b class="mono">{{cust.code}}</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">11</span></sc-if>Customer reference no.</span><b class="mono">{{cust.ref}}</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">12</span></sc-if>Due date</span><b class="mono">{{due}}</b><small>{{dueNote}}</small></div>
                 </div>
-                <div class="r-g3" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px">
-                  <div style="padding: 2px; border-radius: 4px; outline: {{hl}}"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">3</span></sc-if>B/L #</span><div class="mono" style="font-size: 12px; margin-top: 2px">BL-SG-24001</div></div>
-                  <div style="padding: 2px; border-radius: 4px; outline: {{hl}}"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">4</span></sc-if>Voyage (VVD)</span><div class="mono" style="font-size: 12px; margin-top: 2px">Vessel 01 / 012E</div></div>
-                  <div style="padding: 2px; border-radius: 4px; outline: {{hl}}"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">5</span></sc-if>POL / POD</span><div class="mono" style="font-size: 12px; margin-top: 2px">{{polpod}}</div></div>
-                  <div style="padding: 2px"><span class="k">{{etLabel}}</span><div class="mono" style="font-size: 12px; margin-top: 2px">[Date]</div></div>
-                  <div style="padding: 2px"><span class="k">Shipment no.</span><div class="mono" style="font-size: 12px; margin-top: 2px">[Shipment no.]</div></div>
-                  <div style="padding: 2px"><span class="k">POR / DEL</span><div class="mono" style="font-size: 12px; margin-top: 2px">[POR] / [DEL]</div></div>
-                  <div style="padding: 2px"><span class="k">Container no.</span><div class="mono" style="font-size: 12px; margin-top: 2px">[Container no.]</div></div>
-                  <div style="padding: 2px"><span class="k">{{partyLabel}}</span><div style="font-size: 12px; margin-top: 2px">[{{partyLabel}} name]</div></div>
-                  <div style="padding: 2px"><span class="k">Cargo gross weight</span><div class="mono" style="font-size: 12px; margin-top: 2px">[Weight]</div></div>
+                <div class="ivship">
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">2</span></sc-if>VVD (Vessel / Voyage / Direction)</span><b class="mono">{{vvd}}</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">3</span></sc-if>{{etLabel}}</span><b class="mono">{{etDate}}</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">4</span></sc-if>Shipment / B/L no.</span><b class="mono">PILB120260901</b></div>
+                  <div class="fx ivf w3"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">5</span></sc-if>Routing</span><span class="route"><sc-for list="{{route}}" as="r" hint-placeholder-count="4"><span class="rt"><small>{{r.k}}</small><b class="mono">{{r.v}}</b></span></sc-for></span></div>
+                  <div class="fx ivf w3"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">6</span></sc-if>Container no.</span><b class="mono">PILU8291044 (40HC) · PILU8291051 (40HC)</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">8</span></sc-if>Shipper</span><b>{{shipper}}</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">9</span></sc-if>Consignee</span><b>{{consignee}}</b></div>
+                  <div class="fx ivf"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">10</span></sc-if>Cargo gross weight</span><b class="mono">42,860.000 KGS</b></div>
+                  <div class="fx ivf w3"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">18</span></sc-if>Exchange rate (ROE)</span><span class="roe"><sc-for list="{{roe}}" as="r" hint-placeholder-count="2"><span><small>{{r.k}}</small><b class="mono">{{r.v}}</b></span></sc-for></span></div>
                 </div>
               </div>
 
-              <div class="inv" style="padding: 4px; border-radius: 4px; outline: {{hl}}">
+              <div class="inv fx">
+                <div class="k" style="margin: 0 0 6px 2px"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">19</span></sc-if>Itemized charges &amp; tax breakdown</div>
                 <table>
-                  <thead><tr><th>Description</th><th>Schedule</th><th>Ccy</th><th class="r">Amount</th></tr></thead>
-                  <tbody>
+                  <thead class="fx-t"><tr><th>Charge code</th><th>Description</th><th class="r">Qty</th><th class="r">Unit rate</th><th>Ccy</th><th class="r">Net amount</th><th class="r">Tax rate</th><th class="r">Tax amount</th></tr></thead>
+                  <tbody class="fx-t">
                     <sc-for list="{{lines}}" as="ln" hint-placeholder-count="4">
                       <tr>
-                        <td style="font-size: 13px"><sc-if value="{{ln.mark}}" hint-placeholder-val="{{ false }}"><span class="badge">{{ln.badge}}</span></sc-if>{{ln.desc}}</td>
-                        <td style="font-size: 12px; color: var(--muted)">{{ln.sched}}</td>
+                        <td class="mono" style="font-size: 13px; font-weight: 600">{{ln.code}}</td>
+                        <td style="font-size: 13px">{{ln.desc}}</td>
+                        <td class="mono r" style="font-size: 13px">{{ln.qty}}</td>
+                        <td class="mono r" style="font-size: 13px">{{ln.rate}}</td>
                         <td class="mono" style="font-size: 13px">{{ln.ccy}}</td>
                         <td class="mono r" style="font-size: 13px">{{ln.amt}}</td>
+                        <td class="mono r" style="font-size: 13px">{{ln.tr}}</td>
+                        <td class="mono r" style="font-size: 13px">{{ln.tax}}</td>
                       </tr>
                     </sc-for>
                   </tbody>
                 </table>
-              </div>
-
-              <div class="r-wrap" style="display: flex; justify-content: space-between; gap: 24px; align-items: flex-end">
-                <div class="r-wrap" style="display: flex; gap: 16px; align-items: flex-end">
-                  <div aria-label="Statutory QR code placeholder" role="img" style="width: 105px; height: 105px; display: grid; grid-template-columns: repeat(21, minmax(0, 1fr)); border: 4px solid var(--surface); outline: 1px solid var(--line2)">
-                    <sc-for list="{{qr}}" as="q" hint-placeholder-count="441">
-                      <span style="background: {{q}}"></span>
+                <div style="display: flex; justify-content: flex-end; margin-top: 10px">
+                  <div style="min-width: 300px; display: flex; flex-direction: column; gap: 6px">
+                    <sc-for list="{{totals}}" as="t" hint-placeholder-count="5">
+                      <div class="r-wrap" style="display: flex; justify-content: space-between; font-size: 13px; {{t.style}}"><span>{{t.label}}</span><span class="mono">{{t.val}}</span></div>
                     </sc-for>
                   </div>
-                  <div style="display: flex; flex-direction: column; gap: 4px">
-                    <span class="k">Statutory QR</span>
-                    <span style="font-size: 13px; font-weight: 600">{{regime}}</span>
-                    <span class="mono" style="font-size: 12px; color: var(--muted)">{{qrRef}}</span>
-                  </div>
-                </div>
-                <div style="min-width: 280px; display: flex; flex-direction: column; gap: 6px; padding: 4px; border-radius: 4px; outline: {{hl}}">
-                  <div class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">8</span></sc-if>Tax breakdown &amp; totals</div>
-                  <sc-for list="{{totals}}" as="t" hint-placeholder-count="3">
-                    <div class="r-wrap" style="display: flex; justify-content: space-between; font-size: 13px; {{t.style}}"><span>{{t.label}}</span><span class="mono">{{t.val}}</span></div>
-                  </sc-for>
                 </div>
               </div>
 
-              <div class="r-g2m" style="border-top: 1px solid var(--line2); padding-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; font-size: 12px; line-height: 16px">
-                <div><span class="k">Bank account details</span><div class="mono" style="margin-top: 4px">[Local-currency account] · [USD account]</div></div>
-                <div><span class="k">Issued by</span><div class="mono" style="margin-top: 4px">[User ID]</div></div>
-                <div><span class="k">Late payment notification</span><div style="margin-top: 4px; color: var(--muted)">[Late payment wording · interest as configured]</div></div>
-                <div><span class="k">Agency mandatory text</span><div style="margin-top: 4px; color: var(--muted)">[Agency-specific mandatory text]</div></div>
-                <div style="grid-column: span 2"><span class="k">Terms &amp; conditions</span><div style="margin-top: 4px"><span style="color: var(--accent); text-decoration: underline">[T&amp;C link]</span></div></div>
+              <div class="fx" style="display: flex; gap: 18px; align-items: flex-start; border-top: 1px solid var(--line2); padding-top: 16px">
+                <div aria-label="Statutory QR code placeholder" role="img" style="flex: none; width: 105px; height: 105px; display: grid; grid-template-columns: repeat(21, minmax(0, 1fr)); border: 4px solid var(--surface); outline: 1px solid var(--line2)">
+                  <sc-for list="{{qr}}" as="q" hint-placeholder-count="441">
+                    <span style="background: {{q}}"></span>
+                  </sc-for>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                  <span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">17</span></sc-if>Mandatory tax / legal text &amp; QR</span>
+                  <span style="font-size: 13px; font-weight: 600">{{regime}}</span>
+                  <span style="font-size: 12px"><span style="color: var(--muted)">{{qrK}}: </span><span class="mono" style="overflow-wrap: anywhere">{{qrRef}}</span></span>
+                  <span style="font-size: 12px; line-height: 17px; color: var(--muted2)">{{legal}}</span>
+                </div>
+              </div>
+
+              <div class="r-g2m" style="border-top: 1px solid var(--line2); padding-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; font-size: 12px; line-height: 17px">
+                <div class="fx"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">15</span></sc-if>Bank remittance details</span>
+                  <div class="bkr"><sc-for list="{{bank}}" as="b" hint-placeholder-count="5"><span>{{b.k}}</span><span class="mono">{{b.v}}</span></sc-for></div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 14px">
+                  <div class="fx"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">16</span></sc-if>Late payment clause</span><div style="margin-top: 4px; color: var(--muted2)">{{late}}</div></div>
+                  <div class="fx"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">13</span></sc-if>Generated by</span><div class="mono" style="margin-top: 4px">{{genBy}}</div></div>
+                  <div class="fx"><span class="k"><sc-if value="{{marks}}" hint-placeholder-val="{{ true }}"><span class="badge">14</span></sc-if>Terms &amp; conditions</span><div style="margin-top: 4px">Carriage is subject to the <a href="https://www.pilship.com" target="_blank" rel="noopener" style="color: var(--accent)">PIL Conditions of Carriage</a> · www.pilship.com</div></div>
+                </div>
               </div>
             </article>
           </section>
@@ -632,11 +648,31 @@ class GirsPage extends DCLogic {
   renderVals() {
     const s = this.state;
     const C = {
-      SG: { name: 'Singapore', regime: 'Peppol / InvoiceNow', ccy: 'SGD', rate: 0.09, taxName: 'GST 9%', pod: 'SGSIN', loc: 'SIN', max: null, alt: null, dual: false },
-      IN: { name: 'India', regime: 'GSTN e-Invoice (IRN)', ccy: 'INR', rate: 0.18, taxName: 'IGST 18%', pod: 'INNSA', loc: 'NSA', max: 16, alt: null, dual: true },
-      SA: { name: 'Saudi Arabia', regime: 'ZATCA Phase 2', ccy: 'SAR', rate: 0.15, taxName: 'VAT 15%', pod: 'SAJED', loc: 'JED', max: null, alt: 'ar', dual: false },
-      MY: { name: 'Malaysia', regime: 'MyInvois', ccy: 'MYR', rate: 0.08, taxName: 'SST 8%', pod: 'MYPKG', loc: 'PKG', max: null, alt: null, dual: false },
-      MX: { name: 'Mexico', regime: 'CFDI', ccy: 'MXN', rate: 0.16, taxName: 'IVA 16%', pod: 'MXZLO', loc: 'ZLO', max: null, alt: 'es', dual: false }
+      SG: { name: 'Singapore', regime: 'Peppol / InvoiceNow', ccy: 'SGD', rate: 0.09, taxName: 'GST 9%', pod: 'SGSIN', loc: 'SIN', max: null, alt: null, dual: false,
+        agency: 'Singapore Head Office', addr: '7500A Beach Road, #12-01 The Plaza, Singapore 199591', tax: [['UEN / GST Reg. No.', '196700080N']],
+        route: ['SGSIN', 'SGSIN', 'INNSA', 'INPPG'], roe: [1.342150, 1.341870], qrK: 'InvoiceNow ID', qrRef: 'SG-INV-2026-0001042-7F3A',
+        legal: 'International freight and related services are zero-rated under Section 21(3) of the GST Act.',
+        bank: [['Bank', 'DBS Bank Ltd'], ['Account no.', 'SGD 003-901234-5 · USD 003-901235-3'], ['SWIFT BIC', 'DBSSSGSG'], ['Branch address', '12 Marina Boulevard, DBS Asia Central, Singapore 018982']] },
+      IN: { name: 'India', regime: 'GSTN e-Invoice (IRN)', ccy: 'INR', rate: 0.18, taxName: 'IGST 18%', pod: 'INNSA', loc: 'NSA', max: 16, alt: null, dual: true,
+        agency: 'Agency branch · Navi Mumbai', addr: 'Unit 501, Platinum Techno Park, Sector 30A, Vashi, Navi Mumbai 400703, India', tax: [['PAN', 'AABCP1234F'], ['GSTIN (Maharashtra)', '27AABCP1234F1Z5']],
+        route: ['INTKD', 'INNSA', 'SGSIN', 'SGSIN'], roe: [84.215000, 84.198500], qrK: 'IRN', qrRef: '7a1c94e0b6f2d3c58e1a4b07f9d2e6c31b8a5f4e2d7c9b0a6e3f1d8c4b2a5e9f7',
+        legal: 'Ack. No. 112610238846201 · Supply of ocean freight services under the reverse-charge / LUT provisions as applicable.',
+        bank: [['Bank', 'HDFC Bank Ltd'], ['Account no.', 'INR 50200012345678'], ['IFSC', 'HDFC0000060'], ['SWIFT BIC', 'HDFCINBB'], ['Branch address', 'Sandoz House, Dr. Annie Besant Road, Worli, Mumbai 400018']] },
+      SA: { name: 'Saudi Arabia', regime: 'ZATCA Phase 2', ccy: 'SAR', rate: 0.15, taxName: 'VAT 15%', pod: 'SAJED', loc: 'JED', max: null, alt: 'ar', dual: false,
+        agency: 'Agency branch · Jeddah', addr: 'Al Madinah Al Munawwarah Road, Al Hamra District, Jeddah 23323, Saudi Arabia', tax: [['VAT Reg. No.', '300012345600003'], ['CR No.', '4030123456']],
+        route: ['SAJED', 'SAJED', 'SGSIN', 'SGSIN'], roe: [3.750000, 3.750000], qrK: 'ZATCA UUID', qrRef: '3f6b2c1e-8d4a-4b7f-9c2e-5a1d0e7f4b36',
+        legal: 'Zero-rated supply: international transport of goods (VAT Implementing Regulations, Article 33).',
+        bank: [['Bank', 'The Saudi National Bank'], ['Account no.', 'SAR 21000012345601'], ['IBAN', 'SA03 1000 0000 2100 0012 3456'], ['SWIFT BIC', 'NCBKSAJE'], ['Branch address', 'King Abdulaziz Road, Jeddah 21481']] },
+      MY: { name: 'Malaysia', regime: 'MyInvois', ccy: 'MYR', rate: 0.08, taxName: 'SST 8%', pod: 'MYPKG', loc: 'PKG', max: null, alt: null, dual: false,
+        agency: 'Agency branch · Port Klang', addr: 'Lot 3, Jalan Pelabuhan Utara, 42000 Port Klang, Selangor, Malaysia', tax: [['TIN', 'C20880123045'], ['SST Reg. No.', 'B16-1808-32000123']],
+        route: ['MYPKG', 'MYPKG', 'SGSIN', 'SGSIN'], roe: [4.468200, 4.465900], qrK: 'MyInvois UIN', qrRef: 'MY-26-PKG-0001042-K8QZ',
+        legal: 'International shipping services are not subject to service tax (Service Tax Regulations 2018, First Schedule).',
+        bank: [['Bank', 'Malayan Banking Berhad'], ['Account no.', 'MYR 514011234567 · USD 714011234568'], ['SWIFT BIC', 'MBBEMYKL'], ['Branch address', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur']] },
+      MX: { name: 'Mexico', regime: 'CFDI', ccy: 'MXN', rate: 0.16, taxName: 'IVA 16%', pod: 'MXZLO', loc: 'ZLO', max: null, alt: 'es', dual: false,
+        agency: 'Agency branch · Manzanillo', addr: 'Av. Teniente Azueta 9, Burócrata, 28250 Manzanillo, Colima, México', tax: [['RFC', 'PIL960312AB4']],
+        route: ['MXZLO', 'MXZLO', 'SGSIN', 'SGSIN'], roe: [18.904500, 18.887200], qrK: 'Folio fiscal (UUID)', qrRef: '9B2E4C71-5A3D-4F08-B6E1-2C7D9A0F3E85',
+        legal: 'Tasa 0% de IVA: transporte internacional de bienes (Art. 29 LIVA).',
+        bank: [['Bank', 'BBVA México'], ['Account no.', 'MXN 0123456789'], ['CLABE', '012180001234567891'], ['SWIFT BIC', 'BCMRMXMM'], ['Branch address', 'Paseo de la Reforma 510, Juárez, 06600 CDMX']] }
     };
     const c = C[s.country];
     const titles = { inv: ['Tax Invoice', 'فاتورة ضريبية', 'Factura'], cn: ['Credit Note', 'إشعار دائن', 'Nota de crédito'], dn: ['Debit Note', 'إشعار مدين', 'Nota de débito'] };
@@ -650,12 +686,14 @@ class GirsPage extends DCLogic {
     const sign = s.doc === 'cn' ? -1 : 1;
     const f2 = (v) => (sign * v).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const marks = s.marks;
-    const lines = [
-      { desc: 'Ocean Freight', sched: 'International — zero-rated', ccy: 'USD', amt: f2(1850), badge: 6, mark: marks },
-      { desc: 'Bunker / Environmental Surcharge', sched: 'International — zero-rated', ccy: 'USD', amt: f2(320), badge: 7, mark: marks },
-      { desc: 'Terminal Handling (THC)', sched: 'Domestic — ' + c.taxName, ccy: c.ccy, amt: f2(local), badge: 7, mark: marks },
-      { desc: 'Documentation Fee', sched: 'Domestic — ' + c.taxName, ccy: c.ccy, amt: f2(doc), badge: 7, mark: marks }
+    const pct = (r) => (r * 100).toLocaleString('en-US', { maximumFractionDigits: 2 }) + '%';
+    const L0 = [
+      ['OFT', 'Ocean Freight', 2, 925, 'USD', 0],
+      ['BAF', 'Bunker / Environmental Surcharge', 2, 160, 'USD', 0],
+      ['THC', 'Terminal Handling (THC)', 2, local / 2, c.ccy, c.rate],
+      ['DOC', 'Documentation Fee', 1, doc, c.ccy, c.rate]
     ];
+    const lines = L0.map(([code, desc, q, r, ccy, tr]) => ({ code, desc, qty: String(q), rate: f2(r), ccy, amt: f2(q * r), tr: pct(tr), tax: f2(q * r * tr) }));
     const tax = (local + doc) * c.rate;
     const totals = [
       { label: 'Subtotal USD', val: f2(2170), style: '' },
@@ -682,7 +720,7 @@ class GirsPage extends DCLogic {
       const f = finder(r, col);
       qr.push((f === 1 || (f === -1 && rnd() > 0.52)) ? 'var(--ink)' : 'var(--surface)');
     }
-    const fieldNames = ['Legal Carrier Name', 'Tax IDs', 'B/L #', 'Voyage', 'POL / POD', 'Itemized Freight', 'Surcharges', 'Tax Breakdowns'];
+    const fieldNames = ['Local Company Name & Address', 'VVD (Vessel / Voyage / Direction)', 'ETA / ETD (Sailing Date)', 'Shipment / B/L Number', 'POR & DEL (Routing)', 'Container Number(s)', 'Customer Code', 'Shipper Name', 'Consignee Name', 'Cargo Gross Weight', 'Customer Reference Number', 'Due Date', 'User ID / Generator Mode', 'Terms & Conditions Link', 'Bank Remittance Details', 'Late Payment Clause', 'Mandatory Tax/Legal Text & QR', 'Exchange Rate (ROE)', 'Itemized Charges & Tax Breakdown'];
     const recent = (s.log[series] || []).slice(-3).reverse().map((no) => ({ no }));
     return {
       docTypes: [['inv', 'Invoice'], ['cn', 'Credit Note'], ['dn', 'Debit Note']].map(([k, label]) => ({ label, on: s.doc === k ? 'true' : 'false', bg: s.doc === k ? 'var(--surface)' : 'transparent', fw: s.doc === k ? 600 : 500, shadow: s.doc === k ? '0 1px 2px rgba(22,26,33,.15)' : 'none', pick: () => this.setState({ doc: k }) })),
@@ -706,7 +744,7 @@ class GirsPage extends DCLogic {
       pickDir: (e) => this.setState({ dir: e.target.value }),
       pickCtype: (e) => this.setState({ ctype: e.target.value }),
       pickEnt: (e) => this.setState({ ent: e.target.value }),
-      etLabel: s.dir === 'O' ? 'ETD (export)' : 'ETA (import)',
+      etLabel: s.dir === 'O' ? 'ETD (sailing date)' : 'ETA (arrival date)',
       partyLabel: s.dir === 'O' ? 'Shipper' : 'Consignee',
       parts: [
         { v: c.loc, k: 'Location' }, { v: s.dir, k: s.dir === 'O' ? 'Outbound' : 'Inbound' }, { v: s.ctype, k: s.ctype === 'F' ? 'Freight' : 'DET / DEM' },
@@ -720,7 +758,20 @@ class GirsPage extends DCLogic {
       polpod: 'SGSIN → ' + (c.pod === 'SGSIN' ? 'INNSA' : c.pod),
       lines, totals, qr,
       regime: c.regime,
-      qrRef: s.country === 'IN' ? 'IRN: [64-char hash]' : '[Clearance reference]',
+      qrRef: c.qrRef, qrK: c.qrK, legal: c.legal,
+      mkCls: marks ? 'mk' : '',
+      co: { name: 'Pacific International Lines (Pte) Ltd', agency: c.agency, addr: c.addr, tax: c.tax.map(([l, v]) => ({ l, v })) },
+      cust: { name: 'Orion Freight Solutions Pte Ltd', addr: '30 Cecil Street, #19-08 Prudential Tower, Singapore 049712', tax: '201812345K', code: 'CUST-' + s.country + '-01048', ref: 'PO-4500187726' },
+      vvd: 'KOTA CANTIK / 0124' + (s.dir === 'O' ? 'W' : 'E'),
+      etDate: '28 Nov 2026',
+      due: '28 Dec 2026', dueNote: '30-day credit terms from sailing date',
+      route: (s.dir === 'O' ? c.route : c.route.slice().reverse()).map((v, i) => ({ k: ['POR', 'POL', 'POD', 'DEL'][i], v })),
+      shipper: s.dir === 'O' ? 'Kim Seng Trading Pte Ltd' : 'Nhava Sheva Agro Exports Pvt Ltd',
+      consignee: s.dir === 'O' ? 'Nhava Sheva Agro Exports Pvt Ltd' : 'Kim Seng Trading Pte Ltd',
+      roe: [{ k: 'Commercial (ETD 28 Nov 2026)', v: '1 USD = ' + c.roe[0].toFixed(6) + ' ' + c.ccy }, { k: 'Statutory tax point (30 Nov 2026)', v: '1 USD = ' + c.roe[1].toFixed(6) + ' ' + c.ccy }],
+      bank: c.bank.map(([k, v]) => ({ k, v })),
+      late: 'Overdue balances bear interest at 1.5% per month from the due date until paid in full.',
+      genBy: s.doc === 'inv' ? 'SYSTEM-STP' : 'SIN-DTAN01 (Daniel Tan)',
       log: recent,
       issue: () => {
         const cur = fmtNo(seqN);

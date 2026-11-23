@@ -80,7 +80,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     return '<svg width="' + px + '" height="' + px + '" viewBox="-1 -1 ' + (q.n + 2) + ' ' + (q.n + 2) + '" shape-rendering="crispEdges" role="img" aria-label="QR code"><rect x="-1" y="-1" width="' + (q.n + 2) + '" height="' + (q.n + 2) + '" fill="#fff"/><path d="' + d + '" fill="#161A21"/></svg>'; }
   function qrPdf(p, text, x, y, size) { var q = qrCells(text), u = size / q.n; q.c.forEach(function (c) { p.rect(x + c[0] * u, y + c[1] * u, u + 0.02, u + 0.02, '#161A21'); }); }
 
-  function invoiceModel(inv) {
+  function invoiceModel(inv) { var m = invoiceModelBase(inv); m.v2 = invoiceV2(inv, m); return m; }
+  function invoiceModelBase(inv) {
     var credit = inv.kind === 'credit', sign = credit ? -1 : 1, cust = inv.cust || {};
     var dir = String(inv.no || '').charAt(3), port = PORT[inv.port] || inv.port || '', h = hsh(inv.no), cc = String(inv.port || 'SG').slice(0, 2);
     var cur = ((inv.lines || []).filter(function (l) { return l.roe === '—' || !l.roe; })[0] || (inv.lines || [])[0] || {}).cur || 'USD';
@@ -334,6 +335,286 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     return [p];
   }
 
+  // ================================================================ invoice document v2 (approved 2-page design, all 19 fields)
+  var V2C = {
+    SG: { sup: 'Pacific International Lines (Pte) Ltd', addr: '128 Beach Road, #15-01 Guoco Midtown, Singapore 189773', ids: [['GST Reg. No.', 'M2-0012345-6'], ['UEN', '196700080N']],
+      tax: 'GST', reg: 'Peppol / InvoiceNow', idK: ['InvoiceNow ID', 'Peppol Message ID', 'Transmitted On'], local: 'SGD', roe: 1.3412, law: 'Singapore', court: 'Singapore', agent: '',
+      legal: 'International freight and related services are zero-rated under Section 21(3) of the GST Act.',
+      banks: [['SGD payments', [['Bank Name', 'DBS Bank Ltd'], ['Account Name', 'Pacific International Lines (Pte) Ltd'], ['Account No.', '003-901234-5'], ['SWIFT Code', 'DBSSSGSG'], ['Branch Address', '12 Marina Boulevard, DBS Asia Central, Singapore 018982']]],
+        ['USD payments', [['Bank Name', 'Citibank N.A., Singapore'], ['Account Name', 'Pacific International Lines (Pte) Ltd'], ['Account No.', '0-110293-008'], ['SWIFT Code', 'CITISGSG'], ['Branch Address', '8 Marina View, Asia Square Tower 1, Singapore 018960']]]] },
+    IN: { sup: 'PIL (India) Private Limited', addr: '601, 6th Floor, "B" Wing, 58, Dynasty Business Park, Andheri Kurla Road, Andheri East, Mumbai 400059', ids: [['GSTIN', '27AAACP1234F1Z5'], ['PAN', 'AAACP1234F'], ['State / Code', 'Maharashtra / 27']],
+      tax: 'GST', reg: 'GSTN e-Invoice (IRN)', idK: ['IRN', 'Ack No.', 'Ack Date'], local: 'INR', roe: 84.12, law: 'India', court: 'Mumbai', agent: 'Issued in India by PIL (India) Private Limited as agent',
+      legal: 'GSTN e-Invoice (IRN) registered with the Invoice Registration Portal. The signed QR code on page 1 can be verified on the GST portal.',
+      banks: [['INR payments', [['Bank Name', 'HDFC Bank Ltd'], ['Account Name', 'PIL (India) Private Limited'], ['Virtual Account No.', 'VA'], ['IFSC', 'HDFC0000060'], ['SWIFT Code', 'HDFCINBB'], ['Branch Address', 'Sandoz House, Dr. Annie Besant Road, Worli, Mumbai 400018']]],
+        ['USD payments', [['Bank Name', 'Citibank N.A.'], ['Account Name', 'PIL (India) Private Limited'], ['Account No.', '0039 4521 8806'], ['IFSC', 'CITI0100000'], ['SWIFT Code', 'CITIINBX'], ['Branch Address', 'FIFC, C-54 & 55, G Block, Bandra Kurla Complex, Mumbai 400051']]]] },
+    MY: { sup: 'Pacific International Lines (M) Sdn Bhd', addr: 'Lot 3, Jalan Pelabuhan Utara, 42000 Port Klang, Selangor, Malaysia', ids: [['TIN', 'C20880123045'], ['SST Reg. No.', 'B16-1808-32000123']],
+      tax: 'SST', reg: 'MyInvois', idK: ['MyInvois UIN', 'Validation Ref.', 'Validated On'], local: 'MYR', roe: 4.471, law: 'Malaysia', court: 'Kuala Lumpur', agent: 'Issued in Malaysia by Pacific International Lines (M) Sdn Bhd as agent',
+      legal: 'International shipping services are not subject to service tax under the Service Tax Regulations 2018.',
+      banks: [['MYR payments', [['Bank Name', 'Malayan Banking Berhad (Maybank)'], ['Account Name', 'Pacific International Lines (M) Sdn Bhd'], ['Account No.', '5140 1123 4567'], ['SWIFT Code', 'MBBEMYKL'], ['Branch Address', 'Menara Maybank, 100 Jalan Tun Perak, 50050 Kuala Lumpur']]],
+        ['USD payments', [['Bank Name', 'Citibank Berhad'], ['Account Name', 'Pacific International Lines (M) Sdn Bhd'], ['Account No.', '0105 2231 8840'], ['SWIFT Code', 'CITIMYKL'], ['Branch Address', 'Menara Citibank, 165 Jalan Ampang, 50450 Kuala Lumpur']]]] },
+    TH: { sup: 'PIL (Thailand) Co., Ltd', addr: '1/8 Moo 3, Sukhumvit Road, Thung Sukhla, Si Racha, Chon Buri 20230, Thailand', ids: [['Tax ID', '0105536012345'], ['Branch', 'Head Office (00000)']],
+      tax: 'VAT', reg: 'e-Tax Invoice (Revenue Department)', idK: ['e-Tax Invoice No.', 'RD Reference', 'Submitted On'], local: 'THB', roe: 35.62, law: 'Thailand', court: 'Bangkok', agent: 'Issued in Thailand by PIL (Thailand) Co., Ltd as agent',
+      legal: 'International transport of goods is zero-rated under Section 80/1 of the Revenue Code.',
+      banks: [['THB payments', [['Bank Name', 'Bangkok Bank Public Company Ltd'], ['Account Name', 'PIL (Thailand) Co., Ltd'], ['Account No.', '101-3-45678-9'], ['SWIFT Code', 'BKKBTHBK'], ['Branch Address', '333 Silom Road, Bang Rak, Bangkok 10500']]],
+        ['USD payments', [['Bank Name', 'Citibank N.A., Bangkok'], ['Account Name', 'PIL (Thailand) Co., Ltd'], ['Account No.', '0-701254-019'], ['SWIFT Code', 'CITITHBX'], ['Branch Address', '399 Interchange 21 Building, Sukhumvit Road, Bangkok 10110']]]] }
+  };
+  var IN_STATE = { '27': 'Maharashtra', '24': 'Gujarat', '09': 'Uttar Pradesh', '29': 'Karnataka', '33': 'Tamil Nadu', '07': 'Delhi', '06': 'Haryana', '19': 'West Bengal', '36': 'Telangana' };
+  var PORT_CODE = { SINGAPORE: 'SGSIN', 'PORT KLANG': 'MYPKG', 'NHAVA SHEVA': 'INNSA', 'LAEM CHABANG': 'THLCH', SHANGHAI: 'CNSHA', 'JEBEL ALI': 'AEJEA', MOMBASA: 'KEMBA' };
+  var SAC = { OFT: '996521', BAF: '996521', LSS: '996521', 'THC-O': '996711', 'THC-DST': '996711', THC: '996711', DOC: '996799', DEM: '996729', DET: '996729', SEAL: '996799', MISC: '996799' };
+  var PARTY = ['Ningbo Hengtai Industrial Co., Ltd', 'Shanghai Lianhua Trading Co., Ltd', 'Gulf Star General Trading LLC', 'Coastline Imports Ltd', 'Harbourview Merchandise Pte Ltd', 'Sunrise Agro Commodities Ltd'];
+  function fmtC(n, cur) { return cur === 'INR' ? Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : fmt(n); }
+  function wordsIN(x) {
+    var whole = Math.floor(x + 1e-9), paise = Math.round((x - whole) * 100), parts = [];
+    [[1e7, 'Crore'], [1e5, 'Lakh'], [1e3, 'Thousand']].forEach(function (u) { if (whole >= u[0]) { parts.push(words999(Math.floor(whole / u[0])) + ' ' + u[1]); whole %= u[0]; } });
+    if (whole) parts.push(words999(whole)); if (!parts.length) parts.push('Zero');
+    return parts.join(' ') + (paise ? ' and Paise ' + words999(paise) : '');
+  }
+  function hex64(seed) { var s = '', h = (seed % 2147483646) + 1; for (var i = 0; i < 64; i++) { h = (h * 48271) % 2147483647; s += '0123456789abcdef'[(h >> 5) % 16]; } return s; }
+  function invoiceV2(inv, m) {
+    var cust = inv.cust || {}, cc = String(inv.port || 'SG').slice(0, 2), C = V2C[cc] || V2C.SG, h = hsh(inv.no), credit = inv.kind === 'credit', sign = credit ? -1 : 1;
+    var cur = (((inv.lines || []).filter(function (l) { return l.roe === '—' || !l.roe; })[0]) || (inv.lines || [])[0] || {}).cur || 'USD';
+    var dir = String(inv.no || '').charAt(3) === 'I' ? 'I' : 'O', isIN = cc === 'IN';
+    var gst = String(cust.tax || '').replace(/^\D+\s*/, ''), stCode = isIN ? (gst.match(/^\d\d/) || ['27'])[0] : '';
+    var intra = isIN && stCode === '27', taxName = isIN ? (intra ? 'CGST + SGST' : 'IGST') : C.tax;
+    var usdRoe = null; (inv.lines || []).forEach(function (l) { var r = parseFloat(l.roe); if (!isNaN(r) && l.cur === 'USD') usdRoe = r; });
+    var roeC = usdRoe || C.roe, roeS = Math.round(roeC * (1 - (h % 7) / 10000) * 1e6) / 1e6;
+    var maxQ = 1, rows = [], tv = 0, byRate = {}, order = [];
+    (inv.lines || []).forEach(function (l, i) {
+      var q = qtyOf(l, h + i), r = rateOf(l.tax); r = r == null ? 0 : r;
+      if (q[1] === 'CNTR') maxQ = Math.max(maxQ, q[0]);
+      var amt = sign * l.amt, k = l.cur === cur ? 1 : (l.cur === 'USD' ? roeS : (parseFloat(l.roe) || 1));
+      var taxable = Math.round(amt * k * 100) / 100, tx = Math.round(taxable * r) / 100;
+      tv += taxable; if (!(r in byRate)) { byRate[r] = [0, 0]; order.push(r); } byRate[r][0] += taxable; byRate[r][1] += tx;
+      rows.push({ code: l.code, head: l.name || l.code, sac: isIN ? (SAC[l.code] || '996799') : (l.tax || '—'), qty: String(q[0]), uom: q[1], unit: fmtC(amt / q[0], l.cur), cur: l.cur,
+        amt: fmtC(amt, l.cur), tv: fmtC(taxable, cur), tr: r + '%', tax: fmtC(tx, cur), incl: fmtC(taxable + tx, cur) });
+    });
+    var taxTot = order.reduce(function (a, r) { return a + byRate[r][1]; }, 0), grand = tv + taxTot, total = isIN ? Math.round(grand) : Math.round(grand * 100) / 100, roff = total - grand;
+    var second = cur === 'USD' ? C.local : 'USD', secAmt = cur === 'USD' ? total * roeS : total / roeS;
+    if (second === cur) { second = ''; }
+    var vm = String(inv.vvd || '').match(/Vessel (\d+) \/ (\w+)/), sail = minusDays(inv.date, 4 + h % 6);
+    var vvd = vm ? (VESSEL[vm[1]] || 'KOTA LAYANG') + ' / ' + vm[2] : ph(inv.vvd, '—');
+    var here = PORT[inv.port] || inv.port || '—', other = (OTHER_PORT[inv.port] || ['SHANGHAI'])[h % 4] || 'SHANGHAI';
+    var pc = function (n) { return n + ' (' + (PORT_CODE[n] || '—') + ')'; };
+    var pol = dir === 'I' ? other : here, pod = dir === 'I' ? here : other;
+    var other2 = PARTY[h % PARTY.length], custName = ph(cust.name, '—');
+    var pref = String(inv.cntr || 'PILU1000000').slice(0, 4), base = parseInt(String(inv.cntr || '').slice(4, 10), 10) || 100000 + h % 800000;
+    var cntrs = []; for (var i = 0; i < maxQ; i++) cntrs.push(i === 0 && inv.cntr && inv.cntr !== '—' ? inv.cntr : pref + String(base + i * 13).padStart(6, '0') + String((base + i * 7) % 10));
+    var taxInv = m.title === 'Tax Invoice' || credit, d0 = dShort(inv.date);
+    var ids = isIN ? [hex64(h), String(1126 * 1e11 + h * 97 % 99999999999).slice(0, 15), d0 + ' 10:' + String(10 + h % 49)]
+      : cc === 'MY' ? [('MY' + hex64(h).toUpperCase()).slice(0, 26), 'VR-' + String(h % 999999).padStart(6, '0'), d0] : cc === 'TH' ? ['ET' + String(h).padStart(10, '0'), 'RD-' + String(h * 7 % 9999999), d0]
+      : ['SG-INV-' + String(inv.no).slice(-8) + '-' + hex64(h).slice(0, 4).toUpperCase(), 'PPL-' + hex64(h + 1).slice(0, 12).toUpperCase(), d0];
+    var banks = C.banks.map(function (b) { return [b[0], b[1].map(function (r) { return [r[0], r[1] === 'VA' ? 'PIL' + cc + String(cust.code || '').replace(/\D/g, '').slice(-6) + String(h % 1000).padStart(3, '0') : r[1]]; })]; });
+    var rcv = [['Address', ph(cust.addr, '—')]].concat(isIN ? [['GSTIN / Unique ID', gst || '—'], ['Place of Supply', IN_STATE[stCode] || 'Maharashtra'], ['State Code', String(parseInt(stCode, 10) || 27)]] : [['Tax ID', ph(cust.tax, '—')]]);
+    var taxRows = order.map(function (r) { var v = byRate[r]; return isIN ? (intra ? [taxName + ' @ ' + r + '%', v[0], r, 0, v[1] / 2, v[1] / 2, v[1]] : [taxName + ' @ ' + r + '%', v[0], r, v[1], 0, 0, v[1]]) : [C.tax + ' @ ' + r + '%', v[0], r, v[1], 0, 0, v[1]]; });
+    var late = isIN ? 'Overdue balances bear interest at 18% per annum (1.5% per month) from the due date until paid in full.' : 'Overdue balances bear interest at 1.5% per month from the due date until paid in full.';
+    return {
+      isIN: isIN, cur: cur, title: m.title, credit: credit, taxInv: taxInv, orig: !credit && taxInv, badge: m.badge, txn: m.txn, qr: m.qr || (credit ? 'PIL CREDIT NOTE ' + inv.no : ''),
+      meta: [[credit ? 'Credit Note No.' : 'Invoice No.', inv.no], [credit ? 'Credit Note Date' : 'Invoice Date', d0], ['Invoice Due Date', dShort(inv.due)], ['Currency', cur]],
+      ids: taxInv ? [[C.idK[0], ids[0]], [C.idK[1], ids[1]], [C.idK[2], ids[2]]] : null,
+      sup: { title: 'Details of Supplier (Billed from)', name: C.sup, rows: [['Address', C.addr]].concat(C.ids) },
+      rcv: { title: 'Details of Receiver (Billed to)', name: custName, rows: rcv },
+      info: [['Customer Code', ph(cust.code, '—')], ['Customer Ref', (cust.code || 'REF').replace(/\W/g, '') + '/' + String(inv.bkg || inv.no).slice(-6)], isIN ? ['Reverse Charge', 'No'] : (inv.orig ? ['Against Invoice', inv.orig] : ['Document Type', 'BL']),
+        ['Shipper', dir === 'I' ? other2 : custName], ['Consignee', dir === 'I' ? custName : other2], ['Cargo Gross Weight', fmt(cntrs.length * (14000 + h % 9000)).replace('.00', '.000') + ' KGS']],
+      ship: [['Voyage (VVD)', vvd], ['BL Number', ph(inv.bl, '—')], [dir === 'I' ? 'ETA (Arrival Date)' : 'ETD (Sailing Date)', dShort(sail)],
+        ['Receipt (POR)', pc(pol)], ['Loaded (POL)', pc(pol)], ['Discharge (POD)', pc(pod)], ['Delivery (DEL)', pc(pod)],
+        ['Containers', cntrs.length + ' x 40HC' + (cntrs.length > 1 ? ' (container numbers listed on page 2)' : ' (' + cntrs[0] + ')')]],
+      cols: ['Code', 'Charge head', isIN ? 'SAC' : 'Tax Code', 'Qty', 'UOM', 'Unit Price', 'Ccy', 'Amount', 'Taxable Value (' + cur + ')', (isIN ? (intra ? 'GST' : 'IGST') : C.tax) + ' Rate', (isIN ? (intra ? 'GST' : 'IGST') : C.tax) + ' Amount', 'Total Incl Tax (' + cur + ')'],
+      keys: ['code', 'head', 'sac', 'qty', 'uom', 'unit', 'cur', 'amt', 'tv', 'tr', 'tax', 'incl'], right: [0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+      rows: rows,
+      totals: [['Total Taxable Value (' + cur + ')', fmtC(tv, cur)]].concat(order.map(function (r) { return [taxName + ' @ ' + r + '%', fmtC(byRate[r][1], cur)]; })).concat(isIN ? [['Round Off', (roff < 0 ? '-' : '') + fmtC(Math.abs(roff), cur)]] : []),
+      grand: [['Invoice Total (' + cur + ')', fmtC(total, cur) + ' ' + cur]].concat(second ? [['Invoice Total (' + second + ')', fmtC(secAmt, second) + ' ' + second]] : []),
+      roe: [['ROE commercial (' + (dir === 'I' ? 'ETA ' : 'ETD ') + dShort(sail) + ')', '1 USD = ' + roeC.toFixed(6) + ' ' + C.local], ['ROE statutory tax point (' + d0 + ')', '1 USD = ' + roeS.toFixed(6) + ' ' + C.local]],
+      words: (cur === 'INR' ? 'Indian Rupees ' + wordsIN(Math.abs(total)) : cur + ' ' + inWords(Math.abs(total))) + ' only', wordsSub: second ? 'Equivalent to ' + second + ' ' + fmtC(secAmt, second) + ' at the statutory ROE.' : '',
+      banks: banks,
+      taxCols: ['Tax Type', 'Taxable Value (' + cur + ')', 'Rate', (isIN ? 'IGST' : C.tax) + ' (' + cur + ')', 'CGST (' + cur + ')', 'SGST (' + cur + ')', 'Total Tax (' + cur + ')'],
+      taxRows: taxRows.map(function (r) { return [r[0], fmtC(r[1], cur), r[2] + '%', fmtC(r[3], cur), fmtC(r[4], cur), fmtC(r[5], cur), fmtC(r[6], cur)]; }),
+      taxTotal: ['Total', fmtC(tv, cur), '', fmtC(taxRows.reduce(function (a, r) { return a + r[3]; }, 0), cur), fmtC(taxRows.reduce(function (a, r) { return a + r[4]; }, 0), cur), fmtC(taxRows.reduce(function (a, r) { return a + r[5]; }, 0), cur), fmtC(taxTot, cur)],
+      showCS: isIN, regName: C.reg,
+      legal: (taxInv ? (C.legal.indexOf(C.reg) === 0 ? '' : C.reg + '. ') + C.legal : 'This is a proforma invoice and is not a tax invoice. A tax invoice will be issued on confirmation.') + (isIN ? (intra ? ' Intra-state supply: CGST and SGST apply.' : ' Inter-state supply: IGST applies.') : ''),
+      late: late,
+      tc: ['All services are performed subject to the PIL Conditions of Carriage and the Bill of Lading terms in force at the date of shipment (www.pilship.com).',
+        'Payment is due in full by the due date without set-off or deduction, and only to the bank account shown on this invoice.',
+        'Foreign-currency charges are converted at the Rate of Exchange shown on this invoice, which is final.',
+        'All bank and remittance charges are for the account of the payer.',
+        late.replace(' until paid in full.', '.') + ' PIL may withhold delivery of cargo or documents until all amounts are settled.',
+        'Any query must be raised in writing within 7 days of the invoice date, quoting the invoice and B/L number.',
+        isIN ? 'GST input tax credit is available to the recipient only after this invoice is reported in GSTR-1 by the supplier.' : 'PIL has a lien on the goods and documents for all sums due under this invoice and the contract of carriage.',
+        'Subject to ' + C.court + ' jurisdiction. This invoice is governed by the laws of ' + C.law + '.'],
+      sign: 'For ' + C.sup.toUpperCase(), signed: taxInv ? 'Digitally signed · ' + d0 : '',
+      declaration: 'We declare that this invoice shows the actual price of the services described and that all particulars are true and correct.',
+      cntrs: cntrs, hq: ['PACIFIC INTERNATIONAL LINES (PTE) LTD', '128 Beach Road, #15-01 Guoco Midtown, Singapore 189773', 'Tel: +65 6221 8133 · www.pilship.com'],
+      foot: ['Pacific International Lines (Pte) Ltd · Head Office: 128 Beach Road, #15-01 Guoco Midtown, Singapore 189773 · UEN 196700080N', (C.agent ? C.agent + ' · ' : '') + 'billing@pilship.com · www.pilship.com'],
+      issued: m.issued, printed: nowStamp(), disclaimer: 'This is a computer generated invoice and further authorization is not required.'
+    };
+  }
+
+  var V2_CSS = [
+    '.gv{position:relative;width:794px;min-height:1123px;margin:0 auto 24px;background:#fff;color:#1F2329;box-shadow:0 12px 40px rgba(0,0,0,.35);box-sizing:border-box;padding:0 48px 24px;font:10.5px/15px Helvetica,Arial,sans-serif;display:flex;flex-direction:column;border-top:5px solid #E31D1A;overflow:hidden}',
+    '.gv.l{width:1123px;min-height:794px}.gv *{box-sizing:border-box;letter-spacing:normal}.gv>*{flex:none}',
+    '.gv .lb{display:block;font-size:8.5px;font-weight:700;color:#5D6673;text-transform:uppercase;letter-spacing:.04em;line-height:12px}.gv .v{display:block;margin-top:2px}',
+    '.gv .h{display:block;font-size:9px;font-weight:700;color:#3B434E;text-transform:uppercase;letter-spacing:.05em;padding-bottom:8px;border-bottom:1px solid #D9DDE2;margin-bottom:8px}',
+    '.gv .s16{margin-top:16px}.gv .s24{margin-top:24px}',
+    '.gv-lh{display:grid;grid-template-columns:130px 1fr 130px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid #D9DDE2}.gv-lh img{height:32px;display:block}',
+    '.gv-co{text-align:center;font-size:9.5px;line-height:13px;color:#5D6673}.gv-co b{display:block;font-size:12px;line-height:16px;color:#1F2329;letter-spacing:.03em}.gv-qr{justify-self:end;line-height:0}',
+    '.gv-ttl{display:flex;justify-content:space-between;align-items:center;gap:16px}.gv-ttl h1{margin:0;font-size:18px;line-height:24px;letter-spacing:.03em;font-weight:700}',
+    '.gv-orig{font-size:8.5px;font-weight:700;color:#5D6673;border:1px solid #D9DDE2;padding:2px 6px;border-radius:3px;margin-left:8px;vertical-align:middle;letter-spacing:.03em}',
+    '.gv-tn{font-size:10px;color:#5D6673;display:flex;align-items:center;gap:8px}.gv-tn b{color:#1F2329}.gv-chip{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700}',
+    '.gv-g4{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #D9DDE2}.gv-g4>div{padding:8px 12px;border-right:1px solid #D9DDE2;min-width:0}.gv-g4>div:nth-child(4n){border-right:0}',
+    '.gv-g4>div.t{border-top:1px solid #D9DDE2}.gv-g4>div.w2{grid-column:span 2}.gv-g4 b{display:block;font-size:12.5px;margin-top:2px}.gv-brk{white-space:nowrap;font-size:8.6px;overflow:hidden;text-overflow:ellipsis}',
+    '.gv-two{display:grid;grid-template-columns:1fr 1fr;gap:32px}.gv-pn{font-size:11.5px;font-weight:700;margin-bottom:6px}',
+    '.gv-kv{display:grid;grid-template-columns:104px 1fr;gap:3px 8px}.gv-kv>span:nth-child(odd){color:#5D6673}',
+    '.gv-g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px}.gv-panel{background:#F4F5F7;padding:12px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px}',
+    '.gv table{width:100%;border-collapse:collapse;table-layout:auto}.gv th{font-size:8.5px;font-weight:700;color:#3B434E;text-align:left;padding:6px 4px;vertical-align:bottom;border:0;border-bottom:1px solid #9AA2AD;border-top:1px solid #D9DDE2;line-height:11px;background:#F4F5F7;height:auto;position:static;white-space:normal;text-transform:none;letter-spacing:0}',
+    '.gv td{padding:7px 4px;border:0;border-bottom:1px solid #E8EAED;font-size:10px;height:auto;white-space:nowrap;vertical-align:top}.gv td.w{white-space:normal}.gv .r{text-align:right}.gv tbody tr:hover td{background:none}',
+    '.gv-tot{display:grid;grid-template-columns:1fr auto;gap:3px 12px}.gv-gt{margin-top:8px;border-top:1.5px solid #1F2329;padding-top:8px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline}',
+    '.gv-gt span:nth-child(1){font-weight:700;font-size:11.5px}.gv-gt span:nth-child(2){font-weight:700;font-size:14px;text-align:right}.gv-gt span:nth-child(n+3){color:#3B434E}.gv-gt span:nth-child(4){font-weight:700;font-size:12px;text-align:right}',
+    '.gv-roe{margin-top:8px;padding-top:8px;border-top:1px solid #E3E6EA;display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:9.5px;color:#5D6673}.gv-roe b{font-weight:400;color:#1F2329;text-align:right}',
+    '.gv-mu{color:#5D6673}.gv-tc ol{margin:0;padding-left:13px;columns:2;column-gap:32px;font-size:8px;line-height:10.5px;color:#5D6673}.gv-tc li{break-inside:avoid;margin-bottom:3px}',
+    '.gv-sig{display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:end}.gv-sig .s{text-align:right}.gv-sig .ln{height:28px;border-bottom:1px solid #9AA2AD;margin:4px 0;display:flex;align-items:flex-end;justify-content:flex-end;color:#1F6B45;font-size:9px;padding-bottom:3px}',
+    '.gv-cg{display:grid;grid-template-columns:repeat(5,1fr);gap:4px 16px;font-size:9.5px;line-height:13px}.gv.l .gv-cg{grid-template-columns:repeat(7,1fr)}.gv-cg div{display:flex;gap:6px}.gv-cg i{font-style:normal;color:#5D6673}',
+    '.gv a{color:#0071B7}.gv-ft{margin-top:auto;padding-top:8px;border-top:1px solid #D9DDE2;color:#5D6673;font-size:8.5px;line-height:12px}',
+    '.gv-ft .f1{display:flex;justify-content:space-between;color:#3B434E;font-size:9px}.gv-ft .f2,.gv-ft .f3{margin-top:4px}.gv-ft .f3{font-style:italic}.gv-sp{height:24px}'
+  ].join('');
+
+  function invoiceHtmlV2(m, land) {
+    var x = m.v2, E = esc, cls = 'gv' + (land ? ' l' : '');
+    var lh = function (qr) { return '<div class="gv-lh"><img src="data:image/jpeg;base64,' + LOGO + '" alt="PIL"><div class="gv-co"><b>' + E(x.hq[0]) + '</b><div>' + E(x.hq[1]) + '</div><div>' + E(x.hq[2]) + '</div></div>' + (qr && x.qr ? '<div class="gv-qr">' + qrSvg(x.qr, 64) + '</div>' : '<div></div>') + '</div>'; };
+    var ft = function (n) { return '<div class="gv-ft"><div class="f1"><span>Issued By: ' + E(x.issued) + ' · Printed: ' + E(x.printed) + '</span><span>Page ' + n + ' of 2</span></div><div class="f2">' + E(x.foot[0]) + '<br>' + E(x.foot[1]) + '</div><div class="f3">' + E(x.disclaimer) + '</div></div>'; };
+    var cell = function (r) { return '<div><span class="lb">' + E(r[0]) + '</span><span class="v">' + E(r[1]) + '</span></div>'; };
+    var party = function (p) { return '<div><span class="h">' + E(p.title) + '</span><div class="gv-pn">' + E(p.name) + '</div><div class="gv-kv">' + p.rows.map(function (r) { return '<span>' + E(r[0]) + '</span><span>' + E(r[1]) + '</span>'; }).join('') + '</div></div>'; };
+    var kv = function (rows) { return rows.map(function (r) { return '<span>' + E(r[0]) + '</span><span class="r">' + E(r[1]) + '</span>'; }).join(''); };
+    var chip = x.badge ? '<span class="gv-chip" style="' + BADGE[x.badge] + '">' + E(x.badge) + '</span>' : '';
+    var p1 = '<div class="' + cls + '" role="document">' + lh(true) +
+      '<div class="gv-ttl s16"><h1>' + E(x.title.toUpperCase()) + (x.orig ? '<span class="gv-orig">ORIGINAL FOR RECIPIENT</span>' : '') + '</h1><div class="gv-tn">Transaction Name: <b>' + E(x.txn) + '</b>' + chip + '</div></div>' +
+      '<div class="gv-g4 s16">' + x.meta.map(function (r) { return '<div><span class="lb">' + E(r[0]) + '</span><b>' + E(r[1]) + '</b></div>'; }).join('') +
+        (x.ids ? '<div class="t w2"><span class="lb">' + E(x.ids[0][0]) + '</span><span class="v gv-brk" title="' + E(x.ids[0][1]) + '">' + E(x.ids[0][1]) + '</span></div><div class="t"><span class="lb">' + E(x.ids[1][0]) + '</span><span class="v">' + E(x.ids[1][1]) + '</span></div><div class="t"><span class="lb">' + E(x.ids[2][0]) + '</span><span class="v">' + E(x.ids[2][1]) + '</span></div>' : '') + '</div>' +
+      '<div class="gv-two s24">' + party(x.sup) + party(x.rcv) + '</div>' +
+      '<div class="gv-g3 s16">' + x.info.map(cell).join('') + '</div>' +
+      '<div class="gv-panel s16">' + x.ship.map(function (r, i) { return i === x.ship.length - 1 ? '<div style="grid-column:span 2"><span class="lb">' + E(r[0]) + '</span><span class="v">' + E(r[1]) + '</span></div>' : cell(r); }).join('') + '</div>' +
+      '<table class="s16"><thead><tr>' + x.cols.map(function (c, i) { return '<th class="' + (x.right[i] ? 'r' : '') + '">' + E(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        x.rows.map(function (r) { return '<tr>' + x.keys.map(function (k, i) { return '<td class="' + (x.right[i] ? 'r' : '') + (k === 'head' ? ' w' : '') + '">' + E(r[k]) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>' +
+      '<div class="gv-two s16"><div><span class="lb">Amount in Words</span><div class="v" style="font-size:11px;line-height:16px">' + E(x.words) + '</div>' + (x.wordsSub ? '<div class="v gv-mu" style="margin-top:4px">' + E(x.wordsSub) + '</div>' : '') + '</div>' +
+        '<div><div class="gv-tot">' + kv(x.totals) + '</div><div class="gv-gt">' + x.grand.map(function (g) { return '<span>' + E(g[0]) + '</span><span>' + E(g[1]) + '</span>'; }).join('') + '</div>' +
+        '<div class="gv-roe">' + x.roe.map(function (r) { return '<span>' + E(r[0]) + '</span><b>' + E(r[1]) + '</b>'; }).join('') + '</div></div></div>' +
+      '<div class="gv-sp"></div>' + ft(1) + '</div>';
+    var p2 = '<div class="' + cls + '" role="document">' + lh(false) +
+      '<div class="gv-ttl s16"><h1 style="font-size:14px">' + E(x.title.toUpperCase()) + ' <span style="font-weight:400;color:#5D6673;font-size:11px;letter-spacing:0">&nbsp;' + E(x.meta[0][1]) + ' · ' + E(x.meta[1][1]) + ' · continued</span></h1></div>' +
+      '<div class="s24"><span class="h">Bank Details for Remittance</span><div class="gv-two">' + x.banks.map(function (b) { return '<div><div class="gv-pn">' + E(b[0]) + '</div><div class="gv-kv">' + b[1].map(function (r) { return '<span>' + E(r[0]) + '</span><span>' + E(r[1]) + '</span>'; }).join('') + '</div></div>'; }).join('') + '</div></div>' +
+      '<div class="s24"><span class="h">' + (x.isIN ? 'GST' : 'Tax') + ' Summary</span><table><thead><tr>' + x.taxCols.map(function (c, i) { return (!x.showCS && (i === 4 || i === 5)) ? '' : '<th class="' + (i ? 'r' : '') + '">' + E(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        x.taxRows.concat([x.taxTotal]).map(function (r, n, all) { return '<tr>' + r.map(function (v, i) { return (!x.showCS && (i === 4 || i === 5)) ? '' : '<td class="' + (i ? 'r' : '') + '">' + (n === all.length - 1 ? '<b>' + E(v) + '</b>' : E(v)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>' +
+      '<div class="gv-two s24"><div><span class="h">Statutory e-Invoice</span><div>' + E(x.legal) + '</div></div><div><span class="h">Late Payment</span><div>' + E(x.late) + '</div></div></div>' +
+      '<div class="s24 gv-tc"><span class="h">Terms &amp; Conditions</span><ol>' + x.tc.map(function (t) { return '<li>' + E(t) + '</li>'; }).join('') + '</ol><div style="font-size:8px;color:#5D6673;margin-top:4px">Full terms: <a href="https://www.pilship.com" target="_blank" rel="noopener">PIL Conditions of Carriage · www.pilship.com</a></div></div>' +
+      '<div class="gv-sig s24"><div><span class="h">Declaration</span><div>' + E(x.declaration) + '</div></div><div class="s">' + E(x.sign) + '<div class="ln">' + E(x.signed) + '</div>Authorised Signatory</div></div>' +
+      '<div class="s24"><span class="h">Container Nos. (' + x.cntrs.length + ' x 40HC)</span><div class="gv-cg">' + x.cntrs.map(function (c) { return '<div><i>40HC</i><span>' + E(c) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="gv-sp"></div>' + ft(2) + '</div>';
+    return p1 + p2;
+  }
+
+  // PDF (vector, Helvetica) · same layout, flows onto extra pages when needed
+  function drawInvoiceV2(m) {
+    var x = m.v2, land = m.orient === 'l', W = land ? 842 : 595, H = land ? 595 : 842, L = 36, R = W - 36, CW = R - L, MU = '#5D6673', INK = '#1F2329', LN = '#D9DDE2';
+    var pages = [], p, y, FOOT = 54;
+    var K = function (xx, yy, t, sz, col) { p.text(xx, yy, T(t).toUpperCase(), { size: sz || 6.4, bold: true, color: col || MU }); };
+    var head = function (qr) {
+      p.rect(0, 0, W, 3.75, '#E31D1A'); p.logo(L, 16, 24);
+      p.text(W / 2, 26, x.hq[0], { size: 9, bold: true, align: 'c' }); p.text(W / 2, 37, x.hq[1], { size: 7, color: MU, align: 'c' }); p.text(W / 2, 47, x.hq[2], { size: 7, color: MU, align: 'c' });
+      if (qr && x.qr) qrPdf(p, x.qr, R - 48, 9, 48);
+      p.line(L, 62, R, 62, LN); y = 62;
+    };
+    var newPage = function (qr) { p = new Page(W, H); pages.push(p); head(qr); };
+    var need = function (hh) { if (y + hh > H - FOOT) { newPage(false); y += 12; } };
+    var H6 = function (t, xx, w) { K(xx, y + 7, t, 6.8, '#3B434E'); p.line(xx, y + 13, xx + w, y + 13, LN); };
+    var kvBlock = function (xx, yy, w, rows, lw) { rows.forEach(function (r) { var ls = wrap(r[1], false, 7.9, w - lw); p.text(xx, yy, r[0], { size: 7.9, color: MU }); ls.forEach(function (t, i) { p.text(xx + lw, yy + i * 11, t, { size: 7.9 }); }); yy += Math.max(1, ls.length) * 11 + 1.5; }); return yy; };
+    newPage(true);
+    // title row
+    y += 24; p.text(L, y, x.title.toUpperCase(), { size: 13.5, bold: true });
+    if (x.orig) { var tw = width(x.title.toUpperCase(), true, 13.5) + 8, ow = width('ORIGINAL FOR RECIPIENT', true, 6.4) + 9; p.rect(L + tw, y - 9, ow, 12, null, LN, 0.75); K(L + tw + 4.5, y - 0.6, 'ORIGINAL FOR RECIPIENT'); }
+    var bw = x.badge ? width(x.badge, true, 6.8) + 12 : 0, bx = R - bw;
+    if (x.badge) { var bc = CHIP[x.badge]; p.pill(bx, y - 9.5, bw, 13, bc[0]); p.text(bx + 6, y - 0.6, x.badge, { size: 6.8, bold: true, color: bc[1] }); }
+    var tv = width(x.txn, true, 7.5); p.text(bx - 6 - tv, y - 1, x.txn, { size: 7.5, bold: true }); p.text(bx - 10 - tv, y - 1, 'Transaction Name:', { size: 7.5, color: MU, align: 'r' });
+    // meta grid
+    y += 12; var cw4 = CW / 4, rh = 30, nR = x.ids ? 2 : 1; p.rect(L, y, CW, rh * nR, null, LN);
+    x.meta.forEach(function (r, i) { var xx = L + i * cw4; if (i) p.line(xx, y, xx, y + rh); K(xx + 9, y + 11, r[0]); p.text(xx + 9, y + 24, r[1], { size: 9.4, bold: true }); });
+    if (x.ids) { p.line(L, y + rh, R, y + rh, LN); p.line(L + 2 * cw4, y + rh, L + 2 * cw4, y + 2 * rh); p.line(L + 3 * cw4, y + rh, L + 3 * cw4, y + 2 * rh);
+      K(L + 9, y + rh + 11, x.ids[0][0]); var id = x.ids[0][1]; while (width(id, false, 6.4) > 2 * cw4 - 18 && id.length > 8) id = id.slice(0, -1); p.text(L + 9, y + rh + 23, id, { size: 6.4 });
+      [1, 2].forEach(function (k) { K(L + (k + 1) * cw4 + 9, y + rh + 11, x.ids[k][0]); p.text(L + (k + 1) * cw4 + 9, y + rh + 23, x.ids[k][1], { size: 7.9 }); }); }
+    y += rh * nR + 18;
+    // parties
+    var hw = (CW - 24) / 2, xs2 = [L, L + hw + 24], y0 = y, ye = y;
+    [x.sup, x.rcv].forEach(function (pt, i) { y = y0; H6(pt.title, xs2[i], hw); p.text(xs2[i], y + 27, pt.name, { size: 8.6, bold: true }); ye = Math.max(ye, kvBlock(xs2[i], y + 41, hw, pt.rows, 78)); });
+    y = ye + 6;
+    // info grid
+    var c3 = CW / 3; x.info.forEach(function (r, i) { var xx = L + (i % 3) * c3, yy = y + Math.floor(i / 3) * 24; K(xx, yy + 7, r[0]); p.text(xx, yy + 18, r[1], { size: 7.9 }); });
+    y += Math.ceil(x.info.length / 3) * 24 + 6;
+    // shipment panel
+    var pr = Math.ceil(x.ship.length / 3), ph = 14 + pr * 24; p.rect(L, y, CW, ph, '#F4F5F7'); var pc3 = (CW - 24) / 3;
+    x.ship.forEach(function (r, i) { var xx = L + 12 + (i % 3) * pc3, yy = y + 10 + Math.floor(i / 3) * 24; K(xx, yy + 7, r[0]); p.text(xx, yy + 18, r[1], { size: 7.9 }); });
+    y += ph + 12;
+    // charges table
+    var fr = land ? [0.65, 2.1, 0.75, 0.4, 0.5, 0.95, 0.45, 1.05, 1.15, 0.6, 0.95, 1.15] : [0.6, 1.9, 0.7, 0.35, 0.5, 0.95, 0.42, 1.05, 1.1, 0.5, 0.9, 1.1];
+    var ft = fr.reduce(function (a, b) { return a + b; }, 0), xs = [L]; fr.forEach(function (f) { xs.push(xs[xs.length - 1] + f * CW / ft); });
+    var thead = function () { var hh = 24; p.rect(L, y, CW, hh, '#F4F5F7'); p.line(L, y, R, y, LN); p.line(L, y + hh, R, y + hh, '#9AA2AD');
+      x.cols.forEach(function (c, i) { var ln = wrap(c, true, 6.4, xs[i + 1] - xs[i] - 5), yy = y + hh - 6 - (ln.length - 1) * 7.5; ln.forEach(function (t, k) { p.text(x.right[i] ? xs[i + 1] - 3 : xs[i] + 3, yy + k * 7.5, t, { size: 6.4, bold: true, color: '#3B434E', align: x.right[i] ? 'r' : 'l' }); }); });
+      y += hh; };
+    thead();
+    x.rows.forEach(function (r) {
+      var hl = wrap(r.head, false, 7.5, xs[2] - xs[1] - 5), rh2 = Math.max(19, 8 + hl.length * 10);
+      if (y + rh2 > H - FOOT) { newPage(false); y += 12; thead(); }
+      x.keys.forEach(function (k, i) { if (k === 'head') { hl.forEach(function (t, n) { p.text(xs[1] + 3, y + 12 + n * 10, t, { size: 7.5 }); }); return; }
+        var s = String(r[k]); while (width(s, false, 7.5) > xs[i + 1] - xs[i] - 5 && s.length > 3) s = s.slice(0, -1); p.text(x.right[i] ? xs[i + 1] - 3 : xs[i] + 3, y + 12, s, { size: 7.5, align: x.right[i] ? 'r' : 'l' }); });
+      y += rh2; p.line(L, y, R, y, '#E8EAED');
+    });
+    // words + totals
+    var tb = 12 + x.totals.length * 12 + 10 + x.grand.length * 13 + 10 + x.roe.length * 11; need(tb + 8); y += 12;
+    K(L, y + 7, 'Amount in Words'); var wl = wrap(x.words, false, 8.2, hw); wl.forEach(function (t, i) { p.text(L, y + 20 + i * 12, t, { size: 8.2 }); });
+    if (x.wordsSub) p.text(L, y + 24 + wl.length * 12, x.wordsSub, { size: 7.5, color: MU });
+    var tx = xs2[1], ty = y + 7;
+    x.totals.forEach(function (t) { p.text(tx, ty, t[0], { size: 7.9 }); p.text(R, ty, t[1], { size: 7.9, align: 'r' }); ty += 12; });
+    ty += 2; p.line(tx, ty, R, ty, INK, 1.1); ty += 13;
+    x.grand.forEach(function (g, i) { p.text(tx, ty, g[0], { size: i ? 7.9 : 8.6, bold: !i, color: i ? '#3B434E' : INK }); p.text(R, ty, g[1], { size: i ? 9 : 10.5, bold: true, color: i ? '#3B434E' : INK, align: 'r' }); ty += 14; });
+    ty += 1; p.line(tx, ty - 6, R, ty - 6, '#E3E6EA'); ty += 6;
+    x.roe.forEach(function (r) { p.text(tx, ty, r[0], { size: 7.1, color: MU }); p.text(R, ty, r[1], { size: 7.1, align: 'r' }); ty += 11; });
+    // page 2 (always starts a new page)
+    newPage(false); y += 18;
+    p.text(L, y, x.title.toUpperCase(), { size: 10.5, bold: true }); p.text(L + width(x.title.toUpperCase(), true, 10.5) + 8, y, x.meta[0][1] + ' · ' + x.meta[1][1] + ' · continued', { size: 8.2, color: MU });
+    y += 14; H6('Bank Details for Remittance', L, CW); y += 20; var by = y;
+    x.banks.forEach(function (b, i) { p.text(xs2[i], y + 6, b[0], { size: 8.6, bold: true }); by = Math.max(by, kvBlock(xs2[i], y + 20, hw, b[1], 82)); });
+    y = by + 12;
+    // tax summary
+    var tcols = x.taxCols.filter(function (c, i) { return x.showCS || (i !== 4 && i !== 5); }), trows = x.taxRows.concat([x.taxTotal]).map(function (r) { return r.filter(function (c, i) { return x.showCS || (i !== 4 && i !== 5); }); });
+    need(40 + trows.length * 19); H6((x.isIN ? 'GST' : 'Tax') + ' Summary', L, CW); y += 20; var tf = tcols.map(function (c, i) { return i ? 1 : 1.3; }), tft = tf.reduce(function (a, b) { return a + b; }, 0), txs = [L];
+    tf.forEach(function (f) { txs.push(txs[txs.length - 1] + f * CW / tft); });
+    p.rect(L, y, CW, 18, '#F4F5F7'); p.line(L, y, R, y, LN); p.line(L, y + 18, R, y + 18, '#9AA2AD');
+    tcols.forEach(function (c, i) { p.text(i ? txs[i + 1] - 3 : txs[i] + 3, y + 12, c, { size: 6.4, bold: true, color: '#3B434E', align: i ? 'r' : 'l' }); }); y += 18;
+    trows.forEach(function (r, n) { var b = n === trows.length - 1; r.forEach(function (v, i) { p.text(i ? txs[i + 1] - 3 : txs[i] + 3, y + 12, v, { size: 7.5, bold: b, align: i ? 'r' : 'l' }); }); y += 19; p.line(L, y, R, y, '#E8EAED'); });
+    y += 18;
+    // statutory + late payment
+    var sl = wrap(x.legal, false, 7.9, hw), ll = wrap(x.late, false, 7.9, hw); need(24 + Math.max(sl.length, ll.length) * 11);
+    H6('Statutory e-Invoice', L, hw); H6('Late Payment', xs2[1], hw);
+    sl.forEach(function (t, i) { p.text(L, y + 26 + i * 11, t, { size: 7.9 }); }); ll.forEach(function (t, i) { p.text(xs2[1], y + 26 + i * 11, t, { size: 7.9 }); });
+    y += 26 + Math.max(sl.length, ll.length) * 11 + 10;
+    // T&C (two columns, small)
+    var tcw = hw - 10, half = Math.ceil(x.tc.length / 2), colH = [0, 0], tcl = x.tc.map(function (t, i) { return wrap((i + 1) + '. ' + t, false, 6, tcw); });
+    tcl.forEach(function (l, i) { colH[i < half ? 0 : 1] += l.length * 8 + 2.5; }); need(30 + Math.max(colH[0], colH[1]));
+    H6('Terms & Conditions', L, CW); var cy = [y + 24, y + 24];
+    tcl.forEach(function (l, i) { var c = i < half ? 0 : 1; l.forEach(function (t, k) { p.text(xs2[c] + (k ? 7 : 0), cy[c], t, { size: 6, color: MU }); cy[c] += 8; }); cy[c] += 2.5; });
+    y = Math.max(cy[0], cy[1]) + 2; p.text(L, y + 4, 'Full terms: PIL Conditions of Carriage · www.pilship.com', { size: 6, color: '#0071B7' }); y += 22;
+    // declaration + signatory
+    need(52); var dw = CW - 190, dl = wrap(x.declaration, false, 7.9, dw - 20);
+    H6('Declaration', L, dw - 20); dl.forEach(function (t, i) { p.text(L, y + 26 + i * 11, t, { size: 7.9 }); });
+    p.text(R, y + 6, x.sign, { size: 7.9, align: 'r' }); if (x.signed) p.text(R, y + 26, x.signed, { size: 6.8, color: '#1F6B45', align: 'r' }); p.line(R - 165, y + 30, R, y + 30, '#9AA2AD'); p.text(R, y + 41, 'Authorised Signatory', { size: 7.9, align: 'r' });
+    y += 58;
+    // containers (last)
+    var per = land ? 7 : 5, cr = Math.ceil(x.cntrs.length / per); need(26 + Math.min(cr, 3) * 11);
+    H6('Container Nos. (' + x.cntrs.length + ' x 40HC)', L, CW); y += 24; var ccw = CW / per;
+    x.cntrs.forEach(function (c, i) { if (i % per === 0 && i) { y += 11; need(11); } var xx = L + (i % per) * ccw; p.text(xx, y, '40HC', { size: 7.1, color: MU }); p.text(xx + 22, y, c, { size: 7.1 }); });
+    // footers
+    pages.forEach(function (pg, n) { var fy = H - 42; pg.line(L, fy - 8, R, fy - 8, LN);
+      pg.text(L, fy, 'Issued By: ' + x.issued + ' · Printed: ' + x.printed, { size: 6.8, color: '#3B434E' }); pg.text(R, fy, 'Page ' + (n + 1) + ' of ' + pages.length, { size: 6.8, color: '#3B434E', align: 'r' });
+      pg.text(L, fy + 10, x.foot[0], { size: 6.2, color: MU }); pg.text(L, fy + 19, x.foot[1], { size: 6.2, color: MU }); pg.text(L, fy + 28, x.disclaimer, { size: 6.2, color: MU }); });
+    return pages;
+  }
+
   // ---------------------------------------------------------------- screen renderer
   var CSS = [
     '.gd-paper,.gd-paper *{box-sizing:border-box;letter-spacing:normal}.gd-paper table{width:100%;table-layout:auto}.gd-paper td,.gd-paper th{height:auto;white-space:normal}.gd-paper tbody tr:hover td{background:none}.gd-scrim{position:fixed;inset:0;z-index:200;background:rgba(14,17,22,.62);display:flex;flex-direction:column;align-items:center;font-family:"IBM Plex Sans",system-ui,sans-serif}',
@@ -372,11 +653,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     '.gd-stamp{position:absolute;top:44px;left:400px;transform:rotate(-14deg);border:3px solid currentColor;border-radius:6px;padding:2px 12px;font:700 23px/32px "IBM Plex Sans",sans-serif;letter-spacing:.12em;opacity:.22;pointer-events:none}',
     '@media (max-width:860px){.gd-paper{transform:scale(.9);transform-origin:top center}}'
   ].join('');
-  CSS += INV_CSS + INV_CSS_L;
+  CSS += INV_CSS + INV_CSS_L + V2_CSS;
   var STAMP_COLOR = { DRAFT: '#5A6170', CANCELLED: '#A3262A', CREDITED: '#5B3BA8', PAID: '#1F6B45' };
 
   function paperHtml(m) {
-    if (m.kind === 'invoice' || m.kind === 'credit') return m.orient === 'l' ? invoiceHtmlL(m) : invoiceHtml(m);
+    if (m.kind === 'invoice' || m.kind === 'credit') return invoiceHtmlV2(m, m.orient === 'l');
     var meta = m.meta.slice(0, 4).map(function (r) { return '<div><div class="gd-k">' + esc(r[0]) + '</div><div class="gd-v' + (/No\.$/.test(r[0]) ? ' gd-mono' : '') + '">' + esc(r[1]) + '</div></div>'; }).join('');
     var extraMeta = m.meta.slice(4).map(function (r) { return '<span>' + esc(r[0]) + '</span><span class="gd-mono">' + esc(r[1]) + '</span>'; }).join('');
     var bill = '<div><div class="gd-k">' + esc(m.billTo.title) + '</div><div class="n">' + esc(m.billTo.name) + '</div>' + m.billTo.lines.map(function (l) { return '<div class="l">' + esc(l) + '</div>'; }).join('') + '</div>';
@@ -455,7 +736,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     try {
       var w = window.open('', '_blank'); if (!w) return;
       w.document.write('<!doctype html><title>' + esc(m.file) + '</title><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><style>' + CSS +
-        'body{margin:0}.gd-paper,.gi,.gl{box-shadow:none;margin:0}@page{size:A4' + (m.orient === 'l' ? ' landscape' : '') + ';margin:0}</style>' + paperHtml(m));
+        'body{margin:0}.gd-paper,.gi,.gl,.gv{box-shadow:none;margin:0}.gv{page-break-after:always}@page{size:A4' + (m.orient === 'l' ? ' landscape' : '') + ';margin:0}</style>' + paperHtml(m));
       w.document.close(); setTimeout(function () { w.focus(); w.print(); }, 400);
     } catch (e) {}
   }
@@ -558,7 +839,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   };
 
   function drawDoc(m) {
-    if (m.kind === 'invoice' || m.kind === 'credit') return m.orient === 'l' ? drawInvoiceL(m) : drawInvoice(m);
+    if (m.kind === 'invoice' || m.kind === 'credit') return drawInvoiceV2(m);
     var pages = [], p = new Page(), L = 40, R = PW - 40, W = R - L;
     pages.push(p);
     p.rect(0, 0, PW, 3, '#E31D1A');
