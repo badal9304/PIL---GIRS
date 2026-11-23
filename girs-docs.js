@@ -472,13 +472,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     '.gv-mu{color:#5D6673}.gv-tc ol{margin:0;padding-left:13px;columns:2;column-gap:32px;font-size:8px;line-height:10.5px;color:#5D6673}.gv-tc li{break-inside:avoid;margin-bottom:3px}',
     '.gv-sig{display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:end}.gv-sig .s{text-align:right}.gv-sig .ln{height:28px;border-bottom:1px solid #9AA2AD;margin:4px 0;display:flex;align-items:flex-end;justify-content:flex-end;color:#1F6B45;font-size:9px;padding-bottom:3px}',
     '.gv-cg{display:grid;grid-template-columns:repeat(5,1fr);gap:4px 16px;font-size:9.5px;line-height:13px}.gv.l .gv-cg{grid-template-columns:repeat(7,1fr)}.gv-cg div{display:flex;gap:6px}.gv-cg i{font-style:normal;color:#5D6673}',
-    '.gv a{color:#0071B7}.gv-ft{margin-top:auto;padding-top:8px;border-top:1px solid #D9DDE2;color:#5D6673;font-size:8.5px;line-height:12px}',
+    '.gv-wm{position:absolute;left:50%;top:52%;width:520px;transform:translate(-50%,-50%);opacity:.04;pointer-events:none;z-index:5}.gv.l .gv-wm{width:560px}.gv a{color:#0071B7}.gv-ft{margin-top:auto;padding-top:8px;border-top:1px solid #D9DDE2;color:#5D6673;font-size:8.5px;line-height:12px}',
     '.gv-ft .f1{display:flex;justify-content:space-between;color:#3B434E;font-size:9px}.gv-ft .f2,.gv-ft .f3{margin-top:4px}.gv-ft .f3{font-style:italic}.gv-sp{height:24px}'
   ].join('');
 
   function invoiceHtmlV2(m, land) {
     var x = m.v2, E = esc, cls = 'gv' + (land ? ' l' : '');
-    var lh = function (qr) { return '<div class="gv-lh"><img src="data:image/jpeg;base64,' + LOGO + '" alt="PIL"><div class="gv-co"><b>' + E(x.hq[0]) + '</b><div>' + E(x.hq[1]) + '</div><div>' + E(x.hq[2]) + '</div></div>' + (qr && x.qr ? '<div class="gv-qr">' + qrSvg(x.qr, 64) + '</div>' : '<div></div>') + '</div>'; };
+    var lh = function (qr) { return '<img class="gv-wm" src="data:image/jpeg;base64,' + LOGO + '" alt="" aria-hidden="true"><div class="gv-lh"><img src="data:image/jpeg;base64,' + LOGO + '" alt="PIL"><div class="gv-co"><b>' + E(x.hq[0]) + '</b><div>' + E(x.hq[1]) + '</div><div>' + E(x.hq[2]) + '</div></div>' + (qr && x.qr ? '<div class="gv-qr">' + qrSvg(x.qr, 64) + '</div>' : '<div></div>') + '</div>'; };
     var ft = function (n) { return '<div class="gv-ft"><div class="f1"><span>Issued By: ' + E(x.issued) + ' · Printed: ' + E(x.printed) + '</span><span>Page ' + n + ' of 2</span></div><div class="f2">' + E(x.foot[0]) + '<br>' + E(x.foot[1]) + '</div><div class="f3">' + E(x.disclaimer) + '</div></div>'; };
     var cell = function (r) { return '<div><span class="lb">' + E(r[0]) + '</span><span class="v">' + E(r[1]) + '</span></div>'; };
     var party = function (p) { return '<div><span class="h">' + E(p.title) + '</span><div class="gv-pn">' + E(p.name) + '</div><div class="gv-kv">' + p.rows.map(function (r) { return '<span>' + E(r[0]) + '</span><span>' + E(r[1]) + '</span>'; }).join('') + '</div></div>'; };
@@ -609,7 +609,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     H6('Container Nos. (' + x.cntrs.length + ' x 40HC)', L, CW); y += 24; var ccw = CW / per;
     x.cntrs.forEach(function (c, i) { if (i % per === 0 && i) { y += 11; need(11); } var xx = L + (i % per) * ccw; p.text(xx, y, '40HC', { size: 7.1, color: MU }); p.text(xx + 22, y, c, { size: 7.1 }); });
     // footers
-    pages.forEach(function (pg, n) { var fy = H - 42; pg.line(L, fy - 8, R, fy - 8, LN);
+    pages.forEach(function (pg, n) { pg.wm(land ? 340 : 390); var fy = H - 42; pg.line(L, fy - 8, R, fy - 8, LN);
       pg.text(L, fy, 'Issued By: ' + x.issued + ' · Printed: ' + x.printed, { size: 6.8, color: '#3B434E' }); pg.text(R, fy, 'Page ' + (n + 1) + ' of ' + pages.length, { size: 6.8, color: '#3B434E', align: 'r' });
       pg.text(L, fy + 10, x.foot[0], { size: 6.2, color: MU }); pg.text(L, fy + 19, x.foot[1], { size: 6.2, color: MU }); pg.text(L, fy + 28, x.disclaimer, { size: 6.2, color: MU }); });
     return pages;
@@ -827,6 +827,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (this.cx) { var c = this.cx; c.strokeStyle = color || '#DADDE3'; c.lineWidth = (lw || 0.75) * RS; c.beginPath(); c.moveTo(x1 * RS, y1 * RS); c.lineTo(x2 * RS, y2 * RS); c.stroke(); return; }
     this.ops.push('q ' + rgb(color || '#DADDE3') + ' RG ' + (lw || 0.75) + ' w ' + x1.toFixed(2) + ' ' + (this.h - y1).toFixed(2) + ' m ' + x2.toFixed(2) + ' ' + (this.h - y2).toFixed(2) + ' l S Q'); };
   Page.prototype.logo = function (x, y, h) { var w = h * LOGO_W / LOGO_H; if (this.cx) { try { this.cx.drawImage(LOGO_IMG, x * RS, y * RS, w * RS, h * RS); } catch (e) {} return; } this.ops.push('q ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + x.toFixed(2) + ' ' + (this.h - y - h).toFixed(2) + ' cm /Im1 Do Q'); };
+  Page.prototype.wm = function (w) { var h = w * LOGO_H / LOGO_W, x = (this.w - w) / 2, y = this.h * 0.52 - h / 2;
+    if (this.cx) { try { var c = this.cx; c.save(); c.globalAlpha = 0.04; c.drawImage(LOGO_IMG, x * RS, y * RS, w * RS, h * RS); c.restore(); } catch (e) {} return; }
+    this.ops.push('q /GS2 gs ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + x.toFixed(2) + ' ' + (this.h - y - h).toFixed(2) + ' cm /Im1 Do Q'); };
   Page.prototype.stamp = function (label, color) {
     label = T(label);
     if (this.cx) {
@@ -934,7 +937,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     pages.forEach(function (pg, n) {
       var content = pg.ops.join('\n'), img = '';
       if (pg.img) img = ' /Pg ' + (firstPage + nPages * 2 + n) + ' 0 R';
-      add([enc('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pg.w + ' ' + pg.h + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << /Im1 5 0 R' + img + ' >> /ExtGState << /GS1 6 0 R >> >> /Contents ' + (firstPage + n * 2 + 1) + ' 0 R >>')]);
+      add([enc('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pg.w + ' ' + pg.h + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << /Im1 5 0 R' + img + ' >> /ExtGState << /GS1 6 0 R /GS2 << /Type /ExtGState /ca 0.04 /CA 0.04 >> >> >> /Contents ' + (firstPage + n * 2 + 1) + ' 0 R >>')]);
       add([enc('<< /Length ' + content.length + ' >>\nstream\n' + content + '\nendstream')]);
     });
     pages.forEach(function (pg) {
