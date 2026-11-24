@@ -432,6 +432,32 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .tb-j .skip .tb-o{color:var(--muted)}.tb-j .bad .tb-o{color:var(--bad);font-weight:600}
 .tb-j .lnk{font-size:12px}
 .hi{list-style:none;margin:0;padding:0}.hi li{display:grid;grid-template-columns:40px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2)}.hi div{display:flex;flex-direction:column}.hi .mu{font-size:12px}.hi-v{color:var(--accent);font-weight:600}
+
+/* BRE: find, add */
+.rq{position:relative;margin:2px 2px 6px}.rq .input{width:100%;height:36px;padding-inline:34px 32px;background:var(--sub)}.rq .input::-webkit-search-cancel-button{display:none}
+.rq-i{position:absolute;left:11px;top:10px;color:var(--muted);pointer-events:none}
+.rq-x{all:unset;position:absolute;right:6px;top:6px;width:24px;height:24px;display:grid;place-items:center;border-radius:4px;color:var(--muted);cursor:pointer}.rq-x:hover{background:var(--hover);color:var(--ink)}
+.rq-p{position:absolute;z-index:90;top:calc(100% + 4px);left:0;width:440px;max-height:420px;overflow:auto;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(22,26,33,.16),0 2px 6px rgba(22,26,33,.06)}
+.rq-h{padding:8px 10px 6px;font-size:11.5px;color:var(--muted)}
+.rq-e{padding:14px 12px;font-size:13px;color:var(--muted);line-height:18px}
+.rq-o{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:1fr auto;column-gap:12px;row-gap:2px;padding:8px 10px;border-radius:6px}
+.rq-o:hover,.rq-o:focus-visible{background:var(--hover)}
+.rq-t{font-size:13px;font-weight:600;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rq-s{font-size:11.5px;color:var(--accent2);white-space:nowrap}
+.rq-m{grid-column:1/-1;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rw{transition:box-shadow .25s,border-color .25s}.rw.rw-hl{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)}
+.tg-cus{background:#EEF0FF;color:#4B4FB8}
+.rs-del{color:var(--bad,#C62828)}
+.sc-add{all:unset;box-sizing:border-box;cursor:pointer;margin-top:10px;width:100%;height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px dashed var(--bd);border-radius:8px;font-size:13px;font-weight:500;color:var(--accent)}
+.sc-add:hover{background:var(--tint);border-color:var(--accent)}.sc-add:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dlg.ad{z-index:202;width:min(620px,calc(100vw - 48px));overflow:visible}
+.ad .dh{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.ad-b{padding:18px 20px;display:flex;flex-direction:column;gap:16px;overflow:visible}
+.ad-f{display:flex;flex-direction:column}.ad-f > .input{width:100%}.ad-o{font-weight:400;color:var(--muted)}
+.ad-sx{margin:0}.ad-h{margin-top:6px;font-size:12px;color:var(--muted)}
+.ad-pv{padding:12px 14px;border-radius:8px;background:var(--sub);border:1px solid var(--line2)}.ad-pv span{font-size:11.5px;font-weight:600;color:var(--muted)}.ad-pv p{margin:3px 0 0;font-size:13px;line-height:19px;color:var(--ink)}
+.ad .df{display:flex;align-items:center;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}.ad-n{margin-inline-end:auto;font-size:12px;color:var(--muted)}
+.ad .dd-loc,.ad-sx .dd[style*="100%"]{flex:1}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -755,6 +781,18 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </sc-if>
         <div class="rs-grid">
           <nav class="card st-nav" aria-label="Invoicing stages">
+            <div class="rq">
+              <svg class="rq-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+              <input class="input" type="search" placeholder="Find a rule" aria-label="Find a rule" autocomplete="off" value="{{rq.v}}" onInput="{{rq.on}}">
+              <sc-if value="{{rq.has}}" hint-placeholder-val="{{ false }}"><button type="button" class="rq-x" onClick="{{rq.clear}}" aria-label="Clear search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if>
+              <sc-if value="{{rq.open}}" hint-placeholder-val="{{ false }}">
+                <div class="rq-p" role="listbox" aria-label="Matching rules">
+                  <sc-if value="{{rq.none}}" hint-placeholder-val="{{ false }}"><div class="rq-e">{{rq.noneT}}</div></sc-if>
+                  <sc-if value="{{rq.n}}" hint-placeholder-val="{{ true }}"><div class="rq-h">{{rq.head}}</div></sc-if>
+                  <sc-for list="{{rq.items}}" as="x" hint-placeholder-count="4"><button type="button" class="rq-o" role="option" onClick="{{x.go}}"><span class="rq-t">{{x.title}}</span><span class="rq-s">{{x.stage}}</span><span class="rq-m">{{x.snip}}</span></button></sc-for>
+                </div>
+              </sc-if>
+            </div>
             <div class="st-h">Invoicing stages <span class="mu">in the order GIRS applies them</span></div>
             <sc-for list="{{stages}}" as="g" hint-placeholder-count="8">
               <button class="st-i" aria-current="{{g.cur}}" onClick="{{g.pick}}">
@@ -773,7 +811,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                 <section class="sc">
                   <div class="sc-h"><h3>{{sec.title}}</h3><sc-if value="{{sec.hasDesc}}" hint-placeholder-val="{{ true }}"><p>{{sec.desc}}</p></sc-if></div>
                   <sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="3">
-                    <div class="rw {{r.cls}}">
+                    <div class="rw {{r.cls}} {{r.hlc}}" data-k="{{r.key}}">
                       <sc-if value="{{r.isSen}}" hint-placeholder-val="{{ true }}">
                         <div class="rw-top"><div class="rw-l"><span class="rw-t">{{r.title}}</span></div><span class="rm"><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if></span></div>
                         <div class="sx"><sc-for list="{{r.parts}}" as="p" hint-placeholder-count="5"><sc-if value="{{p.isText}}" hint-placeholder-val="{{ true }}"><span class="sx-t">{{p.t}}</span></sc-if><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{p.c.cls}}" style="{{p.c.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.c.ex}}" aria-label="{{p.c.aria}}" onClick="{{p.c.toggle}}"><span class="dd-v">{{p.c.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.c.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.c.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.c.aria}}"><sc-for list="{{p.c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isNum}}" hint-placeholder-val="{{ false }}"><input class="input sx-n" inputmode="numeric" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input sx-i" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if></sc-for></div>
@@ -781,7 +819,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <sc-if value="{{r.isTog}}" hint-placeholder-val="{{ false }}">
                         <div class="rw-top">
                           <label class="sw"><input type="checkbox" role="switch" checked="{{r.on}}" onChange="{{r.flip}}"><span class="sw-k" aria-hidden="true"></span><span class="sr">{{r.title}}</span></label>
-                          <div class="rw-l"><span class="rw-t">{{r.title}}</span><span class="rw-d">{{r.desc}}</span></div><span class="rm"><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if></span>
+                          <div class="rw-l"><span class="rw-t">{{r.title}}</span><span class="rw-d">{{r.desc}}</span></div><span class="rm"><sc-if value="{{r.isCustom}}" hint-placeholder-val="{{ false }}"><span class="tg tg-cus" title="Added by your team">Custom</span></sc-if><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if><sc-if value="{{r.isCustom}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs rs-del" onClick="{{r.del}}" aria-label="Delete {{r.title}}">Delete</button></sc-if></span>
                         </div>
                         <sc-if value="{{r.showSub}}" hint-placeholder-val="{{ false }}"><div class="sx sx-sub"><sc-for list="{{r.parts}}" as="p" hint-placeholder-count="5"><sc-if value="{{p.isText}}" hint-placeholder-val="{{ true }}"><span class="sx-t">{{p.t}}</span></sc-if><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{p.c.cls}}" style="{{p.c.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.c.ex}}" aria-label="{{p.c.aria}}" onClick="{{p.c.toggle}}"><span class="dd-v">{{p.c.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.c.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.c.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.c.aria}}"><sc-for list="{{p.c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isNum}}" hint-placeholder-val="{{ false }}"><input class="input sx-n" inputmode="numeric" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input sx-i" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if></sc-for></div></sc-if>
                       </sc-if>
@@ -807,6 +845,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       </sc-if>
                     </div>
                   </sc-for>
+                  <sc-if value="{{sec.hasAdd}}" hint-placeholder-val="{{ false }}"><button type="button" class="sc-add" onClick="{{sec.add}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>{{sec.addL}}</button></sc-if>
                 </section>
               </sc-for>
             </div>
@@ -835,10 +874,29 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
   </sc-if>
   <sc-if value="{{hist.on}}" hint-placeholder-val="{{ false }}">
     <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{hist.close}}"></button>
-    <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="hi-t">
+    <div class="dlg dim" role="dialog" aria-modal="true" aria-labelledby="hi-t">
       <div class="dh"><div><h2 id="hi-t" style="margin: 0; font-size: 16px; font-weight: 600">Change history</h2><div class="mu" style="font-size: 12px">{{hist.sub}}</div></div><button class="cm-ib x" onClick="{{hist.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
       <div class="db"><ol class="hi"><sc-for list="{{hist.items}}" as="h" hint-placeholder-count="4"><li><span class="mono hi-v">{{h.v}}</span><div><b>{{h.t}}</b><span class="mu">{{h.w}}</span></div></li></sc-for></ol></div>
       <div class="df"><button class="btn" onClick="{{hist.close}}">Close</button></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{dlg.on}}" hint-placeholder-val="{{ false }}">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{dlg.close}}"></button>
+    <div class="dlg dim ad" role="dialog" aria-modal="true" aria-labelledby="ad-t">
+      <div class="dh"><div><h2 id="ad-t" style="margin: 0; font-size: 16px; font-weight: 600">{{dlg.title}}</h2><div class="mu" style="font-size: 12px">{{dlg.sub}}</div></div><button class="cm-ib x" onClick="{{dlg.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <div class="db ad-b">
+        <sc-for list="{{dlg.fields}}" as="f" hint-placeholder-count="3">
+          <div class="ad-f">
+            <span class="lbl">{{f.l}}<sc-if value="{{f.opt}}" hint-placeholder-val="{{ false }}"><span class="ad-o"> · optional</span></sc-if></span>
+            <sc-if value="{{f.isIn}}" hint-placeholder-val="{{ true }}"><input class="input" aria-label="{{f.l}}" placeholder="{{f.ph}}" value="{{f.v}}" onInput="{{f.on}}"></sc-if>
+            <sc-if value="{{f.isRow}}" hint-placeholder-val="{{ false }}"><div class="sx ad-sx"><sc-for list="{{f.parts}}" as="p" hint-placeholder-count="5"><sc-if value="{{p.isText}}" hint-placeholder-val="{{ true }}"><span class="sx-t">{{p.t}}</span></sc-if><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{p.c.cls}}" style="{{p.c.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.c.ex}}" aria-label="{{p.c.aria}}" onClick="{{p.c.toggle}}"><span class="dd-v">{{p.c.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.c.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.c.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.c.aria}}"><sc-for list="{{p.c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isNum}}" hint-placeholder-val="{{ false }}"><input class="input sx-n" inputmode="numeric" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input sx-i" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if></sc-for></div></sc-if>
+            <sc-if value="{{f.hasHelp}}" hint-placeholder-val="{{ false }}"><span class="ad-h">{{f.help}}</span></sc-if>
+          </div>
+        </sc-for>
+        <div class="ad-pv"><span>Preview</span><p>{{dlg.pv}}</p></div>
+      </div>
+      <div class="df"><span class="ad-n">{{dlg.note}}</span><button class="btn" onClick="{{dlg.close}}">Cancel</button><button class="btn btn-primary" disabled="{{dlg.noOk}}" onClick="{{dlg.ok}}">{{dlg.okL}}</button></div>
     </div>
   </sc-if>
 
@@ -913,6 +971,14 @@ const RL_STAGES = [
   ['dlv', 'Delivery', 'Where a validated invoice is sent, in which order.'],
   ['evt', 'Automatic invoices & credit notes', 'Documents GIRS creates on its own when an event happens.']
 ];
+const RL_CF = {
+  field: ['Container numbers', 'Shipper name', 'Consignee name', 'Customer tax ID', 'Customer e-mail contact', 'Invoice amount', 'Number of containers', 'Freight term', 'Port of loading', 'Port of discharge', 'Commodity'],
+  op: ['is empty', 'is not empty', 'equals', 'does not equal', 'is more than', 'is less than', 'contains'],
+  ev: ['A container is gated out', 'A container is returned', 'The vessel departs', 'The B/L is amended in LMS', 'Free time is exceeded', 'Cargo is released'],
+  doc: ['Invoice', 'Credit note', 'Debit note']
+};
+const RL_NEWLOC = [['ID', 'Indonesia', null, 'Indonesia'], ['ID-JKT', 'Indonesia · Jakarta (JKT)', 'ID', 'Jakarta'], ['VN', 'Vietnam', null, 'Vietnam'], ['VN-SGN', 'Vietnam · Ho Chi Minh City (SGN)', 'VN', 'Ho Chi Minh City'],
+  ['CN', 'China', null, 'China'], ['CN-SHA', 'China · Shanghai (SHA)', 'CN', 'Shanghai'], ['IN-MUN', 'India · Mundra (MUN)', 'IN', 'Mundra'], ['MY-PEN', 'Malaysia · Penang (PEN)', 'MY', 'Penang'], ['TH-BKK', 'Thailand · Bangkok (BKK)', 'TH', 'Bangkok']];
 const RL_LS = 'girs.rules.v2';
 function rlLoad() { try { const x = JSON.parse(localStorage.getItem(RL_LS) || 'null'); if (x && x.ov) return x; } catch (e) {} return { ov: JSON.parse(JSON.stringify(RL_BASE)), draft: {}, pend: {}, ver: Object.fromEntries(RL_LOCS.map((l) => [l.id, l.ver])), hist: {} }; }
 function rlStore(d) { try { localStorage.setItem(RL_LS, JSON.stringify(d)); } catch (e) {} }
@@ -922,19 +988,20 @@ function rlFmt(n, cur) { return Number(n).toLocaleString(cur === 'INR' ? 'en-IN'
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { db: rlLoad(), loc: 'IN-NSA', stage: 'trg', open: '', tst: null, hist: false };
-    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.open) this.setState({ open: '' }); else if (this.state.tst || this.state.hist) this.setState({ tst: null, hist: false }); }); } catch (e) {}
+    this.state = { db: rlLoad(), loc: 'IN-NSA', stage: 'trg', open: '', tst: null, hist: false, rq: '', hl: '', dlg: null };
+    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.open) this.setState({ open: '' }); else if (this.state.dlg) this.setState({ dlg: null }); else if (this.state.rq) this.setState({ rq: '' }); else if (this.state.tst || this.state.hist) this.setState({ tst: null, hist: false }); }); } catch (e) {}
   }
   renderVals() {
     const s = this.state, self = this, set = (o) => self.setState(o), DB = s.db;
-    const L = (id) => RL_LOCS.find((l) => l.id === id);
+    const LOCS = (() => { const all = RL_LOCS.concat(DB.locs || []), out = [all[0]]; all.filter((l) => l.parent === 'GL').forEach((c) => { out.push(c); all.filter((l) => l.parent === c.id).forEach((x) => out.push(x)); }); return out; })();
+    const L = (id) => LOCS.find((l) => l.id === id);
     const chainOf = (id) => { const c = []; let x = L(id); while (x) { c.push(x.id); x = x.parent ? L(x.parent) : null; } return c; };
     const layer = (lid, k) => { const d = (DB.draft[lid] || {}), o = (DB.ov[lid] || {});
       if (k in d) return d[k] === RL_RESET ? { none: true, chg: true } : { v: d[k], chg: true }; if (k in o) return { v: o[k] }; return null; };
     const eff = (k, lid) => { lid = lid || s.loc; for (const c of chainOf(lid)) { const x = layer(c, k); if (x && !x.none) return { v: x.v, src: c, chg: !!(x.chg && c === lid) }; } return { v: undefined, src: 'GL' }; };
     const chgHere = (k) => { const d = DB.draft[s.loc] || {}; return k in d; };
     const save = (db, extra) => { rlStore(db); set(Object.assign({ db }, extra || {})); };
-    const setK = (k, v) => { const db = JSON.parse(JSON.stringify(DB)); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][k] = v; save(db, { open: '' }); };
+    const setK = (k, v, extra) => { const db = JSON.parse(JSON.stringify(DB)); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][k] = v; save(db, Object.assign({ open: '' }, extra || {})); };
     const resetK = (k) => { const db = JSON.parse(JSON.stringify(DB)); db.draft[s.loc] = db.draft[s.loc] || {};
       if ((DB.ov[s.loc] || {})[k] !== undefined) db.draft[s.loc][k] = RL_RESET; else delete db.draft[s.loc][k]; save(db); };
     const loc = L(s.loc), parent = loc.parent ? L(loc.parent) : null;
@@ -946,7 +1013,7 @@ class GirsPage extends DCLogic {
     const meta = (k) => { const e = eff(k), here = e.src === s.loc;
       const srcName = L(e.src).short;
       return { chg: chgHere(k), src: here ? 'Set for ' + loc.short : 'From ' + srcName, srcCls: here ? 'tg-set' : 'tg-inh', srcTip: here ? 'This location overrides ' + (parent ? parent.short : '') : 'Inherited. Change it here to override for ' + loc.short + ' only.',
-        canReset: !!parent && (here || chgHere(k)), reset: () => resetK(k), resetTip: 'Use the value from ' + (parent ? parent.short : '') }; };
+        canReset: !!parent && (here || chgHere(k)), reset: () => resetK(k), resetTip: 'Use the value from ' + (parent ? parent.short : ''), key: k, hlc: s.hl === k ? 'rw-hl' : '', isCustom: false }; };
     const T = (t) => ({ isText: true, t, isDd: false, isNum: false, isIn: false });
     const P = (c) => ({ isText: false, isDd: true, isNum: false, isIn: false, c });
     const N = (v, on, aria, w) => ({ isText: false, isDd: false, isNum: true, isIn: false, v: String(v), on, aria, st: w ? 'width:' + w : '' });
@@ -978,8 +1045,14 @@ class GirsPage extends DCLogic {
         ] }, { title: 'Before the batch starts', desc: '', rows: [ tog('trg.man', 'Match B/L count with the vessel manifest', 'The batch waits until every B/L on the manifest is ready, so a voyage is not invoiced in parts.') ].map((r) => Object.assign(r, { on: ev('trg.man') ? 'true' : '', flip: () => setK('trg.man', !ev('trg.man')), cls: (chgHere('trg.man') ? 'rw-chg ' : '') + (ev('trg.man') ? '' : 'rw-off'), showSub: false })) }]; },
       chk: () => { const C = [['chk.lms', 'Charges received from LMS', 'All charges for the B/L have arrived from LMS.'], ['chk.roe', 'Exchange rate available', 'A Rate of Exchange exists for the invoice date and currency.'], ['chk.man', 'B/L data complete', 'Shipper, consignee, ports and containers are filled in.'],
           ['chk.cust', 'Customer master complete', 'The billing party has a tax ID, address and invoice e-mail contact.'], ['chk.tax', 'Tax code valid', 'Every charge has a tax code that matches GFS.'], ['chk.hold', 'Customer not on credit hold', 'The billing party is not on hold in Credit Management.'], ['chk.lim', 'Within credit limit', 'The invoice keeps the customer within the approved credit limit.']];
+        const cus = ev('chk.cus') || [], setC = (i, j, x) => { const a = cus.map((y) => y.slice()); a[i][j] = x; setK('chk.cus', a); };
+        const cusRows = cus.map((c, i) => { const ck = 'chk.cus.' + i;
+          return Object.assign(tog('chk.cus', c[3], 'Fails if ' + c[4] + ' ' + c[5] + (c[6] ? ' ' + c[6] : '') + '.', [T('If it fails'), P(dd(ck + '.f', c[1], RL_O.fail, (x) => setC(i, 1, x), { w: '196px', aria: c[3] + ': if it fails' })), T('and notify'), P(dd(ck + '.n', c[2], RL_O.team, (x) => setC(i, 2, x), { w: '210px', aria: c[3] + ': notify' }))]),
+            { on: c[0] ? 'true' : '', flip: () => setC(i, 0, !c[0]), cls: (chgHere('chk.cus') ? 'rw-chg ' : '') + (c[0] ? '' : 'rw-off'), showSub: !!c[0], key: ck, hlc: s.hl === ck ? 'rw-hl' : '', isCustom: true, canReset: false,
+              del: () => setK('chk.cus', cus.filter((_, j) => j !== i), { __toast: '"' + c[3] + '" deleted. Submit for approval to apply.' }) }); });
         return [{ title: 'Checks', desc: 'Each check runs for every invoice. Turn a check off only if this location does not need it.', rows: C.map(([k, t, d]) => { const v = ev(k);
-          return tog(k, t, d, [T('If it fails'), P(dd(k + '.f', v[1], RL_O.fail, (x) => arrSet(k, 1, x), { w: '196px', aria: t + ': if it fails' })), T('and notify'), P(dd(k + '.n', v[2], RL_O.team, (x) => arrSet(k, 2, x), { w: '210px', aria: t + ': notify' }))]); }) }]; },
+          return tog(k, t, d, [T('If it fails'), P(dd(k + '.f', v[1], RL_O.fail, (x) => arrSet(k, 1, x), { w: '196px', aria: t + ': if it fails' })), T('and notify'), P(dd(k + '.n', v[2], RL_O.team, (x) => arrSet(k, 2, x), { w: '210px', aria: t + ': notify' }))]); }).concat(cusRows),
+          hasAdd: true, addL: 'Add check', add: () => set({ dlg: { t: 'chk', name: '', field: '', op: '', val: '', fail: 'Block the invoice', team: 'Documentation team' }, open: '' }) }]; },
       bil: () => [{ title: 'Billing party', desc: 'GIRS uses the first row that matches.', rows: [
           tbl('bil.t', 'Who receives the invoice', 'Match the freight term, charge group and customer group to a billing party.', [{ t: 'Freight term', w: '150px' }, { t: 'Charge group', w: 'minmax(0,1.3fr)' }, { t: 'Customer group', w: 'minmax(0,1fr)' }, { t: 'Bill to', w: 'minmax(0,1fr)' }],
             [RL_O.term, RL_O.grp, RL_O.cust, RL_O.party], ['Any', 'Any charge', 'Any customer', 'Shipper'], 'Rows are checked from top to bottom.', 3) ] },
@@ -1004,36 +1077,41 @@ class GirsPage extends DCLogic {
           tog('dlv.portal', '1. Submit to the government e-invoice portal', 'The invoice is sent to the customer only after the portal accepts it.', [T('Portal'), P(dd('dlv.p', pt[1], RL_O.portal, (v) => arrSet('dlv.portal', 1, v), { w: '220px', aria: 'Portal' })), T('wait up to'), P(dd('dlv.w', pt[2], RL_O.wait, (v) => arrSet('dlv.portal', 2, v), { w: '84px', aria: 'Minutes' })), T('min, if rejected'), P(dd('dlv.r', pt[3], RL_O.reject, (v) => arrSet('dlv.portal', 3, v), { w: '290px', aria: 'If rejected' }))]),
           tog('dlv.mail', '2. E-mail the invoice to the customer', 'Uses the contacts in Customer Master.', [T('Send to'), P(dd('dlv.to', ml[1], RL_O.to, (v) => arrSet('dlv.mail', 1, v), { w: '260px', aria: 'Send to' })), T('attach'), P(dd('dlv.att', ml[2], RL_O.att, (v) => arrSet('dlv.mail', 2, v), { w: '150px', aria: 'Attachment' })), T('copy to'), I(ev('dlv.cc'), (e) => setK('dlv.cc', e.target.value), 'Copy to', '220px')]),
           sen('dlv.gfs', '3. Post to GFS', [T('Post the invoice to GFS'), P(dd('dlv.gfs', ev('dlv.gfs'), RL_O.gfs, (v) => setK('dlv.gfs', v), { w: '250px', aria: 'Post to GFS' }))]) ] }]; },
-      evt: () => { const d = ev('evt.dd'), f = ev('evt.fca');
+      evt: () => { const d = ev('evt.dd'), f = ev('evt.fca'), ce = ev('evt.cus') || [], setE = (i, j, x) => { const a = ce.map((y) => y.slice()); a[i][j] = x; setK('evt.cus', a); };
+        const cusE = ce.map((c, i) => { const ck = 'evt.cus.' + i;
+          return Object.assign(tog('evt.cus', c[1], 'When ' + c[2].replace(/^./, (x) => x.toLowerCase()) + ', create ' + (c[3] === 'Invoice' ? 'an invoice' : 'a ' + c[3].toLowerCase()) + ' for ' + c[4] + (c[5] ? ' if the amount is over ' + c[5] + ' in local currency' : '') + '.'),
+            { on: c[0] ? 'true' : '', flip: () => setE(i, 0, !c[0]), cls: (chgHere('evt.cus') ? 'rw-chg ' : '') + (c[0] ? '' : 'rw-off'), showSub: false, key: ck, hlc: s.hl === ck ? 'rw-hl' : '', isCustom: true, canReset: false,
+              del: () => setK('evt.cus', ce.filter((_, j) => j !== i), { __toast: '"' + c[1] + '" deleted. Submit for approval to apply.' }) }); });
         return [{ title: 'Events', desc: 'Documents created this way still go through the checks, tax and delivery stages.', rows: [
           tog('evt.dd', 'D&D invoice', 'Detention and demurrage, using LMS gate dates and the D&D tariff.', [T('Create when'), P(dd('evt.ddw', d[1], RL_O.dd, (v) => arrSet('evt.dd', 1, v), { w: '230px', aria: 'Create when' })), T('if the amount is over'), N(d[2], (e) => arrSet('evt.dd', 2, e.target.value.replace(/[^\d]/g, '')), 'Minimum amount', '90px'), T('in local currency')]),
           tog('evt.dar', 'Credit note for an approved DAR waiver', 'When a D&D waiver is approved, GIRS credits the waived amount against the original invoice.'),
-          tog('evt.fca', 'Credit note for an amended charge', 'When a charge is changed in LMS after it was invoiced (FCA).', [T('Create the credit note'), P(dd('evt.fcam', f[1], RL_O.fca, (v) => arrSet('evt.fca', 1, v), { w: '170px', aria: 'Credit note creation' }))]) ] }]; }
+          tog('evt.fca', 'Credit note for an amended charge', 'When a charge is changed in LMS after it was invoiced (FCA).', [T('Create the credit note'), P(dd('evt.fcam', f[1], RL_O.fca, (v) => arrSet('evt.fca', 1, v), { w: '170px', aria: 'Credit note creation' }))]) ].concat(cusE),
+          hasAdd: true, addL: 'Add automatic document', add: () => set({ dlg: { t: 'evt', name: '', trig: '', doc: 'Invoice', chg: '', min: '' }, open: '' }) }]; }
     };
     const sum = {
       trg: () => { const e = ev('trg.exp'), i = ev('trg.imp'); return 'Export ' + e[0] + 'd ' + e[1] + ' ' + e[2] + ' · Import ' + i[0] + 'd ' + i[1] + ' ' + i[2]; },
-      chk: () => { const ks = ['chk.lms', 'chk.roe', 'chk.man', 'chk.cust', 'chk.tax', 'chk.hold', 'chk.lim'], on = ks.filter((k) => ev(k)[0]); return on.length + ' checks on · ' + on.filter((k) => ev(k)[1] === 'Block the invoice').length + ' block'; },
+      chk: () => { const ks = ['chk.lms', 'chk.roe', 'chk.man', 'chk.cust', 'chk.tax', 'chk.hold', 'chk.lim'], on = ks.filter((k) => ev(k)[0]), cu = (ev('chk.cus') || []).filter((c) => c[0]); return (on.length + cu.length) + ' checks on · ' + (on.filter((k) => ev(k)[1] === 'Block the invoice').length + cu.filter((c) => c[1] === 'Block the invoice').length) + ' block'; },
       bil: () => (ev('bil.t') || []).length + ' billing rules' + (ev('bil.split') ? ' · split allowed' : ''),
       cur: () => { const r = ev('cur.t') || []; return new Set(r.map((x) => x[2])).size + ' invoices per B/L · ' + [...new Set(r.map((x) => x[1]))].join(', '); },
       tax: () => { const r = ev('tax.t') || []; return [...new Set(r.map((x) => x[2]))].filter((x) => x !== 'No tax').join(', ') || 'No tax'; },
       num: () => (ev('num.tk') || []).map((t) => (RL_O.token.find((x) => x[0] === t) || ['', ''])[1]).join('') || '—',
       dlv: () => { const p = ev('dlv.portal'); return (p[0] ? p[1] + ' → ' : '') + 'e-mail → GFS'; },
-      evt: () => ['evt.dd', 'evt.dar', 'evt.fca'].filter((k) => ev(k)[0]).length + ' of 3 on'
+      evt: () => { const ce = ev('evt.cus') || []; return (['evt.dd', 'evt.dar', 'evt.fca'].filter((k) => ev(k)[0]).length + ce.filter((c) => c[0]).length) + ' of ' + (3 + ce.length) + ' on'; }
     };
-    const KEYS = { trg: ['trg.exp', 'trg.imp', 'trg.proc', 'trg.days', 'trg.man'], chk: ['chk.lms', 'chk.roe', 'chk.man', 'chk.cust', 'chk.tax', 'chk.hold', 'chk.lim'], bil: ['bil.t', 'bil.split'], cur: ['cur.t', 'cur.banks'],
-      tax: ['tax.t'], num: ['num.tk', 'num.reset', 'num.layout', 'num.lang'], dlv: ['dlv.portal', 'dlv.mail', 'dlv.cc', 'dlv.gfs'], evt: ['evt.dd', 'evt.dar', 'evt.fca'] };
+    const KEYS = { trg: ['trg.exp', 'trg.imp', 'trg.proc', 'trg.days', 'trg.man'], chk: ['chk.lms', 'chk.roe', 'chk.man', 'chk.cust', 'chk.tax', 'chk.hold', 'chk.lim', 'chk.cus'], bil: ['bil.t', 'bil.split'], cur: ['cur.t', 'cur.banks'],
+      tax: ['tax.t'], num: ['num.tk', 'num.reset', 'num.layout', 'num.lang'], dlv: ['dlv.portal', 'dlv.mail', 'dlv.cc', 'dlv.gfs'], evt: ['evt.dd', 'evt.dar', 'evt.fca', 'evt.cus'] };
     const idx = RL_STAGES.findIndex((x) => x[0] === s.stage);
     const stages = RL_STAGES.map(([k, t], i) => { const chg = KEYS[k].some(chgHere), here = KEYS[k].some((x) => eff(x).src === s.loc);
       return { n: String(i + 1), title: t, sum: sum[k](), cur: s.stage === k ? 'step' : 'false', pick: () => set({ stage: k, open: '' }),
         dot: chg || (here && !!parent), dotCls: chg ? 'chg' : 'set', dotTip: chg ? 'Unsaved changes' : 'Overridden for ' + loc.short }; });
     const S = RL_STAGES[idx];
-    const st = { n: String(idx + 1), title: S[1], desc: S[2], secs: stageSecs[S[0]]().map((x) => Object.assign({ hasDesc: !!x.desc }, x)),
+    const st = { n: String(idx + 1), title: S[1], desc: S[2], secs: stageSecs[S[0]]().map((x) => Object.assign({ hasDesc: !!x.desc, hasAdd: false }, x)),
       noPrev: idx === 0 ? 'true' : '', noNext: idx === RL_STAGES.length - 1 ? 'true' : '', prev: () => set({ stage: RL_STAGES[Math.max(0, idx - 1)][0] }), next: () => set({ stage: RL_STAGES[Math.min(7, idx + 1)][0] }) };
     // location bar
     const nDraft = Object.keys(DB.draft[s.loc] || {}).length, nPend = Object.keys(DB.pend[s.loc] || {}).length;
     const ovN = (id) => id === 'GL' ? '' : Object.keys(DB.ov[id] || {}).length;
-    const locDd = dd('loc', s.loc, RL_LOCS.map((l) => [l.id, l.id === 'GL' ? 'Applies everywhere unless overridden' : (ovN(l.id) ? ovN(l.id) + (ovN(l.id) === 1 ? ' override' : ' overrides') : 'No overrides') + (Object.keys(DB.draft[l.id] || {}).length ? ' · unsaved changes' : '')]),
-      (v) => set({ loc: v }), { fmt: (v) => { const l = L(v); return (l.id.includes('-') ? ' ' : '') + l.name; }, w: '330px', aria: 'Location', cls: 'dd-loc' });
+    const locDd = dd('loc', s.loc, LOCS.map((l) => [l.id, l.id === 'GL' ? 'Applies everywhere unless overridden' : (ovN(l.id) ? ovN(l.id) + (ovN(l.id) === 1 ? ' override' : ' overrides') : 'No overrides') + (Object.keys(DB.draft[l.id] || {}).length ? ' · unsaved changes' : '')]).concat([['__add', 'Start rules for a new country or port']]),
+      (v) => v === '__add' ? set({ dlg: { t: 'loc', id: '' } }) : set({ loc: v, hl: '' }), { fmt: (v) => v === '__add' ? '+ Add location' : L(v).name, w: '330px', aria: 'Location', cls: 'dd-loc' });
     locDd.label = loc.name;
     const db2 = () => JSON.parse(JSON.stringify(DB));
     const bump = (v) => 'v' + ((parseInt(String(v).slice(1), 10) || 1) + 1);
@@ -1079,8 +1157,53 @@ class GirsPage extends DCLogic {
           cls: x.skip ? 'skip' : x.warn ? 'warn' : x.ok ? 'ok' : 'bad', icon: x.skip ? '–' : x.ok ? '✓' : '!' })) };
     }
     const hist = { on: !!s.hist, close: () => set({ hist: false }), sub: loc.name + ' · live ' + DB.ver[s.loc],
-      items: (DB.hist[s.loc] || []).concat(RL_HIST[s.loc] || [[DB.ver[s.loc], 'Local overrides approved', '6 Nov 2026 · approved by Finance Controller'], ['v1', 'Created from ' + (parent ? parent.short : 'Global'), '12 Dec 2025 · Daniel Tan']]).map(([v, t, w]) => ({ v, t, w })) };
-    return { loc: locV, stages, st, tst, hist, openTest: () => set({ tst: { bl: s.loc.startsWith('SG') ? 'BL-SG-25283' : s.loc.startsWith('MY') ? 'BL-MY-25475' : 'BL-IN-25056' }, open: '' }), openHist: () => set({ hist: true, open: '' }) };
+      items: (DB.hist[s.loc] || []).concat(RL_HIST[s.loc] || (loc.custom ? [] : [[DB.ver[s.loc], 'Local overrides approved', '6 Nov 2026 · approved by Finance Controller'], ['v1', 'Created from ' + (parent ? parent.short : 'Global'), '12 Dec 2025 · Daniel Tan']])).map(([v, t, w]) => ({ v, t, w })) };
+
+    // find a rule
+    const q = (s.rq || '').trim().toLowerCase(), res = [];
+    if (q) { const ws = q.split(/\s+/);
+      RL_STAGES.forEach(([k, t], i) => stageSecs[k]().forEach((sec) => sec.rows.forEach((r) => {
+        const bits = [r.desc || ''].concat((r.parts || []).map((x) => x.isText ? '' : x.isDd ? x.c.label : (x.v || '')));
+        (r.rows || []).forEach((x) => x.cells.forEach((c) => { if (c.isDd) bits.push(c.c.label); }));
+        (r.tokens || []).forEach((x) => bits.push(x.t));
+        const lo = [t, sec.title, r.title].concat(bits).join(' ').toLowerCase();
+        if (!ws.every((w) => lo.includes(w))) return;
+        const hits = [...new Set(bits.filter((b) => b && ws.some((w) => String(b).toLowerCase().includes(w))))];
+        res.push({ title: r.title, stage: 'Stage ' + (i + 1) + ' · ' + t, snip: hits.length && hits[0] !== r.desc ? 'Matches: ' + hits.slice(0, 3).join(', ') : (r.desc || sec.title), hasSnip: true,
+          go: () => { set({ stage: k, rq: '', hl: r.key, open: '' });
+            setTimeout(() => { try { const el = document.querySelector('[data-k="' + r.key + '"]'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }, 80);
+            setTimeout(() => { if (self.state.hl === r.key) self.setState({ hl: '' }); }, 2800); } }); }))); }
+    const rq = { v: s.rq || '', on: (e) => set({ rq: e.target.value, open: '' }), has: !!q, clear: () => set({ rq: '' }), open: !!q, items: res.slice(0, 8), n: res.length,
+      head: res.length ? res.length + (res.length === 1 ? ' rule' : ' rules') + ' at ' + loc.short : '', none: !!q && !res.length, noneT: 'No rules match "' + (s.rq || '').trim() + '". Try a charge, tax, team, field or document name.' };
+    // add dialogs
+    let dlg = { on: false };
+    if (s.dlg) { const D = s.dlg, upd = (o) => set({ dlg: Object.assign({}, D, o), open: '' }), close = () => set({ dlg: null, open: '' });
+      const F = (l, parts, o) => Object.assign({ l, isIn: false, isRow: true, parts, opt: false, hasHelp: false }, o || {});
+      const FI = (l, v, on, ph, o) => Object.assign({ l, isIn: true, isRow: false, v, on, ph, opt: false, hasHelp: false }, o || {});
+      if (D.t === 'chk') { const need = D.op && !/empty/.test(D.op), ok = D.name.trim() && D.field && D.op && (!need || String(D.val).trim());
+        dlg = { title: 'Add a check', sub: 'Runs for every invoice at ' + loc.short + ', after the built-in checks.', okL: 'Add check',
+          fields: [FI('Check name', D.name, (e) => upd({ name: e.target.value }), 'e.g. Container numbers present'),
+            F('Fails when', [P(dd('ad.f', D.field, RL_CF.field, (v) => upd({ field: v }), { w: '220px', ph: 'Select a field', aria: 'Field' })), P(dd('ad.o', D.op, RL_CF.op, (v) => upd({ op: v, val: /empty/.test(v) ? '' : D.val }), { w: '160px', ph: 'Condition', aria: 'Condition' }))].concat(need ? [I(D.val, (e) => upd({ val: e.target.value }), 'Value', '130px')] : [])),
+            F('If it fails', [P(dd('ad.x', D.fail, RL_O.fail, (v) => upd({ fail: v }), { w: '196px', aria: 'If it fails' })), T('and notify'), P(dd('ad.n', D.team, RL_O.team, (v) => upd({ team: v }), { w: '210px', aria: 'Notify' }))])],
+          pv: ok ? 'If ' + D.field + ' ' + D.op + (need ? ' ' + D.val : '') + ', GIRS ' + (D.fail === 'Block the invoice' ? 'blocks the invoice' : 'warns but still creates the invoice') + ' and notifies ' + D.team + '.' : 'Fill in the name and condition to see how the check works.',
+          ok: () => setK('chk.cus', (ev('chk.cus') || []).concat([[true, D.fail, D.team, D.name.trim(), D.field, D.op, need ? String(D.val).trim() : '']]), { dlg: null, stage: 'chk', __toast: '"' + D.name.trim() + '" added for ' + loc.short + '. Submit for approval to make it live.' }), noOk: ok ? '' : 'true' }; }
+      if (D.t === 'evt') { const ok = D.name.trim() && D.trig && D.doc && D.chg;
+        dlg = { title: 'Add an automatic document', sub: 'GIRS creates it on its own when the event comes from LMS at ' + loc.short + '.', okL: 'Add document',
+          fields: [FI('Name', D.name, (e) => upd({ name: e.target.value }), 'e.g. Reefer monitoring invoice'),
+            F('When this happens in LMS', [P(dd('ad.t', D.trig, RL_CF.ev, (v) => upd({ trig: v }), { w: '240px', ph: 'Select an event', aria: 'LMS event' }))]),
+            F('Create', [P(dd('ad.d', D.doc, RL_CF.doc, (v) => upd({ doc: v }), { w: '150px', aria: 'Document' })), T('for'), P(dd('ad.c', D.chg, RL_O.grp.filter((g) => g !== 'Any charge'), (v) => upd({ chg: v }), { w: '230px', ph: 'Select a charge group', aria: 'Charge group' }))]),
+            F('Only if the amount is over', [N(D.min, (e) => upd({ min: e.target.value.replace(/[^\d]/g, '').slice(0, 7) }), 'Minimum amount', '110px'), T('in local currency')], { opt: true, hasHelp: true, help: 'Leave empty to create it for any amount.' })],
+          pv: ok ? 'When ' + D.trig.replace(/^./, (x) => x.toLowerCase()) + ', GIRS creates ' + (D.doc === 'Invoice' ? 'an invoice' : 'a ' + D.doc.toLowerCase()) + ' for ' + D.chg + (D.min ? ' if the amount is over ' + D.min + ' in local currency' : '') + '. It still goes through the checks, tax and delivery stages.' : 'Fill in the name, event and charge group to see what GIRS will do.',
+          ok: () => setK('evt.cus', (ev('evt.cus') || []).concat([[true, D.name.trim(), D.trig, D.doc, D.chg, D.min]]), { dlg: null, stage: 'evt', __toast: '"' + D.name.trim() + '" added for ' + loc.short + '. Submit for approval to make it live.' }), noOk: ok ? '' : 'true' }; }
+      if (D.t === 'loc') { const avail = RL_NEWLOC.filter((x) => !L(x[0])), sel = RL_NEWLOC.find((x) => x[0] === D.id), par = sel ? (sel[2] && L(sel[2]) ? L(sel[2]) : L('GL')) : null;
+        dlg = { title: 'Add a location', sub: 'Start invoicing rules for a new country or port.', okL: 'Add location',
+          fields: [F('Country or port', [P(dd('ad.l', D.id, avail.map((x) => [x[0], x[2] ? 'Port · starts from ' + (L(x[2]) ? L(x[2]).short : 'Global defaults') : 'Country · starts from Global defaults']), (v) => upd({ id: v }), { w: '100%', ph: 'Select a country or port', aria: 'Country or port', fmt: (v) => (RL_NEWLOC.find((x) => x[0] === v) || ['', v])[1] }))])],
+          pv: sel ? sel[1] + ' starts with every rule from ' + (par.id === 'GL' ? 'Global defaults' : par.short) + '. Change only what is different there; each change goes for approval.' : 'Pick a location to see where its rules come from.',
+          ok: () => { const d = JSON.parse(JSON.stringify(DB)); d.locs = (d.locs || []).concat([{ id: sel[0], name: sel[1], short: sel[3], parent: par.id, ver: 'v1', custom: true }]); d.ver[sel[0]] = 'v1';
+            d.hist = d.hist || {}; d.hist[sel[0]] = [['v1', 'Created from ' + (par.id === 'GL' ? 'Global defaults' : par.short), '24 Nov 2026 · Daniel Tan']];
+            save(d, { loc: sel[0], stage: 'trg', dlg: null, open: '', __toast: sel[1] + ' added. It uses ' + (par.id === 'GL' ? 'the Global defaults' : par.short + ' rules') + ' until you change them.' }); }, noOk: sel ? '' : 'true' }; }
+      dlg = Object.assign({ on: true, close, note: D.t === 'loc' ? '' : 'Added as an unsaved change for ' + loc.short + '.' }, dlg); }
+    return { loc: locV, stages, st, tst, hist, rq, dlg, openTest: () => set({ tst: { bl: s.loc.startsWith('SG') ? 'BL-SG-25283' : s.loc.startsWith('MY') ? 'BL-MY-25475' : 'BL-IN-25056' }, open: '' }), openHist: () => set({ hist: true, open: '' }) };
   }
 }
 const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
