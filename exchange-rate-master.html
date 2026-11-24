@@ -274,7 +274,7 @@ input[type=date]::-webkit-calendar-picker-indicator:hover{background:var(--hover
 .er-sel{position:relative;display:block}
 .er-sel .select{padding-inline-end:32px}
 .er-sel svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
-.er-b{display:flex;gap:8px;justify-content:flex-end}
+.er-b{grid-column:-3/-1;display:flex;gap:8px;justify-content:flex-end;align-self:end}
 .er-b .btn{gap:6px}
 .er-r{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden}
 .er-n{font-size:12px;color:var(--muted)}
@@ -626,7 +626,7 @@ input[type=date]::-webkit-calendar-picker-indicator:hover{background:var(--hover
                 <sc-if value="{{f.isDate}}" hint-placeholder-val="{{ false }}"><input class="input mono" type="date" id="{{f.id}}" value="{{f.v}}" onChange="{{f.on}}"></sc-if>
               </div>
             </sc-for>
-            <div class="er-b"><button class="btn btn-primary" onClick="{{search}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search</button><button class="btn" onClick="{{cancel}}">Cancel</button></div>
+            <div class="er-b"><button class="btn" onClick="{{cancel}}">Reset</button><button class="btn btn-primary" onClick="{{search}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search</button></div>
           </div>
           <sc-if value="{{dateErr}}" hint-placeholder-val="{{ false }}"><div class="banner b-block" role="alert" style="margin-top: 12px">To Date can’t be before From Date.</div></sc-if>
         </section>
@@ -725,7 +725,7 @@ const erCopy = (c) => JSON.parse(JSON.stringify(c));
 // Table columns per tab, in the order of the client's sheet; Ex.Rate is always shown
 const ER_COLS_T = {
   vvd: [['ctry', 'Country'], ['port', 'Port', 'mono'], ['off', 'Office', 'mono'], ['bound', 'Bound'], ['scope', 'Scope (Charge Group)'], ['upd', 'Updated Date'], ['from', 'Applicable From Date'], ['to', 'Applicable To Date (ETA)'],
-    ['cc', 'Charge Curr', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['vvd', 'VVD', 'mono'], ['by', 'Updated By']],
+    ['cc', 'Charge Currency', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['vvd', 'VVD', 'mono'], ['by', 'Updated By']],
   daily: [['ctry', 'Country'], ['port', 'Port', 'mono'], ['off', 'Office', 'mono'], ['bound', 'Bound'], ['scope', 'Scope (Charge Group)'], ['upd', 'Updated Date'], ['from', 'Applicable From Date'], ['to', 'Applicable To Date'],
     ['cc', 'Charge Currency', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['by', 'Updated By']]
 };
@@ -769,13 +769,13 @@ class GirsPage extends DCLogic {
     const dt = (k, label) => ({ id: 'er-' + k, label, isMulti: false, isText: false, isDate: true, v: C[k], on: (e) => put(k, e.target.value) });
     const T = s.tab, isV = T === 'vvd';
     const crit = [
-      ms('cc', isV ? 'Charge Curr' : 'Charge Currency', ER_UNIQ('cc', T), 'All'),
+      ms('cc', 'Charge Currency', ER_UNIQ('cc', T), 'All'),
       ms('lc', 'Local Currency', ER_UNIQ('lc', T), 'All'),
       ms('off', 'Office', ER_UNIQ('off', T), 'All'),
       ms('port', 'Port', ER_UNIQ('port', T), 'All'),
     ].concat(isV ? [txt('vvd', 'VVD', 'e.g. KLJA061835')] : []).concat([
-      ms('scope', 'Scope (Charge Group)', ER_UNIQ('scope', T), 'ALL'),
-      ms('bound', 'Bound', ['IB', 'OB'], 'ALL'),
+      ms('scope', 'Scope (Charge Group)', ER_UNIQ('scope', T), 'All'),
+      ms('bound', 'Bound', ['IB', 'OB'], 'All'),
       dt('from', 'Applicable From Date'),
       dt('to', isV ? 'Applicable To Date (ETA)' : 'Applicable To Date')
     ]);
