@@ -341,44 +341,97 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .cm-yn.n{background:var(--neutral);color:var(--muted2)}
 .cm2-f .lbl{white-space:normal;overflow:visible}
 .cm2-grid{align-items:end}
-/* Business Rule Engine */
-.br-tabs{overflow-x:auto;flex:none}.br-tabs .tabb{font-size:13px;padding:0 12px;white-space:nowrap}
-.br-n{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;padding:0 6px;border-radius:9px;background:var(--neutral);color:var(--muted2);font-size:11px;font-weight:600}
-.tabb[aria-selected=true] .br-n{background:var(--tint);color:var(--accent)}
-.br-tool{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.br-q{position:relative;width:360px}.br-q svg{position:absolute;left:10px;top:10px;color:var(--muted)}.br-q .input{width:100%;padding-left:34px}
-.br-fl{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.br-split{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:16px}
-.br-list{display:flex;flex-direction:column;overflow:hidden;min-height:420px}.br-row{cursor:pointer}
-.br-nm{max-width:330px}.br-tr{display:block;overflow:hidden;text-overflow:ellipsis}
-.br-ty{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2);white-space:nowrap}.br-ty i{width:8px;height:8px;border-radius:2px;flex:none}
-.br-det{display:flex;flex-direction:column;overflow:hidden;min-height:420px}
-.br-dh{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}.br-id{font-weight:600;font-size:13px}
-.br-h{margin:6px 0 0;font-size:15px;line-height:21px;font-weight:600}
-.br-db{flex:1 1 auto;min-height:0;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:16px}.br-db>*{flex:none}
-.br-desc{margin:0;color:var(--muted2)}
-.br-blk{border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.br-bh{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--sub);border-bottom:1px solid var(--line2);font-size:12px}
-.br-kw{font-size:11px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:4px}.br-if{background:var(--tint);color:var(--accent)}.br-then{background:var(--okbg);color:var(--ok)}
-.br-cl{margin:0;padding:6px 12px 8px 30px}.br-cl li{padding:4px 0;line-height:20px}.br-cl li::marker{color:var(--muted);font-size:12px}
-.br-f{font-weight:600}.br-op{color:var(--muted);margin:0 6px}.br-v{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:4px;background:var(--neutral);font-size:12px}
-.br-kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0}.br-kv dt{color:var(--muted)}.br-kv dd{margin:0}
-.br-hist{list-style:none;margin:0;padding:0}.br-hist li{display:grid;grid-template-columns:34px 1fr;gap:0 8px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:12px}.br-hist li .mu{grid-column:2}
-.br-ver{color:var(--accent);font-weight:600}
-.br-df{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--sub)}.br-df:empty{display:none}
-.br-del{color:var(--bad)}
-.br-ed{width:min(980px,calc(100vw - 48px))}
-.br-eg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 16px}.br-ef{display:flex;flex-direction:column;min-width:0}.br-ef.w2{grid-column:span 2}.br-ef.w4{grid-column:1 / -1}.br-ef .lbl{margin-bottom:4px}
-.br-eb{border:1px solid var(--line);border-radius:8px;overflow:hidden}.br-eb .br-bh{justify-content:flex-start}
-.br-er{display:grid;grid-template-columns:44px 220px 150px minmax(0,1fr) 32px;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line2)}
-.br-ea{grid-template-columns:44px 260px minmax(0,1fr) 32px}
-.br-jn{font-size:11px;font-weight:700;color:var(--muted);text-align:center}
-.br-add{margin:10px 12px}
-.br-seg{display:inline-flex;padding:2px;border-radius:6px;background:var(--neutral);gap:2px}.br-seg button{all:unset;cursor:pointer;padding:3px 10px;border-radius:4px;font-size:12px;color:var(--muted2)}
-.br-seg button[aria-checked=true]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
-.br-tt{width:100%!important;table-layout:fixed}.br-tt td{white-space:normal!important;height:auto;padding-block:8px;vertical-align:top}.br-tt th:nth-child(1){width:48px}.br-tt th:nth-child(2){width:34%}.br-tt th:nth-child(3){width:150px}.br-tt th:nth-child(4){width:96px}
-.br-tsel{display:flex;gap:12px;align-items:flex-end}
-.br-bl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px 16px;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--sub)}.br-bl div{display:flex;flex-direction:column}
-.br-res{display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-radius:8px}.br-res.ok{background:var(--okbg);color:var(--ok)}.br-res.bad{background:var(--badbg);color:var(--bad)}.br-res span{color:var(--ink);font-size:12px}
+/* Business Rule Engine · setup by location */
+.lb{display:flex;align-items:center;gap:20px;padding:12px 16px;flex:none;flex-wrap:wrap}
+.lb-l{display:flex;align-items:center;gap:10px}
+.lb-crumb{display:flex;align-items:center;gap:6px;font-size:13px;flex-wrap:wrap}.lb-c{color:var(--muted2)}.lb-sep{color:var(--muted4)}
+.lb-r{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
+.lb-dn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--warn);margin-inline-end:4px}.lb-dn i{width:8px;height:8px;border-radius:50%;background:var(--warn)}
+.pend{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:8px;background:var(--warnbg);color:var(--warn);flex:none}
+.pend div{display:flex;flex-direction:column;flex:1;line-height:18px}.pend span{color:var(--ink);font-size:12px}.pend .btn{flex:none}
+.rs-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}
+.st-nav{padding:8px;display:flex;flex-direction:column;gap:2px;position:sticky;top:0}
+.st-h{padding:8px 10px 10px;font-size:12px;font-weight:600;color:var(--ink);display:flex;flex-direction:column;gap:1px}.st-h .mu{font-weight:400}
+.st-i{all:unset;box-sizing:border-box;cursor:pointer;display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:8px;position:relative}
+.st-i:hover{background:var(--hover)}.st-i:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.st-i[aria-current=step]{background:var(--tint2);box-shadow:inset 3px 0 0 var(--accent)}
+.st-i:not(:last-child)::after{content:'';position:absolute;left:23px;top:36px;bottom:-8px;width:1px;background:var(--line);z-index:0}
+.st-n{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--line3);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--muted2);position:relative;z-index:1}
+.st-i[aria-current=step] .st-n{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.st-tx{display:flex;flex-direction:column;min-width:0;padding-top:2px}
+.st-t{font-size:13px;font-weight:600;color:var(--ink);line-height:18px;display:flex;align-items:center;gap:6px}
+.st-s{font-size:12px;color:var(--muted);line-height:16px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
+.st-d{width:7px;height:7px;border-radius:50%;flex:none}.st-d.set{background:var(--accent)}.st-d.chg{background:var(--warn)}
+.st-c{display:flex;flex-direction:column;min-width:0}
+.st-ch{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px 24px 16px;border-bottom:1px solid var(--line)}
+.st-k{font-size:12px;color:var(--muted);font-weight:500}.st-ch h2{margin:2px 0 4px;font-size:18px;line-height:24px;font-weight:600}.st-ch p{margin:0;color:var(--muted2);max-width:640px}
+.st-nx{display:flex;gap:8px;flex:none}
+.st-b{padding:8px 24px 24px;display:flex;flex-direction:column}
+.sc{padding-top:16px}.sc+.sc{margin-top:8px;border-top:1px solid var(--line2)}
+.sc-h{margin-bottom:10px}.sc-h h3{margin:0;font-size:14px;font-weight:600;line-height:20px}.sc-h p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.rw{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--surface)}.rw+.rw{margin-top:10px}
+.rw.rw-chg{border-color:#E8B05A;box-shadow:inset 3px 0 0 var(--warn)}
+.rw-top{display:flex;align-items:flex-start;gap:14px}
+.rw-l{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}.rw-t{font-size:13px;font-weight:600;line-height:20px}.rw-d{font-size:12px;color:var(--muted);line-height:17px}
+.rw-off .rw-t{color:var(--muted)}
+.rm{display:inline-flex;align-items:center;gap:8px;flex:none}
+.tg{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.tg-inh{background:var(--neutral);color:var(--muted2)}.tg-set{background:var(--tint);color:var(--accent2)}.tg-chg{background:var(--warnbg);color:var(--warn);font-weight:600}
+.rs{all:unset;cursor:pointer;font-size:12px;color:var(--accent);font-weight:500}.rs:hover{text-decoration:underline}.rs:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sx{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px}.sx-sub{margin-inline-start:50px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.sx-t{color:var(--muted2)}
+.sx-n{width:56px;height:34px;text-align:center;font-family:'IBM Plex Mono',ui-monospace,monospace;padding:0 6px}.sx-i{height:34px}
+.sw{position:relative;display:inline-flex;flex:none;width:36px;height:20px;margin-top:1px;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.sw-k{position:absolute;inset:0;border-radius:10px;background:var(--line3);transition:background .15s}
+.sw-k::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+.sw input:checked+.sw-k{background:var(--accent)}.sw input:checked+.sw-k::after{transform:translateX(16px)}
+.sw input:focus-visible+.sw-k{outline:2px solid var(--accent);outline-offset:2px}
+.dd{position:relative;display:inline-block;min-width:0}
+.dd-b{all:unset;box-sizing:border-box;cursor:pointer;width:100%;height:34px;display:flex;align-items:center;gap:8px;padding:0 10px 0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-size:13px}
+.dd-b:hover{border-color:var(--bdh)}.dd-b:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.dd-b[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)}
+.dd-v{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-ch{flex:none;color:var(--muted);transition:transform .15s}.dd-b[aria-expanded=true] .dd-ch{transform:rotate(180deg);color:var(--accent)}
+.dd-p{position:absolute;z-index:90;top:calc(100% + 4px);left:0;min-width:100%;width:max-content;max-width:380px;max-height:300px;overflow:auto;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(22,26,33,.16),0 2px 6px rgba(22,26,33,.08)}
+.dd-o{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;padding:7px 10px;border-radius:6px;font-size:13px;line-height:18px}
+.dd-o:hover,.dd-o:focus-visible{background:var(--hover)}.dd-o[aria-selected=true]{color:var(--accent);font-weight:600}
+.dd-ot{display:flex;flex-direction:column;flex:1;min-width:0}.dd-ot small{font-size:11.5px;color:var(--muted);font-weight:400}
+.dd-ck{flex:none;visibility:hidden}.dd-o[aria-selected=true] .dd-ck{visibility:visible}
+.dd-loc .dd-b{height:36px;font-weight:600}.dd-loc .dd-p{width:330px}
+.dd-ghost .dd-b{border-style:dashed;color:var(--accent);font-weight:500}.dd-ghost .dd-ch{display:none}
+.dt{margin-top:12px;border:1px solid var(--line);border-radius:8px}
+.dt-h,.dt-r{display:grid;gap:10px;align-items:center;padding:0 10px}
+.dt-h{height:34px;background:var(--sub);border-bottom:1px solid var(--line);border-radius:8px 8px 0 0;font-size:12px;font-weight:600;color:var(--muted)}
+.dt-r{min-height:48px;border-bottom:1px solid var(--line2)}
+.dt-c{min-width:0;display:flex;align-items:center;gap:8px}.dt-c .dd{flex:1}
+.dt-out{padding-inline-start:22px}.dt-c.dt-out{padding-inline-start:0}
+.dt-ar{color:var(--muted4);font-weight:600;width:14px;flex:none}
+.dt-h .dt-out{padding-inline-start:22px}
+.dt-f{display:flex;align-items:center;gap:12px;padding:8px 10px}.dt-f .mu{font-size:12px}
+.pt{margin-top:12px;display:flex;flex-direction:column;gap:12px}
+.pt-tk{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--sub)}
+.pt-k{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 4px 0 12px;border-radius:6px;background:var(--surface);border:1px solid var(--bd);font-size:13px}
+.pt-k small{color:var(--muted);font-size:11.5px}
+.pt-k button{all:unset;cursor:pointer;display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;border-radius:4px;color:var(--muted)}.pt-k button:hover{background:var(--badbg);color:var(--bad)}
+.pt-k button svg{width:14px;height:14px}
+.pt-pv{display:flex;align-items:baseline;gap:12px}.pt-pv .mono{font-size:18px;font-weight:600;letter-spacing:.02em;color:var(--ink)}.pt-pv .mu{font-size:12px}
+.tb-s{z-index:110;background:rgba(22,26,33,.28)!important}
+.tb{position:fixed;z-index:111;top:0;right:0;bottom:0;width:520px;background:var(--surface);box-shadow:-12px 0 40px rgba(22,26,33,.18);display:flex;flex-direction:column}
+.tb-h{display:flex;justify-content:space-between;gap:16px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}.tb-h h2{margin:0;font-size:16px;font-weight:600}.tb-h p{margin:4px 0 0;font-size:12px;color:var(--muted);line-height:17px}
+.tb-b{flex:1;overflow:auto;padding:16px 20px 24px;display:flex;flex-direction:column;gap:14px}
+.tb-b .dd{display:block}.tb-b .dd-p{width:100%;max-width:none}
+.tb-f{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;padding:12px 14px;border-radius:8px;background:var(--sub);border:1px solid var(--line2)}
+.tb-f div{display:flex;flex-direction:column;min-width:0}.tb-f span{font-size:11.5px;color:var(--muted)}.tb-f b{font-weight:500;font-size:12.5px}
+.tb-r{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:8px}.tb-r.ok{background:var(--okbg)}.tb-r.ok b{color:var(--ok)}.tb-r.bad{background:var(--badbg)}.tb-r.bad b{color:var(--bad)}.tb-r span{font-size:12px}
+.tb-j{list-style:none;margin:0;padding:0}
+.tb-j li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2);align-items:start}
+.tb-i{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.tb-j .ok .tb-i{background:var(--okbg);color:var(--ok)}.tb-j .bad .tb-i{background:var(--badbg);color:var(--bad)}.tb-j .warn .tb-i{background:var(--warnbg);color:var(--warn)}.tb-j .skip .tb-i{background:var(--neutral);color:var(--muted)}
+.tb-j li div{display:flex;flex-direction:column;gap:2px;min-width:0}.tb-st{font-size:12px;color:var(--muted);font-weight:500}.tb-o{font-size:13px;line-height:18px}.tb-w{font-size:12px;color:var(--muted)}
+.tb-j .skip .tb-o{color:var(--muted)}.tb-j .bad .tb-o{color:var(--bad);font-weight:600}
+.tb-j .lnk{font-size:12px}
+.hi{list-style:none;margin:0;padding:0}.hi li{display:grid;grid-template-columns:40px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2)}.hi div{display:flex;flex-direction:column}.hi .mu{font-size:12px}.hi-v{color:var(--accent);font-weight:600}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -677,179 +730,115 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Business Rule Engine</h1>
-            <div style="font-size: 12px; color: var(--muted); line-height: 16px">Rules that decide when, for whom and how invoices are created</div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 16px">Set up how GIRS creates invoices for each location, stage by stage</div>
           </div>
-          <div class="gright" style="display: flex; align-items: center; gap: 10px; margin-inline-start: auto">
-            <button class="btn" onClick="{{testAll}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2l-6-10V3"></path></svg>Test rules</button>
-            <button class="btn btn-primary" onClick="{{newRule}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New rule</button>
+          <div class="gright" style="display: flex; align-items: center; gap: 10px; margin-inline-start: auto"><nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px; margin-inline-end: 6px"><span style="font-size: 12px; color: var(--muted)">Version</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="business-rule-engine-v1.html">1</a><a class="lay" href="business-rule-engine.html" aria-current="page">2</a></div></nav>
+            <button class="btn" onClick="{{openHist}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg>Change history</button>
+            <button class="btn btn-primary" onClick="{{openTest}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2l-6-10V3"></path></svg>Test with a B/L</button>
           </div>
         </div>
       </div>
-      <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; min-height: 0">
-        <div class="tabs br-tabs" role="tablist" aria-label="Rule types">
-          <sc-for list="{{types}}" as="t" hint-placeholder-count="10">
-            <button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="br-n">{{t.n}}</span></button>
-          </sc-for>
-        </div>
-        <div class="br-tool">
-          <div class="br-q"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" placeholder="Search rule ID, name, condition or action" value="{{q}}" onInput="{{onQ}}" aria-label="Search rules"></div>
-          <label class="br-fl"><span>Country</span><select class="select select-sm" onChange="{{onCty}}" aria-label="Country"><sc-for list="{{ctyOpts}}" as="o" hint-placeholder-count="6"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select></label>
-          <label class="br-fl"><span>Status</span><select class="select select-sm" onChange="{{onSt}}" aria-label="Status"><sc-for list="{{stOpts}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select></label>
-          <span class="card-meta" style="margin-inline-start: auto">{{shown}}</span>
-        </div>
-        <div class="br-split">
-          <section class="card br-list" aria-label="Rules">
-            <div style="flex: 1 1 auto; min-height: 0; overflow: auto">
-              <table class="lst">
-                <thead><tr><th scope="col" class="r" style="width: 1%">Priority</th><th scope="col" class="c-no">Rule ID</th><th scope="col">Rule name</th><th scope="col">Rule type</th><th scope="col">Scope</th><th scope="col">Effective</th><th scope="col">Status</th></tr></thead>
-                <tbody>
-                  <sc-for list="{{rows}}" as="r" hint-placeholder-count="12">
-                    <tr class="{{r.cls}} br-row" onClick="{{r.pick}}">
-                      <td class="r mono">{{r.pri}}</td>
-                      <td class="c-no"><button class="lnk mono" onClick="{{r.pick}}">{{r.id}}</button></td>
-                      <td class="nm br-nm"><span class="br-tr" title="{{r.name}}">{{r.name}}</span></td>
-                      <td><span class="br-ty"><i style="background: {{r.tc}}"></i>{{r.type}}</span></td>
-                      <td>{{r.scope}}</td>
-                      <td class="mono" style="font-size: 12px">{{r.eff}}</td>
-                      <td><span class="chip {{r.stc}}">{{r.st}}</span></td>
-                    </tr>
+            <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; min-height: 0">
+        <section class="card lb" aria-label="Location">
+          <div class="lb-l">
+            <span class="lbl" style="margin: 0">Rules for</span>
+            <div class="dd {{loc.dd.cls}}" style="{{loc.dd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{loc.dd.ex}}" aria-label="{{loc.dd.aria}}" onClick="{{loc.dd.toggle}}"><span class="dd-v">{{loc.dd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{loc.dd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{loc.dd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{loc.dd.aria}}"><sc-for list="{{loc.dd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div>
+          </div>
+          <nav class="lb-crumb" aria-label="Inheritance"><span class="mu">Inherits from</span><sc-for list="{{loc.chain}}" as="c" hint-placeholder-count="2"><span class="lb-c">{{c.t}}</span><span class="lb-sep" aria-hidden="true">›</span></sc-for><b>{{loc.name}}</b></nav>
+          <div class="lb-r">
+            <span class="chip t-ok">Live · {{loc.ver}}</span>
+            <sc-if value="{{loc.hasDraft}}" hint-placeholder-val="{{ false }}"><span class="lb-dn"><i></i>{{loc.draftN}}</span><button class="btn btn-sm" onClick="{{loc.discard}}">Discard</button><button class="btn btn-sm btn-primary" onClick="{{loc.submit}}">Submit for approval</button></sc-if>
+          </div>
+        </section>
+        <sc-if value="{{loc.hasPend}}" hint-placeholder-val="{{ false }}">
+          <div class="pend" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><div><b>{{loc.pendN}} waiting for approval</b><span>Submitted by Daniel Tan to Finance Controller. Live rules stay unchanged until approved.</span></div><button class="btn btn-sm" onClick="{{loc.withdraw}}">Withdraw</button><button class="btn btn-sm btn-primary" onClick="{{loc.approve}}">Approve (approver view)</button></div>
+        </sc-if>
+        <div class="rs-grid">
+          <nav class="card st-nav" aria-label="Invoicing stages">
+            <div class="st-h">Invoicing stages <span class="mu">in the order GIRS applies them</span></div>
+            <sc-for list="{{stages}}" as="g" hint-placeholder-count="8">
+              <button class="st-i" aria-current="{{g.cur}}" onClick="{{g.pick}}">
+                <span class="st-n">{{g.n}}</span>
+                <span class="st-tx"><span class="st-t">{{g.title}}<sc-if value="{{g.dot}}" hint-placeholder-val="{{ false }}"><i class="st-d {{g.dotCls}}" title="{{g.dotTip}}"></i></sc-if></span><span class="st-s">{{g.sum}}</span></span>
+              </button>
+            </sc-for>
+          </nav>
+          <section class="card st-c" aria-labelledby="st-title">
+            <header class="st-ch">
+              <div><div class="st-k">Stage {{st.n}} of 8</div><h2 id="st-title">{{st.title}}</h2><p>{{st.desc}}</p></div>
+              <div class="st-nx"><button class="btn btn-sm" disabled="{{st.noPrev}}" onClick="{{st.prev}}">Previous</button><button class="btn btn-sm" disabled="{{st.noNext}}" onClick="{{st.next}}">Next stage</button></div>
+            </header>
+            <div class="st-b">
+              <sc-for list="{{st.secs}}" as="sec" hint-placeholder-count="2">
+                <section class="sc">
+                  <div class="sc-h"><h3>{{sec.title}}</h3><sc-if value="{{sec.hasDesc}}" hint-placeholder-val="{{ true }}"><p>{{sec.desc}}</p></sc-if></div>
+                  <sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="3">
+                    <div class="rw {{r.cls}}">
+                      <sc-if value="{{r.isSen}}" hint-placeholder-val="{{ true }}">
+                        <div class="rw-top"><div class="rw-l"><span class="rw-t">{{r.title}}</span></div><span class="rm"><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if></span></div>
+                        <div class="sx"><sc-for list="{{r.parts}}" as="p" hint-placeholder-count="5"><sc-if value="{{p.isText}}" hint-placeholder-val="{{ true }}"><span class="sx-t">{{p.t}}</span></sc-if><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{p.c.cls}}" style="{{p.c.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.c.ex}}" aria-label="{{p.c.aria}}" onClick="{{p.c.toggle}}"><span class="dd-v">{{p.c.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.c.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.c.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.c.aria}}"><sc-for list="{{p.c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isNum}}" hint-placeholder-val="{{ false }}"><input class="input sx-n" inputmode="numeric" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input sx-i" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if></sc-for></div>
+                      </sc-if>
+                      <sc-if value="{{r.isTog}}" hint-placeholder-val="{{ false }}">
+                        <div class="rw-top">
+                          <label class="sw"><input type="checkbox" role="switch" checked="{{r.on}}" onChange="{{r.flip}}"><span class="sw-k" aria-hidden="true"></span><span class="sr">{{r.title}}</span></label>
+                          <div class="rw-l"><span class="rw-t">{{r.title}}</span><span class="rw-d">{{r.desc}}</span></div><span class="rm"><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if></span>
+                        </div>
+                        <sc-if value="{{r.showSub}}" hint-placeholder-val="{{ false }}"><div class="sx sx-sub"><sc-for list="{{r.parts}}" as="p" hint-placeholder-count="5"><sc-if value="{{p.isText}}" hint-placeholder-val="{{ true }}"><span class="sx-t">{{p.t}}</span></sc-if><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{p.c.cls}}" style="{{p.c.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.c.ex}}" aria-label="{{p.c.aria}}" onClick="{{p.c.toggle}}"><span class="dd-v">{{p.c.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.c.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.c.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.c.aria}}"><sc-for list="{{p.c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isNum}}" hint-placeholder-val="{{ false }}"><input class="input sx-n" inputmode="numeric" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input sx-i" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}" style="{{p.st}}"></sc-if></sc-for></div></sc-if>
+                      </sc-if>
+                      <sc-if value="{{r.isTbl}}" hint-placeholder-val="{{ false }}">
+                        <div class="rw-top"><div class="rw-l"><span class="rw-t">{{r.title}}</span><span class="rw-d">{{r.desc}}</span></div><span class="rm"><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if></span></div>
+                        <div class="dt">
+                          <div class="dt-h" style="{{r.grid}}"><sc-for list="{{r.cols}}" as="c" hint-placeholder-count="4"><span class="{{c.cls}}">{{c.t}}</span></sc-for><span></span></div>
+                          <sc-for list="{{r.rows}}" as="x" hint-placeholder-count="3">
+                            <div class="dt-r" style="{{r.grid}}">
+                              <sc-for list="{{x.cells}}" as="p" hint-placeholder-count="4"><div class="dt-c {{p.cls}}"><sc-if value="{{p.isArrow}}" hint-placeholder-val="{{ false }}"><span class="dt-ar" aria-hidden="true">→</span></sc-if><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{p.c.cls}}" style="{{p.c.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.c.ex}}" aria-label="{{p.c.aria}}" onClick="{{p.c.toggle}}"><span class="dd-v">{{p.c.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.c.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.c.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.c.aria}}"><sc-for list="{{p.c.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input" aria-label="{{p.aria}}" value="{{p.v}}" onInput="{{p.on}}"></sc-if></div></sc-for>
+                              <button type="button" class="cm-ib d" onClick="{{x.del}}" aria-label="Remove row" title="Remove row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+                            </div>
+                          </sc-for>
+                          <div class="dt-f"><button type="button" class="btn btn-sm" onClick="{{r.add}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>{{r.addL}}</button><span class="mu">{{r.note}}</span></div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{r.isPat}}" hint-placeholder-val="{{ false }}">
+                        <div class="rw-top"><div class="rw-l"><span class="rw-t">{{r.title}}</span><span class="rw-d">{{r.desc}}</span></div><span class="rm"><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}" title="{{r.resetTip}}">Reset</button></sc-if></span></div>
+                        <div class="pt">
+                          <div class="pt-tk"><sc-for list="{{r.tokens}}" as="k" hint-placeholder-count="5"><span class="pt-k"><span>{{k.t}}</span><small class="mono">{{k.ex}}</small><button type="button" onClick="{{k.del}}" aria-label="Remove {{k.t}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for><div class="dd {{r.addDd.cls}}" style="{{r.addDd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{r.addDd.ex}}" aria-label="{{r.addDd.aria}}" onClick="{{r.addDd.toggle}}"><span class="dd-v">{{r.addDd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{r.addDd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{r.addDd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{r.addDd.aria}}"><sc-for list="{{r.addDd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
+                          <div class="pt-pv"><span class="k">Preview</span><span class="mono">{{r.preview}}</span><span class="mu">{{r.pvNote}}</span></div>
+                        </div>
+                      </sc-if>
+                    </div>
                   </sc-for>
-                </tbody>
-              </table>
-              <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No rules match these filters</div></sc-if>
+                </section>
+              </sc-for>
             </div>
           </section>
-
-          <sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
-          <aside class="card br-det" aria-label="Rule detail">
-            <div class="br-dh">
-              <div style="min-width: 0">
-                <div style="display: flex; align-items: center; gap: 8px"><span class="mono br-id">{{d.id}}</span><span class="chip {{d.stc}}">{{d.st}}</span><span class="br-ty"><i style="background: {{d.tc}}"></i>{{d.type}}</span></div>
-                <h2 class="br-h">{{d.name}}</h2>
-              </div>
-              <div class="cm-acts">
-                <button class="cm-ib" onClick="{{d.edit}}" title="Edit" aria-label="Edit rule"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button>
-                <button class="cm-ib" onClick="{{d.copy}}" title="Copy" aria-label="Copy rule"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button>
-                <button class="cm-ib" onClick="{{d.test}}" title="Test this rule" aria-label="Test this rule"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2l-6-10V3"></path></svg></button>
-              </div>
-            </div>
-            <div class="br-db">
-              <p class="br-desc">{{d.desc}}</p>
-              <div class="br-blk">
-                <div class="br-bh"><span class="br-kw br-if">WHEN</span><span class="mu">{{d.join}} of these conditions are true</span></div>
-                <ol class="br-cl">
-                  <sc-for list="{{d.conds}}" as="c" hint-placeholder-count="3">
-                    <li><span class="br-f">{{c.f}}</span><span class="br-op">{{c.o}}</span><span class="br-v">{{c.v}}</span></li>
-                  </sc-for>
-                </ol>
-              </div>
-              <div class="br-blk">
-                <div class="br-bh"><span class="br-kw br-then">THEN</span><span class="mu">do the following, in order</span></div>
-                <ol class="br-cl">
-                  <sc-for list="{{d.acts}}" as="a" hint-placeholder-count="2">
-                    <li><span class="br-f">{{a.a}}</span><span class="br-v">{{a.v}}</span></li>
-                  </sc-for>
-                </ol>
-              </div>
-              <dl class="br-kv">
-                <dt>Priority</dt><dd class="mono">{{d.pri}}</dd>
-                <dt>Scope</dt><dd>{{d.scope}}</dd>
-                <dt>Effective</dt><dd class="mono">{{d.eff}}</dd>
-                <dt>If matched</dt><dd>{{d.stop}}</dd>
-                <dt>Owner</dt><dd>{{d.owner}}</dd>
-              </dl>
-              <div>
-                <div class="k" style="margin-bottom: 6px">Version history</div>
-                <ul class="br-hist">
-                  <sc-for list="{{d.hist}}" as="h" hint-placeholder-count="3">
-                    <li><span class="mono br-ver">{{h.v}}</span><span>{{h.t}}</span><span class="mu">{{h.w}}</span></li>
-                  </sc-for>
-                </ul>
-              </div>
-            </div>
-            <div class="br-df">
-              <sc-if value="{{d.canSubmit}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm btn-primary" onClick="{{d.submit}}">Submit for approval</button></sc-if>
-              <sc-if value="{{d.canApprove}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{d.reject}}">Return to draft</button><button class="btn btn-sm btn-primary" onClick="{{d.approve}}">Approve</button></sc-if>
-              <sc-if value="{{d.isActive}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{d.deact}}">Deactivate</button></sc-if>
-              <sc-if value="{{d.isInactive}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{d.react}}">Reactivate</button></sc-if>
-              <sc-if value="{{d.isDraft}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm br-del" onClick="{{d.del}}">Delete draft</button></sc-if>
-            </div>
-          </aside>
-          </sc-if>
         </div>
       </main>
     </div>
   </div>
 
 
-  <sc-if value="{{ed.on}}" hint-placeholder-val="{{ false }}">
-    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{ed.cancel}}"></button>
-    <div class="dlg wide br-ed" role="dialog" aria-modal="true" aria-labelledby="br-et">
-      <div class="dh"><div><h2 id="br-et" style="margin: 0; font-size: 16px; font-weight: 600">{{ed.title}}</h2><div class="mu" style="font-size: 12px">{{ed.sub}}</div></div>
-        <button class="cm-ib x" onClick="{{ed.cancel}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
-      <div class="db">
-        <div class="br-eg">
-          <label class="br-ef w2"><span class="lbl">Rule name</span><input class="input" value="{{ed.name}}" onInput="{{ed.onName}}" placeholder="Describe what the rule does"></label>
-          <label class="br-ef"><span class="lbl">Rule type</span><select class="select" onChange="{{ed.onType}}"><sc-for list="{{ed.typeOpts}}" as="o" hint-placeholder-count="9"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select></label>
-          <label class="br-ef"><span class="lbl">Scope (country / port)</span><input class="input" value="{{ed.scope}}" onInput="{{ed.onScope}}" placeholder="e.g. India · NSA, or Global"></label>
-          <label class="br-ef"><span class="lbl">Priority</span><input class="input mono" inputmode="numeric" value="{{ed.pri}}" onInput="{{ed.onPri}}"></label>
-          <label class="br-ef"><span class="lbl">Effective from</span><input type="date" class="input" value="{{ed.from}}" onInput="{{ed.onFrom}}"></label>
-          <label class="br-ef"><span class="lbl">Effective to</span><input type="date" class="input" value="{{ed.to}}" onInput="{{ed.onTo}}"></label>
-          <label class="br-ef"><span class="lbl">If matched</span><select class="select" onChange="{{ed.onStop}}"><option value="N" selected="{{ed.stopN}}">Continue to next rules</option><option value="Y" selected="{{ed.stopY}}">Stop further rules of this type</option></select></label>
-          <label class="br-ef w4"><span class="lbl">Description</span><input class="input" value="{{ed.desc}}" onInput="{{ed.onDesc}}" placeholder="Why this rule exists"></label>
-        </div>
-        <section class="br-eb">
-          <div class="br-bh"><span class="br-kw br-if">WHEN</span>
-            <div class="br-seg" role="radiogroup" aria-label="Condition match"><button role="radio" aria-checked="{{ed.allOn}}" onClick="{{ed.setAll}}">All conditions</button><button role="radio" aria-checked="{{ed.anyOn}}" onClick="{{ed.setAny}}">Any condition</button></div></div>
-          <sc-for list="{{ed.conds}}" as="c" hint-placeholder-count="2">
-            <div class="br-er">
-              <span class="br-jn">{{c.jn}}</span>
-              <select class="select select-sm" onChange="{{c.onF}}" aria-label="Field"><sc-for list="{{c.fOpts}}" as="o" hint-placeholder-count="10"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select>
-              <select class="select select-sm" onChange="{{c.onO}}" aria-label="Operator"><sc-for list="{{c.oOpts}}" as="o" hint-placeholder-count="8"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select>
-              <input class="input input-sm" value="{{c.v}}" onInput="{{c.onV}}" aria-label="Value" placeholder="Value">
-              <button class="cm-ib d" onClick="{{c.del}}" aria-label="Remove condition" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-            </div>
-          </sc-for>
-          <button class="btn btn-sm br-add" onClick="{{ed.addCond}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add condition</button>
-        </section>
-        <section class="br-eb">
-          <div class="br-bh"><span class="br-kw br-then">THEN</span><span class="mu">Actions run in this order</span></div>
-          <sc-for list="{{ed.acts}}" as="a" hint-placeholder-count="2">
-            <div class="br-er br-ea">
-              <span class="br-jn">{{a.n}}</span>
-              <select class="select select-sm" onChange="{{a.onA}}" aria-label="Action"><sc-for list="{{a.aOpts}}" as="o" hint-placeholder-count="10"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select>
-              <input class="input input-sm" value="{{a.v}}" onInput="{{a.onV}}" aria-label="Action value" placeholder="Value">
-              <button class="cm-ib d" onClick="{{a.del}}" aria-label="Remove action" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-            </div>
-          </sc-for>
-          <button class="btn btn-sm br-add" onClick="{{ed.addAct}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add action</button>
-        </section>
-        <sc-if value="{{ed.hasErr}}" hint-placeholder-val="{{ false }}"><div class="chip t-bad" style="height: auto; padding: 6px 12px; align-self: flex-start">{{ed.err}}</div></sc-if>
-      </div>
-      <div class="df"><span class="mu" style="font-size: 12px; margin-inline-end: auto">Changes go live only after approval.</span><button class="btn" onClick="{{ed.cancel}}">Cancel</button><button class="btn" onClick="{{ed.saveDraft}}">Save as draft</button><button class="btn btn-primary" onClick="{{ed.submit}}">Submit for approval</button></div>
-    </div>
-  </sc-if>
-
   <sc-if value="{{tst.on}}" hint-placeholder-val="{{ false }}">
-    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{tst.close}}"></button>
-    <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="br-tt">
-      <div class="dh"><div><h2 id="br-tt" style="margin: 0; font-size: 16px; font-weight: 600">Test rules</h2><div class="mu" style="font-size: 12px">Run the active rules against a B/L to see what GIRS would do. Nothing is created.</div></div>
-        <button class="cm-ib x" onClick="{{tst.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
-      <div class="db">
-        <div class="br-tsel">
-          <label class="br-ef" style="flex: 1"><span class="lbl">B/L</span><select class="select" onChange="{{tst.onBl}}"><sc-for list="{{tst.blOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.on}}">{{o.t}}</option></sc-for></select></label>
-          <button class="btn btn-primary" onClick="{{tst.run}}" style="align-self: flex-end">Run test</button>
-        </div>
-        <div class="br-bl"><sc-for list="{{tst.facts}}" as="f" hint-placeholder-count="8"><div><span class="k">{{f.k}}</span><span>{{f.v}}</span></div></sc-for></div>
-        <sc-if value="{{tst.ran}}" hint-placeholder-val="{{ false }}">
-          <div class="br-res {{tst.resCls}}"><b>{{tst.head}}</b><span>{{tst.sum}}</span></div>
-          <table class="lst br-tt" style="width: 100%">
-            <thead><tr><th scope="col">Step</th><th scope="col">Rule</th><th scope="col">Rule type</th><th scope="col">Result</th><th scope="col">Outcome</th></tr></thead>
-            <tbody><sc-for list="{{tst.steps}}" as="x" hint-placeholder-count="5"><tr><td class="mono">{{x.n}}</td><td class="w"><span class="mono" style="font-weight: 600">{{x.id}}</span><div>{{x.name}}</div></td><td>{{x.type}}</td><td><span class="chip {{x.c}}">{{x.r}}</span></td><td class="w">{{x.o}}</td></tr></sc-for></tbody>
-          </table>
-        </sc-if>
+    <button class="scrim tb-s" tabindex="-1" aria-label="Close" onClick="{{tst.close}}"></button>
+    <aside class="tb" role="dialog" aria-modal="true" aria-labelledby="tb-t">
+      <div class="tb-h"><div><h2 id="tb-t">Test with a B/L</h2><p>Runs the rules for the B/L's location, including unsaved changes. Nothing is created.</p></div><button class="cm-ib x" onClick="{{tst.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <div class="tb-b">
+        <div><span class="lbl">B/L</span><div class="dd {{tst.dd.cls}}" style="{{tst.dd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{tst.dd.ex}}" aria-label="{{tst.dd.aria}}" onClick="{{tst.dd.toggle}}"><span class="dd-v">{{tst.dd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{tst.dd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{tst.dd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{tst.dd.aria}}"><sc-for list="{{tst.dd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
+        <div class="tb-f"><sc-for list="{{tst.facts}}" as="f" hint-placeholder-count="6"><div><span>{{f.k}}</span><b>{{f.v}}</b></div></sc-for></div>
+        <div class="tb-r {{tst.cls}}"><b>{{tst.head}}</b><span>{{tst.sub}}</span></div>
+        <ol class="tb-j">
+          <sc-for list="{{tst.steps}}" as="x" hint-placeholder-count="8">
+            <li class="{{x.cls}}"><span class="tb-i" aria-hidden="true">{{x.icon}}</span><div><span class="tb-st">{{x.stage}}</span><span class="tb-o">{{x.out}}</span><sc-if value="{{x.hasWhy}}" hint-placeholder-val="{{ false }}"><span class="tb-w">{{x.why}}</span></sc-if></div><button class="lnk" onClick="{{x.go}}">View</button></li>
+          </sc-for>
+        </ol>
       </div>
-      <div class="df"><button class="btn" onClick="{{tst.close}}">Close</button></div>
+    </aside>
+  </sc-if>
+  <sc-if value="{{hist.on}}" hint-placeholder-val="{{ false }}">
+    <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{hist.close}}"></button>
+    <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="hi-t">
+      <div class="dh"><div><h2 id="hi-t" style="margin: 0; font-size: 16px; font-weight: 600">Change history</h2><div class="mu" style="font-size: 12px">{{hist.sub}}</div></div><button class="cm-ib x" onClick="{{hist.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <div class="db"><ol class="hi"><sc-for list="{{hist.items}}" as="h" hint-placeholder-count="4"><li><span class="mono hi-v">{{h.v}}</span><div><b>{{h.t}}</b><span class="mu">{{h.w}}</span></div></li></sc-for></ol></div>
+      <div class="df"><button class="btn" onClick="{{hist.close}}">Close</button></div>
     </div>
   </sc-if>
 
@@ -859,165 +848,239 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 </div>
 </script>
 <script type="text/x-dc" id="logic">
-// ---------- Business Rule Engine (first draft)
-const BR_TYPES = [['TRG', 'Trigger & timing', '#0071B7'], ['VAL', 'Validation', '#C77700'], ['BIL', 'Billing party', '#6B4FBB'], ['SPL', 'Invoice split & currency', '#0F8A8A'],
-  ['TAX', 'Tax', '#B4235B'], ['NUM', 'Numbering & format', '#5A6170'], ['EVT', 'Event-triggered', '#2E7D32'], ['CRD', 'Credit control', '#C62828'], ['DLV', 'Delivery', '#1565C0']];
-const BR_FIELDS = ['Country', 'Port', 'Direction', 'Freight term', 'Customer group', 'Customer code', 'Charge code', 'Charge type', 'Invoice type', 'Shipment type', 'Supplier state', 'Place of supply',
-  'Container status', 'Days over free time', 'Credit status', 'Waiver status', 'B/L count vs manifest', 'ROE available', 'LMS charges received', 'e-Invoice status', 'Voyage event'];
-const BR_OPS = ['is', 'is not', 'is one of', 'equals', 'greater than', 'less than', 'exists', 'is missing'];
-const BR_ACTS = ['Run invoice batch', 'Offset from anchor (days)', 'Block invoice with reason', 'Bill to party', 'Raise separate invoice for', 'Invoice currency', 'Apply tax', 'Invoice number format',
-  'Create invoice', 'Create credit note', 'Hold and notify', 'Send email to', 'Submit to tax portal', 'Show warning'];
-const BR_SEED = [
-  ['TRG-001', 'TRG', 'India export: run invoice batch 2 days before ETD', 'India · NSA', 10, '2026-01-01', '', 'Active', 'all', [['Country', 'is', 'India'], ['Direction', 'is', 'Export'], ['Voyage event', 'is', 'ETD']], [['Run invoice batch', 'Freight, MISC'], ['Offset from anchor (days)', '-2 (ETD)']], 'Billing Ops · IN'],
-  ['TRG-002', 'TRG', 'Singapore import: run invoice batch 1 day after ATA', 'Singapore · SIN', 10, '2026-01-01', '', 'Active', 'all', [['Country', 'is', 'Singapore'], ['Direction', 'is', 'Import'], ['Voyage event', 'is', 'ATA']], [['Run invoice batch', 'Freight, MISC'], ['Offset from anchor (days)', '+1 (ATA)']], 'Billing Ops · SG'],
-  ['VAL-001', 'VAL', 'Block invoice when charges not received from LMS', 'Global', 1, '2026-01-01', '', 'Active', 'any', [['LMS charges received', 'is', 'No']], [['Block invoice with reason', 'Data not received from LMS'], ['Hold and notify', 'Documentation team']], 'Finance Systems'],
-  ['VAL-002', 'VAL', 'Block invoice when ROE is not available for the invoice date', 'Global', 2, '2026-01-01', '', 'Active', 'all', [['Invoice type', 'is one of', 'Freight, DET / DEM'], ['ROE available', 'is', 'No']], [['Block invoice with reason', 'ROE not received'], ['Hold and notify', 'Finance · ROE desk']], 'Finance Systems'],
-  ['VAL-003', 'VAL', 'B/L count must match manifest before batch generation', 'Global', 3, '2026-01-01', '', 'Active', 'all', [['B/L count vs manifest', 'is not', 'Matched']], [['Block invoice with reason', 'B/L count does not match manifest'], ['Hold and notify', 'Documentation team']], 'Finance Systems'],
-  ['BIL-001', 'BIL', 'Prepaid freight is billed to the shipper', 'Global', 20, '2026-01-01', '', 'Active', 'all', [['Freight term', 'is', 'Prepaid'], ['Charge type', 'is', 'Freight']], [['Bill to party', 'Shipper']], 'Billing Ops · Global'],
-  ['BIL-002', 'BIL', 'Collect freight is billed to the consignee', 'Global', 21, '2026-01-01', '', 'Active', 'all', [['Freight term', 'is', 'Collect'], ['Charge type', 'is', 'Freight']], [['Bill to party', 'Consignee']], 'Billing Ops · Global'],
-  ['BIL-003', 'BIL', 'Key-account customers are billed at corporate office', 'Global', 15, '2026-04-01', '', 'Active', 'all', [['Customer group', 'is', 'Key Account']], [['Bill to party', 'Corporate office of the customer group']], 'Key Account Mgmt'],
-  ['SPL-001', 'SPL', 'Freight in USD and local charges in local currency (two invoices)', 'India, Malaysia, Thailand', 30, '2026-01-01', '', 'Active', 'all', [['Country', 'is one of', 'India, Malaysia, Thailand'], ['Customer group', 'is not', 'Key Account']], [['Raise separate invoice for', 'Freight / USD'], ['Raise separate invoice for', 'Local charges / local currency']], 'Billing Ops · Global'],
-  ['SPL-002', 'SPL', 'Split one B/L between payers by agreed percentage', 'Global', 31, '2026-12-01', '', 'Draft', 'all', [['Customer code', 'is one of', 'From split-billing agreement']], [['Raise separate invoice for', 'Each payer by agreed %']], 'Billing Ops · Global'],
-  ['TAX-001', 'TAX', 'India inter-state supply: apply IGST', 'India', 40, '2026-01-01', '', 'Active', 'all', [['Country', 'is', 'India'], ['Supplier state', 'is not', 'Place of supply']], [['Apply tax', 'IGST (rate by SAC code)']], 'Tax · India'],
-  ['TAX-002', 'TAX', 'India intra-state supply: apply CGST + SGST', 'India', 41, '2026-01-01', '', 'Active', 'all', [['Country', 'is', 'India'], ['Supplier state', 'equals', 'Place of supply']], [['Apply tax', 'CGST + SGST (half rate each)']], 'Tax · India'],
-  ['TAX-003', 'TAX', 'Singapore: international freight zero-rated', 'Singapore', 40, '2026-01-01', '', 'Active', 'all', [['Country', 'is', 'Singapore'], ['Shipment type', 'is one of', 'Export, Import, Cross-trade'], ['Charge type', 'is', 'Freight']], [['Apply tax', 'GST 0% (Section 21(3))']], 'Tax · Singapore'],
-  ['NUM-001', 'NUM', 'India invoice number format', 'India', 50, '2026-04-01', '', 'Active', 'all', [['Country', 'is', 'India']], [['Invoice number format', '{PORT}{DIR}{TYPE}{YY}{SEQ5}  e.g. NSAOF2601194']], 'Finance · India'],
-  ['EVT-001', 'EVT', 'Raise D&D invoice when container is returned after free time', 'Global', 60, '2026-01-01', '', 'Active', 'all', [['Container status', 'is', 'Returned'], ['Days over free time', 'greater than', '0']], [['Create invoice', 'DET / DEM at tariff rate']], 'D&D Desk'],
-  ['EVT-002', 'EVT', 'Approved DAR waiver creates a credit note automatically', 'Global', 61, '2026-12-01', '', 'Pending approval', 'all', [['Waiver status', 'is', 'Approved'], ['Invoice type', 'is', 'DET / DEM']], [['Create credit note', 'Waived amount against original invoice']], 'D&D Desk'],
-  ['CRD-001', 'CRD', 'Customer on credit hold: stop invoice issue and notify credit team', 'Global', 5, '2026-01-01', '', 'Active', 'any', [['Credit status', 'is', 'On hold']], [['Block invoice with reason', 'Customer on credit hold'], ['Hold and notify', 'Credit Management']], 'Credit Management'],
-  ['DLV-001', 'DLV', 'India: submit invoice to IRP before sending to customer', 'India', 70, '2026-01-01', '', 'Active', 'all', [['Country', 'is', 'India'], ['Invoice type', 'is not', 'Proforma']], [['Submit to tax portal', 'IRP (GST e-invoice)'], ['Show warning', 'If IRN not returned in 15 min']], 'Finance Systems'],
-  ['DLV-002', 'DLV', 'Email validated invoices to customer billing contacts', 'Global', 71, '2026-01-01', '', 'Active', 'all', [['e-Invoice status', 'is one of', 'Accepted, Not required']], [['Send email to', 'Customer contacts with e-mail invoice type']], 'Billing Ops · Global'],
-  ['TRG-003', 'TRG', 'Malaysia export batch: 1 day before ETD (old)', 'Malaysia · PKG', 12, '2025-01-01', '2025-12-31', 'Inactive', 'all', [['Country', 'is', 'Malaysia'], ['Direction', 'is', 'Export']], [['Run invoice batch', 'Freight'], ['Offset from anchor (days)', '-1 (ETD)']], 'Billing Ops · MY']
-].map(([id, type, name, scope, pri, from, to, st, join, conds, acts, owner]) => ({ id, type, name, scope, pri, from, to, st, join, conds, acts, owner, stop: id.startsWith('VAL') || id.startsWith('CRD') ? 'Y' : 'N',
-  desc: '', upd: '', hist: [] }));
-BR_SEED.forEach((r, i) => {
-  r.desc = { TRG: 'Sets when invoices are generated for a location, as a voyage event plus an offset in days.', VAL: 'Stops an invoice from being generated until the data it needs is complete.', BIL: 'Decides which party receives the invoice.',
-    SPL: 'Decides how many invoices are raised for a B/L and in which currency.', TAX: 'Decides which tax applies to each charge line.', NUM: 'Sets the legal invoice number sequence for the location.', EVT: 'Creates an invoice or credit note automatically when an event happens.',
-    CRD: 'Applies the customer credit position before an invoice is issued.', DLV: 'Decides where and how a validated invoice is sent.' }[r.type];
-  const who = ['Daniel Tan', 'Priya Nair', 'Lim Wei Ling', 'Ahmad Faiz'][i % 4], d = 3 + (i * 5) % 26;
-  r.upd = d + ' Nov 2026 · ' + who;
-  r.hist = r.st === 'Draft' ? [['v1', 'Draft created', d + ' Nov 2026 · ' + who]]
-    : r.st === 'Pending approval' ? [['v1', 'Submitted for approval', d + ' Nov 2026 · ' + who], ['v1', 'Draft created', (d - 1) + ' Nov 2026 · ' + who]]
-    : [['v' + (2 + i % 2), (r.st === 'Inactive' ? 'Deactivated' : 'Approved and activated'), d + ' Nov 2026 · Finance Controller'], ['v' + (1 + i % 2), 'Condition updated', (d - 2 > 0 ? d - 2 : 1) + ' Nov 2026 · ' + who], ['v1', 'Created', '12 Dec 2025 · ' + who]];
-});
-const BR_BLS = [
-  { v: 'BL-IN-25056', t: 'BL-IN-25056 · Straits Harbour Logistics (IN) · Export', f: { Country: 'India', Port: 'NSA', Direction: 'Export', 'Freight term': 'Prepaid', 'Customer group': 'Standard', 'Supplier state': 'Maharashtra', 'Place of supply': 'Uttar Pradesh', 'Voyage event': 'ETD', 'Charge type': 'Freight', 'Invoice type': 'Freight', 'e-Invoice status': 'Accepted', 'LMS charges received': 'Yes', 'ROE available': 'Yes', 'Credit status': 'Normal', 'B/L count vs manifest': 'Matched' } },
-  { v: 'BL-SG-25283', t: 'BL-SG-25283 · Straits Harbour Logistics (SG) · Import', f: { Country: 'Singapore', Port: 'SIN', Direction: 'Import', 'Freight term': 'Collect', 'Customer group': 'Key Account', 'Voyage event': 'ATA', 'Charge type': 'Freight', 'Invoice type': 'Freight', 'LMS charges received': 'Yes', 'ROE available': 'No', 'Credit status': 'Normal', 'B/L count vs manifest': 'Matched' } },
-  { v: 'BL-MY-25475', t: 'BL-MY-25475 · Straits Harbour Logistics (MY) · Export', f: { Country: 'Malaysia', Port: 'PKG', Direction: 'Export', 'Freight term': 'Prepaid', 'Customer group': 'Standard', 'Charge type': 'Freight', 'Invoice type': 'Freight', 'LMS charges received': 'Yes', 'ROE available': 'Yes', 'Credit status': 'On hold', 'B/L count vs manifest': 'Matched' } }
+// ---------- Business Rule Engine · setup by location (draft 2)
+const RL_LOCS = [
+  { id: 'GL', name: 'Global defaults', short: 'Global', parent: null, ver: 'v6' },
+  { id: 'IN', name: 'India', short: 'India', parent: 'GL', ver: 'v4' }, { id: 'IN-NSA', name: 'India · Nhava Sheva (NSA)', short: 'Nhava Sheva', parent: 'IN', ver: 'v3' }, { id: 'IN-MAA', name: 'India · Chennai (MAA)', short: 'Chennai', parent: 'IN', ver: 'v2' },
+  { id: 'SG', name: 'Singapore', short: 'Singapore', parent: 'GL', ver: 'v5' }, { id: 'SG-SIN', name: 'Singapore · Singapore (SIN)', short: 'Singapore port', parent: 'SG', ver: 'v2' },
+  { id: 'MY', name: 'Malaysia', short: 'Malaysia', parent: 'GL', ver: 'v3' }, { id: 'MY-PKG', name: 'Malaysia · Port Klang (PKG)', short: 'Port Klang', parent: 'MY', ver: 'v2' },
+  { id: 'TH', name: 'Thailand', short: 'Thailand', parent: 'GL', ver: 'v3' }, { id: 'TH-LCH', name: 'Thailand · Laem Chabang (LCH)', short: 'Laem Chabang', parent: 'TH', ver: 'v1' }
 ];
-const BR_LS = 'girs.bre.v1';
-function brLoad() { try { const x = JSON.parse(localStorage.getItem(BR_LS) || 'null'); if (Array.isArray(x) && x.length) return x; } catch (e) {} return JSON.parse(JSON.stringify(BR_SEED)); }
-function brStore(d) { try { localStorage.setItem(BR_LS, JSON.stringify(d)); } catch (e) {} }
-function brDate(v) { if (!v) return ''; const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v); const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return m ? +m[3] + ' ' + M[+m[2] - 1] + ' ' + m[1] : v; }
+const RL_O = {
+  n: ['0', '1', '2', '3', '4', '5', '7'], dir: ['before', 'after'], anchorE: ['ETD', 'ATD', 'Berthing'], anchorI: ['ETA', 'ATA', 'Berthing'],
+  time: ['06:00', '07:00', '08:00', '12:00', '18:00'], days: ['Every day', 'Weekdays only', 'Mon, Wed, Fri'], proc: ['Freight & MISC', 'Freight only', 'All charges'],
+  fail: ['Block the invoice', 'Warn, allow invoice'], team: ['Documentation team', 'Finance · ROE desk', 'Customer master team', 'Tax team', 'Credit Management', 'Billing team lead'],
+  term: ['Prepaid', 'Collect', 'Any'], grp: ['Freight', 'Origin local charges', 'Destination local charges', 'D&D', 'MISC', 'Any charge'],
+  party: ['Shipper', 'Consignee', 'Notify party', 'Forwarder', 'Corporate office'], cust: ['Any customer', 'Key Account', 'Standard', 'SEZ unit'],
+  cur: ['USD', 'Local currency', 'INR', 'SGD', 'MYR', 'THB'], inv: ['Freight invoice', 'Local charges invoice', 'D&D invoice', 'MISC invoice', 'Same invoice as freight'],
+  supply: ['Any', 'Inter-state', 'Intra-state', 'Export of service', 'International transport'], tax: ['No tax', 'IGST', 'CGST + SGST', 'GST', 'SST', 'VAT', 'Zero-rated', 'Exempt'],
+  rate: ['0%', '5%', '6%', '7%', '8%', '9%', '18%', 'By SAC code'],
+  token: [['Port', 'NSA'], ['Direction', 'O'], ['Invoice type', 'F'], ['Year (YY)', '26'], ['Financial year', '2627'], ['Month (MM)', '11'], ['Sequence (5 digits)', '01195'], ['Sequence (6 digits)', '001195'], ['Separator /', '/'], ['Separator -', '-']],
+  reset: ['Never', 'Yearly (1 January)', 'Yearly (1 April)', 'Monthly'], layout: ['Standard A4 portrait', 'Standard A4 landscape', 'Country legal format'], lang: ['English', 'English + local language'],
+  portal: ['None', 'IRP (GST e-invoice)', 'InvoiceNow (Peppol)', 'MyInvois', 'e-Tax Invoice (RD)'], wait: ['5', '15', '30', '60'], reject: ['Move to E-invoice Exceptions', 'Retry automatically, then move to Exceptions'],
+  to: ['Contacts with e-mail invoice type', 'Primary contact only', 'All contacts'], att: ['PDF', 'PDF and JSON', 'PDF and XML'], gfs: ['After e-invoice is accepted', 'Immediately after generation', 'In the daily batch'],
+  dd: ['Container returned', 'Daily while over free time', 'On request'], fca: ['Automatically', 'After approval']
+};
+const RL_BASE = {
+  GL: { 'trg.exp': ['2', 'before', 'ETD', '08:00'], 'trg.imp': ['1', 'after', 'ATA', '08:00'], 'trg.days': 'Every day', 'trg.proc': 'Freight & MISC', 'trg.man': true,
+    'chk.lms': [true, 'Block the invoice', 'Documentation team'], 'chk.roe': [true, 'Block the invoice', 'Finance · ROE desk'], 'chk.man': [true, 'Block the invoice', 'Documentation team'],
+    'chk.cust': [true, 'Block the invoice', 'Customer master team'], 'chk.tax': [true, 'Block the invoice', 'Tax team'], 'chk.hold': [true, 'Block the invoice', 'Credit Management'], 'chk.lim': [true, 'Warn, allow invoice', 'Credit Management'],
+    'bil.t': [['Prepaid', 'Freight', 'Any customer', 'Shipper'], ['Collect', 'Freight', 'Any customer', 'Consignee'], ['Any', 'Origin local charges', 'Any customer', 'Shipper'], ['Any', 'Destination local charges', 'Any customer', 'Consignee'], ['Any', 'Any charge', 'Key Account', 'Corporate office']],
+    'bil.split': true, 'cur.t': [['Freight', 'USD', 'Freight invoice'], ['Origin local charges', 'Local currency', 'Local charges invoice'], ['Destination local charges', 'Local currency', 'Local charges invoice'], ['D&D', 'Local currency', 'D&D invoice']],
+    'cur.banks': true, 'tax.t': [['Any', 'Freight', 'No tax', '0%'], ['Any', 'Any charge', 'No tax', '0%']],
+    'num.tk': ['Port', 'Direction', 'Invoice type', 'Year (YY)', 'Sequence (5 digits)'], 'num.reset': 'Yearly (1 January)', 'num.layout': 'Standard A4 portrait', 'num.lang': 'English',
+    'dlv.portal': [false, 'None', '15', 'Move to E-invoice Exceptions'], 'dlv.mail': [true, 'Contacts with e-mail invoice type', 'PDF'], 'dlv.cc': 'billing@pilship.com', 'dlv.gfs': 'After e-invoice is accepted',
+    'evt.dd': [true, 'Container returned', '0'], 'evt.dar': [true], 'evt.fca': [true, 'After approval'] },
+  IN: { 'cur.t': [['Freight', 'USD', 'Freight invoice'], ['Origin local charges', 'INR', 'Local charges invoice'], ['Destination local charges', 'INR', 'Local charges invoice'], ['D&D', 'INR', 'D&D invoice']],
+    'tax.t': [['Inter-state', 'Freight', 'IGST', '5%'], ['Inter-state', 'Any charge', 'IGST', '18%'], ['Intra-state', 'Freight', 'CGST + SGST', '5%'], ['Intra-state', 'Any charge', 'CGST + SGST', '18%'], ['Export of service', 'Any charge', 'Zero-rated', '0%']],
+    'num.reset': 'Yearly (1 April)', 'dlv.portal': [true, 'IRP (GST e-invoice)', '15', 'Move to E-invoice Exceptions'], 'dlv.cc': 'billing.india@pilship.com', 'evt.dd': [true, 'Container returned', '500'] },
+  'IN-NSA': { 'trg.exp': ['2', 'before', 'ETD', '07:00'], 'chk.lim': [true, 'Block the invoice', 'Credit Management'] },
+  'IN-MAA': { 'trg.imp': ['0', 'after', 'Berthing', '08:00'] },
+  SG: { 'cur.t': [['Freight', 'USD', 'Freight invoice'], ['Origin local charges', 'SGD', 'Freight invoice'], ['Destination local charges', 'SGD', 'Local charges invoice'], ['D&D', 'SGD', 'D&D invoice']],
+    'tax.t': [['International transport', 'Freight', 'Zero-rated', '0%'], ['International transport', 'Any charge', 'Zero-rated', '0%'], ['Any', 'MISC', 'GST', '9%']], 'dlv.portal': [true, 'InvoiceNow (Peppol)', '15', 'Retry automatically, then move to Exceptions'], 'dlv.cc': 'billing.sg@pilship.com' },
+  'SG-SIN': { 'trg.days': 'Weekdays only' },
+  MY: { 'cur.t': [['Freight', 'USD', 'Freight invoice'], ['Origin local charges', 'MYR', 'Local charges invoice'], ['Destination local charges', 'MYR', 'Local charges invoice'], ['D&D', 'MYR', 'D&D invoice']],
+    'tax.t': [['International transport', 'Freight', 'Exempt', '0%'], ['Any', 'Any charge', 'SST', '8%']], 'dlv.portal': [true, 'MyInvois', '30', 'Move to E-invoice Exceptions'] },
+  'MY-PKG': {}, TH: { 'tax.t': [['International transport', 'Freight', 'Zero-rated', '0%'], ['Any', 'Any charge', 'VAT', '7%']], 'dlv.portal': [true, 'e-Tax Invoice (RD)', '30', 'Move to E-invoice Exceptions'],
+    'cur.t': [['Freight', 'USD', 'Freight invoice'], ['Origin local charges', 'THB', 'Local charges invoice'], ['Destination local charges', 'THB', 'Local charges invoice'], ['D&D', 'THB', 'D&D invoice']] }, 'TH-LCH': {}
+};
+const RL_HIST = { GL: [['v6', 'Credit limit check changed to "Warn, allow invoice"', '18 Nov 2026 · approved by Finance Controller'], ['v5', 'Added Key Account billing to corporate office', '2 Oct 2026 · approved by Finance Controller'], ['v4', 'D&D invoice on container return', '14 Aug 2026 · approved by Finance Controller'], ['v1', 'Global defaults created', '12 Dec 2025 · Daniel Tan']] };
+const RL_BLS = [
+  { id: 'BL-IN-25056', t: 'BL-IN-25056', sub: 'Nhava Sheva · Export · Straits Harbour Logistics', loc: 'IN-NSA', dir: 'exp', term: 'Prepaid', cust: 'Standard', supply: 'Inter-state', etd: '26 Nov 2026', ok: {} ,
+    lines: [['Freight', 'USD', 9765], ['Origin local charges', 'INR', 136000]], facts: [['Customer', 'Straits Harbour Logistics (IN)'], ['Direction', 'Export · Prepaid'], ['Vessel / voyage', 'KOTA CANTIK / 0124W'], ['ETD', '26 Nov 2026'], ['Place of supply', 'Uttar Pradesh (inter-state)'], ['Charges', 'Freight USD 9,765 · Local INR 1,36,000']] },
+  { id: 'BL-SG-25283', t: 'BL-SG-25283', sub: 'Singapore · Import · Straits Harbour Logistics', loc: 'SG-SIN', dir: 'imp', term: 'Collect', cust: 'Key Account', supply: 'International transport', etd: '25 Nov 2026', ok: { roe: false },
+    lines: [['Freight', 'USD', 3225], ['Destination local charges', 'SGD', 1180]], facts: [['Customer', 'Straits Harbour Logistics (SG)'], ['Direction', 'Import · Collect'], ['Vessel / voyage', 'KOTA LAYANG / 034S'], ['ATA', '25 Nov 2026'], ['Customer group', 'Key Account'], ['ROE for invoice date', 'Not received']] },
+  { id: 'BL-MY-25475', t: 'BL-MY-25475', sub: 'Port Klang · Export · Straits Harbour Logistics', loc: 'MY-PKG', dir: 'exp', term: 'Prepaid', cust: 'Standard', supply: 'International transport', etd: '27 Nov 2026', ok: { hold: false },
+    lines: [['Freight', 'USD', 3670], ['Origin local charges', 'MYR', 2410]], facts: [['Customer', 'Straits Harbour Logistics (MY)'], ['Direction', 'Export · Prepaid'], ['Vessel / voyage', 'KOTA SATRIA / 046W'], ['ETD', '27 Nov 2026'], ['Credit status', 'On credit hold'], ['Charges', 'Freight USD 3,670 · Local MYR 2,410']] }
+];
+const RL_STAGES = [
+  ['trg', 'When to invoice', 'When GIRS generates invoices for this location, counted from a vessel event.'],
+  ['chk', 'Checks before invoicing', 'What must be true before an invoice is created, and what happens if a check fails.'],
+  ['bil', 'Who pays', 'Which party receives the invoice for each kind of charge.'],
+  ['cur', 'Invoices & currency', 'How charges on one B/L are grouped into invoices, and in which currency.'],
+  ['tax', 'Tax', 'Which tax and rate apply to each kind of charge.'],
+  ['num', 'Numbering & format', 'The legal invoice number and the document layout.'],
+  ['dlv', 'Delivery', 'Where a validated invoice is sent, in which order.'],
+  ['evt', 'Automatic invoices & credit notes', 'Documents GIRS creates on its own when an event happens.']
+];
+const RL_LS = 'girs.rules.v2';
+function rlLoad() { try { const x = JSON.parse(localStorage.getItem(RL_LS) || 'null'); if (x && x.ov) return x; } catch (e) {} return { ov: JSON.parse(JSON.stringify(RL_BASE)), draft: {}, pend: {}, ver: Object.fromEntries(RL_LOCS.map((l) => [l.id, l.ver])), hist: {} }; }
+function rlStore(d) { try { localStorage.setItem(RL_LS, JSON.stringify(d)); } catch (e) {} }
+const RL_RESET = '__reset__';
+function rlFmt(n, cur) { return Number(n).toLocaleString(cur === 'INR' ? 'en-IN' : 'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    const d = brLoad();
-    this.state = { d, type: 'ALL', q: '', cty: 'ALL', st: 'ALL', sel: 'TRG-001', ed: null, tst: null };
-    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && (this.state.ed || this.state.tst)) this.setState({ ed: null, tst: null }); }); } catch (e) {}
+    this.state = { db: rlLoad(), loc: 'IN-NSA', stage: 'trg', open: '', tst: null, hist: false };
+    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.open) this.setState({ open: '' }); else if (this.state.tst || this.state.hist) this.setState({ tst: null, hist: false }); }); } catch (e) {}
   }
   renderVals() {
-    const s = this.state, self = this, set = (o) => self.setState(o), D = s.d;
-    const tyOf = (k) => BR_TYPES.find((t) => t[0] === k) || BR_TYPES[0];
-    const stc = (st) => ({ Active: 't-ok', Draft: 't-neutral', 'Pending approval': 't-warn', Inactive: 't-neutral' }[st] || 't-neutral');
-    const save = (d, extra) => { brStore(d); set(Object.assign({ d }, extra || {})); };
-    const eff = (r) => brDate(r.from) + ' – ' + (r.to ? brDate(r.to) : 'open');
-    const CTY = ['India', 'Singapore', 'Malaysia', 'Thailand'];
-    const q = s.q.trim().toLowerCase();
-    const base = D.filter((r) => (s.cty === 'ALL' || (s.cty === 'Global' ? r.scope === 'Global' : r.scope.includes(s.cty))) && (s.st === 'ALL' || r.st === s.st)
-      && (!q || [r.id, r.name, r.scope].concat(r.conds.map((c) => c.join(' ')), r.acts.map((a) => a.join(' '))).join(' ').toLowerCase().includes(q)));
-    const list = base.filter((r) => s.type === 'ALL' || r.type === s.type).sort((a, b) => a.pri - b.pri || a.id.localeCompare(b.id));
-    const types = [['ALL', 'All rules']].concat(BR_TYPES.map((t) => [t[0], t[1]])).map(([k, l]) => ({ label: l, n: String(k === 'ALL' ? base.length : base.filter((r) => r.type === k).length), on: s.type === k ? 'true' : 'false', pick: () => set({ type: k }) }));
-    const sel = D.find((r) => r.id === s.sel) || list[0];
-    const rows = list.map((r) => ({ pri: String(r.pri), id: r.id, name: r.name, type: tyOf(r.type)[1], tc: tyOf(r.type)[2], scope: r.scope, eff: eff(r), st: r.st, stc: stc(r.st), upd: r.upd,
-      cls: sel && sel.id === r.id ? 'on' : '', pick: () => set({ sel: r.id }) }));
-    const upd = (id, fn, toast) => { const d = JSON.parse(JSON.stringify(D)), r = d.find((x) => x.id === id); fn(r); save(d, { __toast: toast }); };
-    const hist = (r, t, who) => { const v = 'v' + (r.hist.length ? (parseInt(String(r.hist[0][0]).slice(1), 10) || 1) + (t === 'Approved and activated' ? 0 : 1) : 1); r.hist.unshift([v, t, '24 Nov 2026 · ' + (who || 'Daniel Tan')]); r.upd = '24 Nov 2026 · ' + (who || 'Daniel Tan'); };
-    const openEd = (mode, r) => {
-      const v = r ? JSON.parse(JSON.stringify(r)) : { id: '', type: s.type === 'ALL' ? 'VAL' : s.type, name: '', scope: 'Global', pri: 50, from: '2026-12-01', to: '', st: 'Draft', join: 'all', conds: [['Country', 'is', '']], acts: [['Block invoice with reason', '']], owner: 'Billing Ops · Global', stop: 'N', desc: '', hist: [] };
-      if (mode === 'copy') { v.name = v.name + ' (copy)'; v.st = 'Draft'; v.hist = []; }
-      set({ ed: { mode, orig: r && mode === 'edit' ? r.id : '', v, tried: false } });
+    const s = this.state, self = this, set = (o) => self.setState(o), DB = s.db;
+    const L = (id) => RL_LOCS.find((l) => l.id === id);
+    const chainOf = (id) => { const c = []; let x = L(id); while (x) { c.push(x.id); x = x.parent ? L(x.parent) : null; } return c; };
+    const layer = (lid, k) => { const d = (DB.draft[lid] || {}), o = (DB.ov[lid] || {});
+      if (k in d) return d[k] === RL_RESET ? { none: true, chg: true } : { v: d[k], chg: true }; if (k in o) return { v: o[k] }; return null; };
+    const eff = (k, lid) => { lid = lid || s.loc; for (const c of chainOf(lid)) { const x = layer(c, k); if (x && !x.none) return { v: x.v, src: c, chg: !!(x.chg && c === lid) }; } return { v: undefined, src: 'GL' }; };
+    const chgHere = (k) => { const d = DB.draft[s.loc] || {}; return k in d; };
+    const save = (db, extra) => { rlStore(db); set(Object.assign({ db }, extra || {})); };
+    const setK = (k, v) => { const db = JSON.parse(JSON.stringify(DB)); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][k] = v; save(db, { open: '' }); };
+    const resetK = (k) => { const db = JSON.parse(JSON.stringify(DB)); db.draft[s.loc] = db.draft[s.loc] || {};
+      if ((DB.ov[s.loc] || {})[k] !== undefined) db.draft[s.loc][k] = RL_RESET; else delete db.draft[s.loc][k]; save(db); };
+    const loc = L(s.loc), parent = loc.parent ? L(loc.parent) : null;
+    // dropdown factory
+    const dd = (id, cur, opts, pick, o) => { o = o || {}; const open = s.open === id;
+      return { cls: o.cls || '', st: o.w ? 'width:' + o.w : '', label: cur == null || cur === '' ? (o.ph || 'Select') : (o.fmt ? o.fmt(cur) : cur), aria: o.aria || id, ex: open ? 'true' : 'false', open,
+        toggle: () => set({ open: open ? '' : id }), close: () => set({ open: '' }),
+        opts: opts.map((x) => { const v = Array.isArray(x) ? x[0] : x, sub = Array.isArray(x) ? x[1] : ''; return { t: o.fmt ? o.fmt(v) : v, sub, hasSub: !!sub, on: String(v) === String(cur) ? 'true' : 'false', pick: () => { set({ open: '' }); pick(v); } }; }) }; };
+    const meta = (k) => { const e = eff(k), here = e.src === s.loc;
+      const srcName = L(e.src).short;
+      return { chg: chgHere(k), src: here ? 'Set for ' + loc.short : 'From ' + srcName, srcCls: here ? 'tg-set' : 'tg-inh', srcTip: here ? 'This location overrides ' + (parent ? parent.short : '') : 'Inherited. Change it here to override for ' + loc.short + ' only.',
+        canReset: !!parent && (here || chgHere(k)), reset: () => resetK(k), resetTip: 'Use the value from ' + (parent ? parent.short : '') }; };
+    const T = (t) => ({ isText: true, t, isDd: false, isNum: false, isIn: false });
+    const P = (c) => ({ isText: false, isDd: true, isNum: false, isIn: false, c });
+    const N = (v, on, aria, w) => ({ isText: false, isDd: false, isNum: true, isIn: false, v: String(v), on, aria, st: w ? 'width:' + w : '' });
+    const I = (v, on, aria, w) => ({ isText: false, isDd: false, isNum: false, isIn: true, v: String(v), on, aria, st: w ? 'width:' + w : '' });
+    const arrSet = (k, i, v) => { const a = (eff(k).v || []).slice(); a[i] = v; setK(k, a); };
+    const sen = (k, title, parts) => Object.assign({ isSen: true, isTog: false, isTbl: false, isPat: false, cls: chgHere(k) ? 'rw-chg' : '', title, parts }, meta(k));
+    const tog = (k, title, desc, parts) => { const v = eff(k).v || [false]; return Object.assign({ isSen: false, isTog: true, isTbl: false, isPat: false, cls: (chgHere(k) ? 'rw-chg ' : '') + (v[0] ? '' : 'rw-off'), title, desc,
+      on: v[0] ? 'true' : '', flip: () => arrSet(k, 0, !v[0]), showSub: !!v[0] && parts && parts.length > 0, parts: parts || [] }, meta(k)); };
+    const tbl = (k, title, desc, cols, opts, addRow, note, arrowAt) => { const rows = eff(k).v || [];
+      const grid = 'grid-template-columns:' + cols.map((c) => c.w).join(' ') + ' 32px';
+      return Object.assign({ isSen: false, isTog: false, isTbl: true, isPat: false, cls: chgHere(k) ? 'rw-chg' : '', title, desc, grid, note, addL: 'Add row',
+        cols: cols.map((c, j) => ({ t: c.t, cls: j === arrowAt ? 'dt-out' : '' })),
+        rows: rows.map((r, i) => ({ del: () => setK(k, rows.filter((_, j) => j !== i)),
+          cells: cols.map((c, j) => ({ cls: j === arrowAt ? 'dt-out' : '', isArrow: j === arrowAt, isDd: true, isIn: false,
+            c: dd(k + '.' + i + '.' + j, r[j], opts[j], (v) => { const x = rows.map((y) => y.slice()); x[i][j] = v; setK(k, x); }, { aria: c.t + ', row ' + (i + 1) }) })) })),
+        add: () => setK(k, rows.concat([addRow.slice()])) }, meta(k)); };
+    // stage builders
+    const ev = (k) => eff(k).v;
+    const stageSecs = {
+      trg: () => { const ex = ev('trg.exp'), im = ev('trg.imp');
+        return [{ title: 'Batch timing', desc: 'GIRS runs the invoice batch at this time, counted from the vessel event. Timing follows the Rate of Exchange rules.', rows: [
+          sen('trg.exp', 'Export B/Ls', [T('Run the batch'), N(ex[0], (e) => arrSet('trg.exp', 0, e.target.value.replace(/\D/g, '').slice(0, 2)), 'Days', '56px'), T('days'),
+            P(dd('trg.exp.d', ex[1], RL_O.dir, (v) => arrSet('trg.exp', 1, v), { w: '104px', aria: 'Before or after' })), P(dd('trg.exp.a', ex[2], RL_O.anchorE, (v) => arrSet('trg.exp', 2, v), { w: '120px', aria: 'Vessel event' })),
+            T('at'), P(dd('trg.exp.t', ex[3], RL_O.time, (v) => arrSet('trg.exp', 3, v), { w: '96px', aria: 'Time' })), T('local time')]),
+          sen('trg.imp', 'Import B/Ls', [T('Run the batch'), N(im[0], (e) => arrSet('trg.imp', 0, e.target.value.replace(/\D/g, '').slice(0, 2)), 'Days', '56px'), T('days'),
+            P(dd('trg.imp.d', im[1], RL_O.dir, (v) => arrSet('trg.imp', 1, v), { w: '104px', aria: 'Before or after' })), P(dd('trg.imp.a', im[2], RL_O.anchorI, (v) => arrSet('trg.imp', 2, v), { w: '120px', aria: 'Vessel event' })),
+            T('at'), P(dd('trg.imp.t', im[3], RL_O.time, (v) => arrSet('trg.imp', 3, v), { w: '96px', aria: 'Time' })), T('local time')]),
+          sen('trg.proc', 'What the batch includes', [T('Include'), P(dd('trg.proc', ev('trg.proc'), RL_O.proc, (v) => setK('trg.proc', v), { w: '180px', aria: 'Charges included' })), T('and run on'), P(dd('trg.days', ev('trg.days'), RL_O.days, (v) => setK('trg.days', v), { w: '170px', aria: 'Run days' }))])
+        ] }, { title: 'Before the batch starts', desc: '', rows: [ tog('trg.man', 'Match B/L count with the vessel manifest', 'The batch waits until every B/L on the manifest is ready, so a voyage is not invoiced in parts.') ].map((r) => Object.assign(r, { on: ev('trg.man') ? 'true' : '', flip: () => setK('trg.man', !ev('trg.man')), cls: (chgHere('trg.man') ? 'rw-chg ' : '') + (ev('trg.man') ? '' : 'rw-off'), showSub: false })) }]; },
+      chk: () => { const C = [['chk.lms', 'Charges received from LMS', 'All charges for the B/L have arrived from LMS.'], ['chk.roe', 'Exchange rate available', 'A Rate of Exchange exists for the invoice date and currency.'], ['chk.man', 'B/L data complete', 'Shipper, consignee, ports and containers are filled in.'],
+          ['chk.cust', 'Customer master complete', 'The billing party has a tax ID, address and invoice e-mail contact.'], ['chk.tax', 'Tax code valid', 'Every charge has a tax code that matches GFS.'], ['chk.hold', 'Customer not on credit hold', 'The billing party is not on hold in Credit Management.'], ['chk.lim', 'Within credit limit', 'The invoice keeps the customer within the approved credit limit.']];
+        return [{ title: 'Checks', desc: 'Each check runs for every invoice. Turn a check off only if this location does not need it.', rows: C.map(([k, t, d]) => { const v = ev(k);
+          return tog(k, t, d, [T('If it fails'), P(dd(k + '.f', v[1], RL_O.fail, (x) => arrSet(k, 1, x), { w: '196px', aria: t + ': if it fails' })), T('and notify'), P(dd(k + '.n', v[2], RL_O.team, (x) => arrSet(k, 2, x), { w: '210px', aria: t + ': notify' }))]); }) }]; },
+      bil: () => [{ title: 'Billing party', desc: 'GIRS uses the first row that matches.', rows: [
+          tbl('bil.t', 'Who receives the invoice', 'Match the freight term, charge group and customer group to a billing party.', [{ t: 'Freight term', w: '150px' }, { t: 'Charge group', w: 'minmax(0,1.3fr)' }, { t: 'Customer group', w: 'minmax(0,1fr)' }, { t: 'Bill to', w: 'minmax(0,1fr)' }],
+            [RL_O.term, RL_O.grp, RL_O.cust, RL_O.party], ['Any', 'Any charge', 'Any customer', 'Shipper'], 'Rows are checked from top to bottom.', 3) ] },
+        { title: 'Split billing', desc: '', rows: [ Object.assign(tog('bil.split', 'Allow split billing per B/L', 'When a split-billing agreement exists, one B/L can be billed to several parties by agreed percentage.'), { on: ev('bil.split') ? 'true' : '', flip: () => setK('bil.split', !ev('bil.split')), cls: (chgHere('bil.split') ? 'rw-chg ' : '') + (ev('bil.split') ? '' : 'rw-off'), showSub: false }) ] }],
+      cur: () => { const rows = ev('cur.t') || [], names = [...new Set(rows.map((r) => r[2] === 'Same invoice as freight' ? 'Freight invoice' : r[2]))];
+        return [{ title: 'Grouping and currency', desc: '', rows: [ tbl('cur.t', 'Invoices per B/L', 'Charges with the same invoice name go on one invoice.', [{ t: 'Charge group', w: 'minmax(0,1.2fr)' }, { t: 'Currency', w: '170px' }, { t: 'Invoice', w: 'minmax(0,1.2fr)' }],
+            [RL_O.grp, RL_O.cur, RL_O.inv], ['MISC', 'Local currency', 'MISC invoice'], 'A typical B/L gets ' + names.length + (names.length === 1 ? ' invoice: ' : ' invoices: ') + names.join(', ') + '.', 1) ] },
+          { title: 'Bank details on the invoice', desc: '', rows: [ Object.assign(tog('cur.banks', 'Show both bank accounts', 'Freight invoices in USD show the USD and local-currency bank accounts, so the customer can pay either.'), { on: ev('cur.banks') ? 'true' : '', flip: () => setK('cur.banks', !ev('cur.banks')), cls: (chgHere('cur.banks') ? 'rw-chg ' : '') + (ev('cur.banks') ? '' : 'rw-off'), showSub: false }) ] }]; },
+      tax: () => [{ title: 'Tax by charge', desc: 'GIRS uses the first row that matches. Rates must match the Tax Set-up in Industry Master.', rows: [
+          tbl('tax.t', 'Tax rules', 'Match the type of supply and charge group to a tax and rate.', [{ t: 'Type of supply', w: 'minmax(0,1.2fr)' }, { t: 'Charge group', w: 'minmax(0,1.2fr)' }, { t: 'Tax', w: 'minmax(0,1fr)' }, { t: 'Rate', w: '130px' }],
+            [RL_O.supply, RL_O.grp, RL_O.tax, RL_O.rate], ['Any', 'Any charge', 'No tax', '0%'], 'Rows are checked from top to bottom.', 2) ] }],
+      num: () => { const tk = ev('num.tk') || [], ex = (t) => (RL_O.token.find((x) => x[0] === t) || ['', ''])[1];
+        const pv = tk.map(ex).join('');
+        return [{ title: 'Invoice number', desc: '', rows: [ Object.assign({ isSen: false, isTog: false, isTbl: false, isPat: true, cls: chgHere('num.tk') ? 'rw-chg' : '', title: 'Number pattern', desc: 'Build the number from parts, in order. The sequence is per location.',
+            tokens: tk.map((t, i) => ({ t, ex: ex(t), del: () => setK('num.tk', tk.filter((_, j) => j !== i)) })),
+            addDd: dd('num.add', '', RL_O.token.map((x) => [x[0], 'e.g. ' + x[1]]), (v) => setK('num.tk', tk.concat([v])), { ph: '+ Add part', w: '150px', cls: 'dd-ghost', aria: 'Add part' }),
+            preview: pv || '—', pvNote: 'Next invoice for a freight export at ' + (loc.id.includes('-') ? loc.short : 'this location') }, meta('num.tk')),
+          sen('num.reset', 'Sequence', [T('Restart the sequence'), P(dd('num.reset', ev('num.reset'), RL_O.reset, (v) => setK('num.reset', v), { w: '200px', aria: 'Sequence restart' }))]) ] },
+          { title: 'Document', desc: '', rows: [ sen('num.layout', 'Layout and language', [T('Use'), P(dd('num.layout', ev('num.layout'), RL_O.layout, (v) => setK('num.layout', v), { w: '210px', aria: 'Layout' })), T('in'), P(dd('num.lang', ev('num.lang'), RL_O.lang, (v) => setK('num.lang', v), { w: '210px', aria: 'Language' }))]) ] }]; },
+      dlv: () => { const pt = ev('dlv.portal'), ml = ev('dlv.mail');
+        return [{ title: 'In this order', desc: '', rows: [
+          tog('dlv.portal', '1. Submit to the government e-invoice portal', 'The invoice is sent to the customer only after the portal accepts it.', [T('Portal'), P(dd('dlv.p', pt[1], RL_O.portal, (v) => arrSet('dlv.portal', 1, v), { w: '220px', aria: 'Portal' })), T('wait up to'), P(dd('dlv.w', pt[2], RL_O.wait, (v) => arrSet('dlv.portal', 2, v), { w: '84px', aria: 'Minutes' })), T('min, if rejected'), P(dd('dlv.r', pt[3], RL_O.reject, (v) => arrSet('dlv.portal', 3, v), { w: '290px', aria: 'If rejected' }))]),
+          tog('dlv.mail', '2. E-mail the invoice to the customer', 'Uses the contacts in Customer Master.', [T('Send to'), P(dd('dlv.to', ml[1], RL_O.to, (v) => arrSet('dlv.mail', 1, v), { w: '260px', aria: 'Send to' })), T('attach'), P(dd('dlv.att', ml[2], RL_O.att, (v) => arrSet('dlv.mail', 2, v), { w: '150px', aria: 'Attachment' })), T('copy to'), I(ev('dlv.cc'), (e) => setK('dlv.cc', e.target.value), 'Copy to', '220px')]),
+          sen('dlv.gfs', '3. Post to GFS', [T('Post the invoice to GFS'), P(dd('dlv.gfs', ev('dlv.gfs'), RL_O.gfs, (v) => setK('dlv.gfs', v), { w: '250px', aria: 'Post to GFS' }))]) ] }]; },
+      evt: () => { const d = ev('evt.dd'), f = ev('evt.fca');
+        return [{ title: 'Events', desc: 'Documents created this way still go through the checks, tax and delivery stages.', rows: [
+          tog('evt.dd', 'D&D invoice', 'Detention and demurrage, using LMS gate dates and the D&D tariff.', [T('Create when'), P(dd('evt.ddw', d[1], RL_O.dd, (v) => arrSet('evt.dd', 1, v), { w: '230px', aria: 'Create when' })), T('if the amount is over'), N(d[2], (e) => arrSet('evt.dd', 2, e.target.value.replace(/[^\d]/g, '')), 'Minimum amount', '90px'), T('in local currency')]),
+          tog('evt.dar', 'Credit note for an approved DAR waiver', 'When a D&D waiver is approved, GIRS credits the waived amount against the original invoice.'),
+          tog('evt.fca', 'Credit note for an amended charge', 'When a charge is changed in LMS after it was invoiced (FCA).', [T('Create the credit note'), P(dd('evt.fcam', f[1], RL_O.fca, (v) => arrSet('evt.fca', 1, v), { w: '170px', aria: 'Credit note creation' }))]) ] }]; }
     };
-    let d = null;
-    if (sel) {
-      const ty = tyOf(sel.type);
-      d = { id: sel.id, name: sel.name, type: ty[1], tc: ty[2], st: sel.st, stc: stc(sel.st), desc: sel.desc, join: sel.join === 'any' ? 'Any' : 'All',
-        conds: sel.conds.map(([f, o, v]) => ({ f, o, v })), acts: sel.acts.map(([a, v]) => ({ a, v })), pri: String(sel.pri), scope: sel.scope, eff: eff(sel),
-        stop: sel.stop === 'Y' ? 'Stop further rules of this type' : 'Continue to next rules', owner: sel.owner, hist: sel.hist.map(([v, t, w]) => ({ v, t, w })),
-        canSubmit: sel.st === 'Draft', canApprove: sel.st === 'Pending approval', isActive: sel.st === 'Active', isInactive: sel.st === 'Inactive', isDraft: sel.st === 'Draft',
-        edit: () => openEd('edit', sel), copy: () => openEd('copy', sel), test: () => set({ tst: { bl: BR_BLS[0].v, ran: false } }),
-        submit: () => upd(sel.id, (r) => { r.st = 'Pending approval'; hist(r, 'Submitted for approval'); }, sel.id + ' submitted for approval.'),
-        approve: () => upd(sel.id, (r) => { r.st = 'Active'; hist(r, 'Approved and activated', 'Finance Controller'); }, sel.id + ' approved and active.'),
-        reject: () => upd(sel.id, (r) => { r.st = 'Draft'; hist(r, 'Returned to draft', 'Finance Controller'); }, sel.id + ' returned to draft.'),
-        deact: () => upd(sel.id, (r) => { r.st = 'Inactive'; hist(r, 'Deactivated'); }, sel.id + ' deactivated.'),
-        react: () => upd(sel.id, (r) => { r.st = 'Pending approval'; hist(r, 'Submitted for reactivation'); }, sel.id + ' submitted for reactivation.'),
-        del: () => { const dd = D.filter((r) => r.id !== sel.id); save(dd, { sel: (dd[0] || {}).id, __toast: 'Draft ' + sel.id + ' deleted.' }); } };
-    }
-    // editor
-    let ed = { on: false };
-    if (s.ed) {
-      const E = s.ed, V = E.v, setV = (o) => set({ ed: Object.assign({}, E, { v: Object.assign({}, V, o) }) });
-      const opts = (arr, cur) => arr.map((x) => ({ v: x, t: x, on: x === cur ? 'true' : '' }));
-      const err = !V.name.trim() ? 'Enter a rule name.' : !V.conds.length ? 'Add at least one condition.' : !V.acts.length ? 'Add at least one action.' : V.conds.some((c) => !String(c[2]).trim() && c[1] !== 'exists' && c[1] !== 'is missing') ? 'Every condition needs a value.' : '';
-      const commit = (st) => {
-        if (err) return set({ ed: Object.assign({}, E, { tried: true }) });
-        const dd = JSON.parse(JSON.stringify(D)); let r;
-        if (E.mode === 'edit') { r = dd.find((x) => x.id === E.orig); Object.assign(r, V, { pri: parseInt(V.pri, 10) || 0 }); }
-        else { const n = 1 + Math.max(0, ...dd.filter((x) => x.type === V.type).map((x) => parseInt(x.id.slice(4), 10) || 0)); r = Object.assign({}, V, { id: V.type + '-' + String(n).padStart(3, '0'), pri: parseInt(V.pri, 10) || 0, hist: [] }); dd.push(r); }
-        r.st = st; hist(r, st === 'Draft' ? (E.mode === 'edit' ? 'Edited as draft' : 'Draft created') : 'Submitted for approval');
-        save(dd, { ed: null, sel: r.id, type: s.type === 'ALL' || s.type === r.type ? s.type : 'ALL', __toast: r.id + (st === 'Draft' ? ' saved as draft.' : ' submitted for approval.') });
-      };
-      ed = { on: true, title: E.mode === 'edit' ? 'Edit rule · ' + E.orig : E.mode === 'copy' ? 'Copy rule' : 'New rule', sub: E.mode === 'edit' ? 'Saving creates a new version. The current version stays active until approval.' : 'New rules start as drafts.',
-        name: V.name, onName: (e) => setV({ name: e.target.value }), typeOpts: BR_TYPES.map((t) => ({ v: t[0], t: t[1], on: t[0] === V.type ? 'true' : '' })), onType: (e) => setV({ type: e.target.value }),
-        scope: V.scope, onScope: (e) => setV({ scope: e.target.value }), pri: String(V.pri), onPri: (e) => setV({ pri: e.target.value.replace(/\D/g, '') }),
-        from: V.from, onFrom: (e) => setV({ from: e.target.value }), to: V.to, onTo: (e) => setV({ to: e.target.value }), desc: V.desc, onDesc: (e) => setV({ desc: e.target.value }),
-        stopN: V.stop !== 'Y' ? 'true' : '', stopY: V.stop === 'Y' ? 'true' : '', onStop: (e) => setV({ stop: e.target.value }),
-        allOn: V.join !== 'any' ? 'true' : 'false', anyOn: V.join === 'any' ? 'true' : 'false', setAll: () => setV({ join: 'all' }), setAny: () => setV({ join: 'any' }),
-        conds: V.conds.map((c, i) => ({ jn: i ? (V.join === 'any' ? 'OR' : 'AND') : 'IF', fOpts: opts(BR_FIELDS, c[0]), oOpts: opts(BR_OPS, c[1]), v: c[2],
-          onF: (e) => { const x = V.conds.map((y) => y.slice()); x[i][0] = e.target.value; setV({ conds: x }); }, onO: (e) => { const x = V.conds.map((y) => y.slice()); x[i][1] = e.target.value; setV({ conds: x }); },
-          onV: (e) => { const x = V.conds.map((y) => y.slice()); x[i][2] = e.target.value; setV({ conds: x }); }, del: () => setV({ conds: V.conds.filter((_, j) => j !== i) }) })),
-        addCond: () => setV({ conds: V.conds.concat([['Country', 'is', '']]) }),
-        acts: V.acts.map((a, i) => ({ n: String(i + 1), aOpts: opts(BR_ACTS, a[0]), v: a[1], onA: (e) => { const x = V.acts.map((y) => y.slice()); x[i][0] = e.target.value; setV({ acts: x }); },
-          onV: (e) => { const x = V.acts.map((y) => y.slice()); x[i][1] = e.target.value; setV({ acts: x }); }, del: () => setV({ acts: V.acts.filter((_, j) => j !== i) }) })),
-        addAct: () => setV({ acts: V.acts.concat([['Show warning', '']]) }),
-        hasErr: E.tried && !!err, err, cancel: () => set({ ed: null }), saveDraft: () => commit('Draft'), submit: () => commit('Pending approval') };
-    }
-    // test
+    const sum = {
+      trg: () => { const e = ev('trg.exp'), i = ev('trg.imp'); return 'Export ' + e[0] + 'd ' + e[1] + ' ' + e[2] + ' · Import ' + i[0] + 'd ' + i[1] + ' ' + i[2]; },
+      chk: () => { const ks = ['chk.lms', 'chk.roe', 'chk.man', 'chk.cust', 'chk.tax', 'chk.hold', 'chk.lim'], on = ks.filter((k) => ev(k)[0]); return on.length + ' checks on · ' + on.filter((k) => ev(k)[1] === 'Block the invoice').length + ' block'; },
+      bil: () => (ev('bil.t') || []).length + ' billing rules' + (ev('bil.split') ? ' · split allowed' : ''),
+      cur: () => { const r = ev('cur.t') || []; return new Set(r.map((x) => x[2])).size + ' invoices per B/L · ' + [...new Set(r.map((x) => x[1]))].join(', '); },
+      tax: () => { const r = ev('tax.t') || []; return [...new Set(r.map((x) => x[2]))].filter((x) => x !== 'No tax').join(', ') || 'No tax'; },
+      num: () => (ev('num.tk') || []).map((t) => (RL_O.token.find((x) => x[0] === t) || ['', ''])[1]).join('') || '—',
+      dlv: () => { const p = ev('dlv.portal'); return (p[0] ? p[1] + ' → ' : '') + 'e-mail → GFS'; },
+      evt: () => ['evt.dd', 'evt.dar', 'evt.fca'].filter((k) => ev(k)[0]).length + ' of 3 on'
+    };
+    const KEYS = { trg: ['trg.exp', 'trg.imp', 'trg.proc', 'trg.days', 'trg.man'], chk: ['chk.lms', 'chk.roe', 'chk.man', 'chk.cust', 'chk.tax', 'chk.hold', 'chk.lim'], bil: ['bil.t', 'bil.split'], cur: ['cur.t', 'cur.banks'],
+      tax: ['tax.t'], num: ['num.tk', 'num.reset', 'num.layout', 'num.lang'], dlv: ['dlv.portal', 'dlv.mail', 'dlv.cc', 'dlv.gfs'], evt: ['evt.dd', 'evt.dar', 'evt.fca'] };
+    const idx = RL_STAGES.findIndex((x) => x[0] === s.stage);
+    const stages = RL_STAGES.map(([k, t], i) => { const chg = KEYS[k].some(chgHere), here = KEYS[k].some((x) => eff(x).src === s.loc);
+      return { n: String(i + 1), title: t, sum: sum[k](), cur: s.stage === k ? 'step' : 'false', pick: () => set({ stage: k, open: '' }),
+        dot: chg || (here && !!parent), dotCls: chg ? 'chg' : 'set', dotTip: chg ? 'Unsaved changes' : 'Overridden for ' + loc.short }; });
+    const S = RL_STAGES[idx];
+    const st = { n: String(idx + 1), title: S[1], desc: S[2], secs: stageSecs[S[0]]().map((x) => Object.assign({ hasDesc: !!x.desc }, x)),
+      noPrev: idx === 0 ? 'true' : '', noNext: idx === RL_STAGES.length - 1 ? 'true' : '', prev: () => set({ stage: RL_STAGES[Math.max(0, idx - 1)][0] }), next: () => set({ stage: RL_STAGES[Math.min(7, idx + 1)][0] }) };
+    // location bar
+    const nDraft = Object.keys(DB.draft[s.loc] || {}).length, nPend = Object.keys(DB.pend[s.loc] || {}).length;
+    const ovN = (id) => id === 'GL' ? '' : Object.keys(DB.ov[id] || {}).length;
+    const locDd = dd('loc', s.loc, RL_LOCS.map((l) => [l.id, l.id === 'GL' ? 'Applies everywhere unless overridden' : (ovN(l.id) ? ovN(l.id) + (ovN(l.id) === 1 ? ' override' : ' overrides') : 'No overrides') + (Object.keys(DB.draft[l.id] || {}).length ? ' · unsaved changes' : '')]),
+      (v) => set({ loc: v }), { fmt: (v) => { const l = L(v); return (l.id.includes('-') ? ' ' : '') + l.name; }, w: '330px', aria: 'Location', cls: 'dd-loc' });
+    locDd.label = loc.name;
+    const db2 = () => JSON.parse(JSON.stringify(DB));
+    const bump = (v) => 'v' + ((parseInt(String(v).slice(1), 10) || 1) + 1);
+    const locV = { dd: locDd, name: loc.short === 'Global' ? 'Global defaults' : loc.short, chain: chainOf(s.loc).slice(1).reverse().map((id) => ({ t: L(id).short })), ver: DB.ver[s.loc],
+      hasDraft: nDraft > 0, draftN: nDraft + (nDraft === 1 ? ' unsaved change' : ' unsaved changes'), hasPend: nPend > 0, pendN: nPend + (nPend === 1 ? ' change' : ' changes'),
+      discard: () => { const d = db2(); delete d.draft[s.loc]; save(d, { __toast: 'Changes discarded.' }); },
+      submit: () => { const d = db2(); d.pend[s.loc] = Object.assign({}, d.pend[s.loc] || {}, d.draft[s.loc]); delete d.draft[s.loc]; save(d, { __toast: 'Submitted to Finance Controller for approval.' }); },
+      withdraw: () => { const d = db2(); d.draft[s.loc] = Object.assign({}, d.pend[s.loc], d.draft[s.loc] || {}); delete d.pend[s.loc]; save(d, { __toast: 'Changes moved back to draft.' }); },
+      approve: () => { const d = db2(), p = d.pend[s.loc]; d.ov[s.loc] = d.ov[s.loc] || {}; Object.keys(p).forEach((k) => { if (p[k] === RL_RESET) delete d.ov[s.loc][k]; else d.ov[s.loc][k] = p[k]; });
+        delete d.pend[s.loc]; d.ver[s.loc] = bump(d.ver[s.loc]); d.hist[s.loc] = [[d.ver[s.loc], Object.keys(p).length + ' rule changes approved', '24 Nov 2026 · approved by Finance Controller']].concat(d.hist[s.loc] || []);
+        save(d, { __toast: loc.short + ' rules ' + d.ver[s.loc] + ' are live.' }); } };
+    // draft overlay for chg detection on pending: treat pending as changed too
+    // test drawer
     let tst = { on: false };
     if (s.tst) {
-      const T = s.tst, bl = BR_BLS.find((b) => b.v === T.bl) || BR_BLS[0], F = bl.f;
-      const test = (c) => { const [f, o, v] = c, x = F[f]; if (x === undefined) return null; const vs = String(v).split(',').map((y) => y.trim());
-        if (o === 'is' || o === 'equals') return x === v || (f === 'Supplier state' && v === 'Place of supply' && x === F['Place of supply']);
-        if (o === 'is not') return f === 'Supplier state' && v === 'Place of supply' ? x !== F['Place of supply'] : x !== v;
-        if (o === 'is one of') return vs.includes(x); return null; };
-      const active = D.filter((r) => r.st === 'Active').sort((a, b) => a.pri - b.pri);
+      const B = RL_BLS.find((b) => b.id === s.tst.bl) || RL_BLS[0], lid = B.loc, E = (k) => eff(k, lid).v, Ln = L(lid);
       const steps = []; let blocked = '';
-      active.forEach((r) => {
-        const res = r.conds.map(test), known = res.filter((x) => x !== null);
-        if (!known.length) return;
-        const hit = r.join === 'any' ? known.some(Boolean) : res.every((x) => x === null || x === true) && known.length === res.length;
-        if (!hit && !(r.join === 'all' && res.every((x) => x !== false) )) return;
-        if (!hit) return;
-        if (blocked && r.type !== 'CRD' && r.type !== 'VAL') return;
-        if (r.type === 'VAL' || r.type === 'CRD') blocked = blocked || r.acts[0][1];
-        steps.push({ n: String(steps.length + 1), id: r.id, name: r.name, type: tyOf(r.type)[1], r: r.type === 'VAL' || r.type === 'CRD' ? 'Blocked' : 'Applied', c: r.type === 'VAL' || r.type === 'CRD' ? 't-bad' : 't-ok',
-          o: r.acts.map((a) => a[0] + ': ' + a[1]).join(' · ') });
-      });
-      const nInv = steps.filter((x) => x.id.startsWith('SPL')).length ? 2 : 1;
-      tst = { on: true, ran: T.ran, blOpts: BR_BLS.map((b) => ({ v: b.v, t: b.t, on: b.v === T.bl ? 'true' : '' })), onBl: (e) => set({ tst: { bl: e.target.value, ran: false } }),
-        facts: Object.keys(F).map((k) => ({ k, v: F[k] })), run: () => set({ tst: Object.assign({}, T, { ran: true }) }), close: () => set({ tst: null }),
-        steps, resCls: blocked ? 'bad' : 'ok', head: blocked ? 'Invoice would be blocked' : nInv + (nInv === 1 ? ' invoice' : ' invoices') + ' would be created',
-        sum: blocked ? 'Reason: ' + blocked + '. ' + steps.length + (steps.length === 1 ? ' rule' : ' rules') + ' matched.' : steps.length + ' rules matched, applied in priority order.' };
+      const go = (k) => () => set({ tst: null, loc: lid, stage: k });
+      const tr = E(B.dir === 'exp' ? 'trg.exp' : 'trg.imp');
+      steps.push({ k: 'trg', ok: true, out: 'Batch runs ' + tr[0] + ' days ' + tr[1] + ' ' + tr[2] + ' (' + B.etd + ') at ' + tr[3], why: E('trg.man') ? 'Waits for every B/L on the manifest.' : '' });
+      const fails = [['chk.roe', B.ok.roe === false, 'Exchange rate not available for the invoice date'], ['chk.hold', B.ok.hold === false, 'Customer is on credit hold']];
+      const f = fails.find(([k, bad]) => bad && E(k)[0]);
+      if (f) { const c = E(f[0]); blocked = c[1] === 'Block the invoice' ? f[2] : ''; steps.push({ k: 'chk', ok: !blocked, warn: !blocked, out: (blocked ? 'Blocked: ' : 'Warning: ') + f[2], why: 'Notifies ' + c[2] + '.' }); }
+      else steps.push({ k: 'chk', ok: true, out: 'All 7 checks passed', why: '' });
+      const brow = (E('bil.t') || []).find((r) => (r[0] === 'Any' || r[0] === B.term) && (r[1] === 'Any charge' || r[1] === 'Freight') && (r[2] === 'Any customer' || r[2] === B.cust));
+      const curs = B.lines.map(([g, c, a]) => { const r = (E('cur.t') || []).find((x) => x[0] === g) || [g, c, 'Invoice']; return { g, inv: r[2], cur: r[1] === 'Local currency' ? c : r[1], a: a, c }; });
+      const invs = [...new Set(curs.map((x) => x.inv))];
+      const trows = E('tax.t') || []; const tx = (g) => trows.find((r) => (r[0] === 'Any' || r[0] === B.supply) && (r[1] === 'Any charge' || r[1] === g)) || ['', '', 'No tax', '0%'];
+      const tk = E('num.tk') || [], port = lid.split('-')[1] || 'NSA', num = tk.map((t) => t === 'Port' ? port : t === 'Direction' ? (B.dir === 'exp' ? 'O' : 'I') : (RL_O.token.find((x) => x[0] === t) || ['', ''])[1]).join('');
+      const pt = E('dlv.portal'), ml = E('dlv.mail');
+      const rest = [
+        { k: 'bil', out: 'Bill to ' + (brow ? brow[3] : 'Shipper'), why: brow ? 'Matched: ' + brow[0] + ' · ' + brow[1] + ' · ' + brow[2] : '' },
+        { k: 'cur', out: invs.length + (invs.length === 1 ? ' invoice: ' : ' invoices: ') + curs.map((x) => x.inv + ' (' + x.cur + ' ' + rlFmt(x.a, x.c) + ')').join(', '), why: '' },
+        { k: 'tax', out: curs.map((x) => { const r = tx(x.g); return x.g + ': ' + (r[2] === 'No tax' ? 'no tax' : r[2] + ' ' + r[3]); }).join(' · '), why: '' },
+        { k: 'num', out: 'Invoice number ' + num + (invs.length > 1 ? ' and next in sequence' : ''), why: 'Sequence restarts ' + E('num.reset').replace(/^./, c => c.toLowerCase()), },
+        { k: 'dlv', out: (pt[0] ? pt[1] + ', then ' : '') + 'e-mail ' + ml[2] + ' to ' + ml[1].toLowerCase() + ', then GFS', why: '' }
+      ];
+      rest.forEach((x) => steps.push(Object.assign({ ok: !blocked, skip: !!blocked }, x, blocked ? { out: 'Not reached', why: '' } : {})));
+      tst = { on: true, dd: dd('tst.bl', B.id, RL_BLS.map((b) => [b.id, b.sub]), (v) => set({ tst: { bl: v } }), { w: '100%', aria: 'B/L' }), close: () => set({ tst: null, open: '' }),
+        facts: [['Rules used', Ln.name]].concat(B.facts).map(([k, v]) => ({ k, v })),
+        cls: blocked ? 'bad' : 'ok', head: blocked ? 'Invoice would be blocked' : invs.length + (invs.length === 1 ? ' invoice' : ' invoices') + ' would be created', sub: blocked ? blocked + '. The remaining stages are not reached.' : 'All 8 stages applied in order.',
+        steps: steps.map((x, i) => ({ stage: (i + 1) + '. ' + RL_STAGES.find((g) => g[0] === x.k)[1], out: x.out, why: x.why || '', hasWhy: !!x.why, go: go(x.k),
+          cls: x.skip ? 'skip' : x.warn ? 'warn' : x.ok ? 'ok' : 'bad', icon: x.skip ? '–' : x.ok ? '✓' : '!' })) };
     }
-    const allC = ['ALL', 'Global'].concat(CTY);
-    return {
-      types, q: s.q, onQ: (e) => set({ q: e.target.value }),
-      ctyOpts: allC.map((c) => ({ v: c, t: c === 'ALL' ? 'All countries' : c, on: s.cty === c ? 'true' : '' })), onCty: (e) => set({ cty: e.target.value }),
-      stOpts: ['ALL', 'Active', 'Draft', 'Pending approval', 'Inactive'].map((c) => ({ v: c, t: c === 'ALL' ? 'All statuses' : c, on: s.st === c ? 'true' : '' })), onSt: (e) => set({ st: e.target.value }),
-      shown: list.length + (list.length === 1 ? ' rule' : ' rules'), rows, noRows: !rows.length, hasSel: !!d, d: d || {}, ed, tst,
-      newRule: () => openEd('new', null), testAll: () => set({ tst: { bl: BR_BLS[0].v, ran: false } })
-    };
+    const hist = { on: !!s.hist, close: () => set({ hist: false }), sub: loc.name + ' · live ' + DB.ver[s.loc],
+      items: (DB.hist[s.loc] || []).concat(RL_HIST[s.loc] || [[DB.ver[s.loc], 'Local overrides approved', '6 Nov 2026 · approved by Finance Controller'], ['v1', 'Created from ' + (parent ? parent.short : 'Global'), '12 Dec 2025 · Daniel Tan']]).map(([v, t, w]) => ({ v, t, w })) };
+    return { loc: locV, stages, st, tst, hist, openTest: () => set({ tst: { bl: s.loc.startsWith('SG') ? 'BL-SG-25283' : s.loc.startsWith('MY') ? 'BL-MY-25475' : 'BL-IN-25056' }, open: '' }), openHist: () => set({ hist: true, open: '' }) };
   }
 }
 const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
