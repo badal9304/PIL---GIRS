@@ -716,11 +716,35 @@ const ER_DAILY_FROM = '2026-11-17';
 const erBuild = () => ER_SHEET.map(([ctry, off, port, type, bound, vvd, eta, scope, date, cc, lc, rate, by, upd]) => type === 'Daily'
   ? { tab: 'daily', ctry, port, off, bound, scope: 'OTH', upd, from: ER_DAILY_FROM, to: ER_DAILY_FROM, cc, lc, rate, vvd: '', by }
   : { tab: 'vvd', ctry, port, off, bound, scope: 'FRT', upd, from: upd, to: eta, cc, lc, rate, vvd, by });
-const ER_ALL = erBuild();
+// Extra sample rows so the screens show a realistic mix of countries, ports, bounds, VVDs and dates (prototype data; AU rows above are from the sheet)
+const ER_PER_USD = { USD: 1, AUD: 1.5442, CNY: 7.13, EUR: 0.931, FJD: 2.258, GBP: 0.789, HKD: 7.785, IDR: 16890, INR: 84.42, JPY: 154.3, KRW: 1398, MYR: 4.468, NZD: 1.702, PHP: 58.76, SGD: 1.339, THB: 34.82, TWD: 32.48, VND: 25390, PGK: 3.952, SAR: 3.752, AED: 3.673 };
+const ER_LOCS = [
+  { ctry: 'SG', port: 'SGSIN', off: 'SG00', lc: 'SGD', cc: ['USD', 'EUR', 'GBP', 'CNY', 'MYR', 'IDR', 'INR', 'JPY', 'HKD', 'SGD'] },
+  { ctry: 'MY', port: 'MYPKG', off: 'MY00', lc: 'MYR', cc: ['USD', 'EUR', 'SGD', 'CNY', 'THB', 'IDR', 'MYR'] },
+  { ctry: 'IN', port: 'INNSA', off: 'IN00', lc: 'INR', cc: ['USD', 'EUR', 'GBP', 'SGD', 'AED', 'CNY', 'INR'] },
+  { ctry: 'CN', port: 'CNSHA', off: 'CN00', lc: 'CNY', cc: ['USD', 'EUR', 'HKD', 'JPY', 'KRW', 'SGD', 'CNY'] },
+  { ctry: 'TH', port: 'THLCH', off: 'TH00', lc: 'THB', cc: ['USD', 'EUR', 'SGD', 'MYR', 'CNY', 'THB'] },
+  { ctry: 'AU', port: 'AUMEL', off: 'AU01', lc: 'AUD', cc: ['USD', 'EUR', 'NZD', 'SGD', 'CNY', 'AUD'] }
+];
+const ER_VOY = [
+  ['SG', 'IB', 'KMNG042101', '2026-11-03', '2026-11-19'], ['SG', 'OB', 'KPGL033207', '2026-11-10', '2026-11-26'],
+  ['MY', 'OB', 'KRAD051512', '2026-11-05', '2026-11-21'], ['IN', 'IB', 'KJTI027409', '2026-10-28', '2026-11-14'],
+  ['IN', 'OB', 'KLJA062035', '2026-11-12', '2026-11-30'], ['CN', 'OB', 'KHCM019823', '2026-11-08', '2026-11-22'],
+  ['TH', 'IB', 'KMNG042302', '2026-11-11', '2026-11-25'], ['AU', 'OB', 'KLJA061936', '2026-11-14', '2026-12-01']
+];
+const erRate = (cc, lc, k) => { if (cc === lc) return '1'; const v = ER_PER_USD[lc] / ER_PER_USD[cc] * (1 + k); return v >= 100 ? v.toFixed(2) : v >= 1 ? v.toFixed(4) : v.toPrecision(4).replace(/0+$/, ''); };
+const erMore = () => { const out = [];
+  ER_VOY.forEach(([c, bound, vvd, from, to], i) => { const L = ER_LOCS.find((x) => x.ctry === c && (c !== 'AU' || x.port === 'AUMEL'));
+    L.cc.forEach((cc, j) => out.push({ tab: 'vvd', ctry: L.ctry, port: L.port, off: L.off, bound, scope: 'FRT', upd: from, from, to, cc, lc: L.lc, rate: erRate(cc, L.lc, ((i * 7 + j * 3) % 9 - 4) / 1000), vvd, by: 'SYSTEM' })); });
+  ['2026-11-15', '2026-11-16', '2026-11-17'].forEach((d, di) => ER_LOCS.forEach((L, li) => { if (di < 2 && li % 2) return;
+    ['IB', 'OB'].forEach((bound, bi) => { if (bi && (li + di) % 3) return;
+      L.cc.forEach((cc, j) => out.push({ tab: 'daily', ctry: L.ctry, port: L.port, off: L.off, bound, scope: 'OTH', upd: d, from: d, to: d, cc, lc: L.lc, rate: erRate(cc, L.lc, ((di * 5 + li * 3 + j) % 7 - 3) / 1000), vvd: '', by: 'SYSTEM' })); }); }));
+  return out; };
+const ER_ALL = erBuild().concat(erMore());
 const ER_TABS = [['vvd', 'VVD Exchange Rate'], ['daily', 'Daily Exchange Rate']];
 const ER_UNIQ = (k, tab) => ER_ALL.filter((r) => !tab || r.tab === tab).map((r) => r[k]).filter((v, i, a) => v && v !== ER_NA && a.indexOf(v) === i).sort();
-// Search criteria; Ex. Rate Type is now the tab. Defaults: Local Curr AUD, Office AU00.
-const ER_DEF = { cc: [], lc: ['AUD'], off: ['AU00'], vvd: '', port: [], scope: [], bound: [], from: '', to: '' };
+// Search criteria; Ex. Rate Type is now the tab. Nothing selected = All.
+const ER_DEF = { cc: [], lc: [], off: [], vvd: '', port: [], scope: [], bound: [], from: '', to: '' };
 const erCopy = (c) => JSON.parse(JSON.stringify(c));
 // Table columns per tab, in the order of the client's sheet; Ex.Rate is always shown
 const ER_COLS_T = {
