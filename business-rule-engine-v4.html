@@ -744,6 +744,95 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .b4-3{display:grid;grid-template-columns:1.3fr 1fr 1.2fr;gap:8px}.b4-3 .dd{display:block}.b4-3 .input{width:100%}
 .ad-pv{padding:12px 14px;border-radius:8px;background:var(--sub);border:1px solid var(--line2)}.ad-pv span{font-size:11.5px;font-weight:600;color:var(--muted)}.ad-pv p{margin:3px 0 0;font-size:13px;line-height:19px;color:var(--ink)}
 .tb-j li.bad .tb-o{color:var(--bad);font-weight:600}
+
+/* BRE v4 revamp: list + side panel */
+.b5 .rs-grid.b5-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}
+.b5 .rs-grid.b5-grid[data-panel=true]{grid-template-columns:280px minmax(0,1fr) minmax(0,600px)}
+.b5 .st-nav{position:sticky;top:0;max-height:calc(100vh - 150px);overflow:auto}
+.b5-list{min-width:0;display:flex;flex-direction:column}
+.b5-sh{display:flex;align-items:flex-start;gap:12px;padding:16px 16px 10px}
+.b5-sht{flex:1;min-width:0}.b5-sht h2{margin:2px 0 4px;font-size:17px;font-weight:600}.b5-sht p{margin:0;font-size:12.5px;color:var(--muted2);line-height:18px}
+.b5-sht .b3-hit{margin-right:4px;vertical-align:1px}
+.b5 .st-k{font-size:12px;color:var(--muted)}
+.st-nx{display:flex;gap:6px;flex:none}
+.b5-tb{display:flex;align-items:center;gap:10px;padding:4px 16px 12px;border-bottom:1px solid var(--line)}
+.b5-ch{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.b5-other{margin:12px 16px 0}
+.b5-rows{display:flex;flex-direction:column;padding:6px 8px 10px}
+.rr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:0 10px 0 12px;border-radius:8px;position:relative;transition:background .15s}
+.rr+.rr::before{content:'';position:absolute;top:0;left:60px;right:12px;height:1px;background:var(--line2)}
+.rr:hover{background:var(--hover)}
+.rr.rr-sel{background:var(--tint)}.rr.rr-sel::before,.rr.rr-sel+.rr::before{display:none}
+.rr.rr-sel .rr-n{color:var(--accent2)}
+.rr.rr-hl{box-shadow:0 0 0 2px var(--accent)}
+.rr.rr-chg{box-shadow:inset 3px 0 0 var(--warn)}
+.rr.rr-off .rr-n,.rr.rr-off .rr-s{color:var(--muted)}
+.rr-b{all:unset;box-sizing:border-box;cursor:pointer;min-width:0;display:flex;flex-direction:column;gap:3px;padding:11px 0}
+.rr-b:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.rr-t{display:flex;align-items:center;gap:8px;min-width:0}
+.rr-n{font-size:13.5px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rr-id{font-size:11.5px;color:var(--muted);flex:none}
+.rr-t .tg{flex:none;height:20px;font-size:11px}
+.rr-s{font-size:12.5px;color:var(--muted2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rr-c{color:var(--muted);transition:transform .15s}.rr.rr-sel .rr-c{color:var(--accent);transform:rotate(180deg)}
+/* panel */
+.pn{position:sticky;top:0;max-height:calc(100vh - 150px);display:flex;flex-direction:column;min-width:0;box-shadow:0 8px 24px rgba(22,26,33,.08)}
+.pn-h{display:flex;align-items:flex-start;gap:12px;padding:14px 12px 12px 18px;border-bottom:1px solid var(--line)}
+.pn-ht{flex:1;min-width:0}
+.pn-k{display:flex;align-items:center;gap:8px;font-size:12px}.pn-k .b3-chip{height:20px;font-size:11px;padding:0 7px}
+.pn-h h3{margin:6px 0 2px;font-size:16px;font-weight:600;line-height:22px}
+.pn-h p{margin:0;font-size:12px}
+.pn-h .sw{margin-top:4px}
+.pn-b{flex:1;overflow:auto;padding:14px 18px 18px;display:flex;flex-direction:column;gap:16px}
+.qc{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:18px}
+.qc b{font-size:13px}
+.qc-ok{background:var(--okbg);color:var(--ok)}.qc-no{background:var(--neutral);color:var(--muted2)}.qc-no b{color:var(--ink)}.qc-na{background:var(--sub);color:var(--muted)}
+.pn-s{display:flex;flex-direction:column;gap:6px}
+.pn-s h4{margin:0 0 2px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent2)}
+.pn-s h4.th{color:var(--ok)}.pn-s h4.el,.pn-s h4.gr{color:var(--muted)}
+.pn-s + .pn-s{padding-top:14px;border-top:1px solid var(--line2)}
+.pn-s > .input{width:100%}
+.ln{display:grid;grid-template-columns:34px minmax(0,auto) auto minmax(0,1fr) 18px 24px;align-items:center;gap:6px;min-height:36px;padding:2px 4px 2px 0;border-radius:6px}
+.ln:hover{background:var(--sub)}
+.ln-t{grid-template-columns:auto minmax(0,auto) auto minmax(0,1fr) 24px;padding-left:2px}
+.ln-j{display:flex;justify-content:flex-start}
+.ln-a{font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ln-v{min-width:0;display:flex;align-items:center;gap:6px}.ln-v .dd{display:block;width:100%}.ln-v .input{width:100%;height:30px}
+.ln-r{font-size:12px;color:var(--muted)}
+.ln .dd-b{height:30px;font-size:13px}
+.ln .dd-op .dd-b,.ln .dd-act .dd-b{border-color:transparent;background:transparent;padding:0 4px 0 6px;color:var(--muted2)}
+.ln .dd-op .dd-b:hover,.ln .dd-act .dd-b:hover{border-color:var(--bd);background:var(--surface)}
+.ln .dd-act .dd-b{font-size:10.5px;font-weight:700;letter-spacing:.02em;color:var(--ok)}
+.ln .dd-val .dd-b{font-weight:500;color:var(--accent2)}
+.ln .dd-dis .dd-b{background:transparent}
+.ln-m{font-size:13px;font-weight:700;text-align:center}.ln-m.ok{color:var(--ok)}.ln-m.bad{color:var(--bad)}.ln-m.na{color:var(--muted)}
+.ln .pl-x{visibility:hidden}.ln:hover .pl-x,.ln:focus-within .pl-x{visibility:visible}
+.pn-s .pl-add{align-self:flex-start;margin-top:2px}
+.pn-g{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pn-g .input{width:100%}.pn-g2{grid-column:1/-1}.pn-g .dd{display:block}
+.pn-none{margin:0}
+.pn-ab{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}.pn-ab dt{font-size:11.5px;color:var(--muted)}.pn-ab dd{margin:1px 0 0;font-size:12.5px;color:var(--ink)}
+.pn-f{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:var(--sub);border-radius:0 0 8px 8px}
+.rc-ex{flex-wrap:wrap}
+/* role toggle */
+.b5-role{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.b5-role .b3-seg button{height:28px;padding:0 10px}
+/* review dialog */
+.b3-dlg.b5-wide{width:min(820px,calc(100vw - 48px))}
+.b5-wide .db{max-height:calc(100vh - 220px);overflow:auto}
+.rv-list{display:flex;flex-direction:column;gap:10px}
+.rv-it{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.rv-h{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px}.rv-h .mu{font-size:12px}.rv-h .lnk{margin-left:auto;font-size:12.5px}
+.rv-t{width:100%;border-collapse:collapse;font-size:12.5px}.rv-t td{padding:5px 8px;vertical-align:top}
+.rv-f{width:120px;font-weight:600;color:var(--muted2);white-space:nowrap}.rv-ar{width:16px;color:var(--muted)}
+.rv-t tr.df-add td{background:var(--okbg)}.rv-t tr.df-chg td{background:var(--warnbg)}.rv-t tr.df-del td{background:var(--badbg)}
+.rv-t tr td:first-child{border-radius:4px 0 0 4px}.rv-t tr td:last-child{border-radius:0 4px 4px 0}
+.rv-imp{border:1px solid var(--line);border-radius:8px;padding:10px 12px}.rv-imp.imp{border-color:var(--warnbd);background:var(--warnbg)}
+.rv-ih{font-size:12.5px;font-weight:600;margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap}.rv-ih .mu{font-weight:400}
+.rv-ba{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rv-b{padding:8px 10px;border-radius:6px;display:flex;flex-direction:column;gap:2px;font-size:12.5px;background:var(--surface);border:1px solid var(--line2)}
+.rv-b span{font-size:11.5px;color:var(--muted)}.rv-b.bad b{color:var(--bad)}.rv-b.ok b{color:var(--ok)}
+.b5-nv{display:flex;align-items:center;height:34px;margin:0}
+.tb-in{width:100%}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -1045,24 +1134,30 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             <div style="font-size: 12px; color: var(--muted); line-height: 16px">Set up how GIRS creates invoices for each location, stage by stage · 76 rules from the rule catalogue</div>
           </div>
           <div class="gright" style="display: flex; align-items: center; gap: 10px; margin-inline-start: auto"><nav aria-label="Layout options" style="display: flex; align-items: center; gap: 8px; margin-inline-end: 6px"><span style="font-size: 12px; color: var(--muted)">Version</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="business-rule-engine-v1.html">1</a><a class="lay" href="business-rule-engine.html">2</a><a class="lay" href="business-rule-engine-v3.html">3</a><a class="lay" href="business-rule-engine-v4.html" aria-current="page">4</a></div></nav>
+            <span class="b5-role">Viewing as<span class="b3-seg" role="radiogroup" aria-label="Viewing as"><button type="button" role="radio" aria-checked="{{role.a}}" onClick="{{role.setA}}">Author</button><button type="button" role="radio" aria-checked="{{role.b}}" onClick="{{role.setB}}">Approver</button></span></span>
             <button class="btn" onClick="{{openHist}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg>Change history</button>
             <button class="btn btn-primary" onClick="{{openTest}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2l-6-10V3"></path></svg>Test with a B/L</button>
           </div>
         </div>
       </div>
-            <main class="gmain b3 b4" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; min-height: 0">
+            <main class="gmain b3 b4 b5" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; min-height: 0">
         <section class="card lb" aria-label="Location">
           <div class="lb-l"><span class="b3-fl">Rules for</span><div class="dd {{loc.dd.cls}}" style="{{loc.dd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{loc.dd.ex}}" aria-label="{{loc.dd.aria}}" onClick="{{loc.dd.toggle}}"><span class="dd-v">{{loc.dd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{loc.dd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{loc.dd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{loc.dd.aria}}"><sc-for list="{{loc.dd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
-          <nav class="lb-crumb" aria-label="Inheritance"><span class="mu">{{loc.inh}}</span><sc-for list="{{loc.chain}}" as="c" hint-placeholder-count="1"><span class="lb-c">{{c.t}}</span><span class="lb-sep" aria-hidden="true">›</span></sc-for><sc-if value="{{loc.notGl}}" hint-placeholder-val="{{ true }}"><b>{{loc.name}}</b></sc-if><span class="lb-ap">{{loc.applies}}</span></nav>
+          <nav class="lb-crumb" aria-label="Inheritance"><span class="mu">{{loc.inh}}</span><sc-if value="{{loc.notGl}}" hint-placeholder-val="{{ true }}"><span class="lb-c">Global</span><span class="lb-sep" aria-hidden="true">›</span><b>{{loc.name}}</b></sc-if><span class="lb-ap">{{loc.applies}}</span></nav>
           <div class="lb-r">
             <span class="b3-chip c-act">Live · {{loc.ver}}</span>
-            <sc-if value="{{loc.hasDraft}}" hint-placeholder-val="{{ false }}"><span class="lb-dn"><i></i>{{loc.draftN}}</span><button type="button" class="btn btn-sm" onClick="{{loc.discard}}">Discard</button><button type="button" class="btn btn-sm btn-primary" onClick="{{loc.submit}}">Submit for approval</button></sc-if>
+            <sc-if value="{{loc.hasDraft}}" hint-placeholder-val="{{ false }}"><span class="lb-dn"><i></i>{{loc.draftN}}</span><button type="button" class="btn btn-sm" onClick="{{loc.discard}}">Discard</button><button type="button" class="btn btn-sm btn-primary" onClick="{{loc.review}}">Review &amp; submit</button></sc-if>
           </div>
         </section>
-        <sc-if value="{{loc.hasPend}}" hint-placeholder-val="{{ false }}">
-          <div class="pend" role="status"><div><b>{{loc.pendN}} waiting for approval</b><span>Submitted by Daniel Tan to the Rule Approver (PIL Process Owner). Live rules stay unchanged until approved; rules here are read-only.</span></div><button type="button" class="btn btn-sm" onClick="{{loc.withdraw}}">Withdraw</button><button type="button" class="btn btn-sm btn-primary" onClick="{{loc.approve}}">Approve (approver view)</button></div>
+        <sc-if value="{{loc.hasRej}}" hint-placeholder-val="{{ false }}"><div class="b3-note b3-n-bad" role="status">{{loc.rejT}}</div></sc-if>
+        <sc-if value="{{loc.hasRoNote}}" hint-placeholder-val="{{ false }}"><div class="b3-note b3-n-live" role="status">{{loc.roNote}}</div></sc-if>
+        <sc-if value="{{loc.hasPendA}}" hint-placeholder-val="{{ false }}">
+          <div class="pend" role="status"><div><b>{{loc.pendT}}</b><span>{{loc.pendSub}}</span></div><button type="button" class="btn btn-sm" onClick="{{loc.openPend}}">View changes</button><button type="button" class="btn btn-sm" onClick="{{loc.withdraw}}">Withdraw</button></div>
         </sc-if>
-        <div class="rs-grid">
+        <sc-if value="{{loc.hasPendB}}" hint-placeholder-val="{{ false }}">
+          <div class="pend" role="status"><div><b>Needs your approval</b><span>{{loc.pendSubB}}</span></div><button type="button" class="btn btn-sm btn-primary" onClick="{{loc.openPend}}">Review &amp; approve</button></div>
+        </sc-if>
+        <div class="rs-grid b5-grid" data-panel="{{panel}}">
           <nav class="card st-nav" aria-label="Invoicing stages">
             <div class="rq">
               <svg class="rq-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
@@ -1084,56 +1179,85 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
               </button>
             </sc-for>
           </nav>
-          <section class="card st-c" aria-labelledby="st-title">
-            <header class="st-ch">
-              <div><div class="st-k">Stage {{st.n}} of 14 · <span class="b3-hit">{{st.hit}}</span></div><h2 id="st-title">{{st.title}}</h2><p>{{st.hitT}} Output: {{st.out}}.</p></div>
-              <div class="st-nx"><button type="button" class="btn btn-sm" disabled="{{st.noPrev}}" onClick="{{st.prev}}">Previous</button><button type="button" class="btn btn-sm" disabled="{{st.noNext}}" onClick="{{st.next}}">Next stage</button></div>
+
+          <section class="card b5-list" aria-labelledby="st-title">
+            <header class="b5-sh">
+              <div class="b5-sht"><div class="st-k">Stage {{st.n}} of 14</div><h2 id="st-title">{{st.title}}</h2><p><span class="b3-hit">{{st.hit}}</span> {{st.hitT}} Output: {{st.out}}.</p></div>
+              <div class="st-nx"><button type="button" class="btn btn-sm" disabled="{{st.noPrev}}" onClick="{{st.prev}}" aria-label="Previous stage">‹</button><button type="button" class="btn btn-sm" disabled="{{st.noNext}}" onClick="{{st.next}}">Next stage</button></div>
             </header>
-            <div class="st-b">
-              <sc-if value="{{other.has}}" hint-placeholder-val="{{ false }}"><div class="b4-other">{{other.t}}</div></sc-if>
-              <sc-for list="{{st.cards}}" as="r" hint-placeholder-count="3">
-                <article class="rc {{r.cls}}" data-k="{{r.id}}" aria-label="{{r.id}} {{r.name}}">
-                  <header class="rc-h">
-                    <label class="sw"><input type="checkbox" role="switch" checked="{{r.on}}" onChange="{{r.flip}}" disabled="{{ro}}"><span class="sw-k" aria-hidden="true"></span><span class="sr">Use {{r.name}}</span></label>
-                    <div class="rc-t">
-                      <div class="rc-tl"><span class="rc-n">{{r.name}}</span><span class="mono rc-id">{{r.id}}</span><span class="b3-chip {{r.stCls}}">{{r.st}}</span></div>
-                      <div class="rc-meta"><span>Priority {{r.pri}}</span><span>{{r.trig}}</span><span>{{r.country}}</span><span class="rv {{r.reviewCls}}">{{r.review}}</span></div>
-                    </div>
-                    <span class="rm"><sc-if value="{{r.isNew}}" hint-placeholder-val="{{ false }}"><span class="tg tg-cus">New</span></sc-if><sc-if value="{{r.cfg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-inh" title="{{r.cfgT}}">Country config</span></sc-if><sc-if value="{{r.chg}}" hint-placeholder-val="{{ false }}"><span class="tg tg-chg">Changed</span></sc-if><span class="tg {{r.srcCls}}" title="{{r.srcTip}}">{{r.src}}</span><sc-if value="{{r.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="rs" onClick="{{r.reset}}">Reset</button></sc-if><button type="button" class="rc-more" aria-expanded="{{r.expA}}" onClick="{{r.togExp}}">{{r.expL}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button></span>
-                  </header>
-                  <div class="rc-b">
-                    <div class="rc-row"><span class="rc-k">If</span><div class="rc-ps">
-                      <sc-for list="{{r.ifs}}" as="p" hint-placeholder-count="3"><span class="pl-w"><sc-if value="{{p.hasJoin}}" hint-placeholder-val="{{ false }}"><button type="button" class="pl-j" onClick="{{p.togJ}}" disabled="{{ro}}" title="Switch AND / OR">{{p.j}}</button></sc-if><span class="pl"><span class="pl-a">{{p.a}}</span><div class="dd {{p.op.cls}}" style="{{p.op.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.op.ex}}" aria-label="{{p.op.aria}}" onClick="{{p.op.toggle}}"><span class="dd-v">{{p.op.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.op.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.op.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.op.aria}}"><sc-for list="{{p.op.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{p.vd.cls}}" style="{{p.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.vd.ex}}" aria-label="{{p.vd.aria}}" onClick="{{p.vd.toggle}}"><span class="dd-v">{{p.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.vd.aria}}"><sc-for list="{{p.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input pl-in" style="{{p.w}}" value="{{p.v}}" onInput="{{p.setV}}" disabled="{{ro}}" aria-label="Value for {{p.a}}"></sc-if><button type="button" class="pl-x" onClick="{{p.del}}" disabled="{{ro}}" aria-label="{{p.delAria}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></span></sc-for>
-                      <button type="button" class="pl-add" onClick="{{r.addC}}" disabled="{{ro}}">+ Condition</button>
-                    </div></div>
-                    <div class="rc-row"><span class="rc-k rc-kt">Then</span><div class="rc-ps">
-                      <sc-for list="{{r.thens}}" as="p" hint-placeholder-count="2"><span class="pl pl-then"><div class="dd {{p.op.cls}}" style="{{p.op.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.op.ex}}" aria-label="{{p.op.aria}}" onClick="{{p.op.toggle}}"><span class="dd-v">{{p.op.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.op.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.op.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.op.aria}}"><sc-for list="{{p.op.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="pl-a">{{p.a}}</span><span class="pl-eq">=</span><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{p.vd.cls}}" style="{{p.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.vd.ex}}" aria-label="{{p.vd.aria}}" onClick="{{p.vd.toggle}}"><span class="dd-v">{{p.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.vd.aria}}"><sc-for list="{{p.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input pl-in" style="{{p.w}}" value="{{p.v}}" onInput="{{p.setV}}" disabled="{{ro}}" aria-label="Value for {{p.a}}"></sc-if><button type="button" class="pl-x" onClick="{{p.del}}" disabled="{{ro}}" aria-label="{{p.delAria}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for>
-                      <button type="button" class="pl-add" onClick="{{r.addA}}" disabled="{{ro}}">+ Action</button>
-                    </div></div>
-                    <sc-if value="{{r.hasElse}}" hint-placeholder-val="{{ true }}"><div class="rc-row"><span class="rc-k rc-ke">Else</span><p class="rc-else">{{r.els}}</p></div></sc-if>
-                  </div>
-                  <sc-if value="{{r.exp}}" hint-placeholder-val="{{ false }}">
-                    <div class="rc-d">
-                      <div class="b3-f"><label class="lbl">Trigger event</label><div class="dd {{r.d.trig.cls}}" style="{{r.d.trig.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{r.d.trig.ex}}" aria-label="{{r.d.trig.aria}}" onClick="{{r.d.trig.toggle}}"><span class="dd-v">{{r.d.trig.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{r.d.trig.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{r.d.trig.close}}"></button><div class="dd-p" role="listbox" aria-label="{{r.d.trig.aria}}"><sc-for list="{{r.d.trig.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
-                      <div class="b3-f"><label class="lbl">Priority</label><input class="input mono" inputmode="numeric" value="{{r.d.pri}}" onInput="{{r.d.setPri}}" disabled="{{ro}}" aria-label="Priority"><span class="b3-h">1–999; lower runs first.</span></div>
-                      <div class="b3-f"><label class="lbl">Effective from</label><input class="input" type="date" value="{{r.d.from}}" onChange="{{r.d.setFrom}}" disabled="{{ro}}" aria-label="Effective from"></div>
-                      <div class="b3-f"><label class="lbl">Effective to</label><input class="input" type="date" value="{{r.d.to}}" onChange="{{r.d.setTo}}" disabled="{{ro}}" aria-label="Effective to"><span class="b3-h">Blank = open-ended.</span></div>
-                      <div class="b3-f rc-d2"><label class="lbl">Charge / customer scope</label><input class="input" value="{{r.d.scope}}" onInput="{{r.d.setScope}}" disabled="{{ro}}" aria-label="Charge / customer scope"></div>
-                      <div class="b3-f rc-d2"><label class="lbl">Else / exception</label><input class="input" value="{{r.d.els}}" onInput="{{r.d.setEls}}" disabled="{{ro}}" placeholder="—" aria-label="Else / exception"></div>
-                      <div class="b3-f rc-d4"><label class="lbl">Exception codes</label>
-                        <sc-for list="{{r.d.exc}}" as="x" hint-placeholder-count="1"><div class="rc-ex"><div class="dd {{x.code.cls}}" style="{{x.code.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{x.code.ex}}" aria-label="{{x.code.aria}}" onClick="{{x.code.toggle}}"><span class="dd-v">{{x.code.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{x.code.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{x.code.close}}"></button><div class="dd-p" role="listbox" aria-label="{{x.code.aria}}"><sc-for list="{{x.code.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="rc-exm">{{x.msg}}</span><div class="dd {{x.sev.cls}}" style="{{x.sev.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{x.sev.ex}}" aria-label="{{x.sev.aria}}" onClick="{{x.sev.toggle}}"><span class="dd-v">{{x.sev.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{x.sev.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{x.sev.close}}"></button><div class="dd-p" role="listbox" aria-label="{{x.sev.aria}}"><sc-for list="{{x.sev.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="mu">notify</span><div class="dd {{x.notify.cls}}" style="{{x.notify.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{x.notify.ex}}" aria-label="{{x.notify.aria}}" onClick="{{x.notify.toggle}}"><span class="dd-v">{{x.notify.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{x.notify.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{x.notify.close}}"></button><div class="dd-p" role="listbox" aria-label="{{x.notify.aria}}"><sc-for list="{{x.notify.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><button type="button" class="cm-ib" onClick="{{x.del}}" disabled="{{ro}}" aria-label="Remove exception"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></div></sc-for>
-                        <sc-if value="{{r.d.noExc}}" hint-placeholder-val="{{ false }}"><span class="b3-h">No exception code on this rule.</span></sc-if>
-                        <button type="button" class="pl-add rc-exa" onClick="{{r.d.addExc}}" disabled="{{ro}}">+ Exception code</button>
-                      </div>
-                      <div class="rc-src mu rc-d4"><span>Country / Agency: <b>{{r.d.country}}</b></span><span>BR No.: <b>{{r.d.br}}</b></span><span>MOM ref.: <b>{{r.d.mom}}</b></span><span>Lifecycle: <b>{{r.d.st}}</b></span></div>
-                    </div>
-                  </sc-if>
-                </article>
+            <div class="b5-tb">
+              <div class="b5-ch" role="group" aria-label="Filter rules"><sc-for list="{{st.flts}}" as="f" hint-placeholder-count="3"><button type="button" class="b3-qc" aria-pressed="{{f.on}}" onClick="{{f.go}}">{{f.t}}<b>{{f.n}}</b></button></sc-for></div>
+              <sc-if value="{{st.canAdd}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-sm" onClick="{{st.addRule}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add rule</button></sc-if>
+            </div>
+            <sc-if value="{{st.hasOther}}" hint-placeholder-val="{{ false }}"><div class="b4-other b5-other">{{st.other}}</div></sc-if>
+            <div class="b5-rows" role="list">
+              <sc-for list="{{st.rows}}" as="r" hint-placeholder-count="5">
+                <div class="rr {{r.cls}}" role="listitem" data-k="{{r.id}}">
+                  <label class="sw"><input type="checkbox" role="switch" checked="{{r.on}}" onChange="{{r.flip}}" disabled="{{ro}}"><span class="sw-k" aria-hidden="true"></span><span class="sr">Use {{r.name}}</span></label>
+                  <button type="button" class="rr-b" aria-expanded="{{r.cur}}" onClick="{{r.open}}">
+                    <span class="rr-t"><span class="rr-n">{{r.name}}</span><span class="mono rr-id">{{r.id}}</span><sc-if value="{{r.hasTag}}" hint-placeholder-val="{{ false }}"><span class="tg {{r.tagCls}}">{{r.tag}}</span></sc-if></span>
+                    <span class="rr-s">{{r.sum}}</span>
+                  </button>
+                  <svg class="rr-c" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+                </div>
               </sc-for>
               <sc-if value="{{st.none}}" hint-placeholder-val="{{ false }}"><div class="b3-empty"><b>{{st.noneT}}</b></div></sc-if>
-              <sc-if value="{{st.notRo}}" hint-placeholder-val="{{ true }}"><button type="button" class="sc-add" onClick="{{st.addRule}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>{{st.addL}}</button></sc-if>
             </div>
           </section>
+
+          <sc-if value="{{pn.on}}" hint-placeholder-val="{{ false }}">
+            <aside class="card pn" aria-labelledby="pn-t">
+              <div class="pn-h">
+                <div class="pn-ht">
+                  <div class="pn-k"><span class="mono rc-id">{{pn.id}}</span><span class="b3-chip {{pn.stCls}}">{{pn.st}}</span><span class="mu">{{pn.srcT}}</span></div>
+                  <h3 id="pn-t">{{pn.name}}</h3>
+                  <p class="mu">{{pn.meta}}</p>
+                </div>
+                <label class="sw" title="Rule on / off"><input type="checkbox" role="switch" checked="{{pn.on}}" onChange="{{pn.flip}}" disabled="{{ro}}"><span class="sw-k" aria-hidden="true"></span><span class="sr">Use this rule</span></label>
+                <button type="button" class="cm-ib x" onClick="{{pn.close}}" aria-label="Close panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+              </div>
+              <div class="pn-b">
+                <div class="qc qc-{{pn.qc.cls}}" role="status"><b>{{pn.qc.head}}</b><span>{{pn.qc.sub}}</span></div>
+                <sc-if value="{{pn.hasWarn}}" hint-placeholder-val="{{ false }}"><div class="b3-note b3-n-info">{{pn.warn}}</div></sc-if>
+                <section class="pn-s"><h4>If</h4>
+                  <sc-for list="{{pn.ifs}}" as="p" hint-placeholder-count="3">
+                    <div class="ln"><span class="ln-j"><sc-if value="{{p.hasJoin}}" hint-placeholder-val="{{ false }}"><button type="button" class="pl-j" onClick="{{p.togJ}}" disabled="{{ro}}" title="Switch AND / OR">{{p.j}}</button></sc-if></span>
+                      <span class="ln-a">{{p.a}}</span><div class="dd {{p.op.cls}}" style="{{p.op.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.op.ex}}" aria-label="{{p.op.aria}}" onClick="{{p.op.toggle}}"><span class="dd-v">{{p.op.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.op.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.op.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.op.aria}}"><sc-for list="{{p.op.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div>
+                      <span class="ln-v"><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{p.vd.cls}}" style="{{p.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.vd.ex}}" aria-label="{{p.vd.aria}}" onClick="{{p.vd.toggle}}"><span class="dd-v">{{p.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.vd.aria}}"><sc-for list="{{p.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input" value="{{p.v}}" onInput="{{p.setV}}" disabled="{{ro}}" aria-label="Value for {{p.a}}"></sc-if><sc-if value="{{p.hasRest}}" hint-placeholder-val="{{ false }}"><span class="ln-r">{{p.rest}}</span></sc-if></span>
+                      <span class="ln-m {{p.mkCls}}" title="{{p.mkTip}}">{{p.mk}}</span>
+                      <button type="button" class="pl-x" onClick="{{p.del}}" disabled="{{ro}}" aria-label="Remove {{p.a}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+                  </sc-for>
+                  <button type="button" class="pl-add" onClick="{{pn.addC}}" disabled="{{ro}}">+ Condition</button>
+                </section>
+                <section class="pn-s"><h4 class="th">Then</h4>
+                  <sc-for list="{{pn.thens}}" as="p" hint-placeholder-count="2">
+                    <div class="ln ln-t"><div class="dd {{p.op.cls}}" style="{{p.op.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.op.ex}}" aria-label="{{p.op.aria}}" onClick="{{p.op.toggle}}"><span class="dd-v">{{p.op.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.op.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.op.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.op.aria}}"><sc-for list="{{p.op.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="ln-a">{{p.a}}</span><span class="pl-eq">=</span>
+                      <span class="ln-v"><sc-if value="{{p.isDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{p.vd.cls}}" style="{{p.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{p.vd.ex}}" aria-label="{{p.vd.aria}}" onClick="{{p.vd.toggle}}"><span class="dd-v">{{p.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{p.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{p.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{p.vd.aria}}"><sc-for list="{{p.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{p.isIn}}" hint-placeholder-val="{{ false }}"><input class="input" value="{{p.v}}" onInput="{{p.setV}}" disabled="{{ro}}" aria-label="Value for {{p.a}}"></sc-if></span>
+                      <button type="button" class="pl-x" onClick="{{p.del}}" disabled="{{ro}}" aria-label="Remove {{p.a}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+                  </sc-for>
+                  <button type="button" class="pl-add" onClick="{{pn.addA}}" disabled="{{ro}}">+ Action</button>
+                </section>
+                <section class="pn-s"><h4 class="el">Otherwise</h4><input class="input" value="{{pn.els}}" onInput="{{pn.setEls}}" disabled="{{ro}}" placeholder="Skip – continue to the next rule" aria-label="Otherwise"></section>
+                <section class="pn-s"><h4 class="gr">Settings</h4>
+                  <div class="pn-g">
+                    <div class="b3-f pn-g2"><label class="lbl">Trigger event</label><div class="dd {{pn.trig.cls}}" style="{{pn.trig.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{pn.trig.ex}}" aria-label="{{pn.trig.aria}}" onClick="{{pn.trig.toggle}}"><span class="dd-v">{{pn.trig.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{pn.trig.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{pn.trig.close}}"></button><div class="dd-p" role="listbox" aria-label="{{pn.trig.aria}}"><sc-for list="{{pn.trig.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
+                    <div class="b3-f"><label class="lbl">Priority</label><input class="input mono" inputmode="numeric" value="{{pn.pri}}" onInput="{{pn.setPri}}" disabled="{{ro}}" aria-label="Priority"><span class="b3-h">Lower runs first</span></div>
+                    <div class="b3-f"><label class="lbl">Effective from</label><input class="input" type="date" value="{{pn.from}}" onChange="{{pn.setFrom}}" disabled="{{ro}}" aria-label="Effective from"></div>
+                    <div class="b3-f"><label class="lbl">Effective to</label><input class="input" type="date" value="{{pn.to}}" onChange="{{pn.setTo}}" disabled="{{ro}}" aria-label="Effective to"><span class="b3-h">Blank = open-ended</span></div>
+                  </div>
+                </section>
+                <section class="pn-s"><h4 class="gr">Exceptions</h4>
+                  <sc-for list="{{pn.exc}}" as="x" hint-placeholder-count="1"><div class="rc-ex"><div class="dd {{x.code.cls}}" style="{{x.code.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{x.code.ex}}" aria-label="{{x.code.aria}}" onClick="{{x.code.toggle}}"><span class="dd-v">{{x.code.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{x.code.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{x.code.close}}"></button><div class="dd-p" role="listbox" aria-label="{{x.code.aria}}"><sc-for list="{{x.code.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="rc-exm">{{x.msg}}</span><div class="dd {{x.sev.cls}}" style="{{x.sev.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{x.sev.ex}}" aria-label="{{x.sev.aria}}" onClick="{{x.sev.toggle}}"><span class="dd-v">{{x.sev.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{x.sev.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{x.sev.close}}"></button><div class="dd-p" role="listbox" aria-label="{{x.sev.aria}}"><sc-for list="{{x.sev.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><div class="dd {{x.notify.cls}}" style="{{x.notify.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{x.notify.ex}}" aria-label="{{x.notify.aria}}" onClick="{{x.notify.toggle}}"><span class="dd-v">{{x.notify.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{x.notify.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{x.notify.close}}"></button><div class="dd-p" role="listbox" aria-label="{{x.notify.aria}}"><sc-for list="{{x.notify.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><button type="button" class="cm-ib" onClick="{{x.del}}" disabled="{{ro}}" aria-label="Remove exception"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></div></sc-for>
+                  <sc-if value="{{pn.noExc}}" hint-placeholder-val="{{ false }}"><p class="b3-h pn-none">No exception code. If the rule can stop an invoice, add one so users see why.</p></sc-if>
+                  <button type="button" class="pl-add" onClick="{{pn.addExc}}" disabled="{{ro}}">+ Exception code</button>
+                </section>
+                <section class="pn-s"><h4 class="gr">About this rule</h4>
+                  <dl class="pn-ab"><sc-for list="{{pn.about}}" as="a" hint-placeholder-count="6"><div><dt>{{a.k}}</dt><dd>{{a.v}}</dd></div></sc-for></dl>
+                </section>
+              </div>
+              <div class="pn-f"><sc-if value="{{pn.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm" onClick="{{pn.reset}}">{{pn.resetL}}</button></sc-if><span class="b3-sp"></span><button type="button" class="btn btn-sm btn-primary" onClick="{{pn.close}}">Done</button></div>
+            </aside>
+          </sc-if>
         </div>
       </main>
     </div>
@@ -1145,14 +1269,15 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
     <aside class="tb" role="dialog" aria-modal="true" aria-labelledby="tb-t">
       <div class="tb-h"><div><h2 id="tb-t">Test with a B/L</h2><p>{{tst.note}}</p></div><button class="cm-ib x" onClick="{{tst.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
       <div class="tb-b">
-        <div><span class="lbl">B/L</span><div class="dd {{tst.dd.cls}}" style="{{tst.dd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{tst.dd.ex}}" aria-label="{{tst.dd.aria}}" onClick="{{tst.dd.toggle}}"><span class="dd-v">{{tst.dd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{tst.dd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{tst.dd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{tst.dd.aria}}"><sc-for list="{{tst.dd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
-        <div class="tb-f"><sc-for list="{{tst.facts}}" as="f" hint-placeholder-count="6"><div><span>{{f.k}}</span><b>{{f.v}}</b></div></sc-for></div>
+        <div><label class="lbl" for="tb-bl">B/L No.</label><input id="tb-bl" class="input mono tb-in" value="{{tst.bl}}" onInput="{{tst.setBl}}"></div>
+        <sc-if value="{{tst.bad}}" hint-placeholder-val="{{ false }}"><div class="tb-r bad"><b>B/L not found</b><span>{{tst.badT}}</span></div></sc-if>
+        <sc-if value="{{tst.ok}}" hint-placeholder-val="{{ true }}"><div class="tb-f"><sc-for list="{{tst.facts}}" as="f" hint-placeholder-count="6"><div><span>{{f.k}}</span><b>{{f.v}}</b></div></sc-for></div>
         <div class="tb-r {{tst.cls}}"><b>{{tst.head}}</b><span>{{tst.sub}}</span></div>
         <ol class="tb-j">
           <sc-for list="{{tst.steps}}" as="x" hint-placeholder-count="14">
             <li class="{{x.cls}}"><span class="tb-i" aria-hidden="true">{{x.icon}}</span><div><span class="tb-st">{{x.stage}}</span><span class="tb-o">{{x.out}}</span><sc-if value="{{x.hasWhy}}" hint-placeholder-val="{{ false }}"><span class="tb-w">{{x.why}}</span></sc-if></div><button class="lnk" onClick="{{x.go}}">View</button></li>
           </sc-for>
-        </ol>
+        </ol></sc-if>
       </div>
     </aside>
   </sc-if>
@@ -1168,13 +1293,13 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 
   <sc-if value="{{dlg.on}}" hint-placeholder-val="{{ false }}">
     <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{dlg.close}}"></button>
-    <div class="dlg dim b3-dlg b4-dlg" role="dialog" aria-modal="true" aria-labelledby="b4-dt">
+    <div class="dlg dim b3-dlg b4-dlg {{dlg.wide}}" role="dialog" aria-modal="true" aria-labelledby="b4-dt">
       <div class="dh"><div><h2 id="b4-dt" style="margin: 0; font-size: 16px; font-weight: 600">{{dlg.title}}</h2><div class="mu" style="font-size: 12px">{{dlg.sub}}</div></div><button class="cm-ib x" onClick="{{dlg.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
       <div class="db b3-db">
         <sc-if value="{{dlg.isCond}}" hint-placeholder-val="{{ false }}">
           <div class="b3-f"><label class="lbl">{{dlg.aL}}</label><div class="dd {{dlg.a.cls}}" style="{{dlg.a.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.a.ex}}" aria-label="{{dlg.a.aria}}" onClick="{{dlg.a.toggle}}"><span class="dd-v">{{dlg.a.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.a.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.a.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.a.aria}}"><sc-for list="{{dlg.a.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
           <div class="b4-2"><div class="b3-f"><label class="lbl">{{dlg.oL}}</label><div class="dd {{dlg.o.cls}}" style="{{dlg.o.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.o.ex}}" aria-label="{{dlg.o.aria}}" onClick="{{dlg.o.toggle}}"><span class="dd-v">{{dlg.o.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.o.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.o.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.o.aria}}"><sc-for list="{{dlg.o.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div>
-          <div class="b3-f"><label class="lbl">Value</label><sc-if value="{{dlg.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{dlg.vd.cls}}" style="{{dlg.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.vd.ex}}" aria-label="{{dlg.vd.aria}}" onClick="{{dlg.vd.toggle}}"><span class="dd-v">{{dlg.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.vd.aria}}"><sc-for list="{{dlg.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{dlg.isIn}}" hint-placeholder-val="{{ true }}"><input class="input" value="{{dlg.v}}" onInput="{{dlg.setV}}" placeholder="Value, list or config key" aria-label="Value"></sc-if></div></div>
+          <sc-if value="{{dlg.noVal}}" hint-placeholder-val="{{ false }}"><div class="b3-f"><label class="lbl">Value</label><span class="b3-h b5-nv">No value needed</span></div></sc-if><sc-if value="{{dlg.hasVal}}" hint-placeholder-val="{{ true }}"><div class="b3-f"><label class="lbl">Value</label><sc-if value="{{dlg.isDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{dlg.vd.cls}}" style="{{dlg.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.vd.ex}}" aria-label="{{dlg.vd.aria}}" onClick="{{dlg.vd.toggle}}"><span class="dd-v">{{dlg.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.vd.aria}}"><sc-for list="{{dlg.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{dlg.isIn}}" hint-placeholder-val="{{ true }}"><input class="input" value="{{dlg.v}}" onInput="{{dlg.setV}}" placeholder="Value, list or config key" aria-label="Value"></sc-if></div></sc-if></div>
           <div class="ad-pv"><span>Preview</span><p>{{dlg.pv}}</p></div>
         </sc-if>
         <sc-if value="{{dlg.isRule}}" hint-placeholder-val="{{ false }}">
@@ -1185,8 +1310,20 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <div class="b3-f"><label class="lbl">Then</label><div class="b4-3"><div class="dd {{dlg.tt.cls}}" style="{{dlg.tt.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.tt.ex}}" aria-label="{{dlg.tt.aria}}" onClick="{{dlg.tt.toggle}}"><span class="dd-v">{{dlg.tt.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.tt.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.tt.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.tt.aria}}"><sc-for list="{{dlg.tt.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><div class="dd {{dlg.ta.cls}}" style="{{dlg.ta.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.ta.ex}}" aria-label="{{dlg.ta.aria}}" onClick="{{dlg.ta.toggle}}"><span class="dd-v">{{dlg.ta.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.ta.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.ta.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.ta.aria}}"><sc-for list="{{dlg.ta.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><sc-if value="{{dlg.tIsDd}}" hint-placeholder-val="{{ false }}"><div class="dd {{dlg.tvd.cls}}" style="{{dlg.tvd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.tvd.ex}}" aria-label="{{dlg.tvd.aria}}" onClick="{{dlg.tvd.toggle}}"><span class="dd-v">{{dlg.tvd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.tvd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.tvd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.tvd.aria}}"><sc-for list="{{dlg.tvd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{dlg.tIsIn}}" hint-placeholder-val="{{ true }}"><input class="input" value="{{dlg.tv}}" onInput="{{dlg.setTv}}" placeholder="Value" aria-label="Action value"></sc-if></div><span class="b3-h">Add more conditions and actions on the rule card after it is created.</span></div>
           <div class="ad-pv"><span>Preview</span><p>{{dlg.pv}}</p></div>
         </sc-if>
+        <sc-if value="{{dlg.isRev}}" hint-placeholder-val="{{ false }}">
+          <div class="rv-list">
+            <sc-for list="{{dlg.items}}" as="it" hint-placeholder-count="2">
+              <div class="rv-it"><div class="rv-h"><span class="mono rc-id">{{it.id}}</span><b>{{it.name}}</b><span class="mu">{{it.stage}}</span><button type="button" class="lnk" onClick="{{it.open}}">Open</button></div>
+                <table class="rv-t"><tbody><sc-for list="{{it.lines}}" as="l" hint-placeholder-count="2"><tr class="df-{{l.cls}}"><td class="rv-f">{{l.f}}</td><td>{{l.a}}</td><td class="rv-ar" aria-hidden="true">→</td><td>{{l.b}}</td></tr></sc-for></tbody></table>
+                <sc-if value="{{it.none}}" hint-placeholder-val="{{ false }}"><p class="b3-h">No visible difference from the live rule.</p></sc-if></div>
+            </sc-for>
+          </div>
+          <div class="rv-imp {{dlg.impCls}}"><div class="rv-ih">Effect on sample B/L PILB120260901 <span class="mu">{{dlg.impT}}</span></div>
+            <div class="rv-ba"><div class="rv-b {{dlg.bCls}}"><span>Live now</span><b>{{dlg.bA}}</b></div><div class="rv-b {{dlg.aCls}}"><span>With these changes</span><b>{{dlg.bB}}</b></div></div></div>
+          <sc-if value="{{dlg.hasNote}}" hint-placeholder-val="{{ false }}"><div class="b3-f"><label class="lbl">{{dlg.noteL}}<sc-if value="{{dlg.noteOpt}}" hint-placeholder-val="{{ false }}"><span class="ad-o"> · optional</span></sc-if></label><textarea class="input b3-ta" onInput="{{dlg.setNote}}" aria-label="{{dlg.noteL}}">{{dlg.note}}</textarea></div></sc-if>
+        </sc-if>
       </div>
-      <div class="df"><button class="btn" onClick="{{dlg.close}}">Cancel</button><button class="btn btn-primary" disabled="{{dlg.noOk}}" onClick="{{dlg.ok}}">{{dlg.okL}}</button></div>
+      <div class="df"><button class="btn" onClick="{{dlg.close}}">Cancel</button><sc-if value="{{dlg.isAp}}" hint-placeholder-val="{{ false }}"><button class="btn" disabled="{{dlg.rejNo}}" onClick="{{dlg.rej}}">Send back</button></sc-if><button class="btn btn-primary" disabled="{{dlg.noOk}}" onClick="{{dlg.ok}}">{{dlg.okL}}</button></div>
     </div>
   </sc-if>
 
@@ -1307,10 +1444,10 @@ function b3Run(rules, F0, catOrder) {
 const b3Check = (exp, run, id) => { if (/^Rule not fired$/i.test(exp)) return !run.firedIds.includes(id);
   const txt = (run.outcome + ' ' + run.outs.join(' ')).toLowerCase(); return exp.split(/,\s*|\s+(?=BRE-)/).every((t) => txt.includes(t.trim().toLowerCase())); };
 
-const B4_LS = 'girs.bre.v4';
+const B4_LS = 'girs.bre.v4r';
 const B4_LOCS = [{ id: 'GL', name: 'Global defaults', short: 'Global', parent: null }].concat(['India', 'China', 'South Africa', 'Malaysia', 'Nigeria', 'Indonesia', 'UAE', 'Brazil'].map((c) => ({ id: c, name: c, short: c, parent: 'GL' })));
 const B4_LATAM = ['Brazil'];
-const B4_OPP = { '=': 'is', '<>': 'is not', '>': 'is more than', '>=': 'is at least', '<': 'is less than', '<=': 'is at most', 'IN': 'is one of', 'NOT IN': 'is not in', 'IS': 'is', 'IS NOT': 'is not', 'BETWEEN': 'is between', 'WITHIN': 'is within', 'CONTAINS': 'contains' };
+const B4_OPP = { '=': 'is', '<>': 'is not', '>': 'is more than', '>=': 'is at least', '<': 'is less than', '<=': 'is at most', 'IN': 'is one of', 'NOT IN': 'is not one of', 'IS': 'is empty', 'IS NOT': 'is not empty', 'BETWEEN': 'is between', 'WITHIN': 'is within', 'CONTAINS': 'contains' };
 const B4_BASE = (() => { const m = {};
   const excFor = (id) => B3.exc.filter((e) => e.by.split(',').map((x) => x.trim()).includes(id));
   const NOT = { 'BRE-001': 'Invoice user', 'BRE-003': 'Invoice user', 'BRE-004': 'Finance admin', 'BRE-007': 'Tax admin', 'BRE-006': '—', 'BRE-010': 'Finance admin' };
@@ -1337,169 +1474,227 @@ const b4Applies = (scope, loc) => { if (loc === 'GL') return { on: true };
   if (/^e\.g\./.test(s)) return { on: false };
   return { on: true, cfg: true };
 };
-function b4Load() { try { const x = JSON.parse(localStorage.getItem(B4_LS) || 'null'); if (x && x.ov) return x; } catch (e) {} return { ov: {}, draft: {}, pend: {}, ver: Object.fromEntries(B4_LOCS.map((l) => [l.id, l.id === 'GL' ? 'v3' : 'v1'])), hist: {} }; }
+const B4_AUTHOR = 'Daniel Tan', B4_APPROVER = 'Thushy (PIL Process Owner)';
+const b4IsBlankOp = (c) => c.o === 'IS' || c.o === 'IS NOT';
+const b4Rest = (v) => String(v || '').replace(/^Blank\s*/i, '').trim();
+const b4Sum = (r) => { const ifs = r.conds.filter((c) => c.t === 'IF'), th = r.conds.filter((c) => c.t === 'THEN');
+  const key = ifs.filter((c) => !b4IsBlankOp(c)).slice(0, 2), k2 = key.length ? key : ifs.slice(0, 1);
+  const w = k2.map((c) => c.a + ' ' + (B4_OPP[c.o] || c.o) + (b4IsBlankOp(c) ? '' : ' ' + c.v)).join(', ') + (ifs.length > k2.length ? ' …' : '');
+  const t = th.slice(0, 2).map((c) => c.a + ': ' + c.v).join(' · ') + (th.length > 2 ? ' …' : '');
+  return (w || 'Always') + '  →  ' + (t || 'No action yet'); };
+function b4Load() { try { const x = JSON.parse(localStorage.getItem(B4_LS) || 'null'); if (x && x.ov) return x; } catch (e) {} return { ov: {}, draft: {}, pend: {}, rej: {}, ver: Object.fromEntries(B4_LOCS.map((l) => [l.id, l.id === 'GL' ? 'v3' : 'v1'])), hist: {} }; }
 function b4Store(d) { try { localStorage.setItem(B4_LS, JSON.stringify(d)); } catch (e) {} }
 
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { db: b4Load(), loc: 'GL', stage: 'TRG', open: '', rq: '', hl: '', exp: {}, tst: null, hist: false, dlg: null, other: false };
-    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; const s = this.state; if (s.open) this.setState({ open: '' }); else if (s.dlg) this.setState({ dlg: null }); else if (s.rq) this.setState({ rq: '' }); else if (s.tst || s.hist) this.setState({ tst: null, hist: false }); }); } catch (e) {}
+    this.state = { db: b4Load(), loc: 'GL', stage: 'TRG', open: '', rq: '', hl: '', sel: '', flt: 'all', role: 'author', tst: null, hist: false, dlg: null };
+    try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; const s = this.state; if (s.open) this.setState({ open: '' }); else if (s.dlg) this.setState({ dlg: null }); else if (s.rq) this.setState({ rq: '' }); else if (s.tst || s.hist) this.setState({ tst: null, hist: false }); else if (s.sel) this.setState({ sel: '' }); }); } catch (e) {}
   }
   renderVals() {
     const self = this, s = this.state, set = (o) => self.setState(o), DB = s.db;
+    DB.rej = DB.rej || {};
     const clone = (x) => JSON.parse(JSON.stringify(x));
     const save = (db, extra) => { b4Store(db); set(Object.assign({ db }, extra || {})); };
     const L = (id) => B4_LOCS.find((l) => l.id === id);
     const chainOf = (id) => id === 'GL' ? ['GL'] : ['GL', id];
     const loc = L(s.loc), parent = loc.parent ? L(loc.parent) : null;
+    const isAppr = s.role === 'approver';
     const dd = (id, cur, opts, pick, o) => { o = o || {}; const open = s.open === id;
       return { cls: (o.cls || '') + (o.dis ? ' dd-dis' : ''), st: o.w ? 'width:' + o.w : '', label: cur == null || cur === '' ? (o.ph || 'Select') : (o.fmt ? o.fmt(cur) : cur), aria: o.aria || id, ex: open ? 'true' : 'false', open: open && !o.dis,
         toggle: () => { if (!o.dis) set({ open: open ? '' : id }); }, close: () => set({ open: '' }),
         opts: opts.map((x) => { const v = Array.isArray(x) ? x[0] : x, sub = Array.isArray(x) ? x[1] : ''; return { t: o.ofmt ? o.ofmt(v) : (o.fmt ? o.fmt(v) : v), sub, hasSub: !!sub, on: String(v) === String(cur) ? 'true' : 'false', pick: () => { set({ open: '' }); pick(v); } }; }) }; };
-    // ---- layered rules: Global base ← country override; drafts on top ----
-    const custom = (rid) => { for (const lid of ['GL'].concat(B4_LOCS.map((l) => l.id))) { const d = (DB.draft[lid] || {})[rid] || (DB.ov[lid] || {})[rid] || (DB.pend[lid] || {})[rid]; if (d && d.__new) return Object.assign({ __loc: lid }, d); } return null; };
-    const allIds = () => { const ids = Object.keys(B4_BASE); ['ov', 'pend', 'draft'].forEach((k) => Object.values(DB[k] || {}).forEach((m) => Object.keys(m).forEach((rid) => { if (!ids.includes(rid) && m[rid] && m[rid].__new) ids.push(rid); }))); return ids; };
-    const eff = (rid, lid) => { lid = lid || s.loc; const base = B4_BASE[rid] || custom(rid); if (!base) return null;
-      let r = clone(base), src = base.__loc || 'GL', chgF = {};
+    const pendOf = (lid) => DB.pend[lid] && DB.pend[lid].ch ? DB.pend[lid] : null;
+    // ---- layered rules ----
+    const layers = (c, lid, mode) => { const out = [(DB.ov[c] || {})]; if (mode !== 'live') { out.push((pendOf(c) || {}).ch || {}); if (c === lid) out.push(DB.draft[c] || {}); } return out; };
+    const custom = (rid, mode) => { for (const l of B4_LOCS) for (const m of layers(l.id, l.id, mode)) { const d = m[rid]; if (d && d.__new) return Object.assign({ __loc: l.id }, d); } return null; };
+    const allIds = () => { const ids = Object.keys(B4_BASE); const add = (m) => Object.keys(m || {}).forEach((rid) => { if (!ids.includes(rid) && m[rid] && m[rid].__new) ids.push(rid); });
+      Object.values(DB.ov).forEach(add); Object.values(DB.draft).forEach(add); Object.values(DB.pend).forEach((p) => add(p && p.ch)); return ids; };
+    const eff = (rid, lid, mode) => { lid = lid || s.loc; const base = B4_BASE[rid] || custom(rid, mode); if (!base) return null;
       if (base.__loc && !chainOf(lid).includes(base.__loc)) return null;
-      chainOf(lid).forEach((c) => { [(DB.ov[c] || {})[rid], (DB.pend[c] || {})[rid], c === lid ? (DB.draft[c] || {})[rid] : null].forEach((o, i) => { if (!o) return; Object.keys(o).forEach((k) => { if (k === '__new' || k === '__reset') return; r[k] = clone(o[k]); if (k !== 'status') src = c; if (i === 2) chgF[k] = 1; }); }); });
-      r.__src = src; r.__chg = Object.keys(chgF).length > 0 || !!((DB.draft[lid] || {})[rid]); return r; };
+      const r = clone(base); let src = base.__loc || 'GL';
+      chainOf(lid).forEach((c) => layers(c, lid, mode).forEach((m) => { const o = m[rid]; if (!o || o.__reset) return; Object.keys(o).forEach((k) => { if (k === '__new') return; r[k] = clone(o[k]); }); src = c; }));
+      r.__src = src; return r; };
     const chgHere = (rid) => !!((DB.draft[s.loc] || {})[rid]);
-    const pendHere = Object.keys(DB.pend[s.loc] || {}).length > 0;
-    const ro = pendHere;
-    const setR = (rid, patch, extra) => { if (ro) return set({ __toast: 'Changes are waiting for approval at ' + loc.short + '. Withdraw them to edit.' }); const db = clone(DB); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][rid] = Object.assign({}, db.draft[s.loc][rid] || {}, clone(patch)); save(db, Object.assign({ open: '' }, extra || {})); };
-    const resetR = (rid) => { const db = clone(DB); db.draft[s.loc] = db.draft[s.loc] || {}; delete db.draft[s.loc][rid]; if ((db.ov[s.loc] || {})[rid]) db.draft[s.loc][rid] = Object.assign({ __reset: true }, clone(B4_BASE[rid] ? (eff(rid, 'GL') || {}) : {})); if (!Object.keys(db.draft[s.loc]).length) delete db.draft[s.loc]; save(db); };
-    const applies = (r) => b4Applies(r.country, s.loc);
-    const rulesAt = () => allIds().map((rid) => eff(rid)).filter((r) => r && applies(r).on);
-    const hidden = s.loc === 'GL' ? [] : allIds().map((rid) => eff(rid)).filter((r) => r && !applies(r).on);
-    const ALL = rulesAt();
+    const ro = !!pendOf(s.loc) || isAppr;
+    const setR = (rid, patch, extra) => { if (ro) return set({ __toast: isAppr ? 'Approvers can’t edit rules. Switch to Author to make changes.' : 'Changes are waiting for approval. Withdraw them to edit.' });
+      const db = clone(DB); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][rid] = Object.assign({}, db.draft[s.loc][rid] || {}, clone(patch)); delete db.rej[s.loc]; save(db, Object.assign({ open: '' }, extra || {})); };
+    const resetR = (rid) => { const db = clone(DB); db.draft[s.loc] = db.draft[s.loc] || {}; delete db.draft[s.loc][rid]; if ((db.ov[s.loc] || {})[rid]) db.draft[s.loc][rid] = { __reset: true }; if (!Object.keys(db.draft[s.loc]).length) delete db.draft[s.loc]; save(db, { __toast: rid + ' uses the Global rule again.' }); };
+    const applies = (r, lid) => b4Applies(r.country, lid || s.loc);
     const catsSorted = B3.cats.slice().sort((a, b) => a.stage - b.stage);
-    // ---- one rule card ----
-    const card = (r) => { const rid = r.id, conds = r.conds;
-      const setC = (i, o) => { const c = conds.map((x) => Object.assign({}, x)); Object.assign(c[i], o); setR(rid, { conds: c }); };
-      const ifs = [], thens = [];
-      conds.forEach((c, i) => { const isIf = c.t === 'IF'; const vals = (B4_VALS[c.a] || []).slice(); if (c.v && !vals.includes(c.v)) vals.push(c.v);
-        const useDd = vals.length >= 2 && !(c.o === 'IN' || c.o === 'NOT IN') && !/X days|Threshold|config/.test(c.v || '');
-        const A = B3_ATTR[c.a] || { ops: [] };
-        const p = { a: c.a, j: (ifs.length ? (conds[i - 1] && conds[i - 1].j === 'OR' ? 'or' : 'and') : ''), hasJoin: isIf && ifs.length > 0, togJ: () => { if (i > 0) setC(i - 1, { j: conds[i - 1].j === 'OR' ? 'AND' : 'OR' }); },
-          op: dd('p.o.' + rid + '.' + i, c.o, (isIf ? (A.ops && A.ops.length ? A.ops : B3_ALLOPS) : B3_ACTS).map((o) => [o, isIf ? o : ((B3.acts.find((x) => x.a === o) || {}).d || '')]), (v) => setC(i, { o: v }),
-            { fmt: isIf ? (v) => B4_OPP[v] || v : (v) => v, ofmt: isIf ? (v) => v + '  ·  ' + (B4_OPP[v] || '') : (v) => v, cls: isIf ? 'dd-op' : 'dd-act', aria: (isIf ? 'Operator for ' : 'Action type for ') + c.a, dis: ro }),
-          isDd: useDd, vd: dd('p.v.' + rid + '.' + i, c.v, vals, (v) => setC(i, { v }), { cls: 'dd-val', aria: 'Value for ' + c.a, dis: ro }),
-          isIn: !useDd, v: c.v, setV: (e) => setC(i, { v: e.target.value }), w: 'width:' + Math.min(360, Math.max(90, (c.v || '').length * 7.6 + 30)) + 'px',
-          del: () => setR(rid, { conds: conds.filter((_, k) => k !== i) }), delAria: 'Remove ' + c.a };
-        (isIf ? ifs : thens).push(p); });
-      const st = r.status, reviewCls = /^Agreed/.test(r.review) ? 'rv-ok' : /Pending/.test(r.review) ? 'rv-pend' : /Roadmap/.test(r.review) ? 'rv-road' : 'rv-prog';
-      const here = r.__src === s.loc, ex = !!s.exp[rid], ap = applies(r);
-      const setExc = (i, o) => { const e = (r.exc || []).map((x) => Object.assign({}, x)); Object.assign(e[i], o); setR(rid, { exc: e }); };
-      return { id: rid, name: r.name, pri: String(r.pri), trig: r.trig, country: r.country, review: r.review, reviewCls, st, stCls: ({ Draft: 'c-draft', Submitted: 'c-sub', Active: 'c-act', Inactive: 'c-off' })[st] || 'c-draft',
-        on: r.on ? 'true' : '', flip: () => setR(rid, { on: !r.on }), cls: (chgHere(rid) ? 'rc-chg ' : '') + (r.on ? '' : 'rc-off ') + (s.hl === rid ? 'rc-hl' : ''),
-        isNew: !!r.__new || !B4_BASE[rid], chg: chgHere(rid), src: s.loc === 'GL' ? (r.__new || !B4_BASE[rid] ? 'Added in GIRS' : 'Catalogue') : here ? 'Set for ' + loc.short : 'From ' + L(r.__src).short, srcCls: here && s.loc !== 'GL' ? 'tg-set' : 'tg-inh',
-        srcTip: s.loc === 'GL' ? 'Global default – applies to every country unless overridden' : here ? 'Overridden for ' + loc.short : 'Inherited. A change here applies to ' + loc.short + ' only.', canReset: !!parent && (here || chgHere(rid)) && !!B4_BASE[rid], reset: () => resetR(rid),
-        cfg: !!ap.cfg && s.loc !== 'GL', cfgT: 'Applies where configured: ' + r.country,
-        ifs, thens, hasThen: thens.length > 0, hasElse: !!r.elsT, els: r.elsT,
-        addC: () => set({ dlg: { t: 'cond', rid, kind: 'IF', a: '', o: '=', v: '' }, open: '' }), addA: () => set({ dlg: { t: 'cond', rid, kind: 'THEN', a: '', o: 'SET', v: '' }, open: '' }),
-        exp: ex, expL: ex ? 'Hide details' : 'Details', expA: ex ? 'true' : 'false', togExp: () => set({ exp: Object.assign({}, s.exp, { [rid]: !ex }) }),
-        d: { trig: dd('d.t.' + rid, r.trig, B3_TRIG, (v) => setR(rid, { trig: v }), { w: '100%', aria: 'Trigger event', dis: ro }), pri: String(r.pri), setPri: (e) => setR(rid, { pri: Math.max(1, Math.min(999, parseInt(e.target.value.replace(/\D/g, '') || '1', 10))) }),
-          scope: r.scope, setScope: (e) => setR(rid, { scope: e.target.value }), country: r.country, from: r.from, setFrom: (e) => setR(rid, { from: e.target.value }), to: r.to, setTo: (e) => setR(rid, { to: e.target.value }),
-          els: r.elsT, setEls: (e) => setR(rid, { elsT: e.target.value }), mom: r.mom || '—', br: r.br || '—', st,
-          exc: (r.exc || []).map((e, i) => ({ code: dd('d.c.' + rid + '.' + i, e.code, B3.exc.map((x) => [x.code, x.msg]), (v) => setExc(i, { code: v }), { w: '120px', aria: 'Exception code', dis: ro }),
-            msg: (B3.exc.find((x) => x.code === e.code) || {}).msg || '', sev: dd('d.s.' + rid + '.' + i, e.sev, B3_SEV, (v) => setExc(i, { sev: v }), { w: '110px', aria: 'Severity', dis: ro, cls: e.sev === 'Hold' ? 'sv-hold' : 'sv-warn' }),
-            notify: dd('d.n.' + rid + '.' + i, e.notify, B3_NOTIFY, (v) => setExc(i, { notify: v }), { w: '140px', aria: 'Notify', dis: ro }), del: () => setR(rid, { exc: (r.exc || []).filter((_, k) => k !== i) }) })),
-          noExc: !(r.exc || []).length, addExc: () => setR(rid, { exc: (r.exc || []).concat([{ code: 'BRE-001', sev: 'Hold', notify: 'Invoice user' }]) }) } }; };
-    // ---- stages ----
-    const inCat = (c) => ALL.filter((r) => r.cat === c).sort((a, b) => a.pri - b.pri || (a.id > b.id ? 1 : -1));
-    const stages = catsSorted.map((c) => { const rs = inCat(c.code), chg = rs.some((r) => chgHere(r.id)), here = rs.some((r) => r.__src === s.loc && s.loc !== 'GL');
-      return { n: String(c.stage), title: c.name, sum: rs.length + (rs.length === 1 ? ' rule' : ' rules') + ' · ' + rs.filter((r) => r.on).length + ' on', cur: s.stage === c.code ? 'step' : 'false', pick: () => set({ stage: c.code, open: '', hl: '' }),
-        dot: chg || here, dotCls: chg ? 'chg' : 'set', dotTip: chg ? 'Unsaved changes' : 'Overridden for ' + loc.short }; });
-    const C = B3_CAT(s.stage), idx = catsSorted.findIndex((c) => c.code === s.stage);
-    const cards = inCat(s.stage).map(card);
-    const nextId = (cat) => { let n = 1; allIds().forEach((id) => { const m = id.match(new RegExp('^BR-' + cat + '-(\\d+)$')); if (m) n = Math.max(n, +m[1] + 1); }); return 'BR-' + cat + '-' + String(n).padStart(3, '0'); };
-    const st = { n: String(C.stage), title: C.name, hit: /^FIRST/.test(C.hit) ? 'FIRST' : C.hit, hitT: B4_HIT[/^FIRST/.test(C.hit) ? 'FIRST' : 'COLLECT'] + (/most specific/.test(C.hit) ? ' Most specific scope wins.' : '') + (/per chargeline/.test(C.hit) ? ' Applied per chargeline.' : ''),
-      trig: C.trig, out: C.out, cards, none: cards.length === 0, noneT: 'No rules in this stage apply to ' + loc.short + '.',
-      noPrev: idx === 0 ? 'true' : '', noNext: idx === catsSorted.length - 1 ? 'true' : '', prev: () => set({ stage: catsSorted[Math.max(0, idx - 1)].code, hl: '' }), next: () => set({ stage: catsSorted[Math.min(13, idx + 1)].code, hl: '' }),
-      addRule: () => set({ dlg: { t: 'rule', name: '', trig: C.code === 'TPL' ? 'Invoice print' : 'Invoice generation', pri: '50', a: '', o: '=', v: '', ta: '', tt: 'SET', tv: '' }, open: '' }), addL: 'Add rule to ' + C.name, notRo: !ro };
-    // ---- location bar ----
-    const nDraft = Object.keys(DB.draft[s.loc] || {}).length, nPend = Object.keys(DB.pend[s.loc] || {}).length;
-    const ovN = (id) => Object.keys(DB.ov[id] || {}).length;
-    const locDd = dd('loc', s.loc, B4_LOCS.map((l) => [l.id, (l.id === 'GL' ? 'All 76 catalogue rules' : (ovN(l.id) ? ovN(l.id) + (ovN(l.id) === 1 ? ' override' : ' overrides') : 'No overrides')) + (Object.keys(DB.draft[l.id] || {}).length ? ' · unsaved changes' : '') + (Object.keys(DB.pend[l.id] || {}).length ? ' · waiting for approval' : '')]),
-      (v) => set({ loc: v, hl: '', other: false }), { fmt: (v) => L(v).name, w: '300px', aria: 'Location', cls: 'dd-loc' });
-    const bump = (v) => 'v' + ((parseInt(String(v).slice(1), 10) || 1) + 1);
-    const locV = { dd: locDd, name: loc.short === 'Global' ? 'Global defaults' : loc.short, chain: s.loc === 'GL' ? [] : [{ t: 'Global' }], notGl: s.loc !== 'GL', inh: s.loc === 'GL' ? 'Applies everywhere unless a country overrides it' : 'Inherits from', ver: DB.ver[s.loc] || 'v1',
-      hasDraft: nDraft > 0, draftN: nDraft + (nDraft === 1 ? ' unsaved change' : ' unsaved changes'), hasPend: nPend > 0, pendN: nPend + (nPend === 1 ? ' rule change' : ' rule changes'),
-      applies: s.loc === 'GL' ? '76 rules' : ALL.length + ' of ' + (ALL.length + hidden.length) + ' rules apply',
-      discard: () => { const d = clone(DB); delete d.draft[s.loc]; save(d, { __toast: 'Changes discarded.' }); },
-      submit: () => { const d = clone(DB); d.pend[s.loc] = Object.assign({}, d.pend[s.loc] || {}, d.draft[s.loc]); delete d.draft[s.loc]; (d.hist[s.loc] = d.hist[s.loc] || []).unshift([d.ver[s.loc] || 'v1', 'Submitted ' + nDraft + (nDraft === 1 ? ' change' : ' changes') + ' for approval', '24 Nov 2026 · Daniel Tan']); save(d, { __toast: 'Submitted to the Rule Approver (PIL Process Owner). Live rules stay unchanged until approved.' }); },
-      withdraw: () => { const d = clone(DB); d.draft[s.loc] = Object.assign({}, d.pend[s.loc], d.draft[s.loc] || {}); delete d.pend[s.loc]; save(d, { __toast: 'Changes moved back to draft.' }); },
-      approve: () => { const d = clone(DB); const P = d.pend[s.loc] || {}; d.ov[s.loc] = d.ov[s.loc] || {};
-        Object.keys(P).forEach((rid) => { if (P[rid].__reset) { delete d.ov[s.loc][rid]; return; } d.ov[s.loc][rid] = Object.assign({}, d.ov[s.loc][rid] || {}, P[rid]); });
-        if (!Object.keys(d.ov[s.loc]).length) delete d.ov[s.loc]; delete d.pend[s.loc]; d.ver[s.loc] = bump(d.ver[s.loc] || 'v1');
-        (d.hist[s.loc] = d.hist[s.loc] || []).unshift([d.ver[s.loc], Object.keys(P).length + ' rule ' + (Object.keys(P).length === 1 ? 'change' : 'changes') + ' approved and published: ' + Object.keys(P).join(', '), '24 Nov 2026 · approved by PIL Process Owner']);
-        save(d, { __toast: loc.short + ' rules ' + d.ver[s.loc] + ' are live (published within 1 minute).' }); } };
-    // ---- find a rule ----
-    const q = (s.rq || '').trim().toLowerCase(), res = [];
-    if (q) { const ws = q.split(/\s+/); ALL.forEach((r) => { const C2 = B3_CAT(r.cat); const bits = [r.id, r.name, r.trig, r.country, r.scope, r.review].concat(r.conds.map((c) => c.a + ' ' + c.v));
-        const lo = bits.join(' ').toLowerCase(); if (!ws.every((w) => lo.includes(w))) return;
-        const hit = r.conds.find((c) => ws.some((w) => (c.a + ' ' + c.v).toLowerCase().includes(w)));
-        res.push({ title: r.name, id: r.id, stage: C2.stage + ' · ' + C2.name, snip: hit ? (hit.t === 'IF' ? 'If ' : 'Then ') + hit.a + ' ' + (B4_OPP[hit.o] || '=') + ' ' + hit.v : r.trig,
-          go: () => { set({ stage: r.cat, rq: '', hl: r.id, open: '' }); setTimeout(() => { try { const el = document.querySelector('[data-k="' + r.id + '"]'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }, 80);
-            setTimeout(() => { if (self.state.hl === r.id) self.setState({ hl: '' }); }, 2800); } }); }); }
-    const rq = { v: s.rq || '', on: (e) => set({ rq: e.target.value, open: '' }), has: !!q, clear: () => set({ rq: '' }), open: !!q, items: res.slice(0, 8), n: res.length,
-      head: res.length ? res.length + (res.length === 1 ? ' rule' : ' rules') + (res.length > 8 ? ' · showing 8' : '') + ' at ' + loc.short : '', none: !!q && !res.length, noneT: 'No rules match "' + (s.rq || '').trim() + '". Try a rule ID, charge group, attribute or value.' };
-    // ---- other-country rules note ----
-    const otherHere = hidden.filter((r) => r.cat === s.stage);
-    const other = { has: otherHere.length > 0, t: otherHere.length + (otherHere.length === 1 ? ' rule in this stage doesn’t apply to ' : ' rules in this stage don’t apply to ') + loc.short + ': ' + otherHere.map((r) => r.id + ' (' + r.country + ')').join(', ') };
-    // ---- test with a B/L ----
-    let tst = { on: false };
-    if (s.tst) { const lid = s.loc;
-      const bySt = catsSorted.map((c) => ({ c, rules: inCat(c.code).filter((r) => r.on) }));
-      let held = false; const steps = [];
-      let F = Object.assign({}, B3_FACTS);
-      bySt.forEach(({ c, rules }) => { const go = () => set({ tst: null, stage: c.code });
+    const rulesAt = (lid, mode) => allIds().map((rid) => eff(rid, lid, mode)).filter((r) => r && applies(r, lid).on);
+    const ALL = rulesAt(s.loc);
+    const hidden = s.loc === 'GL' ? [] : allIds().map((rid) => eff(rid)).filter((r) => r && !applies(r).on);
+    const excRows = (r) => (r.exc || []).map((e) => Object.assign({ msg: (B3.exc.find((x) => x.code === e.code) || {}).msg || '' }, e));
+    const toRun = (r) => Object.assign({}, r, { els: { rows: excRows(r) } });
+    // ---- whole-pipeline run on the sample B/L ----
+    const pipeline = (lid, mode) => { const rs = rulesAt(lid, mode).filter((r) => r.on); let F = Object.assign({}, B3_FACTS), held = null; const steps = [];
+      catsSorted.forEach((c) => { const go = () => set({ tst: null, stage: c.code, sel: '' }); const rules = rs.filter((r) => r.cat === c.code).sort((a, b) => a.pri - b.pri);
         if (held) { steps.push({ icon: '–', cls: 'skip', stage: c.stage + '. ' + c.name, out: 'Not reached', why: '', hasWhy: false, go }); return; }
-        const out = b3Run(rules.map((r) => Object.assign({}, r, { els: { rows: (r.exc || []).map((e) => Object.assign({ msg: (B3.exc.find((x) => x.code === e.code) || {}).msg || '' }, e)) } })), F);
-        out.trace.filter((t) => /Fired/.test(t.res)).forEach((t) => { (t.cond || '').split('; ').forEach((kv) => { const m = kv.split(' = '); if (m.length === 2) F[m[0]] = m[1]; }); });
-        if (out.hold.length) { held = true; steps.push({ icon: '!', cls: 'bad', stage: c.stage + '. ' + c.name, out: 'Held: ' + out.hold[0], why: 'Fired: ' + out.firedIds.join(', '), hasWhy: true, go }); return; }
+        const out = b3Run(rules.map(toRun), F);
+        out.trace.filter((t) => /Fired/.test(t.res)).forEach((t) => (t.cond || '').split('; ').forEach((kv) => { const m = kv.split(' = '); if (m.length === 2) F[m[0]] = m[1]; }));
+        if (out.hold.length) { held = { stage: c.name, why: out.hold[0], by: out.firedIds.join(', ') }; steps.push({ icon: '!', cls: 'bad', stage: c.stage + '. ' + c.name, out: 'Held: ' + out.hold[0], why: 'Fired: ' + out.firedIds.join(', '), hasWhy: true, go }); return; }
         steps.push({ icon: out.fired ? '✓' : '–', cls: out.fired ? 'ok' : 'skip', stage: c.stage + '. ' + c.name, out: out.fired ? out.outs.slice(0, 2).join('; ') + (out.outs.length > 2 ? ' …' : '') : rules.length ? 'No rule matched the data' : 'No rules on', why: out.fired ? 'Fired: ' + out.firedIds.join(', ') : '', hasWhy: out.fired > 0, go }); });
-      const firstHold = steps.find((x) => x.cls === 'bad');
-      tst = { on: true, close: () => set({ tst: null, open: '' }), dd: dd('tst.bl', 'PILB120260901', [['PILB120260901', 'KOTA CANTIK / 0124W · Freight PP · Export']], () => {}, { w: '100%', aria: 'B/L' }),
+      return { steps, held, head: held ? 'Held at ' + held.stage + ': ' + held.why : 'Invoice would be created' }; };
+    // ---- stage list ----
+    const tagOf = (r) => chgHere(r.id) ? ['Changed', 'tg-chg'] : (r.__new || !B4_BASE[r.id]) ? ['New', 'tg-cus'] : (s.loc !== 'GL' && r.__src === s.loc) ? ['Set for ' + loc.short, 'tg-set'] : (s.loc !== 'GL' && applies(r).cfg) ? ['Country config', 'tg-inh'] : null;
+    const inCat = (c) => ALL.filter((r) => r.cat === c).sort((a, b) => a.pri - b.pri || (a.id > b.id ? 1 : -1));
+    const stRules = inCat(s.stage);
+    const FL = { all: () => true, chg: (r) => chgHere(r.id), set: (r) => r.__src === s.loc && s.loc !== 'GL', off: (r) => !r.on };
+    const shown = stRules.filter(FL[s.flt] || FL.all);
+    const rows = shown.map((r) => { const t = tagOf(r);
+      return { id: r.id, name: r.name, sum: b4Sum(r), on: r.on ? 'true' : '', flip: () => setR(r.id, { on: !r.on }), cur: s.sel === r.id ? 'true' : 'false',
+        open: () => set({ sel: s.sel === r.id ? '' : r.id, open: '', hl: '' }), cls: (r.on ? '' : 'rr-off ') + (s.sel === r.id ? 'rr-sel ' : '') + (s.hl === r.id ? 'rr-hl ' : '') + (chgHere(r.id) ? 'rr-chg' : ''),
+        hasTag: !!t, tag: t ? t[0] : '', tagCls: t ? t[1] : '', pri: String(r.pri) }; });
+    const stages = catsSorted.map((c) => { const rs = inCat(c.code), chg = rs.some((r) => chgHere(r.id)), here = rs.some((r) => r.__src === s.loc && s.loc !== 'GL');
+      return { n: String(c.stage), title: c.name, sum: rs.length + (rs.length === 1 ? ' rule' : ' rules') + (rs.some((r) => !r.on) ? ' · ' + rs.filter((r) => !r.on).length + ' off' : ''), cur: s.stage === c.code ? 'step' : 'false',
+        pick: () => set({ stage: c.code, open: '', hl: '', sel: '', flt: 'all' }), dot: chg || here, dotCls: chg ? 'chg' : 'set', dotTip: chg ? 'Changes not submitted' : 'Set for ' + loc.short }; });
+    const C = B3_CAT(s.stage), idx = catsSorted.findIndex((c) => c.code === s.stage), hitK = /^FIRST/.test(C.hit) ? 'FIRST' : 'COLLECT';
+    const nextId = (cat) => { let n = 1; allIds().forEach((id) => { const m = id.match(new RegExp('^BR-' + cat + '-(\\d+)$')); if (m) n = Math.max(n, +m[1] + 1); }); return 'BR-' + cat + '-' + String(n).padStart(3, '0'); };
+    const otherHere = hidden.filter((r) => r.cat === s.stage);
+    const flts = [['all', 'All', stRules.length], ['chg', 'Changed', stRules.filter(FL.chg).length]].concat(s.loc !== 'GL' ? [['set', 'Set for ' + loc.short, stRules.filter(FL.set).length]] : []).concat([['off', 'Off', stRules.filter(FL.off).length]]);
+    const st = { n: String(C.stage), title: C.name, hit: hitK, hitT: hitK === 'FIRST' ? 'GIRS uses the first rule that matches, top to bottom.' : 'Every rule that matches is applied.', out: C.out, rows, none: rows.length === 0,
+      noneT: stRules.length ? 'No rules match this filter.' : 'No rules in this stage apply to ' + loc.short + '.',
+      flts: flts.map(([k, t, n]) => ({ t, n: String(n), on: s.flt === k ? 'true' : 'false', go: () => set({ flt: k }) })),
+      hasOther: otherHere.length > 0, other: otherHere.length + (otherHere.length === 1 ? ' rule doesn’t' : ' rules don’t') + ' apply to ' + loc.short + ': ' + otherHere.map((r) => r.id + ' (' + r.country + ')').join(', '),
+      noPrev: idx === 0 ? 'true' : '', noNext: idx === catsSorted.length - 1 ? 'true' : '', prev: () => set({ stage: catsSorted[Math.max(0, idx - 1)].code, sel: '', flt: 'all' }), next: () => set({ stage: catsSorted[Math.min(13, idx + 1)].code, sel: '', flt: 'all' }),
+      addRule: () => set({ dlg: { t: 'rule', name: '', trig: C.code === 'TPL' ? 'Invoice print' : 'Invoice generation', pri: '50', a: '', o: '=', v: '', ta: '', tt: 'SET', tv: '' }, open: '' }), canAdd: !ro };
+    // ---- side panel ----
+    let pn = { on: false };
+    const R = s.sel ? ALL.find((x) => x.id === s.sel) : null;
+    if (R) { const rid = R.id, conds = R.conds, chk = b3EvalRule(R, B3_FACTS), res = chk.res || [];
+      const setC = (i, o) => { const c = conds.map((x) => Object.assign({}, x)); Object.assign(c[i], o); setR(rid, { conds: c }); };
+      let ii = -1;
+      const lines = conds.map((c, i) => { const isIf = c.t === 'IF'; if (isIf) ii++; const A = B3_ATTR[c.a] || { ops: [] };
+        const vals = (B4_VALS[c.a] || []).slice(); if (c.v && !vals.includes(c.v)) vals.push(c.v);
+        const blank = isIf && b4IsBlankOp(c), useDd = !blank && vals.length >= 2 && !(c.o === 'IN' || c.o === 'NOT IN') && !/X days|Threshold|config/.test(c.v || '');
+        const rr = isIf ? res[ii] : null, mk = !rr ? '' : rr.r === null ? '–' : rr.r ? '✓' : '✗';
+        return { isIf, a: c.a, hasJoin: isIf && ii > 0, j: ii > 0 && conds[i - 1] && conds[i - 1].j === 'OR' ? 'or' : 'and', togJ: () => { if (i > 0) setC(i - 1, { j: conds[i - 1].j === 'OR' ? 'AND' : 'OR' }); },
+          op: dd('pn.o.' + i, c.o, (isIf ? (A.ops && A.ops.length ? A.ops : B3_ALLOPS) : B3_ACTS).map((o) => [o, isIf ? o : ((B3.acts.find((x) => x.a === o) || {}).d || '')]), (v) => setC(i, { o: v, v: isIf && (v === 'IS' || v === 'IS NOT') && !/^Blank/.test(c.v) ? 'Blank' : c.v }),
+            { fmt: isIf ? (v) => B4_OPP[v] || v : (v) => v, ofmt: isIf ? (v) => B4_OPP[v] || v : (v) => v, cls: isIf ? 'dd-op' : 'dd-act', aria: (isIf ? 'Operator for ' : 'Action type for ') + c.a, dis: ro }),
+          isDd: useDd, vd: dd('pn.v.' + i, c.v, vals, (v) => setC(i, { v }), { cls: 'dd-val', aria: 'Value for ' + c.a, dis: ro }),
+          isIn: !useDd && !blank, v: c.v, setV: (e) => setC(i, { v: e.target.value }),
+          hasRest: blank && !!b4Rest(c.v), rest: b4Rest(c.v),
+          hasMk: isIf, mk, mkCls: mk === '✓' ? 'ok' : mk === '✗' ? 'bad' : 'na', mkTip: rr ? 'Sample B/L: ' + rr.x : '',
+          del: () => setR(rid, { conds: conds.filter((_, k) => k !== i) }) }; });
+      const failed = res.find((x) => x.r === false);
+      const qc = chk.na ? { cls: 'na', head: 'Not enough sample data', sub: 'The sample B/L has no value for these attributes. Use Test with a B/L to run all stages.' }
+        : chk.fired ? { cls: 'ok', head: 'Fires on sample B/L PILB120260901', sub: (chk.thens || []).slice(0, 2).map((t) => t.a + ': ' + t.v).join(' · ') }
+        : { cls: 'no', head: 'Doesn’t fire on sample B/L PILB120260901', sub: failed ? 'Needs ' + failed.c.a + ' ' + (B4_OPP[failed.c.o] || failed.c.o) + (b4IsBlankOp(failed.c) ? '' : ' ' + failed.c.v) + '; the sample has ' + (failed.x === '(blank)' ? 'no value' : failed.x) + '.' : 'Some conditions have no sample data.' };
+      const dup = ALL.filter((x) => x.id !== rid && x.cat === R.cat && x.pri === R.pri && x.on && x.country === R.country);
+      const t = tagOf(R), here = R.__src === s.loc && s.loc !== 'GL';
+      const setExc = (i, o) => { const e = (R.exc || []).map((x) => Object.assign({}, x)); Object.assign(e[i], o); setR(rid, { exc: e }); };
+      pn = { on: true, id: rid, name: R.name, st: R.status, stCls: ({ Draft: 'c-draft', Submitted: 'c-sub', Active: 'c-act', Inactive: 'c-off' })[R.status] || 'c-draft',
+        hasTag: !!t, tag: t ? t[0] : '', tagCls: t ? t[1] : '', on: R.on ? 'true' : '', flip: () => setR(rid, { on: !R.on }),
+        meta: 'Priority ' + R.pri + ' · ' + R.trig, close: () => set({ sel: '' }), qc,
+        hasWarn: dup.length > 0 && hitK === 'FIRST', warn: 'Same priority as ' + dup.map((x) => x.id).join(', ') + ' in a FIRST stage, so which one wins is unclear. Give them different priorities.',
+        ifs: lines.filter((x) => x.isIf), thens: lines.filter((x) => !x.isIf),
+        addC: () => set({ dlg: { t: 'cond', rid, kind: 'IF', a: '', o: '=', v: '' }, open: '' }), addA: () => set({ dlg: { t: 'cond', rid, kind: 'THEN', a: '', o: 'SET', v: '' }, open: '' }),
+        els: R.elsT, setEls: (e) => setR(rid, { elsT: e.target.value }),
+        trig: dd('pn.t', R.trig, B3_TRIG, (v) => setR(rid, { trig: v }), { w: '100%', aria: 'Trigger event', dis: ro }), pri: String(R.pri), setPri: (e) => setR(rid, { pri: Math.max(1, Math.min(999, parseInt(e.target.value.replace(/\D/g, '') || '1', 10))) }),
+        from: R.from, setFrom: (e) => setR(rid, { from: e.target.value }), to: R.to, setTo: (e) => setR(rid, { to: e.target.value }), scope: R.scope, setScope: (e) => setR(rid, { scope: e.target.value }),
+        exc: (R.exc || []).map((e, i) => ({ code: dd('pn.c.' + i, e.code, B3.exc.map((x) => [x.code, x.msg]), (v) => setExc(i, { code: v }), { w: '116px', aria: 'Exception code', dis: ro }),
+          msg: (B3.exc.find((x) => x.code === e.code) || {}).msg || '', sev: dd('pn.s.' + i, e.sev, B3_SEV, (v) => setExc(i, { sev: v }), { w: '104px', aria: 'Severity', dis: ro, cls: e.sev === 'Hold' ? 'sv-hold' : 'sv-warn' }),
+          notify: dd('pn.n.' + i, e.notify, B3_NOTIFY, (v) => setExc(i, { notify: v }), { w: '136px', aria: 'Notify', dis: ro }), del: () => setR(rid, { exc: (R.exc || []).filter((_, k) => k !== i) }) })),
+        noExc: !(R.exc || []).length, addExc: () => setR(rid, { exc: (R.exc || []).concat([{ code: 'BRE-001', sev: 'Hold', notify: 'Invoice user' }]) }),
+        about: [['Country / Agency', R.country], ['Charge / customer scope', R.scope || '—'], ['Workshop status', R.review || '—'], ['BR No.', R.br || '—'], ['MOM ref.', R.mom || '—'], ['Hit policy', C.hit]].map(([k, v]) => ({ k, v })),
+        canReset: !!parent && (here || chgHere(rid)) && !!B4_BASE[rid] && !ro, reset: () => resetR(rid), resetL: 'Use Global rule', srcT: s.loc === 'GL' ? 'Global default' : here ? 'Set for ' + loc.short : 'From Global' }; }
+    // ---- location bar & approval ----
+    const draft = DB.draft[s.loc] || {}, nDraft = Object.keys(draft).length, P = pendOf(s.loc), nPend = P ? Object.keys(P.ch).length : 0;
+    const ovN = (id) => Object.keys(DB.ov[id] || {}).length;
+    const locDd = dd('loc', s.loc, B4_LOCS.map((l) => [l.id, (l.id === 'GL' ? 'All 76 catalogue rules' : (ovN(l.id) ? ovN(l.id) + (ovN(l.id) === 1 ? ' rule set for this country' : ' rules set for this country') : 'Uses Global rules')) + (Object.keys(DB.draft[l.id] || {}).length ? ' · changes not submitted' : '') + (pendOf(l.id) ? ' · waiting for approval' : '')]),
+      (v) => set({ loc: v, hl: '', sel: '', flt: 'all' }), { fmt: (v) => L(v).name, w: '280px', aria: 'Location', cls: 'dd-loc' });
+    const bump = (v) => 'v' + ((parseInt(String(v).slice(1), 10) || 1) + 1);
+    const locV = { dd: locDd, name: loc.short, notGl: s.loc !== 'GL', inh: s.loc === 'GL' ? 'Applies everywhere unless a country sets its own' : 'Inherits from', ver: DB.ver[s.loc] || 'v1',
+      applies: s.loc === 'GL' ? '76 rules' : ALL.length + ' of ' + (ALL.length + hidden.length) + ' rules apply',
+      hasDraft: nDraft > 0 && !isAppr, draftN: nDraft + (nDraft === 1 ? ' change' : ' changes') + ' not submitted',
+      discard: () => { const d = clone(DB); delete d.draft[s.loc]; save(d, { __toast: 'Changes discarded.' }); },
+      review: () => set({ dlg: { t: 'review', mode: 'submit', note: '' }, open: '' }),
+      hasPendA: !!P && !isAppr, hasPendB: !!P && isAppr, pendT: nPend + (nPend === 1 ? ' change' : ' changes') + ' waiting for approval',
+      pendSub: P ? 'Submitted by ' + P.by + ' on ' + b3D(P.on) + '. Live rules stay unchanged until ' + B4_APPROVER + ' approves.' : '',
+      pendSubB: P ? P.by + ' submitted ' + nPend + (nPend === 1 ? ' change' : ' changes') + ' for ' + loc.short + ' on ' + b3D(P.on) + '.' : '',
+      openPend: () => set({ dlg: { t: 'review', mode: isAppr ? 'approve' : 'view', note: '' }, open: '' }),
+      withdraw: () => { const d = clone(DB); d.draft[s.loc] = Object.assign({}, d.pend[s.loc].ch, d.draft[s.loc] || {}); delete d.pend[s.loc]; save(d, { __toast: 'Withdrawn. The changes are back in draft.' }); },
+      hasRej: !!DB.rej[s.loc] && !isAppr && nDraft > 0, rejT: DB.rej[s.loc] ? 'Returned by ' + B4_APPROVER + ': “' + DB.rej[s.loc] + '”' : '',
+      roNote: isAppr && !P ? 'You’re viewing as Rule Approver. Rules are read-only; switch to Author to make changes.' : '', hasRoNote: isAppr && !P };
+    // ---- review dialog data ----
+    const sig = (c) => (c.t === 'IF' ? 'If ' : 'Then ') + c.a + ' ' + (c.t === 'IF' ? (B4_OPP[c.o] || c.o) + (b4IsBlankOp(c) ? '' : ' ' + c.v) : '= ' + c.v);
+    const diffOf = (rid, ch) => { const before = ch.__new ? null : eff(rid, s.loc, 'live'), after = eff(rid, s.loc) || Object.assign({}, ch), out = [];
+      if (!before) { out.push({ f: 'New rule', a: '—', b: after.name, cls: 'add' }); after.conds.forEach((c) => out.push({ f: '', a: '', b: sig(c), cls: 'add' })); return { before, after, out }; }
+      if (ch.__reset) { out.push({ f: 'Country setting', a: 'Set for ' + loc.short, b: 'Use Global rule', cls: 'chg' }); return { before, after, out }; }
+      [['on', 'Rule', (v) => v ? 'On' : 'Off'], ['pri', 'Priority', String], ['trig', 'Trigger', String], ['from', 'Effective from', b3D], ['to', 'Effective to', (v) => v ? b3D(v) : 'Open-ended'], ['scope', 'Scope', String], ['elsT', 'Otherwise', String]]
+        .forEach(([k, t, f]) => { if (JSON.stringify(before[k]) !== JSON.stringify(after[k])) out.push({ f: t, a: f(before[k]) || '—', b: f(after[k]) || '—', cls: 'chg' }); });
+      const sa = before.conds.map(sig), sb = after.conds.map(sig);
+      sb.forEach((x, i) => { if (!sa.includes(x)) { const old = before.conds[i] && !sb.includes(sa[i]) ? sa[i] : ''; out.push({ f: old ? 'Changed' : 'Added', a: old || '—', b: x, cls: old ? 'chg' : 'add' }); } });
+      sa.forEach((x, i) => { if (!sb.includes(x) && !(after.conds[i] && !sa.includes(sb[i]))) out.push({ f: 'Removed', a: x, b: '—', cls: 'del' }); });
+      if (JSON.stringify(before.exc) !== JSON.stringify(after.exc)) out.push({ f: 'Exception codes', a: (before.exc || []).map((e) => e.code + ' ' + e.sev).join(', ') || '—', b: (after.exc || []).map((e) => e.code + ' ' + e.sev).join(', ') || '—', cls: 'chg' });
+      return { before, after, out }; };
+    // ---- test drawer ----
+    let tst = { on: false };
+    if (s.tst) { const ok = (s.tst.bl || '').trim().toUpperCase() === 'PILB120260901'; const p = ok ? pipeline(s.loc) : null;
+      tst = { on: true, close: () => set({ tst: null, open: '' }), bl: s.tst.bl, setBl: (e) => set({ tst: { bl: e.target.value } }), ok, bad: !ok, badT: 'B/L ' + ((s.tst.bl || '').trim() || '(blank)') + ' was not found. Try PILB120260901.',
         facts: [['B/L No.', 'PILB120260901'], ['VVD', 'KOTA CANTIK / 0124W'], ['Direction', 'Export'], ['Charge group / term', 'FREIGHT · PP'], ['Charge code', 'OCF'], ['GL Account Mapping', 'OCF (Ocean Freight) – no mapping']].map(([k, v]) => ({ k, v })),
-        cls: firstHold ? 'bad' : 'ok', head: firstHold ? 'Invoice would be held' : 'Invoice would be created', sub: firstHold ? firstHold.out.replace(/^Held: /, '') + '. The remaining stages are not reached.' : 'All stages passed for ' + loc.short + '.', steps,
-        note: 'Runs the rules that are on at ' + loc.short + ', including unsaved changes. Nothing is created.' }; }
-    // ---- history ----
+        cls: p && p.held ? 'bad' : 'ok', head: p && p.held ? 'Invoice would be held' : 'Invoice would be created', sub: p ? (p.held ? p.held.why + ' (' + p.held.by + '). Later stages are not reached.' : 'All stages passed for ' + loc.short + '.') : '', steps: p ? p.steps : [],
+        note: 'Runs the rules that are on for ' + loc.short + ', including changes not yet submitted. Nothing is created.' }; }
     const hist = { on: !!s.hist, close: () => set({ hist: false }), sub: loc.name + ' · live ' + (DB.ver[s.loc] || 'v1'),
-      items: (DB.hist[s.loc] || []).concat(s.loc === 'GL' ? [['v3', 'BR-ROE-001 updated to v3', '18 Nov 2026 · approved by Thushy (PIL)'], ['v2', 'BR-TRG-001 updated to v2', '18 Nov 2026 · approved by Thushy (PIL)'], ['v1', 'Initial rules from the workshop catalogue (76 rules)', '18 Nov 2026 · Shivender V.']] : [['v1', 'Uses Global defaults', '18 Nov 2026 · Shivender V.']]).map(([v, t, w]) => ({ v, t, w })) };
+      items: (DB.hist[s.loc] || []).concat(s.loc === 'GL' ? [['v3', 'BR-ROE-001 updated to v3', '18 Nov 2026 · approved by Thushy (PIL)'], ['v2', 'BR-TRG-001 updated to v2', '18 Nov 2026 · approved by Thushy (PIL)'], ['v1', 'Initial rules from the workshop catalogue (76 rules)', '18 Nov 2026 · Shivender V.']] : [['v1', 'Uses Global rules', '18 Nov 2026 · Shivender V.']]).map(([v, t, w]) => ({ v, t, w })) };
+    // ---- find ----
+    const q = (s.rq || '').trim().toLowerCase(), res = [];
+    if (q) { const ws = q.split(/\s+/); ALL.forEach((r) => { const C2 = B3_CAT(r.cat); const lo = [r.id, r.name, r.trig, r.country, r.scope].concat(r.conds.map((c) => c.a + ' ' + c.v)).join(' ').toLowerCase(); if (!ws.every((w) => lo.includes(w))) return;
+        res.push({ title: r.name, id: r.id, stage: C2.stage + ' · ' + C2.name, snip: b4Sum(r), go: () => { set({ stage: r.cat, rq: '', sel: r.id, hl: r.id, flt: 'all', open: '' }); setTimeout(() => { try { const el = document.querySelector('[data-k="' + r.id + '"]'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }, 80); } }); }); }
+    const rq = { v: s.rq || '', on: (e) => set({ rq: e.target.value, open: '' }), has: !!q, clear: () => set({ rq: '' }), open: !!q, items: res.slice(0, 8), n: res.length,
+      head: res.length ? res.length + (res.length === 1 ? ' rule' : ' rules') + (res.length > 8 ? ' · showing 8' : '') + ' for ' + loc.short : '', none: !!q && !res.length, noneT: 'No rules match "' + (s.rq || '').trim() + '". Try a rule ID, charge group or value.' };
     // ---- dialogs ----
     let dlg = { on: false };
     if (s.dlg) { const D = s.dlg, close = () => set({ dlg: null, open: '' }), upd = (o) => set({ dlg: Object.assign({}, D, o), open: '' });
       const attrOpts = Object.keys(B3_ATTR).sort().map((k) => [k, B3_ATTR[k].src + (B3_ATTR[k].type ? ' · ' + B3_ATTR[k].type : '')]);
-      const valPart = (key, a, v, setter) => { const vals = B4_VALS[a] || []; return vals.length >= 2 ? { isDd: true, isIn: false, vd: dd(key, v, vals, setter, { w: '100%', ph: 'Value', aria: 'Value' }) } : { isDd: false, isIn: true, v, setV: (e) => setter(e.target.value) }; };
-      if (D.t === 'cond') { const isIf = D.kind === 'IF', A = B3_ATTR[D.a] || { ops: [] }, r = eff(D.rid);
-        dlg = Object.assign({ title: isIf ? 'Add condition' : 'Add action', sub: r ? r.id + ' – ' + r.name : '', okL: isIf ? 'Add condition' : 'Add action', isCond: true,
-          aL: isIf ? 'Attribute' : 'Target', oL: isIf ? 'Operator' : 'Action type',
+      const valPart = (key, a, o, v, setter) => { if (o === 'IS' || o === 'IS NOT') return { isDd: false, isIn: false, noVal: true }; const vals = B4_VALS[a] || []; return vals.length >= 2 ? { isDd: true, isIn: false, noVal: false, vd: dd(key, v, vals, setter, { w: '100%', ph: 'Value', aria: 'Value' }) } : { isDd: false, isIn: true, noVal: false, v, setV: (e) => setter(e.target.value) }; };
+      if (D.t === 'cond') { const isIf = D.kind === 'IF', A = B3_ATTR[D.a] || { ops: [] }, r = eff(D.rid); const vp = valPart('n.v', D.a, isIf ? D.o : '', D.v, (v) => upd({ v }));
+        dlg = Object.assign({ title: isIf ? 'Add condition' : 'Add action', sub: r ? r.id + ' · ' + r.name : '', okL: isIf ? 'Add condition' : 'Add action', isCond: true, aL: isIf ? 'Attribute' : 'Target', oL: isIf ? 'Operator' : 'Action type',
           a: isIf ? dd('n.a', D.a, attrOpts, (v) => upd({ a: v, o: (B3_ATTR[v] && B3_ATTR[v].ops && B3_ATTR[v].ops[0]) || '=' }), { w: '100%', ph: 'Select an attribute', aria: 'Attribute' }) : dd('n.a', D.a, B4_TARGETS, (v) => upd({ a: v }), { w: '100%', ph: 'Select a target', aria: 'Target' }),
-          o: dd('n.o', D.o, (isIf ? (A.ops && A.ops.length ? A.ops : B3_ALLOPS) : B3_ACTS).map((o) => [o, isIf ? ((B3.ops.find((x) => x.o === o) || {}).m || '') : ((B3.acts.find((x) => x.a === o) || {}).d || '')]), (v) => upd({ o: v }), { w: '100%', aria: isIf ? 'Operator' : 'Action type' }),
-          pv: (D.a || '…') + ' ' + (isIf ? (B4_OPP[D.o] || D.o) : '=') + ' ' + (D.v || '…'),
-          noOk: D.a && (D.v || '').trim() ? '' : 'true',
-          ok: () => { const c = r.conds.slice(); const nc = { t: D.kind, a: D.a, o: D.o, v: D.v.trim(), j: '' };
+          o: dd('n.o', D.o, (isIf ? (A.ops && A.ops.length ? A.ops : B3_ALLOPS) : B3_ACTS).map((o) => [o, isIf ? o : ((B3.acts.find((x) => x.a === o) || {}).d || '')]), (v) => upd({ o: v }), { w: '100%', aria: isIf ? 'Operator' : 'Action type', fmt: isIf ? (v) => B4_OPP[v] || v : null, ofmt: isIf ? (v) => B4_OPP[v] || v : null }),
+          pv: (D.a || '…') + ' ' + (isIf ? (B4_OPP[D.o] || D.o) + (vp.noVal ? '' : ' ' + (D.v || '…')) : '= ' + (D.v || '…')),
+          noOk: D.a && (vp.noVal || (D.v || '').trim()) ? '' : 'true',
+          ok: () => { const c = r.conds.slice(); const nc = { t: D.kind, a: D.a, o: D.o, v: vp.noVal ? 'Blank' : D.v.trim(), j: '' };
             if (isIf) { const at = c.findIndex((x) => x.t === 'THEN'); const pos = at < 0 ? c.length : at; if (pos > 0 && c[pos - 1].t === 'IF') c[pos - 1] = Object.assign({}, c[pos - 1], { j: c[pos - 1].j || 'AND' }); c.splice(pos, 0, nc); } else c.push(nc);
-            setR(D.rid, { conds: c }, { dlg: null, __toast: (isIf ? 'Condition' : 'Action') + ' added to ' + D.rid + ' for ' + loc.short + '.' }); } }, valPart('n.v', D.a, D.v, (v) => upd({ v }))); }
+            setR(D.rid, { conds: c }, { dlg: null, __toast: (isIf ? 'Condition' : 'Action') + ' added to ' + D.rid + '.' }); } }, vp); }
       if (D.t === 'rule') { const nid = nextId(s.stage), A = B3_ATTR[D.a] || { ops: [] };
-        const ok = (D.name || '').trim() && D.a && (D.v || '').trim() && D.ta && (D.tv || '').trim();
-        const vp = valPart('r.v', D.a, D.v, (v) => upd({ v })), tp = valPart('r.tv', D.ta, D.tv, (v) => upd({ tv: v }));
-        dlg = { title: 'Add rule to ' + C.name, sub: 'Stage ' + C.stage + ' · ' + C.hit + ' · added for ' + loc.short + (s.loc === 'GL' ? ' (applies everywhere)' : ' only'), okL: 'Add rule', isRule: true,
+        const vp = valPart('r.v', D.a, D.o, D.v, (v) => upd({ v })), tp = valPart('r.tv', D.ta, '', D.tv, (v) => upd({ tv: v }));
+        const ok = (D.name || '').trim() && D.a && (vp.noVal || (D.v || '').trim()) && D.ta && (D.tv || '').trim();
+        dlg = { title: 'Add rule to ' + C.name, sub: 'Stage ' + C.stage + ' · ' + hitK + ' · ' + (s.loc === 'GL' ? 'applies everywhere' : 'for ' + loc.short + ' only'), okL: 'Add rule', isRule: true,
           nid, name: D.name, setName: (e) => upd({ name: e.target.value }), trig: dd('r.t', D.trig, B3_TRIG, (v) => upd({ trig: v }), { w: '100%', aria: 'Trigger event' }), pri: D.pri, setPri: (e) => upd({ pri: e.target.value.replace(/\D/g, '').slice(0, 3) }),
           a: dd('r.a', D.a, attrOpts, (v) => upd({ a: v, o: (B3_ATTR[v] && B3_ATTR[v].ops && B3_ATTR[v].ops[0]) || '=' }), { w: '100%', ph: 'Attribute', aria: 'Attribute' }),
-          o: dd('r.o', D.o, (A.ops && A.ops.length ? A.ops : B3_ALLOPS), (v) => upd({ o: v }), { w: '100%', aria: 'Operator', fmt: (v) => v + ' · ' + (B4_OPP[v] || '') }), vIsDd: vp.isDd, vIsIn: vp.isIn, vd: vp.vd, v: vp.v, setV: vp.setV,
+          o: dd('r.o', D.o, (A.ops && A.ops.length ? A.ops : B3_ALLOPS), (v) => upd({ o: v }), { w: '100%', aria: 'Operator', fmt: (v) => B4_OPP[v] || v, ofmt: (v) => B4_OPP[v] || v }),
+          vIsDd: vp.isDd, vIsIn: vp.isIn, vd: vp.vd, v: vp.v, setV: vp.setV,
           ta: dd('r.ta', D.ta, B4_TARGETS, (v) => upd({ ta: v }), { w: '100%', ph: 'Target', aria: 'Target' }), tt: dd('r.tt', D.tt, B3_ACTS, (v) => upd({ tt: v }), { w: '100%', aria: 'Action type' }),
           tIsDd: tp.isDd, tIsIn: tp.isIn, tvd: tp.vd, tv: tp.v, setTv: tp.setV,
-          pv: 'If ' + (D.a || '…') + ' ' + (B4_OPP[D.o] || D.o) + ' ' + (D.v || '…') + ', then ' + D.tt + ' ' + (D.ta || '…') + ' = ' + (D.tv || '…') + '.',
-          noOk: ok ? '' : 'true',
+          pv: 'If ' + (D.a || '…') + ' ' + (B4_OPP[D.o] || D.o) + (vp.noVal ? '' : ' ' + (D.v || '…')) + ', then ' + (D.ta || '…') + ' = ' + (D.tv || '…') + '.', noOk: ok ? '' : 'true',
           ok: () => { const r = { __new: true, id: nid, br: '', name: D.name.trim(), cat: s.stage, pri: +D.pri || 50, country: s.loc === 'GL' ? 'All' : s.loc, scope: '', trig: D.trig, review: 'New – added in GIRS', mom: '', status: 'Draft', on: true, from: '2026-11-24', to: '', elsT: '',
-              conds: [{ t: 'IF', a: D.a, o: D.o, v: D.v.trim(), j: '' }, { t: 'THEN', a: D.ta, o: D.tt, v: D.tv.trim(), j: '' }], exc: [] };
-            const db = clone(DB); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][nid] = r; save(db, { dlg: null, hl: nid, __toast: nid + ' added for ' + loc.short + '. Submit for approval to make it live.' }); } }; }
-      dlg = Object.assign({ on: true, close, isCond: false, isRule: false }, dlg); }
-    return { loc: locV, stages, st, rq, other, tst, hist, dlg, ro: ro ? 'true' : '', isRo: ro,
+              conds: [{ t: 'IF', a: D.a, o: D.o, v: vp.noVal ? 'Blank' : D.v.trim(), j: '' }, { t: 'THEN', a: D.ta, o: D.tt, v: D.tv.trim(), j: '' }], exc: [] };
+            const db = clone(DB); db.draft[s.loc] = db.draft[s.loc] || {}; db.draft[s.loc][nid] = r; save(db, { dlg: null, sel: nid, hl: nid, flt: 'all', __toast: nid + ' added. Submit for approval to make it live.' }); } }; }
+      if (D.t === 'review') { const ch = D.mode === 'submit' ? draft : (P ? P.ch : {}); const items = Object.keys(ch).map((rid) => { const d = diffOf(rid, ch[rid]); const r = d.after || d.before || {};
+          return { id: rid, name: r.name || rid, stage: B3_CAT(r.cat).name, lines: d.out, none: d.out.length === 0, open: () => set({ dlg: null, stage: r.cat, sel: rid, flt: 'all' }) }; });
+        const pb = pipeline(s.loc, 'live'), pa = pipeline(s.loc);
+        const same = pb.head === pa.head;
+        const base = { title: D.mode === 'submit' ? 'Review changes for ' + loc.short : D.mode === 'approve' ? 'Approve changes for ' + loc.short : 'Changes waiting for approval', isRev: true, items,
+          sub: D.mode === 'submit' ? items.length + (items.length === 1 ? ' rule changed' : ' rules changed') + '. Check them before sending to ' + B4_APPROVER + '.' : (P ? 'Submitted by ' + P.by + ' on ' + b3D(P.on) + (P.note ? ' · “' + P.note + '”' : '') : ''),
+          bA: pb.head, bB: pa.head, bCls: pb.held ? 'bad' : 'ok', aCls: pa.held ? 'bad' : 'ok', impT: same ? 'No change to the sample B/L outcome.' : 'The sample B/L outcome changes.', impCls: same ? '' : 'imp',
+          note: D.note || '', setNote: (e) => upd({ note: e.target.value }) };
+        if (D.mode === 'submit') dlg = Object.assign(base, { noteL: 'Note for the approver', noteOpt: true, hasNote: true, okL: 'Submit for approval', noOk: items.length ? '' : 'true', isSub: true,
+          ok: () => { const d = clone(DB); d.pend[s.loc] = { ch: d.draft[s.loc], by: B4_AUTHOR, on: B3_NOW, note: (D.note || '').trim() }; delete d.draft[s.loc]; delete d.rej[s.loc];
+            (d.hist[s.loc] = d.hist[s.loc] || []).unshift([d.ver[s.loc] || 'v1', 'Submitted ' + items.length + (items.length === 1 ? ' change' : ' changes') + ': ' + items.map((x) => x.id).join(', '), '24 Nov 2026 · ' + B4_AUTHOR]);
+            save(d, { dlg: null, sel: '', __toast: 'Sent to ' + B4_APPROVER + '. Live rules stay unchanged until approved.' }); } });
+        else if (D.mode === 'approve') dlg = Object.assign(base, { noteL: 'Comment (needed to send back)', hasNote: true, okL: 'Approve & publish', noOk: '', isAp: true, rejNo: (D.note || '').trim() ? '' : 'true',
+          ok: () => { const d = clone(DB); const ch2 = d.pend[s.loc].ch; d.ov[s.loc] = d.ov[s.loc] || {}; Object.keys(ch2).forEach((rid) => { if (ch2[rid].__reset) delete d.ov[s.loc][rid]; else d.ov[s.loc][rid] = Object.assign({}, d.ov[s.loc][rid] || {}, ch2[rid]); });
+            if (!Object.keys(d.ov[s.loc]).length) delete d.ov[s.loc]; delete d.pend[s.loc]; d.ver[s.loc] = bump(d.ver[s.loc] || 'v1');
+            (d.hist[s.loc] = d.hist[s.loc] || []).unshift([d.ver[s.loc], items.length + (items.length === 1 ? ' change' : ' changes') + ' approved and published: ' + items.map((x) => x.id).join(', '), '24 Nov 2026 · approved by ' + B4_APPROVER]);
+            save(d, { dlg: null, __toast: loc.short + ' rules ' + d.ver[s.loc] + ' are live (published within 1 minute).' }); },
+          rej: () => { const d = clone(DB); d.draft[s.loc] = Object.assign({}, d.pend[s.loc].ch, d.draft[s.loc] || {}); delete d.pend[s.loc]; d.rej[s.loc] = (D.note || '').trim();
+            (d.hist[s.loc] = d.hist[s.loc] || []).unshift([d.ver[s.loc] || 'v1', 'Sent back: ' + (D.note || '').trim(), '24 Nov 2026 · ' + B4_APPROVER]); save(d, { dlg: null, __toast: 'Sent back to ' + B4_AUTHOR + ' with your comment.' }); } });
+        else dlg = Object.assign(base, { hasNote: false, okL: 'Close', noOk: '', isView: true, ok: close }); }
+      dlg = Object.assign({ on: true, close, wide: D.t === 'review' ? 'b5-wide' : '', hasVal: !dlg.noVal, isCond: false, isRule: false, isRev: false, isSub: false, isAp: false, isView: false, hasNote: false, noteOpt: false }, dlg); }
+    const roleSeg = { a: isAppr ? 'false' : 'true', b: isAppr ? 'true' : 'false', setA: () => set({ role: 'author', dlg: null }), setB: () => set({ role: 'approver', sel: s.sel, dlg: null }) };
+    return { loc: locV, stages, st, pn, rq, tst, hist, dlg, role: roleSeg, ro: ro ? 'true' : '', notRo: !ro, panel: pn.on ? 'true' : 'false',
       openTest: () => set({ tst: { bl: 'PILB120260901' }, open: '' }), openHist: () => set({ hist: true, open: '' }) };
   }
 }
