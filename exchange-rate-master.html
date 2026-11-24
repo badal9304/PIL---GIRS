@@ -599,6 +599,9 @@ input[type=date]::-webkit-calendar-picker-indicator:hover{background:var(--hover
         </div>
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <div class="tabs" role="tablist" aria-label="Exchange rate type">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" id="{{t.id}}" aria-controls="er-panel" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="cnt">{{t.n}}</span></button></sc-for>
+        </div>
         <section class="card er-s" aria-labelledby="er-s-t">
           <h2 id="er-s-t" class="sr">Search exchange rates</h2>
           <div class="er-g">
@@ -628,8 +631,8 @@ input[type=date]::-webkit-calendar-picker-indicator:hover{background:var(--hover
           <sc-if value="{{dateErr}}" hint-placeholder-val="{{ false }}"><div class="banner b-block" role="alert" style="margin-top: 12px">To Date can’t be before From Date.</div></sc-if>
         </section>
 
-        <section class="card er-r" aria-labelledby="er-r-t">
-          <div class="card-head"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="card-title" id="er-r-t">Exchange Rates</h2><span class="mono er-n">{{countText}}</span></div>
+        <section class="card er-r" id="er-panel" role="tabpanel" aria-labelledby="er-r-t">
+          <div class="card-head"><div style="display: flex; align-items: baseline; gap: 8px"><h2 class="card-title" id="er-r-t">{{tabTitle}}</h2><span class="mono er-n">{{countText}}</span></div>
             <span style="display: inline-flex; gap: 8px">
             <div class="fq"><button class="btn btn-sm cols-b" aria-haspopup="dialog" aria-expanded="{{cols.openA}}" title="Show or hide table columns" onClick="{{cols.toggle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="1.5"></rect><path d="M9.5 4v16M14.5 4v16"></path></svg><span>Columns</span><span class="count on">{{cols.n}}</span></button><sc-if value="{{cols.open}}" hint-placeholder-val="{{ false }}"><button class="mback" tabindex="-1" aria-label="Close columns" onClick="{{cols.cancel}}"></button><div class="msel-p cols-p" role="dialog" aria-label="Columns"><div class="cols-h"><span>Columns</span><span class="mu">{{cols.dn}}</span></div><div class="cols-s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input cols-q" placeholder="Search columns" aria-label="Search columns" value="{{cols.q}}" onInput="{{cols.onQ}}"><sc-if value="{{cols.hasQ}}" hint-placeholder-val="{{ false }}"><button class="cols-x" aria-label="Clear search" onClick="{{cols.clrQ}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div><sc-if value="{{cols.noQ}}" hint-placeholder-val="{{ true }}"><label class="msel-o"><input type="checkbox" checked="{{cols.all}}" onChange="{{cols.allFlip}}"><span style="font-weight: 600">Select all</span></label></sc-if><div class="cols-l"><sc-for list="{{cols.list}}" as="c" hint-placeholder-count="8"><label class="msel-o" title="{{c.tip}}"><input type="checkbox" checked="{{c.on}}" disabled="{{c.lock}}" onChange="{{c.flip}}"><span>{{c.label}}</span></label></sc-for><sc-if value="{{cols.none}}" hint-placeholder-val="{{ false }}"><div class="mu" style="padding: 16px; font-size: 13px; text-align: center">No columns match</div></sc-if></div><div class="msel-f"><button class="btn btn-sm" onClick="{{cols.reset}}" disabled="{{cols.isDef}}">Reset to default</button><button class="btn btn-sm btn-primary" onClick="{{cols.done}}">Done</button></div></div></sc-if></div>
             <button class="btn btn-sm" onClick="{{exportXls}}" disabled="{{noRows}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M5 20h14"></path></svg>Export to Excel</button>
@@ -708,31 +711,38 @@ const ER_SHEET = [
 ];
 const ER_NA = 'Not Applicable';
 // Customer is not in the sheet's table; it stays Not Applicable until the client gives customer-specific rates
-const erBuild = () => ER_SHEET.map(([ctry, off, port, type, bound, vvd, eta, scope, date, cc, lc, rate, by, upd]) => ({ ctry, off, port, type, bound, vvd, eta, scope, cust: ER_NA, date, cc, lc, rate, by, upd }));
+// Two tabs, as in the client's sheet: VVD Exchange Rate and Daily Exchange Rate. Each tab has its own table columns.
+const ER_DAILY_FROM = '2026-11-17';
+const erBuild = () => ER_SHEET.map(([ctry, off, port, type, bound, vvd, eta, scope, date, cc, lc, rate, by, upd]) => type === 'Daily'
+  ? { tab: 'daily', ctry, port, off, bound, scope: 'OTH', upd, from: ER_DAILY_FROM, to: ER_DAILY_FROM, cc, lc, rate, vvd: '', by }
+  : { tab: 'vvd', ctry, port, off, bound, scope: 'FRT', upd, from: upd, to: eta, cc, lc, rate, vvd, by });
 const ER_ALL = erBuild();
-const ER_UNIQ = (k) => ER_ALL.map((r) => r[k]).filter((v, i, a) => v && v !== ER_NA && a.indexOf(v) === i).sort();
-// Search criteria as on the sheet; the sheet's defaults are Daily, AUD, ALL scope and bound, and From Date = To Date
-const ER_DEF = { type: [], cc: [], lc: ['AUD'], off: ['AU00'], vvd: '', port: [], scope: [], bound: [], cust: '', from: '', to: '' };
+const ER_TABS = [['vvd', 'VVD Exchange Rate'], ['daily', 'Daily Exchange Rate']];
+const ER_UNIQ = (k, tab) => ER_ALL.filter((r) => !tab || r.tab === tab).map((r) => r[k]).filter((v, i, a) => v && v !== ER_NA && a.indexOf(v) === i).sort();
+// Search criteria; Ex. Rate Type is now the tab. Defaults: Local Curr AUD, Office AU00.
+const ER_DEF = { cc: [], lc: ['AUD'], off: ['AU00'], vvd: '', port: [], scope: [], bound: [], from: '', to: '' };
 const erCopy = (c) => JSON.parse(JSON.stringify(c));
-// Table columns the user can show or hide; Ex.Rate is always shown
-const ER_COLS = [['ctry', 'Country'], ['off', 'Office', 'mono'], ['port', 'Port', 'mono'], ['type', 'Ex-Rate Type'], ['bound', 'Bound'], ['vvd', 'VVD'], ['eta', 'ETA'], ['scope', 'Scope'], ['cust', 'Customer', 'cust'], ['date', 'Ex.Rate Date'],
-  ['cc', 'Charge Currency', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['by', 'Updated By'], ['upd', 'Updated Date']];
-const ER_COLS_DEF = ER_COLS.map((c) => c[0]);
-const erColsLoad = () => { try { const v = JSON.parse(localStorage.getItem('girs.er.cols3') || 'null'); if (Array.isArray(v)) return v.filter((k) => ER_COLS.some((c) => c[0] === k) ); } catch (e) {} return ER_COLS_DEF.slice(); };
-const erColsSave = (arr) => { const v = ER_COLS.map((c) => c[0]).filter((k) => arr.includes(k) || k === 'rate'); try { localStorage.setItem('girs.er.cols3', JSON.stringify(v)); } catch (e) {} return v; };
+// Table columns per tab, in the order of the client's sheet; Ex.Rate is always shown
+const ER_COLS_T = {
+  vvd: [['ctry', 'Country'], ['port', 'Port', 'mono'], ['off', 'Office', 'mono'], ['bound', 'Bound'], ['scope', 'Scope (Charge Group)'], ['upd', 'Updated Date'], ['from', 'Applicable From Date'], ['to', 'Applicable To Date (ETA)'],
+    ['cc', 'Charge Curr', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['vvd', 'VVD', 'mono'], ['by', 'Updated By']],
+  daily: [['ctry', 'Country'], ['port', 'Port', 'mono'], ['off', 'Office', 'mono'], ['bound', 'Bound'], ['scope', 'Scope (Charge Group)'], ['upd', 'Updated Date'], ['from', 'Applicable From Date'], ['to', 'Applicable To Date'],
+    ['cc', 'Charge Currency', 'mono ccy'], ['lc', 'Local Currency', 'mono lccy'], ['rate', 'Ex.Rate', 'num mono rate'], ['by', 'Updated By']]
+};
+const erColsLoad = (tab) => { const all = ER_COLS_T[tab].map((c) => c[0]); try { const v = JSON.parse(localStorage.getItem('girs.er.cols.' + tab) || 'null'); if (Array.isArray(v)) return v.filter((k) => all.includes(k)); } catch (e) {} return all; };
+const erColsSave = (tab, arr) => { const v = ER_COLS_T[tab].map((c) => c[0]).filter((k) => arr.includes(k) || k === 'rate'); try { localStorage.setItem('girs.er.cols.' + tab, JSON.stringify(v)); } catch (e) {} return v; };
 const ER_PAGE = 20;
 const erMon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const erDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || '')); return m ? +m[3] + ' ' + erMon[+m[2] - 1] + ' ' + m[1] : s; };
 const erIn = (arr, v) => !arr.length || arr.includes(v);
-const erMatch = (r, c) => erIn(c.type, r.type) && erIn(c.cc, r.cc) && erIn(c.lc, r.lc) && erIn(c.off, r.off) && erIn(c.port, r.port)
+const erMatch = (r, c) => erIn(c.cc, r.cc) && erIn(c.lc, r.lc) && erIn(c.off, r.off) && erIn(c.port, r.port)
   && (!c.vvd.trim() || r.vvd.toUpperCase().includes(c.vvd.trim().toUpperCase())) && erIn(c.scope, r.scope) && erIn(c.bound, r.bound)
-  && (!c.cust.trim() || (r.cust !== ER_NA && r.cust.toUpperCase().includes(c.cust.trim().toUpperCase())))
-  && (!c.from || r.date >= c.from) && (!c.to || r.date <= c.to);
+  && (!c.from || r.to >= c.from) && (!c.to || r.from <= c.to);
 
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { c: erCopy(ER_DEF), applied: erCopy(ER_DEF), page: 1, dateErr: false, op: '', opQ: '', cols: erColsLoad(), colsOpen: false, colsDraft: null, colsQ: '' };
+    this.state = { tab: 'vvd', c: erCopy(ER_DEF), applied: erCopy(ER_DEF), page: 1, dateErr: false, op: '', opQ: '', cols: { vvd: erColsLoad('vvd'), daily: erColsLoad('daily') }, colsOpen: false, colsDraft: null, colsQ: '' };
     try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') this.setState({ op: '', opQ: '', colsOpen: false, colsDraft: null }); }); } catch (e) {}
   }
   renderVals() {
@@ -757,55 +767,57 @@ class GirsPage extends DCLogic {
     };
     const txt = (k, label, ph) => ({ id: 'er-' + k, label, isMulti: false, isText: true, isDate: false, v: C[k], ph: ph || '', on: (e) => put(k, e.target.value), key });
     const dt = (k, label) => ({ id: 'er-' + k, label, isMulti: false, isText: false, isDate: true, v: C[k], on: (e) => put(k, e.target.value) });
+    const T = s.tab, isV = T === 'vvd';
     const crit = [
-      ms('type', 'Ex. Rate Type', ER_UNIQ('type'), 'All'),
-      ms('cc', 'Charge Curr.', ER_UNIQ('cc'), 'All'),
-      ms('lc', 'Local Curr', ER_UNIQ('lc'), 'All'),
-      ms('off', 'Office', ER_UNIQ('off'), 'All'),
-      txt('vvd', 'VVD', 'e.g. KLJA061835'),
-      ms('port', 'Port', ER_UNIQ('port'), 'All'),
-      ms('scope', 'Scope', ['OTH'], 'ALL'),
+      ms('cc', isV ? 'Charge Curr' : 'Charge Currency', ER_UNIQ('cc', T), 'All'),
+      ms('lc', 'Local Currency', ER_UNIQ('lc', T), 'All'),
+      ms('off', 'Office', ER_UNIQ('off', T), 'All'),
+      ms('port', 'Port', ER_UNIQ('port', T), 'All'),
+    ].concat(isV ? [txt('vvd', 'VVD', 'e.g. KLJA061835')] : []).concat([
+      ms('scope', 'Scope (Charge Group)', ER_UNIQ('scope', T), 'ALL'),
       ms('bound', 'Bound', ['IB', 'OB'], 'ALL'),
-      txt('cust', 'Customer', 'Customer code or name'),
-      dt('from', 'From Date'),
-      dt('to', 'To Date')
-    ];
-    const hits = ER_ALL.filter((r) => erMatch(r, s.applied));
+      dt('from', 'Applicable From Date'),
+      dt('to', isV ? 'Applicable To Date (ETA)' : 'Applicable To Date')
+    ]);
+    const ER_COLS = ER_COLS_T[T], ER_COLS_DEF = ER_COLS.map((c) => c[0]), myCols = s.cols[T];
+    const hits = ER_ALL.filter((r) => r.tab === T && erMatch(r, Object.assign({}, s.applied, isV ? {} : { vvd: '' })));
     const pages = Math.max(1, Math.ceil(hits.length / ER_PAGE)), page = Math.min(s.page, pages);
     const slice = hits.slice((page - 1) * ER_PAGE, page * ER_PAGE);
     const na = (v) => (v === ER_NA ? 'na' : '');
-    const vis = ER_COLS.filter(([k]) => s.cols.includes(k) || k === 'rate');
-    const show = (r, k) => (k === 'eta' || k === 'date' || k === 'upd' ? (r[k] === ER_NA ? r[k] : erDate(r[k])) : r[k]);
-    const rows = slice.map((r) => ({ cells: vis.map(([k, , c]) => ({ v: show(r, k), c: [c || '', na(r[k]), k === 'vvd' && r.vvd !== ER_NA ? 'mono' : ''].join(' ').trim(),
-      chip: k === 'type' || k === 'bound', plain: k !== 'type' && k !== 'bound' && !(k === 'cust' && r.cust !== ER_NA), long: k === 'cust' && r.cust !== ER_NA,
-      chipC: k === 'type' ? (r.type === 'Daily' ? 'chip t-neutral' : 'chip t-info') : 'er-bd' })) }));
-    const dr = s.colsDraft || s.cols, cq = String(s.colsQ || '').trim().toLowerCase();
+    const vis = ER_COLS.filter(([k]) => myCols.includes(k) || k === 'rate');
+    const show = (r, k) => (k === 'from' || k === 'to' || k === 'upd' ? erDate(r[k]) : r[k]);
+    const rows = slice.map((r) => ({ cells: vis.map(([k, , c]) => ({ v: show(r, k), c: [c || '', na(r[k])].join(' ').trim(),
+      chip: k === 'bound', plain: k !== 'bound', long: false, chipC: 'er-bd' })) }));
+    const dr = s.colsDraft || myCols, cq = String(s.colsQ || '').trim().toLowerCase();
     const allOn = ER_COLS.every(([k]) => dr.includes(k) || k === 'rate');
     const cList = ER_COLS.map(([k, label]) => ({ label, on: dr.includes(k) || k === 'rate', lock: k === 'rate', tip: k === 'rate' ? 'Always shown' : label,
       flip: () => set({ colsDraft: dr.includes(k) ? dr.filter((x) => x !== k) : dr.concat([k]) }) }));
     const cShown = cq ? cList.filter((c) => c.label.toLowerCase().includes(cq)) : cList;
-    const nVis = ER_COLS.filter(([k]) => s.cols.includes(k) || k === 'rate').length, nDr = ER_COLS.filter(([k]) => dr.includes(k) || k === 'rate').length;
+    const nVis = ER_COLS.filter(([k]) => myCols.includes(k) || k === 'rate').length, nDr = ER_COLS.filter(([k]) => dr.includes(k) || k === 'rate').length;
     const cols = { heads: vis.map(([k, l]) => ({ l, c: k === 'rate' ? 'num hl' : k === 'cc' ? 'hl' : '' })),
       n: nVis + ' of ' + ER_COLS.length, dn: nDr + ' of ' + ER_COLS.length,
       open: !!s.colsOpen, openA: s.colsOpen ? 'true' : 'false', list: cShown, none: !cShown.length, q: s.colsQ || '', hasQ: !!cq, noQ: !cq, all: allOn,
       onQ: (e) => set({ colsQ: e.target.value }), clrQ: () => set({ colsQ: '' }),
-      toggle: () => { set({ colsOpen: !s.colsOpen, colsQ: '', colsDraft: s.colsOpen ? null : s.cols.slice(), op: '' }); if (!s.colsOpen) setTimeout(() => { const i = document.querySelector('.cols-p .cols-q'); if (i) i.focus(); }, 30); },
+      toggle: () => { set({ colsOpen: !s.colsOpen, colsQ: '', colsDraft: s.colsOpen ? null : myCols.slice(), op: '' }); if (!s.colsOpen) setTimeout(() => { const i = document.querySelector('.cols-p .cols-q'); if (i) i.focus(); }, 30); },
       cancel: () => set({ colsOpen: false, colsDraft: null, colsQ: '' }),
-      done: () => set({ cols: erColsSave(dr), colsOpen: false, colsDraft: null, colsQ: '' }),
+      done: () => set({ cols: Object.assign({}, s.cols, { [T]: erColsSave(T, dr) }), colsOpen: false, colsDraft: null, colsQ: '' }),
       allFlip: () => set({ colsDraft: allOn ? ['rate'] : ER_COLS.map((c) => c[0]) }),
       reset: () => set({ colsDraft: ER_COLS_DEF.slice() }),
       isDef: ER_COLS_DEF.every((k) => dr.includes(k)) };
     const exportXls = () => {
       const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-      const head = ['Country', 'Office', 'Port', 'Ex-Rate Type', 'Bound', 'VVD', 'ETA', 'Scope', 'Customer', 'Ex.Rate Date', 'Charge Currency', 'Local Currency', 'Ex.Rate', 'Updated By', 'Updated Date'];
-      const body = hits.map((r) => [r.ctry, r.off, r.port, r.type, r.bound, r.vvd, r.eta, r.scope, r.cust, r.date, r.cc, r.lc, r.rate, r.by, r.upd]);
+      const head = ER_COLS.map((c) => c[1]);
+      const body = hits.map((r) => ER_COLS.map(([k]) => show(r, k)));
       const html = '<html><head><meta charset="utf-8"></head><body><table border="1"><tr>' + head.map((h) => '<th>' + esc(h) + '</th>').join('') + '</tr>' +
         body.map((b) => '<tr>' + b.map((v) => '<td style="mso-number-format:\'\\@\'">' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table></body></html>';
-      try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'application/vnd.ms-excel' })); a.download = 'Exchange-Rate-Master.xls'; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
-      set({ __toast: 'Exported ' + hits.length + (hits.length === 1 ? ' exchange rate' : ' exchange rates') + ' to Excel.' });
+      try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'application/vnd.ms-excel' })); a.download = (isV ? 'VVD' : 'Daily') + '-Exchange-Rate.xls'; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
+      set({ __toast: 'Exported ' + hits.length + ' ' + (isV ? 'VVD' : 'Daily') + (hits.length === 1 ? ' exchange rate' : ' exchange rates') + ' to Excel.' });
     };
     return {
       crit, search, dateErr: s.dateErr, cols,
+      tabs: ER_TABS.map(([k, label]) => ({ id: 'er-t-' + k, label, n: String(ER_ALL.filter((r) => r.tab === k && erMatch(r, Object.assign({}, s.applied, k === 'vvd' ? {} : { vvd: '' }))).length), on: T === k ? 'true' : 'false',
+        pick: () => set({ tab: k, page: 1, op: '', colsOpen: false, colsDraft: null, dateErr: false }) })),
+      tabTitle: isV ? 'VVD Exchange Rates' : 'Daily Exchange Rates',
       cancel: () => set({ c: erCopy(ER_DEF), applied: erCopy(ER_DEF), page: 1, dateErr: false, op: '' }),
       rows, noRows: !hits.length,
       countText: String(hits.length),
