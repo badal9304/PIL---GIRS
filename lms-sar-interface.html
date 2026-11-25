@@ -1,0 +1,1463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS LMS SAR Interface</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root,.theme{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;--selbg:#0071B7;--selfg:#FFFFFF;--selbd:#0071B7}
+.theme[data-theme=dark]{--ink:#ECEEF1;--muted:#9DA3AC;--muted2:#C5CAD1;--muted3:#C5CAD1;--muted4:#878D96;--line:#2E3135;--line2:#25272A;--bd:#43474D;--bdh:#646A72;--line3:#383B40;--bg:#0D0E0F;--sub:#202225;--hover:#26292D;--hover2:#1E2023;--hover3:#1D1F22;--neutral:#2B2E32;--canvas:#09090A;--accent:#4BA0DD;--accent2:#8FC5EC;--tint:#172636;--tintbd:#264A6B;--tint2:#152230;--ok:#5BC48A;--okbg:#122A1E;--ok2:#86D7A8;--okdot:#3DB471;--okbar:#3DB471;--okbd:#1F4B33;--okrow:#111D16;--warn:#D9A449;--warnbg:#241E13;--warn2:#E6B865;--warnbar:#C08A26;--warnbd:#4A3B18;--bad:#F07A7F;--badbg:#2E1719;--badbar:#E04B51;--bad2:#F7A1A4;--badbd:#5A2629;--badrow:#1E1415;--aibg:#231D36;--ai:#B4A2F0;--surface:#191A1C;--brand:#E31D1A;--onaccent:#0B1620;--accenth:#6CB3E6;--gold:#E2C063;--goldbg:#2A2412;--selbg:#172636;--selfg:#9CCBEE;--selbd:#4BA0DD;color-scheme:dark}
+/* dark: filled buttons keep white text on a deeper PIL blue; overlays get real depth */
+.glogo{background:#fff}.theme[data-theme=dark] .glogo{background:transparent}.theme[data-theme=dark] img[src="pil-logo.png"]{content:url(pil-logo-dark.png)}/* dark polish: one 'selected' style, true disabled state, outlined checkboxes, visible focus */.theme[data-theme=dark] .chipb[aria-pressed=true]{background:var(--selbg);border-color:var(--selbd);color:var(--selfg)}.theme[data-theme=dark] .btn:disabled,.theme[data-theme=dark] .btn[disabled],.theme[data-theme=dark] .btn-primary:disabled{opacity:1;background:#232528;border-color:#2E3135;color:#6B7079;box-shadow:none}.theme[data-theme=dark] input[type=checkbox]{-webkit-appearance:none;appearance:none;width:16px;height:16px;flex:none;border:1.5px solid #8A9099;border-radius:3px;background:transparent center/12px no-repeat;box-sizing:border-box}.theme[data-theme=dark] input[type=checkbox]:hover{border-color:#C5CAD1}.theme[data-theme=dark] input[type=checkbox]:checked{background-color:#2580C3;border-color:#2580C3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}.theme[data-theme=dark] input[type=checkbox]:indeterminate{background-color:#2580C3;border-color:#2580C3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8h8' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")}.theme[data-theme=dark] input[type=checkbox]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.theme[data-theme=dark] input[type=checkbox]:disabled{opacity:.35}.theme[data-theme=dark] :is(.input,.select,textarea):is(:focus,:focus-visible){box-shadow:0 0 0 3px rgba(75,160,221,.42)!important;border-color:var(--accent)!important}.theme[data-theme=dark] .select:open{box-shadow:0 0 0 3px rgba(75,160,221,.42)}.theme[data-theme=dark] :is(button,a,[tabindex]):focus-visible{outline-color:#6CB3E6}.theme[data-theme=dark] .btn-primary{background:#1B6FAE;border-color:#1B6FAE;color:#fff}.theme[data-theme=dark] .btn-primary:hover{background:#2580C3;border-color:#2580C3}.theme[data-theme=dark] .menu,.theme[data-theme=dark] .ri-sug,.theme[data-theme=dark] .ng-fly,.theme[data-theme=dark] .amenu,.gs-panel[data-theme=dark]{box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.theme[data-theme=dark] .paper,.paper{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;color-scheme:light;color:var(--ink)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:var(--accent)}a:hover{color:var(--accent2)}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{position:relative;display:flex;align-items:center;height:32px;padding-inline:42px 12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:400;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-item:hover{background:var(--hover);color:var(--ink)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;height:36px;padding:0 8px 0 12px;border-radius:6px;color:var(--muted2);font-size:13px;font-weight:600;line-height:18px}.nav-grp .ng-ic{flex:none;width:22px;height:22px;color:var(--muted)}nav[data-c=true] .nav-grp{height:44px}.nav-grp .ng-l{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:start}.nav-grp .ng-ch{flex:none;color:var(--muted);transition:transform .15s}.nav-grp:hover .ng-ic,.nav-grp-on .ng-ic{color:var(--accent)}.nav-grp-on{color:var(--ink)}.ng-sub{display:flex;flex-direction:column;gap:2px}.ng-fly{position:fixed;left:68px;z-index:61;width:280px;overflow:auto;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.18);box-sizing:border-box}.ng-fly .ng-sub,.ng-fly{gap:2px}.ng-fly .nav-item{height:40px;padding-inline:14px;font-size:14px;line-height:20px;border-radius:6px}.ng-fly .nav-on::before{display:none}.ng-fh{padding:8px 14px 8px;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.ng-bd{position:fixed;top:0;right:0;bottom:0;left:64px;z-index:60}nav[data-c=true] .nav-grp[aria-expanded=true]{background:var(--hover)}nav[data-c=true] .nav-grp-on{background:var(--tint)}nav[data-c=true] .nav-grp-on .ng-ic{color:var(--accent)}
+.nav-grp:hover{background:var(--hover);color:var(--ink)}
+.nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}.nav-on::before{content:"";position:absolute;inset-inline-start:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:var(--accent)}
+.nav-item svg{flex:none}
+.sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:44px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.sbtoggle:hover{background:var(--hover);color:var(--ink)}
+.sbtoggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--bd);background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:var(--hover)}
+.btn-sm{height:32px;padding:0 12px}
+.btn-icon{width:36px;padding:0}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.btn-primary:hover{background:var(--accenth);border-color:var(--accenth)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible,.pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select-sm{height:32px;line-height:30px;font-size:12px}
+.select:hover,.input:hover{border-color:var(--bdh)}
+.input{height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;box-sizing:border-box}
+.input::placeholder{color:var(--muted4)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 16px;border-bottom:1px solid var(--line);box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:var(--muted)}
+.lbl{display:block;font-size:12px;font-weight:600;color:var(--muted);line-height:16px;margin-bottom:6px}
+.k{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);padding:0 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sub);box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid var(--line2);vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:var(--hover2)}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cursor:pointer}
+.gsearch{position:relative;flex:0 1 480px;min-width:220px}
+.gsearch .input{width:100%;padding-inline:36px 12px;background:var(--sub)}
+.grow{flex:1 1 auto}
+
+.select:focus,.select:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:active{background:var(--sub)}
+.select:disabled{background:var(--bg);color:var(--muted4);border-color:var(--line);cursor:not-allowed}
+.input:focus,.input:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+@supports (appearance: base-select){
+.select,.select::picker(select){appearance:base-select}
+.select{display:inline-flex;align-items:center;line-height:normal}
+.select::picker-icon{display:none}
+.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
+.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
+.select option::checkmark{order:2;margin-inline-start:auto;color:var(--accent);font-weight:700}
+.select option:hover{background:var(--hover)}
+.select option:focus-visible{background:var(--hover);box-shadow:inset 0 0 0 2px var(--accent)}
+.select option:active{background:var(--neutral)}
+.select option:checked{background:var(--tint);color:var(--accent2);font-weight:600}
+.select option:disabled{color:var(--muted4);cursor:not-allowed}
+.select:open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:open + svg{transform:rotate(180deg)}
+}
+.select + svg{transition:transform .15s ease}
+.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
+.ap-row{cursor:default}.ap-row:hover{background:transparent}.ap-seg{display:inline-flex;flex:none;margin-inline-start:auto;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}.ap-seg button{all:unset;box-sizing:border-box;cursor:pointer;height:26px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);display:inline-flex;align-items:center;gap:6px}.ap-seg button:hover{color:var(--ink)}.ap-seg button[aria-checked=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.18)}.ap-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}.lg-list{max-height:280px;overflow-y:auto;overscroll-behavior:contain}.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
+.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
+.mi:hover{background:var(--hover);color:var(--ink)}
+.mi:active{background:var(--neutral)}
+.mi:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mi[aria-checked=true]{background:var(--tint);color:var(--accent2)}
+.mi[aria-checked=true] .mi-sub{color:var(--accent2)}
+.mi svg{flex:none;color:var(--muted)}
+.mi[aria-checked=true] svg{color:var(--accent)}
+.mi-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.mi-lbl{font-weight:500;white-space:normal}
+.mi-sub{font-size:12px;line-height:16px;color:var(--muted);white-space:normal}
+.mi-danger{color:var(--bad)}.mi-danger svg{color:var(--bad)}.mi-danger:hover{background:var(--badbg);color:var(--bad)}
+.ubtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;height:36px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:18px;box-sizing:border-box;transition:background .12s,border-color .12s}
+.ubtn:hover{background:var(--hover);border-color:var(--bd)}
+.ubtn:active{background:var(--neutral)}
+.ubtn[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
+.ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.uchev{transition:transform .15s ease}
+tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
+@keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
+.gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+.gmain{flex:1 1 0 !important;min-height:0 !important}
+.ro{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500}
+.lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
+.lay:hover{color:var(--ink)}
+.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.kv2 .l{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.kv2 .v{display:block;font-size:14px;line-height:20px}
+.kv2 .full{grid-column:1 / -1}
+.mini{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
+.mini:first-child{border-top:0;padding-top:0}
+.tl{position:relative;padding-inline-start:20px;padding-bottom:14px}
+.tl:before{content:"";position:absolute;inset-inline-start:4px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tl:after{content:"";position:absolute;inset-inline-start:7.5px;top:18px;bottom:0;width:1px;background:var(--line)}
+.tl:last-child:after{display:none}
+.tl:last-child{padding-bottom:0}
+.ph{color:var(--muted4)}
+.citem{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:10px 16px}
+.citem:hover{background:#F6F8FA}
+.citem:focus-visible,.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.gbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;height:40px;padding:0 12px;border-radius:6px;font-weight:600}
+.cbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:0 12px 0 34px;border-radius:6px;font-size:13px}
+.gbtn:hover,.cbtn:hover{background:var(--hover)}
+.gbtn:focus-visible,.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;height:48px;padding:0 2px;display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
+.fact{display:flex;flex-direction:column;gap:4px;padding:0 24px;border-inline-start:1px solid var(--line2)}
+.fact:first-child{padding-inline-start:0;border:0}
+.fact .l{font-size:12px;color:var(--muted)}
+.fact .v{font-size:14px;font-weight:500}
+.sech{margin:0 0 12px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.kbar{display:inline-flex;align-items:center;gap:6px;flex:none;margin-inline-start:auto}
+.kbar .btn{gap:6px}
+.kmore{position:relative;display:inline-flex}
+.kmorebtn[aria-expanded=true]{background:var(--hover);border-color:var(--bdh)}
+.kmback{position:fixed;inset:0;z-index:58;background:transparent;border:0;padding:0;margin:0;cursor:default}
+.kmenu{position:absolute;top:calc(100% + 6px);inset-inline-end:0;z-index:59;width:280px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(14,17,22,.16);text-align:start}
+.kmi{display:flex;align-items:flex-start;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--ink);font:inherit;font-size:13px;line-height:18px;text-align:start;cursor:pointer}
+.kmi svg{flex:none;margin-top:2px}
+.kmi:hover:not(:disabled),.kmi:focus-visible{background:var(--hover);outline:0}
+.kmt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kmt>span{font-weight:500}
+.kmt small{font-size:12px;line-height:16px;color:var(--muted);font-weight:400}
+.kmi-d{color:var(--bad)}
+.kmi-d:hover:not(:disabled){background:var(--badbg)}
+.kmi:disabled{cursor:not-allowed;color:var(--bad);opacity:.55}
+.kmenu.up{top:auto;bottom:calc(100% + 6px)}
+section:has(.kmenu.up),.card:has(.kmenu.up){overflow:visible!important;position:relative;z-index:6}
+.ksep{height:1px;margin:4px 0;background:var(--line2)}
+.fct .v{white-space:normal;text-overflow:clip;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:20px}
+.dcol .kvs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 20px}
+table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > td{height:auto;padding-block:8px}
+.kib{width:32px;padding:0}
+.kdanger{color:var(--bad)}
+.kdanger:hover:not(:disabled){background:var(--badbg);border-color:var(--badbd)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.ktool{display:flex;align-items:center;gap:8px;padding:12px 24px;border-bottom:1px solid var(--line2);background:var(--hover2);font-size:12px;color:var(--muted)}
+.ktbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.ktbl th{height:36px;padding:0 12px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);background:var(--sub);border-bottom:1px solid var(--line)}
+.ktbl td{white-space:normal;padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px;line-height:18px;overflow-wrap:anywhere;vertical-align:top}
+.ktbl tr:first-child td{font-weight:500}
+.kfs{border:0;margin:0 0 22px;padding:0}
+.kfs legend{padding:0;margin-bottom:12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px}
+.kf{display:flex;flex-direction:column;gap:5px;min-width:0}
+.kf.w{grid-column:span 2}
+.kf .kl{font-size:12px;font-weight:500;color:var(--muted2)}
+.kf .kl b{color:var(--bad);font-weight:600;margin-inline-start:2px}
+.kf .input,.kf .select{width:100%;padding-inline-start:12px;background:var(--surface)}
+.kf textarea.input{height:auto;min-height:72px;padding:8px 12px;resize:vertical;line-height:20px}
+.kf .kro{min-height:36px;display:flex;align-items:center;padding:0 12px;border-radius:6px;background:var(--sub);border:1px dashed var(--bd);color:var(--muted2);font-size:13px;box-sizing:border-box}
+.kf .kh{font-size:12px;color:var(--muted)}
+.kf .ke{font-size:12px;color:var(--bad);font-weight:500}
+.kf.bad .input,.kf.bad .select{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.kbtn-danger{background:var(--bad);border-color:var(--bad);color:var(--onaccent)}
+.kbtn-danger:hover:not(:disabled){background:#8A1F23;border-color:#8A1F23;color:var(--onaccent)}
+.kbtn-danger:focus-visible{outline:2px solid var(--bad);outline-offset:2px}
+
+/* ---- Charge Master (revamp) ---- */
+/* shared components, same rules as Invoice List: tabs, table, docked pagination, links, checkbox */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;font-size:14px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabb[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.lnk:focus-visible,.tabb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
+.lnk:hover{text-decoration:underline}
+.mu{color:var(--muted)}
+.cbx{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+.cbx:disabled{cursor:not-allowed}
+.pager{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 4px 0;font-size:13px;color:var(--muted2)}
+.card:has(+ .pager){border-end-start-radius:0;border-end-end-radius:0}
+.card + .pager{margin-top:-17px;min-height:48px;padding:6px 8px 6px 16px;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-top-color:var(--line2);border-radius:0 0 8px 8px}
+.pbtn{min-width:32px;justify-content:center;font-size:15px}
+.lst{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}
+.lst th,.lst td{white-space:nowrap}
+.lst thead th{position:sticky;top:0;z-index:2}
+.lst .c-no{position:sticky;inset-inline-start:0;z-index:1;background:var(--surface);box-shadow:inset -1px 0 0 var(--line2)}
+.lst .c-act{position:sticky;inset-inline-end:0;z-index:1;width:1%;padding-inline:16px;text-align:center;background:var(--surface);box-shadow:inset 1px 0 0 var(--line2)}
+.lst thead .c-no,.lst thead .c-act{z-index:3;background:var(--sub)}
+.lst tbody tr:hover td,.lst tbody tr:hover .c-no,.lst tbody tr:hover .c-act{background:var(--hover2)}
+.lst tr.on td,.lst tr.on .c-no,.lst tr.on .c-act{background:var(--tint2)}
+.cm2-acts{display:inline-flex;align-items:center;gap:0;padding:0 4px}
+.cm2-acts .cm2-bar{width:1px;height:14px;padding:0;margin:0 10px;background:var(--line)}
+/* Search tab fits the window like the Invoice List: the results table scrolls inside its card, pagination stays in view */
+.gmain:has(#cm2-p1){flex:1 1 0 !important;min-height:0 !important}
+/* non-editable fields are grey; editable fields are white */
+.input[readonly]{background:var(--sub);color:var(--ink);cursor:default}
+.input[readonly]:hover{border-color:var(--bd)}
+.input[readonly]:focus{border-color:var(--bd);box-shadow:none}
+/* screen layout */
+.card-meta{font-size:12px;color:var(--muted)}
+.cm2-grid{display:grid;gap:16px;align-items:start}
+.cm2-g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cm2-f{min-width:0;display:flex;flex-direction:column}
+.cm2-f .input{width:100%}
+.cm2-f .lbl{margin-bottom:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm2-f > .lbl{margin-bottom:6px}
+.cm2-lr{display:flex;align-items:center;gap:6px;min-height:16px;margin-bottom:6px}
+.cm2-i{display:inline-flex;color:var(--muted4);cursor:help;border-radius:50%}
+.cm2-i:hover,.cm2-i:focus-visible{color:var(--accent)}
+.cm2-i:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cm2-sel{position:relative}
+.cm2-sel .select{width:100%}
+.cm2-sel svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
+.cm2-actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line2)}
+.cm2-bar{color:var(--line);padding:0 8px}
+.cm2-detail{flex:1 0 auto;display:flex;flex-direction:column;gap:16px}
+/* action bar: pinned to the bottom of the screen, actions on the right */
+.cm2-bottom{position:sticky;bottom:0;z-index:5;margin:auto -20px -20px;display:flex;justify-content:flex-end;align-items:center;gap:8px;min-height:64px;padding:0 20px;box-sizing:border-box;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 12px rgba(22,26,33,.06)}
+.cm2-bottom .btn{min-width:96px}
+.cm2-rec{display:flex;align-items:center;gap:12px}
+.cm2-rec h2{margin:0;font-size:16px;font-weight:600;line-height:22px}
+.cm2-code{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;background:var(--tint);color:var(--accent2);font-size:13px;font-weight:600}
+.cm2-secs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.cm2-sec{padding:16px 16px 20px;box-sizing:border-box;min-width:0}
+.cm2-sh{margin-bottom:16px}
+.cm2-sh h3{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.cm2-sh p{margin:2px 0 0;font-size:12px;line-height:16px;color:var(--muted)}
+.cm2-yn{display:inline-flex;align-self:flex-start;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}
+.cm2-yn button{all:unset;box-sizing:border-box;cursor:pointer;min-width:44px;height:32px;padding:0 12px;border-radius:4px;text-align:center;font-size:13px;font-weight:600;line-height:32px;color:var(--muted)}
+.cm2-yn button:hover{color:var(--ink)}
+.cm2-yn button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.cm2-yn button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cm2-checks{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;min-height:36px}
+.cm2-ck{display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.cm2-ck:has(input:disabled){cursor:default}
+.cm2-alias{margin-top:20px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cm2-ah{padding:10px 12px;font-size:13px;font-weight:600;background:var(--surface);border-bottom:1px solid var(--line)}
+.cm2-atw{overflow-x:auto}
+.cm2-atw td{height:48px}
+.cm2-atw tbody tr:last-child td{border-bottom:0}
+.cm2-atw .input{height:32px}
+.cm2-ci{width:72px!important}
+.cm2-pi{width:96px!important}
+.cm2-ac{width:1%;text-align:end}
+.cm2-del{color:var(--bad)}
+.cm2-man{margin-top:16px}
+
+/* ---- Layout C ---- */
+.cmc-crit{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:end;padding:12px 16px 16px}
+.cmc-crit .lbl{margin-bottom:4px}
+.cmc-crit .input,.cmc-crit .select{height:32px}
+.cmc-crit .select{line-height:30px}
+.cmc-act{grid-column:span 2;display:flex;justify-content:flex-end;gap:8px}
+.cmc-act .btn{min-width:88px}
+.cmc-row{cursor:pointer}
+.cmc-stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+.cmc-row4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.cmc-row4 .cm2-sec,.cmc-stack > .cm2-sec{padding:14px 16px 16px}
+.cmc-stack .cm2-sh{margin-bottom:12px}
+.cmc-stack .cm2-grid{gap:12px}
+.cmc-alias{padding:0;overflow:hidden}
+.cmc-alias .cmc-at{margin:0;border:0;border-radius:0}
+.cmc-alias .cm2-ah{padding:14px 16px;font-size:14px}
+.cmc-alias .cm2-man{margin:0;padding:12px 16px;border-top:1px solid var(--line2);display:flex}
+
+/* View/Update popup */
+
+.dlg.full .dh{align-items:center;min-height:60px;padding:0 12px 0 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.dlg.full .db{flex:1 1 auto;min-height:0;background:var(--bg);padding:16px 20px}
+.dlg.full .df .btn{min-width:96px}
+.dh .x{margin-inline-start:auto}
+.dlg.bm-pm{width:min(640px,calc(100vw - 48px))}
+.dlg.dim{z-index:201}
+.scrim{z-index:200}
+.bm1-sh .search .input{height:36px}
+
+.mback{position:fixed;inset:0;z-index:80;background:transparent;border:0;padding:0;margin:0;cursor:default}
+.er-ms{position:relative}
+.er-msb{width:100%;display:flex;align-items:center;gap:6px;text-align:start;cursor:pointer;padding-inline-end:32px;position:relative;box-sizing:border-box}
+.er-msb svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;color:var(--muted);pointer-events:none}
+.er-msb[aria-expanded=true]{border-color:var(--accent)}
+.er-msb .count{margin-inline-start:auto}
+.er-mst{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.er-msp{position:absolute;z-index:81;top:calc(100% + 4px);left:0;min-width:100%;width:240px;max-height:360px;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(22,26,33,.16);overflow:hidden}
+.er-msp>.er-mso:first-child,.er-msp>.cols-s:first-child{margin-top:8px}
+.er-msl{flex:1 1 auto;overflow:auto}
+.er-mso{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 14px;font-size:13px;cursor:pointer;flex:none}
+.er-mso:hover{background:var(--hover2)}
+.er-mso input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.er-msf{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2)}
+.fq{position:relative}
+.cols-b{gap:6px}.cols-b svg{color:var(--muted)}.cols-b[aria-expanded="true"]{border-color:var(--accent)}
+.cols-s{position:relative;padding:4px 12px 8px}.cols-s>svg{position:absolute;inset-inline-start:22px;top:50%;margin-top:-10px;color:var(--muted);pointer-events:none}.cols-q{width:100%;padding-inline:32px 30px;box-sizing:border-box}.cols-x{position:absolute;inset-inline-end:16px;top:50%;margin-top:-14px;width:24px;height:24px;display:grid;place-items:center;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:4px}.cols-x:hover{background:var(--hover2);color:var(--ink)}
+.fq .msel-p{position:absolute;z-index:81;top:calc(100% + 4px);display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(22,26,33,.16);overflow:hidden}
+.cols-p{inset-inline-end:0;width:280px;max-height:480px}.cols-h{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 6px;font-weight:600;font-size:14px}.cols-h .mu{font-weight:400;font-size:12px}.cols-l{flex:1 1 auto;overflow:auto;border-top:1px solid var(--line2);padding-top:4px}
+.fq .msel-o{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 16px;font-size:13px;cursor:pointer;flex:none}
+.fq .msel-o:hover{background:var(--hover2)}
+.fq .msel-o input{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+.fq .msel-o input:disabled+span{color:var(--muted)}
+.fq .msel-f{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line2);background:var(--surface)}
+/* Charge Master: actions, highlights, labels */
+.card-head .btn{gap:6px}
+.er-mo{display:flex;flex-direction:column;min-width:0;line-height:16px;padding-block:4px}
+.er-mo b{font-weight:400;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.er-mo small{font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.er-msp.wide{width:340px}
+.cm-acts{display:inline-flex;align-items:center;gap:2px}
+.cm-ib{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;color:var(--muted2)}
+.cm-ib:hover{background:var(--hover);color:var(--accent)}
+.cm-ib.d:hover{background:var(--badbg);color:var(--bad)}
+.cm-ib:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.lst td.c-act{padding-block:4px;padding-inline:10px}
+.lst td.c-no .lnk{font-weight:600}
+.cm-tr{display:block;max-width:280px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.lst td.nm{font-weight:500;color:var(--ink)}
+.lst td.gl .cm-tr{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.cm-yn{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:4px;font-size:11px;font-weight:600}
+.cm-yn.y{background:var(--okbg);color:var(--ok)}
+.cm-yn.n{background:var(--neutral);color:var(--muted2)}
+.cm2-f .lbl{white-space:normal;overflow:visible}
+.cm2-grid{align-items:end}
+/* Business Rule Engine v3 · Admin > Business Rules (SCR-AD-19-01 … 07) */
+.dd{position:relative;display:inline-block;min-width:0;vertical-align:middle}
+.dd-b{all:unset;box-sizing:border-box;cursor:pointer;width:100%;height:34px;display:flex;align-items:center;gap:8px;padding:0 10px 0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-size:13px}
+.dd-b:hover{border-color:var(--bdh)}.dd-b:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.dd-b[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)}
+.dd-v{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-ch{flex:none;color:var(--muted);transition:transform .15s}.dd-b[aria-expanded=true] .dd-ch{transform:rotate(180deg);color:var(--accent)}
+.dd-p{position:absolute;z-index:90;top:calc(100% + 4px);left:0;min-width:100%;width:max-content;max-width:420px;max-height:320px;overflow:auto;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(22,26,33,.16),0 2px 6px rgba(22,26,33,.08)}
+.dd-o{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;padding:7px 10px;border-radius:6px;font-size:13px;line-height:18px}
+.dd-o:hover,.dd-o:focus-visible{background:var(--hover)}.dd-o[aria-selected=true]{color:var(--accent);font-weight:600}
+.dd-ot{display:flex;flex-direction:column;flex:1;min-width:0}.dd-ot small{font-size:11.5px;color:var(--muted);font-weight:400}
+.dd-ck{flex:none;visibility:hidden}.dd-o[aria-selected=true] .dd-ck{visibility:visible}
+.dd-ghost .dd-b{border-style:dashed;color:var(--accent);font-weight:500}.dd-ghost .dd-ch{display:none}
+.dd-right .dd-p{left:auto;right:0}.dd-up .dd-p{top:auto;bottom:calc(100% + 4px)}
+.dd-btn .dd-b{height:36px;padding:0 12px 0 14px;font-weight:500}
+.dd-dis .dd-b{cursor:default;background:var(--sub);color:var(--muted2)}.dd-dis .dd-b:hover{border-color:var(--bd)}.dd-dis .dd-ch{opacity:.4}
+.b3 .input{height:34px}
+.b3 input.input[readonly]:not(.b3-date),.b3 textarea.input[readonly],.b3 .input:disabled{background:var(--sub);color:var(--muted2)}
+/* top tabs */
+.b3-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:-4px 0 0}
+.b3-tab{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 4px;margin-right:18px;font-size:14px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.b3-tab:hover{color:var(--ink)}.b3-tab[aria-current=page]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.b3-tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.b3-n{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--neutral);color:var(--muted2);font-size:11.5px;font-weight:600;box-sizing:border-box}
+.b3-tab[aria-current=page] .b3-n{background:var(--tint);color:var(--accent2)}
+.b3-nq{background:var(--warnbg);color:var(--warn)}
+/* list layout */
+.b3-grid{display:grid;grid-template-columns:296px minmax(0,1fr);gap:16px;align-items:start}
+.b3-rail{padding:8px;position:sticky;top:0}
+.b3-rail-h{padding:8px 10px 10px;font-size:12px;font-weight:600;color:var(--ink);display:flex;flex-direction:column;gap:1px}.b3-rail-h span{font-weight:400;color:var(--muted)}
+.b3-ci{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:22px 1fr auto auto;align-items:center;gap:8px;min-height:34px;padding:5px 8px;border-radius:6px;font-size:13px;color:var(--ink)}
+.b3-ci:hover{background:var(--hover)}.b3-ci:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.b3-ci[aria-current=true]{background:var(--tint);color:var(--accent2);font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+.b3-cn{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted2);background:var(--neutral)}
+.b3-ci[aria-current=true] .b3-cn{background:var(--accent);color:#fff}
+.b3-ci:first-of-type .b3-cn{background:transparent}
+.b3-ct{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b3-hit{font-size:10px;font-weight:600;letter-spacing:.02em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+.b3-cc{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:18px;text-align:right}
+.b3-main{min-width:0;display:flex;flex-direction:column}
+.b3-mh{display:flex;align-items:flex-start;gap:12px;padding:14px 16px 6px}.b3-mh h2{margin:0;font-size:15px;font-weight:600}.b3-mh p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.b3-fb{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:8px 16px}
+.b3-fl{font-size:12px;color:var(--muted);font-weight:500}
+.b3-s{position:relative;display:inline-flex;align-items:center}.b3-s svg{position:absolute;left:10px;color:var(--muted);pointer-events:none}.b3-s .input{width:240px;padding-left:34px}
+.b3-fx{display:inline-flex;align-items:center;gap:8px;padding:0 2px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--sub)}
+.b3-rm{all:unset;cursor:pointer;width:26px;height:26px;display:grid;place-items:center;border-radius:4px;color:var(--muted)}.b3-rm:hover{background:var(--hover);color:var(--ink)}
+.b3-date{width:150px}
+.b3-sp{flex:1}
+.b3-icb[aria-pressed=true]{background:var(--tint);border-color:var(--tintbd);color:var(--accent2)}
+.b3-qf{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:2px 16px 12px}
+.b3-qc{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 6px 0 12px;border:1px solid var(--line);border-radius:14px;font-size:12.5px;color:var(--ink);background:var(--surface)}
+.b3-qc b{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--neutral);font-size:11px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
+.b3-qc:hover{border-color:var(--bdh)}.b3-qc[aria-pressed=true]{background:var(--tint);border-color:var(--accent);color:var(--accent2);font-weight:600}.b3-qc[aria-pressed=true] b{background:var(--accent);color:#fff}
+.b3-qc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.b3-bulk{display:flex;align-items:center;gap:8px;margin:0 16px 10px;padding:8px 10px 8px 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);font-size:13px}.b3-bulk b{margin-right:auto;color:var(--accent2)}
+.b3-clr{font-size:12.5px;margin-left:6px}
+/* tables */
+.b3-tw{overflow:auto;border-top:1px solid var(--line)}
+.b3-t{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.b3-t th{position:sticky;top:0;z-index:1;background:var(--sub);text-align:left;font-size:12px;font-weight:600;color:var(--muted2);padding:0 10px;height:38px;border-bottom:1px solid var(--line);white-space:nowrap}
+.b3-t td{padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:middle;height:44px;box-sizing:border-box}
+.b3-t tbody tr:hover td{background:var(--hover)}
+.b3-t tr[aria-selected=true] td{background:var(--tint)}
+.b3-t .ck{width:36px;padding-right:0;text-align:center}
+.b3-t td.r,.b3-t th.h-pri,.b3-t th.h-ver{text-align:right}.b3-t th.h-pri .b3-sh,.b3-t th.h-ver .b3-sh{justify-content:flex-end;width:100%}
+.b3-t .nw{white-space:nowrap}
+.b3-sh{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;height:100%}.b3-sh:hover{color:var(--ink)}.b3-sh:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.b3-ar{color:var(--accent);font-size:12px;min-width:8px}
+.b3-cs th{top:38px;height:44px;background:var(--surface)}.b3-cs .input{height:30px;width:100%;min-width:70px;font-weight:400}
+.b3-idc{white-space:nowrap}
+.b3-id{all:unset;cursor:pointer;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12.5px;font-weight:500;color:var(--accent)}.b3-id:hover{text-decoration:underline}.b3-id:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.b3-nm{min-width:220px}
+.b3-nmb{all:unset;cursor:pointer;color:var(--ink);font-weight:500}.b3-nmb:hover{color:var(--accent)}.b3-nmb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.b3-pend,.b3-dr,.b3-you{display:inline-flex;margin-left:8px;height:20px;align-items:center;padding:0 7px;border-radius:10px;font-size:11px;font-weight:600;vertical-align:1px}
+.b3-pend{background:var(--warnbg);color:var(--warn)}.b3-dr{background:var(--neutral);color:var(--muted2)}.b3-you{background:var(--tint);color:var(--accent2)}
+.b3-cat{white-space:nowrap;color:var(--muted2)}
+.b3-co{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b3-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:11px;font-size:12px;font-weight:600;white-space:nowrap}
+.b3-chip::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.c-draft{background:var(--neutral);color:var(--muted2)}.c-sub{background:var(--warnbg);color:var(--warn)}.c-appr{background:var(--tint);color:var(--accent2)}
+.c-act{background:var(--okbg);color:var(--ok)}.c-off{background:var(--neutral);color:var(--muted)}.c-off::before{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}.c-rej{background:var(--badbg);color:var(--bad)}
+.b3-ac{width:1%;white-space:nowrap;text-align:right}
+.b3-ra{display:inline-flex;align-items:center;gap:2px;justify-content:flex-end}
+.b3-ra .lnk{font-size:12.5px;margin-left:10px}
+.cm-ib[disabled]{opacity:.35;cursor:default;pointer-events:none}
+.b3-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 16px;text-align:center;font-size:13px;color:var(--muted)}.b3-empty b{color:var(--ink);font-weight:600}.b3-empty .btn{margin-top:4px}
+.b3-pgr{display:flex;align-items:center;gap:16px;padding:10px 16px;border-top:1px solid var(--line);font-size:12.5px}
+.b3-pgs{display:inline-flex;align-items:center;gap:2px;margin-left:auto}
+.b3-pg{all:unset;cursor:pointer;min-width:30px;height:30px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--ink)}.b3-pg:hover{background:var(--hover)}
+.b3-pg[aria-current=page]{background:var(--accent);color:#fff;font-weight:600}.b3-pg:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.b3-gap{padding:0 6px;color:var(--muted)}
+.b3-ps{display:inline-flex;align-items:center;gap:8px}
+/* approval queue */
+.b3-ch{display:inline-flex;height:22px;align-items:center;padding:0 9px;border-radius:4px;font-size:12px;font-weight:600}
+.ch-new{background:var(--tint);color:var(--accent2)}.ch-modify{background:var(--warnbg);color:var(--warn)}.ch-deactivate{background:var(--neutral);color:var(--muted2)}
+.b3-ts{font-weight:600;font-size:12.5px;white-space:nowrap}.b3-ts.ok{color:var(--ok)}.b3-ts.bad{color:var(--bad)}
+.b3-qa .btn{margin-left:4px}
+/* rule header */
+.b3-rh{padding:12px 16px 0}
+.b3-rh1{display:flex;align-items:center;gap:6px;font-size:12.5px}
+.b3-back{display:inline-flex;align-items:center;gap:2px}.b3-crumb{color:var(--muted)}
+.b3-rh2{display:flex;align-items:flex-start;gap:24px;padding:10px 0 12px;flex-wrap:wrap}
+.b3-rti{min-width:280px;flex:1}
+.b3-rtl{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.b3-rid{font-size:13px;font-weight:600;color:var(--accent2);background:var(--tint);padding:2px 8px;border-radius:4px}
+.b3-rti h2{margin:6px 0 4px;font-size:19px;font-weight:600;line-height:24px}
+.b3-rmeta{display:flex;gap:6px;font-size:12px;color:var(--muted)}.b3-rmeta span+span::before{content:'·';margin-right:6px}
+.b3-life{list-style:none;margin:4px 0 0;padding:0;display:flex;align-items:center;gap:0}
+.b3-life li{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.b3-life li+li::before{content:'';width:28px;height:2px;background:var(--line);margin:0 8px}
+.b3-ln{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--bd);background:var(--surface);color:var(--muted);box-sizing:border-box}
+.b3-life li.done{color:var(--ink)}.b3-life li.done .b3-ln{background:var(--ok);border-color:var(--ok);color:#fff;font-size:0}.b3-life li.done .b3-ln::after{content:'✓';font-size:12px}
+.b3-life li.done+li::before,.b3-life li.cur::before{background:var(--ok)}
+.b3-life li.cur{color:var(--accent2);font-weight:600}.b3-life li.cur .b3-ln{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 3px var(--tint)}
+.b3-rbtn{display:flex;gap:8px;margin-left:auto;align-self:center}
+.b3-note{margin:0 0 10px;padding:9px 12px;border-radius:6px;font-size:12.5px;line-height:18px}
+.b3-n-info{background:var(--warnbg);color:var(--warn);border:1px solid var(--warnbd)}.b3-n-live{background:var(--tint);color:var(--accent2);border:1px solid var(--tintbd)}
+.b3-n-bad{background:var(--badbg);color:var(--bad);border:1px solid var(--badbd)}.b3-n-off{background:var(--neutral);color:var(--muted2);border:1px solid var(--line)}
+.b3-et{display:flex;gap:4px;margin:0 -16px;padding:0 12px;border-top:1px solid var(--line)}
+.b3-etb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 10px;font-size:13px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;position:relative}
+.b3-etb:hover{color:var(--ink)}.b3-etb[aria-current=page]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}.b3-etb:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.b3-etb[aria-current=page] .b3-n{background:var(--tint);color:var(--accent2)}
+.b3-etb[data-err=true]::after{content:'';position:absolute;top:10px;right:2px;width:7px;height:7px;border-radius:50%;background:var(--bad)}
+/* body */
+.b3-body{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+.b3-body[data-side=true]{grid-template-columns:minmax(0,1fr) 340px}
+.b3-col{min-width:0;display:flex;flex-direction:column;gap:16px}
+.b3-pane{padding:0 0 4px;min-width:0}
+.b3-ph{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px 16px 12px}
+.b3-ph h3{margin:0;font-size:14px;font-weight:600;line-height:20px}.b3-ph .mu{font-size:12px}.b3-ph > div{display:flex;flex-direction:column;gap:2px}
+.b3-pbtn{display:flex;gap:8px;flex:none}
+.b3-req{color:var(--bad)}
+.b3-form{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;padding:4px 16px 16px}
+.b3-f{display:flex;flex-direction:column;min-width:0}.b3-f .lbl{margin-bottom:6px}.b3-f .dd{display:block}.b3-f > .input{width:100%}
+.b3-f2{grid-column:1/-1}
+.b3-pri{width:120px !important}
+.b3-h{margin-top:5px;font-size:12px;color:var(--muted);line-height:16px}.b3-hw{color:var(--warn)}.b3-he{color:var(--bad)}
+.b3-ta{height:auto !important;min-height:72px;padding:8px 12px;line-height:19px;resize:vertical;font-family:inherit}
+.b3-audit{display:flex;gap:10px;padding:12px 16px;border-top:1px solid var(--line2);font-size:12px}
+/* conditions grid */
+.b3-cw{border-top:1px solid var(--line);overflow-x:auto}
+.b3-cg{display:grid;grid-template-columns:40px 92px 32px minmax(190px,1.3fr) minmax(130px,.8fr) minmax(170px,1.2fr) 32px 90px 104px;align-items:center;gap:8px;padding:0 16px;min-width:960px}
+.b3-cgh{height:38px;background:var(--sub);border-bottom:1px solid var(--line);font-size:12px;font-weight:600;color:var(--muted2)}
+.b3-cr{min-height:50px;border-bottom:1px solid var(--line2);position:relative}
+.b3-cr .dd{display:block}.b3-cr .input{width:100%}
+.b3-cr.cr-then{background:linear-gradient(90deg,var(--okbg) 0 3px,transparent 3px)}
+.b3-cr:not(.cr-then){background:linear-gradient(90deg,var(--tint) 0 3px,transparent 3px)}
+.b3-cr.cr-err{background:var(--badbg)}.b3-cr.cr-err .dd-b,.b3-cr.cr-err .input{border-color:var(--badbd)}
+.b3-rerr{grid-column:4/-1;margin:-4px 0 8px;font-size:12px;color:var(--bad);font-weight:500}
+.b3-sq{color:var(--muted);font-size:12px;text-align:center}
+.b3-ty .dd-b{font-weight:700;font-size:12px;letter-spacing:.02em}.t-if .dd-b{color:var(--accent2)}.t-then .dd-b{color:var(--ok)}
+.b3-br{all:unset;cursor:pointer;width:28px;height:30px;display:grid;place-items:center;border-radius:6px;border:1px dashed var(--line);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;box-sizing:border-box}
+.b3-br:hover{border-color:var(--bdh);color:var(--ink)}.b3-br[aria-pressed=true]{border-style:solid;border-color:var(--accent);background:var(--tint);color:var(--accent2)}.b3-br[disabled]{pointer-events:none}
+.b3-leg{display:flex;flex-wrap:wrap;gap:6px 20px;padding:12px 16px;font-size:12px}.b3-leg span{display:inline-flex;align-items:center;gap:6px}.b3-leg i{width:10px;height:10px;border-radius:2px}
+.b3-leg i.t-if{background:var(--accent)}.b3-leg i.t-then{background:var(--ok)}
+/* exceptions */
+.b3-xs{display:grid;grid-template-columns:auto auto 1fr;gap:16px 20px;padding:0 16px 16px}
+.b3-xt td .input{width:100%;min-width:140px}.b3-xt td .dd{display:block}
+.b3-sev.sv-hold .dd-b{color:var(--bad);font-weight:600}.b3-sev.sv-warn .dd-b{color:var(--warn);font-weight:600}
+/* side preview */
+.b3-side{position:sticky;top:0;padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.b3-sh2{font-size:13px;font-weight:600;display:flex;gap:8px;align-items:baseline;margin-bottom:4px}.b3-sh2 .mu{font-weight:400;font-size:12px}
+.b3-pv{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:19px}
+.b3-pv li b{display:inline-block;min-width:30px;font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--accent2)}
+.b3-pvh{margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+.b3-pvt{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:19px}
+.b3-pvt li{display:flex;gap:8px;align-items:baseline}
+.b3-act{flex:none;font-size:10.5px;font-weight:700;color:var(--ok);background:var(--okbg);padding:1px 6px;border-radius:4px;letter-spacing:.02em}
+.b3-pve{margin:0;font-size:13px;line-height:19px;color:var(--muted2)}
+.b3-val{margin-top:12px;padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:18px;display:flex;flex-direction:column;gap:4px}
+.b3-val ul{margin:2px 0 0;padding-left:16px}.b3-val li.e{color:var(--bad)}.b3-val li.w{color:var(--warn)}
+.v-ok{background:var(--okbg);color:var(--ok);border:1px solid var(--okbd,#B7DEC8)}.v-warn{background:var(--warnbg);color:var(--warn);border:1px solid var(--warnbd)}.v-err{background:var(--badbg);color:var(--bad);border:1px solid var(--badbd)}
+.b3-vbtn{margin-top:12px;align-self:flex-start}
+/* test */
+.b3-test{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:16px;align-items:start}
+.b3-tin{display:flex;flex-direction:column;gap:14px;padding-bottom:16px}.b3-tin > .b3-f,.b3-tin > .b3-t2,.b3-tin > .b3-tact{padding:0 16px}
+.b3-t2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.b3-seg{display:inline-flex;padding:2px;border-radius:8px;background:var(--neutral);gap:2px;align-self:flex-start}
+.b3-seg button{all:unset;cursor:pointer;height:30px;padding:0 12px;border-radius:6px;font-size:12.5px;font-weight:500;color:var(--muted2)}
+.b3-seg button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12);font-weight:600}
+.b3-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.b3-json{height:220px !important;padding:8px 12px;font-size:12px;line-height:17px;resize:vertical}
+.b3-tact{display:flex;gap:8px}
+.b3-span{grid-column:1/-1}
+.b3-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 16px}
+.b3-kpi div{padding:12px;border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;gap:2px}
+.b3-kpi b{font-size:22px;font-weight:600;line-height:28px;font-variant-numeric:tabular-nums}.b3-kpi span{font-size:12px;color:var(--muted)}
+.b3-out{margin:12px 16px 12px;padding:12px 14px;border-radius:8px;display:flex;flex-direction:column;gap:2px;font-size:13px}
+.b3-out b{font-size:11px;letter-spacing:.03em;text-transform:uppercase}.b3-out span{font-size:14px;font-weight:600}
+.b3-out.ok{background:var(--okbg);color:var(--ok)}.b3-out.warn{background:var(--warnbg);color:var(--warn)}.b3-out.bad{background:var(--badbg);color:var(--bad)}
+.b3-tempty{padding:40px 16px}
+.b3-trw{max-height:420px}
+.b3-trt tr.tr-bad td{background:var(--badbg)}.b3-trt tr.tr-bad.tr-fired td,.b3-trt tr.tr-ok.tr-fired td{font-weight:600}
+.b3-trt tr.tr-ok.tr-fired td{background:var(--okbg)}
+.b3-trt tr.tr-me td:nth-child(2){color:var(--accent);font-weight:600}
+.b3-res{font-weight:600}.tr-ok .b3-res{color:var(--ok)}.tr-bad .b3-res{color:var(--bad)}.tr-na .b3-res{color:var(--muted)}
+.b3-got{display:block;font-size:11.5px;color:var(--muted);font-weight:400;margin-top:2px}
+/* history */
+.b3-hgrid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:start}
+.b3-cmp{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.b3-dt td{height:auto;padding:9px 10px}
+.df-same td{color:var(--muted2)}.df-add td{background:var(--okbg)}.df-chg td{background:var(--warnbg)}.df-del td{background:var(--badbg);text-decoration:line-through;text-decoration-color:rgba(0,0,0,.3)}
+.df-add td:first-child,.df-chg td:first-child,.df-del td:first-child{text-decoration:none;font-weight:600}
+.b3-leg i.df-add{background:var(--ok)}.b3-leg i.df-chg{background:var(--warn)}.b3-leg i.df-del{background:var(--bad)}
+.b3-nd{padding:4px 16px;font-size:12.5px}
+/* footer */
+.b3-foot{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:8px;padding:10px 16px;box-shadow:0 -6px 16px rgba(22,26,33,.06)}
+.b3-ds{margin-right:auto;font-size:12.5px;color:var(--muted)}.b3-ds[data-on=true]{color:var(--warn);font-weight:600}.b3-ds[data-on=true]::before{content:'●';margin-right:6px}
+.b3-ds:not([data-on=true]){visibility:hidden}
+/* dialogs */
+.b3-dlg{width:min(520px,calc(100vw - 48px));overflow:visible}.b3-dlg .db{overflow:visible}
+.b3-db{display:flex;flex-direction:column;gap:14px}
+.b3-dp{margin:0;font-size:13px;line-height:19px;color:var(--muted2)}
+.b3-drop{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:26px 16px;border:1.5px dashed var(--bd);border-radius:8px;cursor:pointer;text-align:center;font-size:12.5px;color:var(--muted)}
+.b3-drop:hover{border-color:var(--accent);background:var(--tint)}.b3-drop b{color:var(--ink);font-size:13px}
+.b3-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.btn-primary[data-danger=true]{background:var(--bad);border-color:var(--bad)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.gtoast{bottom:84px !important}
+
+.dd-q{position:sticky;top:-4px;z-index:1;margin:-4px -4px 4px;padding:8px;background:var(--surface);border-bottom:1px solid var(--line2);display:flex;align-items:center}
+.dd-q svg{position:absolute;left:18px;color:var(--muted);pointer-events:none}
+.dd-q .input{width:100%;height:32px !important;padding-left:30px;font-size:13px;background:var(--sub)}
+.dd-q .input::-webkit-search-cancel-button{display:none}
+.dd-e{padding:10px 12px;font-size:12.5px;color:var(--muted)}
+.dlg.dim.b3-dlg:not(.b5-wide){overflow:visible}.b3-dlg:not(.b5-wide) .db.b3-db{overflow:visible}
+
+/* ===== BRE v6 ===== */
+.v6 .lnk{all:unset;cursor:pointer;color:var(--accent);font-size:13px;font-weight:500}.v6 .lnk:hover{text-decoration:underline}.v6 .lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.v6-sp{flex:1 1 auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.v6 .dd{display:inline-block;position:relative}.v6 .dd-b{height:36px}
+/* list */
+.v6-tool{padding:12px 16px;display:flex;flex-direction:column;gap:12px}
+.v6-tr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v6-srch{position:relative;width:300px}.v6-srch svg{position:absolute;left:11px;top:10px;color:var(--muted)}.v6-srch .input{width:100%;padding-left:34px}
+.v6-cnt{font-size:12.5px}
+.v6-chips,.v6-kinds{display:flex;gap:6px;flex-wrap:wrap}
+.v6-chip{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:15px;font-size:12.5px;color:var(--ink);background:var(--surface)}
+.v6-chip b{font-weight:600;color:var(--muted2);font-size:12px}
+.v6-chip:hover{border-color:var(--bd)}.v6-chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.v6-chip[aria-pressed=true]{background:var(--tint);border-color:var(--tintbd);color:var(--accent2)}.v6-chip[aria-pressed=true] b{color:var(--accent2)}
+.v6-grp{overflow:hidden}
+.v6-gh{display:flex;align-items:baseline;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}.v6-gh h2{margin:0;font-size:15px;font-weight:600}.v6-gh .mu{font-size:12.5px}
+.v6-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.v6-tbl th{height:36px;padding:0 12px;text-align:left;font-size:12px;font-weight:600;color:var(--muted2);background:var(--sub);border-bottom:1px solid var(--line)}
+.v6-tbl td{height:56px;padding:0 12px;border-bottom:1px solid var(--line2);vertical-align:middle}
+.v6-tbl tr:last-child td{border-bottom:0}
+.v6-tbl tbody tr{cursor:pointer}.v6-tbl tbody tr:hover td{background:var(--sub)}
+.v6-tbl .r{text-align:right}
+.v6-rn{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:2px}.v6-rn b{font-weight:600;color:var(--accent2)}.v6-rn span{font-size:12px;color:var(--muted)}.v6-rn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.v6-app{font-size:12px}
+.v6-ac{width:1%;white-space:nowrap;text-align:right}
+.v6-ia{display:inline-flex;gap:2px}.v6-ia .cm-ib{width:32px;height:32px;color:var(--muted2)}.v6-ia .cm-ib:hover{color:var(--accent);background:var(--tint)}
+.v6-lf-d{color:var(--warn);font-weight:600}.v6-lf-n{color:var(--muted)}
+.v6-empty{padding:40px;display:flex;flex-direction:column;align-items:center;gap:8px}
+/* rule header */
+.v6-hd{padding:0}
+.v6-h1{padding:12px 20px 0}
+.v6-back{display:inline-flex;align-items:center;gap:4px;font-size:13px}
+.v6-h2{display:flex;align-items:center;gap:10px;padding:6px 20px 0;flex-wrap:wrap}
+.v6-ht{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.v6-ht h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.v6-id{font-size:12.5px;color:var(--muted2);padding:3px 8px;background:var(--sub);border-radius:5px}
+.v6-hm{display:flex;gap:16px;margin:6px 0 0;padding:0 20px;font-size:12.5px}.v6-hm span+span::before{content:'';display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--muted4);vertical-align:middle;margin-right:16px}
+.v6-ban{margin:12px 20px 0;padding:10px 14px;border-radius:8px;font-size:13px;display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+.v6-ban-w{background:var(--warnbg);color:var(--warn)}.v6-ban-w span{color:var(--muted2)}.v6-ban-w q{color:var(--ink);flex-basis:100%;font-style:italic}
+.v6-ban-i{background:var(--tint);color:var(--accent2)}
+.v6-tabs{padding:0 20px;margin:8px 0 0}
+/* body */
+.v6-body{display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px;align-items:start}
+.v6-rail{position:sticky;top:0;padding:14px 10px}
+.v6-rail h2{margin:0 6px 8px;font-size:12px;font-weight:600;color:var(--muted)}
+.v6-rail ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.v6-rail li{position:relative}
+.v6-li{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;flex-direction:column;gap:1px;padding:8px 10px 8px 12px;border-radius:6px;border-left:3px solid transparent}
+.v6-li b{font-size:13.5px;font-weight:500}.v6-li small{font-size:12px;color:var(--muted)}
+.v6-li:hover{background:var(--sub)}.v6-li:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.v6-li[aria-current=true]{background:var(--tint);border-left-color:var(--accent)}.v6-li[aria-current=true] b{color:var(--accent2);font-weight:600}
+.v6-ld small{color:var(--warn)}
+.v6-lrm{position:absolute;right:4px;top:8px;width:28px;height:28px}
+.v6-alb{margin:10px 2px 0;width:calc(100% - 4px)}
+.v6-al{display:flex;flex-direction:column;gap:6px;margin:10px 2px 0}.v6-al .dd{display:block}
+.v6-rh{margin:12px 6px 0;font-size:12px;line-height:17px}
+.v6-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.v6-ctx{padding:14px 18px;border-left:4px solid var(--bd)}
+.v6-cx{display:flex;align-items:flex-start;gap:12px}.v6-cx > div{flex:1}
+.v6-ctx h2{margin:0;font-size:18px;font-weight:600}.v6-ctx p{margin:3px 0 0;font-size:13px;color:var(--muted2)}
+.v6-lid{font-size:12px !important;color:var(--muted) !important}
+.v6-x-l{border-left-color:var(--accent);background:var(--tint)}.v6-x-l h2{color:var(--accent2)}
+.v6-x-ge{border-left-color:var(--warn)}
+.v6-en{margin:10px 0 0 !important;padding-top:10px;border-top:1px solid var(--line2);font-weight:600;color:var(--ink) !important}
+.v6-x-ge .v6-en{color:var(--warn) !important}.v6-x-l .v6-en{color:var(--accent2) !important;border-top-color:var(--tintbd)}
+.v6-sen{padding:14px 18px}.v6-sen h3{margin:0 0 4px;font-size:12px;font-weight:600;color:var(--muted)}.v6-sen p{margin:0;font-size:14px;line-height:22px;color:var(--muted2)}.v6-sen b{color:var(--ink);font-weight:600}
+.v6-sec{padding:0 0 18px}
+.v6-sec > header{display:flex;align-items:flex-start;gap:12px;padding:16px 18px 14px}
+.v6-sec > header > div{flex:1}.v6-sec h3{margin:0;font-size:15px;font-weight:600}.v6-sec header p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.v6-n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--neutral);color:var(--muted2);margin-top:-1px}
+.v6-cnt2{font-size:12.5px;font-weight:600;color:var(--muted2);padding:3px 10px;border-radius:12px;background:var(--sub)}
+.v6-g4{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.9fr) 100px minmax(0,1fr) minmax(0,1fr);gap:14px 16px;padding:0 18px;align-items:start}
+.v6-g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:0 18px}
+.v6-g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.v6-f{display:flex;flex-direction:column;min-width:0}.v6-f .dd{display:block}.v6-f .input{width:100%}
+.v6-f .lbl{display:flex;align-items:center;gap:6px;min-height:16px}
+.v6-gv{font-weight:500;color:var(--warn);font-size:11.5px;margin-left:auto}
+.v6-rs{all:unset;cursor:pointer;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:4px;color:var(--warn)}.v6-rs:hover{background:var(--warnbg)}.v6-rs svg{width:14px;height:14px}.v6-rs[disabled]{display:none}
+.v6-ov .dd-b,.v6-ov .input{border-color:#E0A84C;background:var(--warnbg)}
+.v6-win{display:flex;align-items:center;gap:8px;height:36px;font-size:13px;white-space:nowrap}
+.v6-days{width:56px !important;text-align:center}
+.v6-err{font-size:12px;color:var(--bad);margin-top:4px}
+.v6-ft{margin:12px 18px 0;font-size:12.5px}
+.v6-sw{all:unset;cursor:pointer;flex:none;position:relative;width:34px;height:20px;border-radius:10px;background:var(--bd);transition:background .15s}
+.v6-sw i{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .15s}
+.v6-sw[aria-checked=true]{background:var(--accent)}.v6-sw[aria-checked=true] i{transform:translateX(14px)}
+.v6-sw:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.v6-sw[disabled]{cursor:default;opacity:.7}
+@media (prefers-reduced-motion:reduce){.v6-sw,.v6-sw i{transition:none}}
+/* conditions */
+.v6-conds{list-style:none;margin:0;padding:0 18px;display:flex;flex-direction:column;gap:8px}
+.v6-conds li{display:grid;grid-template-columns:44px minmax(0,1.3fr) 150px minmax(0,1.4fr) 140px 72px;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;border:1px solid var(--line2);background:var(--surface)}
+.v6-conds li:first-child .v6-and{visibility:hidden}
+.v6-and{font-size:11.5px;font-weight:600;color:var(--muted);text-align:center}
+.v6-ca .dd,.v6-co .dd,.v6-cv .dd{display:block}
+.v6-cx2{display:flex;justify-content:flex-end;gap:2px}.v6-cx2 .cm-ib{width:30px;height:30px}
+.v6-tag{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:10px;white-space:nowrap}
+.v6-c-chg{border-color:#E9C48A;background:var(--warnbg)}.v6-c-chg .v6-tag{color:var(--warn);background:var(--surface)}
+.v6-c-add{border-color:var(--okbd);background:var(--okbg)}.v6-c-add .v6-tag{color:var(--ok);background:var(--surface)}
+.v6-c-del{border-style:dashed;background:var(--sub)}.v6-c-del .v6-ca,.v6-c-del .v6-co,.v6-c-del .v6-cv{opacity:.5;text-decoration:line-through}.v6-c-del .v6-tag{color:var(--bad);background:var(--badbg)}
+/* required */
+.v6-req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px;padding:0 18px}
+.v6-rg h4{display:flex;gap:8px;align-items:baseline;margin:0 0 8px;font-size:12.5px;font-weight:600}.v6-rg h4 .mu{font-weight:400;font-size:12px}
+.v6-qs{display:flex;flex-wrap:wrap;gap:6px}
+.v6-q{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:6px;border:1px dashed var(--bd);font-size:12.5px;color:var(--muted)}
+.v6-q::before{content:'';width:12px;height:12px;border-radius:3px;border:1.5px solid var(--bd);box-sizing:border-box}
+.v6-q[aria-pressed=true]{border:1px solid var(--line);background:var(--sub);color:var(--ink)}
+.v6-q[aria-pressed=true]::before{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/10px no-repeat;border-color:var(--accent)}
+.v6-q:not([disabled]):hover{border-color:var(--accent)}.v6-q:focus-visible{outline:2px solid var(--accent);outline-offset:1px}.v6-q[disabled]{cursor:default}
+.v6-q.v6-q-add{border-color:var(--okbd);background:var(--okbg);color:var(--ok)}
+.v6-q.v6-q-del{border-color:#E9C48A;background:var(--warnbg);color:var(--warn);text-decoration:line-through}
+/* posts */
+.v6-posts{list-style:none;margin:0;padding:0 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v6-posts li{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:8px}
+.v6-posts li > div{display:flex;flex-direction:column;flex:1}.v6-posts b{font-size:13.5px;font-weight:600}.v6-posts .mu{font-size:12px}
+.v6-posts li.v6-ov{border-color:#E9C48A;background:var(--warnbg)}
+/* compare */
+.v6-cmp{overflow:hidden}.v6-cw{overflow:auto}
+.v6-ct{width:100%;border-collapse:collapse;font-size:13px}
+.v6-ct th,.v6-ct td{padding:10px 14px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:top}
+.v6-ct thead th{position:sticky;top:0;background:var(--sub);border-bottom:1px solid var(--line);padding:8px 14px}
+.v6-ct tbody th{font-weight:500;color:var(--muted2);width:220px}
+.v6-chd{all:unset;cursor:pointer;display:flex;flex-direction:column}.v6-chd b{font-size:13px}.v6-chd small{font-size:11.5px;color:var(--muted);font-weight:400}.v6-chd:hover b{color:var(--accent)}
+.v6-cs-h th{background:var(--surface);font-size:12px;font-weight:600;color:var(--muted);padding-top:16px}
+.v6-cg{font-weight:500}.v6-cs{color:var(--muted4)}.v6-cd{background:var(--warnbg);color:var(--warn);font-weight:600}
+/* history */
+.v6-hist ol{list-style:none;margin:0;padding:16px 20px;display:flex;flex-direction:column}
+.v6-hist li{display:flex;gap:14px;padding-bottom:18px;position:relative}
+.v6-hist li:not(:last-child)::after{content:'';position:absolute;left:5px;top:16px;bottom:0;width:2px;background:var(--line)}
+.v6-hd2{flex:none;width:12px;height:12px;border-radius:50%;background:var(--bd);margin-top:4px}
+.v6-h-a .v6-hd2{background:var(--ok)}.v6-h-d .v6-hd2{background:var(--warn)}
+.v6-hist li > div{display:flex;flex-direction:column;gap:2px}.v6-hist b{font-size:14px}.v6-hist .mu{font-size:12.5px}.v6-hist p{margin:4px 0 0;font-size:13px}.v6-hist small{font-size:12px;color:var(--warn);font-weight:600}
+/* draft bar */
+.v6-bar{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 -4px 16px rgba(22,26,33,.08)}
+.v6-dot{width:8px;height:8px;border-radius:50%;background:var(--warn)}
+.v6-bt{display:flex;flex-direction:column}.v6-bt b{font-size:13.5px}.v6-bt .mu{font-size:12px}
+/* drawer */
+.v6-scr{z-index:200}
+.v6-dr{position:fixed;top:0;right:0;bottom:0;z-index:201;width:min(520px,100vw);background:var(--surface);box-shadow:-8px 0 32px rgba(22,26,33,.18);display:flex;flex-direction:column}
+.v6-drh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}.v6-drh h2{margin:0;font-size:17px;font-weight:600}.v6-drh .mu{font-size:12.5px}
+.v6-drb{flex:1;overflow:auto;padding:16px 20px 24px;display:flex;flex-direction:column;gap:14px}
+.v6-lms{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin:0;padding:12px 14px;border-radius:8px;background:var(--sub)}
+.v6-lms dt{font-size:11.5px;color:var(--muted)}.v6-lms dd{margin:1px 0 0;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v6-miss dd{color:var(--bad);font-weight:600}
+.v6-res{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:8px}.v6-res b{font-size:15px}.v6-res span{font-size:12.5px;color:var(--muted2)}
+.v6-r-ok{background:var(--okbg)}.v6-r-ok b{color:var(--ok)}.v6-r-hold,.v6-r-win{background:var(--warnbg)}.v6-r-hold b,.v6-r-win b{color:var(--warn)}.v6-r-skip{background:var(--neutral)}.v6-r-skip b{color:var(--ink)}
+.v6-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.v6-steps li{display:flex;gap:10px}.v6-steps li > div{display:flex;flex-direction:column}.v6-steps b{font-size:13px}.v6-steps span:not(.v6-sm){font-size:12.5px;color:var(--muted2)}
+.v6-sm{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}
+.st-ok .v6-sm{background:var(--ok)}.st-bad .v6-sm{background:var(--warn)}
+.v6-inv{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.v6-ih{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:10px;border-bottom:1px solid var(--line2)}.v6-ih > div{display:flex;flex-direction:column}.v6-ih .mu{font-size:11.5px}.v6-ih b{font-size:17px}
+.v6-idl{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:10px 0}.v6-idl dt{font-size:11px;color:var(--muted)}.v6-idl dd{margin:1px 0 0;font-size:12.5px}
+.v6-il{width:100%;border-collapse:collapse;font-size:12.5px;border-top:1px solid var(--line2)}.v6-il td{padding:5px 0}.v6-il .r{text-align:right}
+.v6-it td{font-weight:600;border-top:1px solid var(--line2)}.v6-itl td{color:var(--accent2);font-size:14px}
+.v6-icl{margin:8px 0 0;font-size:12px}.v6-icl b{color:var(--ok);margin-left:6px}
+.v6-tp h3{margin:0 0 6px;font-size:12px;font-weight:600;color:var(--muted)}.v6-tp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.v6-tp li{display:flex;justify-content:space-between;padding:7px 10px;border-radius:6px;background:var(--sub);font-size:13px}.tp-ok b{color:var(--ok)}.tp-off b{color:var(--muted);font-weight:500}
+/* dialog */
+.v6-dlg{width:min(560px,calc(100vw - 48px));overflow:visible}.v6-dlg[data-wide=true]{width:min(760px,calc(100vw - 48px))}
+.v6-dh{display:flex;align-items:flex-start;gap:12px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}.v6-dh > div{flex:1}.v6-dh h2{margin:0;font-size:17px;font-weight:600}.v6-dh p{margin:3px 0 0;font-size:12.5px}
+.v6-db{padding:16px 20px;display:flex;flex-direction:column;gap:14px}.v6-db:empty{display:none}
+.v6-rv{max-height:min(62vh,560px);overflow:auto}
+.v6-df{display:flex;align-items:center;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}
+.v6-sb{color:var(--bad)}
+.v6-seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.v6-seg button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:8px}.v6-seg b{font-size:13px}.v6-seg small{font-size:12px;color:var(--muted)}
+.v6-seg button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--tint)}.v6-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.v6-hint{margin:0;font-size:12.5px;line-height:18px}
+.v6-pq{display:block;padding:10px 12px;border-left:3px solid var(--warn);background:var(--warnbg);font-size:13px;quotes:none}
+.v6-sum{list-style:none;margin:0;padding:0;display:flex;gap:8px;flex-wrap:wrap}.v6-sum li{display:flex;gap:8px;padding:6px 10px;border-radius:6px;background:var(--sub);font-size:12.5px}
+.v6-ds h3{display:flex;gap:8px;align-items:baseline;margin:0 0 6px;font-size:13.5px}.v6-ds h3 .mu{font-size:12px;font-weight:400}
+.v6-ds ul{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.v6-ds li{display:grid;grid-template-columns:180px minmax(0,1fr);gap:12px;padding:8px 12px;font-size:12.5px;border-top:1px solid var(--line2);border-left:3px solid var(--warn)}.v6-ds li:first-child{border-top:0}
+.v6-ds ul:empty{display:none}
+.v6-ba{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}.v6-ba s{color:var(--bad)}.v6-ba b{font-weight:600}
+.v6-k-add{border-left-color:var(--ok) !important}.v6-k-add b{color:var(--ok)}.v6-k-del{border-left-color:var(--bad) !important}
+.v6-dn{margin:0;padding:10px 12px;border-radius:8px;background:var(--sub);font-size:13px;line-height:20px}
+.v6-ta{min-height:64px;resize:vertical;padding:8px 12px;height:auto !important}
+@media (max-width:1300px){.v6-g4{grid-template-columns:1fr 1fr}.v6-g3{grid-template-columns:1fr 1fr}.v6-req,.v6-posts{grid-template-columns:1fr}}
+.gmain.v6 > *{flex-shrink:0}
+.v6-cv .input{width:100%}
+.v6 .v6-back{display:inline-flex;align-items:center;gap:4px}
+.v6-w2 .lbl{max-width:360px}
+
+/* ===== BRE v7 additions ===== */
+.v7-tbl td{height:52px}
+.v7-pri{display:inline-flex;align-items:center;gap:6px}
+.v7-warn{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--warn);color:#fff;font-size:11px;font-weight:700;font-family:inherit;cursor:help}
+.v7-ban-r{background:var(--sub);color:var(--muted2)}
+.v7-src{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:10px;white-space:nowrap;align-self:flex-start}
+.v7-src-s{background:var(--okbg);color:var(--ok)}.v7-src-p{background:var(--neutral);color:var(--muted2)}
+.v7-dg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 18px;padding:0 18px}
+.v7-w2{grid-column:span 2}
+.v7-hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+.v7-lchips{display:flex;flex-wrap:wrap;gap:6px;min-height:36px;align-items:center}.v7-lchips span{padding:4px 10px;border-radius:6px;background:var(--sub);border:1px solid var(--line);font-size:12.5px}
+.v7-ovs{padding:14px 18px;border-left:4px solid var(--warn)}.v7-ovs h3{margin:0;font-size:14px;font-weight:600}.v7-ovs > p{margin:2px 0 10px;font-size:12.5px}
+.v7-ovs ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}.v7-ovs li{display:flex;gap:12px;align-items:baseline;font-size:13px;padding:8px 12px;border-radius:6px}
+.v7-ov-c{background:var(--warnbg)}.v7-ov-c span{color:var(--warn);font-weight:500}.v7-ov-i{background:var(--sub)}.v7-ov-i span{color:var(--muted2)}
+.v7-wg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:16px;padding:0 18px}
+.v7-num{display:flex;align-items:center;gap:8px}.v7-num .input{width:110px !important}.v7-num .mu{font-size:12.5px;white-space:nowrap}
+.v7-swd{font-size:12.5px;white-space:normal}
+.v7-nbad .input{border-color:var(--badbd);background:var(--badbg)}
+.v7-cbad{border-color:var(--badbd) !important;background:var(--badbg) !important}.v7-cbad .v6-tag{color:var(--bad);background:var(--surface)}
+.v7-exc{overflow:visible}.v7-exc .v6-gh{flex-wrap:wrap}.v7-exc .v6-gh .mu{max-width:720px}
+.v7-xt td{height:56px}.v7-xt td .input{width:100%}.v7-xt .dd{display:block}.v7-xt tbody tr{cursor:default}.v7-xt tbody tr:hover td{background:none}
+.v7-sla{display:flex;gap:6px;align-items:center}.v7-sla .input{width:64px !important}
+.v7-xbad td{background:var(--badbg) !important}
+.v7-simw{display:grid;grid-template-columns:380px minmax(0,1fr);gap:16px;align-items:start}
+.v7-simf{position:sticky;top:0}
+.v7-sf{padding:14px 18px 18px;display:flex;flex-direction:column;gap:14px}.v7-sf .dd{display:block}
+.v7-bls{display:flex;flex-direction:column;gap:4px}
+.v7-bl{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;padding:7px 10px;border:1px solid var(--line);border-radius:6px}.v7-bl b{font-size:12.5px}.v7-bl small{font-size:11.5px;color:var(--muted)}
+.v7-bl:hover{border-color:var(--bd)}.v7-bl[aria-pressed=true]{border-color:var(--accent);background:var(--tint)}.v7-bl:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.v7-run{align-self:flex-start;min-width:120px}
+.v7-np{margin:-4px 0 0;font-size:12px}
+.v7-simr{padding:16px 18px;display:flex;flex-direction:column;gap:14px;min-height:400px}
+.v7-r-ok{background:var(--okbg)}.v7-r-ok b{color:var(--ok)}.v7-r-c{background:var(--warnbg)}.v7-r-c b{color:var(--warn)}.v7-r-w{background:var(--neutral)}
+.v7-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0}.v7-kpi > div{padding:10px 12px;border:1px solid var(--line);border-radius:8px}.v7-kpi dt{font-size:11.5px;color:var(--muted)}.v7-kpi dd{margin:2px 0 0;font-size:15px;font-weight:600}
+.v7-h3{margin:4px 0 0;font-size:13px;font-weight:600}
+.v7-rt td{height:48px}.v7-rt tbody tr{cursor:default}.v7-rt tbody tr:hover td{background:none}
+.v7-rt b{display:block;font-size:13px;font-weight:600}.v7-rid{font-size:11.5px}
+.v7-me td{background:var(--tint) !important}
+.v7-why{font-size:12px;max-width:320px}
+.v7-rs{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:10px;white-space:nowrap}
+.v7-rs-ok{background:var(--okbg);color:var(--ok)}.v7-rs-c{background:var(--warnbg);color:var(--warn)}.v7-rs-w{background:var(--warnbg);color:var(--warn)}.v7-rs-n{background:var(--neutral);color:var(--muted2)}.v7-rs-bad{background:var(--badbg);color:var(--bad)}
+.v7-empty{display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;text-align:center;flex:1;padding:60px 40px}.v7-empty .mu{max-width:420px;font-size:13px}
+.v7-aud{overflow:visible}.v7-ah{align-items:center}
+.v7-at td{height:44px;font-size:12.5px}.v7-at tbody tr{cursor:default}.v7-at tbody tr:hover td{background:none}
+.v7-a-a td{background:var(--okbg)}.v7-a-p td{background:var(--warnbg)}
+.v7-cmpb{display:flex;align-items:center;gap:10px;padding:14px 18px 4px}.v7-cmpb .lbl{margin:0}
+.v7-cmpr{padding:10px 18px 18px;display:flex;flex-direction:column;gap:14px}
+.v7-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.v7-cats button{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:1px;padding:8px 10px;border:1px solid var(--line);border-radius:7px}
+.v7-cats b{font-size:12.5px}.v7-cats small{font-size:11.5px;color:var(--muted);line-height:15px}.v7-cats i{position:absolute;top:6px;right:8px;font-style:normal;font-size:10.5px;font-weight:600;color:var(--ok)}
+.v7-cats button[aria-checked=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--tint)}.v7-cats button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.v7-iss{margin:0;padding-left:18px;font-size:13px;line-height:22px;color:var(--bad)}
+.v7-clash{margin:0;padding:10px 12px;border-radius:8px;background:var(--warnbg);color:var(--warn);font-size:13px;font-weight:500}
+.v7-db-bad .v6-dot{background:var(--bad)}.v7-db-bad .v6-bt .mu{color:var(--bad)}
+@media (max-width:1300px){.v7-dg{grid-template-columns:1fr 1fr}.v7-simw{grid-template-columns:1fr}.v7-cats{grid-template-columns:1fr 1fr}}
+/* v7.1 */
+.v7-hb{display:flex;gap:6px}
+.v7-j{display:block}.v7-j .dd{display:block}.v7-j .dd-b{height:32px;font-size:12px;font-weight:600;padding-left:8px}
+.v6-conds li.v7-or{margin-top:10px;border-top:2px dashed var(--accent)}
+.v7-or .v7-j{color:var(--accent2)}
+.v7-ev{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sub)}
+.v7-evh{display:flex;align-items:center;gap:8px}.v7-evh .lbl{margin:0}.v7-evh .btn[aria-pressed=true]{background:var(--tint);border-color:var(--tintbd);color:var(--accent2)}
+.v7-ovn{font-size:12px;font-weight:600;color:var(--warn)}
+.v7-vals{display:flex;flex-direction:column;gap:6px}
+.v7-val{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px;align-items:center;font-size:12px;color:var(--muted2)}.v7-val .input{height:30px;font-size:12px;background:var(--surface)}
+.v7-vchg span{color:var(--warn);font-weight:600}.v7-vchg .input{border-color:#E0A84C;background:var(--warnbg)}
+.v7-inv{margin:0}.v7-ib{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:10px}.v7-ib .v6-idl{margin:0;align-content:start}
+.v6-ih .mu + b{display:block}
+.v7-ips{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px}.v7-ips li{display:flex;justify-content:space-between;padding:6px 10px;border-radius:6px;background:var(--sub);font-size:12.5px}
+.v7 .v6-conds li{grid-template-columns:76px minmax(0,1.3fr) 150px minmax(0,1.4fr) 140px 72px}
+.v7-evh .lbl,.v7-ovn{white-space:nowrap}
+/* v8 · rule list table */
+.v8-gh{align-items:center;gap:10px;padding:14px 20px}
+.v8-gh h2{font-size:15px}
+.v8-cnt{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 7px;border-radius:11px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:600;box-sizing:border-box}
+.v8-gh .mu{font-size:12.5px}
+.v8-tbl{width:100%;table-layout:fixed;border-collapse:collapse;font-size:13px}
+.v8-c-rule{width:24%}.v8-c-trig{width:16%}.v8-c-scope{width:19%}.v8-c-loc{width:14%}.v8-c-lf{width:12%}.v8-c-pri{width:82px}.v8-c-st{width:150px}.v8-c-eff{width:118px}.v8-c-act{width:124px}
+.v8-tbl th{height:38px;padding:0 16px;text-align:left;font-size:12px;font-weight:600;color:var(--muted2);background:var(--sub);border-bottom:1px solid var(--line);white-space:nowrap}
+.v8-tbl td{height:60px;padding:8px 16px;border-bottom:1px solid var(--line2);vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
+.v8-tbl th:first-child,.v8-tbl td:first-child{padding-left:20px}
+.v8-tbl tr:last-child td{border-bottom:0}
+.v8-tbl tbody tr{cursor:pointer}.v8-tbl tbody tr:hover td{background:var(--sub)}
+.v8-tbl .r{text-align:right}
+.v8-rn{max-width:100%}.v8-rn b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v8-rn span{margin-top:1px}
+.v8-trig{color:var(--ink)}
+.v8-tags{display:flex;flex-wrap:wrap;gap:4px}
+.v8-tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--neutral);color:var(--muted2);font-size:12px;font-weight:500;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.v8-loc{display:flex;flex-direction:column;gap:2px}.v8-loc span{color:var(--ink)}.v8-loc small{font-size:12px;color:var(--warn);font-weight:500}
+.v8-pri{display:inline-flex;align-items:center;gap:8px;justify-content:flex-end}
+.v8-eff{white-space:nowrap;color:var(--muted2)}
+.v8-act{text-align:right;padding-right:12px !important}
+.v8-act .v6-ia{justify-content:flex-end}
+.v8-c-st{width:172px}.v8-c-act{width:132px}
+.v8-tbl td.v8-act,.v8-tbl td:nth-last-child(3){overflow:visible;text-overflow:clip}
+.v8-c-act{width:168px}
+.v6-ia .cm-ib.v8-del:not([disabled]):hover{color:var(--bad);background:var(--badbg)}
+.v6-ia .cm-ib[disabled]{pointer-events:auto;cursor:not-allowed;opacity:.35}
+
+/* ===== LMS SAR Interface ===== */
+.sar code{font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);font-size:11px;font-weight:400;color:var(--muted);background:none;padding:0}
+.sar-sum{padding:0}
+.sar-top{display:flex;align-items:flex-end;gap:16px;padding:16px 20px 14px;border-bottom:1px solid var(--line2)}
+.sar-id{display:flex;flex-direction:column;gap:2px}.sar-id .lbl{margin:0}.sar-id h2{margin:0;font-size:24px;font-weight:600;letter-spacing:.01em}
+.sar-b{font-size:12.5px}.sar-b .mono{color:var(--muted2)}
+.sar-tot{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding:8px 14px;border-radius:8px;background:var(--tint)}.sar-tot .lbl{margin:0}.sar-tot b{font-size:20px;color:var(--accent2)}
+.sar-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px 20px;margin:0;padding:14px 20px}
+.sar-facts dt{font-size:11.5px;color:var(--muted)}.sar-facts dd{margin:2px 0 0;font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sar-bot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 20px 14px;border-top:1px solid var(--line2);background:var(--sub);border-radius:0 0 8px 8px}
+.sar-route{list-style:none;display:flex;align-items:center;gap:0;margin:0;padding:0}
+.sar-route li{display:flex;align-items:center;gap:6px}
+.sar-arr{display:inline-block;width:28px;height:1px;background:var(--bd);margin:0 10px;position:relative}.sar-arr::after{content:'';position:absolute;right:-1px;top:-3px;border:3.5px solid transparent;border-left:5px solid var(--bd)}
+.sar-rt{font-size:11px;font-weight:600;color:var(--muted);padding:2px 6px;border-radius:4px;background:var(--surface);border:1px solid var(--line)}
+.sar-route b{font-size:13px}
+.sar-flags{list-style:none;display:flex;gap:6px;flex-wrap:wrap;margin:0;padding:0}
+.sar-flags li{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 4px 0 10px;border-radius:13px;background:var(--surface);border:1px solid var(--line);font-size:12px;color:var(--muted2)}
+.sar-flags b{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;font-size:11px}
+.sar-f-Y{background:var(--okbg);color:var(--ok)}.sar-f-N{background:var(--neutral);color:var(--muted2)}
+.sar-body{padding:0;overflow:visible}
+.sar-tabs{display:flex;align-items:center;gap:4px;padding:0 16px 0 20px;margin:0;border-bottom:1px solid var(--line)}
+.sar-tabs .tabb{height:46px;display:inline-flex;align-items:center;gap:8px}
+.sar-tn{height:20px;min-width:20px;font-size:11.5px}
+.sar-tabs .btn{margin-left:6px}
+.sar-tg[aria-pressed=true]{background:var(--tint);border-color:var(--tintbd);color:var(--accent2)}
+.sar-jn{font-size:12px}
+.sar-secs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;padding:6px 20px 20px}
+.sar-sec{padding:14px 0 4px;border-bottom:1px solid var(--line2);min-width:0}
+.sar-sec h3{display:flex;align-items:baseline;gap:8px;margin:0 0 8px;font-size:13.5px;font-weight:600}.sar-sec h3 .mu{font-size:12px;font-weight:400}
+.sar-kv{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin:0}
+.sar-kv > div{display:flex;flex-direction:column;gap:1px;padding:7px 0;border-top:1px dashed var(--line2);min-width:0}
+.sar-kv > div:nth-child(-n+2){border-top:0}
+.sar-kv dt{display:flex;align-items:baseline;gap:6px;font-size:12px;color:var(--muted2)}.sar-kv dt code{margin-left:auto}
+.sar-kv dd{margin:0;display:flex;align-items:baseline;gap:8px;font-size:13.5px;font-weight:500;min-width:0}.sar-v{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sar-raw{font-size:11px;color:var(--muted);font-weight:400}
+.sar-e dd{color:var(--muted4);font-weight:400}
+.sar-f dd .sar-v{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:10px;font-size:11.5px;font-weight:700}
+.sar-f-Y dd .sar-v{background:var(--okbg);color:var(--ok)}.sar-f-N dd .sar-v{background:var(--neutral);color:var(--muted2)}
+.sar-kv > div.sar-f-Y,.sar-kv > div.sar-f-N{background:none;color:inherit}
+.sar-none{margin:0 0 8px;font-size:12.5px}
+.sar-lt{font-size:13px}.sar-lt td{height:52px}
+.sar-lg tbody,.sar-lg{border-bottom:1px solid var(--line2)}
+.sar-lg[data-open=true] > tr:first-child td{background:var(--tint)}
+.sar-ex{width:28px;height:28px}.sar-ex svg{transition:transform .15s}.sar-ex[aria-expanded=true] svg{transform:rotate(90deg)}
+@media (prefers-reduced-motion:reduce){.sar-ex svg{transition:none}}
+.sar-cc{display:inline-block;margin-right:8px;font-size:12.5px}.sar-cn{color:var(--muted2);font-size:12.5px}
+.sar-det > td{height:auto !important;padding:4px 20px 14px !important;background:var(--sub);cursor:default;white-space:normal}
+.sar-lt tbody tr.sar-det:hover td{background:var(--sub)}
+.sar-coa{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:12px 0 4px}.sar-coa .lbl{display:flex;gap:8px;align-items:baseline;margin:0 0 6px}
+.sar-seg{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:0;padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+.sar-seg li{display:flex;flex-direction:column;padding:4px 8px;border-left:1px solid var(--line2);min-width:34px}.sar-seg li:first-child{border-left:0}
+.sar-seg small{font-size:10px;color:var(--muted)}.sar-seg b{font-size:12px;font-weight:500}
+.sar-ls{grid-template-columns:repeat(3,minmax(0,1fr));padding:0}
+.sar-ls .sar-kv{grid-template-columns:1fr}.sar-ls .sar-kv > div:nth-child(2){border-top:1px dashed var(--line2)}
+.sar-ln{margin:10px 0 0;font-size:12px}
+.sar-lt tfoot td{height:52px;border-top:1px solid var(--line);background:var(--sub)}
+.sar-ft .lbl{margin:0;display:inline}.sar-ct{display:inline-flex;gap:14px;margin-left:12px;font-size:13px}
+.sar-ok,.sar-bad{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:10px;white-space:nowrap}.sar-ok{background:var(--okbg);color:var(--ok)}.sar-bad{background:var(--badbg);color:var(--bad)}
+.sar-note{margin:0;padding:12px 20px 16px;font-size:12px}.sar-note span{margin-left:6px;color:var(--ok)}
+.sar-cs{margin:0;padding:12px 20px 4px;font-size:12.5px}
+.sar-ct2 tbody tr{cursor:default}.sar-ct2 tbody tr:hover td{background:none}
+.sar-json{margin:0;padding:16px 20px 20px;max-height:640px;overflow:auto;font-size:12px;line-height:18px;white-space:pre;color:var(--ink);background:var(--sub);border-radius:0 0 8px 8px}
+@media (max-width:1300px){.sar-facts{grid-template-columns:repeat(3,minmax(0,1fr))}.sar-secs{grid-template-columns:1fr}.sar-ls{grid-template-columns:1fr}}
+.sar-lt td:first-child{font-size:0;padding-left:16px !important}
+.sar-ls .sar-kv > div{flex-direction:row;align-items:baseline;justify-content:space-between;gap:12px;padding:6px 0}
+.sar-ls .sar-kv dt{flex:1;min-width:0}.sar-ls .sar-kv dt code{margin-left:6px}
+.sar-ls .sar-kv dd{flex:none;max-width:55%;justify-content:flex-end;text-align:right}
+.sar-ls .sar-sec{border-bottom:0}
+</style>
+<link rel="stylesheet" href="girs-ui.css">
+</helmet>
+<div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
+  <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
+  <div style="flex: 1 1 auto; min-height: 0; display: flex">
+    <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
+    <aside id="gside" class="gside" data-drawer="{{shell.drawer}}" aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
+      <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); box-sizing: border-box; {{shell.logoRow}}">
+        <span class="glogo" style="display: inline-flex; border-radius: 4px; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
+        <span style="width: 1px; height: 20px; background: var(--line); {{shell.hide}}"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); {{shell.hide}}">GIRS</span>
+        <button class="btn btn-icon btn-sm gdclose" onClick="{{shell.closeDrawer}}" aria-label="Close menu" style="margin-inline-start: auto; width: 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="gdctx" style="flex: none; flex-direction: column; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line2)">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px">
+          <div style="position: relative"><label for="dhub" class="sr">Hub</label><select id="dhub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 100%"><option value="SIN">Singapore · SIN</option><option value="NSA">India · NSA</option><option value="LCH">Thailand · LCH</option><option value="PKG">Malaysia · PKG</option><option value="JED">Saudi Arabia · JED</option><option value="ZLO">Mexico · ZLO</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><label for="dent" class="sr">Entity</label><select id="dent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100%"><option value="PIL">PIL</option><option value="MELL">MELL</option><option value="MSC">MSC</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
+        </div>
+      </div>
+      <nav aria-label="Screens" data-c="{{shell.cA}}" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
+        <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-bd" onClick="{{shell.flyClose}}" aria-hidden="true"></div></sc-if>
+        <a href="index.html" class="nav-grp" title="{{shell.l.nHome}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V9.5"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nHome}}</span></a>
+        <a href="voyage-invoicing.html" class="nav-grp" title="{{shell.l.nVoy}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"></path><path d="M4 17l-1-5h18l-1 5"></path><path d="M6 12V7h12v5"></path><path d="M12 3v4"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nVoy}}</span></a>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" title="{{shell.l.g0}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g0}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g0" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g0}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g0}}</div></sc-if>
+          <a href="operations-cockpit.html" class="nav-item" title="{{shell.l.nMain}}">{{shell.l.nMain}}
+          </a>
+          <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}">{{shell.l.nChargeProcessing}}
+          </a>
+          <a href="dd-engine.html" class="nav-item" title="{{shell.l.nDDEngine}}">{{shell.l.nDDEngine}}
+          </a>
+          <a href="integration-monitor.html" class="nav-item" title="{{shell.l.nIntegrationMonitor}}">{{shell.l.nIntegrationMonitor}}
+          </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}">{{shell.l.nDocumentIntake}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" title="{{shell.l.g1}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h9l5 5v13H5z"></path><path d="M14 3v5h5M8.5 12.5h7M8.5 16.5h7"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g1}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g1" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g1}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g1}}</div></sc-if>
+          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List">Invoice List
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}">{{shell.l.nSplitBilling}}
+          </a>
+          <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}">{{shell.l.nManualInvoice}}
+          </a>
+          <a href="invoice-previewer.html" class="nav-item" title="{{shell.l.nInvoicePreviewer}}">{{shell.l.nInvoicePreviewer}}
+          </a>
+          <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}">{{shell.l.nCreditNotes}}
+          </a>
+          <a href="credit-note-list.html" class="nav-item" title="{{shell.l.nCreditNoteList}}">{{shell.l.nCreditNoteList}}
+          </a>
+          <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}">{{shell.l.nDARConsole}}
+          </a>
+          <a href="einvoice-exceptions.html" class="nav-item" title="{{shell.l.nEInvoiceExceptions}}">{{shell.l.nEInvoiceExceptions}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" title="{{shell.l.g2}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="12" cy="12" r="3"></circle><path d="M6.5 9v6M17.5 9v6"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g2}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g2}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g2" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g2}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g2}}</div></sc-if>
+          <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}">{{shell.l.nReceipting}}
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item" title="{{shell.l.nCashAppWorkbench}}">{{shell.l.nCashAppWorkbench}}
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item" title="{{shell.l.nToleranceCOREOR}}">{{shell.l.nToleranceCOREOR}}
+          </a>
+          <a href="soa-aging.html" class="nav-item" title="{{shell.l.nSOADashboard}}">{{shell.l.nSOADashboard}}
+          </a>
+          <a href="credit-management.html" class="nav-item" title="{{shell.l.nCreditManagement}}">{{shell.l.nCreditManagement}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" title="{{shell.l.g3}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-4.5"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g3}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g3}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g3" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g3}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g3}}</div></sc-if>
+          <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}">{{shell.l.nApprovalsInbox}}
+          </a>
+          <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}">{{shell.l.nEnquiry}}
+          </a>
+          <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}">{{shell.l.nReconciliation}}
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}">{{shell.l.nMonthEnd}}
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}">{{shell.l.nReports}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" title="{{shell.l.g4}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h10M17 6h4M3 12h4M11 12h10M3 18h12M19 18h2"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g4}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g4}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g4" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g4}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g4}}</div></sc-if>
+          <a href="company-master.html" class="nav-item" title="{{shell.l.nCompanyMaster}}">{{shell.l.nCompanyMaster}}
+          </a>
+          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}">{{shell.l.nCustomerMaster}}
+          </a>
+          <a href="bank-master-v1.html" class="nav-item" title="{{shell.l.nBankMaster}}">{{shell.l.nBankMaster}}
+          </a>
+          <a href="charge-master-v2c.html" class="nav-item" title="{{shell.l.nChargeMaster}}">{{shell.l.nChargeMaster}}
+          </a>
+          <a href="business-rule-engine-v8.html" class="nav-item" title="Business Rule Engine">Business Rule Engine
+          </a>
+          <a href="accounting-configuration.html" class="nav-item" title="{{shell.l.nAccountingConfig}}">{{shell.l.nAccountingConfig}}
+          </a>
+          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}">{{shell.l.nExchangeRate}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" title="{{shell.l.g5}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g5}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g5}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g5" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g5}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g5}}</div></sc-if>
+          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}">{{shell.l.nCountryMaster}}
+          </a>
+          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}">{{shell.l.nCurrencyMaster}}
+          </a>
+          <a href="city-master.html" class="nav-item" title="{{shell.l.nCityMaster}}">{{shell.l.nCityMaster}}
+          </a>
+          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}">{{shell.l.nPortMaster}}
+          </a>
+          <a href="tax-setup.html" class="nav-item" title="{{shell.l.nTaxSetup}}">{{shell.l.nTaxSetup}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <a href="lms-sar-interface.html" class="nav-grp nav-grp-on" aria-current="page" title="JSON" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1"></path><path d="M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"></path></svg><span class="ng-l" style="{{shell.hide}}">JSON</span></a>
+      </nav>
+      <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
+        <button class="sbtoggle" onClick="{{shell.toggleSb}}" aria-expanded="{{shell.sbOpen}}" aria-label="{{shell.sbLabel}}" title="{{shell.sbLabel}}" style="{{shell.item}}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path><path d="{{shell.sbIcon}}"></path></svg>
+          <span style="{{shell.hide}}">Collapse side panel</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="gcontent" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; overflow-y: auto">
+      <div style="position: sticky; top: 0; z-index: 20; flex: none">
+        <div class="gtop" style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line2); box-sizing: border-box">
+          <button class="btn btn-icon gmenu" onClick="{{shell.toggleDrawer}}" aria-label="Open menu" aria-controls="gside" aria-expanded="{{shell.drawerAria}}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <div class="gsearch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <label for="gq" class="sr">Search</label>
+            <input id="gq" class="input" placeholder="{{shell.ph}}" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="grow"></div>
+          <div class="gctx" style="position: relative">
+            <label for="ghub" class="sr">Hub</label>
+            <select id="ghub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 148px">
+              <option value="SIN">Singapore · SIN</option>
+              <option value="NSA">India · NSA</option>
+              <option value="LCH">Thailand · LCH</option>
+              <option value="PKG">Malaysia · PKG</option>
+              <option value="JED">Saudi Arabia · JED</option>
+              <option value="ZLO">Mexico · ZLO</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div class="gctx" style="position: relative">
+            <label for="gent" class="sr">Entity</label>
+            <select id="gent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100px">
+              <option value="PIL">PIL</option>
+              <option value="MELL">MELL</option>
+              <option value="MSC">MSC</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="ghl">
+            <button class="{{shell.health.cls}}" aria-haspopup="dialog" aria-expanded="{{shell.health.aria}}" aria-label="{{shell.health.label}}" title="{{shell.health.label}}" onClick="{{shell.health.toggle}}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
+              <sc-if value="{{shell.health.hasN}}" hint-placeholder-val="{{ true }}"><span class="ghl-n">{{shell.health.n}}</span></sc-if>
+            </button>
+            <sc-if value="{{shell.health.open}}" hint-placeholder-val="{{ false }}">
+              <button class="ghl-scrim" tabindex="-1" aria-hidden="true" onClick="{{shell.health.close}}"></button>
+              <div class="ghl-p" role="dialog" aria-label="System health">
+                <div class="ghl-h"><div><b>System health</b><small>{{shell.health.upd}}</small></div><span class="{{shell.health.tone}}">{{shell.health.sum}}</span></div>
+                <ul><sc-for list="{{shell.health.items}}" as="h" hint-placeholder-count="10"><sc-if value="{{h.isHead}}" hint-placeholder-val="{{ false }}"><li class="ghl-g">{{h.head}}</li></sc-if><sc-if value="{{h.isRow}}" hint-placeholder-val="{{ true }}"><li class="ghl-r"><i class="{{h.dot}}" aria-hidden="true"></i><span class="ghl-b"><b>{{h.name}}</b><small>{{h.detail}}</small></span><span class="{{h.sc}}">{{h.state}}</span></li></sc-if></sc-for></ul>
+                <a class="ghl-f lnk" href="integration-monitor.html">Open Integration Monitor</a>
+              </div>
+            </sc-if>
+          </div>
+          <a href="approvals-inbox.html" class="btn btn-icon" aria-label="{{shell.pending}} pending approvals" title="{{shell.pending}} pending approvals" style="position: relative; text-decoration: none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>
+            <span class="mono" style="position: absolute; top: -6px; inset-inline-end: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand); color: var(--onaccent); font-size: 12px; line-height: 18px; text-align: center; box-sizing: border-box">{{shell.pending}}</span>
+          </a>
+          <div style="position: relative">
+            <button class="ubtn" onClick="{{shell.toggleUm}}" aria-expanded="{{shell.umAria}}" aria-haspopup="menu" aria-label="User menu: {{shell.curLogin}}, {{shell.curRole}}">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex: none">{{shell.initials}}</span>
+              <span class="gutxt" style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 12px; color: var(--muted)">{{shell.curRole}}</span></span>
+              <svg class="gutxt uchev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
+              <div aria-hidden="true" onClick="{{shell.closeUm}}" style="position: fixed; inset: 0; z-index: 29"></div>
+              <div class="menu" role="menu" aria-label="User menu">
+                <sc-if value="{{shell.menuMain}}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px">
+                  <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex: none">{{shell.initials}}</span>
+                  <span class="mi-txt"><span style="font-weight: 600; line-height: 20px">{{shell.userName}}</span><span class="mi-sub">2 logins · roles from LMS IAM</span></span>
+                </div>
+                <div class="menu-sep"></div>
+                <div class="k" style="padding: 6px 10px 4px">Switch login</div>
+                <sc-for list="{{shell.logins}}" as="g" hint-placeholder-count="2">
+                  <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span><span class="mi-sub">{{g.role}}</span></span>
+                    <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                  </button>
+                </sc-for>
+                <div class="menu-sep"></div>
+                <button class="mi" role="menuitem" aria-haspopup="true" onClick="{{shell.toggleLang}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Language</span><span class="mi-sub" translate="no">{{shell.langName}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; color: var(--muted)"><path d="M9 6l6 6-6 6"></path></svg>
+                </button>
+                <div class="mi ap-row" role="none">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18" ></path><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Appearance</span></span>
+                  <div class="ap-seg" role="radiogroup" aria-label="Theme">
+                    <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span>Light</span></button>
+                    <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark</span></button>
+                  </div>
+                </div>
+                <div class="menu-sep"></div>
+                <button class="mi mi-danger" role="menuitem" onClick="{{shell.signOut}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
+                  <span class="mi-lbl">Sign out</span>
+                </button>
+                </sc-if>
+                <sc-if value="{{shell.langOpen}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; align-items: center; gap: 6px; padding: 2px 4px 8px">
+                    <button class="btn btn-icon btn-sm" aria-label="Back to profile menu" onClick="{{shell.toggleLang}}" style="width: 32px; padding: 0; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                    <span style="font-weight: 600">Language</span>
+                  </div>
+                  <div style="padding: 0 6px 6px"><input class="input lg-q" style="width: 100%; height: 34px" placeholder="Search language" aria-label="Search language" autocomplete="off" value="{{shell.lgQ}}" onInput="{{shell.setLgQ}}"></div>
+                  <div class="lg-list" role="group" aria-label="Languages" translate="no">
+                    <sc-for list="{{shell.langs}}" as="g" hint-placeholder-count="4">
+                      <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                        <span class="mi-txt"><span class="mi-lbl" lang="{{g.code}}">{{g.label}}</span><span class="mi-sub">{{g.en}}</span></span>
+                        <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                      </button>
+                    </sc-for>
+                    <sc-if value="{{shell.lgNone}}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 10px; color: var(--muted)">No language matches “{{shell.lgQ}}”</div></sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
+          <div style="min-width: 0">
+            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">LMS SAR Interface</h1>
+            <div style="font-size: 12px; color: var(--muted); line-height: 16px">AR interface record received from LMS (SAR PaaS JSON) · read only</div>
+          </div>
+          <div class="gright" style="display: flex; align-items: center; gap: 10px; margin-inline-start: auto">
+          </div>
+        </div>
+      </div>
+            <main class="gmain v6 sar" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; min-height: 0">
+
+        <section class="card sar-sum" aria-label="Interface record">
+          <div class="sar-top">
+            <div class="sar-id"><span class="lbl" title="ArIfNo">AR I/F No.</span><h2 class="mono">{{rec.id}}</h2><span class="mu sar-b" title="BatchId">Batch <span class="mono">{{rec.batch}}</span> · {{rec.nRec}}</span></div>
+            <sc-if value="{{rec.multi}}" hint-placeholder-val="{{ false }}"><div class="v6-chips sar-recs" role="group" aria-label="Records"><sc-for list="{{rec.recs}}" as="r" hint-placeholder-count="2"><button type="button" class="v6-chip mono" aria-pressed="{{r.on}}" onClick="{{r.go}}">{{r.t}}</button></sc-for></div></sc-if>
+            <span class="v6-sp"></span>
+            <div class="sar-tot" title="{{rec.totalK}}"><span class="lbl">Invoice total (local)</span><b class="mono">{{rec.total}}</b></div>
+          </div>
+          <dl class="sar-facts"><sc-for list="{{rec.facts}}" as="f" hint-placeholder-count="10"><div title="{{f.k}}"><dt>{{f.l}}</dt><dd>{{f.v}}</dd></div></sc-for></dl>
+          <div class="sar-bot">
+            <ol class="sar-route" aria-label="Route"><sc-for list="{{rec.route}}" as="r" hint-placeholder-count="4"><li title="{{r.k}}"><sc-if value="{{r.notFirst}}" hint-placeholder-val="{{ true }}"><span class="sar-arr" aria-hidden="true"></span></sc-if><span class="sar-rt">{{r.t}}</span><b class="mono">{{r.v}}</b></li></sc-for></ol>
+            <span class="v6-sp"></span>
+            <ul class="sar-flags" aria-label="Flags"><sc-for list="{{rec.flags}}" as="f" hint-placeholder-count="6"><li title="{{f.k}}"><span>{{f.l}}</span><b class="{{f.cls}}">{{f.v}}</b></li></sc-for></ul>
+          </div>
+        </section>
+
+        <section class="card sar-body" aria-label="Details">
+          <div class="tabs sar-tabs" role="tablist" aria-label="Details"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}">{{t.t}}<sc-if value="{{t.hasN}}" hint-placeholder-val="{{ true }}"><span class="v8-cnt sar-tn">{{t.n}}</span></sc-if></button></sc-for>
+            <span class="v6-sp"></span>
+            <sc-if value="{{isHdr}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-sm sar-tg" aria-pressed="{{emptyP}}" onClick="{{toggleEmpty}}">{{emptyT}}</button></sc-if>
+            <sc-if value="{{isLines}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm sar-tg" aria-pressed="{{emptyP}}" onClick="{{toggleEmpty}}">{{emptyLT}}</button><button type="button" class="btn btn-sm" onClick="{{expandAll}}">{{expandT}}</button></sc-if>
+            <sc-if value="{{isJson}}" hint-placeholder-val="{{ false }}"><span class="mu sar-jn">{{jsonN}}</span><button type="button" class="btn btn-sm" onClick="{{copy}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>Copy JSON</button></sc-if>
+          </div>
+
+          <sc-if value="{{isHdr}}" hint-placeholder-val="{{ true }}">
+            <div class="sar-secs"><sc-for list="{{hdr}}" as="g" hint-placeholder-count="4">
+              <section class="sar-sec"><h3>{{g.t}}<span class="mu">{{g.n}}</span></h3>
+                <dl class="sar-kv"><sc-for list="{{g.f}}" as="f" hint-placeholder-count="6"><div class="{{f.cls}}"><dt>{{f.l}}<code>{{f.k}}</code></dt><dd><span class="sar-v">{{f.t}}</span><sc-if value="{{f.hasRaw}}" hint-placeholder-val="{{ false }}"><span class="mono sar-raw">{{f.raw}}</span></sc-if></dd></div></sc-for></dl>
+                <sc-if value="{{g.none}}" hint-placeholder-val="{{ false }}"><p class="mu sar-none">All fields in this group are empty.</p></sc-if>
+              </section>
+            </sc-for></div>
+          </sc-if>
+
+          <sc-if value="{{isLines}}" hint-placeholder-val="{{ false }}">
+            <table class="v8-tbl sar-lt">
+              <colgroup><col style="width: 52px"><col style="width: 60px"><col><col style="width: 84px"><col style="width: 70px"><col style="width: 100px"><col style="width: 60px"><col style="width: 80px"><col style="width: 120px"><col style="width: 104px"><col style="width: 112px"><col style="width: 140px"><col style="width: 128px"></colgroup>
+              <thead><tr><th scope="col"><span class="sr">Expand</span></th><th scope="col" title="ChgSeq">Seq.</th><th scope="col" title="ChgCd · ChgFullNm">Charge</th><th scope="col" title="RepChgCd">Rep. charge</th><th scope="col" title="PerTpCd">Per</th><th scope="col" class="r" title="TrfRtAmt">Tariff rate</th><th scope="col" class="r" title="RatAsCntrQty">Qty</th><th scope="col" title="CurrCd">Currency</th><th scope="col" class="r" title="ChgAmt">Charge amount</th><th scope="col" class="r" title="InvXchRt">Exch. rate</th><th scope="col" title="InvXchRtDt">Rate date</th><th scope="col" class="r" title="ChgAmt × InvXchRt">{{locH}}</th><th scope="col" title="TaxChgCd · TaxSrcTpCd">Tax</th></tr></thead>
+              <sc-for list="{{lines}}" as="x" hint-placeholder-count="3"><tbody class="sar-lg" data-open="{{x.on}}">
+                <tr onClick="{{x.toggle}}"><td><button type="button" class="cm-ib sar-ex" aria-expanded="{{x.on}}" aria-label="Show all fields of line {{x.i}}" onClick="{{x.toggle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button></td>
+                  <td class="mono">{{x.seq}}</td><td><b class="mono sar-cc">{{x.cd}}</b><span class="sar-cn">{{x.nm}}</span></td><td class="mono">{{x.rep}}</td><td class="mono">{{x.per}}</td><td class="r mono">{{x.rate}}</td><td class="r mono">{{x.qty}}</td><td class="mono">{{x.curr}}</td><td class="r mono"><b>{{x.amt}}</b></td><td class="r mono">{{x.xr}}</td><td>{{x.xrd}}</td><td class="r mono"><b>{{x.la}}</b></td><td class="mono mu">{{x.tax}}</td></tr>
+                <sc-if value="{{x.isOpen}}" hint-placeholder-val="{{ false }}"><tr class="sar-det"><td colspan="13">
+                  <div class="sar-coa"><div><span class="lbl">Account COA <code>Coa1–Coa10</code></span><ol class="sar-seg"><sc-for list="{{x.coa}}" as="c" hint-placeholder-count="10"><li title="{{c.k}}"><small>{{c.n}}</small><b class="mono">{{c.v}}</b></li></sc-for></ol></div>
+                    <div><span class="lbl">Customer COA <code>CustCOA1–CustCOA10</code></span><ol class="sar-seg"><sc-for list="{{x.ccoa}}" as="c" hint-placeholder-count="10"><li title="{{c.k}}"><small>{{c.n}}</small><b class="mono">{{c.v}}</b></li></sc-for></ol></div></div>
+                  <div class="sar-secs sar-ls"><sc-for list="{{x.fl}}" as="g" hint-placeholder-count="3"><section class="sar-sec"><h3>{{g.t}}<span class="mu">{{g.n}}</span></h3><dl class="sar-kv"><sc-for list="{{g.f}}" as="f" hint-placeholder-count="4"><div class="{{f.cls}}"><dt>{{f.l}}<code>{{f.k}}</code></dt><dd><span class="sar-v">{{f.t}}</span><sc-if value="{{f.hasRaw}}" hint-placeholder-val="{{ false }}"><span class="mono sar-raw">{{f.raw}}</span></sc-if></dd></div></sc-for></dl><sc-if value="{{g.none}}" hint-placeholder-val="{{ false }}"><p class="mu sar-none">All fields in this group are empty.</p></sc-if></section></sc-for></div>
+                  <p class="mu sar-ln">{{x.joo}} · {{x.ne}}</p>
+                </td></tr></sc-if>
+              </tbody></sc-for>
+              <tfoot><tr><td colspan="8" class="sar-ft"><span class="lbl">Total by currency</span><span class="sar-ct"><sc-for list="{{curTot}}" as="c" hint-placeholder-count="2"><span class="mono">{{c.t}}</span></sc-for></span></td><td colspan="3" class="r sar-ft"><span class="lbl">Total local amount</span></td><td class="r mono sar-ft"><b>{{locT}}</b></td><td class="sar-ft"><sc-if value="{{match}}" hint-placeholder-val="{{ true }}"><span class="sar-ok" title="{{matchT}}">✓ Matches</span></sc-if><sc-if value="{{noMatch}}" hint-placeholder-val="{{ false }}"><span class="sar-bad" title="{{noMatchT}}">Differs</span></sc-if></td></tr></tfoot>
+            </table>
+            <p class="mu sar-note">Local amount = Charge amount (ChgAmt) × Invoice exch. rate (InvXchRt), rounded to 2 decimals. <span>{{matchT}}</span></p>
+          </sc-if>
+
+          <sc-if value="{{isCntr}}" hint-placeholder-val="{{ false }}">
+            <p class="mu sar-cs">{{cntrSum}}</p>
+            <table class="v8-tbl sar-ct2">
+              <thead><tr><th scope="col" title="CntrSeq">Seq.</th><th scope="col" title="CntrNo">Container No.</th><th scope="col" title="CntrTpszCd">Type/size</th><th scope="col" title="HouseBlNo">House B/L No.</th><th scope="col" title="CgoTp">Cargo type</th><th scope="col" title="JoNum">JO No.</th><th scope="col" title="CreUsrId">Created by</th><th scope="col" title="CreDt">Created date</th></tr></thead>
+              <tbody><sc-for list="{{cntr}}" as="c" hint-placeholder-count="5"><tr><td class="mono">{{c.seq}}</td><td class="mono"><b>{{c.no}}</b></td><td class="mono">{{c.tp}}</td><td class="mono mu">{{c.hbl}}</td><td class="mu">{{c.cgo}}</td><td class="mono mu">{{c.jo}}</td><td class="mono">{{c.by}}</td><td>{{c.at}}</td></tr></sc-for></tbody>
+            </table>
+          </sc-if>
+
+          <sc-if value="{{isJson}}" hint-placeholder-val="{{ false }}"><pre class="sar-json mono">{{json}}</pre></sc-if>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+  <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+  </sc-if>
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+// ---------- Business Rule Engine · setup by location (draft 2)
+// ===== LMS SAR Interface · read-only view of the SAR PaaS JSON payload =====
+const SAR_DATA = [{"BatchId": "LMS_SAR_20261023201841649", "ArIfNo": "SG0001872641", "BlNo": "ABJ600036200", "BlTpCd": "", "OldArIfNo": "", "BlSrcNo": "ABJ600036200", "InvSrcNo": "", "BkgNo": "ABJ600036200", "BkgSeq": "40", "BkgCorrNo": "", "BkgCorrDt": "", "VvdTrnsFlg": "N", "ActCustCntCd": "", "ActCustSeq": "433", "ArOfcCd": "SG00", "RevTpCd": "C", "RevSrcCd": "CA", "VslCd": "KSJI", "SkdVoyNo": "0531", "SkdDirCd": "E", "LoclCurrCd": "SGD", "SvcScpCd": "FWE", "InvSvcScpCd": "FWE", "SailDt": "20260701", "SailArrDt": "20260701", "SlanCd": "SWS", "IoBndCd": "O", "TrnkVslCd": "KSJI", "TrnkSkdVoyNo": "0531", "TrnkSkdDirCd": "E", "PorCd": "CIABJ", "PolCd": "CIABJ", "PodCd": "THLCH", "DelCd": "THLKR", "CustCrFlg": "N", "InvCustCntCd": "SG", "InvCustSeq": "802853", "FrtFwrdCntCd": "CI", "FrtFwrdCustSeq": "102808", "CgoWgt": "131620", "CgoMeasQty": "300", "BkgTeuQty": "0", "BkgFeuQty": "5", "ScNo": "", "RfaNo": "ABJLB260023", "SrepCd": "CI009", "MstBlNo": "", "CxlFlg": "N", "DueDt": "", "BlInvIfDt": "20261023", "BlInvCfmDt": "20261023", "GlEffDt": "", "InvRmk": "", "InvDeltDivCd": "N", "InvIssFlg": "Y", "InvNo": "", "IssDt": "20261023", "InvClrFlg": "Y", "BkgRefNo": "CIABJ2606031906291121", "InvRefNo": "", "SiRefNo": "CIABJ2606031906291121", "CoStfCtnt": "", "InvSplitCd": "", "InvVvdCxlCd": "N", "DestTrnsSvcModCd": "NIP", "AcctXchRtYrmon": "202608", "WhfDeclNo": "", "WhfDeclCfmDt": "", "WhfDeclVslCd": "", "WhfDeclVoyNo": "", "WhfDeclDirCd": "", "WhfDeclOfcCd": "", "WhfMrnNo": "", "WhfNtcNo": "", "CsrNo": "", "WhfFlg": "N", "UsdXchRt": "1.2987", "XchRtUsdTpCd": "V", "XchRtN3rdTpCd": "V", "XchRtDt": "20260626", "ObrdDt": "20260630", "InvTtlLoclAmt": "6089.09", "TrspRqstOrdFlg": "N", "EdiSndDt": "", "RevVslCd": "KSJI", "RevSkdVoyNo": "0531", "RevSkdDirCd": "E", "RevDirCd": "E", "RlaneCd": "SWSAF", "ZnIocCd": "OO", "CrTermDys": "0", "ArTaxIndCd": "0", "ArCtyCd": "SGSIN", "SlsOfcCd": "SG00", "InvOrgOfcCd": "SG00", "SlpNo": "", "ApArOffstNo": "", "ClrStsFlg": "N", "ClrDt": "", "AcctCd": "", "IfSeq": "51", "TaxXchRt": "0", "CtrtOfcCd": "CV00", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:44.0", "InvCurrCd": "USD", "EdwUpdDt": "", "BfrInvCurrCd": "", "ChnInvNo": "", "PoRefNo": "", "GrpInvIssFlg": "", "GrpInvNo": "", "GrpIssDt": "", "GloAplyCustCntCd": "SG", "GloAplyCustSeq": "802853", "BlInvCfmDesc": "", "XchRtDiffFlg": "", "XchRtModiFlg": "", "OrgInvNo": "", "RltArIfNo": "", "ArrDt": "20260809", "DepDt": "20260701", "BookingTaxIndicator": "", "ArLines": [{"ArIfNo": "SG0001872641", "ChgSeq": "1", "ArIfSerNo": "1", "ArIfChgSeq": "1", "ChgCd": "SUF", "CurrCd": "SGD", "PerTpCd": "BL", "TrfRtAmt": "180", "RatAsCntrQty": "1", "ChgAmt": "180", "InvXchRt": "1", "InvXchRtDt": "", "RepChgCd": "DOC", "ChgFullNm": "BL SURRENDER FEE", "TrfNo": "", "InvIssFlg": "Y", "InvClrFlg": "Y", "SobId": "1", "InvRevTpSrcCd": "CCA", "TjSrcNm": "SALAR", "RevCoaCoCd": "01", "RevCoaRgnCd": "41", "RevCoaCtrCd": "111614", "RevCoaAcctCd": "954112", "RevCoaInterCoCd": "00", "RevCoaVslCd": "0000", "RevCoaVoyNo": "0000", "RevCoaSkdDirCd": "0", "RevCoaDirCd": "0", "AcctCd": "", "TvaFlg": "Y", "ChgRmk": "", "MnlFlg": "N", "MfDivCd": "M", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:44.0", "IssXchRt": "", "UsdXchRt": "0.77000077", "EdwUpdDt": "", "TaxChgCd": "GST", "TaxTpCd": "", "TaxChgXchRt": "", "TaxSrcTpCd": "ZO", "LoclChgFlg": "N", "TaxSrcChgXchRt": "0", "N2ndTaxChgCd": "", "N2ndTaxSrcChgXchRt": "", "N2ndTaxSrcTpCd": "", "TaxRfndFlg": "N", "TaxSrcAmt": "", "ChnInvNo": "", "CurrInvNo": "", "Coa1": "102", "Coa2": "61001701", "Coa3": "B071", "Coa4": "433", "Coa5": "KSJI", "Coa6": "SWS", "Coa7": "CIABJ", "Coa8": "KSJI0531E", "Coa9": "0000", "Coa10": "0000", "CustCOA1": "102", "CustCOA2": "21301104", "CustCOA3": "0000", "CustCOA4": "433", "CustCOA5": "0000", "CustCOA6": "000", "CustCOA7": "00000", "CustCOA8": "000000000", "CustCOA9": "0000", "CustCOA10": "0000", "Department": "0000", "JooSettle": [], "CntrSupplementList": []}, {"ArIfNo": "SG0001872641", "ChgSeq": "2", "ArIfSerNo": "2", "ArIfChgSeq": "1", "ChgCd": "OFT", "CurrCd": "USD", "PerTpCd": "D5", "TrfRtAmt": "740", "RatAsCntrQty": "5", "ChgAmt": "3700", "InvXchRt": "1.2987", "InvXchRtDt": "20260626", "RepChgCd": "OFT", "ChgFullNm": "BASIC OCEAN FREIGHT", "TrfNo": "", "InvIssFlg": "Y", "InvClrFlg": "Y", "SobId": "1", "InvRevTpSrcCd": "CCA", "TjSrcNm": "SALAR", "RevCoaCoCd": "01", "RevCoaRgnCd": "41", "RevCoaCtrCd": "111614", "RevCoaAcctCd": "954112", "RevCoaInterCoCd": "00", "RevCoaVslCd": "0000", "RevCoaVoyNo": "0000", "RevCoaSkdDirCd": "0", "RevCoaDirCd": "0", "AcctCd": "", "TvaFlg": "Y", "ChgRmk": "", "MnlFlg": "N", "MfDivCd": "M", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:44.0", "IssXchRt": "", "UsdXchRt": "1", "EdwUpdDt": "", "TaxChgCd": "GST", "TaxTpCd": "", "TaxChgXchRt": "", "TaxSrcTpCd": "ZO", "LoclChgFlg": "N", "TaxSrcChgXchRt": "0", "N2ndTaxChgCd": "", "N2ndTaxSrcChgXchRt": "", "N2ndTaxSrcTpCd": "", "TaxRfndFlg": "N", "TaxSrcAmt": "", "ChnInvNo": "", "CurrInvNo": "", "Coa1": "102", "Coa2": "61001101", "Coa3": "B071", "Coa4": "433", "Coa5": "KSJI", "Coa6": "SWS", "Coa7": "CIABJ", "Coa8": "KSJI0531E", "Coa9": "0000", "Coa10": "0000", "CustCOA1": "102", "CustCOA2": "21301104", "CustCOA3": "0000", "CustCOA4": "433", "CustCOA5": "0000", "CustCOA6": "000", "CustCOA7": "00000", "CustCOA8": "000000000", "CustCOA9": "0000", "CustCOA10": "0000", "Department": "0000", "JooSettle": [], "CntrSupplementList": []}, {"ArIfNo": "SG0001872641", "ChgSeq": "3", "ArIfSerNo": "2", "ArIfChgSeq": "2", "ChgCd": "EBS", "CurrCd": "USD", "PerTpCd": "40", "TrfRtAmt": "170", "RatAsCntrQty": "5", "ChgAmt": "850", "InvXchRt": "1.2987", "InvXchRtDt": "20260626", "RepChgCd": "BAF", "ChgFullNm": "EMERGENCY BUNKER SURCHARGE (L)", "TrfNo": "", "InvIssFlg": "Y", "InvClrFlg": "Y", "SobId": "1", "InvRevTpSrcCd": "CCA", "TjSrcNm": "SALAR", "RevCoaCoCd": "01", "RevCoaRgnCd": "41", "RevCoaCtrCd": "111614", "RevCoaAcctCd": "954112", "RevCoaInterCoCd": "00", "RevCoaVslCd": "0000", "RevCoaVoyNo": "0000", "RevCoaSkdDirCd": "0", "RevCoaDirCd": "0", "AcctCd": "", "TvaFlg": "Y", "ChgRmk": "", "MnlFlg": "N", "MfDivCd": "M", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:44.0", "IssXchRt": "", "UsdXchRt": "1", "EdwUpdDt": "", "TaxChgCd": "GST", "TaxTpCd": "", "TaxChgXchRt": "", "TaxSrcTpCd": "ZO", "LoclChgFlg": "N", "TaxSrcChgXchRt": "0", "N2ndTaxChgCd": "", "N2ndTaxSrcChgXchRt": "", "N2ndTaxSrcTpCd": "", "TaxRfndFlg": "N", "TaxSrcAmt": "", "ChnInvNo": "", "CurrInvNo": "", "Coa1": "102", "Coa2": "61001108", "Coa3": "B071", "Coa4": "433", "Coa5": "KSJI", "Coa6": "SWS", "Coa7": "CIABJ", "Coa8": "KSJI0531E", "Coa9": "0000", "Coa10": "0000", "CustCOA1": "102", "CustCOA2": "21301104", "CustCOA3": "0000", "CustCOA4": "433", "CustCOA5": "0000", "CustCOA6": "000", "CustCOA7": "00000", "CustCOA8": "000000000", "CustCOA9": "0000", "CustCOA10": "0000", "Department": "0000", "JooSettle": [], "CntrSupplementList": []}], "ArCntr": [{"ArIfNo": "SG0001872641", "CntrSeq": "1", "CntrNo": "CAIU9924244", "CntrTpszCd": "D5", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:01.0", "EdwUpdDt": "", "HouseBlNo": "", "CgoTp": "", "JoNum": ""}, {"ArIfNo": "SG0001872641", "CntrSeq": "2", "CntrNo": "FFAU4351686", "CntrTpszCd": "D5", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:01.0", "EdwUpdDt": "", "HouseBlNo": "", "CgoTp": "", "JoNum": ""}, {"ArIfNo": "SG0001872641", "CntrSeq": "3", "CntrNo": "FFAU6572520", "CntrTpszCd": "D5", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:01.0", "EdwUpdDt": "", "HouseBlNo": "", "CgoTp": "", "JoNum": ""}, {"ArIfNo": "SG0001872641", "CntrSeq": "4", "CntrNo": "GAOU7198115", "CntrTpszCd": "D5", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:01.0", "EdwUpdDt": "", "HouseBlNo": "", "CgoTp": "", "JoNum": ""}, {"ArIfNo": "SG0001872641", "CntrSeq": "5", "CntrNo": "PCIU9238875", "CntrTpszCd": "D5", "CreUsrId": "INSHAEVA", "CreDt": "2026-10-23 20:04:01.0", "UpdUsrId": "INSHAEVA", "UpdDt": "2026-10-23 20:04:01.0", "EdwUpdDt": "", "HouseBlNo": "", "CgoTp": "", "JoNum": ""}]}];
+// Readable labels come from the JSON key itself: each abbreviation is spelled out, and the original key is always shown next to it.
+const SAR_TOK = { Ar: 'AR', If: 'I/F', No: 'No.', Bl: 'B/L', Tp: 'Type', Cd: 'Code', Src: 'Source', Inv: 'Invoice', Bkg: 'Booking', Corr: 'Correction', Dt: 'Date', Vvd: 'VVD', Trns: 'Trans.', Flg: 'Flag', Act: 'Actual', Cust: 'Customer', Cnt: 'Country', Ofc: 'Office', Rev: 'Revenue', Vsl: 'Vessel', Skd: 'Schedule', Voy: 'Voyage', Dir: 'Direction',
+  Locl: 'Local', Curr: 'Currency', Svc: 'Service', Scp: 'Scope', Arr: 'Arrival', Slan: 'Service lane', Io: 'I/O', Bnd: 'Bound', Trnk: 'Trunk', Por: 'POR', Pol: 'POL', Pod: 'POD', Del: 'DEL', Cr: 'Credit', Frt: 'Freight', Fwrd: 'Forwarder', Cgo: 'Cargo', Wgt: 'Weight', Meas: 'Measure', Qty: 'Qty', Teu: 'TEU', Feu: 'FEU', Sc: 'S/C', Rfa: 'RFA', Srep: 'Sales rep', Mst: 'Master', Cxl: 'Cancel',
+  Cfm: 'Confirm', Gl: 'GL', Eff: 'Effective', Rmk: 'Remark', Delt: 'Delete', Div: 'Division', Iss: 'Issue', Clr: 'Clear', Ref: 'Ref.', Si: 'SI', Co: 'Co.', Stf: 'Staff', Ctnt: 'Content', Mod: 'Mode', Acct: 'Account', Xch: 'Exch.', Rt: 'Rate', Yrmon: 'Year-month', Whf: 'Wharfage', Decl: 'Declaration', Mrn: 'MRN', Ntc: 'Notice', Csr: 'CSR', Usd: 'USD',
+  Obrd: 'Onboard', Ttl: 'Total', Amt: 'Amount', Trsp: 'Transport', Rqst: 'Request', Ord: 'Order', Edi: 'EDI', Snd: 'Send', Rlane: 'Revenue lane', Zn: 'Zone', Ioc: 'IOC', Dys: 'Days', Ind: 'Indicator', Cty: 'City', Sls: 'Sales', Org: 'Origin', Slp: 'Slip', Ap: 'AP', Offst: 'Offset', Sts: 'Status', Ctrt: 'Contract', Cre: 'Created', Usr: 'User', Id: 'ID', Upd: 'Updated',
+  Edw: 'EDW', Bfr: 'Before', Chn: 'China', Po: 'PO', Grp: 'Group', Glo: 'Global', Aply: 'Apply', Desc: 'Description', Diff: 'Difference', Modi: 'Modified', Rlt: 'Related', Dep: 'Departure', Chg: 'Charge', Trf: 'Tariff', Rat: 'Rated', Cntr: 'Container', Nm: 'Name', Rep: 'Rep.', Sob: 'SOB', Tj: 'TJ', Coa: 'COA', COA: 'COA', Rgn: 'Region', Ctr: 'Center',
+  Tva: 'TVA', Mnl: 'Manual', Mf: 'MF', Rfnd: 'Refund', Ser: 'Serial', Tpsz: 'Type/size', Jo: 'JO', Num: 'No.', Seq: 'Seq.', Batch: 'Batch', Per: 'Per', Sail: 'Sail', Due: 'Due', Old: 'Old', Split: 'Split', Term: 'Term', Tax: 'Tax', Booking: 'Booking', Indicator: 'Indicator', Inter: 'Inter', House: 'House', Full: 'Full', As: 'as' };
+function sarLabel(k) { const t = k.match(/N\d+(?:st|nd|rd|th)|[A-Z]{2,}(?=[A-Z][a-z]|\d|$)|[A-Z][a-z]*|\d+/g) || [k];
+  const out = t.map((x) => /^N\d/.test(x) ? x.slice(1) : SAR_TOK[x] || x); const s = out.join(' ').replace(/\s+/g, ' ').trim(); return s.charAt(0).toUpperCase() + s.slice(1); }
+const SAR_M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function sarVal(k, v) { if (v === '' || v == null) return { t: '—', empty: true };
+  if (/Dt$/.test(k) && /^\d{8}$/.test(v)) return { t: (+v.slice(6, 8)) + ' ' + SAR_M[+v.slice(4, 6) - 1] + ' ' + v.slice(0, 4), raw: v };
+  if (/Dt$/.test(k) && /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(v)) return { t: (+v.slice(8, 10)) + ' ' + SAR_M[+v.slice(5, 7) - 1] + ' ' + v.slice(0, 4) + ' ' + v.slice(11, 19), raw: v };
+  if (/Yrmon$/.test(k) && /^\d{6}$/.test(v)) return { t: SAR_M[+v.slice(4, 6) - 1] + ' ' + v.slice(0, 4), raw: v };
+  if (/Flg$/.test(k) && (v === 'Y' || v === 'N')) return { t: v, flag: v };
+  return { t: String(v) }; }
+const sarNum = (n, d) => Number(n).toLocaleString('en-US', { minimumFractionDigits: d == null ? 2 : d, maximumFractionDigits: d == null ? 2 : d });
+const sarR2 = (x) => Math.round((x + 1e-9) * 100) / 100;
+const SAR_SECT = [
+  ['Interface', ['BatchId', 'ArIfNo', 'OldArIfNo', 'RltArIfNo', 'IfSeq', 'BlInvIfDt', 'BlInvCfmDt', 'BlInvCfmDesc', 'EdwUpdDt']],
+  ['Booking & B/L', ['BlNo', 'BlTpCd', 'BlSrcNo', 'InvSrcNo', 'BkgNo', 'BkgSeq', 'BkgCorrNo', 'BkgCorrDt', 'BkgRefNo', 'SiRefNo', 'MstBlNo', 'ScNo', 'RfaNo', 'CxlFlg', 'BookingTaxIndicator']],
+  ['Vessel & voyage', ['VslCd', 'SkdVoyNo', 'SkdDirCd', 'SlanCd', 'TrnkVslCd', 'TrnkSkdVoyNo', 'TrnkSkdDirCd', 'RevVslCd', 'RevSkdVoyNo', 'RevSkdDirCd', 'RevDirCd', 'RlaneCd', 'VvdTrnsFlg', 'InvVvdCxlCd', 'SailDt', 'SailArrDt', 'DepDt', 'ArrDt', 'ObrdDt']],
+  ['Route & service', ['PorCd', 'PolCd', 'PodCd', 'DelCd', 'IoBndCd', 'SvcScpCd', 'InvSvcScpCd', 'ZnIocCd', 'DestTrnsSvcModCd', 'TrspRqstOrdFlg']],
+  ['Customer', ['ActCustCntCd', 'ActCustSeq', 'InvCustCntCd', 'InvCustSeq', 'FrtFwrdCntCd', 'FrtFwrdCustSeq', 'GloAplyCustCntCd', 'GloAplyCustSeq', 'CustCrFlg', 'CrTermDys', 'SrepCd']],
+  ['Cargo', ['CgoWgt', 'CgoMeasQty', 'BkgTeuQty', 'BkgFeuQty']],
+  ['Invoice', ['InvNo', 'IssDt', 'InvIssFlg', 'InvClrFlg', 'InvDeltDivCd', 'InvSplitCd', 'InvRefNo', 'PoRefNo', 'InvRmk', 'DueDt', 'CoStfCtnt', 'ChnInvNo', 'OrgInvNo', 'GrpInvIssFlg', 'GrpInvNo', 'GrpIssDt', 'EdiSndDt', 'CsrNo']],
+  ['Currency & exchange rate', ['InvCurrCd', 'LoclCurrCd', 'BfrInvCurrCd', 'UsdXchRt', 'XchRtUsdTpCd', 'XchRtN3rdTpCd', 'XchRtDt', 'AcctXchRtYrmon', 'TaxXchRt', 'XchRtDiffFlg', 'XchRtModiFlg', 'InvTtlLoclAmt']],
+  ['Office & accounting', ['ArOfcCd', 'SlsOfcCd', 'InvOrgOfcCd', 'CtrtOfcCd', 'ArCtyCd', 'RevTpCd', 'RevSrcCd', 'ArTaxIndCd', 'GlEffDt', 'AcctCd', 'SlpNo', 'ApArOffstNo', 'ClrStsFlg', 'ClrDt']],
+  ['Wharfage', ['WhfFlg', 'WhfDeclNo', 'WhfDeclCfmDt', 'WhfDeclVslCd', 'WhfDeclVoyNo', 'WhfDeclDirCd', 'WhfDeclOfcCd', 'WhfMrnNo', 'WhfNtcNo']],
+  ['Record', ['CreUsrId', 'CreDt', 'UpdUsrId', 'UpdDt']]
+];
+const SAR_LSECT = [
+  ['Charge', ['ChgSeq', 'ArIfSerNo', 'ArIfChgSeq', 'ChgCd', 'ChgFullNm', 'RepChgCd', 'PerTpCd', 'TrfNo', 'TrfRtAmt', 'RatAsCntrQty', 'ChgAmt', 'CurrCd', 'ChgRmk', 'MnlFlg', 'LoclChgFlg', 'MfDivCd']],
+  ['Exchange rate', ['InvXchRt', 'InvXchRtDt', 'IssXchRt', 'UsdXchRt']],
+  ['Invoice', ['InvIssFlg', 'InvClrFlg', 'ChnInvNo', 'CurrInvNo', 'SobId', 'InvRevTpSrcCd', 'TjSrcNm', 'AcctCd']],
+  ['Tax', ['TvaFlg', 'TaxChgCd', 'TaxTpCd', 'TaxChgXchRt', 'TaxSrcTpCd', 'TaxSrcChgXchRt', 'N2ndTaxChgCd', 'N2ndTaxSrcChgXchRt', 'N2ndTaxSrcTpCd', 'TaxRfndFlg', 'TaxSrcAmt']],
+  ['Revenue COA', ['RevCoaCoCd', 'RevCoaRgnCd', 'RevCoaCtrCd', 'RevCoaAcctCd', 'RevCoaInterCoCd', 'RevCoaVslCd', 'RevCoaVoyNo', 'RevCoaSkdDirCd', 'RevCoaDirCd', 'Department']],
+  ['Record', ['ArIfNo', 'CreUsrId', 'CreDt', 'UpdUsrId', 'UpdDt', 'EdwUpdDt']]
+];
+function sarFields(obj, sects, showEmpty) { const used = {}, out = [];
+  const mk = (k) => { const v = sarVal(k, obj[k]); return { k, l: sarLabel(k), t: v.t, raw: v.raw || '', hasRaw: !!v.raw, cls: v.empty ? 'sar-e' : v.flag ? 'sar-f sar-f-' + v.flag : '', flag: !!v.flag }; };
+  sects.forEach(([t, ks]) => { const keys = ks.filter((k) => k in obj); keys.forEach((k) => { used[k] = 1; }); const all = keys.map(mk), vis = showEmpty ? all : all.filter((f) => f.cls !== 'sar-e');
+    out.push({ t, n: all.filter((f) => f.cls !== 'sar-e').length + ' of ' + all.length + ' filled', f: vis, none: !vis.length }); });
+  const rest = Object.keys(obj).filter((k) => !used[k] && !Array.isArray(obj[k]) && !/^(Cust)?COA\d+$|^Coa\d+$/i.test(k));
+  if (rest.length) { const all = rest.map(mk), vis = showEmpty ? all : all.filter((f) => f.cls !== 'sar-e'); out.push({ t: 'Other', n: all.filter((f) => f.cls !== 'sar-e').length + ' of ' + all.length + ' filled', f: vis, none: !vis.length }); }
+  return out; }
+const sarSeg = (o, pre) => { const segs = []; for (let i = 1; i <= 10; i++) { const k = pre + i; if (k in o) segs.push({ k, n: String(i), v: o[k] === '' ? '—' : o[k] }); } return segs; };
+
+class GirsPage extends DCLogic {
+  constructor(p) { super(p); this.state = { rec: 0, tab: 'hdr', empty: false, open: {}, copied: false }; }
+  renderVals() {
+    const s = this.state, set = (o) => this.setState(o), D = SAR_DATA, R = D[Math.min(s.rec, D.length - 1)] || {};
+    const lines = R.ArLines || [], cntr = R.ArCntr || [], lc = R.LoclCurrCd || '';
+    const hdrKeys = Object.keys(R).filter((k) => !Array.isArray(R[k])), nEmpty = hdrKeys.filter((k) => R[k] === '').length;
+    // charge lines
+    const cur = {}; let loc = 0;
+    const L = lines.map((x, i) => { const amt = parseFloat(x.ChgAmt) || 0, rt = parseFloat(x.InvXchRt) || 0, la = sarR2(amt * rt); loc += la; cur[x.CurrCd] = (cur[x.CurrCd] || 0) + amt; const on = !!s.open[i];
+      const fl = sarFields(x, SAR_LSECT, s.empty); const ne = Object.keys(x).filter((k) => !Array.isArray(x[k]) && x[k] === '').length;
+      return { i: String(i + 1), seq: x.ChgSeq, cd: x.ChgCd, nm: x.ChgFullNm, rep: x.RepChgCd, per: x.PerTpCd, rate: sarNum(x.TrfRtAmt), qty: x.RatAsCntrQty, curr: x.CurrCd, amt: sarNum(amt), xr: x.InvXchRt, xrd: sarVal('InvXchRtDt', x.InvXchRtDt).t, la: sarNum(la), tax: [x.TaxChgCd, x.TaxSrcTpCd].filter(Boolean).join(' · ') || '—',
+        on: on ? 'true' : 'false', isOpen: on, toggle: () => set({ open: Object.assign({}, s.open, { [i]: !on }) }), fl, ne: ne + ' empty fields ' + (s.empty ? 'shown' : 'hidden'),
+        coa: sarSeg(x, 'Coa'), ccoa: sarSeg(x, 'CustCOA'), coaT: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => x['Coa' + n]).join('-'), ccoaT: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => x['CustCOA' + n]).join('-'),
+        joo: (x.JooSettle || []).length + ' JooSettle · ' + (x.CntrSupplementList || []).length + ' CntrSupplementList' }; });
+    loc = sarR2(loc); const ttl = parseFloat(R.InvTtlLoclAmt);
+    const C = cntr.map((x) => ({ seq: x.CntrSeq, no: x.CntrNo, tp: x.CntrTpszCd || '—', hbl: x.HouseBlNo || '—', cgo: x.CgoTp || '—', jo: x.JoNum || '—', by: x.CreUsrId || '—', at: sarVal('CreDt', x.CreDt).t }));
+    const tpCount = {}; cntr.forEach((x) => { tpCount[x.CntrTpszCd] = (tpCount[x.CntrTpszCd] || 0) + 1; });
+    const route = [['POR', 'PorCd'], ['POL', 'PolCd'], ['POD', 'PodCd'], ['DEL', 'DelCd']].map(([t, k], i) => ({ t, v: R[k] || '—', k, notFirst: i > 0 }));
+    const fact = (l, k, v) => ({ l, k, v: v == null ? sarVal(k, R[k]).t : v });
+    const json = JSON.stringify(D, null, 2);
+    return {
+      rec: { id: R.ArIfNo, batch: R.BatchId, nRec: D.length + (D.length === 1 ? ' record in this payload' : ' records in this payload'), multi: D.length > 1,
+        recs: D.map((x, i) => ({ t: x.ArIfNo, on: i === s.rec ? 'true' : 'false', go: () => set({ rec: i, open: {} }) })),
+        facts: [fact('B/L No.', 'BlNo'), fact('Booking No. / Seq.', 'BkgNo', R.BkgNo + ' / ' + R.BkgSeq), fact('Vessel · Voyage · Direction', 'VslCd', [R.VslCd, R.SkdVoyNo, R.SkdDirCd].join(' · ')), fact('Service lane', 'SlanCd'), fact('Sail date', 'SailDt'), fact('Arrival date', 'ArrDt'),
+          fact('Invoice customer', 'InvCustCntCd', R.InvCustCntCd + ' ' + R.InvCustSeq), fact('AR office', 'ArOfcCd'), fact('Invoice / Local currency', 'InvCurrCd', R.InvCurrCd + ' / ' + R.LoclCurrCd), fact('Issue date', 'IssDt')],
+        route, total: lc + ' ' + sarNum(ttl), totalK: 'InvTtlLoclAmt',
+        flags: ['InvIssFlg', 'InvClrFlg', 'CxlFlg', 'CustCrFlg', 'VvdTrnsFlg', 'WhfFlg'].filter((k) => k in R).map((k) => ({ l: sarLabel(k), k, v: R[k], cls: 'sar-f-' + R[k] })) },
+      tabs: [['hdr', 'Header', hdrKeys.length + ' fields'], ['lines', 'Charge lines', String(lines.length)], ['cntr', 'Containers', String(cntr.length)], ['json', 'JSON', '']].map(([k, t, n]) => ({ t, n, hasN: !!n, on: s.tab === k ? 'true' : 'false', go: () => set({ tab: k }) })),
+      isHdr: s.tab === 'hdr', isLines: s.tab === 'lines', isCntr: s.tab === 'cntr', isJson: s.tab === 'json',
+      emptyP: s.empty ? 'true' : 'false', toggleEmpty: () => set({ empty: !s.empty }), emptyT: s.empty ? 'Hide empty fields' : 'Show empty fields (' + nEmpty + ')',
+      hdr: sarFields(R, SAR_SECT, s.empty), emptyLT: s.empty ? 'Hide empty fields' : 'Show empty fields (' + lines.reduce((a, x) => a + Object.keys(x).filter((k) => !Array.isArray(x[k]) && x[k] === '').length, 0) + ')',
+      lines: L, curTot: Object.keys(cur).map((c) => ({ t: c + ' ' + sarNum(cur[c]) })), locT: lc + ' ' + sarNum(loc), match: Math.abs(loc - ttl) < 0.005, noMatch: Math.abs(loc - ttl) >= 0.005,
+      matchT: 'Matches InvTtlLoclAmt ' + lc + ' ' + sarNum(ttl), noMatchT: 'Header InvTtlLoclAmt is ' + lc + ' ' + sarNum(ttl) + ' · difference ' + sarNum(loc - ttl), locH: 'Local amount (' + lc + ')',
+      allOpen: L.length && L.every((x) => x.isOpen), expandAll: () => { const o = {}; const all = L.every((x) => x.isOpen); L.forEach((x, i) => { o[i] = !all; }); set({ open: o }); }, expandT: L.length && L.every((x) => x.isOpen) ? 'Collapse all' : 'Expand all',
+      cntr: C, cntrSum: Object.keys(tpCount).map((t) => tpCount[t] + ' × ' + t).join(', '),
+      json, jsonN: json.split('\n').length + ' lines', copy: () => { try { navigator.clipboard.writeText(json); } catch (e) {} set({ __toast: 'JSON copied.' }); }
+    };
+  }
+}
+
+const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
+const GIRS_LANGS = [['en', 'English', 'English'], ['zh', '中文（简体）', 'Chinese (Simplified)'], ['ar', 'العربية', 'Arabic'], ['es', 'Español', 'Spanish']];
+const LOGINS = [{ role: 'Billing Executive', agency: 'Singapore · SIN', code: 'SIN' }, { role: 'Team Lead', agency: 'Malaysia · PKG', code: 'PKG' }];
+class Component extends GirsPage {
+  constructor(p) {
+    super(p);
+    let sb = false, th = 'light', hub = 'SIN', ent = 'PIL', lang = 'en';
+    try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; lang = localStorage.getItem('girs.lang') || 'en'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
+    let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
+    const narrow = false;
+    const fit = () => { try { const z = Math.max(0.1, window.innerWidth / 1920); return { z, h: window.innerHeight / z }; } catch (e) { return { z: 1, h: 1080 }; } };
+    const f0 = fit();
+    try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
+    try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __lang: lang, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g4' });
+  }
+  renderVals() {
+    const v = super.renderVals();
+    const s = this.state;
+    const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
+    const L = Object.assign({}, {"nHome": "Home", "nVoy": "Voyage Invoicing", "g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nInvoiceList": "Invoice List", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nCreditNoteList": "Credit Note List", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCompanyMaster": "Company Master", "nCompanyBranchMaster": "Company Branch Master", "nCustomerMaster": "Customer Master", "nCustomerBranchMaster": "Customer Branch Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master", "nAccountingConfig": "Accounting Configuration", "nBankMaster": "Bank Master"}, v.navT || {});
+    const c = s.__sb && !s.__narrow;
+    return Object.assign({}, v, { shell: {
+      kit: (typeof KIT_VALS === 'function' ? KIT_VALS(this, s, v) : null),
+      theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
+      drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
+      toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
+      sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '', grp: c ? 'justify-content:center;padding:0' : '',
+      logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
+      logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
+      sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
+      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, c ? s.__fly === g : s.__acc === g])),
+      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? 'true' : 'false'])),
+      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? '180deg' : '0deg'])),
+      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (e) => { if (c) { const t = e && e.currentTarget ? Math.round(e.currentTarget.getBoundingClientRect().top) : 0; this.setState({ __fly: s.__fly === g ? '' : g, __flyT: t }); } else this.setState({ __acc: s.__acc === g ? '' : g }); }])),
+      toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c, __fly: '' }); },
+      // collapsed menu: a section icon opens its pages in a flyout beside the rail
+      cA: c ? 'true' : 'false', flyOn: !!c && !!s.__fly, flyClose: () => this.setState({ __fly: '' }), subCls: c ? 'ng-fly' : '',
+      subSt: c ? 'top:' + (s.__flyT || 0) + 'px;max-height:calc(100vh - ' + ((s.__flyT || 0) + 16) + 'px)' : '',
+      lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
+      lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
+      setLight: () => { save('girs.th', 'light'); this.setState({ __th: 'light' }); },
+      setDark: () => { save('girs.th', 'dark'); this.setState({ __th: 'dark' }); },
+      hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
+      ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
+      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
+      pending: 10, health: (typeof GIRS_HEALTH === 'function' ? GIRS_HEALTH(this, s) : { items: [], cls: 'btn btn-icon', n: '', hasN: false, open: false, aria: 'false', label: 'System health', sum: '', toggle: () => {}, close: () => {} }), l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
+      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um, __lgo: false, __lgq: '' }), closeUm: () => this.setState({ __um: false, __lgo: false, __lgq: '' }),
+      logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
+        pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
+      menuMain: !s.__lgo, langOpen: !!s.__lgo, lgQ: s.__lgq || '', setLgQ: (e) => this.setState({ __lgq: e.target.value }),
+      toggleLang: () => { this.setState({ __lgo: !s.__lgo, __lgq: '' }); if (!s.__lgo) setTimeout(() => { const i = document.querySelector('.lg-q'); if (i) i.focus(); }, 30); },
+      langName: (GIRS_LANGS.find((x) => x[0] === s.__lang) || GIRS_LANGS[0])[1],
+      lgNone: !GIRS_LANGS.some(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())),
+      langs: GIRS_LANGS.filter(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())).map(([code, label, en]) => ({ code, label, en, on: s.__lang === code ? 'true' : 'false', mark: s.__lang === code ? '✓' : '',
+        pick: () => { if (code === s.__lang) return this.setState({ __lgo: false, __um: false }); save('girs.lang', code); location.reload(); } })),
+      userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
+      exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
+      hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
+      signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
+    } });
+  }
+}
+
+</script>
+<script src="runtime.js"></script>
+<script src="girs-search.js"></script>
+<script src="girs-ui.js"></script>
+<script src="girs-i18n.js"></script>
+</body>
+</html>
