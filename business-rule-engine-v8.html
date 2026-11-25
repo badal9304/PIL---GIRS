@@ -847,6 +847,9 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .v8-act .v6-ia{justify-content:flex-end}
 .v8-c-st{width:172px}.v8-c-act{width:132px}
 .v8-tbl td.v8-act,.v8-tbl td:nth-last-child(3){overflow:visible;text-overflow:clip}
+.v8-c-act{width:168px}
+.v6-ia .cm-ib.v8-del:not([disabled]):hover{color:var(--bad);background:var(--badbg)}
+.v6-ia .cm-ib[disabled]{pointer-events:auto;cursor:not-allowed;opacity:.35}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -987,7 +990,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           </a>
           <a href="charge-master-v2c.html" class="nav-item" title="{{shell.l.nChargeMaster}}">{{shell.l.nChargeMaster}}
           </a>
-          <a href="business-rule-engine.html" class="nav-item nav-on" aria-current="page" title="Business Rule Engine">Business Rule Engine
+          <a href="business-rule-engine-v8.html" class="nav-item nav-on" aria-current="page" title="Business Rule Engine">Business Rule Engine
           </a>
           <a href="accounting-configuration.html" class="nav-item" title="{{shell.l.nAccountingConfig}}">{{shell.l.nAccountingConfig}}
           </a>
@@ -1181,7 +1184,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                     <sc-if value="{{list.hasLoc}}" hint-placeholder-val="{{ false }}"><td class="{{r.lfCls}}">{{r.lf}}</td></sc-if>
                     <td class="r"><span class="v8-pri"><sc-if value="{{r.clash}}" hint-placeholder-val="{{ false }}"><span class="v7-warn" title="{{r.clashT}}" aria-label="{{r.clashT}}">!</span></sc-if><span class="mono">{{r.pri}}</span></span></td>
                     <td><span class="chip" style="{{r.stSt}}">{{r.st}}</span></td><td class="v8-eff">{{r.eff}}</td>
-                    <td class="v8-act"><span class="v6-ia"><button type="button" class="cm-ib" onClick="{{r.test}}" disabled="{{r.noTest}}" title="Test &amp; Simulate" aria-label="Test {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"></path></svg></button><button type="button" class="cm-ib" onClick="{{r.edit}}" disabled="{{r.noEdit}}" title="Edit" aria-label="Edit {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button type="button" class="cm-ib" onClick="{{r.copy}}" disabled="{{r.noCopy}}" title="Copy to a new rule" aria-label="Copy {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button></span></td>
+                    <td class="v8-act"><span class="v6-ia"><button type="button" class="cm-ib" onClick="{{r.test}}" disabled="{{r.noTest}}" title="Test &amp; Simulate" aria-label="Test {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"></path></svg></button><button type="button" class="cm-ib" onClick="{{r.edit}}" disabled="{{r.noEdit}}" title="Edit" aria-label="Edit {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button type="button" class="cm-ib" onClick="{{r.copy}}" disabled="{{r.noCopy}}" title="Copy to a new rule" aria-label="Copy {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button type="button" class="cm-ib v8-del" onClick="{{r.del}}" disabled="{{r.noDel}}" title="{{r.delT}}" aria-label="Delete {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></span></td>
                   </tr>
                 </sc-for></tbody>
               </table>
@@ -1696,7 +1699,9 @@ class GirsPage extends DCLogic {
         return { id: r.id, name: c.name, trig: c.trig, apps: (c.gl.conds.length ? c.gl.conds.map((x) => ({ t: String(x.v), tip: x.a + ' ' + V7_OPT[x.o] + ' ' + x.v })) : [{ t: 'Every record', tip: 'No conditions' }]), cnt: String(c.gl.conds.length), pri: String(c.pri), eff: v7D(c.from) + (c.to ? ' – ' + v7D(c.to) : ''),
           locs: locs.length ? 'Global + ' + locs.length + (locs.length === 1 ? ' country' : ' countries') : 'Global only', locD: nDiff ? nDiff + (nDiff === 1 ? ' with differences' : ' with differences') : '', hasLocD: !!nDiff, lf, lfCls: /difference/.test(lf) ? 'v6-lf-d' : 'mu', st: ST[st][0], stSt: ST[st][1],
           clash: !!clash.length, clashT: clash.length ? 'Same priority as ' + clash.map((x) => x.id).join(', ') : '', open: () => openRule(r.id), test: () => openRule(r.id, { tab: 'sim' }),
-          copy: () => newDlg({ how: 'copy', src: r.id, cat: c.cat }), noCopy: canEditCat(c.cat) ? '' : 'true', edit: () => { if (r.pend) return set({ __toast: r.id + ' is pending approval. Withdraw it first to make changes.' }); openRule(r.id, { edit: true, tab: 'cond' }); }, noEdit: r.pend || !canEditCat(c.cat) ? 'true' : '', noTest: ROLE === 'aud' ? 'true' : '' }; }) }; }).filter((g) => g.rows.length);
+          copy: () => newDlg({ how: 'copy', src: r.id, cat: c.cat }), noCopy: canEditCat(c.cat) ? '' : 'true', edit: () => { if (r.pend) return set({ __toast: r.id + ' is pending approval. Withdraw it first to make changes.' }); openRule(r.id, { edit: true, tab: 'cond' }); }, noEdit: r.pend || !canEditCat(c.cat) ? 'true' : '',
+          del: () => set({ dlg: { t: 'del', id: r.id }, open: '' }), noDel: !canEditCat(c.cat) || r.pend || r.act ? 'true' : '',
+          delT: !canEditCat(c.cat) ? 'You can’t delete this rule' : r.pend ? 'Pending approval. Withdraw it first.' : r.act ? 'Approved rules can’t be deleted. Set them Inactive instead.' : 'Delete draft rule', noTest: ROLE === 'aud' ? 'true' : '' }; }) }; }).filter((g) => g.rows.length);
     const list = { q: s.q, setQ: (e) => set({ q: e.target.value }), groups, none: !hits.length, n: hits.length + ' of ' + DB.order.length + ' rules',
       cat: dd('f.cat', s.fCat, [''].concat(V7_CATK), (v) => set({ fCat: v }), { fmt: (v) => v ? V7_CAT[v].t : 'All categories', ph: 'All categories', w: '230px', aria: 'Category' }),
       loc: dd('f.loc', s.fLoc, [''].concat(Object.keys(V7_LM)), (v) => set({ fLoc: v }), { fmt: (v) => v ? V7_LN(v) : 'All countries / agencies', ph: 'All countries / agencies', w: '220px', aria: 'Country / Agency' }),
@@ -1879,6 +1884,8 @@ class GirsPage extends DCLogic {
           else { const p = v7Pol(cat); if (cat === 'inv') p.conds = [v7C('Entity', '=', 'PIL'), v7C('Charge Group', 'IN', 'FREIGHT'), v7C('Charge Type', '=', 'PP')]; c = { name: D.name.trim(), cat, trig, pri: 20, from: V7_TODAY, to: '', on: true, gl: p, loc: {}, exc: v7Exc(cat) }; }
           c.from = V7_TODAY; c.to = ''; const d = v7Cl(DB); d.R[id] = { id, ver: 0, act: null, drf: c, pend: null, hist: [], upd: [ME, V7_NOW] }; d.order.unshift(id);
           save(d, { dlg: null, view: 'rule', rid: id, lc: 'GL', tab: 'cond', edit: true, sim: null, __toast: id + ' created as a draft.' }); } }; }
+    if (D && D.t === 'del' && DB.R[D.id]) { const r = DB.R[D.id], c = contentOf(r); dlg = { on: true, isMsg: true, title: 'Delete ' + r.id + '?', sub: c.name + ' · ' + V7_CAT[c.cat].t + '. This draft rule has never been approved. It will be removed permanently.', okL: 'Delete rule', danger: 'true', close: () => set({ dlg: null }),
+      ok: () => { const d = v7Cl(DB); delete d.R[r.id]; d.order = d.order.filter((x) => x !== r.id); save(d, { dlg: null, __toast: r.id + ' deleted.' }); } }; }
     if (D && D.t === 'discard' && R0) dlg = { on: true, isMsg: true, title: 'Discard the draft of ' + R0.id + '?', sub: 'All draft changes are deleted. v' + R0.ver + ' stays active.', okL: 'Discard draft', danger: 'true', close: () => set({ dlg: null }),
       ok: () => { const d = v7Cl(DB); d.R[R0.id].drf = null; save(d, { dlg: null, edit: false, __toast: 'Draft discarded. v' + R0.ver + ' is unchanged.' }); } };
     if (D && D.t === 'issues') dlg = { on: true, isIss: true, title: D.title || 'Fix these before submitting', sub: 'Rules with incomplete conditions or actions can’t be submitted.', iss: D.items.map((t) => ({ t })), okL: 'Back to the rule', danger: '', close: () => set({ dlg: null }), ok: () => set({ dlg: null }) };
