@@ -1605,7 +1605,7 @@ function v7Eval(c, p, rec) { const T = V7_CAT[c.cat], S = rec.S, steps = []; let
 // Sample execution log (FR-BRE-02 / FR-BRE-07)
 function v7Log(r) { if (!r.act || !r.act.on) return []; const c = r.act, out = [], lcs = Object.keys(c.loc).length ? Object.keys(c.loc) : ['SG-SIN'];
   for (let i = 0; i < 7; i++) { const lc = lcs[i % lcs.length], ok = i % 4 !== 2, d = 25 - Math.floor(i / 2);
-    out.push({ at: '2026-11-' + String(d).padStart(2, '0') + ' ' + String(8 + i).padStart(2, '0') + ':' + String(12 + i * 7).padStart(2, '0'), ev: c.trig, rec: V7_LM[lc].ctry + 'B2600' + (4100 + i * 37), lc: V7_LN(lc),
+    out.push({ at: (() => { const x = new Date(V7_TODAY + 'T00:00:00'); x.setDate(x.getDate() - (25 - d)); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); })() + ' ' + String(8 + i).padStart(2, '0') + ':' + String(12 + i * 7).padStart(2, '0'), ev: c.trig, rec: V7_LM[lc].ctry + 'B2600' + (4100 + i * 37), lc: V7_LN(lc),
       out: ok ? ({ inv: 'Invoice INV-' + V7_LM[lc].ctry + '-2611' + (100 + i), val: 'Passed', pay: 'Receipt RCP-' + (5500 + i), cust: 'Grouped into STM-2611', dist: 'Delivered by e-mail', split: 'Split into 2 invoices', int: 'Debit note DN-' + (300 + i), cur: 'ROE ' + V7_LM[lc].roe, gov: 'Accepted by ' + V7_LM[lc].portal, bank: 'Matched to INV-' + (2200 + i), exc: 'Routed' })[c.cat] : 'Exception EXC-' + (8800 + i), cls: ok ? 'ok' : 'bad', ms: String(80 + i * 13) + ' ms' }); }
   return out; }
 
@@ -1898,6 +1898,7 @@ class Component extends GirsPage {
 }
 
 </script>
+<script src="girs-dates.js"></script>
 <script src="runtime.js"></script>
 <script src="girs-search.js"></script>
 <script src="girs-ui.js"></script>

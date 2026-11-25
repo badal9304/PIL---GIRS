@@ -1299,7 +1299,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 // Home — port / office invoicing workspace. Shipment data arrives from LMS.
 // Voyage Invoicing: export voyages (…E) loading at my port and import voyages (…I) discharging at my port, any date.
 // D&D Billing: containers given to customers; detention / demurrage to invoice.
-// Sample data is generated per location and date, so any date can be opened. "Today" is fixed for the prototype.
+// Sample data is generated per location and date, so any date can be opened. "Today" is moved to the real current date by girs-dates.js.
 const HM_TODAY = '2026-11-20';
 const HM_HUB = { SIN: ['Singapore', 'SGSIN', 'SG', 11], NSA: ['India', 'INNSA', 'IN', 7], LCH: ['Thailand', 'THLCH', 'TH', 5], PKG: ['Malaysia', 'MYPKG', 'MY', 6], JED: ['Saudi Arabia', 'SAJED', 'SA', 4], ZLO: ['Mexico', 'MXZLO', 'MX', 3] };
 const HM_CCY = { SG: 'SGD', NZ: 'NZD', MY: 'MYR', CN: 'CNY', IN: 'INR', TH: 'THB', SA: 'SAR', MX: 'MXN', AE: 'AED', ID: 'IDR', VN: 'VND', KR: 'KRW', JP: 'JPY', AU: 'AUD', HK: 'HKD', LK: 'LKR', BD: 'BDT' };

@@ -52,7 +52,7 @@
     if (window.GIRS_INDEX) { IDX = build(window.GIRS_INDEX); return cb(); }
     if (loading) return; loading = true;
     var sc = document.createElement('script'); sc.src = 'girs-index.js';
-    sc.onload = function () { IDX = build(window.GIRS_INDEX || {}); loading = false; cb(); };
+    sc.onload = function () { if (window.GIRS_INDEX && window.GirsDates && GirsDates.deep) { var a0 = GirsDates.anchor; GirsDates.deep(window.GIRS_INDEX); } IDX = build(window.GIRS_INDEX || {}); loading = false; cb(); };
     sc.onerror = function () { IDX = build({}); loading = false; cb(); };
     document.head.appendChild(sc);
   }
