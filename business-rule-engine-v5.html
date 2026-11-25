@@ -614,7 +614,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .b6-val{display:flex;align-items:flex-start;gap:8px;margin:0 16px 12px;padding:10px 12px;border-radius:8px;font-size:12.5px}
 .b6-val > div{flex:1}.b6-val ul{margin:4px 0 0;padding-left:18px}.b6-val.v-ok{background:var(--okbg);color:var(--ok)}.b6-val.v-err{background:var(--badbg);color:var(--bad)}
 .b6-grid{border-top:1px solid var(--line);overflow-x:auto}
-.b6-r{display:grid;grid-template-columns:28px 78px minmax(170px,1.5fr) 78px minmax(120px,1.1fr) 82px 76px minmax(120px,1fr) 18px 84px;gap:6px;align-items:center;padding:0 10px 0 12px;min-width:980px;position:relative}
+.b6-r{display:grid;grid-template-columns:28px 88px minmax(170px,1.5fr) 78px minmax(120px,1.1fr) 82px 76px minmax(120px,1fr) 18px 84px;gap:6px;align-items:center;padding:0 10px 0 12px;min-width:980px;position:relative}
 .b6-hd{position:sticky;top:0;z-index:2;height:36px;background:var(--sub);border-bottom:1px solid var(--line);font-size:11.5px;font-weight:600;color:var(--muted2)}
 .b6-hd .b6-sh{background:var(--tint);color:var(--accent2);align-self:stretch;display:flex;align-items:center;padding:0 8px;margin:0 -2px}
 .b6-g{border-bottom:1px solid var(--line)}
@@ -798,6 +798,86 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .b6-inf{flex:none;display:inline-flex;color:var(--muted4);cursor:help;border-radius:50%}.b6-inf:hover,.b6-inf:focus-visible{color:var(--accent)}.b6-inf:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .b6-r.cr-trig .b6-inf{color:var(--accent2)}
 .b6-inf-off{visibility:hidden}
+
+/* location changes */
+.b6-lb{display:flex;align-items:center;gap:12px;padding:10px 16px;flex-wrap:wrap}
+.b6-lbl{margin:0 !important}
+.b6-lb .dd{display:inline-block}.b6-lb .dd-b{height:34px}
+.b6-lbt{font-size:12.5px}
+.b6-crumb{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.b6-lg{display:inline-flex;gap:14px;font-size:12.5px;color:var(--muted2);margin-left:6px}
+.lg{display:inline-flex;align-items:center;gap:6px}.lg i{width:10px;height:10px;border-radius:2px}
+.lg-chg i{background:var(--warn)}.lg-add i{background:var(--ok)}.lg-del i{background:var(--bad)}
+.b6-r.src-chg{box-shadow:inset 3px 0 0 var(--warn)}
+.b6-r.src-add{box-shadow:inset 3px 0 0 var(--ok);background:var(--okbg)}
+.b6-r.src-add:hover{background:var(--okbg)}
+.b6-r.src-del{box-shadow:inset 3px 0 0 var(--bad)}
+.b6-r.src-del > span:not(.b6-ra):not(.b6-sq){opacity:.45}
+.b6-r.src-del .dd-v,.b6-r.src-del .input{text-decoration:line-through}
+.b6-r.src-del .b6-mk{visibility:hidden}
+.f-chg .dd-b,.f-chg .input,.b6-at.f-chg .dd-b{border-color:#E0A84C !important;background:var(--warnbg) !important}
+.b6-rst{height:28px;padding:0 10px;font-size:12px}
+.b6-rsi{color:var(--warn) !important}
+/* v5.1 · clearer flow */
+.b6 .cmc-crit{grid-template-columns:repeat(7,minmax(0,1fr))}
+.b6-lch{color:var(--warn);font-weight:600}
+.b6-rhd2{padding:0;display:flex;flex-direction:column}
+.b6-r1{display:flex;align-items:center;gap:14px;padding:12px 16px;flex-wrap:wrap}
+.b6-back{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:500}
+.b6-vs{width:1px;height:22px;background:var(--line)}
+.b6-newc{background:var(--tint);color:var(--accent2)}
+.b6-vo{font-size:12.5px}
+.b6-st{padding:0 16px;border-top:1px solid var(--line2);margin:0}
+.b6-st .tabb{height:44px}
+.b6-guide{list-style:none;margin:0;padding:0 16px 12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.b6-gstep{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sub)}
+.b6-gstep:hover{border-color:var(--bd)}.b6-gstep:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.b6-gstep[aria-current=step]{background:var(--tint);border-color:var(--tintbd)}
+.b6-gstep > span:last-child{display:flex;flex-direction:column;min-width:0}.b6-gstep b{font-size:13px}.b6-gstep small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b6-gn{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--surface);border:1.5px solid var(--bd);color:var(--muted2)}
+.b6-gstep[aria-current=step] .b6-gn{background:var(--accent);border-color:var(--accent);color:#fff}
+.b6-ctx{padding:0;overflow:visible;border-left:4px solid var(--bd)}
+.b6-cx1{display:flex;align-items:center;gap:12px;padding:10px 16px 4px;flex-wrap:wrap}
+.b6-cx1 .dd{display:inline-block}.b6-cx1 .dd-b{height:34px}
+.b6-cxh{margin:0 0 0 4px;font-size:18px;font-weight:600}
+.b6-cxm{display:flex;align-items:center;gap:8px;margin:0;padding:2px 16px 10px;font-size:13px;color:var(--muted2)}
+.b6-cxm svg{flex:none}
+.ctx-ge{border-left-color:var(--warn);background:linear-gradient(var(--warnbg),var(--warnbg))}.ctx-ge .b6-cxm{color:var(--warn);font-weight:500}
+.ctx-lo{border-left-color:var(--accent);background:var(--tint)}.ctx-lo .b6-cxh{color:var(--accent2)}.ctx-lo .b6-cxm{color:var(--accent2)}
+.ctx-gv{border-left-color:var(--bd)}
+.b6-tt-b[aria-pressed=true]{background:var(--tint);border-color:var(--tintbd);color:var(--accent2)}
+.b6-tt-b svg{margin-right:2px}
+.b6-cw[data-tst=false]{grid-template-columns:minmax(0,1fr)}
+.b6-nt .b6-r{grid-template-columns:28px 88px minmax(200px,1.6fr) 90px minmax(160px,1.2fr) 110px 90px 84px;min-width:860px}
+.b6-nt .b6-sv,.b6-nt .b6-mk,.b6-nt .b6-sh,.b6-nt .b6-mkh{display:none}
+.b6-nt .b6-gh{min-width:860px}
+.b6-hid{font-size:12px;margin-left:auto}
+.b6-gs + .b6-hid{margin-left:10px}
+.b6-hn{display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:12.5px;border-top:1px solid var(--line)}
+.b6-ot{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 16px;font-size:12px;font-weight:600;color:var(--muted2);border-bottom:1px solid var(--line2)}
+.b6-dn{margin:-4px 0 0;font-size:12.5px}
+.b6-dlg[data-review=true]{width:min(720px,calc(100vw - 48px))}
+.b6-dlg .db{padding:16px 20px;display:flex;flex-direction:column;gap:14px}
+.b6-dlg .dh{padding:18px 20px 14px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}
+.b6-dlg .df{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}
+.b6-seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.b6-seg button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
+.b6-seg button b{font-size:13px}.b6-seg button small{font-size:12px;color:var(--muted)}
+.b6-seg button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--tint)}
+.b6-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.b6-nh{margin:0;font-size:12.5px;line-height:18px}
+.b6-rv{max-height:min(60vh,520px);overflow:auto !important}
+.b6-sum{list-style:none;margin:0;padding:0;display:flex;gap:8px;flex-wrap:wrap}
+.b6-sum li{display:flex;gap:8px;align-items:center;padding:6px 10px;border-radius:6px;background:var(--sub);font-size:12.5px}.b6-sum b{font-weight:600}
+.b6-rs2 h3{display:flex;align-items:baseline;gap:8px;margin:0 0 6px;font-size:13.5px}.b6-rs2 h3 .mu{font-size:12px;font-weight:400}.b6-rs2 h3 b{margin-left:auto;font-size:12px;font-weight:600;color:var(--muted2)}
+.b6-rs2 ul{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.b6-rs2 li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px;padding:8px 12px;font-size:12.5px;border-top:1px solid var(--line2);border-left:3px solid transparent}
+.b6-rs2 li:first-child{border-top:0}
+.b6-rr{color:var(--muted2)}
+.b6-rba{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.b6-rb{color:var(--bad);text-decoration-color:rgba(0,0,0,.35)}.b6-ra2{color:var(--ink);font-weight:500}
+.dk-chg{border-left-color:var(--warn) !important}.dk-add{border-left-color:var(--ok) !important}.dk-add .b6-ra2{color:var(--ok)}.dk-del{border-left-color:var(--bad) !important}
+.b6-rnew{margin:0;padding:8px 12px;border-radius:8px;background:var(--sub);font-size:12.5px}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -1104,9 +1184,6 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </div>
       </div>
             <main class="gmain b3 b6" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; min-height: 0">
-        <div class="tabs" role="tablist" aria-label="Invoice generation config">
-          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button class="tabb" role="tab" aria-selected="{{t.on}}" aria-disabled="{{t.dis}}" onClick="{{t.go}}">{{t.t}}</button></sc-for>
-        </div>
 
         <!-- ============ SEARCH BUSINESS RULE (same layout as Bank Master) ============ -->
         <sc-if value="{{isSearch}}" hint-placeholder-val="{{ true }}">
@@ -1118,6 +1195,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
               <div class="cm2-f"><label class="lbl" for="b6-cat">Category</label><div class="cm2-sel"><select class="select" id="b6-cat" value="{{search.cat.v}}" onChange="{{search.cat.on}}"><sc-for list="{{search.cat.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div></div>
               <div class="cm2-f"><label class="lbl" for="b6-trig">Trigger Event</label><div class="cm2-sel"><select class="select" id="b6-trig" value="{{search.trig.v}}" onChange="{{search.trig.on}}"><sc-for list="{{search.trig.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div></div>
               <div class="cm2-f"><label class="lbl" for="b6-ctry">Country / Agency</label><div class="cm2-sel"><select class="select" id="b6-ctry" value="{{search.ctry.v}}" onChange="{{search.ctry.on}}"><sc-for list="{{search.ctry.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div></div>
+              <div class="cm2-f"><label class="lbl" for="b6-loc">Rules for</label><div class="cm2-sel"><select class="select" id="b6-loc" value="{{search.loc.v}}" onChange="{{search.loc.on}}"><sc-for list="{{search.loc.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div></div>
               <div class="cm2-f"><label class="lbl" for="b6-st">Status</label><div class="cm2-sel"><select class="select" id="b6-st" value="{{search.st.v}}" onChange="{{search.st.on}}"><sc-for list="{{search.st.opts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}">{{o.l}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div></div>
               <div class="cmc-act b6-cact"><button type="button" class="btn btn-sm" onClick="{{search.reset}}">Reset</button><button type="submit" class="btn btn-sm btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Search</button></div>
             </div>
@@ -1129,13 +1207,13 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
             </div>
             <div style="flex: 1 1 auto; min-height: 0; overflow: auto">
             <table class="lst">
-              <thead><tr><th scope="col" class="c-no">Rule ID</th><th scope="col">Category</th><th scope="col">Trigger Event</th><th scope="col">Scope</th><th scope="col" class="r">Priority</th><th scope="col">Effective</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
+              <thead><tr><th scope="col" class="c-no">Rule ID</th><th scope="col">Category</th><th scope="col">Trigger Event</th><th scope="col">Scope</th><th scope="col" class="r">Priority</th><th scope="col">Effective</th><th scope="col">{{search.locH}}</th><th scope="col">Status</th><th scope="col" class="c-act">Action</th></tr></thead>
               <tbody>
                 <sc-for list="{{search.rows}}" as="r" hint-placeholder-count="10">
                   <tr class="cmc-row" onClick="{{r.view}}">
                     <td class="c-no"><button class="lnk mono" onClick="{{r.view}}" title="View {{r.id}}">{{r.id}}</button></td>
                     <td>{{r.cat}}</td><td>{{r.trig}}</td><td class="mono">{{r.scope}}</td><td class="r mono">{{r.pri}}</td><td>{{r.eff}}</td>
-                    <td><span class="chip" style="{{r.stSt}}">{{r.st}}</span></td>
+                    <td class="{{r.locCls}}">{{r.locs}}</td><td><span class="chip" style="{{r.stSt}}">{{r.st}}</span></td>
                     <td class="c-act"><span class="b6-ia"><button type="button" class="cm-ib" onClick="{{r.view}}" title="View" aria-label="View {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></button><button type="button" class="cm-ib" onClick="{{r.upd}}" disabled="{{r.noUpd}}" title="Update" aria-label="Update {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button><button type="button" class="cm-ib" onClick="{{r.copy}}" title="Copy" aria-label="Copy {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button type="button" class="cm-ib" onClick="{{r.add}}" title="Add a rule in this category" aria-label="Add a rule like {{r.id}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></span></td>
                   </tr>
                 </sc-for>
@@ -1149,13 +1227,22 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         </sc-if>
 
         <sc-if value="{{isDef}}" hint-placeholder-val="{{ false }}">
-          <section class="card b6-rhd" aria-label="Rule">
-            <div class="cm2-rec"><span class="cm2-code mono">{{rule.id}}</span><h2>{{rule.cat}}</h2><span class="chip" style="{{rule.stSt}}">{{rule.st}}</span></div>
-            <span class="b6-rm mu">Trigger: {{rule.trig}}<span class="b6-dot" aria-hidden="true">·</span>Scope: {{rule.scope}}</span>
-            <span class="b3-sp"></span>
-            <sc-if value="{{rule.canEdit}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm btn-primary" onClick="{{rule.edit}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Update</button></sc-if>
-            <sc-if value="{{rule.canWithdraw}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm" onClick="{{rule.withdraw}}">Withdraw</button><button type="button" class="btn btn-sm btn-primary" onClick="{{rule.approve}}">Approve (approver view)</button></sc-if>
+          <section class="card b6-rhd2" aria-label="Rule">
+            <div class="b6-r1">
+              <button type="button" class="lnk b6-back" onClick="{{rule.back}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Back to Search</button>
+              <span class="b6-vs" aria-hidden="true"></span>
+              <div class="cm2-rec"><span class="cm2-code mono">{{rule.id}}</span><h2>{{rule.cat}}</h2><span class="chip" style="{{rule.stSt}}">{{rule.st}}</span><sc-if value="{{rule.isNew}}" hint-placeholder-val="{{ false }}"><span class="chip b6-newc">{{rule.newT}}</span></sc-if></div>
+              <span class="b6-rm mu">Trigger: {{rule.trig}}<span class="b6-dot" aria-hidden="true">·</span>Scope: {{rule.scope}}</span>
+              <span class="b3-sp"></span>
+              <sc-if value="{{rule.canEdit}}" hint-placeholder-val="{{ false }}"><span class="mu b6-vo">View only</span><button type="button" class="btn btn-primary" onClick="{{rule.edit}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Update</button></sc-if>
+              <sc-if value="{{rule.canWithdraw}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm" onClick="{{rule.withdraw}}">Withdraw</button><button type="button" class="btn btn-sm btn-primary" onClick="{{rule.approve}}">Approve (approver view)</button></sc-if>
+            </div>
+            <sc-if value="{{rule.guideOn}}" hint-placeholder-val="{{ false }}">
+              <ol class="b6-guide" aria-label="Steps to set up this rule"><sc-for list="{{rule.guide}}" as="x" hint-placeholder-count="4"><li><button type="button" class="b6-gstep" aria-current="{{x.cur}}" onClick="{{x.go}}"><span class="b6-gn" aria-hidden="true">{{x.n}}</span><span><b>{{x.t}}</b><small>{{x.s}}</small></span></button></li></sc-for></ol>
+            </sc-if>
+            <div class="tabs b6-st" role="tablist" aria-label="Rule"><sc-for list="{{rule.tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}">{{t.t}}</button></sc-for></div>
           </section>
+          <p class="b6-dn mu">Rule Definition is shared by Global and every location. Location changes are made in Conditions &amp; Actions.</p>
           <div class="b6-secs">
             <section class="card cm2-sec" aria-labelledby="b6-s1">
               <div class="cm2-sh"><h3 id="b6-s1">Rule Identification</h3><p>What the rule is and which event starts it</p></div>
@@ -1189,66 +1276,85 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
           <div class="cm2-bottom" role="region" aria-label="Save">
             <span class="b3-ds b6-ds" data-on="{{rule.dirty}}">{{rule.dirtyT}}</span>
             <button type="button" class="btn" onClick="{{rule.back}}">Back to Search</button>
-            <sc-if value="{{rule.notRo}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" onClick="{{rule.cancel}}" disabled="{{rule.noSave}}">Cancel</button><button type="button" class="btn" onClick="{{rule.save}}" disabled="{{rule.noSave}}">Save</button><button type="button" class="btn btn-primary" onClick="{{rule.submit}}">Submit for Approval</button></sc-if>
+            <sc-if value="{{rule.notRo}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" onClick="{{rule.cancel}}" disabled="{{rule.noSave}}">Cancel</button><button type="button" class="btn" onClick="{{rule.save}}" disabled="{{rule.noSave}}">Save</button><sc-if value="{{rule.showNext}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" onClick="{{rule.next}}">Next: Conditions &amp; Actions</button></sc-if><button type="button" class="btn btn-primary" onClick="{{rule.submit}}">Submit for Approval</button></sc-if>
           </div>
         </sc-if>
 
         <sc-if value="{{isCond}}" hint-placeholder-val="{{ false }}">
-          <section class="card b6-rhd" aria-label="Rule">
-            <div class="cm2-rec"><span class="cm2-code mono">{{rule.id}}</span><h2>{{rule.cat}}</h2><span class="chip" style="{{rule.stSt}}">{{rule.st}}</span></div>
-            <span class="b6-rm mu">Trigger: {{rule.trig}}<span class="b6-dot" aria-hidden="true">·</span>Scope: {{rule.scope}}</span>
-            <span class="b3-sp"></span>
-            <sc-if value="{{rule.canEdit}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm btn-primary" onClick="{{rule.edit}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Update</button></sc-if>
-            <sc-if value="{{rule.canWithdraw}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm" onClick="{{rule.withdraw}}">Withdraw</button><button type="button" class="btn btn-sm btn-primary" onClick="{{rule.approve}}">Approve (approver view)</button></sc-if>
+          <section class="card b6-rhd2" aria-label="Rule">
+            <div class="b6-r1">
+              <button type="button" class="lnk b6-back" onClick="{{rule.back}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Back to Search</button>
+              <span class="b6-vs" aria-hidden="true"></span>
+              <div class="cm2-rec"><span class="cm2-code mono">{{rule.id}}</span><h2>{{rule.cat}}</h2><span class="chip" style="{{rule.stSt}}">{{rule.st}}</span><sc-if value="{{rule.isNew}}" hint-placeholder-val="{{ false }}"><span class="chip b6-newc">{{rule.newT}}</span></sc-if></div>
+              <span class="b6-rm mu">Trigger: {{rule.trig}}<span class="b6-dot" aria-hidden="true">·</span>Scope: {{rule.scope}}</span>
+              <span class="b3-sp"></span>
+              <sc-if value="{{rule.canEdit}}" hint-placeholder-val="{{ false }}"><span class="mu b6-vo">View only</span><button type="button" class="btn btn-primary" onClick="{{rule.edit}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Update</button></sc-if>
+              <sc-if value="{{rule.canWithdraw}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm" onClick="{{rule.withdraw}}">Withdraw</button><button type="button" class="btn btn-sm btn-primary" onClick="{{rule.approve}}">Approve (approver view)</button></sc-if>
+            </div>
+            <sc-if value="{{rule.guideOn}}" hint-placeholder-val="{{ false }}">
+              <ol class="b6-guide" aria-label="Steps to set up this rule"><sc-for list="{{rule.guide}}" as="x" hint-placeholder-count="4"><li><button type="button" class="b6-gstep" aria-current="{{x.cur}}" onClick="{{x.go}}"><span class="b6-gn" aria-hidden="true">{{x.n}}</span><span><b>{{x.t}}</b><small>{{x.s}}</small></span></button></li></sc-for></ol>
+            </sc-if>
+            <div class="tabs b6-st" role="tablist" aria-label="Rule"><sc-for list="{{rule.tabs}}" as="t" hint-placeholder-count="2"><button class="tabb" role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}">{{t.t}}</button></sc-for></div>
           </section>
-          <ol class="card b6-flow" aria-label="How GIRS handles this rule">
+          <section class="card b6-ctx {{rule.lc.ctxCls}}" aria-label="Which rule you are working on">
+            <div class="b6-cx1"><span class="lbl b6-lbl">Rules for</span><div class="dd {{rule.lc.dd.cls}}" style="{{rule.lc.dd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{rule.lc.dd.ex}}" aria-label="{{rule.lc.dd.aria}}" onClick="{{rule.lc.dd.toggle}}"><span class="dd-v">{{rule.lc.dd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{rule.lc.dd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{rule.lc.dd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{rule.lc.dd.aria}}"><sc-if value="{{rule.lc.dd.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{rule.lc.dd.q}}" onInput="{{rule.lc.dd.setQ}}" aria-label="Search {{rule.lc.dd.aria}}"></div></sc-if><sc-if value="{{rule.lc.dd.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{rule.lc.dd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><h3 class="b6-cxh">{{rule.lc.headT}}</h3>
+              <sc-if value="{{rule.lc.showLegend}}" hint-placeholder-val="{{ false }}"><span class="b6-lg"><span class="lg lg-chg"><i></i>{{rule.lc.nChg}} changed</span><span class="lg lg-add"><i></i>{{rule.lc.nAdd}} added</span><span class="lg lg-del"><i></i>{{rule.lc.nDel}} removed</span></span></sc-if>
+              <span class="b3-sp"></span>
+              <sc-if value="{{rule.lc.canResetAll}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm" onClick="{{rule.lc.resetAll}}">Reset to Global</button></sc-if>
+            </div>
+            <p class="b6-cxm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>{{rule.lc.msgT}}</p>
+          </section>
+          <sc-if value="{{rule.tst}}" hint-placeholder-val="{{ false }}"><ol class="card b6-flow" aria-label="How GIRS handles this rule">
             <sc-for list="{{rule.steps}}" as="x" hint-placeholder-count="4"><li class="fs-{{x.cls}}"><span class="b6-fn" aria-hidden="true">{{x.n}}</span><div><b>{{x.t}}</b><span>{{x.s}}</span></div></li></sc-for>
-          </ol>
-          <div class="b6-cw">
+          </ol></sc-if>
+          <div class="b6-cw" data-tst="{{rule.tstP}}">
             <section class="card b6-cond" aria-labelledby="b6-ct">
               <div class="b6-ch">
-                <div><h2 id="b6-ct">{{rule.title}}</h2><p class="mu">Each LMS field is checked against the sample data on the right. FORALL accepts any value received from LMS.</p></div>
-                <span class="b6-tb"><sc-if value="{{rule.notRo}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-sm" onClick="{{rule.addC}}">+ Add Condition</button><button type="button" class="btn btn-sm" onClick="{{rule.addA}}">+ Add Action</button></sc-if><button type="button" class="btn btn-sm" onClick="{{rule.validate}}">Validate</button></span>
+                <div><h2 id="b6-ct">{{rule.title}}</h2><p class="mu">{{rule.sub}}</p></div>
+                <span class="b6-tb"><sc-if value="{{rule.notRo}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-sm" onClick="{{rule.addC}}">+ Add Condition</button><button type="button" class="btn btn-sm" onClick="{{rule.addA}}">+ Add Action</button></sc-if><button type="button" class="btn btn-sm" onClick="{{rule.validate}}">Validate</button><button type="button" class="btn btn-sm b6-tt-b" aria-pressed="{{rule.tstP}}" onClick="{{rule.toggleTst}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"></path></svg>Test with sample LMS data</button></span>
               </div>
               <div class="b6-fl" role="group" aria-label="Show rows">
-                <button type="button" class="b3-qc" aria-pressed="{{rule.fAll}}" onClick="{{rule.showAll}}">All rows<b>{{rule.nAll}}</b></button>
-                <button type="button" class="b3-qc" aria-pressed="{{rule.fSet}}" onClick="{{rule.showSet}}">With a value<b>{{rule.nSet}}</b></button>
-                <button type="button" class="b3-qc" aria-pressed="{{rule.fFail}}" onClick="{{rule.showFail}}">Failing<b>{{rule.nFail}}</b></button>
+                <button type="button" class="b3-qc" aria-pressed="{{rule.fSet}}" onClick="{{rule.showSet}}">Rows with a value<b>{{rule.nSet}}</b></button>
+                <button type="button" class="b3-qc" aria-pressed="{{rule.fAll}}" onClick="{{rule.showAll}}">All rows incl. FORALL<b>{{rule.nAll}}</b></button>
+                <sc-if value="{{rule.tst}}" hint-placeholder-val="{{ false }}"><button type="button" class="b3-qc" aria-pressed="{{rule.fFail}}" onClick="{{rule.showFail}}">Failing<b>{{rule.nFail}}</b></button></sc-if>
+                <sc-if value="{{rule.lc.notGL}}" hint-placeholder-val="{{ false }}"><button type="button" class="b3-qc" aria-pressed="{{rule.fLoc}}" onClick="{{rule.showLoc}}">Changed for {{rule.lc.name}}<b>{{rule.lc.nAll}}</b></button></sc-if>
                 <span class="b3-sp"></span>
                 <sc-if value="{{rule.sampleChanged}}" hint-placeholder-val="{{ false }}"><button type="button" class="lnk b6-rs" onClick="{{rule.resetSample}}">Reset sample data</button></sc-if>
               </div>
               <sc-if value="{{rule.hasVal}}" hint-placeholder-val="{{ false }}">
                 <div class="b6-val {{rule.valCls}}" role="status"><div><b>{{rule.valHead}}</b><ul><sc-for list="{{rule.valItems}}" as="v" hint-placeholder-count="2"><li>{{v.t}}</li></sc-for></ul></div><button type="button" class="cm-ib" onClick="{{rule.valClose}}" aria-label="Dismiss"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
               </sc-if>
-              <div class="b6-grid" role="table" aria-label="Conditions and actions">
-                <div class="b6-r b6-hd" role="row"><span role="columnheader">#</span><span role="columnheader">Type</span><span role="columnheader">Attribute</span><span role="columnheader">Operator</span><span role="columnheader">Value</span><span role="columnheader">Value 2</span><span role="columnheader">Join</span><span role="columnheader" class="b6-sh">Sample LMS data</span><span role="columnheader"><span class="sr">Result</span></span><span role="columnheader"><span class="sr">Row actions</span></span></div>
+              <div class="b6-grid {{rule.gridCls}}" role="table" aria-label="Conditions and actions">
+                <div class="b6-r b6-hd" role="row"><span role="columnheader">#</span><span role="columnheader">Type</span><span role="columnheader">Attribute</span><span role="columnheader">Operator</span><span role="columnheader">Value</span><span role="columnheader">Value 2</span><span role="columnheader">Join</span><span role="columnheader" class="b6-sh">Sample LMS data (test)</span><span role="columnheader" class="b6-mkh"><span class="sr">Result</span></span><span role="columnheader"><span class="sr">Row actions</span></span></div>
                 <sc-for list="{{rule.groups}}" as="g" hint-placeholder-count="6">
                   <div class="b6-g" role="rowgroup">
-                    <button type="button" class="b6-gh" aria-expanded="{{g.folded}}" onClick="{{g.fold}}"><svg class="b6-gc" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg><b>{{g.t}}</b><span class="mu">{{g.sub}}</span><span class="b6-gs gs-{{g.statCls}}">{{g.stat}}</span></button>
+                    <button type="button" class="b6-gh" aria-expanded="{{g.folded}}" onClick="{{g.fold}}"><svg class="b6-gc" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg><b>{{g.t}}</b><span class="mu">{{g.sub}}</span><sc-if value="{{g.hasStat}}" hint-placeholder-val="{{ false }}"><span class="b6-gs gs-{{g.statCls}}">{{g.stat}}</span></sc-if><sc-if value="{{g.nHid}}" hint-placeholder-val="{{ false }}"><span class="b6-hid mu">{{g.hidT}}</span></sc-if></button>
                     <sc-if value="{{g.open}}" hint-placeholder-val="{{ true }}">
                       <sc-for list="{{g.rows}}" as="c" hint-placeholder-count="5">
-                        <div class="b6-r {{c.cls}}" role="row" data-k="{{c.k}}">
+                        <div class="b6-r {{c.cls}}" role="row" data-k="{{c.k}}" title="{{c.srcT}}">
                           <span class="b6-sq mono">{{c.n}}</span>
                           <span class="b6-ty {{c.tCls}}"><div class="dd {{c.type.cls}}" style="{{c.type.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.type.ex}}" aria-label="{{c.type.aria}}" onClick="{{c.type.toggle}}"><span class="dd-v">{{c.type.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.type.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.type.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.type.aria}}"><sc-if value="{{c.type.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.type.q}}" onInput="{{c.type.setQ}}" aria-label="Search {{c.type.aria}}"></div></sc-if><sc-if value="{{c.type.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.type.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></span>
-                          <span class="b6-at"><div class="dd {{c.att.cls}}" style="{{c.att.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.att.ex}}" aria-label="{{c.att.aria}}" onClick="{{c.att.toggle}}"><span class="dd-v">{{c.att.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.att.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.att.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.att.aria}}"><sc-if value="{{c.att.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.att.q}}" onInput="{{c.att.setQ}}" aria-label="Search {{c.att.aria}}"></div></sc-if><sc-if value="{{c.att.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.att.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="b6-inf {{c.infCls}}" tabindex="{{c.infTab}}" title="{{c.info}}" aria-label="{{c.info}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></span></span>
+                          <span class="b6-at {{c.fA}}" title="{{c.tA}}"><div class="dd {{c.att.cls}}" style="{{c.att.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.att.ex}}" aria-label="{{c.att.aria}}" onClick="{{c.att.toggle}}"><span class="dd-v">{{c.att.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.att.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.att.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.att.aria}}"><sc-if value="{{c.att.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.att.q}}" onInput="{{c.att.setQ}}" aria-label="Search {{c.att.aria}}"></div></sc-if><sc-if value="{{c.att.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.att.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div><span class="b6-inf {{c.infCls}}" tabindex="{{c.infTab}}" title="{{c.info}}" aria-label="{{c.info}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></span></span>
 
-                          <span><div class="dd {{c.op.cls}}" style="{{c.op.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.op.ex}}" aria-label="{{c.op.aria}}" onClick="{{c.op.toggle}}"><span class="dd-v">{{c.op.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.op.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.op.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.op.aria}}"><sc-if value="{{c.op.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.op.q}}" onInput="{{c.op.setQ}}" aria-label="Search {{c.op.aria}}"></div></sc-if><sc-if value="{{c.op.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.op.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></span>
-                          <span class="b6-vl {{c.any}}"><sc-if value="{{c.vDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{c.vd.cls}}" style="{{c.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.vd.ex}}" aria-label="{{c.vd.aria}}" onClick="{{c.vd.toggle}}"><span class="dd-v">{{c.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.vd.aria}}"><sc-if value="{{c.vd.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.vd.q}}" onInput="{{c.vd.setQ}}" aria-label="Search {{c.vd.aria}}"></div></sc-if><sc-if value="{{c.vd.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{c.vIn}}" hint-placeholder-val="{{ false }}"><input class="input" value="{{c.v}}" onInput="{{c.setV}}" disabled="{{rule.ro}}" aria-label="Value, row {{c.n}}"></sc-if></span>
-                          <span><input class="input b6-v2" value="{{c.v2}}" onInput="{{c.setV2}}" disabled="{{rule.ro}}" placeholder="—" aria-label="Value 2, row {{c.n}}"></span>
-                          <span><div class="dd {{c.join.cls}}" style="{{c.join.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.join.ex}}" aria-label="{{c.join.aria}}" onClick="{{c.join.toggle}}"><span class="dd-v">{{c.join.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.join.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.join.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.join.aria}}"><sc-if value="{{c.join.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.join.q}}" onInput="{{c.join.setQ}}" aria-label="Search {{c.join.aria}}"></div></sc-if><sc-if value="{{c.join.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.join.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></span>
+                          <span class="{{c.fO}}" title="{{c.tO}}"><div class="dd {{c.op.cls}}" style="{{c.op.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.op.ex}}" aria-label="{{c.op.aria}}" onClick="{{c.op.toggle}}"><span class="dd-v">{{c.op.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.op.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.op.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.op.aria}}"><sc-if value="{{c.op.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.op.q}}" onInput="{{c.op.setQ}}" aria-label="Search {{c.op.aria}}"></div></sc-if><sc-if value="{{c.op.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.op.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></span>
+                          <span class="b6-vl {{c.any}} {{c.fV}}" title="{{c.tV}}"><sc-if value="{{c.vDd}}" hint-placeholder-val="{{ true }}"><div class="dd {{c.vd.cls}}" style="{{c.vd.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.vd.ex}}" aria-label="{{c.vd.aria}}" onClick="{{c.vd.toggle}}"><span class="dd-v">{{c.vd.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.vd.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.vd.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.vd.aria}}"><sc-if value="{{c.vd.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.vd.q}}" onInput="{{c.vd.setQ}}" aria-label="Search {{c.vd.aria}}"></div></sc-if><sc-if value="{{c.vd.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.vd.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></sc-if><sc-if value="{{c.vIn}}" hint-placeholder-val="{{ false }}"><input class="input" value="{{c.v}}" onInput="{{c.setV}}" disabled="{{c.rro}}" aria-label="Value, row {{c.n}}"></sc-if></span>
+                          <span class="{{c.fV2}}" title="{{c.tV2}}"><input class="input b6-v2" value="{{c.v2}}" onInput="{{c.setV2}}" disabled="{{c.rro}}" placeholder="—" aria-label="Value 2, row {{c.n}}"></span>
+                          <span class="{{c.fJ}}" title="{{c.tJ}}"><div class="dd {{c.join.cls}}" style="{{c.join.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{c.join.ex}}" aria-label="{{c.join.aria}}" onClick="{{c.join.toggle}}"><span class="dd-v">{{c.join.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{c.join.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{c.join.close}}"></button><div class="dd-p" role="listbox" aria-label="{{c.join.aria}}"><sc-if value="{{c.join.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{c.join.q}}" onInput="{{c.join.setQ}}" aria-label="Search {{c.join.aria}}"></div></sc-if><sc-if value="{{c.join.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{c.join.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></span>
                           <span class="b6-sv"><sc-if value="{{c.hasS}}" hint-placeholder-val="{{ true }}"><input class="input" value="{{c.sv}}" onInput="{{c.setS}}" disabled="{{c.sRo}}" title="{{c.sTip}}" placeholder="Not received" aria-label="Sample LMS value, row {{c.n}}"></sc-if></span>
                           <span class="b6-mk mk-{{c.mkCls}}" title="{{c.tip}}" aria-label="{{c.tip}}">{{c.mk}}</span>
-                          <span class="b6-ra"><button type="button" class="cm-ib" onClick="{{c.add}}" disabled="{{rule.ro}}" title="Add a row below" aria-label="Add a row below row {{c.n}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button><button type="button" class="cm-ib" onClick="{{c.copy}}" disabled="{{rule.ro}}" title="Copy" aria-label="Copy row {{c.n}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button type="button" class="cm-ib" onClick="{{c.del}}" disabled="{{rule.ro}}" title="Delete" aria-label="Delete row {{c.n}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></span>
+                          <span class="b6-ra"><sc-if value="{{c.isDel}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm b6-rst" onClick="{{c.restore}}" disabled="{{rule.ro}}" aria-label="Restore row {{c.n}}">Restore</button></sc-if><sc-if value="{{c.notDel}}" hint-placeholder-val="{{ true }}"><button type="button" class="cm-ib" onClick="{{c.add}}" disabled="{{rule.ro}}" title="Add a row below" aria-label="Add a row below row {{c.n}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button><sc-if value="{{c.canReset}}" hint-placeholder-val="{{ false }}"><button type="button" class="cm-ib b6-rsi" onClick="{{c.reset}}" title="Reset to Global" aria-label="Reset row {{c.n}} to Global"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v6h6"></path><path d="M3 13a9 9 0 1 0 3-7.7L3 8"></path></svg></button></sc-if><sc-if value="{{c.noReset}}" hint-placeholder-val="{{ true }}"><button type="button" class="cm-ib" onClick="{{c.copy}}" disabled="{{rule.ro}}" title="Copy" aria-label="Copy row {{c.n}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button></sc-if><button type="button" class="cm-ib" onClick="{{c.del}}" disabled="{{rule.ro}}" title="Delete" aria-label="Delete row {{c.n}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button></sc-if></span>
+
                         </div>
                       </sc-for>
                     </sc-if>
                   </div>
                 </sc-for>
               </div>
+              <sc-if value="{{rule.hasHidden}}" hint-placeholder-val="{{ false }}"><div class="b6-hn mu">{{rule.nHidden}} rows set to FORALL are hidden. They accept any value received from LMS.<button type="button" class="lnk" onClick="{{rule.showAll}}">Show all rows</button></div></sc-if>
             </section>
 
-            <aside class="card b6-out" aria-labelledby="b6-ot" aria-live="polite">
-              <div class="b6-oh b6-oh-{{rule.out.cls}}"><span class="b6-oi" aria-hidden="true"></span><div><h2 id="b6-ot">{{rule.out.head}}</h2><p>{{rule.out.sub}}</p></div></div>
+            <sc-if value="{{rule.tst}}" hint-placeholder-val="{{ false }}"><aside class="card b6-out" aria-labelledby="b6-ot" aria-live="polite">
+              <div class="b6-ot"><span>Test with sample LMS data</span><button type="button" class="cm-ib" onClick="{{rule.toggleTst}}" aria-label="Close test"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div><div class="b6-oh b6-oh-{{rule.out.cls}}"><span class="b6-oi" aria-hidden="true"></span><div><h2 id="b6-ot">{{rule.out.head}}</h2><p>{{rule.out.sub}}</p></div></div>
               <sc-if value="{{rule.out.ok}}" hint-placeholder-val="{{ true }}">
                 <div class="b6-inv">
                   <div class="b6-ih"><div><span class="mu">{{rule.out.type}}</span><b class="mono">{{rule.out.no}}</b><span class="mu b6-src">{{rule.out.noSrc}}</span></div><span class="chip" style="background: var(--warnbg); color: var(--warn)">{{rule.out.status}}</span></div>
@@ -1270,13 +1376,13 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
               </sc-if>
               <div class="b6-fails"><sc-for list="{{rule.out.fails}}" as="f" hint-placeholder-count="2"><button type="button" class="b6-fi" onClick="{{f.go}}"><b>{{f.t}}</b><span>{{f.why}}</span></button></sc-for><sc-if value="{{rule.out.hasMore}}" hint-placeholder-val="{{ false }}"><span class="mu b6-more">{{rule.out.moreFails}}</span></sc-if></div>
               <div class="b6-po"><h3>Post to</h3><ul><sc-for list="{{rule.out.posts}}" as="p" hint-placeholder-count="4"><li class="po-{{p.cls}}"><span>{{p.t}}</span><b>{{p.st}}</b></li></sc-for></ul></div>
-            </aside>
+            </aside></sc-if>
           </div>
           
           <div class="cm2-bottom" role="region" aria-label="Save">
             <span class="b3-ds b6-ds" data-on="{{rule.dirty}}">{{rule.dirtyT}}</span>
             <button type="button" class="btn" onClick="{{rule.back}}">Back to Search</button>
-            <sc-if value="{{rule.notRo}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" onClick="{{rule.cancel}}" disabled="{{rule.noSave}}">Cancel</button><button type="button" class="btn" onClick="{{rule.save}}" disabled="{{rule.noSave}}">Save</button><button type="button" class="btn btn-primary" onClick="{{rule.submit}}">Submit for Approval</button></sc-if>
+            <sc-if value="{{rule.notRo}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" onClick="{{rule.cancel}}" disabled="{{rule.noSave}}">Cancel</button><button type="button" class="btn" onClick="{{rule.save}}" disabled="{{rule.noSave}}">Save</button><sc-if value="{{rule.showNext}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" onClick="{{rule.next}}">Next: Conditions &amp; Actions</button></sc-if><button type="button" class="btn btn-primary" onClick="{{rule.submit}}">Submit for Approval</button></sc-if>
           </div>
         </sc-if>
       </main>
@@ -1286,9 +1392,30 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 
   <sc-if value="{{dlg.on}}" hint-placeholder-val="{{ false }}">
     <button class="scrim" tabindex="-1" aria-label="Close" onClick="{{dlg.close}}"></button>
-    <div class="dlg dim b3-dlg" role="dialog" aria-modal="true" aria-labelledby="b6-lt">
-      <div class="dh"><div><h2 id="b6-lt" style="margin: 0; font-size: 16px; font-weight: 600">{{dlg.title}}</h2><div class="mu" style="font-size: 12px">{{dlg.sub}}</div></div><button class="cm-ib x" onClick="{{dlg.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
-      <div class="df"><button class="btn" onClick="{{dlg.close}}">Keep editing</button><button class="btn btn-primary" data-danger="true" onClick="{{dlg.ok}}">{{dlg.okL}}</button></div>
+    <div class="dlg dim b3-dlg b6-dlg" role="dialog" aria-modal="true" aria-labelledby="b6-lt" data-review="{{dlg.isReview}}">
+      <div class="dh"><div><h2 id="b6-lt" style="margin: 0; font-size: 16px; font-weight: 600">{{dlg.title}}</h2><div class="mu" style="font-size: 12.5px; margin-top: 2px">{{dlg.sub}}</div></div><button class="cm-ib x" onClick="{{dlg.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+      <sc-if value="{{dlg.isNew}}" hint-placeholder-val="{{ false }}">
+        <div class="db b6-nd">
+          <div class="cm2-f"><span class="lbl">Start from</span><div class="b6-seg" role="group" aria-label="Start from"><button type="button" aria-pressed="{{dlg.blankP}}" onClick="{{dlg.setBlank}}"><b>Standard rule</b><small>Sheet checks, all FORALL</small></button><button type="button" aria-pressed="{{dlg.copyP}}" onClick="{{dlg.setCopy}}"><b>Copy of a rule</b><small>Includes location changes</small></button></div></div>
+          <sc-if value="{{dlg.isCopy}}" hint-placeholder-val="{{ false }}"><div class="cm2-f"><span class="lbl">Copy from</span><div class="dd {{dlg.src.cls}}" style="{{dlg.src.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.src.ex}}" aria-label="{{dlg.src.aria}}" onClick="{{dlg.src.toggle}}"><span class="dd-v">{{dlg.src.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.src.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.src.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.src.aria}}"><sc-if value="{{dlg.src.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{dlg.src.q}}" onInput="{{dlg.src.setQ}}" aria-label="Search {{dlg.src.aria}}"></div></sc-if><sc-if value="{{dlg.src.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{dlg.src.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div></sc-if>
+          <div class="b6-g2"><div class="cm2-f"><span class="lbl">Category</span><div class="dd {{dlg.cat.cls}}" style="{{dlg.cat.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.cat.ex}}" aria-label="{{dlg.cat.aria}}" onClick="{{dlg.cat.toggle}}"><span class="dd-v">{{dlg.cat.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.cat.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.cat.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.cat.aria}}"><sc-if value="{{dlg.cat.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{dlg.cat.q}}" onInput="{{dlg.cat.setQ}}" aria-label="Search {{dlg.cat.aria}}"></div></sc-if><sc-if value="{{dlg.cat.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{dlg.cat.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div><div class="cm2-f"><span class="lbl">Trigger Event</span><div class="dd {{dlg.trig.cls}}" style="{{dlg.trig.st}}"><button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="{{dlg.trig.ex}}" aria-label="{{dlg.trig.aria}}" onClick="{{dlg.trig.toggle}}"><span class="dd-v">{{dlg.trig.label}}</span><svg class="dd-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{dlg.trig.open}}" hint-placeholder-val="{{ false }}"><button type="button" class="mback" tabindex="-1" aria-label="Close list" onClick="{{dlg.trig.close}}"></button><div class="dd-p" role="listbox" aria-label="{{dlg.trig.aria}}"><sc-if value="{{dlg.trig.hasQ}}" hint-placeholder-val="{{ false }}"><div class="dd-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" type="search" placeholder="Search" autocomplete="off" value="{{dlg.trig.q}}" onInput="{{dlg.trig.setQ}}" aria-label="Search {{dlg.trig.aria}}"></div></sc-if><sc-if value="{{dlg.trig.noHit}}" hint-placeholder-val="{{ false }}"><div class="dd-e">No matches</div></sc-if><sc-for list="{{dlg.trig.opts}}" as="o" hint-placeholder-count="4"><button type="button" class="dd-o" role="option" aria-selected="{{o.on}}" onClick="{{o.pick}}"><span class="dd-ot"><span>{{o.t}}</span><sc-if value="{{o.hasSub}}" hint-placeholder-val="{{ false }}"><small>{{o.sub}}</small></sc-if></span><svg class="dd-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></button></sc-for></div></sc-if></div></div></div>
+          <p class="b6-nh mu">{{dlg.hint}}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{dlg.isReview}}" hint-placeholder-val="{{ false }}">
+        <div class="db b6-rv">
+          <ul class="b6-sum"><sc-for list="{{dlg.sum}}" as="x" hint-placeholder-count="3"><li><span>{{x.t}}</span><b>{{x.n}}</b></li></sc-for></ul>
+          <sc-if value="{{dlg.none}}" hint-placeholder-val="{{ false }}"><p class="mu">No changes from the active rule.</p></sc-if>
+          <sc-for list="{{dlg.secs}}" as="g" hint-placeholder-count="2">
+            <section class="b6-rs2"><h3>{{g.t}}<span class="mu">{{g.note}}</span><b>{{g.n}}</b></h3>
+              <sc-if value="{{g.hasNew}}" hint-placeholder-val="{{ false }}"><p class="b6-rnew">{{g.newT}}</p></sc-if>
+              <ul><sc-for list="{{g.items}}" as="i" hint-placeholder-count="3"><li class="{{i.cls}}"><span class="b6-rr">{{i.row}}</span><span class="b6-rba"><sc-if value="{{i.hasB}}" hint-placeholder-val="{{ true }}"><s class="b6-rb">{{i.b}}</s></sc-if><sc-if value="{{i.both}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" class="mu">→</span></sc-if><sc-if value="{{i.hasA}}" hint-placeholder-val="{{ true }}"><span class="b6-ra2">{{i.a}}</span></sc-if></span></li></sc-for></ul>
+              <sc-if value="{{g.hasMore}}" hint-placeholder-val="{{ false }}"><p class="mu b6-more">{{g.more}}</p></sc-if>
+            </section>
+          </sc-for>
+        </div>
+      </sc-if>
+      <div class="df"><button class="btn" onClick="{{dlg.close}}">Keep editing</button><button class="btn btn-primary" data-danger="{{dlg.danger}}" onClick="{{dlg.ok}}">{{dlg.okL}}</button></div>
     </div>
   </sc-if>
 
@@ -1300,15 +1427,18 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 <script type="text/x-dc" id="logic">
 // ---------- Business Rule Engine · setup by location (draft 2)
 // ===== Business Rule Engine v5 · Invoice Generation Config (from "2. PIL GIRS Function List", tab Invoice Generation Config) =====
-const B5_LS = 'girs.bre.v5';
+const B5_LS = 'girs.bre.v5c';
+// Locations that can change the global rule (sample list)
+const B5_LOCS = [['GL', 'Global', ''], ['CN-SHA', 'CN · Shanghai', 'CN'], ['IN-NSA', 'IN · Nhava Sheva', 'IN'], ['SG-SIN', 'SG · Singapore', 'SG'], ['MY-PKG', 'MY · Port Klang', 'MY']];
 const B5_TODAY = '2026-11-25', B5_NOW = '2026-11-25 10:30', B5_ME = 'Daniel Tan';
 const B5_OPS = ['=', '<>', '>', '>=', '<', '<=', 'IN', 'NOT IN', 'IS', 'IS NOT'];
 const B5_OPT = { '=': 'equals', '<>': 'not equal to', '>': 'greater than', '>=': 'at least', '<': 'less than', '<=': 'at most', 'IN': 'one of', 'NOT IN': 'not one of', 'IS': 'is', 'IS NOT': 'is not' };
 const B5_JOIN = ['AND', 'OR'];
 // Sections group the sheet's rows by the LMS data they check
 const B5_SECT = [
+  ['trg', 'Trigger', ['VVD Date']],
   ['loc', 'Location & entity', ['Country', 'City', 'Port', 'Entity', 'Office']],
-  ['shp', 'Voyage & shipment', ['VVD', 'VVD Date', 'B/L No.', 'Customer Reference Number', 'Container No.', 'From', 'To', 'ETD', 'ETA']],
+  ['shp', 'Voyage & shipment', ['VVD', 'B/L No.', 'Customer Reference Number', 'Container No.', 'From', 'To', 'ETD', 'ETA']],
   ['pty', 'Parties & cargo', ['Contract Party', 'Shipper', 'Consignee', 'Cargo Gross Weight']],
   ['chg', 'Charges', ['Charge Group', 'Charge Code', 'Charge Amount', 'Charge Amount Currency', 'Charge Type', 'Tax Amount', 'Total Amount (Incl. Tax)']],
   ['cur', 'Currency & exchange rate', ['Invoice Currency (in USD)', 'ROE Type', 'ROE', 'Total Amount (Incl. Tax) (Local Currency)', 'Invoice Currency (in Local Currency)']]
@@ -1393,9 +1523,48 @@ function b5Seed() {
     const sample = Object.assign({}, B5_SAMPLE_CN, { 'Country': cc, 'City': L[0], 'Port': L[1], 'Office': L[2], 'From': L[3], 'Invoice Currency (in Local Currency)': L[4], 'ROE': L[5],
       'Charge Group': cg === 'FORALL' ? 'FREIGHT' : cg, 'Contract Party': cust === 'FORALL' ? 'Shipper 1' : cust });
     if (trig !== 'Freight Invoice generation') sample['ROE Type'] = 'Daily';
-    rules[id] = { id, cat, trig, ctry, cg, cust, scope, pri, from, to, status, conds: conds.map(b5Row), sample, upd: ['Shivender V.', '2026-11-18 10:05'] };
+    const rows = conds.map(b5Row), loc = {};
+    if (id === 'BR-SPL-004') {
+      const K = (a, t) => (rows.find((x) => x.a === a && (!t || x.t === t)) || {}).k;
+      const glob = { Country: 'FORALL', City: 'FORALL', Port: 'FORALL', Office: 'FORALL', From: 'FORALL' };
+      const cn = {}; Object.keys(glob).forEach((a) => { const r = rows.find((x) => x.a === a); cn[r.k] = { v: r.v }; r.v = glob[a]; });
+      loc['CN-SHA'] = { chg: cn, add: [], del: [] };
+      const inC = {}; [['Country', 'IN'], ['City', 'Mumbai'], ['Port', 'Nhava Sheva'], ['Office', 'PIL Mumbai'], ['From', 'Nhava Sheva'], ['Invoice Currency (in Local Currency)', 'INR']].forEach(([a, v]) => { inC[K(a)] = { v }; });
+      loc['IN-NSA'] = { chg: inC, add: [{ k: 'r' + (b5Uid++), t: 'IF', a: 'Tax Amount', o: '>', v: '0', j: 'AND', v2: '', g: 'chg', after: K('Tax Amount') }],
+        del: [rows.find((x) => x.t === 'THEN' && x.v === '3rd Party Platform').k] };
+    }
+    rules[id] = { id, cat, trig, ctry, cg, cust, scope, pri, from, to, status, conds: rows, loc, sample, upd: ['Shivender V.', '2026-11-18 10:05'] };
+    if (status === 'Active') rules[id].appr = b5Snap(rules[id]);
     order.push(id); });
   return { rules, order };
+}
+function b5Snap(r) { const x = JSON.parse(JSON.stringify(r)); delete x.appr; delete x.samp; return x; }
+const B5_FL = { t: 'Type', a: 'Attribute', o: 'Operator', v: 'Value', v2: 'Value 2', j: 'Join' };
+const B5_DF = [['cat', 'Category'], ['trig', 'Trigger Event'], ['ctry', 'Country / Agency'], ['cg', 'Charge Group'], ['cust', 'Customer'], ['pri', 'Priority'], ['from', 'Effective From'], ['to', 'Effective To']];
+const b5Lbl = (c) => c ? (c.t + ' ' + (c.a || '(no attribute)') + (c.t === 'IF' ? ' ' + c.o + ' ' + (c.v || '—') : ' = ' + (c.v || '—'))) : '';
+const b5Sh = (x) => (x == null || x === '' ? '—' : String(x));
+// What changed between a baseline rule and the edited one, grouped as Rule Definition / Global / each location
+function b5Diff(base, cur) {
+  const secs = [];
+  const def = []; B5_DF.forEach(([f, l]) => { if (base && String(base[f] == null ? '' : base[f]) !== String(cur[f] == null ? '' : cur[f])) def.push({ row: l, b: b5Sh(base[f]), a: b5Sh(cur[f]), kind: 'chg' }); });
+  if (def.length) secs.push({ id: 'def', t: 'Rule Definition', note: 'Applies to all locations', items: def });
+  const g = [], bc = base ? base.conds : [], idx = {}; cur.conds.forEach((c, i) => { idx[c.k] = i + 1; });
+  cur.conds.forEach((c) => { const o = bc.find((x) => x.k === c.k);
+    if (!o) { g.push({ row: 'Added row', b: '', a: b5Lbl(c), kind: 'add' }); return; }
+    Object.keys(B5_FL).forEach((f) => { if (String(o[f] || '') !== String(c[f] || '')) g.push({ row: c.t + ' ' + (c.a || o.a) + ' · ' + B5_FL[f], b: b5Sh(o[f]), a: b5Sh(c[f]), kind: 'chg' }); }); });
+  bc.forEach((o) => { if (!cur.conds.find((x) => x.k === o.k)) g.push({ row: 'Removed', b: b5Lbl(o), a: '', kind: 'del' }); });
+  if (base) secs.push({ id: 'GL', t: 'Global', note: 'Applies to every location', items: g });
+  else secs.push({ id: 'GL', t: 'Global', note: 'Applies to every location', items: [], newT: cur.conds.filter((c) => c.t === 'IF').length + ' checks (' + cur.conds.filter((c) => c.t === 'IF' && c.v !== 'FORALL').length + ' with a value) and ' + cur.conds.filter((c) => c.t === 'THEN').length + ' actions' });
+  B5_LOCS.slice(1).forEach(([lc, name]) => { const B = Object.assign({ chg: {}, add: [], del: [] }, ((base && base.loc) || {})[lc] || {}), C = Object.assign({ chg: {}, add: [], del: [] }, (cur.loc || {})[lc] || {});
+    const it = [], gl = (k) => cur.conds.find((x) => x.k === k) || bc.find((x) => x.k === k) || {};
+    const keys = Object.keys(B.chg).concat(Object.keys(C.chg)).filter((k, i, a) => a.indexOf(k) === i);
+    keys.forEach((k) => { const G = gl(k), b0 = B.chg[k] || {}, c0 = C.chg[k] || {}; Object.keys(B5_FL).forEach((f) => { const bv = f in b0 ? b0[f] : G[f], av = f in c0 ? c0[f] : G[f]; if ((f in b0 || f in c0) && String(bv || '') !== String(av || '')) it.push({ row: (G.a || '') + ' · ' + B5_FL[f], b: b5Sh(bv), a: b5Sh(av), kind: 'chg' }); }); });
+    C.add.forEach((r) => { const o = B.add.find((x) => x.k === r.k); if (!o) it.push({ row: 'Added row', b: '', a: b5Lbl(r), kind: 'add' }); else if (b5Lbl(o) !== b5Lbl(r)) it.push({ row: 'Added row', b: b5Lbl(o), a: b5Lbl(r), kind: 'chg' }); });
+    B.add.forEach((r) => { if (!C.add.find((x) => x.k === r.k)) it.push({ row: 'Added row taken out', b: b5Lbl(r), a: '', kind: 'del' }); });
+    C.del.forEach((k) => { if (!B.del.includes(k)) it.push({ row: 'Removed for ' + name, b: b5Lbl(gl(k)), a: '', kind: 'del' }); });
+    B.del.forEach((k) => { if (!C.del.includes(k)) it.push({ row: 'Restored from Global', b: '', a: b5Lbl(gl(k)), kind: 'add' }); });
+    if (it.length) secs.push({ id: lc, t: name, note: 'Applies to ' + name + ' only', items: it }); });
+  return secs;
 }
 function b5Load() { try { const x = JSON.parse(localStorage.getItem(B5_LS) || 'null'); if (x && x.rules) { Object.values(x.rules).forEach((r) => r.conds.forEach((c) => { const n = +String(c.k).slice(1); if (n >= b5Uid) b5Uid = n + 1; })); return x; } } catch (e) {} return b5Seed(); }
 function b5Store(d) { try { localStorage.setItem(B5_LS, JSON.stringify(d)); } catch (e) {} }
@@ -1442,8 +1611,8 @@ function b5Validate(rule, ro) {
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    const crit = { id: '', cat: '', trig: '', ctry: '', st: '' };
-    this.state = { db: b5Load(), tab: 'search', crit, applied: Object.assign({}, crit), page: 1, ps: 10, rid: '', mode: 'view', ed: null, dirty: false, open: '', ddq: '', fold: {}, show: 'all', val: null, dlg: null, hl: '' };
+    const crit = { id: '', cat: '', trig: '', ctry: '', st: '', loc: 'GL' };
+    this.state = { db: b5Load(), tab: 'search', crit, applied: Object.assign({}, crit), page: 1, ps: 10, rid: '', mode: 'view', ed: null, dirty: false, open: '', ddq: '', fold: {}, show: 'all', val: null, dlg: null, hl: '', tst: false, nw: null, lc: 'GL' };
     try { document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (this.state.open) this.setState({ open: '' }); else if (this.state.dlg) this.setState({ dlg: null }); }); } catch (e) {}
   }
   renderVals() {
@@ -1466,26 +1635,34 @@ class GirsPage extends DCLogic {
     // ================= SEARCH =================
     const C = s.crit, A = s.applied;
     const updC = (o) => set({ crit: Object.assign({}, C, o), open: '' });
+    const ALOC = A.loc || 'GL', ALN = (B5_LOCS.find((x) => x[0] === ALOC) || B5_LOCS[0])[1];
+    const locN = (r, k) => { const o = (r.loc || {})[k]; return o ? Object.keys(o.chg || {}).length + (o.add || []).length + (o.del || []).length : 0; };
     const match = (r) => (!A.id.trim() || r.id.toLowerCase().includes(A.id.trim().toLowerCase())) && (!A.cat || r.cat === A.cat) && (!A.trig || r.trig === A.trig) && (!A.ctry || r.ctry === A.ctry) && (!A.st || r.status === A.st);
     const hits = DB.order.map((id) => DB.rules[id]).filter(match);
     const PS = s.ps, pages = Math.max(1, Math.ceil(hits.length / PS)), pg = Math.min(s.page, pages);
-    const openRule = (id, mode, tab) => { const r = DB.rules[id]; set({ rid: id, mode, tab: tab || 'cond', ed: clone(r), dirty: false, val: null, show: 'all', fold: {}, open: '', hl: '' }); };
+    const openRule = (id, mode, tab) => { const r = DB.rules[id]; set({ rid: id, mode, tab: tab || 'cond', ed: clone(r), dirty: false, val: null, show: 'set', fold: {}, open: '', hl: '', lc: ALOC, nw: null, tst: false }); };
     const nextId = (cat) => { const pre = /Split Billing/.test(cat) ? 'BR-SPL-' : /Freight/.test(cat) ? 'BR-FRT-INV-' : 'BR-D&D-INV-'; let n = 0; DB.order.forEach((x) => { const m = x.match(/(\d+)$/); if (m) n = Math.max(n, +m[1]); }); return pre + String(n + 1).padStart(3, '0'); };
-    const makeCopy = (src, blank) => { const d = clone(DB); const id = nextId(src.cat); const r = clone(src); r.id = id; r.status = 'Draft'; r.upd = [B5_ME, B5_NOW];
-      r.conds = r.conds.map((c) => Object.assign({}, c, { k: 'r' + (b5Uid++), v: blank && c.t === 'IF' && !['Charge Group'].includes(c.a) ? (c.a === 'VVD Date' ? c.v : 'FORALL') : c.v }));
-      if (blank) { r.ctry = 'FORALL'; r.cust = 'FORALL'; r.scope = r.cg + '/FORALL'; r.from = B5_TODAY; r.to = ''; }
-      d.rules[id] = r; d.order.splice(d.order.indexOf(src.id) + 1, 0, id); return { d, r }; };
+    const makeDraft = (o) => { const src = o.src ? DB.rules[o.src] : DB.rules['BR-SPL-004'], blank = !o.src; const r = clone(src); delete r.appr; delete r.samp; if (blank) r.conds = B5_SPL.map(b5Row);
+      r.id = nextId(o.cat || r.cat); r.status = 'Draft'; r.upd = [B5_ME, B5_NOW];
+      const km = {}; r.conds = r.conds.map((c) => { const k = 'r' + (b5Uid++); km[c.k] = k; return Object.assign({}, c, { k, v: blank && c.t === 'IF' ? (c.a === 'VVD Date' && o.trig === 'Freight Invoice generation' ? c.v : 'FORALL') : c.v, o: blank && c.t === 'IF' && c.a === 'VVD Date' && o.trig !== 'Freight Invoice generation' ? '=' : c.o, v2: blank && c.t === 'IF' && c.a === 'VVD Date' && o.trig !== 'Freight Invoice generation' ? '' : c.v2 }); });
+      if (blank) { r.loc = {}; r.cat = o.cat; r.trig = o.trig; r.ctry = 'FORALL'; r.cg = 'FORALL'; r.cust = 'FORALL'; r.scope = 'FORALL/FORALL'; r.pri = 20; r.from = B5_TODAY; r.to = ''; }
+      else { const L = {}; Object.keys(r.loc || {}).forEach((lc) => { const x = r.loc[lc], chg = {}; Object.keys(x.chg || {}).forEach((k) => { chg[km[k] || k] = x.chg[k]; });
+        L[lc] = { chg, add: (x.add || []).map((a) => Object.assign({}, a, { k: 'r' + (b5Uid++), after: km[a.after] || a.after })), del: (x.del || []).map((k) => km[k] || k) }; }); r.loc = L; }
+      return r; };
+    const startDraft = (r, msg) => set({ nw: r, rid: r.id, mode: 'edit', tab: 'def', ed: clone(r), dirty: true, val: null, show: 'all', fold: {}, open: '', hl: '', lc: 'GL', tst: false, dlg: null, __toast: msg });
+    const newDlg = (o) => set({ dlg: Object.assign({ t: 'new', how: 'blank', src: '', cat: B5_CATS[0], trig: B5_TRIGS[0] }, o || {}), open: '' });
     const search = {
       on: s.tab === 'search',
       id: C.id, setId: (e) => updC({ id: e.target.value }),
+      loc: { v: C.loc || 'GL', on: (e) => updC({ loc: e.target.value }), opts: B5_LOCS.map(([v, l]) => ({ v, l })) }, locH: ALOC === 'GL' ? 'Location Changes' : 'Rule for ' + ALN,
       cat: sel(C.cat, B5_CATS, (v) => updC({ cat: v })), trig: sel(C.trig, B5_TRIGS, (v) => updC({ trig: v })), ctry: sel(C.ctry, B5_CTRY, (v) => updC({ ctry: v })), st: sel(C.st, B5_STATUS, (v) => updC({ st: v })),
       go: (e) => { if (e && e.preventDefault) e.preventDefault(); set({ applied: Object.assign({}, C), page: 1, open: '' }); },
-      reset: () => { const z = { id: '', cat: '', trig: '', ctry: '', st: '' }; set({ crit: z, applied: Object.assign({}, z), page: 1 }); },
+      reset: () => { const z = { id: '', cat: '', trig: '', ctry: '', st: '', loc: 'GL' }; set({ crit: z, applied: Object.assign({}, z), page: 1 }); },
       count: hits.length + (hits.length === 1 ? ' Record' : ' Records'),
-      rows: hits.slice((pg - 1) * PS, pg * PS).map((r) => ({ id: r.id, cat: r.cat, trig: r.trig, scope: r.scope, pri: String(r.pri), eff: b5D(r.from) + (r.to ? ' – ' + b5D(r.to) : ''), st: r.status, stSt: stSt(r.status),
+      rows: hits.slice((pg - 1) * PS, pg * PS).map((r) => ({ id: r.id, cat: r.cat, trig: r.trig, scope: r.scope, pri: String(r.pri), eff: b5D(r.from) + (r.to ? ' – ' + b5D(r.to) : ''), st: r.status, stSt: stSt(r.status), locs: (() => { if (ALOC !== 'GL') { const n = locN(r, ALOC); return n ? n + (n === 1 ? ' change from Global' : ' changes from Global') : 'Uses Global as is'; } const n = Object.keys(r.loc || {}).filter((k) => locN(r, k)).length; return n ? n + (n === 1 ? ' location changed' : ' locations changed') : 'Global only'; })(), locCls: ALOC !== 'GL' && locN(r, ALOC) ? 'b6-lch' : 'mu',
         view: () => openRule(r.id, 'view'), upd: () => r.status === 'Pending Approval' ? set({ __toast: r.id + ' is waiting for approval and can’t be updated.' }) : openRule(r.id, 'edit'),
-        copy: () => { const { d, r: n } = makeCopy(r); save(d, { rid: n.id, mode: 'edit', tab: 'def', ed: clone(n), dirty: false, val: null, __toast: n.id + ' created as a Draft copy of ' + r.id + '.' }); },
-        add: () => { const { d, r: n } = makeCopy(r, true); save(d, { rid: n.id, mode: 'edit', tab: 'def', ed: clone(n), dirty: false, val: null, __toast: n.id + ' created in ' + r.cat + '. Set the scope, then the conditions.' }); },
+        copy: () => newDlg({ how: 'copy', src: r.id, cat: r.cat, trig: r.trig }),
+        add: () => newDlg({ how: 'blank', cat: r.cat, trig: r.trig }),
         noUpd: r.status === 'Pending Approval' ? 'true' : '' })),
       none: hits.length === 0,
       pageT: pg + ' / ' + pages, ps: String(PS), setPs: (e) => set({ ps: +e.target.value, page: 1 }), sizes: ['10', '25', '50'], first: () => set({ page: 1 }), prev: () => set({ page: Math.max(1, pg - 1) }), next: () => set({ page: Math.min(pages, pg + 1) }), last: () => set({ page: pages }),
@@ -1497,15 +1674,34 @@ class GirsPage extends DCLogic {
     };
     // ================= RULE (definition + conditions) =================
     let rule = { on: false };
-    const E = s.ed, R0 = s.rid ? DB.rules[s.rid] : null;
+    const E = s.ed, R0 = s.rid ? (DB.rules[s.rid] || (s.nw && s.nw.id === s.rid ? s.nw : null)) : null;
     if (E && R0) {
       const ro = s.mode !== 'edit' || R0.status === 'Pending Approval';
       const upd = (o) => { if (ro) return; set({ ed: Object.assign({}, E, o), dirty: true, val: null, open: '' }); };
+      const LC = s.lc || 'GL', isGL = LC === 'GL', LCN = (B5_LOCS.find((x) => x[0] === LC) || B5_LOCS[0]);
+      const LO = Object.assign({ chg: {}, add: [], del: [] }, (E.loc || {})[LC] || {});
+      const setLO = (o) => upd({ loc: Object.assign({}, E.loc || {}, { [LC]: Object.assign({}, LO, o) }) });
       const setConds = (conds) => upd({ conds });
-      const updRow = (k, o) => setConds(E.conds.map((c) => c.k === k ? Object.assign({}, c, o) : c));
-      const S = E.sample;
-      const run = b5Run(E, S);
-      const trigRow = E.conds.find((c) => c.a === 'VVD Date' && c.t === 'IF');
+      const isAddK = (k) => LO.add.some((x) => x.k === k), globK = (k) => E.conds.find((x) => x.k === k);
+      const updRow = (k, o) => { if (isGL) return setConds(E.conds.map((c) => c.k === k ? Object.assign({}, c, o) : c));
+        if (isAddK(k)) return setLO({ add: LO.add.map((x) => x.k === k ? Object.assign({}, x, o) : x) });
+        const g = globK(k), cur = Object.assign({}, LO.chg[k] || {}, o); Object.keys(cur).forEach((f) => { if (String(cur[f] == null ? '' : cur[f]) === String(g[f] == null ? '' : g[f])) delete cur[f]; });
+        const chg = Object.assign({}, LO.chg); if (Object.keys(cur).length) chg[k] = cur; else delete chg[k]; setLO({ chg }); };
+      const insAfter = (k, row) => { if (isGL) { const a = E.conds.slice(); a.splice(a.findIndex((x) => x.k === k) + 1, 0, row); return setConds(a); } setLO({ add: LO.add.concat([Object.assign({ after: k }, row)]) }); };
+      const delRow = (k) => { if (isGL) return setConds(E.conds.filter((x) => x.k !== k)); if (isAddK(k)) return setLO({ add: LO.add.filter((x) => x.k !== k) }); setLO({ del: LO.del.concat([k]) }); };
+      const restoreRow = (k) => setLO({ del: LO.del.filter((x) => x !== k) });
+      const resetRow = (k) => { const chg = Object.assign({}, LO.chg); delete chg[k]; setLO({ chg }); };
+      const EC = []; E.conds.forEach((c) => { const ch = LO.chg[c.k], rm = LO.del.includes(c.k); EC.push(Object.assign({}, c, ch || {}, { src: rm ? 'del' : ch ? 'chg' : 'gl', gl: c, chf: ch ? Object.keys(ch) : [] })); });
+      LO.add.forEach((a0) => { const at = a0.after ? EC.findIndex((x) => x.k === a0.after) : -1, anc = at >= 0 ? EC[at] : null;
+        const r = Object.assign({}, a0, { src: 'add', chf: [], g: a0.t === 'THEN' ? 'then' : anc && anc.t === 'IF' ? (anc.g && anc.g !== 'then' ? anc.g : b5Sect(anc.a)) : 'oth' });
+        let i = at; if (i < 0) i = r.t === 'IF' ? EC.findIndex((x) => x.t === 'THEN') - 1 : EC.length - 1; EC.splice(i + 1, 0, r); });
+      const EL = EC.filter((c) => c.src !== 'del');
+      const sampleFor = (lc) => { const code = (B5_LOCS.find((x) => x[0] === lc) || [])[2], L5 = B5_LOC[code]; if (!L5 || lc === 'GL') return R0.sample;
+        return Object.assign({}, R0.sample, { 'Country': code, 'City': L5[0], 'Port': L5[1], 'Office': L5[2], 'From': L5[3], 'Invoice Currency (in Local Currency)': L5[4], 'ROE': L5[5], 'To': code === 'SG' ? 'SHANGHAI' : R0.sample['To'] }); };
+      const S0 = sampleFor(LC), S = (E.samp && E.samp[LC]) || S0;
+      const setSamp = (obj) => set({ ed: Object.assign({}, E, { samp: Object.assign({}, E.samp || {}, { [LC]: obj }) }) });
+      const run = b5Run({ conds: EL }, S);
+      const trigRow = EL.find((c) => c.a === 'VVD Date' && c.t === 'IF');
       const trigT = trigRow && /^\d+/.test(trigRow.v) && trigRow.v2 ? trigRow.v2 + ' ± ' + trigRow.v : E.trig;
       const val = s.val;
       // definition
@@ -1521,48 +1717,54 @@ class GirsPage extends DCLogic {
         st: E.status, chip: chip(E.status), stSt: stSt(E.status), updT: E.upd[0] + ' · ' + b5D(E.upd[1])
       };
       // condition rows
-      const rowVM = (c, i) => { const isIf = c.t === 'IF', e = isIf ? run.res[c.k] : null, err = val && val.rowErr[c.k];
+      const rowVM = (c, i) => { const isIf = c.t === 'IF', isDel = c.src === 'del', e = isIf ? (isDel ? { r: null, why: '' } : run.res[c.k]) : null, err = val && val.rowErr[c.k], rro = ro || isDel;
+        const fc = (f) => c.chf.includes(f) ? 'f-chg' : '', gt = (f) => c.chf.includes(f) ? 'Global: ' + (c.gl[f] || '—') : '';
         const vals = isIf ? (B5_VALS[c.a] || ['FORALL']) : (B5_THEN_V[c.a] || []); const useDd = vals.length > 1 && (vals.includes(c.v) || b5Blank(c.v));
         const f = B5_FIELD[c.a]; const sv = isIf ? b5SampleOf(S, c.a) : '';
         const at = isIf ? B5_ATTRS.concat(Object.keys(B5_FIELD).filter((x) => !B5_ATTRS.includes(x))).filter((x, i2, a2) => a2.indexOf(x) === i2) : B5_THEN_T;
-        const idx = E.conds.findIndex((x) => x.k === c.k);
         return { k: c.k, n: String(i), isIf, t: c.t, tCls: isIf ? 'ty-if' : 'ty-then',
-          type: dd('c.t.' + c.k, c.t, ['IF', 'THEN'], (v) => updRow(c.k, { t: v, g: v === 'THEN' ? 'then' : b5Sect(c.a) }), { w: '100%', aria: 'Type, row ' + i, dis: ro }),
-          att: dd('c.a.' + c.k, c.a, at.map((x) => [x, B5_FIELD[x] ? 'Prints as: ' + B5_FIELD[x][0] : '']), (v) => updRow(c.k, { a: v }), { w: '100%', ph: isIf ? 'Attribute' : 'Action', aria: 'Attribute, row ' + i, dis: ro }),
-          op: dd('c.o.' + c.k, c.o, B5_OPS.map((o) => [o, B5_OPT[o]]), (v) => updRow(c.k, { o: v }), { w: '100%', aria: 'Operator, row ' + i, dis: ro }),
-          vDd: useDd, vd: dd('c.v.' + c.k, c.v, vals, (v) => updRow(c.k, { v }), { w: '100%', aria: 'Value, row ' + i, dis: ro, cls: c.v === 'FORALL' ? 'dd-any' : '' }),
+          type: dd('c.t.' + c.k, c.t, ['IF', 'THEN'], (v) => updRow(c.k, { t: v, g: v === 'THEN' ? 'then' : b5Sect(c.a) }), { w: '100%', aria: 'Type, row ' + i, dis: rro }),
+          att: dd('c.a.' + c.k, c.a, at.map((x) => [x, B5_FIELD[x] ? 'Prints as: ' + B5_FIELD[x][0] : '']), (v) => updRow(c.k, { a: v }), { w: '100%', ph: isIf ? 'Attribute' : 'Action', aria: 'Attribute, row ' + i, dis: rro }),
+          op: dd('c.o.' + c.k, c.o, B5_OPS.map((o) => [o, B5_OPT[o]]), (v) => updRow(c.k, { o: v }), { w: '100%', aria: 'Operator, row ' + i, dis: rro }),
+          vDd: useDd, vd: dd('c.v.' + c.k, c.v, vals, (v) => updRow(c.k, { v }), { w: '100%', aria: 'Value, row ' + i, dis: rro, cls: c.v === 'FORALL' ? 'dd-any' : '' }),
           vIn: !useDd, v: c.v, setV: (e2) => updRow(c.k, { v: e2.target.value }), any: c.v === 'FORALL' ? 'v-any' : '',
           v2: c.v2, setV2: (e2) => updRow(c.k, { v2: e2.target.value }),
-          join: dd('c.j.' + c.k, c.j || '', ['', 'AND', 'OR'], (v) => updRow(c.k, { j: v }), { w: '100%', aria: 'Join, row ' + i, dis: ro || !isIf, fmt: (v) => v || '—' }),
+          join: dd('c.j.' + c.k, c.j || '', ['', 'AND', 'OR'], (v) => updRow(c.k, { j: v }), { w: '100%', aria: 'Join, row ' + i, dis: rro || !isIf, ph: '—', fmt: (v) => v || '—' }),
+          fA: fc('a'), fO: fc('o'), fV: fc('v'), fV2: fc('v2'), fJ: fc('j'), tA: gt('a'), tO: gt('o'), tV: gt('v'), tV2: gt('v2'), tJ: gt('j'), rro: rro ? 'true' : '',
+          isDel, notDel: !isDel, restore: () => restoreRow(c.k), canReset: !isGL && c.src === 'chg' && !ro, reset: () => resetRow(c.k), noReset: !(!isGL && c.src === 'chg' && !ro),
+          srcT: c.src === 'chg' ? 'Changed for ' + LCN[1] : c.src === 'add' ? 'Added for ' + LCN[1] : c.src === 'del' ? 'Removed for ' + LCN[1] : (isGL ? '' : 'From Global'),
           hasField: !!f, field: f ? f[0] : '', fieldD: f ? f[1] : '',
           hasS: isIf, sv: sv || '', sRo: c.a === 'Total Amount (Incl. Tax) (Local Currency)' || c.a === 'VVD Date' ? 'true' : '', sTip: c.a === 'VVD Date' ? 'Uses the ETD from the sample' : c.a === 'Total Amount (Incl. Tax) (Local Currency)' ? 'Total × ROE' : 'Sample value from LMS',
-          setS: (e2) => { if (c.a === 'Total Amount (Incl. Tax) (Local Currency)' || c.a === 'VVD Date') return; set({ ed: Object.assign({}, E, { sample: Object.assign({}, S, { [c.a]: e2.target.value }) }) }); },
+          setS: (e2) => { if (c.a === 'Total Amount (Incl. Tax) (Local Currency)' || c.a === 'VVD Date') return; setSamp(Object.assign({}, S, { [c.a]: e2.target.value })); },
           mk: !isIf ? '' : e.r === null ? '–' : e.r ? '✓' : '✗', mkCls: !isIf ? '' : e.r === null ? 'na' : e.r ? 'ok' : 'bad', why: isIf && e.why ? e.why : '',
-          cls: (isIf && e.r === false ? 'cr-fail ' : '') + (err ? 'cr-err ' : '') + (s.hl === c.k ? 'cr-hl ' : '') + (c.a === 'VVD Date' ? 'cr-trig' : ''),
+          cls: 'src-' + c.src + ' ' + (TST && isIf && e.r === false ? 'cr-fail ' : '') + (err ? 'cr-err ' : '') + (s.hl === c.k ? 'cr-hl ' : '') + (c.a === 'VVD Date' ? 'cr-trig' : ''),
           isTrig: c.a === 'VVD Date', hasInfo: !!f || c.a === 'VVD Date', infCls: f || c.a === 'VVD Date' ? '' : 'b6-inf-off', infTab: f || c.a === 'VVD Date' ? '0' : '-1', info: c.a === 'VVD Date' ? 'Trigger window: invoice runs when today is within ETD ± the value' : f ? 'Prints as ' + f[0] + ' – ' + f[1] : '', tip: err ? err : (isIf ? (e.r === null ? 'Not enough sample data' : e.r ? 'Passes with the sample LMS data' : (e.why || 'Fails with the sample LMS data')) : 'Action'), hasErr: !!err, err: err || '', hasWhy: isIf && e.r === false && !!e.why,
-          add: () => { const a = E.conds.slice(); a.splice(idx + 1, 0, { k: 'r' + (b5Uid++), t: c.t, a: '', o: c.t === 'IF' ? '=' : 'IS', v: c.t === 'IF' ? 'FORALL' : '', j: c.t === 'IF' ? 'AND' : '', v2: '', g: c.g }); setConds(a); },
-          copy: () => { const a = E.conds.slice(); a.splice(idx + 1, 0, Object.assign({}, c, { k: 'r' + (b5Uid++) })); setConds(a); },
-          del: () => setConds(E.conds.filter((x) => x.k !== c.k)) }; };
-      let seq = 0; const seqOf = {}; E.conds.forEach((c) => { seqOf[c.k] = ++seq; });
-      const showRow = (c) => s.show === 'all' || (s.show === 'set' && c.t === 'IF' && c.v !== 'FORALL') || (s.show === 'fail' && c.t === 'IF' && run.res[c.k] && run.res[c.k].r === false) || (s.show !== 'all' && c.t === 'THEN' && s.show === 'set');
+          add: () => insAfter(c.k, { k: 'r' + (b5Uid++), t: c.t, a: '', o: c.t === 'IF' ? '=' : 'IS', v: c.t === 'IF' ? 'FORALL' : '', j: c.t === 'IF' ? 'AND' : '', v2: '', g: c.g }),
+          copy: () => { const n = { k: 'r' + (b5Uid++) }; ['t', 'a', 'o', 'v', 'j', 'v2', 'g'].forEach((f) => { n[f] = c[f]; }); insAfter(c.k, n); },
+          del: () => delRow(c.k) }; };
+      let seq = 0; const seqOf = {}, gOf = (c) => c.t === 'THEN' ? 'then' : (c.g && c.g !== 'then' ? c.g : b5Sect(c.a)); B5_SECT.map((x) => x[0]).concat(['oth', 'then']).forEach((g) => EC.forEach((c) => { if (gOf(c) === g) seqOf[c.k] = ++seq; }));
+      const TST = !!s.tst, SHOW = !TST && s.show === 'fail' ? 'set' : s.show;
+      const showRow = (c) => SHOW === 'all' || (SHOW === 'loc' && c.src !== 'gl') || (SHOW === 'set' && (c.t === 'THEN' || c.v !== 'FORALL' || c.src !== 'gl' || s.hl === c.k)) || (SHOW === 'fail' && c.t === 'IF' && run.res[c.k] && run.res[c.k].r === false);
       const groups = B5_SECT.map(([g, t]) => [g, t]).concat([['oth', 'Other conditions'], ['then', 'Then create the invoice']]).map(([g, t]) => {
-        const rows = E.conds.filter((c) => (c.t === 'THEN' ? 'then' : (c.g && c.g !== 'then' ? c.g : b5Sect(c.a))) === g);
-        if (!rows.length && g === 'oth') return null;
-        const vis = rows.filter(showRow), isThen = g === 'then';
+        const rows0 = EC.filter((c) => (c.t === 'THEN' ? 'then' : (c.g && c.g !== 'then' ? c.g : b5Sect(c.a))) === g);
+        const rows = rows0.filter((c) => c.src !== 'del');
+        if (!rows0.length && g === 'oth') return null;
+        const vis = rows0.filter(showRow), isThen = g === 'then', nl = rows0.filter((c) => c.src !== 'gl').length;
         const f = rows.filter((c) => c.t === 'IF' && run.res[c.k] && run.res[c.k].r === false).length, set1 = rows.filter((c) => c.t === 'IF' && c.v !== 'FORALL').length;
         const folded = !!s.fold[g];
         return { g, t, isThen, n: String(rows.length), stat: isThen ? (run.ok ? 'Runs' : 'Waits for all checks') : f ? f + (f === 1 ? ' check fails' : ' checks fail') : 'All pass', statCls: isThen ? (run.ok ? 'ok' : 'na') : f ? 'bad' : 'ok',
-          sub: isThen ? rows.length + (rows.length === 1 ? ' action' : ' actions') : rows.length + (rows.length === 1 ? ' check' : ' checks') + (set1 ? ' · ' + set1 + ' with a value' : ''),
+          sub: (isThen ? rows.length + (rows.length === 1 ? ' action' : ' actions') : rows.length + (rows.length === 1 ? ' check' : ' checks') + (set1 ? ' · ' + set1 + ' with a value' : '')) + (nl && !isGL ? ' · ' + nl + ' ' + (nl === 1 ? 'change' : 'changes') + ' for ' + LCN[1] : ''),
           folded: folded ? 'false' : 'true', open: !folded && vis.length > 0, fold: () => set({ fold: Object.assign({}, s.fold, { [g]: !folded }) }),
-          rows: vis.map((c) => rowVM(c, seqOf[c.k])), hide: vis.length === 0 && s.show !== 'all' };
+          rows: vis.map((c) => rowVM(c, seqOf[c.k])), hide: vis.length === 0 && SHOW !== 'all', hasStat: TST, nHid: rows0.length - vis.length, hidT: rows0.length - vis.length ? '+ ' + (rows0.length - vis.length) + ' FORALL' : '' };
       }).filter((x) => x && !x.hide);
-      const nSet = E.conds.filter((c) => c.t === 'IF' && c.v !== 'FORALL').length, nIf = E.conds.filter((c) => c.t === 'IF').length;
-      const addRow = (t) => { const a = E.conds.slice(); const row = { k: 'r' + (b5Uid++), t, a: '', o: t === 'IF' ? '=' : 'IS', v: t === 'IF' ? 'FORALL' : '', j: t === 'IF' ? 'AND' : '', v2: '', g: t === 'IF' ? 'oth' : 'then' };
-        if (t === 'IF') { const at = a.findIndex((x) => x.t === 'THEN'); a.splice(at < 0 ? a.length : at, 0, row); } else a.push(row);
-        set({ ed: Object.assign({}, E, { conds: a }), dirty: true, val: null, show: 'all', fold: Object.assign({}, s.fold, { [row.g]: false }), hl: row.k });
+      const nSet = EL.filter((c) => c.t === 'IF' && c.v !== 'FORALL').length, nIf = EL.filter((c) => c.t === 'IF').length;
+      const addRow = (t) => { const row = { k: 'r' + (b5Uid++), t, a: '', o: t === 'IF' ? '=' : 'IS', v: t === 'IF' ? 'FORALL' : '', j: t === 'IF' ? 'AND' : '', v2: '', g: t === 'IF' ? 'oth' : 'then' };
+        let nE; if (isGL) { const a = E.conds.slice(); if (t === 'IF') { const at = a.findIndex((x) => x.t === 'THEN'); a.splice(at < 0 ? a.length : at, 0, row); } else a.push(row); nE = Object.assign({}, E, { conds: a }); }
+        else nE = Object.assign({}, E, { loc: Object.assign({}, E.loc || {}, { [LC]: Object.assign({}, LO, { add: LO.add.concat([row]) }) }) });
+        set({ ed: nE, dirty: true, val: null, show: 'all', fold: Object.assign({}, s.fold, { [row.g]: false }), hl: row.k });
         setTimeout(() => { try { const el = document.querySelector('[data-k="' + row.k + '"]'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }, 60); };
       // outcome + invoice preview
-      const th = (a) => E.conds.filter((c) => c.t === 'THEN' && c.a === a);
+      const th = (a) => EL.filter((c) => c.t === 'THEN' && c.a === a);
       const tv = (a) => (th(a)[0] || {}).v || '';
       const invNo = th('Invoice No.')[0];
       const lc = S['Invoice Currency (in Local Currency)'] || '', loc = b5LocalTotal(S);
@@ -1584,36 +1786,73 @@ class GirsPage extends DCLogic {
         { n: '3', t: 'Invoice generated', s: run.ok ? out.type + ' ' + out.no + ' · ' + out.status : 'Not generated', cls: run.ok ? 'done' : 'todo' },
         { n: '4', t: 'Posted', s: run.ok ? out.posts.filter((p) => p.ok).map((p) => p.t).join(' · ') || 'No posting' : 'Not posted', cls: run.ok ? 'done' : 'todo' }];
       // validation
-      const validate = () => { const v = b5Validate(E); set({ val: v, show: 'all', __toast: v.errs.length ? v.errs.length + (v.errs.length === 1 ? ' issue' : ' issues') + ' to fix.' : 'Rule is valid. ' + (run.ok ? 'The sample LMS data generates an invoice.' : run.fails.length + (run.fails.length === 1 ? ' check fails' : ' checks fail') + ' on the sample LMS data.') }); };
-      const commit = (status, msg) => { const v = b5Validate(E); if (status === 'Pending Approval' && v.errs.length) return set({ val: v, tab: 'cond', show: 'all', __toast: 'Fix ' + v.errs.length + (v.errs.length === 1 ? ' issue' : ' issues') + ' before submitting.' });
-        const d = clone(DB); const r = Object.assign(clone(E), { status, upd: [B5_ME, B5_NOW] }); if (!r.scope) r.scope = r.cg + '/' + r.cust; d.rules[r.id] = r;
-        save(d, { ed: clone(r), dirty: false, val: status === 'Pending Approval' ? v : s.val, mode: status === 'Pending Approval' ? 'view' : s.mode, __toast: msg }); };
-      const leave = (to) => s.dirty ? set({ dlg: { t: 'leave', to } }) : set(Object.assign({ tab: to }, to === 'search' ? { rid: '', ed: null, mode: 'view' } : {}));
+      const validate = () => { const v = b5Validate({ conds: EL }); set({ val: v, show: 'all', __toast: v.errs.length ? v.errs.length + (v.errs.length === 1 ? ' issue' : ' issues') + ' to fix.' : 'Rule is valid. ' + (run.ok ? 'The sample LMS data generates an invoice.' : run.fails.length + (run.fails.length === 1 ? ' check fails' : ' checks fail') + ' on the sample LMS data.') }); };
+      const isNew = !DB.rules[E.id], base = R0.appr || null;
+      const commit = (status, msg) => { const v = b5Validate({ conds: EL }); if (status === 'Pending Approval' && v.errs.length) return set({ val: v, tab: 'cond', show: 'all', dlg: null, __toast: 'Fix ' + v.errs.length + (v.errs.length === 1 ? ' issue' : ' issues') + ' before submitting.' });
+        const d = clone(DB); const r = Object.assign(clone(E), { status, upd: [B5_ME, B5_NOW] }); if (!r.scope) r.scope = r.cg + '/' + r.cust; delete r.samp; if (!d.rules[r.id]) d.order.unshift(r.id); d.rules[r.id] = r;
+        save(d, { ed: clone(Object.assign({}, r, { samp: E.samp })), nw: null, dlg: null, dirty: false, val: status === 'Pending Approval' ? v : s.val, mode: status === 'Pending Approval' ? 'view' : s.mode, __toast: msg }); };
+      const globalDiff = isNew ? [] : b5Diff(R0, E).filter((x) => x.id === 'def' || x.id === 'GL').filter((x) => x.items.length);
+      const doSave = () => commit(E.status === 'Active' ? 'Draft' : E.status, E.id + ' saved' + (E.status === 'Active' ? ' as Draft. Submit for approval to make it active again.' : '.'));
+      const leave = (to) => s.dirty ? set({ dlg: { t: 'leave', to } }) : set(Object.assign({ tab: to }, to === 'search' ? { rid: '', ed: null, mode: 'view', nw: null } : {}));
+      const reqSubmit = () => { const v = b5Validate({ conds: EL }); if (v.errs.length) return set({ val: v, tab: 'cond', show: 'all', __toast: 'Fix ' + v.errs.length + (v.errs.length === 1 ? ' issue' : ' issues') + ' before submitting.' }); if (base && !b5Diff(base, E).some((x) => x.items.length)) return set({ __toast: 'Nothing to submit. ' + E.id + ' is the same as the active rule.' }); set({ dlg: { t: 'review', how: 'submit' }, open: '' }); };
+      const reqSave = () => globalDiff.length ? set({ dlg: { t: 'review', how: 'save' }, open: '' }) : doSave();
+      const LC_N = B5_LOCS.slice(1).map((x) => x[1]).join(', ');
+      const guideOn = !R0.appr && !ro;
+      const guide = [{ n: '1', t: 'Rule Definition', s: 'Category, trigger, scope and dates', on: s.tab === 'def', go: () => set({ tab: 'def' }) },
+        { n: '2', t: 'Conditions & Actions', s: 'Global checks and invoice actions', on: s.tab === 'cond' && isGL, go: () => set({ tab: 'cond', lc: 'GL' }) },
+        { n: '3', t: 'Location changes', s: 'Optional · pick a location in Rules for', on: s.tab === 'cond' && !isGL, go: () => set({ tab: 'cond', lc: LC === 'GL' ? B5_LOCS[1][0] : LC, show: 'set' }) },
+        { n: '4', t: 'Save and submit', s: 'Save a draft, then Submit for Approval', on: false, go: reqSubmit }].map((x) => Object.assign(x, { cur: x.on ? 'step' : 'false' }));
       rule = { on: true, id: E.id, cat: E.cat, st: E.status, chip: chip(E.status), stSt: stSt(E.status), trig: trigT, scope: E.scope, ro: ro ? 'true' : '', notRo: !ro, isView: s.mode !== 'edit',
         modeT: R0.status === 'Pending Approval' ? 'Waiting for approval · read-only' : s.mode === 'edit' ? 'Editing' : 'Viewing', modeCls: s.mode === 'edit' && !ro ? 'md-edit' : 'md-view',
         canEdit: s.mode !== 'edit' && R0.status !== 'Pending Approval', edit: () => set({ mode: 'edit' }),
         canWithdraw: R0.status === 'Pending Approval', withdraw: () => { const d = clone(DB); d.rules[E.id].status = 'Draft'; save(d, { ed: clone(d.rules[E.id]), mode: 'edit', __toast: 'Withdrawn. ' + E.id + ' is a Draft again.' }); },
-        approve: () => { const d = clone(DB); d.rules[E.id].status = 'Active'; d.rules[E.id].upd = ['Thushy (PIL)', B5_NOW]; save(d, { ed: clone(d.rules[E.id]), mode: 'view', __toast: E.id + ' approved and active.' }); },
-        def, groups, steps, out, title: 'Rule ' + E.id + ' · Trigger: ' + trigT,
+        approve: () => { const d = clone(DB); d.rules[E.id].status = 'Active'; d.rules[E.id].upd = ['Thushy (PIL)', B5_NOW]; d.rules[E.id].appr = b5Snap(d.rules[E.id]); save(d, { ed: clone(d.rules[E.id]), mode: 'view', __toast: E.id + ' approved and active.' }); },
+        def, groups, steps, out, title: 'Conditions & actions · ' + (isGL ? 'Global' : LCN[1]),
         fAll: s.show === 'all' ? 'true' : 'false', fSet: s.show === 'set' ? 'true' : 'false', fFail: s.show === 'fail' ? 'true' : 'false',
-        nAll: String(E.conds.length), nSet: String(nSet), nFail: String(run.fails.length),
+        nAll: String(EL.length), nSet: String(nSet), nFail: String(run.fails.length),
         showAll: () => set({ show: 'all' }), showSet: () => set({ show: 'set' }), showFail: () => set({ show: 'fail' }),
         addC: () => addRow('IF'), addA: () => addRow('THEN'), validate,
         hasVal: !!val, valCls: val ? (val.errs.length ? 'v-err' : 'v-ok') : '', valHead: val ? (val.errs.length ? val.errs.length + (val.errs.length === 1 ? ' issue to fix' : ' issues to fix') : '✓ Rule is valid') : '',
         valItems: val ? val.errs.slice(0, 6).map((t) => ({ t })) : [], valClose: () => set({ val: null }),
-        resetSample: () => set({ ed: Object.assign({}, E, { sample: clone(R0.sample) }) }), sampleChanged: JSON.stringify(S) !== JSON.stringify(R0.sample),
+        resetSample: () => { const sp = Object.assign({}, E.samp || {}); delete sp[LC]; set({ ed: Object.assign({}, E, { samp: sp }) }); }, sampleChanged: JSON.stringify(S) !== JSON.stringify(S0),
+        lc: { dd: dd('lc', LC, B5_LOCS.map(([k, t]) => { const o = (E.loc || {})[k]; const n = o ? Object.keys(o.chg || {}).length + (o.add || []).length + (o.del || []).length : 0; return [k, k === 'GL' ? 'Default for every location' : n ? n + (n === 1 ? ' change from Global' : ' changes from Global') : 'Uses the Global rule as is']; }), (v) => set({ lc: v, show: s.show === 'loc' && v === 'GL' ? 'set' : s.show, hl: '' }), { fmt: (v) => (B5_LOCS.find((x) => x[0] === v) || [])[1], w: '220px', aria: 'Rules for' }),
+          isGL, notGL: !isGL, name: LCN[1], nChg: String(Object.keys(LO.chg).length), nAdd: String(LO.add.length), nDel: String(LO.del.length), nAll: Object.keys(LO.chg).length + LO.add.length + LO.del.length,
+          none: !isGL && !(Object.keys(LO.chg).length + LO.add.length + LO.del.length), canResetAll: !isGL && !ro && (Object.keys(LO.chg).length + LO.add.length + LO.del.length) > 0,
+          resetAll: () => setLO({ chg: {}, add: [], del: [] }), glT: 'Global rule: the default every location uses. Pick a location to change, add or remove rows for it only.',
+          ctxCls: isGL ? (ro ? 'ctx-gv' : 'ctx-ge') : 'ctx-lo', headT: isGL ? 'Global' : LCN[1],
+          msgT: isGL ? (ro ? 'Default rule for every location (' + LC_N + ').' : 'You are editing the Global rule. Changes apply to every location (' + LC_N + ') unless a location changed that row.') : (ro ? 'Rows marked as changed, added or removed apply to ' + LCN[1] + ' only. All other rows follow Global.' : 'Changes you make here apply to ' + LCN[1] + ' only. All other rows follow Global.'),
+          showLegend: !isGL },
+        fLoc: s.show === 'loc' ? 'true' : 'false', showLoc: () => set({ show: 'loc' }),
         dirty: s.dirty, dirtyT: s.dirty ? 'Unsaved changes' : 'All changes saved',
-        save: () => commit(E.status === 'Active' ? 'Draft' : E.status, E.id + ' saved' + (E.status === 'Active' ? ' as Draft. Submit for approval to make it active again.' : '.')),
-        submit: () => commit('Pending Approval', E.id + ' submitted for approval.'), noSave: s.dirty ? '' : 'true',
-        cancel: () => set({ ed: clone(R0), dirty: false, val: null }),
+        save: reqSave, doSave, doSubmit: () => commit('Pending Approval', E.id + ' submitted for approval.'), submit: reqSubmit, noSave: s.dirty ? '' : 'true',
+        cancel: () => isNew ? set({ dlg: { t: 'leave', to: 'search' } }) : set({ ed: clone(R0), dirty: false, val: null }),
+        isNew, newT: isNew ? 'New · not saved yet' : '', guideOn, guide, base, globalDiff,
+        tabs: [['def', 'Rule Definition'], ['cond', 'Conditions & Actions']].map(([k, t]) => ({ t, on: s.tab === k ? 'true' : 'false', go: () => set({ tab: k, open: '' }) })),
+        isCondTab: s.tab === 'cond', isDefTab: s.tab === 'def', showNext: s.tab === 'def' && guideOn, next: () => set({ tab: 'cond', lc: 'GL' }),
+        gridCls: TST ? '' : 'b6-nt', tst: TST, noTst: !TST, tstP: TST ? 'true' : 'false', toggleTst: () => set({ tst: !TST, show: !TST ? s.show : (s.show === 'fail' ? 'set' : s.show) }),
+        nHidden: String(EC.filter((c) => !showRow(c)).length), hasHidden: SHOW === 'set' && EC.some((c) => !showRow(c)),
+        sub: TST ? 'Each LMS field is checked against the sample data. FORALL accepts any value received from LMS.' : 'FORALL accepts any value received from LMS. Use Test with sample LMS data to check the rule before you submit.',
         back: () => leave('search') };
     }
-    const tabs = [['search', 'Search Business Rule'], ['def', 'Rule Definition'], ['cond', 'Conditions & Actions']].map(([k, t]) => ({ t, on: s.tab === k ? 'true' : 'false', dis: k !== 'search' && !rule.on ? 'true' : '',
-      go: () => { if (k !== 'search' && !rule.on) return; if (k === 'search' && s.dirty) return set({ dlg: { t: 'leave', to: 'search' } }); set({ tab: k, open: '' }); } }));
     let dlg = { on: false };
-    if (s.dlg && s.dlg.t === 'leave') dlg = { on: true, title: 'Discard unsaved changes?', sub: 'Your changes to ' + s.rid + ' have not been saved.', close: () => set({ dlg: null }), okL: 'Discard changes',
-      ok: () => set({ dlg: null, tab: 'search', rid: '', ed: null, dirty: false, mode: 'view' }) };
-    return { tabs, search, rule, dlg, isSearch: s.tab === 'search', isDef: s.tab === 'def' && rule.on, isCond: s.tab === 'cond' && rule.on, newRule: () => { const src = DB.rules['BR-FRT-INV-001']; const { d, r: n } = makeCopy(src, true); save(d, { rid: n.id, mode: 'edit', tab: 'def', ed: clone(n), dirty: false, val: null, __toast: n.id + ' created. Set the scope, then the conditions.' }); } };
+    const D = s.dlg;
+    if (D && D.t === 'leave') dlg = { on: true, isLeave: true, title: rule.isNew ? 'Discard this new rule?' : 'Discard unsaved changes?', sub: rule.isNew ? s.rid + ' has not been saved. It will not be created.' : 'Your changes to ' + s.rid + ' have not been saved.', close: () => set({ dlg: null }), okL: rule.isNew ? 'Discard rule' : 'Discard changes', danger: 'true',
+      ok: () => set({ dlg: null, tab: 'search', rid: '', ed: null, dirty: false, mode: 'view', nw: null }) };
+    if (D && D.t === 'new') { const upd = (o) => set({ dlg: Object.assign({}, D, o), open: '' }); const isCopy = D.how === 'copy'; const src = isCopy && D.src ? DB.rules[D.src] : null;
+      dlg = { on: true, isNew: true, title: 'New business rule', sub: 'The rule is created as a Draft. Nothing is saved until you click Save.', close: () => set({ dlg: null, open: '' }), okL: 'Create Draft', danger: '',
+        blankP: isCopy ? 'false' : 'true', copyP: isCopy ? 'true' : 'false', setBlank: () => upd({ how: 'blank' }), setCopy: () => upd({ how: 'copy', src: D.src || DB.order[0] }), isCopy, notCopy: !isCopy,
+        src: dd('n.src', D.src, DB.order.map((id) => [id, DB.rules[id].cat + ' · ' + DB.rules[id].status]), (v) => upd({ src: v, cat: DB.rules[v].cat, trig: DB.rules[v].trig }), { w: '100%', aria: 'Copy from rule', ph: 'Select a rule' }),
+        cat: dd('n.cat', D.cat, B5_CATS, (v) => upd({ cat: v }), { w: '100%', aria: 'Category', dis: isCopy }), trig: dd('n.trig', D.trig, B5_TRIGS, (v) => upd({ trig: v }), { w: '100%', aria: 'Trigger Event', dis: isCopy }),
+        hint: isCopy ? (src ? 'Copies Rule Definition, all Global conditions and actions, and every location change of ' + src.id + '.' : '') : 'Starts with the standard Global checks from the Invoice Generation Config sheet, all set to FORALL, and the standard invoice actions.',
+        ok: () => { if (isCopy && !D.src) return set({ __toast: 'Select the rule to copy.' }); const r = makeDraft(isCopy ? { src: D.src } : { cat: D.cat, trig: D.trig }); startDraft(r, r.id + ' created as a Draft. Start with Rule Definition.'); } }; }
+    if (D && D.t === 'review' && rule.on) { const isSub = D.how === 'submit'; const secs = isSub ? b5Diff(rule.base, s.ed) : rule.globalDiff;
+      const nT = (x) => x.newT ? 'New' : x.items.length + (x.items.length === 1 ? ' change' : ' changes');
+      dlg = { on: true, isReview: true, title: isSub ? 'Submit ' + s.rid + ' for approval' : 'Save changes to the Global rule?', danger: '',
+        sub: isSub ? (rule.base ? 'These changes from the active rule go to the approver.' : 'This is a new rule. The approver sees it in full.') : 'These changes apply to every location (' + B5_LOCS.slice(1).map((x) => x[1]).join(', ') + ') unless a location changed that row.',
+        sum: secs.map((x) => ({ t: x.t, n: nT(x) })), close: () => set({ dlg: null }), okL: isSub ? 'Submit for Approval' : 'Save Global change',
+        secs: secs.filter((x) => x.items.length || x.newT).map((x) => ({ t: x.t, note: x.note, n: nT(x), hasNew: !!x.newT, newT: x.newT || '', items: x.items.slice(0, 12).map((i) => ({ row: i.row, b: i.b, a: i.a, cls: 'dk-' + i.kind, hasB: !!i.b, hasA: !!i.a, both: !!i.b && !!i.a })), more: x.items.length > 12 ? '+ ' + (x.items.length - 12) + ' more' : '', hasMore: x.items.length > 12 })),
+        none: !secs.some((x) => x.items.length || x.newT), ok: isSub ? rule.doSubmit : rule.doSave }; }
+    return { search, rule, dlg, isSearch: !rule.on, isDef: s.tab === 'def' && rule.on, isCond: s.tab === 'cond' && rule.on, newRule: () => newDlg() };
   }
 }
 
