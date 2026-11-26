@@ -134,7 +134,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mis-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:20;width:240px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(15,23,42,.16)}
 .mis-menu button{all:unset;box-sizing:border-box;display:flex;flex-direction:column;width:100%;padding:8px 10px;border-radius:6px;font-size:13px;color:var(--ink);cursor:pointer}.mis-menu button:hover{background:var(--hover2)}.mis-menu small{font-size:11.5px;color:var(--muted)}
 .mis-fb{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 16px;padding:12px 20px 14px;border-top:1px solid var(--line2);background:var(--sub);border-radius:0 0 8px 8px}
-.mis-f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}.mis-f select{min-width:160px;height:32px;appearance:auto;-webkit-appearance:menulist}
+.mis-f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}.mis-f select{min-width:160px;height:32px;}
 .mis-seg{display:inline-flex;height:32px;border:1px solid var(--bd);border-radius:6px;overflow:hidden;background:var(--surface)}
 .mis-seg button{all:unset;cursor:pointer;padding:0 12px;font-size:13px;line-height:30px;color:var(--muted2)}.mis-seg button+button{border-left:1px solid var(--line)}
 .mis-seg button[aria-checked=true]{background:var(--tint);color:var(--accent2);font-weight:600}.mis-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
@@ -192,7 +192,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mis-pb{display:inline-block;vertical-align:middle;width:110px;height:6px;border-radius:3px;background:var(--neutral);overflow:hidden;margin-right:8px}.mis-pb i{display:block;height:100%;background:var(--accent)}.mis-pt{font-size:12px;color:var(--muted2)}
 .mis-empty{margin:0;padding:40px 16px;text-align:center;color:var(--muted)}
 .mis-ft{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
-.mis-pg{display:flex;align-items:center;gap:10px}.mis-pg label{display:inline-flex;align-items:center;gap:6px}.mis-pg select{height:30px;appearance:auto;-webkit-appearance:menulist}
+.mis-pg{display:flex;align-items:center;gap:10px}.mis-pg label{display:inline-flex;align-items:center;gap:6px}.mis-pg select{height:32px;}
 .mis-ov{position:fixed;inset:0;background:rgba(15,23,42,.36);z-index:90}
 .mis-dlg{position:fixed;z-index:91;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100vw - 32px));background:var(--surface);border-radius:12px;box-shadow:0 24px 48px rgba(15,23,42,.24);display:flex;flex-direction:column}
 .mis-dh{display:flex;justify-content:space-between;gap:12px;padding:18px 22px 12px;border-bottom:1px solid var(--line2)}.mis-dh h2{margin:0;font-size:17px;font-weight:600}.mis-dh p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
@@ -210,7 +210,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mis-grid1{max-width:1480px;margin:0 auto}
 .mis-nb{display:flex;align-items:center;gap:10px}
 .mis-back{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px 0 6px;border-radius:6px;font-size:13px;font-weight:500;color:var(--accent2)}.mis-back:hover{background:var(--tint)}.mis-back:focus-visible{outline:2px solid var(--accent)}
-.mis-sep{color:var(--bd)}.mis-sw2 select{height:32px;min-width:300px;appearance:auto;-webkit-appearance:menulist;font-weight:500}
+.mis-sep{color:var(--bd)}.mis-sw2 select{height:32px;min-width:300px;;font-weight:500}
 .mis-head,.mis-k,.mis-chart,.mis-ins,.mis-tbl{box-shadow:0 1px 2px rgba(16,24,40,.04)}
 .mis-t td.mis-cmpa{font-weight:600}.mis-t td.mis-cmpb{color:var(--bad);font-weight:600}
 .mis-c,.mis-br{position:relative}
@@ -413,6 +413,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mx-fc button{all:unset;cursor:pointer;display:grid;place-items:center;width:20px;height:20px;border-radius:50%}.mx-fc button:hover{background:var(--tintbd)}.mx-fc button:focus-visible{outline:2px solid var(--accent)}
 .mx-tbh .mis-seg{height:30px}.mx-tbh .mis-seg button{line-height:28px}
 .lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}.lay:hover{color:var(--ink)}.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mis-f select{min-width:170px}.mis-f .selw,.mis-fld .selw{display:flex!important}.mis-fld .selw select{width:100%}.mis-pg select{width:72px}.select:open + svg{transform:rotate(180deg)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -736,8 +737,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
           <div class="mx-main">
             <div class="card mx-ctx">
-              <label class="mis-f"><span>Period</span><select class="select select-sm" value="{{mon}}" onChange="{{setMon}}"><sc-for list="{{months}}" as="o" hint-placeholder-count="6"><option value="{{o.k}}">{{o.t}}</option></sc-for></select></label>
-              <label class="mis-f"><span>Location</span><select class="select select-sm" value="{{loc}}" onChange="{{setLoc}}"><sc-for list="{{locs}}" as="o" hint-placeholder-count="5"><option value="{{o.k}}">{{o.t}}</option></sc-for></select></label>
+              <label class="mis-f"><span>Period</span><span class="selw" style="position: relative; display: inline-flex"><select class="select select-sm" value="{{mon}}" onChange="{{setMon}}"><sc-for list="{{months}}" as="o" hint-placeholder-count="6"><option value="{{o.k}}">{{o.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></span></label>
+              <label class="mis-f"><span>Location</span><span class="selw" style="position: relative; display: inline-flex"><select class="select select-sm" value="{{loc}}" onChange="{{setLoc}}"><sc-for list="{{locs}}" as="o" hint-placeholder-count="5"><option value="{{o.k}}">{{o.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></span></label>
               <div class="mis-f"><span>Direction</span><div class="mis-seg" role="radiogroup" aria-label="Direction"><sc-for list="{{dirs}}" as="d" hint-placeholder-count="3"><button role="radio" aria-checked="{{d.on}}" onClick="{{d.go}}">{{d.t}}</button></sc-for></div></div>
               <button class="mis-tg" role="switch" aria-checked="{{cmp}}" onClick="{{togCmp}}"><span class="mis-sw" aria-hidden="true"></span>Compare with previous month</button>
               <span class="mx-sp1"></span>
@@ -860,7 +861,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                     </table>
                     <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><p class="mis-empty">{{emptyMsg}}</p></sc-if>
                   </div>
-                  <div class="mis-ft"><span>{{foot}}</span><div class="mis-pg"><label>Rows per page <select class="select select-sm" value="{{psz}}" onChange="{{setPsz}}"><option value="15">15</option><option value="30">30</option><option value="50">50</option></select></label><button class="btn btn-icon btn-sm" aria-label="Previous page" disabled="{{prevDis}}" onClick="{{prev}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button><span>{{pgL}}</span><button class="btn btn-icon btn-sm" aria-label="Next page" disabled="{{nextDis}}" onClick="{{next}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button></div></div>
+                  <div class="mis-ft"><span>{{foot}}</span><div class="mis-pg"><label>Rows per page <span class="selw" style="position: relative; display: inline-flex"><select class="select select-sm" value="{{psz}}" onChange="{{setPsz}}"><option value="15">15</option><option value="30">30</option><option value="50">50</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></span></label><button class="btn btn-icon btn-sm" aria-label="Previous page" disabled="{{prevDis}}" onClick="{{prev}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button><span>{{pgL}}</span><button class="btn btn-icon btn-sm" aria-label="Next page" disabled="{{nextDis}}" onClick="{{next}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button></div></div>
                 </div>
 
                 <aside class="card mx-side" aria-label="Details">
@@ -891,7 +892,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <div class="mis-db">
               <div class="mis-fld"><span>Frequency</span><div class="mis-seg" role="radiogroup" aria-label="Frequency"><sc-for list="{{sFreqs}}" as="f" hint-placeholder-count="3"><button role="radio" aria-checked="{{f.on}}" onClick="{{f.go}}">{{f.t}}</button></sc-for></div></div>
               <div class="mis-2c">
-                <sc-if value="{{sWeekly}}" hint-placeholder-val="{{ true }}"><label class="mis-fld"><span>Day</span><select class="select" value="{{sd.day}}" onChange="{{sSetDay}}"><sc-for list="{{sDays}}" as="d" hint-placeholder-count="5"><option value="{{d.k}}">{{d.t}}</option></sc-for></select></label></sc-if>
+                <sc-if value="{{sWeekly}}" hint-placeholder-val="{{ true }}"><label class="mis-fld"><span>Day</span><span class="selw" style="position: relative; display: inline-flex"><select class="select" value="{{sd.day}}" onChange="{{sSetDay}}"><sc-for list="{{sDays}}" as="d" hint-placeholder-count="5"><option value="{{d.k}}">{{d.t}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></span></label></sc-if>
                 <label class="mis-fld"><span>Time (SGT)</span><input class="input" type="time" value="{{sd.time}}" onInput="{{sSetTime}}"></label>
               </div>
               <label class="mis-fld"><span>Send to</span><input class="input" value="{{sd.to}}" onInput="{{sSetTo}}" placeholder="name@pilship.com, team@pilship.com"><sc-if value="{{sHasErr}}" hint-placeholder-val="{{ false }}"><em class="mis-err">{{sd.err}}</em></sc-if></label>
