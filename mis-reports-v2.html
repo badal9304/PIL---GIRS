@@ -470,6 +470,11 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mx-ia .btn{height:34px}
 .lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}.lay:hover{color:var(--ink)}.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .mis-f select{min-width:170px}.mis-f .selw,.mis-fld .selw{display:flex!important}.mis-fld .selw select{width:100%}.mis-pg select{width:72px}.select:open + svg{transform:rotate(180deg)}
+.mx-hd{font-style:normal;font-size:12px;color:var(--muted);margin-top:2px}
+.mis-lg span.pv i{background:none!important;border-top:2px dashed var(--muted);height:0;width:14px;border-radius:0}
+.mx-c{position:relative}.mx-pv{position:absolute;left:50%;width:min(28px,120%);transform:translate(-50%,1px);height:0;border-top:2px dashed var(--ink);opacity:.55;pointer-events:none;transition:bottom .35s cubic-bezier(.2,.7,.2,1);z-index:1}
+.mx-bt{position:relative;overflow:visible}.mx-pvb{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--ink);opacity:.55;transform:translateX(-1px);pointer-events:none;transition:left .35s cubic-bezier(.2,.7,.2,1)}
+.mx-pl{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4;vector-effect:non-scaling-stroke;opacity:.8}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -806,10 +811,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <section class="mx-home">
               <div class="mx-hh"><h2>{{greet}}</h2><p>Billing at a glance for {{period}}. Open any report to analyse it and act on the rows.</p></div>
               <div class="mx-hk">
-                <div class="card mx-hkc"><span>Net revenue</span><b>{{home.net}}</b><em>After credit notes</em></div>
-                <div class="card mx-hkc"><span>B/Ls invoiced</span><b>{{home.invd}}</b><em>{{home.bookings}} bookings fully invoiced</em></div>
-                <div class="card mx-hkc"><span>Revenue loss</span><b class="bad">{{home.lossV}}</b><em>{{home.loss}} of invoiced revenue</em></div>
-                <div class="card mx-hkc"><span>Open exceptions</span><b class="warn">{{home.exc}}</b><em>LMS data and GFS postings</em></div>
+                <div class="card mx-hkc"><span>Net revenue</span><b>{{home.net}}</b><em>After credit notes</em><sc-if value="{{home.cmp}}" hint-placeholder-val="{{ true }}"><i class="mx-hd"><span class="{{home.h0.c}}">{{home.h0.t}}</span> {{home.pL}}</i></sc-if></div>
+                <div class="card mx-hkc"><span>B/Ls invoiced</span><b>{{home.invd}}</b><em>{{home.bookings}} bookings fully invoiced</em><sc-if value="{{home.cmp}}" hint-placeholder-val="{{ true }}"><i class="mx-hd"><span class="{{home.h1.c}}">{{home.h1.t}}</span> {{home.pL}}</i></sc-if></div>
+                <div class="card mx-hkc"><span>Revenue loss</span><b class="bad">{{home.lossV}}</b><em>{{home.loss}} of invoiced revenue</em><sc-if value="{{home.cmp}}" hint-placeholder-val="{{ true }}"><i class="mx-hd"><span class="{{home.h2.c}}">{{home.h2.t}}</span> {{home.pL}}</i></sc-if></div>
+                <div class="card mx-hkc"><span>Open exceptions</span><b class="warn">{{home.exc}}</b><em>LMS data and GFS postings</em><sc-if value="{{home.cmp}}" hint-placeholder-val="{{ true }}"><i class="mx-hd"><span class="{{home.h3.c}}">{{home.h3.t}}</span> {{home.pL}}</i></sc-if></div>
               </div>
               <div class="mx-hr">
                 <div class="card mx-pan">
@@ -872,17 +877,17 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
               <div class="mx-charts">
                 <div class="card mx-pan">
-                  <div class="mx-ph"><h3>{{prim.title}}</h3><div class="mis-lg"><sc-for list="{{prim.legend}}" as="l" hint-placeholder-count="3"><span><i style="{{l.st}}"></i>{{l.t}}</span></sc-for></div></div>
+                  <div class="mx-ph"><h3>{{prim.title}}</h3><div class="mis-lg"><sc-for list="{{prim.legend}}" as="l" hint-placeholder-count="3"><span class="{{l.cls}}"><i style="{{l.st}}"></i>{{l.t}}</span></sc-for></div></div>
                   <sc-if value="{{prim.isCols}}" hint-placeholder-val="{{ true }}">
                     <div class="mx-cols"><div class="mx-y"><span>{{prim.ymax}}</span><span>{{prim.ymid}}</span><span>0</span></div>
-                      <div class="mx-cg"><sc-for list="{{prim.data}}" as="d" hint-placeholder-count="20"><div class="mx-c {{d.wk}} {{d.dim}}" style="{{d.ix}}" role="button" tabindex="0" aria-pressed="{{d.on}}" onClick="{{d.go}}"><div class="mx-tip" role="tooltip">{{d.tip}}</div><div class="mx-cs"><sc-for list="{{d.segs}}" as="g" hint-placeholder-count="2"><i style="{{g.st}}"></i></sc-for></div><span>{{d.lab}}</span></div></sc-for></div></div>
+                      <div class="mx-cg"><sc-for list="{{prim.data}}" as="d" hint-placeholder-count="20"><div class="mx-c {{d.wk}} {{d.dim}}" style="{{d.ix}}" role="button" tabindex="0" aria-pressed="{{d.on}}" onClick="{{d.go}}"><div class="mx-tip" role="tooltip">{{d.tip}}</div><div class="mx-cs"><sc-for list="{{d.segs}}" as="g" hint-placeholder-count="2"><i style="{{g.st}}"></i></sc-for></div><sc-if value="{{d.hasPv}}" hint-placeholder-val="{{ false }}"><b class="mx-pv" style="{{d.pv}}" aria-hidden="true"></b></sc-if><span>{{d.lab}}</span></div></sc-for></div></div>
                   </sc-if>
                   <sc-if value="{{prim.isBars}}" hint-placeholder-val="{{ false }}">
-                    <div class="mx-bars"><sc-for list="{{prim.data}}" as="d" hint-placeholder-count="5"><div class="mx-br {{d.dim}}" style="{{d.ix}}" role="button" tabindex="0" aria-pressed="{{d.on}}" onClick="{{d.go}}"><div class="mx-tip" role="tooltip">{{d.tip}}</div><span class="mx-bl" title="{{d.l}}">{{d.l}}</span><div class="mx-bt"><sc-for list="{{d.segs}}" as="g" hint-placeholder-count="2"><i style="{{g.st}}"></i></sc-for></div><span class="mx-bv">{{d.tot}}</span></div></sc-for></div>
+                    <div class="mx-bars"><sc-for list="{{prim.data}}" as="d" hint-placeholder-count="5"><div class="mx-br {{d.dim}}" style="{{d.ix}}" role="button" tabindex="0" aria-pressed="{{d.on}}" onClick="{{d.go}}"><div class="mx-tip" role="tooltip">{{d.tip}}</div><span class="mx-bl" title="{{d.l}}">{{d.l}}</span><div class="mx-bt"><sc-for list="{{d.segs}}" as="g" hint-placeholder-count="2"><i style="{{g.st}}"></i></sc-for><sc-if value="{{d.hasPv}}" hint-placeholder-val="{{ false }}"><b class="mx-pvb" style="{{d.pv}}" aria-hidden="true"></b></sc-if></div><span class="mx-bv">{{d.tot}}</span></div></sc-for></div>
                   </sc-if>
                   <sc-if value="{{prim.isArea}}" hint-placeholder-val="{{ false }}">
                     <div class="mx-ar"><div class="mx-y"><span>{{prim.area.ymax}}</span><span>{{prim.area.ymid}}</span><span>0</span></div>
-                      <div class="mx-ap"><svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mxg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".22"></stop><stop offset="1" stop-color="var(--accent)" stop-opacity="0"></stop></linearGradient></defs><path class="mx-af" d="{{prim.area.area}}"></path><path class="mx-al" d="{{prim.area.line}}"></path></svg>
+                      <div class="mx-ap"><svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mxg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".22"></stop><stop offset="1" stop-color="var(--accent)" stop-opacity="0"></stop></linearGradient></defs><path class="mx-af" d="{{prim.area.area}}"></path><path class="mx-pl" d="{{prim.area.pline}}"></path><path class="mx-al" d="{{prim.area.line}}"></path></svg>
                         <sc-for list="{{prim.area.dots}}" as="p" hint-placeholder-count="20"><div class="mx-dot" style="{{p.st}}" role="button" tabindex="0" aria-pressed="{{p.on}}" onClick="{{p.go}}"><div class="mx-tip" role="tooltip">{{p.tip}}</div></div></sc-for>
                         <div class="mx-ax"><sc-for list="{{prim.area.dots}}" as="p" hint-placeholder-count="20"><span style="{{p.st}}" data-show="{{p.show}}">{{p.l}}</span></sc-for></div></div></div>
                   </sc-if>
@@ -1055,8 +1060,8 @@ const MIS_GUIDE = {
   ctry: 'Net revenue and revenue loss for the country. Drill down to see the bookings behind the loss.'
 };
 
-function misArea(vals, labels, fmt) {
-  const n = vals.length, mx = Math.max(1e-9, ...vals) * 1.1, W = 600, H = 160;
+function misArea(vals, labels, fmt, fixMx) {
+  const n = vals.length, mx = fixMx || Math.max(1e-9, ...vals) * 1.1, W = 600, H = 160;
   const pt = vals.map((v, i) => [n === 1 ? W / 2 : i * W / (n - 1), H - v / mx * H]);
   const line = pt.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
   return { line, area: line + ' L' + W + ' ' + H + ' L0 ' + H + ' Z', ymax: fmt(mx), ymid: fmt(mx / 2),
@@ -1237,17 +1242,21 @@ class GirsPage extends DCLogic {
       const pv = RP.kpis[i][1], dv = v - pv, pct = pv ? dv / Math.abs(pv) * 100 : 0, series = hist.map((h) => h[i][1]), mx = Math.max(1e-9, ...series), mn = Math.min(...series);
       const pts = series.map((y, j) => (j * 20) + ',' + (24 - ((y - mn) / Math.max(1e-9, mx - mn)) * 20 - 2).toFixed(1)).join(' ');
       const good = !better || !dv ? 'neu' : (dv > 0) === (better === 'up') ? 'good' : 'bad';
-      return { l, v: fmtK(v, f), cls: 'mx-kv ' + (tone && v ? tone : ''), hasD: s.cmp && !R.flat, d: (dv > 0 ? '▲ ' : dv < 0 ? '▼ ' : '') + (f === 'p' ? Math.abs(dv).toFixed(1) + ' pts' : Math.abs(pct).toFixed(0) + '%'), dCls: 'mx-d ' + good, dL: 'vs ' + P.label.split(' ')[0], pts, hasSp: !R.flat, sCls: 'mx-sp ' + (tone && v ? tone : '') };
+      return { l, v: fmtK(v, f), cls: 'mx-kv ' + (tone && v ? tone : ''), hasD: s.cmp && !R.flat, d: (dv > 0 ? '▲ ' : dv < 0 ? '▼ ' : '') + (f === 'p' ? Math.abs(dv).toFixed(1) + ' pts' : Math.abs(pct).toFixed(0) + '%'), dCls: 'mx-d ' + good, dL: 'vs ' + P.label.split(' ')[0] + ' (' + fmtK(pv, f) + ')', pts, hasSp: !R.flat, sCls: 'mx-sp ' + (tone && v ? tone : '') };
     });
     // ---------- primary chart
     const ch = R.chart, fmtC = (v) => ch.fmt === 'm' ? misK(v) : misN(Math.round(v));
     const toArea = REP === 'inv';
-    const cmax = Math.max(1, ...ch.data.map((d) => d.v.reduce((a, b) => a + b, 0)));
-    const prim = { title: ch.title, isCols: ch.kind === 'cols' && !toArea, isBars: ch.kind === 'bars', isArea: toArea, legend: ch.legend.map(([t, c]) => ({ t, st: 'background:' + c })),
-      data: ch.data.map((d, di) => { const sum = d.v.reduce((a, b) => a + b, 0); const f = ch.kind === 'cols' ? (dateCi >= 0 ? { t: 'day', ci: dateCi, v: +d.l, l: d.l + ' ' + D.label.split(' ')[0] } : null) : eqF(d.l); return { ix: '--i:' + di, go: f ? () => setF(f) : () => {}, on: flt && f && flt.l === f.l ? 'true' : 'false', dim: flt && !(f && flt.l === f.l) ? 'dim' : '', l: d.l, tot: fmtC(sum), tip: (ch.kind === 'cols' ? d.l + ' ' + D.label.split(' ')[0] : d.l + ' · ' + (d.tip || fmtC(sum))) + ' · ' + ch.legend.map(([t], i) => t + ' ' + fmtC(d.v[i] || 0)).join(' · '),
-        segs: d.v.map((v, i) => ({ st: (ch.kind === 'cols' ? 'height:' : 'width:') + (v / cmax * 100).toFixed(2) + '%;background:' + ch.legend[i][1] })), wk: ch.kind === 'cols' && [0, 6].includes(new Date(D.y, D.m, +d.l).getDay()) ? 'wk' : '', lab: ch.kind !== 'cols' || +d.l % 2 === 1 || ch.data.length < 16 ? d.l : '' }; }),
+    const pvOf = {}; (RP.chart.data || []).forEach((d) => { pvOf[d.l] = d.v.reduce((a, b) => a + b, 0); });
+    const cmpOn = s.cmp && !R.flat, pL = P.label.split(' ')[0];
+    const cmax = Math.max(1, ...ch.data.map((d) => d.v.reduce((a, b) => a + b, 0)), ...(cmpOn ? Object.keys(pvOf).map((k) => toArea ? 0 : pvOf[k]) : [0]));
+    const prim = { title: ch.title, isCols: ch.kind === 'cols' && !toArea, isBars: ch.kind === 'bars', isArea: toArea, legend: ch.legend.map(([t, c]) => ({ t, st: 'background:' + c, cls: '' })).concat(cmpOn ? [{ t: pL + ' (previous month)', st: '', cls: 'pv' }] : []),
+      data: ch.data.map((d, di) => { const sum = d.v.reduce((a, b) => a + b, 0); const f = ch.kind === 'cols' ? (dateCi >= 0 ? { t: 'day', ci: dateCi, v: +d.l, l: d.l + ' ' + D.label.split(' ')[0] } : null) : eqF(d.l); return { ix: '--i:' + di, go: f ? () => setF(f) : () => {}, on: flt && f && flt.l === f.l ? 'true' : 'false', dim: flt && !(f && flt.l === f.l) ? 'dim' : '', l: d.l, tot: fmtC(sum), tip: (ch.kind === 'cols' ? d.l + ' ' + D.label.split(' ')[0] : d.l + ' · ' + (d.tip || fmtC(sum))) + ' · ' + ch.legend.map(([t], i) => t + ' ' + fmtC(d.v[i] || 0)).join(' · ') + (cmpOn ? ' · ' + pL + ' ' + fmtC(pvOf[d.l] || 0) : ''),
+        segs: d.v.map((v, i) => ({ st: (ch.kind === 'cols' ? 'height:' : 'width:') + (v / cmax * 100).toFixed(2) + '%;background:' + ch.legend[i][1] })), wk: ch.kind === 'cols' && [0, 6].includes(new Date(D.y, D.m, +d.l).getDay()) ? 'wk' : '', lab: ch.kind !== 'cols' || +d.l % 2 === 1 || ch.data.length < 16 ? d.l : '', hasPv: cmpOn && !toArea, pv: ch.kind === 'cols' ? 'bottom:calc(20px + (100% - 20px) * ' + ((pvOf[d.l] || 0) / cmax).toFixed(4) + ')' : 'left:' + ((pvOf[d.l] || 0) / cmax * 100).toFixed(2) + '%' }; }),
       ymax: fmtC(cmax), ymid: ch.fmt === 'm' ? misK(cmax / 2) : String(Math.round(cmax / 2 * 10) / 10) };
-    if (toArea) { prim.area = misArea(ch.data.map((d) => d.v[0]), ch.data.map((d) => d.l + ' ' + D.label.split(' ')[0]), misK); prim.area.dots.forEach((p, i) => { const f = dateCi >= 0 ? { t: 'day', ci: dateCi, v: +ch.data[i].l, l: ch.data[i].l + ' ' + D.label.split(' ')[0] } : null; p.go = f ? () => setF(f) : () => {}; p.on = flt && f && flt.l === f.l ? 'true' : 'false'; }); }
+    if (toArea) { const pvA = Array.from({ length: P.days }, (_, i) => pvOf[String(i + 1)] || 0), amx = Math.max(1e-9, ...ch.data.map((d) => d.v[0]), ...(cmpOn ? pvA : [0])) * 1.1;
+      prim.area = misArea(ch.data.map((d) => d.v[0]), ch.data.map((d) => d.l + ' ' + D.label.split(' ')[0]), misK, amx); if (cmpOn) prim.area.dots.forEach((pt, i) => { pt.tip += ' · ' + pL + ' ' + misK(pvOf[ch.data[i].l] || 0); });
+      const pa = misArea(pvA.slice(0, Math.max(ch.data.length, 2)), pvA.map(String), misK, amx); prim.area.pline = cmpOn ? pa.line : ''; prim.area.hasP = cmpOn; prim.area.dots.forEach((p, i) => { const f = dateCi >= 0 ? { t: 'day', ci: dateCi, v: +ch.data[i].l, l: ch.data[i].l + ' ' + D.label.split(' ')[0] } : null; p.go = f ? () => setF(f) : () => {}; p.on = flt && f && flt.l === f.l ? 'true' : 'false'; }); }
     // ---------- secondary chart
     const byCol = (ci, sumCi, top) => { const m = {}; R.rows.forEach((r) => { const k = r.cells[ci].t; m[k] = (m[k] || 0) + (sumCi == null ? 1 : +r.cells[sumCi].v || 0); }); let a = Object.keys(m).map((k) => ({ l: k, v: m[k], c: MIS_ST_COL[k] })).sort((x, y) => y.v - x.v); if (top && a.length > top) { const o = a.slice(top).reduce((t, x) => t + x.v, 0); a = a.slice(0, top).concat([{ l: 'Other', v: o, c: '#A3ADBB' }]); } return a; };
     const SEC = {
@@ -1290,15 +1299,18 @@ class GirsPage extends DCLogic {
     const cur = MIS_ITEMS.find((i) => i.k === REP);
     const cards = MIS_ITEMS.map(homeCard);
     const att = cards.filter((c) => c.issue);
+    const dTxt = (v, pv, better, pts) => { const dv = v - pv, good = !dv ? 'neu' : (dv > 0) === (better === 'up') ? 'good' : 'bad'; return { t: (dv > 0 ? '▲ ' : dv < 0 ? '▼ ' : '') + (pts ? Math.abs(dv).toFixed(1) + ' pts' : (pv ? Math.abs(dv / pv * 100).toFixed(0) : '0') + '%'), c: 'mx-d ' + good }; };
     const Kc = DEF.ctry(D).kpis, Kv = DEF.vslbl(D).kpis, Kg = DEF.gfs(D).kpis, Kd = DEF.lmsdata(D).kpis, Ku = DEF.uninv(D).kpis, Ki = DEF.inv(D).kpis;
     const invRev = DEF.ctry(D).rows.reduce((t, r) => t + r.cells[1].v, 0), lossPct = invRev ? Kc[3][1] / invRev * 100 : 0;
+    const Pc = DEF.ctry(P).kpis, Pv = DEF.vslbl(P).kpis, Pg = DEF.gfs(P).kpis, Pd = DEF.lmsdata(P).kpis;
+    const hd = [dTxt(Kc[0][1], Pc[0][1], 'up'), dTxt(Kv[3][1], Pv[3][1], 'up', 1), dTxt(Kc[3][1], Pc[3][1], 'down'), dTxt(Kg[0][1] - Kg[2][1] + Kd[0][1], Pg[0][1] - Pg[2][1] + Pd[0][1], 'down')];
     const health = Math.max(0, Math.min(100, Kv[3][1] - lossPct));
     const trendInv = months.slice().reverse().map((d) => DEF.inv(misData(misMKey(d))).kpis[1][1]), trendUn = months.slice().reverse().map((d) => DEF.uninv(misData(misMKey(d))).kpis[2][1]);
     const tmax = Math.max(1, ...trendInv.map((v, i) => v + trendUn[i]));
     const hc = DEF.ctry(D);
     const quick = { gfs: ['Retry all', 'retryAll', 'retry'], lmsdata: ['Re-sync all', 'syncAll', 'sync'], lmsgirs: ['Raise LMS checks', 'lmsAll', 'lms'] };
     const openRep = (k) => reAll() || self.setState({ rep: k, pg: 1, q: '', sort: null, sel: {}, exp: false, insp: null, flt: null });
-    const home = {
+    const home = { cmp: !!s.cmp, h0: hd[0], h1: hd[1], h2: hd[2], h3: hd[3], pL: 'vs ' + P.label.split(' ')[0],
       health: health.toFixed(1), healthSt: 'width:' + health.toFixed(1) + '%', healthL: health >= 95 ? 'Healthy' : health >= 85 ? 'Watch' : 'At risk', healthCls: 'mx-hb ' + (health >= 95 ? 'ok' : health >= 85 ? 'warn' : 'bad'),
       net: 'USD ' + misK(Kc[0][1]), invd: Kv[3][1].toFixed(1) + '%', loss: lossPct.toFixed(2) + '%', lossV: 'USD ' + misK(Kc[3][1]), exc: misN(Kg[0][1] - Kg[2][1] + Kd[0][1]), open: misN(Ku[0][1]), bookings: misN(Ki[0][1]),
       trend: mLbl.map((l, i) => ({ ix: '--i:' + i, l, tip: l + ' · invoiced USD ' + misK(trendInv[i]) + ' · un-invoiced USD ' + misK(trendUn[i]), av: (trendInv[i] >= 1e6 ? (trendInv[i] / 1e6).toFixed(2) + 'M' : (trendInv[i] / 1e3).toFixed(1) + 'K'), bv: (trendUn[i] >= 1e6 ? (trendUn[i] / 1e6).toFixed(2) + 'M' : (trendUn[i] / 1e3).toFixed(1) + 'K'), a: 'height:' + (trendInv[i] / tmax * 100).toFixed(1) + '%', b: 'height:' + (trendUn[i] / tmax * 100).toFixed(1) + '%', cur: i === mLbl.length - 1 ? 'cur' : '' })), tmax: 'USD ' + misK(tmax),
