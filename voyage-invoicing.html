@@ -641,8 +641,15 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .hm-old:hover{background:var(--hover2)}.hm-old:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .hm-old b{font-size:13px;font-weight:600;line-height:18px}.hm-old small{font-size:11px;color:var(--muted);white-space:nowrap}
 .hm-old-bar{display:block;width:100%;height:6px;margin:6px 0 4px;border-radius:3px;background:var(--line)}
-.hm-old.late{background:var(--warnbg);border-color:transparent}.hm-old.late small{color:var(--warn)}.hm-old.late .hm-old-bar{background:var(--warn);opacity:.55}
+.hm-old.late{background:var(--warnbg);border-color:transparent}.hm-old.late small{color:var(--warn)}.hm-old.late .hm-old-bar{background:repeating-linear-gradient(-45deg,var(--bar-blk) 0 3px,var(--bar-blk2) 3px 5px)}
 .hm-old.on{background:var(--tint2);border:1px solid var(--accent)}
+/* workload bar colours: done recedes (slate), ready = action blue (matches Generate), blocked = amber with hatch so it never relies on colour alone */
+.theme{--bar-done:#A3ADBB;--bar-blk:#C9780E;--bar-blk2:#EBAA48}
+.theme[data-theme=dark]{--bar-done:#5E6773;--bar-blk:#D9A449;--bar-blk2:#9C6F27}
+.hm-dot.inv,.hm-stk .inv{background:var(--bar-done)}
+.hm-dot.rdy,.hm-stk .rdy{background:var(--accent)}
+.hm-dot.blk,.hm-stk .blk{background:repeating-linear-gradient(-45deg,var(--bar-blk) 0 3px,var(--bar-blk2) 3px 5px)}
+.hm-stk i:first-child{border-radius:4px 0 0 4px}.hm-stk i:last-child{border-radius:0 4px 4px 0}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
