@@ -111,7 +111,110 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
 .opt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:4px;width:100%;padding:12px 16px;border-radius:8px}
 .seg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;border-radius:4px;font-size:13px;color:var(--ink)}
-.ro{display:flex;align-items:center;height:36px;padding:0 12px;border:1px solid var(--line);border-radius:6px;background:var(--sub);color:var(--muted2);box-sizing:border-box}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+.ro{display:flex;align-items:center;height:36px;padding:0 12px;border:1px solid var(--line);border-radius:6px;background:var(--sub);color:var(--muted2);box-sizing:border-box}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}.cn-strip{display:grid;grid-template-columns:0.8fr 0.7fr 1.3fr 1.3fr;margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cn-strip > div{padding:10px 14px;border-left:1px solid var(--line2);min-width:0}.cn-strip > div:first-child{border-left:0}.cn-strip > div:last-child{background:var(--tint)}
+.cn-strip dt{font-size:11.5px;color:var(--muted)}.cn-strip dd{margin:2px 0 0;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cn-strip > div:last-child dd{color:var(--accent2)}
+.cn-sec{display:flex;flex-direction:column;gap:10px}
+.cn-sec h3{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:600}.cn-sec h3 .hint{font-size:12px;font-weight:400;color:var(--muted)}
+.cn-n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--neutral);color:var(--muted2);font-size:11.5px;font-weight:700}
+.cn-rs{display:flex;flex-wrap:wrap;gap:8px}
+.cn-rs button{all:unset;box-sizing:border-box;cursor:pointer;height:34px;padding:0 14px;border:1px solid var(--line);border-radius:17px;font-size:13px;font-weight:500;color:var(--ink);background:var(--surface)}
+.cn-rs button:hover{border-color:var(--bd)}.cn-rs button[aria-checked=true]{border-color:var(--accent);background:var(--tint);color:var(--accent2);box-shadow:inset 0 0 0 1px var(--accent)}
+.cn-rs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cn-help{margin:0;font-size:12.5px;color:var(--muted2)}
+.cn-ref{max-width:340px}
+.cn-drop{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px dashed var(--bd);border-radius:8px;cursor:pointer;color:var(--muted2);font-weight:400;max-width:460px}.cn-drop:hover{border-color:var(--accent);color:var(--accent2)}.cn-drop b{color:var(--accent);font-weight:600}
+.cn-fi{position:absolute;inset:0;opacity:0;cursor:pointer}
+.cn-file{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sub);max-width:460px;font-weight:400}.cn-file .mono{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cn-lt{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cn-lt th{height:34px;padding:0 10px;text-align:start;font-size:12px;font-weight:600;color:var(--muted2);background:var(--sub);border-bottom:1px solid var(--line);white-space:nowrap}.cn-lt th.num{text-align:end}
+.cn-lt td{padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:middle}.cn-lt tbody tr:last-child td{border-bottom:0}
+.cn-cn{display:block;font-size:12px;color:var(--muted)}
+.cn-lt tfoot td{background:var(--sub);border-top:1px solid var(--line);border-bottom:0}
+.cn-gt{font-weight:700;color:var(--accent2);white-space:nowrap}
+.cn-e{font-size:12px;color:var(--bad)}
+.cn-ta{height:76px;padding-top:8px;resize:vertical}
+.cn-cnt{align-self:flex-end;font-size:11.5px;margin-top:-6px}
+.cn-facts{list-style:none;margin:0;padding:10px 14px;border-radius:8px;background:var(--sub);display:flex;flex-direction:column;gap:4px;font-size:12.5px}.cn-facts li{display:flex;gap:10px}.cn-facts span{width:120px;flex:none;color:var(--muted)}.cn-facts b{font-weight:500}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500}.fld .err{font-size:12px;font-weight:400;color:var(--bad)}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}.lnk:hover{text-decoration:underline}.mu{color:var(--muted)}.num{text-align:end}
+.cr-grid{display:grid;grid-template-columns:minmax(280px,340px) minmax(0,1fr);gap:16px;align-items:start}
+.cr .card-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cr-cnt{font-size:12px;color:var(--muted)}
+.cr-srch{position:relative;padding:12px 12px 4px}.cr-srch svg{position:absolute;left:22px;top:22px;color:var(--muted)}.cr-srch .input{width:100%;padding-left:32px;box-sizing:border-box}
+.cr-list{padding:8px 12px;display:flex;flex-direction:column;gap:6px;max-height:560px;overflow:auto}
+.cr-inv{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.cr-inv:hover{border-color:var(--bd)}.cr-inv:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cr-inv[aria-selected=true]{border-color:var(--accent);background:var(--tint);box-shadow:inset 3px 0 0 var(--accent)}
+.cr-inv[data-off=true]{background:var(--sub)}.cr-inv[data-off=true] .cr-r1 .mono,.cr-inv[data-off=true] .cr-r2{color:var(--muted)}
+.cr-r1{display:flex;justify-content:space-between;align-items:center;gap:8px}.cr-r1 .mono{font-weight:600;font-size:13px}
+.cr-r2{font-size:12.5px;color:var(--ink)}.cr-r3{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.cr-why{font-size:11.5px;color:var(--muted2);font-style:italic}
+.cr-pay{font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px}.cr-pp{background:var(--okbg);color:var(--ok)}.cr-pu{background:var(--neutral);color:var(--muted2)}.cr-pm{background:var(--warnbg);color:var(--warn)}
+.cr-empty{margin:8px 0;font-size:12.5px;color:var(--muted)}
+.cr-foot{margin:0;padding:4px 16px 14px;font-size:12px;line-height:16px;color:var(--muted)}
+.cr-sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.cr-body{padding:16px;display:flex;flex-direction:column;gap:20px}.cr-body > *{flex-shrink:0}
+.cr-strip{grid-template-columns:0.8fr 0.6fr 0.9fr 1.1fr 1.2fr}
+.cr-block{margin:0;padding:12px 14px;border-radius:8px;background:var(--warnbg);color:var(--warn);font-size:13px;font-weight:500}
+.cr-done{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:8px;background:var(--okbg);color:var(--ok)}
+.cr-done > div:nth-child(2){flex:1 1 320px;display:flex;flex-direction:column;gap:3px;color:var(--ink)}.cr-done > div span{font-size:12.5px;color:var(--muted2)}
+.cr-done-a{display:flex;gap:8px}
+.cr-lt td{padding:7px 10px}
+.cr-paid{margin:0;padding:10px 12px;border-radius:6px;background:var(--sub);font-size:12.5px;color:var(--muted2)}
+.cr-tg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;max-width:520px}
+.cr-tg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.cr-tg b{display:block;font-size:13px;font-weight:600}.cr-tg small{font-size:12px;color:var(--muted)}
+.cr-sw{position:relative;flex:none;width:34px;height:20px;border-radius:10px;background:var(--bd);transition:background .15s}
+.cr-sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s}
+.cr-tg[aria-checked=true] .cr-sw{background:var(--accent)}.cr-tg[aria-checked=true] .cr-sw::after{transform:translateX(14px)}
+.cr-act{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding-top:16px;border-top:1px solid var(--line2)}
+.cr-act .cn-facts{flex:1 1 360px}.cr-btns{display:flex;gap:8px}
+.cr-side{display:flex;flex-direction:column;gap:16px}
+.cr-ap{padding:12px 16px 16px;display:flex;flex-direction:column;gap:8px}
+.cr-apr{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px}.cr-apr .cn-n{width:28px;height:28px;font-size:11px}
+.cr-apr b{display:block;font-size:13px}.cr-apr small{font-size:12px;color:var(--muted)}
+.cr-sod{margin:2px 0 0;font-size:12px;color:var(--muted2)}
+.cr-nx{list-style:none;margin:0;padding:12px 16px 16px}
+.cr-nx li{position:relative;display:flex;gap:12px;padding-bottom:12px}.cr-nx li[data-last=true]{padding-bottom:0}
+.cr-nx li::before{content:'';position:absolute;left:5px;top:14px;bottom:-2px;width:2px;background:var(--line)}.cr-nx li[data-last=true]::before{display:none}
+.cr-dot{position:relative;z-index:1;flex:none;width:12px;height:12px;margin-top:3px;border-radius:50%;border:2px solid var(--bd);background:var(--surface);box-sizing:border-box}
+.nx-done .cr-dot{background:var(--okdot);border-color:var(--okdot)}.nx-now .cr-dot{border-color:var(--accent);background:var(--tint)}
+.cr-nx b{display:block;font-size:13px;font-weight:500}.cr-nx small{font-size:12px;color:var(--muted)}.nx-wait b{color:var(--muted2)}
+.cr-auto p{margin:0;padding:12px 16px 0;font-size:12.5px;line-height:18px;color:var(--muted2)}.cr-auto .btn{margin:12px 16px 16px}
+@media (max-width:1280px){.cr-grid{grid-template-columns:minmax(240px,300px) minmax(0,1fr)}.cr-side{grid-column:1 / -1;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
+@media (max-width:820px){.cr-grid{grid-template-columns:1fr}.cr-strip{grid-template-columns:1fr 1fr}}
+
+.cr-flt{display:flex;gap:8px;padding:8px 12px 4px}.cr-sel{position:relative;flex:1 1 auto;min-width:0}.cr-sel select{width:100%;padding-right:26px}.cr-sel svg{position:absolute;right:8px;top:50%;margin-top:-7px;pointer-events:none;color:var(--muted)}
+.cr-seg{display:flex;flex:none;border:1px solid var(--line);border-radius:6px;overflow:hidden}.cr-seg button{all:unset;cursor:pointer;padding:0 10px;font-size:12.5px;line-height:30px;color:var(--muted2)}.cr-seg button+button{border-left:1px solid var(--line)}.cr-seg button[aria-checked=true]{background:var(--tint);color:var(--accent2);font-weight:600}.cr-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.cr-list{max-height:calc(100vh - 330px);min-height:320px}.cr-more{align-self:center;margin:4px 0 6px}
+.cr-foot{border-top:1px solid var(--line2);padding-top:10px}
+
+.cr-pick{position:sticky;top:108px}
+.cr-pick .card-head,.cr-form .card-head{min-height:64px;box-sizing:border-box;padding-top:10px;padding-bottom:10px}
+.cr-pick .cr-sub{margin:2px 0 0}
+.cr-list{max-height:calc(100vh - 400px);gap:6px}
+.cr-inv{padding:9px 12px;gap:2px}
+.cr-r3 .mono{white-space:nowrap}
+.cr-strip{grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.35fr)}
+.cr-strip dd{font-size:13.5px}
+.cr-body{gap:22px;padding-bottom:0}
+.cn-sec{gap:10px}
+.cr-tg{max-width:none}
+.cr-act{position:sticky;bottom:0;z-index:2;margin:0 -16px;padding:12px 16px;background:var(--surface);border-top:1px solid var(--line);border-radius:0 0 8px 8px;align-items:center;flex-wrap:nowrap}
+.cr-act-t{margin:0;flex:1 1 auto;font-size:12.5px;line-height:18px;color:var(--muted2)}.cr-act-t b{color:var(--ink);font-weight:600}
+.cr-btns{flex:none}
+@media (max-width:900px){.cr-act{flex-wrap:wrap}.cr-pick{position:static}}
+
+/* full-height layout: both panels fill the window, lists/forms scroll inside */
+.gmain.cr{flex:1 1 auto !important;min-height:0;display:flex;flex-direction:column}
+.cr-grid{flex:1 1 auto;min-height:560px;align-items:stretch}
+.cr-pick{position:static;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.cr-pick .cr-list{flex:1 1 auto;max-height:none;min-height:0}
+.cr-form{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.cr-form .cr-body{flex:1 1 auto;min-height:0;overflow:auto;padding-bottom:16px}
+.cr-form .cr-act{position:static;margin:0;flex:none;border-radius:0}
+@media (max-width:820px){.cr-grid{min-height:0}.cr-pick,.cr-form{overflow:visible}.cr-form .cr-body{overflow:visible}}
+</style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
@@ -410,180 +513,95 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
           <div style="min-width: 0">
             <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Credit Notes</h1>
-            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Full and partial credits against the original invoice · same exchange rate · approval with segregation of duties</p>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Whole-invoice credit against the original invoice · same exchange rate · posted to GFS</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
-          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"></path><path d="M4 7l8 6 8-6"></path></svg>FCA / top-level DAR waiver on an invoiced bill raises the credit note automatically · team leads notified by email</span>
-          <span class="chip" style="background: var(--neutral); color: var(--muted2)">No standalone credit note — original invoice required</span>
+          <a class="btn btn-sm" href="credit-note-list.html">Credit Note List</a>
+          
           </div>
         </div>
       </div>
-      <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-        <div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
-          <section class="card r-col" style="flex: 1 1 340px; max-width: 360px; min-width: 0; overflow: hidden">
-            <div class="card-head"><h2 class="card-title">Original invoice</h2></div>
-            <div style="padding: 12px; display: flex; flex-direction: column; gap: 8px">
-              <sc-for list="{{invoices}}" as="v" hint-placeholder-count="4">
-                <button class="opt" onClick="{{v.pick}}" aria-pressed="{{v.on}}" style="border: 1px solid {{v.border}}; background: {{v.bg}}">
-                  <span class="r-wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="mono" style="font-weight: 500">{{v.no}}</span><span class="chip" style="{{v.payStyle}}">{{v.pay}}</span></span>
-                  <span style="font-size: 12px; line-height: 16px; color: var(--muted)">{{v.type}} · {{v.bl}} · USD {{v.totalText}}</span>
+      <main class="gmain cr" style="flex: 1 0 auto; padding: 16px 20px 20px; box-sizing: border-box">
+        <div class="cr-grid">
+          <section class="card cr-pick" aria-labelledby="cr-inv-h">
+            <div class="card-head"><div><h2 class="card-title" id="cr-inv-h">Original invoice</h2><p class="cr-sub">Pick the invoice to credit</p></div><span class="cr-cnt">{{invCount}}</span></div>
+            <div class="cr-srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" value="{{q}}" onInput="{{setQ}}" placeholder="Invoice no., B/L, booking or party" aria-label="Search invoices"></div>
+            <div class="cr-flt">
+              <div class="cr-sel"><select class="select select-sm" value="{{loc}}" onChange="{{setLoc}}" aria-label="Location"><sc-for list="{{locs}}" as="o" hint-placeholder-count="5"><option value="{{o.k}}">{{o.t}}</option></sc-for></select><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div>
+              <div class="cr-seg" role="radiogroup" aria-label="Payment"><sc-for list="{{pays}}" as="o" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.t}}</button></sc-for></div>
+            </div>
+            <div class="cr-list" role="listbox" aria-label="Invoices">
+              <sc-for list="{{invoices}}" as="v" hint-placeholder-count="8">
+                <button type="button" role="option" class="cr-inv" aria-selected="{{v.on}}" data-off="{{v.off}}" onClick="{{v.pick}}">
+                  <span class="cr-r1"><span class="mono">{{v.no}}</span><span class="{{v.payCls}}">{{v.pay}}</span></span>
+                  <span class="cr-r2">{{v.party}}</span>
+                  <span class="cr-r3"><span>{{v.meta}}</span><span class="mono">{{v.total}}</span></span>
+                  <sc-if value="{{v.hasWhy}}" hint-placeholder-val="{{ false }}"><span class="cr-why">{{v.why}}</span></sc-if>
                 </button>
               </sc-for>
+              <sc-if value="{{noMatch}}" hint-placeholder-val="{{ false }}"><p class="cr-empty">{{emptyMsg}}</p></sc-if>
+              <sc-if value="{{hasMore}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-sm cr-more" onClick="{{more}}">{{moreTxt}}</button></sc-if>
             </div>
-            <p style="margin: 0; padding: 0 16px 16px; font-size: 12px; line-height: 16px; color: var(--muted)">A credit note must reference an existing invoice. Standalone credit notes are not permitted.</p>
+            <p class="cr-foot">{{listFoot}}</p>
           </section>
 
-          <section class="card r-col" style="flex: 999 1 640px; min-width: 0; overflow: hidden; display: flex; flex-direction: column">
-            <div class="card-head">
-              <h2 class="card-title">Credit note request</h2>
-              <span class="chip" style="{{stageChip}}">{{stageText}}</span>
-            </div>
+          <section class="card cr-form" aria-labelledby="cr-form-h">
+            <div class="card-head"><div><h2 class="card-title" id="cr-form-h">Credit note for <span class="mono">{{invNo}}</span></h2><p class="cr-sub">{{party}}</p></div></div>
+            <div class="cr-body">
+              <dl class="cn-strip cr-strip"><sc-for list="{{strip}}" as="x" hint-placeholder-count="5"><div><dt>{{x.l}}</dt><dd>{{x.v}}</dd></div></sc-for></dl>
 
-            <sc-if value="{{isProforma}}" hint-placeholder-val="{{ false }}">
-              <div role="alert" style="margin: 16px 16px 0; padding: 12px 16px; border-radius: 6px; background: var(--badbg); color: var(--bad2)">Credit notes are not allowed for proforma invoices. Cancel the proforma instead.</div>
-            </sc-if>
-            <sc-if value="{{needsUnapply}}" hint-placeholder-val="{{ false }}">
-              <div class="r-wrap" role="alert" style="margin: 16px 16px 0; padding: 12px 12px 12px 16px; border-radius: 6px; background: var(--warnbg); color: var(--warn2); display: flex; align-items: center; justify-content: space-between; gap: 16px">
-                <span><strong>Invoice is paid.</strong> Unapply the payment before issuing a credit note and replacement invoice.</span>
-                <button class="btn btn-sm" onClick="{{unapply}}">Unapply payment</button>
-              </div>
-            </sc-if>
+              <sc-if value="{{blocked}}" hint-placeholder-val="{{ false }}"><p class="cr-block">{{blockMsg}}<sc-if value="{{blockLink}}" hint-placeholder-val="{{ false }}"> <a class="lnk" href="credit-note-list.html">Credit Note List</a></sc-if></p></sc-if>
 
-            <div class="r-g3" style="padding: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
-              <div>
-                <label class="lbl" for="src">Source</label>
-                <div style="position: relative">
-                  <select id="src" class="select" value="{{source}}" onChange="{{setSource}}" disabled="{{locked}}" style="width: 100%">
-                    <option value="FCA approval">FCA approval</option>
-                    <option value="DAR waiver">DAR waiver</option>
-                    <option value="Pricing correction">Pricing correction</option>
-                    <option value="Invoice amendment">Invoice amendment</option>
-                  </select>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+              <sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
+                <div class="cr-done" role="status">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.8 2.8L16 10"></path></svg>
+                  <div><b>Credit note <span class="mono">{{doneNo}}</span> sent for approval</b><span>Agency Finance (L1) reviews it first, then the Finance Approver (L2). Once approved it is generated and posted to GFS.</span></div>
+                  <div class="cr-done-a"><a class="btn btn-sm" href="credit-note-list.html">Open Credit Note List</a><button class="btn btn-sm" onClick="{{another}}">Raise another</button></div>
                 </div>
-              </div>
-              <div>
-                <span class="lbl">Credit note date</span>
-                <div class="ro mono">{{today}}</div>
-                <div style="font-size: 12px; line-height: 16px; color: var(--muted); margin-top: 4px">Backdating not permitted</div>
-              </div>
-              <div>
-                <span class="lbl">Exchange rate (from original invoice)</span>
-                <div class="ro mono">{{roe}}</div>
-                <div style="font-size: 12px; line-height: 16px; color: var(--muted); margin-top: 4px">Locked — same rate as original invoice</div>
-              </div>
-              <div>
-                <label class="lbl" for="rc">Dispute reason code</label>
-                <div style="position: relative">
-                  <select id="rc" class="select" value="{{rcode}}" onChange="{{setRcode}}" disabled="{{locked}}" style="width: 100%">
-                    <option value="">Select reason code</option>
-                    <option value="Rate Error">Rate Error</option>
-                    <option value="Weight Variance">Weight Variance</option>
-                    <option value="Surcharge Omission">Surcharge Omission</option>
-                    <option value="Damaged Cargo">Damaged Cargo</option>
-                    <option value="Customer Tax ID Error">Customer Tax ID Error</option>
-                  </select>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
-                </div>
-              </div>
-              <div style="grid-column: span 2">
-                <span class="lbl">Supporting evidence · mandatory</span>
-                <div style="display: flex; align-items: center; gap: 10px">
-                  <button class="btn" onClick="{{attach}}" disabled="{{locked}}">Attach file</button>
-                  <span style="font-size: 12px; color: {{evColor}}">{{evText}}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="r-wrap" style="padding: 0 16px 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
-              <div class="seg" role="radiogroup" aria-label="Credit type" style="display: grid; grid-template-columns: repeat(2, 120px)">
-                <button role="radio" aria-checked="{{fullOn}}" onClick="{{pickFull}}" disabled="{{locked}}">Full credit</button>
-                <button role="radio" aria-checked="{{partOn}}" onClick="{{pickPart}}" disabled="{{locked}}">Partial credit</button>
-              </div>
-              <span style="font-size: 12px; color: var(--muted)">Full / partial: configured per country</span>
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-inline-start: auto">
-                <input type="checkbox" checked="{{replace}}" onChange="{{toggleReplace}}" disabled="{{locked}}">
-                <span>Generate replacement invoice after approval</span>
-              </label>
-            </div>
-
-            <div style="overflow-x: auto; border-top: 1px solid var(--line)">
-              <table>
-                <thead><tr><th style="width: 44px"><span class="sr">Credit</span></th><th>Charge code</th><th class="r">Invoiced USD</th><th class="r r-w" style="width: 200px">Credit USD</th></tr></thead>
-                <tbody>
-                  <sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
-                    <tr>
-                      <td><input type="checkbox" checked="{{l.on}}" onChange="{{l.toggle}}" disabled="{{l.lock}}" aria-label="Credit {{l.code}}"></td>
-                      <td>{{l.code}}</td>
-                      <td class="mono r">{{l.amtText}}</td>
-                      <td class="r"><input class="input mono" type="number" min="0" max="{{l.amt}}" step="0.01" value="{{l.credit}}" onChange="{{l.setCredit}}" disabled="{{l.inputLock}}" aria-label="Credit amount {{l.code}}" style="width: 140px; text-align: end"></td>
-                    </tr>
-                  </sc-for>
-                </tbody>
-              </table>
-            </div>
-            <sc-if value="{{overCredit}}" hint-placeholder-val="{{ false }}">
-              <div role="alert" style="margin: 12px 16px 0; padding: 12px 16px; border-radius: 6px; background: var(--badbg); color: var(--bad2)">Credit value cannot exceed the original invoice value of each charge.</div>
-            </sc-if>
-            <sc-if value="{{taxPortal}}" hint-placeholder-val="{{ false }}">
-              <div style="margin: 12px 16px 0; padding: 12px 16px; border-radius: 6px; background: var(--tint); color: var(--accent2)">Local regulation requires this credit note to be submitted to the government tax portal ({{regime}}), referencing the original invoice IRN.</div>
-            </sc-if>
-
-            <div class="r-wrap" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; height: 72px; padding: 0 16px; border-top: 1px solid var(--line); background: var(--sub); box-sizing: border-box">
-              <div style="display: flex; gap: 40px">
-                <div><div class="k">Original invoice</div><div class="mono" style="font-size: 16px; line-height: 24px">USD {{origTotal}}</div></div>
-                <div><div class="k">Credit note value</div><div class="mono" style="font-size: 16px; line-height: 24px; color: var(--accent2)">USD {{creditTotal}}</div></div>
-              </div>
-              <sc-if value="{{showSubmit}}" hint-placeholder-val="{{ true }}">
-                <button class="btn btn-primary" onClick="{{submit}}" disabled="{{cantSubmit}}">Submit for approval</button>
               </sc-if>
-              <sc-if value="{{showReset}}" hint-placeholder-val="{{ false }}">
-                <button class="btn" onClick="{{reset}}">Raise another credit note</button>
+
+              <sc-if value="{{editable}}" hint-placeholder-val="{{ true }}">
+                <div class="cn-sec">
+                  <h3 id="cr-s1"><span class="cn-n">1</span>Why is the credit needed?</h3>
+                  <div class="cn-rs" role="radiogroup" aria-labelledby="cr-s1"><sc-for list="{{reasons}}" as="r" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{r.on}}" onClick="{{r.pick}}">{{r.t}}</button></sc-for></div>
+                  <sc-if value="{{errReason}}" hint-placeholder-val="{{ false }}"><span class="cn-e">Choose a reason code</span></sc-if>
+                  <sc-if value="{{hasReason}}" hint-placeholder-val="{{ false }}"><p class="cn-help">{{reasonHelp}}</p></sc-if>
+                  <sc-if value="{{needRef}}" hint-placeholder-val="{{ false }}"><label class="fld cn-ref">{{refL}}<input class="input mono" value="{{ref}}" onInput="{{onRef}}" placeholder="{{refPh}}"><sc-if value="{{errRef}}" hint-placeholder-val="{{ false }}"><span class="err">Enter the {{refL}}</span></sc-if></label></sc-if>
+                  <sc-if value="{{needFile}}" hint-placeholder-val="{{ false }}">
+                    <div class="fld">Supporting document
+                      <sc-if value="{{noFile}}" hint-placeholder-val="{{ true }}"><label class="cn-drop"><input type="file" class="cn-fi" onChange="{{onFile}}" aria-label="Attach supporting document"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.5l-8.5 8.5a5 5 0 0 1-7-7L14 5.5a3.3 3.3 0 0 1 4.7 4.7L10.2 18.7a1.7 1.7 0 0 1-2.4-2.4L15.5 8.6"></path></svg><span><b>Attach file</b> · PDF, image or e-mail, up to 10 MB</span></label></sc-if>
+                      <sc-if value="{{hasFile}}" hint-placeholder-val="{{ false }}"><div class="cn-file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span class="mono">{{file}}</span><button type="button" class="lnk" onClick="{{rmFile}}">Remove</button></div></sc-if>
+                      <sc-if value="{{errFile}}" hint-placeholder-val="{{ false }}"><span class="err">Attach the supporting document</span></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+
+                <div class="cn-sec">
+                  <h3><span class="cn-n">2</span>What is credited <span class="hint">The whole invoice, at the original exchange rate. Tax is reversed in full.</span></h3>
+                  <table class="cn-lt cr-lt">
+                    <thead><tr><th>Charge</th><th>Currency</th><th class="num">Amount</th><th>Tax code</th><th class="num">Tax reversed</th><th class="num">Credit total</th></tr></thead>
+                    <tbody><sc-for list="{{lines}}" as="l" hint-placeholder-count="3"><tr><td><span class="mono">{{l.code}}</span><span class="cn-cn">{{l.name}}</span></td><td>{{l.cur}}</td><td class="num mono">{{l.amt}}</td><td><span class="mono">{{l.tcode}}</span><span class="cn-cn">{{l.rate}}</span></td><td class="num mono">{{l.tax}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
+                    <tfoot><sc-for list="{{tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="2"><b>Total</b> <span class="mu">· {{t.cur}}</span></td><td class="num mono">{{t.net}}</td><td></td><td class="num mono">{{t.tax}}</td><td class="num mono cn-gt">{{t.cur}} {{t.gross}}</td></tr></sc-for></tfoot>
+                  </table>
+                  <sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}"><p class="cr-paid">This invoice is paid. The payment is unapplied from it when the credit note is generated, and re-applied to the replacement invoice if one is raised.</p></sc-if>
+                  <button type="button" class="cr-tg" role="switch" aria-checked="{{repl}}" onClick="{{togRepl}}"><span class="cr-sw" aria-hidden="true"></span><span><b>Generate a replacement invoice after approval</b><small>Re-bills the shipment with the corrected charges</small></span></button>
+                  <sc-if value="{{fca}}" hint-placeholder-val="{{ false }}"><p class="cn-help">FCA: the original invoice is cancelled and a new invoice is generated with the revised charges.</p></sc-if>
+                </div>
+
+                <div class="cn-sec">
+                  <h3 id="cr-s3"><span class="cn-n">3</span>Remarks <span class="hint">Optional</span></h3>
+                  <textarea class="input cn-ta" value="{{remark}}" onInput="{{onRemark}}" aria-labelledby="cr-s3" placeholder="Add context for the approver, for example who agreed the correction and when"></textarea><span class="cn-cnt mu">{{remN}}</span>
+                </div>
+
+                
               </sc-if>
             </div>
+            <sc-if value="{{editable}}" hint-placeholder-val="{{ true }}"><div class="cr-act">
+                  <p class="cr-act-t">Dated <b>{{today}}</b>, no back-dating. Approved by Agency Finance (L1), then Finance Approver (L2); you can’t approve your own request. Posted to GFS once approved.</p>
+                  <div class="cr-btns"><button class="btn" onClick="{{clear}}">Clear</button><button class="btn btn-primary" onClick="{{submit}}">Send for approval</button></div>
+                </div></sc-if>
+          
           </section>
-
-          <aside class="r-col" style="flex: 1 1 400px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-            <section class="card">
-              <div class="card-head"><h2 class="card-title">Approval matrix</h2><span class="card-meta">Credit note value</span></div>
-              <div style="padding: 16px; display: flex; flex-direction: column; gap: 8px">
-                <div>
-                  <label class="lbl" for="route">Approval route</label>
-                  <div style="position: relative">
-                    <select id="route" class="select" value="{{route}}" onChange="{{setRoute}}" disabled="{{routeLocked}}" style="width: 100%">
-                      <option value="matrix">Approval matrix (by amount)</option>
-                      <option value="alt">Manual alternative approver</option>
-                    </select>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
-                  </div>
-                </div>
-                <sc-for list="{{tiers}}" as="t" hint-placeholder-count="2">
-                  <div class="r-wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; height: 56px; padding: 0 16px; border-radius: 8px; border: 1px solid {{t.border}}; background: {{t.bg}}; box-sizing: border-box">
-                    <span style="font-weight: 500">{{t.role}}</span>
-                    <span class="mono" style="font-size: 12px; color: var(--muted)">{{t.limit}}</span>
-                  </div>
-                </sc-for>
-              </div>
-            </section>
-
-            <section class="card">
-              <div class="card-head"><h2 class="card-title">Workflow</h2></div>
-              <ol style="list-style: none; margin: 0; padding: 8px 16px 16px; display: flex; flex-direction: column">
-                <sc-for list="{{flow}}" as="f" hint-placeholder-count="8">
-                  <li style="display: flex; gap: 12px; align-items: flex-start; padding: 6px 0">
-                    <span style="width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: {{f.dot}}; flex: none"></span>
-                    <span style="display: flex; flex-direction: column"><span style="font-weight: 500; color: {{f.fg}}">{{f.label}}</span><span class="mono" style="font-size: 12px; line-height: 16px; color: var(--muted)">{{f.sub}}</span></span>
-                  </li>
-                </sc-for>
-              </ol>
-              <sc-if value="{{showApprove}}" hint-placeholder-val="{{ false }}">
-                <div style="padding: 0 16px 16px; display: flex; flex-direction: column; gap: 8px">
-                  <div style="padding: 12px 16px; border-radius: 6px; background: var(--bg); color: var(--muted2)">Prepared by [User ID]. The preparer cannot approve their own credit note. Multi-factor authentication is required to approve.</div>
-                  <button class="btn btn-primary" onClick="{{approve}}" style="align-self: flex-start">Approve as {{approver}}</button>
-                </div>
-              </sc-if>
-            </section>
-          </aside>
         </div>
       </main>
     </div>
@@ -596,95 +614,153 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 </div>
 </script>
 <script type="text/x-dc" id="logic">
+const IV_SEED = [{"no": "SINOF2602401", "type": "Freight", "bkg": "SINB2610231", "bl": "BL-SG-24001", "cntr": "PILU1000016", "vvd": "Vessel 01 / 012E", "party": "Straits Harbour Logistics (SG)", "cust": "SG-100231", "status": "Sent", "due": "20 Nov 2026", "gov": "—", "files": "PDF · JSON", "date": "06 Nov 2026", "port": "SGSIN", "lines": [["OFT", 1850.0, "USD", "1.3412", "SG-SR-9", "AUD-26-104812"], ["BAF", 320.0, "USD", "1.3412", "SG-SR-9", "AUD-26-104813"], ["THC-O", 305.0, "SGD", "—", "SG-SR-9", "AUD-26-104814"]]}, {"no": "SINOF2602405", "type": "Freight", "bkg": "SINB2610244", "bl": "BL-SG-24006", "cntr": "PILU3000014", "vvd": "Vessel 01 / 012E", "party": "Meridian Agro Exports (SG)", "cust": "SG-100874", "status": "Paid", "due": "17 Nov 2026", "gov": "—", "files": "PDF · JSON", "date": "03 Nov 2026", "port": "SGSIN", "lines": [["OFT", 3200.0, "USD", "1.3412", "ZR-INTL", "AUD-26-104820"]]}, {"no": "SINOF2600118PRF", "type": "Proforma", "bkg": "SINB2610252", "bl": "BL-SG-24002", "cntr": "PILU5000019", "vvd": "Vessel 01 / 012E", "party": "Kinabalu Home Furnishings (SG)", "cust": "SG-101066", "status": "Draft", "due": "—", "gov": "—", "files": "PDF", "date": "10 Nov 2026", "port": "SGSIN", "lines": [["OFT", 2100.0, "USD", "1.3412", "ZR-INTL", "AUD-26-104835"]]}, {"no": "SINOD2602150", "type": "DET / DEM", "bkg": "SINB2609870", "bl": "BL-SG-24004", "cntr": "PILU4000021", "vvd": "Vessel 03 / 108N", "party": "Straits Harbour Logistics (MY)", "cust": "MY-200417", "status": "Credited", "due": "12 Nov 2026", "gov": "—", "files": "PDF · JSON", "date": "29 Oct 2026", "port": "SGSIN", "lines": [["DEM", 4200.0, "SGD", "—", "SG-SR-9", "AUD-26-103977"]]}, {"no": "NSAOF2601044", "type": "Freight", "bkg": "NSAB2610118", "bl": "BL-IN-24005", "cntr": "PILU2000013", "vvd": "Vessel 04 / 021S", "party": "Straits Harbour Logistics (IN)", "cust": "IN-300552", "status": "Accepted", "due": "18 Nov 2026", "gov": "IRN 7c1f…a92e", "files": "PDF · JSON", "date": "04 Nov 2026", "port": "INNSA", "lines": [["OFT", 980.0, "USD", "84.1200", "IN-GST-18", "AUD-26-104402"], ["DOC", 220.0, "INR", "—", "IN-GST-18", "AUD-26-104403"]]}, {"no": "NSAOF2601051", "type": "Freight", "bkg": "NSAB2610126", "bl": "BL-IN-24008", "cntr": "PILU2000027", "vvd": "Vessel 04 / 021S", "party": "Orchid Lane Polymers (IN)", "cust": "IN-300781", "status": "Rejected", "due": "21 Nov 2026", "gov": "IRP error 2150", "files": "PDF", "date": "07 Nov 2026", "port": "INNSA", "lines": [["OFT", 1500.0, "USD", "84.1200", "IN-GST-18", "AUD-26-104451"]]}, {"no": "PKGOF2600917", "type": "Freight", "bkg": "PKGB2610064", "bl": "BL-MY-24003", "cntr": "PILU6000011", "vvd": "Vessel 02 / 044W", "party": "Kinabalu Home Furnishings (MY)", "cust": "MY-200903", "status": "Generated", "due": "24 Nov 2026", "gov": "MyInvois 3F8K…Q2LM", "files": "PDF · JSON", "date": "10 Nov 2026", "port": "MYPKG", "lines": [["OFT", 1650.0, "USD", "4.4710", "MY-SST-8", "AUD-26-104510"]]}, {"no": "LCHOD2600233", "type": "DET / DEM", "bkg": "LCHB2609551", "bl": "BL-TH-24002", "cntr": "PILU7000018", "vvd": "Vessel 05 / 077E", "party": "Andaman Bay Traders (TH)", "cust": "TH-500318", "status": "Pending validation", "due": "—", "gov": "—", "files": "—", "date": "11 Nov 2026", "port": "THLCH", "lines": [["DET", 960.0, "THB", "—", "TH-VAT-7", "AUD-26-104588"]]}, {"no": "SINMI2600042", "type": "MISC", "bkg": "SINB2610231", "bl": "BL-SG-24001", "cntr": "PILU1000016", "vvd": "Vessel 01 / 012E", "party": "Straits Harbour Logistics (SG)", "cust": "SG-100231", "status": "Cancelled", "due": "—", "gov": "—", "files": "PDF", "date": "05 Nov 2026", "port": "SGSIN", "lines": [["SEAL", 15.0, "SGD", "—", "SG-SR-9", "AUD-26-104601"]]}];
+const IV_CUST = {"SG-100231": {"name": "Straits Harbour Logistics (SG)", "tax": "UEN 201812345K", "addr": "21 Pioneer Road, #04-02, Singapore 628491", "mail": "ap@straitsharbour.sg"}, "SG-100874": {"name": "Meridian Agro Exports (SG)", "tax": "UEN 199904417M", "addr": "8 Jurong Port Road, Singapore 619088", "mail": "finance@meridianagro.sg"}, "SG-101066": {"name": "Kinabalu Home Furnishings (SG)", "tax": "UEN 201533018D", "addr": "60 Tuas South Ave 1, Singapore 637611", "mail": "billing@kinabaluhome.sg"}, "MY-200417": {"name": "Straits Harbour Logistics (MY)", "tax": "C20811047090", "addr": "Lot 12, Jalan Pelabuhan, 42000 Port Klang", "mail": "ap@straitsharbour.my"}, "IN-300552": {"name": "Straits Harbour Logistics (IN)", "tax": "GSTIN 27AAGCS4412L1Z5", "addr": "Plot 7, JNPT Road, Navi Mumbai 400707", "mail": "ap@straitsharbour.in"}, "IN-300781": {"name": "Orchid Lane Polymers (IN)", "tax": "GSTIN 24AACCO9021P1ZK", "addr": "Survey 118, Vapi GIDC, Gujarat 396195", "mail": "accounts@orchidlane.in"}, "MY-200903": {"name": "Kinabalu Home Furnishings (MY)", "tax": "C21003391080", "addr": "No. 3, Jalan Perigi, 81700 Pasir Gudang", "mail": "billing@kinabaluhome.my"}, "TH-500318": {"name": "Andaman Bay Traders (TH)", "tax": "TIN 0105559013374", "addr": "88 Moo 3, Laem Chabang, Chonburi 20230", "mail": "ar@andamanbay.co.th"}};
+const IV_CHG = {"MISC": "Miscellaneous Charge", "OFT": "Ocean Freight", "BAF": "Bunker Adjustment Factor", "THC-O": "Origin THC", "THC-DST": "Destination THC", "DOC": "Documentation", "DEM": "Demurrage", "DET": "Detention", "SEAL": "Seal Fee", "LSS": "Low Sulphur Surcharge"};
+function ivRand(seed) { let x = seed; return () => { x = (x * 1103515245 + 12345) % 2147483648; return x / 2147483648; }; }
+const IV_POOL = { 'SG-100231': 'SGSIN', 'SG-100874': 'SGSIN', 'SG-101066': 'SGSIN', 'MY-200417': 'MYPKG', 'MY-200903': 'MYPKG', 'IN-300552': 'INNSA', 'IN-300781': 'INNSA', 'TH-500318': 'THLCH' };
+const IV_LOC = { SGSIN: ['SIN', 'SG', 'SGD', '1.3412', 'SG-SR-9', 'ZR-INTL'], MYPKG: ['PKG', 'MY', 'MYR', '4.4710', 'MY-SST-8', 'MY-SST-8'], INNSA: ['NSA', 'IN', 'INR', '84.1200', 'IN-GST-18', 'IN-GST-18'], THLCH: ['LCH', 'TH', 'THB', '34.2500', 'TH-VAT-7', 'TH-VAT-7'] };
+function ivGen(n) {
+  const r = ivRand(20261113), pick = (a) => a[Math.floor(r() * a.length)], amt = (lo, hi) => Math.round((lo + r() * (hi - lo)) / 5) * 5;
+  const hex = (k) => Array.from({ length: k }, () => '0123456789abcdef'[Math.floor(r() * 16)]).join('');
+  const ST = [['Sent', 22], ['Paid', 30], ['Accepted', 14], ['Generated', 10], ['Draft', 4], ['Pending validation', 5], ['Rejected', 4], ['Credited', 6], ['Cancelled', 5]];
+  const tot = ST.reduce((a, x) => a + x[1], 0), stPick = () => { let v = r() * tot; for (const [k, w] of ST) { if ((v -= w) < 0) return k; } return 'Sent'; };
+  const fmt = (x) => x.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const custs = Object.keys(IV_POOL), out = [];
+  for (let k = 0; k < n; k++) {
+    const cust = pick(custs), port = IV_POOL[cust], L = IV_LOC[port];
+    const tr = r(), type = tr < 0.62 ? 'Freight' : (tr < 0.84 ? 'DET / DEM' : (tr < 0.95 ? 'MISC' : 'Proforma'));
+    const code = type === 'DET / DEM' ? 'OD' : (type === 'MISC' ? 'MI' : 'OF');
+    const no = L[0] + code + String(2601000 + k * 3 + Math.floor(r() * 3)).slice(-7) + (type === 'Proforma' ? 'PRF' : '');
+    const day = 1 + Math.floor(r() * 43), d = new Date(2026, 9, day), due = new Date(2026, 9, day + 14);
+    const status = type === 'Proforma' ? 'Draft' : stPick();
+    const lines = [];
+    if (type === 'Freight' || type === 'Proforma') {
+      lines.push(['OFT', amt(600, 7200), 'USD', L[3], L[5]]);
+      if (r() < 0.5) lines.push(['BAF', amt(120, 640), 'USD', L[3], L[5]]);
+      if (r() < 0.6) lines.push(['THC-O', amt(180, 820), L[2], '—', L[4]]);
+      if (r() < 0.3) lines.push(['DOC', amt(60, 260), L[2], '—', L[4]]);
+    } else if (type === 'DET / DEM') lines.push([r() < 0.5 ? 'DEM' : 'DET', amt(240, 6400), L[2], '—', L[4]]);
+    else lines.push([r() < 0.6 ? 'SEAL' : 'DOC', amt(15, 120), L[2], '—', L[4]]);
+    const aud = 110000 + k * 4;
+    lines.forEach((l, j) => l.push('AUD-26-' + (aud + j)));
+    const live = ['Sent', 'Paid', 'Accepted', 'Credited'].includes(status);
+    const gov = L[1] === 'IN' ? (live ? 'IRN ' + hex(4) + '…' + hex(4) : (status === 'Rejected' ? 'IRP error ' + pick(['2150', '2172', '2283']) : '—'))
+      : (L[1] === 'MY' ? (live || status === 'Generated' ? 'MyInvois ' + hex(4).toUpperCase() + '…' + hex(4).toUpperCase() : (status === 'Rejected' ? 'MyInvois rejected' : '—')) : '—');
+    out.push({ no, type, bkg: L[0] + 'B' + (2608000 + k), bl: 'BL-' + L[1] + '-' + (25000 + k), cntr: 'PILU' + (1100000 + k * 7), vvd: 'Vessel 0' + (1 + Math.floor(r() * 6)) + ' / 0' + (10 + Math.floor(r() * 89)) + pick(['E', 'W', 'N', 'S']),
+      party: (IV_CUST[cust] || {}).name, cust, status, due: ['Draft', 'Pending validation'].includes(status) ? '—' : fmt(due),
+      gov, files: status === 'Pending validation' ? '—' : (status === 'Draft' ? 'PDF' : 'PDF · JSON'), date: fmt(d), port, lines });
+  }
+  return out;
+}
+const CR_ALL = IV_SEED.concat(ivGen(491)).sort((a, b) => new Date(b.date) - new Date(a.date));
+// Invoices that already have a credit note in the Credit Note List sample data
+const CR_HASCN = new Set(['SINOF2602298', 'SINOD2602150', 'PKGOF2600917', 'SINOF2602281', 'NSAOF2601044', 'SINOF2602405', 'SINOF2602401', 'LCHOD2600198', 'NSAOF2601051']);
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);
-    this.state = { inv: 'v1', full: false, sel: { v1: { l1: true } }, credit: {}, source: 'FCA approval', replace: true, unapplied: {}, stage: 'draft', route: 'matrix', rcode: '', ev: false };
+    this.state = { inv: '', q: '', loc: 'all', pay: 'all', lim: 25, reason: '', ref: '', file: '', remark: '', repl: null, tried: false, done: null, saved: [] };
+    try { this.state.saved = JSON.parse(localStorage.getItem('girs.cn.v1') || '[]') || []; } catch (e) {}
+    let pre = '';
+    try { const c = window.GirsCtx && window.GirsCtx.take('credit-notes.html'); if (c && c.inv) pre = c.inv; } catch (e) {}
+    try { if (!pre) pre = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
+    if (pre && CR_ALL.some((x) => x.no === pre)) this.state.inv = pre;
   }
   renderVals() {
     const s = this.state;
+    const ME = 'Daniel Tan';
     const m = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const INV = [
-      { id: 'v1', no: 'SINOF2602401', type: 'Final', bl: 'BL-SG-24001', paid: false, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 1850], ['l2', 'Bunker / Environmental Surcharge', 320], ['l3', 'Terminal Handling (THC)', 305]] },
-      { id: 'v2', no: 'SINOF2602405', type: 'Final', bl: 'BL-SG-24006', paid: true, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 3200], ['l2', 'Demurrage', 700]] },
-      { id: 'v3', no: 'NSAOF2601044', type: 'Final', bl: 'BL-IN-24005', paid: false, roe: '1 USD = 83.2000 INR', ctry: 'IN', lines: [['l1', 'Ocean Freight', 980], ['l2', 'Documentation Fee', 220]] },
-      { id: 'v5', no: 'SINOD2602150', type: 'Final', bl: 'BL-SG-24004', paid: false, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Demurrage', 4200]] },
-      { id: 'v6', no: 'SINOF2602298', type: 'Final', bl: 'BL-SG-24009', paid: false, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 5200], ['l2', 'Terminal Handling (THC)', 920]] },
-      { id: 'v7', no: 'SINOF2602281', type: 'Final', bl: 'BL-SG-24005', paid: true, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 62400]] },
-      { id: 'v4', no: 'SINOF2600118PRF', type: 'Proforma', bl: 'BL-SG-24002', paid: false, roe: '1 USD = 1.3450 SGD', ctry: 'SG', lines: [['l1', 'Ocean Freight', 2100]] }
-    ];
-    const v = INV.find((x) => x.id === s.inv);
-    const total = v.lines.reduce((a, l) => a + l[2], 0);
-    const proforma = v.type === 'Proforma';
-    const needsUnapply = v.paid && !s.unapplied[v.id];
-    const locked = s.stage !== 'draft' || proforma || needsUnapply;
-    const selMap = s.sel[v.id] || {};
-    const crMap = s.credit[v.id] || {};
-    const lines = v.lines.map(([id, code, amt]) => {
-      const on = s.full || !!selMap[id];
-      const credit = s.full ? amt : (on ? (crMap[id] !== undefined ? crMap[id] : amt) : 0);
-      return { code, amt, amtText: m(amt), on, credit: credit.toFixed(2), val: credit,
-        lock: locked || s.full, inputLock: locked || s.full || !on,
-        toggle: () => this.setState({ sel: { ...s.sel, [v.id]: { ...selMap, [id]: !on } } }),
-        setCredit: (e) => this.setState({ credit: { ...s.credit, [v.id]: { ...crMap, [id]: Math.max(0, Number(e.target.value) || 0) } } }) };
-    });
-    const over = lines.some((l) => l.val > l.amt + 0.001);
-    const creditTotal = lines.reduce((a, l) => a + l.val, 0);
-    const tierIdx = creditTotal <= 0 ? -1 : (creditTotal > 50000 ? 1 : 0);
-    const tierDefs = [
-      { role: 'Team lead', limit: 'Up to USD 50,000' },
-      { role: 'Chief Commercial Officer (CCO)', limit: 'Above USD 50,000' }
-    ];
-    const approver = s.route === 'alt' ? 'alternative approver' : (tierIdx === 1 ? 'CCO' : 'team lead');
-    const taxPortal = v.ctry === 'IN';
-    const done = s.stage === 'approved';
-    const cnNo = v.no.slice(0, 7) + String(311 + INV.indexOf(v)).padStart(5, '0') + 'CR';
-    const wasPaid = v.paid;
-    const replNo = v.no.slice(0, 7) + String(2501 + INV.indexOf(v) * 7).padStart(5, '0');
-    const flow = [
-      wasPaid ? { label: 'Payment unapplied', sub: s.unapplied[v.id] ? 'Done' : 'Required first', on: !!s.unapplied[v.id] } : null,
-      { label: 'Request prepared', sub: '[User ID]', on: s.stage !== 'draft' },
-      { label: 'Approver notified by email', sub: s.stage === 'draft' ? '—' : (s.route === 'alt' ? '[Alternative approver]' : (tierIdx === 1 ? 'CCO' : 'Team lead')), on: s.stage !== 'draft' },
-      { label: 'Approval', sub: s.stage === 'pending' ? 'Pending · MFA required' : (done ? 'Approved · MFA verified' : 'Not started'), on: done },
-      { label: 'Credit note issued', sub: done ? cnNo : '—', on: done },
-      { label: 'Charge codes released for new invoice', sub: done ? 'Released' : '—', on: done },
-      { label: 'Replacement invoice', sub: !s.replace ? 'Not required' : (done ? replNo : '—'), on: done && s.replace },
-      wasPaid ? { label: 'Payment re-applied to replacement invoice', sub: done && s.replace ? replNo : '—', on: done && s.replace } : null,
-      { label: 'Government tax portal', sub: !taxPortal ? 'Not required' : (done ? 'IRN: [64-char hash]' : '—'), on: done && taxPortal },
-      { label: 'Posted to GFS', sub: done ? 'Posted' : '—', on: done }
-    ].filter(Boolean);
-    const stageMeta = { draft: ['Draft', 'background:var(--neutral);color:var(--muted)'], pending: ['Pending approval', 'background:var(--warnbg);color:var(--warn)'], approved: ['Approved', 'background:var(--okbg);color:var(--ok)'] };
+    const today = () => new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    const TR = { 'SG-SR-9': 9, 'IN-GST-18': 18, 'MY-SST-8': 8, 'TH-VAT-7': 7, 'ZR-INTL': 0 };
+    const LOCN = { SGSIN: 'Singapore · SIN', MYPKG: 'Port Klang · PKG', INNSA: 'Nhava Sheva · NSA', THLCH: 'Laem Chabang · LCH' };
+    const LCUR = { SGSIN: 'SGD', MYPKG: 'MYR', INNSA: 'INR', THLCH: 'THB' };
+    const OK = ['Generated', 'Sent', 'Accepted', 'Paid'];
+    const savedOrig = new Set(s.saved.map((c) => c && c.orig));
+    const whyNot = (x) => x.type === 'Proforma' ? 'Proforma — not a tax invoice' : CR_HASCN.has(x.no) || savedOrig.has(x.no) ? 'Credit note already raised' :
+      x.status === 'Credited' ? 'Already credited' : x.status === 'Cancelled' ? 'Invoice cancelled' : !OK.includes(x.status) ? x.status + ' — not issued yet' : '';
+    const mainAmt = (x) => { const c = x.lines[0][2]; return c + ' ' + m(x.lines.filter((l) => l[2] === c).reduce((t, l) => t + l[1], 0)) + (x.lines.some((l) => l[2] !== c) ? ' + ' + [...new Set(x.lines.map((l) => l[2]).filter((k) => k !== c))].join(' + ') : ''); };
+    const q = s.q.trim().toLowerCase();
+    const base = CR_ALL.filter((x) => (s.loc === 'all' || x.port === s.loc) && (s.pay === 'all' || (s.pay === 'paid') === (x.status === 'Paid')));
+    const okList = base.filter((x) => !whyNot(x));
+    const pool = q ? base.filter((x) => (x.no + ' ' + x.bl + ' ' + (x.party || '') + ' ' + x.bkg).toLowerCase().includes(q)) : okList;
+    const shown = pool.slice(0, s.lim);
+    const v = CR_ALL.find((x) => x.no === s.inv) || okList[0] || CR_ALL[0];
+    const block = whyNot(v);
+    const lines = v.lines.map((l) => { const rate = TR[l[4]] || 0, t = Math.round(l[1] * rate) / 100; return { code: l[0], name: IV_CHG[l[0]] || l[0], cur: l[2], amt: m(l[1]), tcode: l[4], rate: rate + '%', tax: m(t), tot: m(l[1] + t), a: l[1], t }; });
+    const curs = [...new Set(lines.map((l) => l.cur))];
+    const tots = curs.map((c) => { const ls = lines.filter((l) => l.cur === c), n = ls.reduce((t, l) => t + l.a, 0), x = ls.reduce((t, l) => t + l.t, 0); return { cur: c, net: m(n), tax: m(x), gross: m(n + x), g: n + x, n, x }; });
+    const grossTxt = tots.map((t) => t.cur + ' ' + t.gross).join(' + ');
+    const usd = v.lines.find((l) => l[2] === 'USD' && l[3] !== '—');
+    const roe = usd ? '1 USD = ' + usd[3] + ' ' + LCUR[v.port] : '—';
+    const tcode = v.lines[0][4], rate = TR[tcode] || 0, net = tots[0].n, tax = tots[0].x;
+    const R = {
+      'FCA approval': ['ref', 'Freight Correction Advice approved for this invoice.', 'FCA reference', 'e.g. FCA-26-001842'],
+      'DAR waiver': ['ref', 'Waiver approved through a Dispute & Approval Request.', 'DAR reference', 'e.g. DAR-26-000317'],
+      'Pricing correction': ['file', 'Wrong rate or charge billed. Attach the evidence, for example the agreed rate.'],
+      'Invoice amendment': ['file', 'Invoice details need to change. Attach the evidence for the amendment.']
+    };
+    const RC = R[s.reason] || null, needRef = !!RC && RC[0] === 'ref', needFile = !!RC && RC[0] === 'file';
+    const repl = s.repl === null ? s.reason === 'FCA approval' : s.repl;
+    const errReason = s.tried && !s.reason, errRef = s.tried && needRef && !s.ref.trim(), errFile = s.tried && needFile && !s.file;
+    const cnNo = v.no.replace('PRF', '').slice(0, 5) + '26' + String(10000 + (Math.abs([...v.no].reduce((h, c) => h * 31 + c.charCodeAt(0) | 0, 7)) % 89999)).slice(-5) + 'CR';
+    const reset = { reason: '', ref: '', file: '', remark: '', repl: null, tried: false, done: null };
+    const submit = () => {
+      if (block) return;
+      if (!s.reason || (needRef && !s.ref.trim()) || (needFile && !s.file)) { this.setState({ tried: true }); return; }
+      const cn = { no: cnNo, orig: v.no, ctype: 'Full', ref: needRef ? s.ref.trim() : '—', reason: s.reason, amount: net + tax, cur: tots[0].cur, taxrev: tcode + ' · ' + tots[0].cur + ' ' + m(tax),
+        appr: 'Pending approval', repl, gov: '—', party: v.party, src: 'Manual', remark: s.remark.trim(), file: s.file, date: today(), by: ME,
+        lines: v.lines.map((l) => [l[0], IV_CHG[l[0]] || l[0], l[1], l[4], TR[l[4]] || 0, l[2]]), audit: [[today(), ME, 'Credit note requested']] };
+      const saved = [cn].concat(s.saved);
+      try { localStorage.setItem('girs.cn.v1', JSON.stringify(saved)); } catch (e) {}
+      this.setState({ saved, done: cn, tried: false, __toast: 'Credit note ' + cnNo + ' sent for approval' });
+    };
+    const steps = [
+      ['Requested', s.done ? 'By ' + ME + ' · ' + s.done.date : 'By you, when you send this request', !!s.done],
+      ['L1 approval', 'Agency Finance', false],
+      ['L2 approval', 'Finance Approver', false],
+      v.status === 'Paid' ? ['Payment unapplied', 'From ' + v.no, false] : null,
+      ['Original invoice cancelled', v.no, false],
+      ['Credit note generated', cnNo + ' · ' + grossTxt, false],
+      repl ? ['Replacement invoice', 'Generated with the corrected charges', false] : null,
+      v.status === 'Paid' && repl ? ['Payment re-applied', 'To the replacement invoice', false] : null,
+      ['Posted to GFS', 'Credit note' + (repl ? ' and replacement invoice' : ''), false]
+    ].filter(Boolean).map(([t, d, on], i, a) => ({ t, d, cls: on ? 'nx-done' : i === 1 && s.done ? 'nx-now' : 'nx-wait', last: i === a.length - 1 ? 'true' : 'false' }));
     return {
-      invoices: INV.map((x) => ({ ...x, totalText: m(x.lines.reduce((a, l) => a + l[2], 0)), on: x.id === s.inv ? 'true' : 'false',
-        border: x.id === s.inv ? 'var(--accent)' : 'var(--line)', bg: x.id === s.inv ? 'var(--tint)' : 'var(--surface)',
-        pay: x.type === 'Proforma' ? 'Proforma' : (x.paid && !s.unapplied[x.id] ? 'Paid' : 'Unpaid'),
-        payStyle: x.paid && !s.unapplied[x.id] ? 'background:var(--okbg);color:var(--ok)' : 'background:var(--neutral);color:var(--muted)',
-        pick: () => this.setState({ inv: x.id, stage: 'draft', full: false }) })),
-      isProforma: proforma, needsUnapply,
-      unapply: () => this.setState({ unapplied: { ...s.unapplied, [v.id]: true } }),
-      locked, source: s.source, setSource: (e) => this.setState({ source: e.target.value }),
-      today: '05 Nov 2026', roe: v.roe,
-      fullOn: s.full ? 'true' : 'false', partOn: s.full ? 'false' : 'true',
-      fullBg: s.full ? 'var(--surface)' : 'transparent', partBg: s.full ? 'transparent' : 'var(--surface)',
-      fullFw: s.full ? 600 : 500, partFw: s.full ? 500 : 600,
-      pickFull: () => this.setState({ full: true }), pickPart: () => this.setState({ full: false }),
-      replace: s.replace, toggleReplace: () => this.setState({ replace: !s.replace }),
-      lines, overCredit: over, taxPortal, regime: 'GSTN e-Invoice (IRN)',
-      origTotal: m(total), creditTotal: m(creditTotal),
-      stageText: stageMeta[s.stage][0], stageChip: stageMeta[s.stage][1],
-      showSubmit: s.stage === 'draft', cantSubmit: locked || over || creditTotal <= 0 || !s.rcode || !s.ev,
-      rcode: s.rcode, setRcode: (e) => this.setState({ rcode: e.target.value }), attach: () => this.setState({ ev: true }),
-      evText: s.ev ? 'customer-dispute-email.pdf attached' : 'No file attached — required before submitting', evColor: s.ev ? 'var(--ok)' : 'var(--warn)',
-      submit: () => this.setState({ stage: 'pending' }),
-      showApprove: s.stage === 'pending', approver,
-      route: s.route, setRoute: (e) => this.setState({ route: e.target.value }), routeLocked: s.stage !== 'draft',
-      approve: () => this.setState({ stage: 'approved' }),
-      showReset: done, reset: () => this.setState({ stage: 'draft', full: false, sel: { ...s.sel, [v.id]: {} }, credit: { ...s.credit, [v.id]: {} } }),
-      tiers: tierDefs.map((t, i) => ({ ...t, border: i === tierIdx ? 'var(--accent)' : 'var(--line)', bg: i === tierIdx ? 'var(--tint)' : 'var(--surface)' })),
-      flow: flow.map((f) => ({ ...f, dot: f.on ? 'var(--okdot)' : 'var(--bd)', fg: f.on ? 'var(--ink)' : 'var(--muted)' }))
+      q: s.q,
+      invoices: shown.map((x) => { const b = whyNot(x); return { no: x.no, party: x.party, meta: x.type + ' · ' + x.date, total: mainAmt(x),
+        pay: x.type === 'Proforma' ? 'Proforma' : b ? x.status : x.status === 'Paid' ? 'Paid' : 'Unpaid', payCls: 'cr-pay ' + (b ? 'cr-pm' : x.status === 'Paid' ? 'cr-pp' : 'cr-pu'),
+        on: x.no === v.no ? 'true' : 'false', off: b ? 'true' : 'false', why: b, hasWhy: !!b,
+        pick: () => this.setState(Object.assign({ inv: x.no }, reset)) }; }),
+      noMatch: shown.length === 0, emptyMsg: q ? 'No invoice matches “' + s.q + '”. Search by invoice no., B/L, booking or billing party.' : 'No invoice can be credited for these filters.',
+      invCount: okList.length.toLocaleString('en-US') + ' can be credited',
+      listFoot: q ? pool.length + ' match' + (pool.length === 1 ? '' : 'es') + ' · includes invoices that can’t be credited' : 'Showing ' + shown.length + ' of ' + pool.length.toLocaleString('en-US') + ' · newest first',
+      hasMore: pool.length > shown.length, moreTxt: 'Show ' + Math.min(25, pool.length - shown.length) + ' more', more: () => this.setState({ lim: s.lim + 25 }),
+      loc: s.loc, setLoc: (e) => this.setState({ loc: e.target.value, lim: 25 }),
+      locs: [{ k: 'all', t: 'All locations' }].concat(Object.keys(LOCN).map((k) => ({ k, t: LOCN[k] }))),
+      pays: [['all', 'All'], ['unpaid', 'Unpaid'], ['paid', 'Paid']].map(([k, t]) => ({ t, on: s.pay === k ? 'true' : 'false', pick: () => this.setState({ pay: k, lim: 25 }) })),
+      setQ: (e) => this.setState({ q: e.target.value, lim: 25 }),
+      invNo: v.no, party: v.party,
+      strip: [{ l: 'Invoice date', v: v.date }, { l: 'Status', v: v.status === 'Paid' ? 'Paid' : v.status + ' · Unpaid' }, { l: 'B/L', v: v.bl }, { l: 'Exchange rate', v: roe }, { l: 'Credit note total (incl. tax)', v: grossTxt }],
+      blocked: !!block && !s.done, blockMsg: block === 'Credit note already raised' ? 'A credit note has already been raised for this invoice. Open it in the' : 'This invoice can’t be credited: ' + block.toLowerCase() + '. Only generated, sent, accepted or paid invoices can be credited.',
+      blockLink: block === 'Credit note already raised',
+      isPaid: v.status === 'Paid' && !block,
+      editable: !block && !s.done, isDone: !!s.done, doneNo: s.done ? s.done.no : '',
+      reasons: Object.keys(R).map((t) => ({ t, on: s.reason === t ? 'true' : 'false', pick: () => this.setState({ reason: t, ref: '', file: '', repl: null }) })),
+      hasReason: !!RC, reasonHelp: RC ? RC[1] : '', errReason,
+      needRef, refL: needRef ? RC[2] : '', refPh: needRef ? RC[3] : '', ref: s.ref, onRef: (e) => this.setState({ ref: e.target.value }), errRef,
+      needFile, noFile: needFile && !s.file, hasFile: needFile && !!s.file, file: s.file, errFile,
+      onFile: (e) => { const f = e.target.files && e.target.files[0]; this.setState({ file: f ? f.name : '' }); },
+      rmFile: () => this.setState({ file: '' }),
+      lines, tots, tcode,
+      repl: repl ? 'true' : 'false', togRepl: () => this.setState({ repl: !repl }), fca: s.reason === 'FCA approval',
+      remark: s.remark, onRemark: (e) => this.setState({ remark: e.target.value.slice(0, 500) }), remN: s.remark.length + ' / 500',
+      today: today(), submit, clear: () => this.setState(reset), another: () => this.setState(reset),
+      steps
     };
   }
 }
+
+
 
 const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
 const GIRS_LANGS = [['en', 'English', 'English'], ['zh', '中文（简体）', 'Chinese (Simplified)'], ['ar', 'العربية', 'Arabic'], ['es', 'Español', 'Spanish']];
@@ -753,6 +829,7 @@ class Component extends GirsPage {
 
 </script>
 <script src="girs-dates.js"></script>
+<script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 <script src="girs-search.js"></script>
 <script src="girs-ui.js"></script>

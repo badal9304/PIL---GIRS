@@ -311,7 +311,50 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .icard .foot{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--line2);margin-top:2px}
 .at td,.at th{white-space:normal;vertical-align:top}
 .lay{white-space:nowrap;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}
-.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}</style>
+.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}
+.dlg.wide.cnw{width:min(1040px,calc(100vw - 48px))}
+.cnw .db > *{flex-shrink:0}
+.cnw .db{gap:18px}
+.cn-strip{display:grid;grid-template-columns:0.8fr 0.7fr 1.3fr 1.3fr;margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cn-strip > div{padding:10px 14px;border-left:1px solid var(--line2);min-width:0}.cn-strip > div:first-child{border-left:0}.cn-strip > div:last-child{background:var(--tint)}
+.cn-strip dt{font-size:11.5px;color:var(--muted)}.cn-strip dd{margin:2px 0 0;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cn-strip > div:last-child dd{color:var(--accent2)}
+.cn-sec{display:flex;flex-direction:column;gap:10px}
+.cn-sec h3{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:600}.cn-sec h3 .hint{font-size:12px;font-weight:400;color:var(--muted)}
+.cn-n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--neutral);color:var(--muted2);font-size:11.5px;font-weight:700}
+.cn-rs{display:flex;flex-wrap:wrap;gap:8px}
+.cn-rs button{all:unset;box-sizing:border-box;cursor:pointer;height:34px;padding:0 14px;border:1px solid var(--line);border-radius:17px;font-size:13px;font-weight:500;color:var(--ink);background:var(--surface)}
+.cn-rs button:hover{border-color:var(--bd)}.cn-rs button[aria-checked=true]{border-color:var(--accent);background:var(--tint);color:var(--accent2);box-shadow:inset 0 0 0 1px var(--accent)}
+.cn-rs button:focus-visible,.cn-modes button:focus-visible,.cn-cb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cn-help{margin:0;font-size:12.5px;color:var(--muted2)}
+.cn-ref{max-width:340px}
+.cn-drop{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px dashed var(--bd);border-radius:8px;cursor:pointer;color:var(--muted2);font-weight:400;max-width:460px}.cn-drop:hover{border-color:var(--accent);color:var(--accent2)}.cn-drop b{color:var(--accent);font-weight:600}
+.cn-fi{position:absolute;inset:0;opacity:0;cursor:pointer}
+.cn-file{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sub);max-width:460px;font-weight:400}.cn-file .mono{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cn-note{margin:0;padding:10px 12px;border-radius:6px;background:var(--warnbg);color:var(--warn);font-size:12.5px;font-weight:500}
+.cn-modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:520px}
+.cn-modes button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:1px;padding:9px 12px;border:1px solid var(--line);border-radius:8px}.cn-modes b{font-size:13px}.cn-modes small{font-size:12px;color:var(--muted)}
+.cn-modes button[aria-checked=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--tint)}
+.cn-lt{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cn-lt th{height:34px;padding:0 10px;text-align:start;font-size:12px;font-weight:600;color:var(--muted2);background:var(--sub);border-bottom:1px solid var(--line);white-space:nowrap}.cn-lt th.num{text-align:end}
+.cn-lt td{padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:middle}.cn-lt tbody tr:last-child td{border-bottom:0}
+.cn-lt td:first-child,.cn-lt th:first-child{width:28px;padding-inline-end:0}
+.cn-cn{display:block;font-size:12px;color:var(--muted)}
+.cn-on td{background:var(--tint)}.cn-done td{color:var(--muted4)}
+.cn-amt{width:120px !important;height:32px;text-align:end}.cn-bad .cn-amt{border-color:var(--bad);background:var(--badbg)}
+.cn-le{display:block;margin-top:2px;font-size:11.5px}
+.cn-lt tfoot td{background:var(--sub);border-top:1px solid var(--line);border-bottom:0}
+.cn-gt{font-weight:700;color:var(--accent2);white-space:nowrap}
+.cn-cb{all:unset;box-sizing:border-box;display:inline-block;width:16px;height:16px;border:1.5px solid var(--bd);border-radius:3px;cursor:pointer;background:var(--surface);vertical-align:middle}
+.cn-cb[aria-checked=true]{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/11px no-repeat;border-color:var(--accent)}
+.cn-cb[disabled]{cursor:default;opacity:.55}
+.cn-e{font-size:12px;color:var(--bad)}
+.cn-lead{margin-top:-4px}
+.cnw .err{color:var(--bad)}
+.cn-ta{height:76px;padding-top:8px;resize:vertical}
+.cn-cnt{align-self:flex-end;font-size:11.5px;margin-top:-6px}
+.cn-facts{list-style:none;margin:0;padding:10px 14px;border-radius:8px;background:var(--sub);display:flex;flex-direction:column;gap:4px;font-size:12.5px}.cn-facts li{display:flex;gap:10px}.cn-facts span{width:120px;flex:none;color:var(--muted)}.cn-facts b{font-weight:500}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
 <div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
@@ -789,13 +832,31 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <span class="mu">Attachments: {{attach}}</span>
                 </sc-if>
                 <sc-if value="{{dCn}}" hint-placeholder-val="{{ false }}">
-                  <div class="g2">
-                    <div class="fld">Credit Type<div class="seg" role="group" aria-label="Credit Type"><sc-for list="{{ctypes}}" as="c" hint-placeholder-count="2"><button aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div></div>
-                    <label class="fld">Reason Code<div style="position: relative"><select class="select" value="{{f.reason}}" onChange="{{f.onReason}}"><option value="">Select reason</option><sc-for list="{{reasons}}" as="o" hint-placeholder-count="4"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div><sc-if value="{{f.reasonErr}}" hint-placeholder-val="{{ false }}"><span class="err">Choose a reason code</span></sc-if></label>
-                    <label class="fld">Credit Amount<input class="input mono" value="{{f.amount}}" disabled="{{f.full}}" onInput="{{f.onAmount}}"><span class="hint">{{amountHint}}</span><sc-if value="{{f.amountErr}}" hint-placeholder-val="{{ false }}"><span class="err">{{f.amountErrText}}</span></sc-if></label>
-                    <label class="fld">FCA/DAR Reference <span class="hint">Required for FCA approval and DAR waiver</span><input class="input mono" value="{{f.ref}}" onInput="{{f.onRef}}"><sc-if value="{{f.refErr}}" hint-placeholder-val="{{ false }}"><span class="err">Enter the FCA or DAR reference</span></sc-if></label>
-                  </div>
-                  <div class="banner b-info">Tax is reversed at the same rate as the original invoice. The credit note goes for approval before it is issued.</div>
+                  <dl class="cn-strip"><sc-for list="{{cnv.strip}}" as="x" hint-placeholder-count="5"><div><dt>{{x.l}}</dt><dd>{{x.v}}</dd></div></sc-for></dl>
+                  <section class="cn-sec" aria-labelledby="cn-s1"><h3 id="cn-s1"><span class="cn-n">1</span>Why is the credit needed?</h3>
+                    <div class="cn-rs" role="radiogroup" aria-label="Reason code"><sc-for list="{{cnv.reasons}}" as="r" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{r.on}}" onClick="{{r.pick}}">{{r.t}}</button></sc-for></div>
+                    <sc-if value="{{cnv.reasonErr}}" hint-placeholder-val="{{ false }}"><span class="err cn-e">Choose a reason code</span></sc-if>
+                    <sc-if value="{{cnv.hasReason}}" hint-placeholder-val="{{ false }}"><p class="cn-help">{{cnv.reasonHelp}}</p></sc-if>
+                    <sc-if value="{{cnv.needRef}}" hint-placeholder-val="{{ false }}"><label class="fld cn-ref">{{cnv.refL}}<input class="input mono" value="{{cnv.ref}}" onInput="{{cnv.onRef}}" placeholder="{{cnv.refPh}}"><sc-if value="{{cnv.refErr}}" hint-placeholder-val="{{ false }}"><span class="err">Enter the {{cnv.refL}}</span></sc-if></label></sc-if>
+                    <sc-if value="{{cnv.needFile}}" hint-placeholder-val="{{ false }}"><div class="fld">Supporting document
+                      <sc-if value="{{cnv.noFile}}" hint-placeholder-val="{{ true }}"><label class="cn-drop"><input type="file" class="cn-fi" onChange="{{cnv.onFile}}" aria-label="Attach supporting document"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.5l-8.5 8.5a5 5 0 0 1-7-7L14 5.5a3.3 3.3 0 0 1 4.7 4.7L10.2 18.7a1.7 1.7 0 0 1-2.4-2.4L15.5 8.6"></path></svg><span><b>Attach file</b> · PDF, image or e-mail, up to 10 MB</span></label></sc-if>
+                      <sc-if value="{{cnv.hasFile}}" hint-placeholder-val="{{ false }}"><div class="cn-file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg><span class="mono">{{cnv.file}}</span><button type="button" class="lnk" onClick="{{cnv.rmFile}}">Remove</button></div></sc-if>
+                      <sc-if value="{{cnv.fileErr}}" hint-placeholder-val="{{ false }}"><span class="err">Attach the supporting document</span></sc-if></div></sc-if>
+                    <sc-if value="{{cnv.repl}}" hint-placeholder-val="{{ false }}"><p class="cn-note">After approval the original invoice is cancelled and a replacement invoice is generated with the corrected charges (rule BR-CRN-003).</p></sc-if>
+                  </section>
+                  <section class="cn-sec" aria-labelledby="cn-s2"><h3 id="cn-s2"><span class="cn-n">2</span>What is credited</h3>
+                    <p class="cn-help cn-lead">The whole invoice is credited. Every charge line below is reversed in full.</p>
+                    <table class="cn-lt"><thead><tr><th scope="col">Charge</th><th scope="col">Currency</th><th scope="col" class="num">Amount</th><th scope="col">Tax</th><th scope="col" class="num">Tax reversed</th><th scope="col" class="num">Credit total</th></tr></thead>
+                      <tbody><sc-for list="{{cnv.lines}}" as="l" hint-placeholder-count="3"><tr>
+                        <td><b class="mono">{{l.code}}</b><span class="cn-cn">{{l.name}}</span></td><td class="mono">{{l.cur}}</td><td class="num mono">{{l.val}}</td><td class="mono mu">{{l.tax}}</td><td class="num mono">{{l.taxRev}}</td><td class="num mono">{{l.lineTot}}</td></tr></sc-for></tbody>
+                      <tfoot><sc-for list="{{cnv.tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="2"><b>Total credit</b> <span class="mu">· {{t.cur}}</span></td><td class="num mono"><b>{{t.c}}</b></td><td></td><td class="num mono"><b>{{t.t}}</b></td><td class="num mono cn-gt">{{t.cur}} {{t.tot}}</td></tr></sc-for></tfoot></table>
+                    <sc-if value="{{cnv.linesErr}}" hint-placeholder-val="{{ false }}"><span class="err cn-e">{{cnv.linesErrT}}</span></sc-if>
+                    <p class="cn-help">Amounts and tax are reversed at the original invoice ROE and tax rate.</p>
+                  </section>
+                  <section class="cn-sec" aria-labelledby="cn-s3"><h3 id="cn-s3"><span class="cn-n">3</span>Remarks <span class="hint">Optional</span></h3>
+                    <textarea class="input cn-ta" value="{{cnv.remark}}" onInput="{{cnv.onRemark}}" aria-labelledby="cn-s3" placeholder="Add context for the approver, for example who agreed the correction and when"></textarea><span class="cn-cnt mu">{{cnv.remN}}</span>
+                  </section>
+                  <ul class="cn-facts"><li><span>Credit note date</span><b>{{cnv.docDate}} · today, back-dating not allowed</b></li><li><span>Approval</span><b>Agency Finance (L1) → Finance Approver (L2) · you can't approve your own request</b></li><li><span>After approval</span><b>Credit note generated and posted to GFS</b></li></ul>
                 </sc-if>
                 <sc-if value="{{dCancel}}" hint-placeholder-val="{{ false }}">
                   <div class="banner b-warn">{{cancelText}}</div>
@@ -1185,7 +1246,7 @@ class GirsPage extends DCLogic {
         it('View SOA', () => self.dlg('soa', i)),
         it('Download PDF / JSON', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
-        it('Request credit note', () => self.dlg('cn', i, { full: true, amount: ivFmt(ivMain(i)), reason: '', ref: '' }), !cnOk, st === 'Credited' ? 'Already fully credited' : 'Only for generated, sent, accepted or paid invoices'),
+        it('Request credit note', () => self.dlg('cn', i, { full: true, amt: {}, sel: {}, reason: '', ref: '', file: '', remark: '' }), !cnOk || hasCn, st === 'Credited' ? 'Already credited' : hasCn ? 'A credit note already exists for this invoice' : 'Only for generated, sent, accepted or paid invoices'),
         it('Request refund', () => self.dlg('refund', i, { amount: ivFmt(ivMain(i)), reason: '', note: '' }), !paid, 'Only for paid invoices'),
         it('View payment', () => self.dlg('pay', i), !paid, 'No payment received yet'),
         it('View receipt', close(() => ivReceipt(i, toast)), !paid, 'No receipt yet'),
@@ -1339,6 +1400,7 @@ class GirsPage extends DCLogic {
     // ---------------- dialogs
     const d = s.dlg, f = s.f || {};
     const di = d && d.no ? byNo[d.no] : null;
+    let cnv = { strip: [], reasons: [], modes: [], lines: [], tots: [] };
     let dlgTitle = '', dlgSub = '', dlgCls = '', det = { fields: [], lines: [] }, tbl = { cols: [], rows: [] }, okLabel = '', okCls = 'btn-primary', dlgOk = () => {}, dl = {}, prf = { rows: [] }, gen = { kv: [], fields: [], rows: [], cols: [], note: '', noteCls: '', tblTitle: '', empty: false, emptyText: '' };
     const tableOf = (cols, rows) => ({ cols, rows: rows.map((r) => ({ cells: r.map((v, n) => ({ v, cls: n === 0 ? 'mono' : '' })) })) });
     const dlFor = (name, cols, rows) => {
@@ -1467,20 +1529,51 @@ class GirsPage extends DCLogic {
         tbl = tableOf(['Invoice No.', 'Billing Party', 'Channel'], selNos.slice(0, 50).map((no) => [no, byNo[no].party, (IV_CUST[byNo[no].cust] || {}).mail || 'Post']).concat(selNos.length > 50 ? [['+ ' + (selNos.length - 50) + ' more', '', '']] : []));
         dlgOk = () => self.put((x) => selNos.forEach((no) => self.ev(x, no, 'e-mailed to configured channel')), { dlg: null, sel: {}, __toast: selNos.length + ' invoices sent to their configured channels' });
       } else if (d.kind === 'cn' && di) {
-        dlgTitle = 'Request credit note · ' + di.no; dlgSub = di.party; okLabel = 'Submit for approval';
+        dlgTitle = 'Request credit note'; dlgSub = di.no + ' · ' + di.party; okLabel = 'Submit for approval'; dlgCls = 'wide cnw';
+        const TR = { 'SG-SR-9': 9, 'IN-GST-18': 18, 'MY-SST-8': 8, 'TH-VAT-7': 7, 'ZR-INTL': 0 };
+        const prevC = (s.store.cn || []).concat((() => { try { return JSON.parse(localStorage.getItem('girs.cn.v1') || '[]'); } catch (e) { return []; } })()).filter((c, n, a) => c.orig === di.no && a.findIndex((y) => y.no === c.no) === n);
+        const prevL = di.lines.map((l, n) => prevC.reduce((t, c) => t + (c.lines ? (c.lines.find((x) => x.i === n) || { a: 0 }).a : (c.ctype === 'Full' || n === 0 ? Math.min(c.ctype === 'Full' ? l[1] : c.amount, l[1]) : 0)), 0));
+        const rem = (n) => Math.max(0, Math.round((di.lines[n][1] - prevL[n]) * 100) / 100);
+        const full = true, sel = {}, amt = {};
+        const num = (v) => parseFloat(String(v == null ? '' : v).replace(/,/g, ''));
+        const credit = (n) => full ? rem(n) : (sel[n] ? (amt[n] == null ? rem(n) : num(amt[n])) : 0);
+        const R = { 'FCA approval': ['ref', 'Freight Correction Advice approved for this invoice.', 'FCA reference', 'e.g. FCA-26-001842'], 'DAR waiver': ['ref', 'Waiver approved through a Dispute & Approval Request.', 'DAR reference', 'e.g. DAR-26-000317'],
+          'Pricing correction': ['file', 'Wrong rate or charge billed. Attach the evidence, for example the agreed rate.', '', ''], 'Invoice amendment': ['file', 'Invoice details need to change. Attach the evidence for the amendment.', '', ''] };
+        const RC = R[f.reason] || null, needRef = RC && RC[0] === 'ref', needFile = RC && RC[0] === 'file';
+        const lines = di.lines.map((l, n) => { const r0 = rem(n), on = full ? r0 > 0 : !!sel[n], c = credit(n), rate = TR[l[4]] || 0, bad = !full && on && (!(c > 0) || c > r0 + 0.001);
+          return { n: String(n + 1), code: l[0], name: IV_CHG[l[0]] || l[0], cur: l[2], inv: ivFmt(l[1]), prev: prevL[n] ? ivFmt(prevL[n]) : '—', remT: ivFmt(r0), tax: l[4] + ' · ' + rate + '%', roe: l[3] === '—' ? '—' : l[3],
+            on: on ? 'true' : 'false', dis: full || r0 <= 0 ? 'true' : '', none: r0 <= 0, val: full ? ivFmt(r0) : (on ? (amt[n] == null ? ivFmt(r0) : String(amt[n])) : ''), ro: full || !on ? 'true' : '',
+            taxRev: on && c > 0 && !bad ? ivFmt(c * rate / 100) : '—', lineTot: ivFmt(c + c * rate / 100), bal: ivFmt(Math.max(0, r0 - (on && c > 0 && !bad ? c : 0))), cls: (on ? 'cn-on' : '') + (bad ? ' cn-bad' : '') + (r0 <= 0 ? ' cn-done' : ''), bad, badT: !(c > 0) ? 'Enter an amount' : 'Max ' + ivFmt(r0),
+            toggle: () => { if (full || r0 <= 0) return; const ns = Object.assign({}, sel, { [n]: !sel[n] }); self.setF({ sel: ns, linesErr: false }); },
+            onAmt: (e) => self.setF({ amt: Object.assign({}, amt, { [n]: e.target.value }), linesErr: false }) }; });
+        const byCur = {}; di.lines.forEach((l, n) => { const c = credit(n); if (!(c > 0) || c > rem(n) + 0.001) return; const t = byCur[l[2]] || (byCur[l[2]] = { c: 0, t: 0 }); t.c += c; t.t += c * (TR[l[4]] || 0) / 100; });
+        const tots = Object.keys(byCur).map((k) => ({ cur: k, c: ivFmt(byCur[k].c), t: ivFmt(byCur[k].t), tot: ivFmt(byCur[k].c + byCur[k].t) }));
+        const invTot = {}; di.lines.forEach((l, n) => { const t = invTot[l[2]] || (invTot[l[2]] = { i: 0, p: 0 }); t.i += l[1]; t.p += prevL[n]; });
+        const totS = (k) => Object.keys(invTot).map((c) => c + ' ' + ivFmt(k === 'i' ? invTot[c].i : k === 'p' ? invTot[c].p : invTot[c].i - invTot[c].p)).join(' + ');
+        const anyPrev = prevL.some((x) => x > 0);
+        const crTot = tots.map((t) => t.cur + ' ' + t.tot).join(' + ') || '—';
+        cnv = { strip: [['Invoice date', di.date], ['Invoice status', di.status], ['Invoice amount (excl. tax)', totS('i')], ['Credit note total (incl. tax)', crTot]].map(([l, v]) => ({ l, v })),
+          reasons: Object.keys(R).map((k) => ({ t: k, on: f.reason === k ? 'true' : 'false', pick: () => self.setF({ reason: k, reasonErr: false, refErr: false, fileErr: false }) })),
+          reasonErr: !!f.reasonErr, hasReason: !!RC, reasonHelp: RC ? RC[1] : '', needRef, refL: RC ? RC[2] : '', refPh: RC ? RC[3] : '', ref: f.ref || '', onRef: (e) => self.setF({ ref: e.target.value, refErr: false }), refErr: !!f.refErr,
+          needFile, file: f.file || '', hasFile: !!f.file, noFile: !f.file, onFile: (e) => { const x = e.target.files && e.target.files[0]; if (x) self.setF({ file: x.name, fileErr: false }); }, rmFile: () => self.setF({ file: '' }), fileErr: !!f.fileErr,
+          repl: f.reason === 'FCA approval',
+          modes: [['full', 'Full invoice', 'Credit everything still open'], ['part', 'Selected lines', 'Choose lines and amounts']].map(([k, t, d0]) => ({ t, d: d0, on: (k === 'full') === full ? 'true' : 'false', pick: () => self.setF({ full: k === 'full', sel: k === 'full' ? {} : sel, linesErr: false }) })),
+          isPart: !full, lines, tots, hasTots: tots.length > 0, noTots: !tots.length, linesErr: !!f.linesErr, linesErrT: f.linesErrT || '',
+          remark: f.remark || '', onRemark: (e) => self.setF({ remark: e.target.value.slice(0, 500) }), remN: String((f.remark || '').length) + ' / 500',
+          docDate: ivToday() };
         dlgOk = () => {
-          const tot = ivMain(di), amt = parseFloat(String(f.amount || '').replace(/,/g, ''));
-          const needRef = ['FCA approval', 'DAR waiver'].includes(f.reason);
-          const err = { reasonErr: !f.reason, amountErr: !f.full && (!(amt > 0) || amt > tot), amountErrText: !(amt > 0) ? 'Enter an amount above zero' : 'Cannot exceed the invoice amount ' + ivFmt(tot),
-            refErr: needRef && !(f.ref || '').trim() };
-          if (err.reasonErr || err.amountErr || err.refErr) { self.setF(err); return; }
+          const err = { reasonErr: !f.reason, refErr: needRef && !(f.ref || '').trim(), fileErr: needFile && !f.file, linesErr: false, linesErrT: '' };
+          const picked = di.lines.map((l, n) => ({ i: n, a: Math.round(credit(n) * 100) / 100 })).filter((x) => x.a > 0);
+          if (!picked.length) { err.linesErr = true; err.linesErrT = full ? 'Nothing left to credit on this invoice' : 'Select at least one line and enter an amount'; }
+          if (!full && di.lines.some((l, n) => sel[n] && (!(credit(n) > 0) || credit(n) > rem(n) + 0.001))) { err.linesErr = true; err.linesErrT = 'Fix the highlighted amounts. A line can\'t be credited above what is still open.'; }
+          if (err.reasonErr || err.refErr || err.fileErr || err.linesErr) { self.setF(err); return; }
           const cnNo = di.no.slice(0, 5) + '260' + String(1000 + Math.floor(Math.random() * 8999)) + 'CR';
-          const per = di.lines[0];
-          const rate = { 'SG-SR-9': 9, 'IN-GST-18': 18, 'MY-SST-8': 8, 'TH-VAT-7': 7 }[per[4]] || 0;
-          const camt = f.full ? tot : amt;
-          const cn = { no: cnNo, orig: di.no, ctype: f.full ? 'Full' : 'Partial', ref: (f.ref || '').trim() || '—', reason: f.reason, amount: camt, cur: per[2],
-            taxrev: per[4] + ' · ' + per[2] + ' ' + ivFmt(camt * rate / 100), appr: 'Pending approval', repl: '—', gov: '—', audit: 'AUD-26-' + String(105000 + Math.floor(Math.random() * 900)) };
-          self.put((x) => { x.cn = (x.cn || []).concat([cn]); self.ev(x, di.no, 'Credit note ' + cnNo + ' requested · ' + f.reason); }, { dlg: null, __toast: cnNo + ' submitted for approval · see Credit Note List' });
+          const main = di.lines[0][2], camt = picked.filter((x) => di.lines[x.i][2] === main).reduce((t, x) => t + x.a, 0), ttax = picked.filter((x) => di.lines[x.i][2] === main).reduce((t, x) => t + x.a * (TR[di.lines[x.i][4]] || 0) / 100, 0);
+          const allOpen = di.lines.every((l, n) => Math.abs(credit(n) - rem(n)) < 0.005);
+          const cn = { no: cnNo, orig: di.no, ctype: 'Full', ref: (f.ref || '').trim() || '—', reason: f.reason, amount: camt, cur: main,
+            taxrev: di.lines[0][4] + ' · ' + main + ' ' + ivFmt(ttax), appr: 'Pending approval', repl: f.reason === 'FCA approval' ? 'After approval' : '—', gov: '—', audit: 'AUD-26-' + String(105000 + Math.floor(Math.random() * 900)),
+            lines: picked.map((x) => { const l = di.lines[x.i]; return [l[0], IV_CHG[l[0]] || l[0], x.a, l[4], TR[l[4]] || 0, l[2]]; }), party: di.party, src: 'Manual', remark: (f.remark || '').trim(), file: f.file || '', date: ivToday(), by: 'Daniel Tan' };
+          self.put((x) => { x.cn = (x.cn || []).concat([cn]); self.ev(x, di.no, 'Credit note ' + cnNo + ' requested · ' + f.reason + ((f.remark || '').trim() ? ' · ' + f.remark.trim() : '')); }, { dlg: null, __toast: cnNo + ' submitted for approval · see Credit Note List' });
           try { const all = JSON.parse(localStorage.getItem('girs.cn.v1') || '[]'); all.unshift(cn); localStorage.setItem('girs.cn.v1', JSON.stringify(all)); } catch (e) {}
         };
       } else if (d.kind === 'cancel' && di) {
@@ -1567,7 +1660,7 @@ class GirsPage extends DCLogic {
       dDetails: !!d && d.kind === 'details', dTable: !!d && ['audit', 'dist', 'roe', 'src', 'ctx', 'bulkmail'].includes(d.kind), dPrf: !!d && d.kind === 'prf', dGen: !!d && ['pay', 'refund', 'cnv', 'soa', 'manual'].includes(d.kind), dMail: !!d && d.kind === 'mail', dCn: !!d && d.kind === 'cn', dCancel: !!d && d.kind === 'cancel',
       dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, gen, okLabel, okCls, dlgOk, doGenerate,
       closeDlg: () => self.setState({ dlg: null, f: {} }),
-      chans, ctypes, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
+      chans, ctypes, cnv, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
       toLabel: f.ch === 'post' ? 'Postal address' : 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
       amountHint: di ? 'Invoice amount ' + ivFmt(ivMain(di)) + ' ' + di.lines[0][2] : '',
       cancelText: di ? 'The invoice is cancelled in GIRS and the status flows back to LMS.' + (di.gov !== '—' ? ' The e-invoice ' + di.gov + ' is cancelled at the tax portal.' : '') : '',
