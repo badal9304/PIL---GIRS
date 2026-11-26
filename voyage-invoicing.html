@@ -1178,7 +1178,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
       </div>
       <div class="panel-f">
         <a class="btn" href="{{drw.list}}" style="margin-inline-end: auto; text-decoration: none">Open in Invoice List</a>
-        <button class="btn" onClick="{{drw.close}}">Close</button>
+       
         <sc-if value="{{drw.canGen}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{drw.gen}}">{{drw.genL}}</button></sc-if>
       </div>
     </aside>
@@ -1232,7 +1232,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
         <sc-if value="{{ri.notDone}}" hint-placeholder-val="{{ true }}"><label class="hm-decl"><input type="checkbox" class="cbx" checked="{{ri.decl}}" disabled="{{ri.hasErr}}" onChange="{{ri.toggleDecl}}"><span><b>Declaration:</b> I have reviewed the charges, party and tax details for this B/L.</span></label></sc-if>
         <span class="hm-rihint">{{ri.hint}}</span>
         <a class="btn" href="{{ri.list}}" style="text-decoration: none">Open in Invoice List</a>
-        <button class="btn" onClick="{{ri.close}}">Close</button>
+       
         <sc-if value="{{ri.notDone}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" disabled="{{ri.genDis}}" onClick="{{ri.gen}}">Generate invoice</button></sc-if>
       </div>
     </div>
@@ -1291,7 +1291,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
   </sc-if>
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
   </sc-if>
 </div>
 </script>

@@ -1295,7 +1295,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
     <div class="dlg dim" role="dialog" aria-modal="true" aria-labelledby="hi-t">
       <div class="dh"><div><h2 id="hi-t" style="margin: 0; font-size: 16px; font-weight: 600">Change history</h2><div class="mu" style="font-size: 12px">{{hist.sub}}</div></div><button class="cm-ib x" onClick="{{hist.close}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
       <div class="db"><ol class="hi"><sc-for list="{{hist.items}}" as="h" hint-placeholder-count="3"><li><span class="mono hi-v">{{h.v}}</span><div><b>{{h.t}}</b><span class="mu">{{h.w}}</span></div></li></sc-for></ol></div>
-      <div class="df"><button class="btn" onClick="{{hist.close}}">Close</button></div>
+      <div class="df"></div>
     </div>
   </sc-if>
 
@@ -1336,7 +1336,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
   </sc-if>
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
   </sc-if>
 </div>
 </script>

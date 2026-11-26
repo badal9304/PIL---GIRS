@@ -801,7 +801,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <div class="df" style="justify-content: center; background: var(--surface); border: 0; padding-bottom: 28px"><button class="btn" onClick="{{closeDlg}}">Back</button><button class="btn btn-primary" onClick="{{doGenerate}}">Generate</button></div>
             </sc-if>
             <sc-if value="{{dStd}}" hint-placeholder-val="{{ true }}">
-              <div class="dh"><div><h2>{{dlgTitle}}</h2><p>{{dlgSub}}</p></div><button class="btn btn-sm" onClick="{{closeDlg}}" aria-label="Close">Close</button></div>
+              <div class="dh"><div><h2>{{dlgTitle}}</h2><p>{{dlgSub}}</p></div><button class="btn btn-icon btn-sm" onClick="{{closeDlg}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
               <div class="db">
                 <sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}">
                   <div class="kv3"><sc-for list="{{det.fields}}" as="f" hint-placeholder-count="12"><div><span class="l">{{f.k}}</span><span class="v" style="{{f.st}}">{{f.v}}</span></div></sc-for></div>
@@ -876,7 +876,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
   </sc-if>
 </div>
 </script>
@@ -1537,7 +1537,7 @@ class GirsPage extends DCLogic {
         const full = true, sel = {}, amt = {};
         const num = (v) => parseFloat(String(v == null ? '' : v).replace(/,/g, ''));
         const credit = (n) => full ? rem(n) : (sel[n] ? (amt[n] == null ? rem(n) : num(amt[n])) : 0);
-        const R = { 'FCA approval': ['ref', 'Freight Correction Advice approved for this invoice.', 'FCA reference', 'e.g. FCA-26-001842'], 'DAR waiver': ['ref', 'Waiver approved through a Dispute & Approval Request.', 'DAR reference', 'e.g. DAR-26-000317'],
+        const R = { 'FCA approval': ['none', 'Freight Correction Advice approved for this invoice.'], 'DAR waiver': ['none', 'Waiver approved through a Dispute & Approval Request.'],
           'Pricing correction': ['file', 'Wrong rate or charge billed. Attach the evidence, for example the agreed rate.', '', ''], 'Invoice amendment': ['file', 'Invoice details need to change. Attach the evidence for the amendment.', '', ''] };
         const RC = R[f.reason] || null, needRef = RC && RC[0] === 'ref', needFile = RC && RC[0] === 'file';
         const lines = di.lines.map((l, n) => { const r0 = rem(n), on = full ? r0 > 0 : !!sel[n], c = credit(n), rate = TR[l[4]] || 0, bad = !full && on && (!(c > 0) || c > r0 + 0.001);
@@ -1548,11 +1548,11 @@ class GirsPage extends DCLogic {
             onAmt: (e) => self.setF({ amt: Object.assign({}, amt, { [n]: e.target.value }), linesErr: false }) }; });
         const byCur = {}; di.lines.forEach((l, n) => { const c = credit(n); if (!(c > 0) || c > rem(n) + 0.001) return; const t = byCur[l[2]] || (byCur[l[2]] = { c: 0, t: 0 }); t.c += c; t.t += c * (TR[l[4]] || 0) / 100; });
         const tots = Object.keys(byCur).map((k) => ({ cur: k, c: ivFmt(byCur[k].c), t: ivFmt(byCur[k].t), tot: ivFmt(byCur[k].c + byCur[k].t) }));
-        const invTot = {}; di.lines.forEach((l, n) => { const t = invTot[l[2]] || (invTot[l[2]] = { i: 0, p: 0 }); t.i += l[1]; t.p += prevL[n]; });
+        const invTot = {}; di.lines.forEach((l, n) => { const t = invTot[l[2]] || (invTot[l[2]] = { i: 0, p: 0, g: 0 }); t.i += l[1]; t.g += l[1] * (1 + (TR[l[4]] || 0) / 100); t.p += prevL[n]; });
         const totS = (k) => Object.keys(invTot).map((c) => c + ' ' + ivFmt(k === 'i' ? invTot[c].i : k === 'p' ? invTot[c].p : invTot[c].i - invTot[c].p)).join(' + ');
         const anyPrev = prevL.some((x) => x > 0);
         const crTot = tots.map((t) => t.cur + ' ' + t.tot).join(' + ') || '—';
-        cnv = { strip: [['Invoice date', di.date], ['Invoice status', di.status], ['Invoice amount (excl. tax)', totS('i')], ['Credit note total (incl. tax)', crTot]].map(([l, v]) => ({ l, v })),
+        cnv = { strip: [['Invoice date', di.date], ['Invoice status', di.status], ['Invoice amount (incl. tax)', Object.keys(invTot).map((c) => c + ' ' + ivFmt(invTot[c].g)).join(' + ')], ['Credit note total (incl. tax)', crTot]].map(([l, v]) => ({ l, v })),
           reasons: Object.keys(R).map((k) => ({ t: k, on: f.reason === k ? 'true' : 'false', pick: () => self.setF({ reason: k, reasonErr: false, refErr: false, fileErr: false }) })),
           reasonErr: !!f.reasonErr, hasReason: !!RC, reasonHelp: RC ? RC[1] : '', needRef, refL: RC ? RC[2] : '', refPh: RC ? RC[3] : '', ref: f.ref || '', onRef: (e) => self.setF({ ref: e.target.value, refErr: false }), refErr: !!f.refErr,
           needFile, file: f.file || '', hasFile: !!f.file, noFile: !f.file, onFile: (e) => { const x = e.target.files && e.target.files[0]; if (x) self.setF({ file: x.name, fileErr: false }); }, rmFile: () => self.setF({ file: '' }), fileErr: !!f.fileErr,

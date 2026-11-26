@@ -431,7 +431,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
       </div>
       <main class="gmain" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
         <sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}">
-          <div class="r-wrap" role="status" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--tint); border: 1px solid var(--tintbd); color: var(--accent2); box-sizing: border-box">{{notice}}<button class="btn btn-sm" onClick="{{closeNotice}}">Close</button></div>
+          <div class="r-wrap" role="status" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--tint); border: 1px solid var(--tintbd); color: var(--accent2); box-sizing: border-box">{{notice}}<button class="btn btn-icon btn-sm" onClick="{{closeNotice}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
         </sc-if>
 
         <section class="card" aria-label="Country D&amp;D configuration" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0; padding: 12px 0">
@@ -550,7 +550,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
   </sc-if>
 </div>
 </script>

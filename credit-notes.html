@@ -586,6 +586,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   <sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}"><p class="cr-paid">This invoice is paid. The payment is unapplied from it when the credit note is generated, and re-applied to the replacement invoice if one is raised.</p></sc-if>
                   <button type="button" class="cr-tg" role="switch" aria-checked="{{repl}}" onClick="{{togRepl}}"><span class="cr-sw" aria-hidden="true"></span><span><b>Generate a replacement invoice after approval</b><small>Re-bills the shipment with the corrected charges</small></span></button>
                   <sc-if value="{{fca}}" hint-placeholder-val="{{ false }}"><p class="cn-help">FCA: the original invoice is cancelled and a new invoice is generated with the revised charges.</p></sc-if>
+                  
                 </div>
 
                 <div class="cn-sec">
@@ -609,7 +610,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 
 
   <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
-    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-sm" onClick="{{shell.closeToast}}">Close</button></div>
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
   </sc-if>
 </div>
 </script>
@@ -694,8 +695,8 @@ class GirsPage extends DCLogic {
     const roe = usd ? '1 USD = ' + usd[3] + ' ' + LCUR[v.port] : '—';
     const tcode = v.lines[0][4], rate = TR[tcode] || 0, net = tots[0].n, tax = tots[0].x;
     const R = {
-      'FCA approval': ['ref', 'Freight Correction Advice approved for this invoice.', 'FCA reference', 'e.g. FCA-26-001842'],
-      'DAR waiver': ['ref', 'Waiver approved through a Dispute & Approval Request.', 'DAR reference', 'e.g. DAR-26-000317'],
+      'FCA approval': ['none', 'Freight Correction Advice approved for this invoice.'],
+      'DAR waiver': ['none', 'Waiver approved through a Dispute & Approval Request.'],
       'Pricing correction': ['file', 'Wrong rate or charge billed. Attach the evidence, for example the agreed rate.'],
       'Invoice amendment': ['file', 'Invoice details need to change. Attach the evidence for the amendment.']
     };
@@ -712,7 +713,7 @@ class GirsPage extends DCLogic {
         lines: v.lines.map((l) => [l[0], IV_CHG[l[0]] || l[0], l[1], l[4], TR[l[4]] || 0, l[2]]), audit: [[today(), ME, 'Credit note requested']] };
       const saved = [cn].concat(s.saved);
       try { localStorage.setItem('girs.cn.v1', JSON.stringify(saved)); } catch (e) {}
-      this.setState({ saved, done: cn, tried: false, __toast: 'Credit note ' + cnNo + ' sent for approval' });
+      this.setState({ saved, done: cn, inv: v.no, tried: false, __toast: 'Credit note ' + cnNo + ' sent for approval' });
     };
     const steps = [
       ['Requested', s.done ? 'By ' + ME + ' · ' + s.done.date : 'By you, when you send this request', !!s.done],
