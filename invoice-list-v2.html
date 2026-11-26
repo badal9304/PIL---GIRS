@@ -381,6 +381,34 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .icd-rm{margin:0;font-size:13px;line-height:19px}
 .icd-f{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;border-top:1px solid var(--line)}.icd-f a{text-decoration:none}
 button.cnc-no{all:unset;cursor:pointer;color:var(--accent);font-family:var(--mono, monospace);font-size:13px;white-space:nowrap}button.cnc-no:hover{text-decoration:underline}button.cnc-no:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.dlg.wide.ivdw{width:min(980px,calc(100vw - 48px))}.ivdw .db > *{flex-shrink:0}
+.ivd-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ivd-sum{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.ivd-sum > div{display:flex;flex-direction:column;gap:3px;padding:14px 16px;border-inline-start:1px solid var(--line)}
+.ivd-sum > div:first-child{border-inline-start:0}
+.ivd-sum .ivd-amt{background:var(--tint)}
+.ivd-amt b{font-size:22px;line-height:28px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ivd-k{font-size:12px;color:var(--muted)}.ivd-k2{font-size:13px;color:var(--muted2);font-variant-numeric:tabular-nums}
+.ivd-v{font-size:14px;color:var(--ink)}.ivd-v.ivd-pend{color:var(--warn);font-weight:600}.ivd-v.mu{color:var(--muted)}
+.ivd-dn{font-size:12px;font-weight:600;color:var(--muted2)}.ivd-dn.late{color:var(--warn)}
+.ivd-info{display:grid;grid-template-columns:1fr 2fr;gap:0;margin-top:20px}
+.ivd-info section{padding:0 20px}.ivd-info section:first-child{padding-left:0;border-inline-end:1px solid var(--line2)}
+.ivd-info h3,.ivd-sec h3{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--ink)}
+.ivd-info dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px}
+.ivd-info section:first-child dl{grid-template-columns:1fr}
+.ivd-info dt{font-size:12px;color:var(--muted);margin-bottom:2px}.ivd-info dd{margin:0;font-size:13.5px;color:var(--ink)}.ivd-info dd.mu{color:var(--muted)}
+.ivd-sec{margin-top:24px}.ivd-sh{display:flex;justify-content:space-between;align-items:baseline}
+.ivd-t th,.ivd-t td{padding:8px 12px}.ivd-t .num{text-align:right}.ivd-t tfoot td{padding:9px 12px;line-height:18px;background:var(--sub);font-weight:600;border-bottom:0}
+.ivd-t td small{display:block;font-size:11.5px;color:var(--muted);font-family:inherit}.ivd-t td{vertical-align:top}.ivd-gt{color:var(--accent2)}
+.ivd-bot{display:grid;grid-template-columns:1fr 1.4fr;gap:32px}
+.ivd-cn{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
+.ivd-none{margin:0;font-size:13px;color:var(--muted)}
+.ivd-h{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:8px}
+.ivd-h li{display:flex;justify-content:space-between;gap:12px;padding:8px 12px}.ivd-h li + li{border-top:1px solid var(--line2)}
+.ivd-h li div{display:flex;flex-direction:column;min-width:0}.ivd-h span{font-size:13px;color:var(--ink)}.ivd-h small{font-size:12px;color:var(--muted)}
+.ivd-h time{flex:none;font-size:12px;color:var(--muted);white-space:nowrap}
+@media (max-width:900px){.ivd-sum{grid-template-columns:1fr 1fr}.ivd-info,.ivd-bot{grid-template-columns:1fr}.ivd-info section{padding:0}.ivd-info section:first-child{border:0;margin-bottom:16px}}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -828,11 +856,30 @@ button.cnc-no{all:unset;cursor:pointer;color:var(--accent);font-family:var(--mon
               <div class="df" style="justify-content: center; background: var(--surface); border: 0; padding-bottom: 28px"><button class="btn" onClick="{{closeDlg}}">Back</button><button class="btn btn-primary" onClick="{{doGenerate}}">Generate</button></div>
             </sc-if>
             <sc-if value="{{dStd}}" hint-placeholder-val="{{ true }}">
-              <div class="dh"><div><h2>{{dlgTitle}}</h2><p>{{dlgSub}}</p></div><button class="btn btn-icon btn-sm" onClick="{{closeDlg}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+              <div class="dh"><div><h2>{{dlgTitle}}</h2><p>{{dlgSub}}</p><sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}"><div class="ivd-chips"><sc-for list="{{det.chips}}" as="c" hint-placeholder-count="4"><span class="chip" style="{{c.st}}">{{c.t}}</span></sc-for></div></sc-if></div><button class="btn btn-icon btn-sm" onClick="{{closeDlg}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
               <div class="db">
                 <sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}">
-                  <div class="kv3"><sc-for list="{{det.fields}}" as="f" hint-placeholder-count="12"><div><span class="l">{{f.k}}</span><span class="v" style="{{f.st}}">{{f.v}}</span></div></sc-for></div>
-                  <table class="ctab"><thead><tr><th>Charge Code</th><th class="num">Charge Amount</th><th>Currency</th><th>ROE</th><th>Tax Code</th><th>Audit ID</th></tr></thead><tbody><sc-for list="{{det.lines}}" as="l" hint-placeholder-count="2"><tr><td class="mono">{{l.chg}} <span class="mu" style="font-family: inherit">· {{l.name}}</span></td><td class="mono num">{{l.amt}}</td><td class="mono">{{l.cur}}</td><td class="mono">{{l.roe}}</td><td class="mono">{{l.tax}}</td><td class="mono">{{l.audit}}</td></tr></sc-for></tbody></table>
+                  <div class="ivd-sum">
+                    <div class="ivd-amt"><span class="ivd-k">{{det.amtL}}</span><b>{{det.due1}}</b><sc-if value="{{det.hasDue2}}" hint-placeholder-val="{{ false }}"><span class="ivd-k2">{{det.due2}}</span></sc-if></div>
+                    <div><span class="ivd-k">Due date</span><span class="ivd-v">{{det.dueL}}</span><sc-if value="{{det.hasDueNote}}" hint-placeholder-val="{{ false }}"><span class="{{det.dueCls}}">{{det.dueNote}}</span></sc-if></div>
+                    <div><span class="ivd-k">Invoice date</span><span class="ivd-v">{{det.idate}}</span></div>
+                    <div><span class="ivd-k">Govt. reference</span><span class="{{det.govCls}}">{{det.gov}}</span></div>
+                  </div>
+                  <div class="ivd-info"><sc-for list="{{det.groups}}" as="g" hint-placeholder-count="2"><section><h3>{{g.t}}</h3><dl><sc-for list="{{g.fs}}" as="f" hint-placeholder-count="4"><div><dt>{{f.k}}</dt><dd class="{{f.c}}">{{f.v}}</dd></div></sc-for></dl></section></sc-for></div>
+                  <section class="ivd-sec"><div class="ivd-sh"><h3>Charges</h3><button class="lnk" onClick="{{det.openDoc}}">View PDF / JSON</button></div>
+                    <table class="ctab ivd-t"><thead><tr><th>Charge</th><th>Currency</th><th>ROE</th><th class="num">Amount</th><th>Tax code</th><th class="num">Tax</th><th class="num">Total</th></tr></thead>
+                      <tbody><sc-for list="{{det.lines}}" as="l" hint-placeholder-count="3"><tr><td><span class="mono">{{l.chg}}</span><small>{{l.name}}</small></td><td>{{l.cur}}</td><td class="mono">{{l.roe}}</td><td class="mono num">{{l.amt}}</td><td><span class="mono">{{l.tax}}</span><small>{{l.rate}}</small></td><td class="mono num">{{l.taxAmt}}</td><td class="mono num">{{l.tot}}</td></tr></sc-for></tbody>
+                      <tfoot><sc-for list="{{det.tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="3">Total · {{t.cur}}</td><td class="mono num">{{t.a}}</td><td></td><td class="mono num">{{t.t}}</td><td class="mono num ivd-gt">{{t.cur}} {{t.g}}</td></tr></sc-for></tfoot></table>
+                  </section>
+                  <div class="ivd-bot">
+                    <section class="ivd-sec"><h3>Credit note</h3>
+                      <sc-if value="{{det.hasCn}}" hint-placeholder-val="{{ false }}"><div class="ivd-cn"><button class="lnk mono" onClick="{{det.cnOpen}}">{{det.cnNo}}</button><span class="chip" style="{{det.cnPill}}">{{det.cnSt}}</span></div></sc-if>
+                      <sc-if value="{{det.noCn}}" hint-placeholder-val="{{ true }}"><p class="ivd-none">No credit note against this invoice.</p></sc-if>
+                    </section>
+                    <section class="ivd-sec"><div class="ivd-sh"><h3>History</h3><button class="lnk" onClick="{{det.openAudit}}">Full audit trail</button></div>
+                      <ol class="ivd-h"><sc-for list="{{det.hist}}" as="h" hint-placeholder-count="3"><li><div><span>{{h.ev}}</span><small>{{h.by}}</small></div><time>{{h.when}}</time></li></sc-for></ol>
+                    </section>
+                  </div>
                 </sc-if>
                 <sc-if value="{{dPrf}}" hint-placeholder-val="{{ false }}">
                   <div class="kv3"><sc-for list="{{prf.rows}}" as="r" hint-placeholder-count="4"><div><span class="l">{{r.k}}</span><span class="v">{{r.v}}</span></div></sc-for></div>
@@ -890,7 +937,7 @@ button.cnc-no{all:unset;cursor:pointer;color:var(--accent);font-family:var(--mon
                   <label class="fld">Reason<textarea class="input" style="height: 80px; padding-top: 8px; resize: vertical" value="{{f.why}}" onInput="{{f.onWhy}}"></textarea><sc-if value="{{f.whyErr}}" hint-placeholder-val="{{ false }}"><span class="err">A reason is required</span></sc-if></label>
                 </sc-if>
               </div>
-              <sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" aria-haspopup="menu" onClick="{{det.openMenu}}">All actions<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button><sc-if value="{{det.showPrim}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{det.primRun}}">{{det.prim}}</button></sc-if></div></sc-if>
+              <sc-if value="{{dDetails}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" aria-haspopup="menu" onClick="{{det.openMenu}}">All actions<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button><sc-if value="{{det.showPrim2}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{det.primRun}}">{{det.prim}}</button></sc-if><button class="btn btn-primary" onClick="{{det.mailRun}}" disabled="{{det.mailDis}}" title="{{det.mailTip}}">e-Mail / Post</button></div></sc-if>
               <sc-if value="{{dPrf}}" hint-placeholder-val="{{ false }}"><div class="df"><sc-if value="{{prf.canCancel}}" hint-placeholder-val="{{ false }}"><button class="btn dbtn-danger" onClick="{{prf.cancel}}">Cancel proforma</button></sc-if><sc-if value="{{prf.canPaid}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{prf.transfer}}">Booking cancelled · transfer payment</button><button class="btn btn-primary" onClick="{{prf.convert}}">Convert to final + debit note</button></sc-if></div></sc-if>
               <sc-if value="{{dlgDl}}" hint-placeholder-val="{{ false }}"><div class="df"><span class="mu" style="margin-inline-end: auto">Download</span><button class="btn btn-sm" onClick="{{dl.pdf}}">PDF</button><button class="btn btn-sm" onClick="{{dl.xls}}">Excel</button><button class="btn btn-sm" onClick="{{dl.csv}}">CSV</button></div></sc-if>
               <sc-if value="{{dlgAct}}" hint-placeholder-val="{{ false }}"><div class="df"><button class="btn" onClick="{{closeDlg}}">Cancel</button><button class="btn {{okCls}}" onClick="{{dlgOk}}">{{okLabel}}</button></div></sc-if>
@@ -1522,12 +1569,49 @@ class GirsPage extends DCLogic {
     };
     if (d) {
       if (d.kind === 'details' && di) {
-        dlgTitle = di.no; dlgSub = di.type + ' invoice · ' + di.party; dlgCls = 'wide';
-        det.fields = [['Invoice Type', di.type], ['Booking No.', di.bkg], ['B/L No.', di.bl], ['Container No.', di.cntr], ['Voyage/VVD', di.vvd], ['Billing Party', di.party],
-          ['Customer Code', di.cust], ['Invoice Status', di.status, 'color:' + (IV_TONE[di.status] || 'var(--ink)')], ['Payment Status', di.pay], ['Due Date', di.due], ['Govt. Reference', di.gov], ['PDF/JSON Link', di.files], ['Audit ID', di.lines[0][5]]].map(([k, v, st]) => ({ k, v, st: st || '' }));
-        det.lines = di.lines.map((l) => ({ chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], tax: l[4], audit: l[5] }));
+        dlgTitle = di.no; dlgSub = di.type + ' invoice · ' + di.party + ' · ' + di.cust; dlgCls = 'wide ivdw';
+        const TRD = { 'SG-SR-9': 9, 'IN-GST-18': 18, 'MY-SST-8': 8, 'TH-VAT-7': 7, 'ZR-INTL': 0 };
+        const byC = {};
+        det.lines = di.lines.map((l) => { const rate = TRD[l[4]] || 0, tax = Math.round(l[1] * rate) / 100; const c = byC[l[2]] || (byC[l[2]] = { a: 0, t: 0 }); c.a += l[1]; c.t += tax;
+          return { chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], tax: l[4], rate: rate + '%', taxAmt: ivFmt(tax), tot: ivFmt(l[1] + tax) }; });
+        det.tots = Object.keys(byC).map((c) => ({ cur: c, a: ivFmt(byC[c].a), t: ivFmt(byC[c].t), g: ivFmt(byC[c].a + byC[c].t) }));
+        det.due1 = det.tots.length ? det.tots[0].cur + ' ' + det.tots[0].g : '—';
+        det.due2 = det.tots.slice(1).map((t) => '+ ' + t.cur + ' ' + t.g).join('  '); det.hasDue2 = det.tots.length > 1;
+        const open = di.st2 === 'Unpaid' || di.pay === 'Partially paid';
+        det.amtL = di.st2 === 'Cancelled' ? 'Invoice total (cancelled)' : open ? 'Amount due (incl. tax)' : 'Invoice total (incl. tax)';
+        const dd = new Date(di.due), t0 = new Date(); t0.setHours(0, 0, 0, 0);
+        const days = isNaN(dd) ? null : Math.round((dd - t0) / 864e5);
+        det.dueL = di.due && di.due !== '—' ? di.due : 'No due date';
+        det.dueNote = !open || days === null ? '' : days < 0 ? 'Overdue ' + (-days) + (days === -1 ? ' day' : ' days') : days === 0 ? 'Due today' : 'Due in ' + days + (days === 1 ? ' day' : ' days');
+        det.dueCls = 'ivd-dn' + (open && days !== null && days <= 0 ? ' late' : '');
+        det.hasDueNote = !!det.dueNote;
+        det.chips = [[di.st2, ivChip2(di.st2)], [di.status, 'background:var(--neutral);color:var(--muted2)'], ['e-Invoice · ' + di.einv, ivChip2(di.einv)], ['GFS · ' + di.gfs, ivChip2(di.gfs)]]
+          .concat(di.pay === 'Partially paid' ? [['Partially paid', ivPayPill(di.pay)]] : []).map(([t, st]) => ({ t, st }));
+        det.idate = di.date || '—'; const hasGov = di.gov && di.gov !== '—';
+        // countries where e-invoicing returns a government reference (workshop plan: India, Singapore, Saudi Arabia, Malaysia, Latin America)
+        const EINV = ['IN', 'SG', 'SA', 'MY', 'MX', 'BR', 'AR', 'CL', 'CO', 'PE', 'EC', 'UY', 'GT'];
+        const ctry = String(di.port || di.no || '').slice(0, 2).toUpperCase();
+        const ctryOf = { SI: 'SG', NS: 'IN', PK: 'MY', LC: 'TH' }[ctry] || ctry;
+        det.gov = hasGov ? di.gov : EINV.includes(ctryOf) ? 'Pending' : 'Not applicable';
+        det.govCls = 'ivd-v' + (hasGov ? ' mono' : det.gov === 'Pending' ? ' ivd-pend' : ' mu');
+        det.groups = [
+          ['Customer', [['Billing party', di.party], ['Customer code', di.cust, 'mono']]],
+          ['Shipment', [['Booking no.', di.bkg, 'mono'], ['B/L no.', di.bl, 'mono'], ['Container no.', di.cntr, 'mono'], ['Vessel / voyage', di.vvd]]]
+        ].map(([t, fs]) => ({ t, fs: fs.map(([k, v, c]) => ({ k, v: v || '—', c: (c || '') + (!v || v === '—' ? ' mu' : '') })) }));
+        det.openDoc = () => ivView(di);
+        const cn = CNM[di.no];
+        det.hasCn = !!cn; det.noCn = !cn; det.cnNo = cn ? cn.no : ''; det.cnSt = cn ? (IV_CN_LBL[cn.st] || cn.st) : ''; det.cnPill = cn ? (IV_CN_PILL[cn.st] || IV_CN_PILL.Draft) : '';
+        det.cnOpen = () => self.setState({ dlg: null, cnOpen: cn ? cn.no : '' });
+        const hist = this.audit(di) || [];
+        det.hist = hist.slice(-4).reverse().map((r) => ({ when: r[0], ev: r[1], by: r[2] }));
+        det.hasHist = det.hist.length > 0; det.histMore = hist.length > 4;
+        det.openAudit = () => self.dlg('audit', di);
         const pr = primaryOf(di);
-        det.showPrim = pr.label !== 'View invoice details' && !pr.dis; det.prim = pr.label; det.primRun = () => { self.setState({ dlg: null }); setTimeout(() => pr.run(), 0); };
+        det.showPrim = pr.label !== 'View invoice details' && !pr.dis; det.prim = pr.label;
+        det.showPrim2 = det.showPrim && pr.label !== 'e-Mail / Post';
+        const mailOk = !['Draft', 'Pending validation', 'Cancelled'].includes(di.status);
+        det.mailDis = !mailOk; det.mailTip = mailOk ? 'Send the invoice to the customer by e-mail or post' : 'Available once the invoice is generated';
+        det.mailRun = () => { if (mailOk) self.dlg('mail', di, { ch: 'email', to: (IV_CUST[di.cust] || {}).mail || '', msg: '' }); }; det.primRun = () => { self.setState({ dlg: null }); setTimeout(() => pr.run(), 0); };
         det.openMenu = (e) => self.openMenu(di.no, e);
       } else if (d.kind === 'dist' && di) {
         dlgTitle = 'Distribution · ' + di.no; dlgSub = 'Where the invoice was sent · ' + di.party;
