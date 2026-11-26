@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS MIS Reports</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root,.theme{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;--selbg:#0071B7;--selfg:#FFFFFF;--selbd:#0071B7}
+.theme[data-theme=dark]{--ink:#ECEEF1;--muted:#9DA3AC;--muted2:#C5CAD1;--muted3:#C5CAD1;--muted4:#878D96;--line:#2E3135;--line2:#25272A;--bd:#43474D;--bdh:#646A72;--line3:#383B40;--bg:#0D0E0F;--sub:#202225;--hover:#26292D;--hover2:#1E2023;--hover3:#1D1F22;--neutral:#2B2E32;--canvas:#09090A;--accent:#4BA0DD;--accent2:#8FC5EC;--tint:#172636;--tintbd:#264A6B;--tint2:#152230;--ok:#5BC48A;--okbg:#122A1E;--ok2:#86D7A8;--okdot:#3DB471;--okbar:#3DB471;--okbd:#1F4B33;--okrow:#111D16;--warn:#D9A449;--warnbg:#241E13;--warn2:#E6B865;--warnbar:#C08A26;--warnbd:#4A3B18;--bad:#F07A7F;--badbg:#2E1719;--badbar:#E04B51;--bad2:#F7A1A4;--badbd:#5A2629;--badrow:#1E1415;--aibg:#231D36;--ai:#B4A2F0;--surface:#191A1C;--brand:#E31D1A;--onaccent:#0B1620;--accenth:#6CB3E6;--gold:#E2C063;--goldbg:#2A2412;--selbg:#172636;--selfg:#9CCBEE;--selbd:#4BA0DD;color-scheme:dark}
+/* dark: filled buttons keep white text on a deeper PIL blue; overlays get real depth */
+.glogo{background:#fff}.theme[data-theme=dark] .glogo{background:transparent}.theme[data-theme=dark] img[src="pil-logo.png"]{content:url(pil-logo-dark.png)}/* dark polish: one 'selected' style, true disabled state, outlined checkboxes, visible focus */.theme[data-theme=dark] .chipb[aria-pressed=true]{background:var(--selbg);border-color:var(--selbd);color:var(--selfg)}.theme[data-theme=dark] .btn:disabled,.theme[data-theme=dark] .btn[disabled],.theme[data-theme=dark] .btn-primary:disabled{opacity:1;background:#232528;border-color:#2E3135;color:#6B7079;box-shadow:none}.theme[data-theme=dark] input[type=checkbox]{-webkit-appearance:none;appearance:none;width:16px;height:16px;flex:none;border:1.5px solid #8A9099;border-radius:3px;background:transparent center/12px no-repeat;box-sizing:border-box}.theme[data-theme=dark] input[type=checkbox]:hover{border-color:#C5CAD1}.theme[data-theme=dark] input[type=checkbox]:checked{background-color:#2580C3;border-color:#2580C3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}.theme[data-theme=dark] input[type=checkbox]:indeterminate{background-color:#2580C3;border-color:#2580C3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8h8' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")}.theme[data-theme=dark] input[type=checkbox]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.theme[data-theme=dark] input[type=checkbox]:disabled{opacity:.35}.theme[data-theme=dark] :is(.input,.select,textarea):is(:focus,:focus-visible){box-shadow:0 0 0 3px rgba(75,160,221,.42)!important;border-color:var(--accent)!important}.theme[data-theme=dark] .select:open{box-shadow:0 0 0 3px rgba(75,160,221,.42)}.theme[data-theme=dark] :is(button,a,[tabindex]):focus-visible{outline-color:#6CB3E6}.theme[data-theme=dark] .btn-primary{background:#1B6FAE;border-color:#1B6FAE;color:#fff}.theme[data-theme=dark] .btn-primary:hover{background:#2580C3;border-color:#2580C3}.theme[data-theme=dark] .menu,.theme[data-theme=dark] .ri-sug,.theme[data-theme=dark] .ng-fly,.theme[data-theme=dark] .amenu,.gs-panel[data-theme=dark]{box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.theme[data-theme=dark] .paper,.paper{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;color-scheme:light;color:var(--ink)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:var(--accent)}a:hover{color:var(--accent2)}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{position:relative;display:flex;align-items:center;height:32px;padding-inline:42px 12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:400;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-item:hover{background:var(--hover);color:var(--ink)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;height:36px;padding:0 8px 0 12px;border-radius:6px;color:var(--muted2);font-size:13px;font-weight:600;line-height:18px}.nav-grp .ng-ic{flex:none;width:22px;height:22px;color:var(--muted)}nav[data-c=true] .nav-grp{height:44px}.nav-grp .ng-l{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:start}.nav-grp .ng-ch{flex:none;color:var(--muted);transition:transform .15s}.nav-grp:hover .ng-ic,.nav-grp-on .ng-ic{color:var(--accent)}.nav-grp-on{color:var(--ink)}.ng-sub{display:flex;flex-direction:column;gap:2px}.ng-fly{position:fixed;left:68px;z-index:61;width:280px;overflow:auto;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.18);box-sizing:border-box}.ng-fly .ng-sub,.ng-fly{gap:2px}.ng-fly .nav-item{height:40px;padding-inline:14px;font-size:14px;line-height:20px;border-radius:6px}.ng-fly .nav-on::before{display:none}.ng-fh{padding:8px 14px 8px;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.ng-bd{position:fixed;top:0;right:0;bottom:0;left:64px;z-index:60}nav[data-c=true] .nav-grp[aria-expanded=true]{background:var(--hover)}nav[data-c=true] .nav-grp-on{background:var(--tint)}nav[data-c=true] .nav-grp-on .ng-ic{color:var(--accent)}
+.nav-grp:hover{background:var(--hover);color:var(--ink)}
+.nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}.nav-on::before{content:"";position:absolute;inset-inline-start:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:var(--accent)}
+.nav-item svg{flex:none}
+.sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:44px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.sbtoggle:hover{background:var(--hover);color:var(--ink)}
+.sbtoggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--bd);background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:var(--hover)}
+.btn-sm{height:32px;padding:0 12px}
+.btn-icon{width:36px;padding:0}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.btn-primary:hover{background:var(--accenth);border-color:var(--accenth)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible,.pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select-sm{height:32px;line-height:30px;font-size:12px}
+.select:hover,.input:hover{border-color:var(--bdh)}
+.input{height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;box-sizing:border-box}
+.input::placeholder{color:var(--muted4)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 16px;border-bottom:1px solid var(--line);box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:var(--muted)}
+.lbl{display:block;font-size:12px;font-weight:600;color:var(--muted);line-height:16px;margin-bottom:6px}
+.k{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);padding:0 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sub);box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid var(--line2);vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:var(--hover2)}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cursor:pointer}
+.gsearch{position:relative;flex:0 1 480px;min-width:220px}
+.gsearch .input{width:100%;padding-inline:36px 12px;background:var(--sub)}
+.grow{flex:1 1 auto}
+
+.select:focus,.select:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:active{background:var(--sub)}
+.select:disabled{background:var(--bg);color:var(--muted4);border-color:var(--line);cursor:not-allowed}
+.input:focus,.input:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+@supports (appearance: base-select){
+.select,.select::picker(select){appearance:base-select}
+.select{display:inline-flex;align-items:center;line-height:normal}
+.select::picker-icon{display:none}
+.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
+.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
+.select option::checkmark{order:2;margin-inline-start:auto;color:var(--accent);font-weight:700}
+.select option:hover{background:var(--hover)}
+.select option:focus-visible{background:var(--hover);box-shadow:inset 0 0 0 2px var(--accent)}
+.select option:active{background:var(--neutral)}
+.select option:checked{background:var(--tint);color:var(--accent2);font-weight:600}
+.select option:disabled{color:var(--muted4);cursor:not-allowed}
+.select:open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:open + svg{transform:rotate(180deg)}
+}
+.select + svg{transition:transform .15s ease}
+.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
+.ap-row{cursor:default}.ap-row:hover{background:transparent}.ap-seg{display:inline-flex;flex:none;margin-inline-start:auto;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}.ap-seg button{all:unset;box-sizing:border-box;cursor:pointer;height:26px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);display:inline-flex;align-items:center;gap:6px}.ap-seg button:hover{color:var(--ink)}.ap-seg button[aria-checked=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.18)}.ap-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}.lg-list{max-height:280px;overflow-y:auto;overscroll-behavior:contain}.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
+.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
+.mi:hover{background:var(--hover);color:var(--ink)}
+.mi:active{background:var(--neutral)}
+.mi:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mi[aria-checked=true]{background:var(--tint);color:var(--accent2)}
+.mi[aria-checked=true] .mi-sub{color:var(--accent2)}
+.mi svg{flex:none;color:var(--muted)}
+.mi[aria-checked=true] svg{color:var(--accent)}
+.mi-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.mi-lbl{font-weight:500;white-space:normal}
+.mi-sub{font-size:12px;line-height:16px;color:var(--muted);white-space:normal}
+.mi-danger{color:var(--bad)}.mi-danger svg{color:var(--bad)}.mi-danger:hover{background:var(--badbg);color:var(--bad)}
+.ubtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;height:36px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:18px;box-sizing:border-box;transition:background .12s,border-color .12s}
+.ubtn:hover{background:var(--hover);border-color:var(--bd)}
+.ubtn:active{background:var(--neutral)}
+.ubtn[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
+.ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.uchev{transition:transform .15s ease}
+tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
+@keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
+.gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+.rowbtn{all:unset;cursor:pointer;display:inline-block}
+.bar{height:10px;border-radius:2px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}.lnk:hover{text-decoration:underline}.lnk:focus-visible{outline:2px solid var(--accent);border-radius:3px}
+.mis-grid{display:grid;grid-template-columns:264px minmax(0,1fr);gap:16px;align-items:start}
+.mis-nav{position:sticky;top:16px;padding:12px 10px 14px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 140px);overflow:auto}
+.mis-cs{position:relative}.mis-cs svg{position:absolute;left:10px;top:50%;margin-top:-7.5px;color:var(--muted)}.mis-cs .input{width:100%;height:34px;padding-left:31px;box-sizing:border-box}
+.mis-g h2{margin:4px 8px 6px;font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+.mis-sb{margin-bottom:6px}.mis-sb h3{margin:6px 8px 3px;font-size:13px;font-weight:600;color:var(--ink)}
+.mis-it{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:7px 10px 7px 16px;border-radius:6px;font-size:13px;line-height:18px;color:var(--muted2);cursor:pointer}
+.mis-it:hover{background:var(--hover2);color:var(--ink)}.mis-it:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mis-it[aria-current=true]{background:var(--tint);color:var(--accent2);font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+.mis-b{flex:none;min-width:20px;height:18px;padding:0 6px;border-radius:9px;font-size:11px;font-weight:600;line-height:18px;text-align:center;box-sizing:border-box}.mis-b.warn{background:var(--warnbg);color:var(--warn)}.mis-b.bad{background:var(--badbg);color:var(--bad)}
+.mis-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.mis-head{padding:0}
+.mis-ht{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding:16px 20px 14px}
+.mis-cr{font-size:12px;color:var(--muted)}.mis-t1{display:flex;align-items:center;gap:6px}.mis-t1 h2{margin:2px 0;font-size:20px;line-height:28px;font-weight:600}
+.mis-tt p{margin:0;font-size:13px;color:var(--muted2)}
+.mis-star{all:unset;cursor:pointer;display:inline-flex;padding:4px;border-radius:6px;color:var(--muted);fill:none}.mis-star:hover{background:var(--hover2);color:var(--ink)}.mis-star:focus-visible{outline:2px solid var(--accent)}
+.mis-star[aria-pressed=true]{color:#D99A0B;fill:#F5B82E}.mis-star[aria-pressed=true] svg{fill:#F5B82E}
+.mis-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.mis-acts .btn{gap:6px}.mis-up{font-size:12px;color:var(--muted);margin-right:2px}
+.mis-exp{position:relative}
+.mis-scrim{position:fixed;inset:0;z-index:19}
+.mis-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:20;width:240px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(15,23,42,.16)}
+.mis-menu button{all:unset;box-sizing:border-box;display:flex;flex-direction:column;width:100%;padding:8px 10px;border-radius:6px;font-size:13px;color:var(--ink);cursor:pointer}.mis-menu button:hover{background:var(--hover2)}.mis-menu small{font-size:11.5px;color:var(--muted)}
+.mis-fb{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 16px;padding:12px 20px 14px;border-top:1px solid var(--line2);background:var(--sub);border-radius:0 0 8px 8px}
+.mis-f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}.mis-f select{min-width:160px;height:32px;appearance:auto;-webkit-appearance:menulist}
+.mis-seg{display:inline-flex;height:32px;border:1px solid var(--bd);border-radius:6px;overflow:hidden;background:var(--surface)}
+.mis-seg button{all:unset;cursor:pointer;padding:0 12px;font-size:13px;line-height:30px;color:var(--muted2)}.mis-seg button+button{border-left:1px solid var(--line)}
+.mis-seg button[aria-checked=true]{background:var(--tint);color:var(--accent2);font-weight:600}.mis-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mis-tg{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:32px;font-size:13px;color:var(--ink)}.mis-tg:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.mis-sw{position:relative;width:32px;height:18px;border-radius:9px;background:var(--bd);transition:background .15s}.mis-sw::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .15s}
+.mis-tg[aria-checked=true] .mis-sw{background:var(--accent)}.mis-tg[aria-checked=true] .mis-sw::after{transform:translateX(14px)}
+.mis-rst{height:32px;font-size:13px}
+.mis-schip{all:unset;cursor:pointer;margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:14px;background:var(--tint);color:var(--accent2);font-size:12px;font-weight:600}
+.mis-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.mis-k{padding:14px 18px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.mis-kl{font-size:12.5px;color:var(--muted)}
+.mis-kr{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.mis-kv{font-size:24px;line-height:30px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}.mis-kv.warn{color:var(--warn)}.mis-kv.bad{color:var(--bad)}
+.mis-sp{width:84px;height:26px;flex:none}.mis-sp polyline{fill:none;stroke:var(--accent);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.mis-dl{font-size:12px;color:var(--muted)}.mis-d{font-weight:600}.mis-d.good{color:var(--ok)}.mis-d.bad{color:var(--bad)}.mis-d.neu{color:var(--muted2)}
+.mis-row2{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:16px}
+.mis-chart{padding:16px 20px 14px;min-width:0}
+.mis-chh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:14px}.mis-chh h3,.mis-ins h3{margin:0;font-size:14px;font-weight:600}
+.mis-lg{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted2)}.mis-lg span{display:inline-flex;align-items:center;gap:6px}.mis-lg i{width:10px;height:10px;border-radius:2px}
+.mis-cols{display:flex;gap:8px;height:190px}
+.mis-y{display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:var(--muted);text-align:right;padding-bottom:18px;min-width:34px}
+.mis-cg{flex:1;display:flex;align-items:stretch;gap:3px;border-left:1px solid var(--line);padding-left:6px;background:linear-gradient(var(--line2),var(--line2)) 0 0/100% 1px no-repeat,linear-gradient(var(--line2),var(--line2)) 0 calc(50% - 9px)/100% 1px no-repeat}
+.mis-c{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}.mis-c span{font-size:10.5px;color:var(--muted);height:18px;line-height:18px}
+.mis-c.wk .mis-cs2{background:var(--sub)}
+.mis-cs2{flex:1;width:100%;max-width:22px;display:flex;flex-direction:column-reverse;border-bottom:1px solid var(--bd);border-radius:3px 3px 0 0}
+.mis-cs2 i{display:block;width:100%}.mis-cs2 i:last-child{border-radius:3px 3px 0 0}
+.mis-c:hover .mis-cs2{outline:2px solid var(--tint);outline-offset:1px}
+.mis-bars{display:flex;flex-direction:column;gap:12px;padding:4px 0}
+.mis-br{display:grid;grid-template-columns:minmax(120px,190px) 1fr 78px;align-items:center;gap:12px}
+.mis-bl{font-size:12.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mis-bt{display:flex;gap:2px;height:14px;background:var(--neutral);border-radius:7px;overflow:hidden}.mis-bt i{display:block;height:100%}
+.mis-bv{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted2)}
+.mis-ins{padding:16px 20px}
+.mis-ins ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.mis-in{display:flex;gap:10px}.mis-in p{margin:0;font-size:13px;line-height:19px;color:var(--ink)}.mis-in .lnk{font-size:12.5px;margin-top:3px;display:inline-block}
+.mis-idot{flex:none;width:8px;height:8px;margin-top:6px;border-radius:50%;background:var(--accent)}
+.mis-in.warn .mis-idot{background:var(--warn)}.mis-in.bad .mis-idot{background:var(--bad)}.mis-in.ok .mis-idot{background:var(--ok)}.mis-in.note .mis-idot{background:var(--bd)}.mis-in.note p{color:var(--muted2);font-size:12.5px}
+.mis-tbl{display:flex;flex-direction:column;min-width:0}
+.mis-th{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.mis-rc{display:flex;align-items:baseline;gap:8px;font-size:14px}.mis-rc b{font-weight:600}.mis-rc span{font-size:12.5px;color:var(--muted)}
+.mis-selbar{display:flex;align-items:center;gap:10px;font-size:13px}.mis-selbar b{color:var(--accent2)}
+.mis-srch{position:relative;width:300px;margin-left:auto}.mis-srch svg{position:absolute;left:10px;top:50%;margin-top:-8px;color:var(--muted)}.mis-srch .input{width:100%;padding-left:32px;box-sizing:border-box}
+.mis-scroll{overflow:auto}
+.mis-t{width:100%;border-collapse:collapse;font-size:13px}
+.mis-t th{position:sticky;top:0;z-index:1;text-align:left;font-weight:500;font-size:12px;color:var(--muted);background:var(--sub);padding:0 14px;height:38px;border-bottom:1px solid var(--line);white-space:nowrap}
+.mis-t th.num{text-align:right}.mis-t th button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px}.mis-t th button:hover{color:var(--ink)}.mis-t th button:focus-visible{outline:2px solid var(--accent);border-radius:3px}
+.mis-si{font-size:11px;opacity:.45}.mis-t th[aria-sort=ascending] .mis-si,.mis-t th[aria-sort=descending] .mis-si{opacity:1;color:var(--accent)}
+.mis-t td{padding:10px 14px;border-bottom:1px solid var(--line2);white-space:nowrap;color:var(--ink)}
+.mis-t tr:hover td{background:var(--hover3)}.mis-t tr[aria-selected=true] td{background:var(--tint)}
+.mis-t .num{text-align:right}.mis-t td.mono{font-family:var(--mono, monospace);font-size:12.5px}
+.mis-cb{width:20px;padding-right:0 !important}.mis-ac{text-align:right !important;width:1%}
+.mis-rb{white-space:nowrap}
+.mis-st{display:inline-block;font-size:12px;font-weight:500;padding:2px 8px;border-radius:10px;background:var(--neutral);color:var(--muted2)}
+.mis-st.ok{background:var(--okbg);color:var(--ok)}.mis-st.warn{background:var(--warnbg);color:var(--warn)}.mis-st.bad{background:var(--badbg);color:var(--bad)}.mis-st.act{background:var(--tint);color:var(--accent2)}
+.mis-pb{display:inline-block;vertical-align:middle;width:110px;height:6px;border-radius:3px;background:var(--neutral);overflow:hidden;margin-right:8px}.mis-pb i{display:block;height:100%;background:var(--accent)}.mis-pt{font-size:12px;color:var(--muted2)}
+.mis-empty{margin:0;padding:40px 16px;text-align:center;color:var(--muted)}
+.mis-ft{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
+.mis-pg{display:flex;align-items:center;gap:10px}.mis-pg label{display:inline-flex;align-items:center;gap:6px}.mis-pg select{height:30px;appearance:auto;-webkit-appearance:menulist}
+.mis-ov{position:fixed;inset:0;background:rgba(15,23,42,.36);z-index:90}
+.mis-dlg{position:fixed;z-index:91;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100vw - 32px));background:var(--surface);border-radius:12px;box-shadow:0 24px 48px rgba(15,23,42,.24);display:flex;flex-direction:column}
+.mis-dh{display:flex;justify-content:space-between;gap:12px;padding:18px 22px 12px;border-bottom:1px solid var(--line2)}.mis-dh h2{margin:0;font-size:17px;font-weight:600}.mis-dh p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.mis-db{padding:16px 22px;display:flex;flex-direction:column;gap:14px}
+.mis-fld{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted2)}.mis-fld .input,.mis-fld .select{height:36px;box-sizing:border-box}
+.mis-2c{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mis-err{font-style:normal;font-size:12px;color:var(--bad)}
+.mis-dn{margin:0;font-size:12px;color:var(--muted)}
+.mis-df{display:flex;align-items:center;gap:8px;padding:12px 22px;border-top:1px solid var(--line2)}.mis-del{color:var(--bad)}
+@media (max-width:1280px){.mis-row2{grid-template-columns:1fr}.mis-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1000px){.mis-grid{grid-template-columns:1fr}.mis-nav{position:static;max-height:none}}
+@media print{.gside,.gtop,.mis-nav,.mis-acts,.mis-fb,.mis-th,.mis-ft,.mis-cb,.mis-ac{display:none !important}.mis-grid{display:block}}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mis-grid1{max-width:1480px;margin:0 auto}
+.mis-nb{display:flex;align-items:center;gap:10px}
+.mis-back{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px 0 6px;border-radius:6px;font-size:13px;font-weight:500;color:var(--accent2)}.mis-back:hover{background:var(--tint)}.mis-back:focus-visible{outline:2px solid var(--accent)}
+.mis-sep{color:var(--bd)}.mis-sw2 select{height:32px;min-width:300px;appearance:auto;-webkit-appearance:menulist;font-weight:500}
+.mis-head,.mis-k,.mis-chart,.mis-ins,.mis-tbl{box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.mis-t td.mis-cmpa{font-weight:600}.mis-t td.mis-cmpb{color:var(--bad);font-weight:600}
+.mis-c,.mis-br{position:relative}
+.mis-tip{display:none;position:absolute;z-index:5;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);width:max-content;max-width:280px;padding:7px 10px;border-radius:6px;background:#1D2433;color:#fff;font-size:12px;line-height:16px;white-space:normal;box-shadow:0 6px 16px rgba(15,23,42,.25);pointer-events:none}
+.mis-br .mis-tip{left:auto;right:0;transform:none;bottom:calc(100% + 2px)}
+.mis-c:hover .mis-tip,.mis-br:hover .mis-tip{display:block}
+.mis-br:hover .mis-bt{box-shadow:0 0 0 2px var(--tint)}
+.mis-cs2 i{transition:opacity .12s}.mis-cg:hover .mis-c:not(:hover) .mis-cs2 i{opacity:.45}
+/* home */
+.mh{display:flex;flex-direction:column;gap:24px}
+.mh-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;padding:22px 24px;border-radius:12px;background:linear-gradient(120deg,var(--tint) 0%,var(--surface) 70%);border:1px solid var(--line)}
+.mh-hi{font-size:13px;color:var(--accent2);font-weight:600}.mh-top h2{margin:4px 0 4px;font-size:24px;line-height:30px;font-weight:600;letter-spacing:-.01em}.mh-top p{margin:0;font-size:13.5px;color:var(--muted2)}
+.mh-ctl{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 14px}
+.mh-upd{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);height:32px}
+.mh-att{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:14px 16px 14px 18px;border-radius:12px;background:var(--badbg);border:1px solid color-mix(in srgb,var(--bad) 22%,transparent)}
+.mh-att-h{display:flex;align-items:center;gap:12px;min-width:250px}.mh-att-h b{display:block;font-size:14px;color:var(--bad)}.mh-att-h span{font-size:12.5px;color:var(--muted2)}
+.mh-att-ic{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--surface);color:var(--bad)}
+.mh-att-l{flex:1;display:flex;flex-wrap:wrap;gap:8px}
+.mh-ai{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:8px 10px 8px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:border-color .12s,box-shadow .12s}
+.mh-ai:hover{border-color:var(--bad);box-shadow:0 4px 12px rgba(15,23,42,.08)}.mh-ai:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mh-ai b{font-size:18px;font-weight:600;color:var(--bad);font-variant-numeric:tabular-nums}.mh-ai span{display:flex;flex-direction:column;font-size:12.5px;line-height:16px;color:var(--ink)}.mh-ai em{font-style:normal;font-size:11.5px;color:var(--muted)}.mh-ai svg{color:var(--muted)}
+.mh-grp{display:flex;flex-direction:column;gap:18px}
+.mh-gh{margin:6px 0 0;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.mh-sec{display:flex;flex-direction:column;gap:12px}
+.mh-sh{display:flex;align-items:center;gap:8px}.mh-sh h3{margin:0;font-size:15px;font-weight:600}.mh-sh span{min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border-radius:10px;background:var(--neutral);color:var(--muted2);font-size:11.5px;font-weight:600;line-height:20px;text-align:center}
+.mh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.mh-subs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 16px;grid-auto-flow:row dense}
+.mh-subs .mh-sec{grid-column:span var(--n)}.mh-subs .mh-grid{grid-template-columns:repeat(var(--n),minmax(0,1fr));align-items:stretch;flex:1}
+.mh-cf{margin-top:auto !important}
+@media (max-width:1250px){.mh-subs{grid-template-columns:repeat(2,minmax(0,1fr))}.mh-subs .mh-sec{grid-column:span 2}.mh-subs .mh-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.mh-subs{grid-template-columns:1fr}.mh-subs .mh-sec{grid-column:auto}.mh-subs .mh-grid{grid-template-columns:1fr}}
+.mh-card{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:4px;padding:18px 20px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--line);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
+.mh-card:hover{border-color:var(--accent);box-shadow:0 10px 24px rgba(16,24,40,.10);transform:translateY(-2px)}
+.mh-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mh-card.issue.exc::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:var(--bad)}
+.mh-ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.mh-ic{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--tint);color:var(--accent2)}
+.mh-card.issue .mh-ic{background:var(--badbg);color:var(--bad)}
+.mh-st{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:10px}.mh-st.ok{background:var(--okbg);color:var(--ok)}.mh-st.bad{background:var(--badbg);color:var(--bad)}
+.mh-ct{font-size:15px;line-height:20px;font-weight:600;color:var(--ink)}
+.mh-cd{font-size:12.5px;line-height:17px;color:var(--muted);min-height:34px;margin-bottom:auto}.mh-ct{min-height:20px}
+.mh-cv{display:flex;align-items:baseline;gap:8px;margin-top:10px}.mh-cv b{font-size:28px;line-height:34px;font-weight:600;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums}.mh-cv em{font-style:normal;font-size:13px;color:var(--muted2)}
+.mh-card.issue .mh-cv b{color:var(--bad)}
+.mh-sp{width:100%;height:30px;margin:2px 0}.mh-sp polyline{fill:none;stroke:var(--accent);stroke-width:1.8;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.mh-card.issue .mh-sp polyline{stroke:var(--bad)}
+.mh-cs{font-size:12.5px;color:var(--muted2)}
+.mh-cf{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line2);font-size:13px;font-weight:600;color:var(--accent2)}
+.mh-cf svg{transition:transform .15s}.mh-card:hover .mh-cf svg{transform:translateX(3px)}
+.mh-fut{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:1px dashed var(--bd);font-size:12.5px;color:var(--muted2)}.mh-fut b{color:var(--ink);font-weight:600}
+@media (prefers-reduced-motion:reduce){.mh-card,.mh-cf svg{transition:none}.mh-card:hover{transform:none}}
+/* ---------- MIS v4 ---------- */
+.mx{display:grid;grid-template-columns:248px minmax(0,1fr);gap:16px;align-items:start}
+.mx-rail{position:sticky;top:16px;display:flex;flex-direction:column;gap:6px;padding:10px 8px 12px;max-height:calc(100vh - 140px);overflow:auto}
+.mx-ov,.mx-ni{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;border-radius:6px;font-size:13px;color:var(--muted2)}
+.mx-ov{padding:9px 10px;font-weight:600;color:var(--ink)}
+.mx-ni{justify-content:space-between;padding:7px 10px 7px 14px;line-height:18px}
+.mx-ov:hover,.mx-ni:hover{background:var(--hover);color:var(--ink)}
+.mx-ov:focus-visible,.mx-ni:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mx-ov[aria-current=true],.mx-ni[aria-current=true]{background:var(--tint);color:var(--accent2);font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+.mx-ng{padding-top:8px;border-top:1px solid var(--line2)}
+.mx-ng h2{margin:2px 10px 4px;font-size:11.5px;font-weight:600;color:var(--muted)}
+.mx-ns{margin-bottom:4px}.mx-ns h3{margin:6px 10px 2px;font-size:12.5px;font-weight:600;color:var(--ink)}
+.mx-nb{flex:none;min-width:20px;height:18px;padding:0 6px;border-radius:9px;font-size:11px;font-weight:600;line-height:18px;text-align:center;box-sizing:border-box}
+.mx-nb.bad{background:var(--badbg);color:var(--bad)}.mx-nb.warn{background:var(--warnbg);color:var(--warn)}
+.mx-fut{display:flex;gap:8px;margin-top:6px;padding:10px;border:1px dashed var(--bd);border-radius:8px;color:var(--muted)}.mx-fut svg{flex:none;margin-top:1px}
+.mx-fut p{margin:0;font-size:12px;line-height:17px}.mx-fut b{display:block;color:var(--ink);font-weight:600}
+.mx-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.mx-ctx{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 16px;padding:12px 16px}
+.mx-sp1{flex:1}.mx-up{font-size:12px;color:var(--muted);align-self:center}
+.mx-ctx .mis-tg{height:32px}
+.mx-home,.mx-rep{display:flex;flex-direction:column;gap:16px;min-width:0}
+.mx-hh h2{margin:0;font-size:20px;line-height:28px;font-weight:600;color:var(--ink)}.mx-hh p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.mx-hk,.mx-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.mx-hkc{display:flex;flex-direction:column;gap:4px;padding:14px 18px}
+.mx-hkc span{font-size:12.5px;color:var(--muted)}.mx-hkc b{font-size:26px;line-height:32px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.mx-hkc b.bad{color:var(--bad)}.mx-hkc b.warn{color:var(--warn)}.mx-hkc em{font-style:normal;font-size:12px;color:var(--muted)}
+.mx-hr,.mx-charts{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,1fr);gap:16px}
+.mx-pan{padding:16px 20px 16px;min-width:0;position:relative}
+.mx-ph{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
+.mx-ph h3{margin:0;font-size:14px;font-weight:600;color:var(--ink)}
+.mx-cnt{min-width:22px;height:20px;padding:0 7px;border-radius:10px;background:var(--badbg);color:var(--bad);font-size:12px;font-weight:600;line-height:20px;text-align:center;box-sizing:border-box}
+.mx-tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);z-index:5;padding:6px 9px;border-radius:6px;background:#1E2430;color:#fff;font-size:11.5px;line-height:16px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .1s;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.mx-y{display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:var(--muted);text-align:right;padding-bottom:20px;min-width:44px;font-variant-numeric:tabular-nums}
+/* grouped trend */
+.mx-gc{display:flex;gap:8px;height:210px}
+.mx-gcb{flex:1;display:flex;gap:10px;border-left:1px solid var(--line);padding-left:10px;background:linear-gradient(var(--line2),var(--line2)) 0 calc(50% - 10px)/100% 1px no-repeat}
+.mx-gcc{flex:1;position:relative;display:flex;flex-direction:column;align-items:center}
+.mx-gcc:hover .mx-tip,.mx-c:hover .mx-tip,.mx-br:hover .mx-tip,.mx-dot:hover .mx-tip{opacity:1}
+.mx-gcp{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:3px;border-bottom:1px solid var(--bd)}
+.mx-gcp i{display:block;width:min(26px,38%);border-radius:4px 4px 0 0}.mx-gcp i.a{background:var(--bar-done,#A3ADBB)}.mx-gcp i.b{background:var(--accent)}
+.mx-gcc:hover .mx-gcp{background:var(--hover2)}.mx-gcp i{position:relative}.mx-gcp em{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:3px;font-style:normal;font-size:10.5px;font-weight:600;color:var(--muted2);white-space:nowrap}.mx-gcp i.b em{color:var(--accent2)}.mx-gc{padding-top:14px}
+.mx-gcc span{height:20px;line-height:20px;font-size:11.5px;color:var(--muted)}.mx-gcc.cur span{color:var(--ink);font-weight:600}
+/* attention */
+.mx-att ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.mx-att li{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}.mx-att li:first-child{border-top:0;padding-top:2px}
+.mx-aic{flex:none;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--badbg);color:var(--bad)}
+.mx-atx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.mx-atx b{font-size:13.5px;font-weight:600;color:var(--ink)}.mx-atx .lnk{font-size:12.5px;align-self:flex-start}
+.mx-calm{margin:0;font-size:13px;color:var(--muted)}
+/* country bars */
+.mx-cty{display:flex;flex-direction:column;gap:4px}
+.mx-ctr{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:120px minmax(0,1fr) 110px 90px;align-items:center;gap:14px;padding:7px 8px;border-radius:6px}
+.mx-ctr:hover{background:var(--hover2)}.mx-ctr:focus-visible{outline:2px solid var(--accent)}
+.mx-ctl{font-size:13px;color:var(--ink);font-weight:500}.mx-ctb{display:flex;gap:2px;height:14px}
+.mx-ctb i{display:block;height:100%;background:var(--accent);border-radius:0 4px 4px 0;min-width:2px}.mx-ctb i.l{background:var(--bad);border-radius:0 4px 4px 0}
+.mx-ctb i:first-child{border-radius:4px 0 0 4px}
+.mx-ctv{font-size:13px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}.mx-ctp{font-size:12px;text-align:right;color:var(--bad);font-variant-numeric:tabular-nums}
+/* tiles */
+.mx-sec h2{margin:4px 0 10px;font-size:14px;font-weight:600;color:var(--ink)}
+.mx-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.mx-tile{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:14px 16px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.mx-tile:hover{border-color:var(--bdh);box-shadow:0 2px 8px rgba(16,24,40,.06)}.mx-tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mx-tt{display:flex;align-items:center;gap:8px}.mx-tic{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;background:var(--tint);color:var(--accent)}
+.mx-tsb{flex:1;min-width:0;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mx-tn{font-size:14px;font-weight:600;color:var(--ink);margin-top:4px}
+.mx-tv{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px}.mx-tv b{white-space:nowrap}.mx-tv b{font-size:22px;line-height:28px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}.mx-tv em{font-style:normal;font-size:12.5px;color:var(--muted)}
+.mx-tsp{width:100%;height:30px}.mx-tsp polyline{fill:none;stroke:var(--accent);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.mx-ts{font-size:12px;color:var(--muted)}
+.mh-st{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:10px}.mh-st.ok{background:var(--okbg);color:var(--ok)}.mh-st.bad{background:var(--badbg);color:var(--bad)}
+/* report head */
+.mx-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 24px;padding:16px 20px}
+.mx-cr{font-size:12px;color:var(--muted)}.mx-tt2 p{margin:0;font-size:13px;color:var(--muted2)}
+.mx-head .mis-t1{display:flex;align-items:center;gap:6px}.mx-head .mis-t1 h2{margin:2px 0;font-size:20px;line-height:28px;font-weight:600;color:var(--ink)}
+.mx-head .mis-schip{margin-left:6px}
+.mx-k{padding:14px 18px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.mx-kl{font-size:12.5px;color:var(--muted)}.mx-kr{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.mx-kv{font-size:24px;line-height:30px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}.mx-kv.warn{color:var(--warn)}.mx-kv.bad{color:var(--bad)}
+.mx-sp{width:88px;height:28px;flex:none}.mx-sp polyline{fill:none;stroke:var(--accent);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.mx-sp.warn polyline{stroke:var(--warnbar)}.mx-sp.bad polyline{stroke:var(--badbar)}
+.mx-dl{font-size:12px;color:var(--muted)}.mx-d{font-weight:600}.mx-d.good{color:var(--ok)}.mx-d.bad{color:var(--bad)}.mx-d.neu{color:var(--muted2)}
+/* columns */
+.mx-cols{display:flex;gap:8px;height:210px}
+.mx-cg{flex:1;display:flex;align-items:stretch;gap:3px;border-left:1px solid var(--line);padding-left:6px;background:linear-gradient(var(--line2),var(--line2)) 0 calc(50% - 10px)/100% 1px no-repeat}
+.mx-c{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;min-width:0}
+.mx-c span{font-size:10.5px;color:var(--muted);height:20px;line-height:20px}
+.mx-cs{flex:1;width:100%;max-width:22px;display:flex;flex-direction:column-reverse;gap:2px;border-bottom:1px solid var(--bd)}
+.mx-cs i{display:block;width:100%;flex:none}.mx-cs i:last-child{border-radius:4px 4px 0 0}
+.mx-c.wk{background:var(--sub)}.mx-c:hover{background:var(--hover)}
+/* bars */
+.mx-bars{display:flex;flex-direction:column;gap:6px}
+.mx-br{position:relative;display:grid;grid-template-columns:minmax(120px,210px) 1fr 84px;align-items:center;gap:12px;padding:5px 6px;border-radius:6px}.mx-br:hover{background:var(--hover2)}
+.mx-bl{font-size:12.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mx-bt{display:flex;gap:2px;height:14px}.mx-bt i{display:block;height:100%;min-width:0}.mx-bt i:last-child{border-radius:0 4px 4px 0}
+.mx-bv{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.mx-br .mx-tip{left:auto;right:0;transform:none}
+/* area / line */
+.mx-ar{display:flex;gap:8px;height:210px}.mx-ar.sm{height:200px}
+.mx-ap{flex:1;position:relative;border-left:1px solid var(--line);border-bottom:1px solid var(--bd);margin-bottom:20px;background:linear-gradient(var(--line2),var(--line2)) 0 50%/100% 1px no-repeat}
+.mx-ap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.mx-af{fill:var(--accent);fill-opacity:.1}.mx-al{fill:none;stroke:var(--accent);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.mx-dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;cursor:default}
+.mx-dot::after{content:'';position:absolute;inset:5px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);opacity:0}
+.mx-dot.on::after,.mx-dot:hover::after{opacity:1}
+.mx-ax{position:absolute;left:0;right:0;top:100%;height:20px}.mx-ax span{position:absolute;top:0!important;transform:translateX(-50%);font-size:10.5px;line-height:20px;color:var(--muted);white-space:nowrap}.mx-ax span[data-show=false]{display:none}
+/* donut */
+.mx-dn{display:flex;align-items:center;gap:22px;min-height:200px}
+.mx-dw{position:relative;width:150px;height:150px;flex:none}.mx-dw svg{width:100%;height:100%;transform:rotate(-90deg)}
+.mx-dbg{fill:none;stroke:var(--neutral);stroke-width:16}.mx-dsg{fill:none;stroke-width:16;transition:stroke-width .12s}.mx-dsg:hover{stroke-width:20}
+.mx-dc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}.mx-dc b{font-size:20px;line-height:24px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}.mx-dc span{font-size:11.5px;color:var(--muted)}
+.mx-dl2{flex:1;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.mx-dl2 li{display:grid;grid-template-columns:10px minmax(0,1fr) auto 38px;align-items:center;gap:8px;font-size:12.5px}
+.mx-dl2 i{width:10px;height:10px;border-radius:3px}.mx-dl2 span{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mx-dl2 b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}.mx-dl2 em{font-style:normal;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+/* work: table + side */
+.mx-work{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+.mx-tbl{padding:0;overflow:hidden;min-width:0}
+.mx-tbh{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.mx-rc{font-size:13.5px;font-weight:600;color:var(--ink)}.mx-hint{font-size:12.5px;color:var(--muted)}
+.mx-selbar{display:flex;align-items:center;gap:10px}.mx-selbar b{font-size:13px;color:var(--ink)}
+.mx-srch{margin-left:auto;position:relative;width:260px}.mx-srch svg{position:absolute;left:10px;top:50%;margin-top:-8px;color:var(--muted)}.mx-srch .input{width:100%;height:34px;padding-left:34px;box-sizing:border-box}
+.mx-scroll{overflow:auto;max-height:700px}.mx-t th,.mx-t td{padding-left:10px;padding-right:10px}.mx-t .mis-cb{padding-left:16px}.mx-t .mis-ac{padding-right:16px;position:sticky;right:0;z-index:1;background:var(--surface);box-shadow:-1px 0 0 var(--line2)}.mx-t th.mis-ac{background:var(--sub);z-index:2}.mx-t tr:hover td.mis-ac{background:var(--hover3)}.mx-t tbody tr[data-act=true] td.mis-ac{background:var(--tint2)}
+.mx-t tbody tr{cursor:pointer}.mx-t tbody tr[data-act=true] td{background:var(--tint2);box-shadow:inset 0 1px 0 var(--tintbd),inset 0 -1px 0 var(--tintbd)}.mx-t tbody tr[data-act=true] td:first-child{box-shadow:inset 3px 0 0 var(--accent),inset 0 1px 0 var(--tintbd),inset 0 -1px 0 var(--tintbd)}
+.mx-side{position:sticky;top:16px;padding:16px 18px 18px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 120px);overflow:auto}
+.mx-ih{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.mx-ih h3{margin:2px 0 0;font-size:16px;font-weight:600;color:var(--ink);word-break:break-word}.mx-ih p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.mx-inav{display:flex;gap:4px;flex:none}.mx-inav .btn{width:30px}
+.mx-ist .mis-st{font-size:12.5px;padding:3px 10px}
+.mx-cmp{padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--sub);display:flex;flex-direction:column;gap:8px}
+.mx-cmp h4{margin:0;font-size:12px;font-weight:600;color:var(--muted)}
+.mx-cmpr{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:10px;font-size:12.5px;color:var(--muted2)}
+.mx-cmpb{height:10px;border-radius:5px;background:var(--neutral);overflow:hidden}.mx-cmpb i{display:block;height:100%;border-radius:5px}
+.mx-cmp-v{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}.mx-cmp-v.bad{color:var(--bad)}
+.mx-kv{margin:0;display:flex;flex-direction:column}.mx-kv div{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-top:1px solid var(--line2)}.mx-kv div:first-child{border-top:0}
+.mx-kv dt{font-size:12.5px;color:var(--muted)}.mx-kv dd{margin:0;font-size:12.5px;color:var(--ink);text-align:right;font-weight:500}.mx-kv dd.mono{font-variant-numeric:tabular-nums}
+.mx-guide{margin:0;padding:10px 12px;border-radius:8px;background:var(--tint2);font-size:12.5px;line-height:18px;color:var(--muted2)}
+.mx-ia{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.mx-ia .lnk{font-size:13px}
+.mx-ins{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.mx-ins li{display:flex;gap:10px}.mx-ins p{margin:0;font-size:13px;line-height:19px;color:var(--ink)}.mx-ins .btn{margin-top:6px}
+.mx-idot{flex:none;width:8px;height:8px;margin-top:6px;border-radius:50%;background:var(--accent)}
+.mx-ins li.bad .mx-idot{background:var(--bad)}.mx-ins li.warn .mx-idot{background:var(--warnbar)}.mx-ins li.ok .mx-idot{background:var(--okdot)}.mx-ins li.note .mx-idot{background:var(--bd)}.mx-ins li.note p{color:var(--muted);font-size:12.5px}
+@media (max-width:1280px){.mx-work{grid-template-columns:minmax(0,1fr)}.mx-side{position:static;max-height:none}}
+@media (max-width:1100px){.mx{grid-template-columns:minmax(0,1fr)}.mx-rail{position:static;max-height:none}.mx-hr,.mx-charts{grid-template-columns:minmax(0,1fr)}.mx-hk,.mx-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.mx-rail,.mx-ctx,.mis-acts,.mx-side{display:none}.mx{grid-template-columns:1fr}.mx-work{grid-template-columns:1fr}}
+.mx-c,.mx-br{cursor:pointer}.mx-c:focus-visible,.mx-br:focus-visible,.mx-dot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.mx-c.dim .mx-cs,.mx-br.dim .mx-bt{opacity:.3}.mx-c[aria-pressed=true]{background:var(--tint)}.mx-br[aria-pressed=true]{background:var(--tint)}
+.mx-dot{cursor:pointer}.mx-dot[aria-pressed=true]::after{opacity:1;background:var(--accent)}
+.mx-dsg{cursor:pointer}.mx-dsg.dim{opacity:.25}
+.mx-dl2 li{display:block}.mx-dli{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:10px minmax(0,1fr) auto 38px;align-items:center;gap:8px;padding:3px 6px;margin:0 -6px;border-radius:6px;font-size:12.5px}
+.mx-dli:hover{background:var(--hover2)}.mx-dli[aria-pressed=true]{background:var(--tint)}.mx-dli:disabled{cursor:default;background:none}.mx-dli:focus-visible{outline:2px solid var(--accent)}
+.mx-dli i{width:10px;height:10px;border-radius:3px}.mx-dli span{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mx-dli b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}.mx-dli em{font-style:normal;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.mx-dl2{gap:3px}
+.mx-fc{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 6px 0 10px;border-radius:14px;background:var(--tint);color:var(--accent2);font-size:12.5px}.mx-fc b{font-weight:600}
+.mx-fc button{all:unset;cursor:pointer;display:grid;place-items:center;width:20px;height:20px;border-radius:50%}.mx-fc button:hover{background:var(--tintbd)}.mx-fc button:focus-visible{outline:2px solid var(--accent)}
+.mx-tbh .mis-seg{height:30px}.mx-tbh .mis-seg button{line-height:28px}
+</style>
+<link rel="stylesheet" href="girs-ui.css">
+</helmet>
+<div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
+  <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
+  <div style="flex: 1 1 auto; min-height: 0; display: flex">
+    <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
+    <aside id="gside" class="gside" data-drawer="{{shell.drawer}}" aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
+      <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); box-sizing: border-box; {{shell.logoRow}}">
+        <span class="glogo" style="display: inline-flex; border-radius: 4px; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
+        <span style="width: 1px; height: 20px; background: var(--line); {{shell.hide}}"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); {{shell.hide}}">GIRS</span>
+        <button class="btn btn-icon btn-sm gdclose" onClick="{{shell.closeDrawer}}" aria-label="Close menu" style="margin-inline-start: auto; width: 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="gdctx" style="flex: none; flex-direction: column; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line2)">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px">
+          <div style="position: relative"><label for="dhub" class="sr">Hub</label><select id="dhub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 100%"><option value="SIN">Singapore · SIN</option><option value="NSA">India · NSA</option><option value="LCH">Thailand · LCH</option><option value="PKG">Malaysia · PKG</option><option value="JED">Saudi Arabia · JED</option><option value="ZLO">Mexico · ZLO</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><label for="dent" class="sr">Entity</label><select id="dent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100%"><option value="PIL">PIL</option><option value="MELL">MELL</option><option value="MSC">MSC</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
+        </div>
+      </div>
+      <nav aria-label="Screens" data-c="{{shell.cA}}" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
+        <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-bd" onClick="{{shell.flyClose}}" aria-hidden="true"></div></sc-if>
+        <a href="index.html" class="nav-grp" title="{{shell.l.nHome}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V9.5"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nHome}}</span></a>
+        <a href="voyage-invoicing.html" class="nav-grp" title="{{shell.l.nVoy}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"></path><path d="M4 17l-1-5h18l-1 5"></path><path d="M6 12V7h12v5"></path><path d="M12 3v4"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nVoy}}</span></a>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" title="{{shell.l.g0}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g0}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g0" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g0}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g0}}</div></sc-if>
+          <a href="operations-cockpit.html" class="nav-item" title="{{shell.l.nMain}}">{{shell.l.nMain}}
+          </a>
+          <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}">{{shell.l.nChargeProcessing}}
+          </a>
+          <a href="dd-engine.html" class="nav-item" title="{{shell.l.nDDEngine}}">{{shell.l.nDDEngine}}
+          </a>
+          <a href="integration-monitor.html" class="nav-item" title="{{shell.l.nIntegrationMonitor}}">{{shell.l.nIntegrationMonitor}}
+          </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}">{{shell.l.nDocumentIntake}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" title="{{shell.l.g1}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h9l5 5v13H5z"></path><path d="M14 3v5h5M8.5 12.5h7M8.5 16.5h7"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g1}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g1" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g1}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g1}}</div></sc-if>
+          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List">Invoice List
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}">{{shell.l.nSplitBilling}}
+          </a>
+          <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}">{{shell.l.nManualInvoice}}
+          </a>
+          <a href="invoice-previewer.html" class="nav-item" title="{{shell.l.nInvoicePreviewer}}">{{shell.l.nInvoicePreviewer}}
+          </a>
+          <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}">{{shell.l.nCreditNotes}}
+          </a>
+          <a href="credit-note-list.html" class="nav-item" title="{{shell.l.nCreditNoteList}}">{{shell.l.nCreditNoteList}}
+          </a>
+          <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}">{{shell.l.nDARConsole}}
+          </a>
+          <a href="einvoice-exceptions.html" class="nav-item" title="{{shell.l.nEInvoiceExceptions}}">{{shell.l.nEInvoiceExceptions}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" title="{{shell.l.g2}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="12" cy="12" r="3"></circle><path d="M6.5 9v6M17.5 9v6"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g2}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g2}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g2" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g2}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g2}}</div></sc-if>
+          <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}">{{shell.l.nReceipting}}
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item" title="{{shell.l.nCashAppWorkbench}}">{{shell.l.nCashAppWorkbench}}
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item" title="{{shell.l.nToleranceCOREOR}}">{{shell.l.nToleranceCOREOR}}
+          </a>
+          <a href="soa-aging.html" class="nav-item" title="{{shell.l.nSOADashboard}}">{{shell.l.nSOADashboard}}
+          </a>
+          <a href="credit-management.html" class="nav-item" title="{{shell.l.nCreditManagement}}">{{shell.l.nCreditManagement}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" title="{{shell.l.g3}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-4.5"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g3}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g3}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g3" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g3}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g3}}</div></sc-if>
+          <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}">{{shell.l.nApprovalsInbox}}
+          </a>
+          <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}">{{shell.l.nEnquiry}}
+          </a>
+          <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}">{{shell.l.nReconciliation}}
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}">{{shell.l.nMonthEnd}}
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}">{{shell.l.nReports}}
+          </a>
+          <a href="mis-reports.html" class="nav-item nav-on" aria-current="page" title="MIS Reports">MIS Reports
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" title="{{shell.l.g4}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h10M17 6h4M3 12h4M11 12h10M3 18h12M19 18h2"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g4}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g4}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g4" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g4}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g4}}</div></sc-if>
+          <a href="company-master.html" class="nav-item" title="{{shell.l.nCompanyMaster}}">{{shell.l.nCompanyMaster}}
+          </a>
+          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}">{{shell.l.nCustomerMaster}}
+          </a>
+          <a href="bank-master-v1.html" class="nav-item" title="{{shell.l.nBankMaster}}">{{shell.l.nBankMaster}}
+          </a>
+          <a href="charge-master-v2c.html" class="nav-item" title="{{shell.l.nChargeMaster}}">{{shell.l.nChargeMaster}}
+          </a>
+          <a href="business-rule-engine-v8.html" class="nav-item" title="Business Rule Engine">Business Rule Engine
+          </a>
+          <a href="accounting-configuration.html" class="nav-item" title="{{shell.l.nAccountingConfig}}">{{shell.l.nAccountingConfig}}
+          </a>
+          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}">{{shell.l.nExchangeRate}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" title="{{shell.l.g5}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g5}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g5}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g5" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g5}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g5}}</div></sc-if>
+          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}">{{shell.l.nCountryMaster}}
+          </a>
+          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}">{{shell.l.nCurrencyMaster}}
+          </a>
+          <a href="city-master.html" class="nav-item" title="{{shell.l.nCityMaster}}">{{shell.l.nCityMaster}}
+          </a>
+          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}">{{shell.l.nPortMaster}}
+          </a>
+          <a href="tax-setup.html" class="nav-item" title="{{shell.l.nTaxSetup}}">{{shell.l.nTaxSetup}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <a href="lms-sar-interface.html" class="nav-grp" title="JSON" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1"></path><path d="M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"></path></svg><span class="ng-l" style="{{shell.hide}}">JSON</span></a>
+      </nav>
+      <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
+        <button class="sbtoggle" onClick="{{shell.toggleSb}}" aria-expanded="{{shell.sbOpen}}" aria-label="{{shell.sbLabel}}" title="{{shell.sbLabel}}" style="{{shell.item}}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path><path d="{{shell.sbIcon}}"></path></svg>
+          <span style="{{shell.hide}}">Collapse side panel</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="gcontent" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; overflow-y: auto">
+      <div style="position: sticky; top: 0; z-index: 20; flex: none">
+        <div class="gtop" style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line2); box-sizing: border-box">
+          <button class="btn btn-icon gmenu" onClick="{{shell.toggleDrawer}}" aria-label="Open menu" aria-controls="gside" aria-expanded="{{shell.drawerAria}}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <div class="gsearch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <label for="gq" class="sr">Search</label>
+            <input id="gq" class="input" placeholder="{{shell.ph}}" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="grow"></div>
+          <div class="gctx" style="position: relative">
+            <label for="ghub" class="sr">Hub</label>
+            <select id="ghub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 148px">
+              <option value="SIN">Singapore · SIN</option>
+              <option value="NSA">India · NSA</option>
+              <option value="LCH">Thailand · LCH</option>
+              <option value="PKG">Malaysia · PKG</option>
+              <option value="JED">Saudi Arabia · JED</option>
+              <option value="ZLO">Mexico · ZLO</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div class="gctx" style="position: relative">
+            <label for="gent" class="sr">Entity</label>
+            <select id="gent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100px">
+              <option value="PIL">PIL</option>
+              <option value="MELL">MELL</option>
+              <option value="MSC">MSC</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="ghl">
+            <button class="{{shell.health.cls}}" aria-haspopup="dialog" aria-expanded="{{shell.health.aria}}" aria-label="{{shell.health.label}}" title="{{shell.health.label}}" onClick="{{shell.health.toggle}}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
+              <sc-if value="{{shell.health.hasN}}" hint-placeholder-val="{{ true }}"><span class="ghl-n">{{shell.health.n}}</span></sc-if>
+            </button>
+            <sc-if value="{{shell.health.open}}" hint-placeholder-val="{{ false }}">
+              <button class="ghl-scrim" tabindex="-1" aria-hidden="true" onClick="{{shell.health.close}}"></button>
+              <div class="ghl-p" role="dialog" aria-label="System health">
+                <div class="ghl-h"><div><b>System health</b><small>{{shell.health.upd}}</small></div><span class="{{shell.health.tone}}">{{shell.health.sum}}</span></div>
+                <ul><sc-for list="{{shell.health.items}}" as="h" hint-placeholder-count="10"><sc-if value="{{h.isHead}}" hint-placeholder-val="{{ false }}"><li class="ghl-g">{{h.head}}</li></sc-if><sc-if value="{{h.isRow}}" hint-placeholder-val="{{ true }}"><li class="ghl-r"><i class="{{h.dot}}" aria-hidden="true"></i><span class="ghl-b"><b>{{h.name}}</b><small>{{h.detail}}</small></span><span class="{{h.sc}}">{{h.state}}</span></li></sc-if></sc-for></ul>
+                <a class="ghl-f lnk" href="integration-monitor.html">Open Integration Monitor</a>
+              </div>
+            </sc-if>
+          </div>
+          <a href="approvals-inbox.html" class="btn btn-icon" aria-label="{{shell.pending}} pending approvals" title="{{shell.pending}} pending approvals" style="position: relative; text-decoration: none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>
+            <span class="mono" style="position: absolute; top: -6px; inset-inline-end: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand); color: var(--onaccent); font-size: 12px; line-height: 18px; text-align: center; box-sizing: border-box">{{shell.pending}}</span>
+          </a>
+          <div style="position: relative">
+            <button class="ubtn" onClick="{{shell.toggleUm}}" aria-expanded="{{shell.umAria}}" aria-haspopup="menu" aria-label="User menu: {{shell.curLogin}}, {{shell.curRole}}">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex: none">{{shell.initials}}</span>
+              <span class="gutxt" style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 12px; color: var(--muted)">{{shell.curRole}}</span></span>
+              <svg class="gutxt uchev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
+              <div aria-hidden="true" onClick="{{shell.closeUm}}" style="position: fixed; inset: 0; z-index: 29"></div>
+              <div class="menu" role="menu" aria-label="User menu">
+                <sc-if value="{{shell.menuMain}}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px">
+                  <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex: none">{{shell.initials}}</span>
+                  <span class="mi-txt"><span style="font-weight: 600; line-height: 20px">{{shell.userName}}</span><span class="mi-sub">2 logins · roles from LMS IAM</span></span>
+                </div>
+                <div class="menu-sep"></div>
+                <div class="k" style="padding: 6px 10px 4px">Switch login</div>
+                <sc-for list="{{shell.logins}}" as="g" hint-placeholder-count="2">
+                  <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span><span class="mi-sub">{{g.role}}</span></span>
+                    <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                  </button>
+                </sc-for>
+                <div class="menu-sep"></div>
+                <button class="mi" role="menuitem" aria-haspopup="true" onClick="{{shell.toggleLang}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Language</span><span class="mi-sub" translate="no">{{shell.langName}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; color: var(--muted)"><path d="M9 6l6 6-6 6"></path></svg>
+                </button>
+                <div class="mi ap-row" role="none">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18" ></path><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Appearance</span></span>
+                  <div class="ap-seg" role="radiogroup" aria-label="Theme">
+                    <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span>Light</span></button>
+                    <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark</span></button>
+                  </div>
+                </div>
+                <div class="menu-sep"></div>
+                <button class="mi mi-danger" role="menuitem" onClick="{{shell.signOut}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
+                  <span class="mi-lbl">Sign out</span>
+                </button>
+                </sc-if>
+                <sc-if value="{{shell.langOpen}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; align-items: center; gap: 6px; padding: 2px 4px 8px">
+                    <button class="btn btn-icon btn-sm" aria-label="Back to profile menu" onClick="{{shell.toggleLang}}" style="width: 32px; padding: 0; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                    <span style="font-weight: 600">Language</span>
+                  </div>
+                  <div style="padding: 0 6px 6px"><input class="input lg-q" style="width: 100%; height: 34px" placeholder="Search language" aria-label="Search language" autocomplete="off" value="{{shell.lgQ}}" onInput="{{shell.setLgQ}}"></div>
+                  <div class="lg-list" role="group" aria-label="Languages" translate="no">
+                    <sc-for list="{{shell.langs}}" as="g" hint-placeholder-count="4">
+                      <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                        <span class="mi-txt"><span class="mi-lbl" lang="{{g.code}}">{{g.label}}</span><span class="mi-sub">{{g.en}}</span></span>
+                        <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                      </button>
+                    </sc-for>
+                    <sc-if value="{{shell.lgNone}}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 10px; color: var(--muted)">No language matches “{{shell.lgQ}}”</div></sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
+          <div style="min-width: 0">
+            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">MIS Reports</h1>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Operational, financial, exception and management reports by period and location</p>
+          </div>
+          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
+          <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
+          </div>
+        </div>
+      </div>
+      <main class="gmain mis" style="flex: 1 0 auto; padding: 16px 20px 20px; box-sizing: border-box">
+        <div class="mx">
+          <nav class="card mx-rail" aria-label="MIS reports">
+            <button class="mx-ov" aria-current="{{homeOn}}" onClick="{{goHome}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM14 4h6v4h-6zM4 20h6v-3H4z"></path></svg>Overview</button>
+            <sc-for list="{{nav}}" as="g" hint-placeholder-count="2"><div class="mx-ng">
+              <h2>{{g.g}}</h2>
+              <sc-for list="{{g.subs}}" as="sb" hint-placeholder-count="3"><div class="mx-ns"><h3>{{sb.t}}</h3>
+                <sc-for list="{{sb.items}}" as="it" hint-placeholder-count="3"><button class="mx-ni" aria-current="{{it.on}}" onClick="{{it.go}}"><span>{{it.t}}</span><sc-if value="{{it.hasB}}" hint-placeholder-val="{{ false }}"><b class="{{it.bCls}}">{{it.b}}</b></sc-if></button></sc-for>
+              </div></sc-for>
+            </div></sc-for>
+            <div class="mx-fut"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg><p><b>Future scope</b>Push report data to Databricks. Out of scope for now.</p></div>
+          </nav>
+
+          <div class="mx-main">
+            <div class="card mx-ctx">
+              <label class="mis-f"><span>Period</span><select class="select select-sm" value="{{mon}}" onChange="{{setMon}}"><sc-for list="{{months}}" as="o" hint-placeholder-count="6"><option value="{{o.k}}">{{o.t}}</option></sc-for></select></label>
+              <label class="mis-f"><span>Location</span><select class="select select-sm" value="{{loc}}" onChange="{{setLoc}}"><sc-for list="{{locs}}" as="o" hint-placeholder-count="5"><option value="{{o.k}}">{{o.t}}</option></sc-for></select></label>
+              <div class="mis-f"><span>Direction</span><div class="mis-seg" role="radiogroup" aria-label="Direction"><sc-for list="{{dirs}}" as="d" hint-placeholder-count="3"><button role="radio" aria-checked="{{d.on}}" onClick="{{d.go}}">{{d.t}}</button></sc-for></div></div>
+              <button class="mis-tg" role="switch" aria-checked="{{cmp}}" onClick="{{togCmp}}"><span class="mis-sw" aria-hidden="true"></span>Compare with previous month</button>
+              <span class="mx-sp1"></span>
+              <span class="mx-up">{{refreshL}}</span>
+              <button class="btn btn-icon btn-sm" aria-label="Refresh data" title="Refresh data" onClick="{{refresh}}" style="width: 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"></path><path d="M20 4v7h-7"></path></svg></button>
+            </div>
+
+            <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+            <section class="mx-home">
+              <div class="mx-hh"><h2>{{greet}}</h2><p>Billing at a glance for {{period}}. Open any report to analyse it and act on the rows.</p></div>
+              <div class="mx-hk">
+                <div class="card mx-hkc"><span>Net revenue</span><b>{{home.net}}</b><em>After credit notes</em></div>
+                <div class="card mx-hkc"><span>B/Ls invoiced</span><b>{{home.invd}}</b><em>{{home.bookings}} bookings fully invoiced</em></div>
+                <div class="card mx-hkc"><span>Revenue loss</span><b class="bad">{{home.lossV}}</b><em>{{home.loss}} of invoiced revenue</em></div>
+                <div class="card mx-hkc"><span>Open exceptions</span><b class="warn">{{home.exc}}</b><em>LMS data and GFS postings</em></div>
+              </div>
+              <div class="mx-hr">
+                <div class="card mx-pan">
+                  <div class="mx-ph"><h3>Invoiced vs un-invoiced · 6 months</h3><div class="mis-lg"><span><i style="background: var(--bar-done, #A3ADBB)"></i>Invoiced</span><span><i style="background: var(--accent)"></i>Un-invoiced</span></div></div>
+                  <div class="mx-gc"><div class="mx-y"><span>{{home.tmax}}</span><span>0</span></div>
+                    <div class="mx-gcb"><sc-for list="{{home.trend}}" as="t" hint-placeholder-count="6"><div class="mx-gcc {{t.cur}}"><div class="mx-tip" role="tooltip">{{t.tip}}</div><div class="mx-gcp"><i class="a" style="{{t.a}}"><em>{{t.av}}</em></i><i class="b" style="{{t.b}}"><em>{{t.bv}}</em></i></div><span>{{t.l}}</span></div></sc-for></div></div>
+                </div>
+                <div class="card mx-pan mx-att">
+                  <div class="mx-ph"><h3>Needs attention</h3><span class="mx-cnt">{{home.attN}}</span></div>
+                  <sc-if value="{{home.hasAtt}}" hint-placeholder-val="{{ true }}"><ul><sc-for list="{{home.att}}" as="a" hint-placeholder-count="4"><li>
+                    <span class="mx-aic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{a.ic}}"></path></svg></span>
+                    <div class="mx-atx"><b>{{a.big}} {{a.t}}</b><button class="lnk" onClick="{{a.go}}">{{a.r}}</button></div>
+                    <sc-if value="{{a.hasQ}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{a.q}}">{{a.qL}}</button></sc-if>
+                  </li></sc-for></ul></sc-if>
+                  <sc-if value="{{home.noAtt}}" hint-placeholder-val="{{ false }}"><p class="mx-calm">Nothing needs attention right now.</p></sc-if>
+                </div>
+              </div>
+              <div class="card mx-pan">
+                <div class="mx-ph"><h3>Net revenue and revenue loss by country (USD)</h3><div class="mis-lg"><span><i style="background: var(--accent)"></i>Net revenue</span><span><i style="background: var(--bad)"></i>Revenue loss</span></div></div>
+                <div class="mx-cty"><sc-for list="{{home.ctry}}" as="c" hint-placeholder-count="5"><button class="mx-ctr" onClick="{{c.go}}"><span class="mx-ctl">{{c.l}}</span><span class="mx-ctb"><i style="{{c.a}}"></i><i class="l" style="{{c.b}}"></i></span><span class="mx-ctv">{{c.v}}</span><span class="mx-ctp">{{c.loss}} loss</span></button></sc-for></div>
+              </div>
+              <sc-for list="{{home.secs}}" as="g" hint-placeholder-count="2"><div class="mx-sec">
+                <h2>{{g.g}}</h2>
+                <div class="mx-tiles"><sc-for list="{{g.subs}}" as="sb" hint-placeholder-count="3"><sc-for list="{{sb.cards}}" as="c" hint-placeholder-count="3">
+                  <button class="card mx-tile" onClick="{{c.go}}">
+                    <span class="mx-tt"><span class="mx-tic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{c.ic}}"></path></svg></span><span class="mx-tsb">{{sb.t}}</span><span class="{{c.stCls}}">{{c.st}}</span></span>
+                    <span class="mx-tn">{{c.t}}</span>
+                    <span class="mx-tv"><b>{{c.big}}</b><em>{{c.unit}}</em></span>
+                    <svg class="mx-tsp" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="{{c.pts}}"></polyline></svg>
+                    <span class="mx-ts">{{c.sub}}</span>
+                  </button>
+                </sc-for></sc-for></div>
+              </div></sc-for>
+            </section>
+            </sc-if>
+
+            <sc-if value="{{isRep}}" hint-placeholder-val="{{ false }}">
+            <section class="mx-rep">
+              <div class="card mx-head">
+                <div class="mx-tt2">
+                  <span class="mx-cr">{{crumb}}</span>
+                  <div class="mis-t1"><h2>{{title}}</h2><button class="mis-star" aria-pressed="{{isFav}}" aria-label="{{favL}}" title="{{favL}}" onClick="{{togFav}}"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"></path></svg></button><sc-if value="{{hasSched}}" hint-placeholder-val="{{ false }}"><button class="mis-schip" onClick="{{openSched}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>{{schedL}}</button></sc-if></div>
+                  <p>{{desc}}</p>
+                </div>
+                <div class="mis-acts">
+                  <button class="btn" onClick="{{share}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Copy link</button>
+                  <button class="btn" onClick="{{openSched}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>Schedule</button>
+                  <div class="mis-exp">
+                    <button class="btn btn-primary" aria-haspopup="menu" aria-expanded="{{exp}}" onClick="{{togExp}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"></path><path d="M7.5 10.5L12 15l4.5-4.5"></path><path d="M5 19h14"></path></svg>Export<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                    <sc-if value="{{expOn}}" hint-placeholder-val="{{ false }}"><div class="mis-scrim" onClick="{{closeExp}}" aria-hidden="true"></div><div class="mis-menu" role="menu"><button role="menuitem" onClick="{{csv}}">Excel (.csv)<small>All rows with current filters</small></button><button role="menuitem" onClick="{{pdf}}">PDF<small>Print layout of this view</small></button><button role="menuitem" onClick="{{openSched}}">Schedule by e-mail<small>Send this report automatically</small></button></div></sc-if>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mx-kpis"><sc-for list="{{kpis}}" as="k" hint-placeholder-count="4"><div class="card mx-k">
+                <span class="mx-kl">{{k.l}}</span>
+                <div class="mx-kr"><span class="{{k.cls}}">{{k.v}}</span><sc-if value="{{k.hasSp}}" hint-placeholder-val="{{ true }}"><svg class="{{k.sCls}}" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="{{k.pts}}"></polyline></svg></sc-if></div>
+                <sc-if value="{{k.hasD}}" hint-placeholder-val="{{ true }}"><span class="mx-dl"><span class="{{k.dCls}}">{{k.d}}</span> {{k.dL}}</span></sc-if>
+              </div></sc-for></div>
+
+              <div class="mx-charts">
+                <div class="card mx-pan">
+                  <div class="mx-ph"><h3>{{prim.title}}</h3><div class="mis-lg"><sc-for list="{{prim.legend}}" as="l" hint-placeholder-count="3"><span><i style="{{l.st}}"></i>{{l.t}}</span></sc-for></div></div>
+                  <sc-if value="{{prim.isCols}}" hint-placeholder-val="{{ true }}">
+                    <div class="mx-cols"><div class="mx-y"><span>{{prim.ymax}}</span><span>{{prim.ymid}}</span><span>0</span></div>
+                      <div class="mx-cg"><sc-for list="{{prim.data}}" as="d" hint-placeholder-count="20"><div class="mx-c {{d.wk}} {{d.dim}}" role="button" tabindex="0" aria-pressed="{{d.on}}" onClick="{{d.go}}"><div class="mx-tip" role="tooltip">{{d.tip}}</div><div class="mx-cs"><sc-for list="{{d.segs}}" as="g" hint-placeholder-count="2"><i style="{{g.st}}"></i></sc-for></div><span>{{d.lab}}</span></div></sc-for></div></div>
+                  </sc-if>
+                  <sc-if value="{{prim.isBars}}" hint-placeholder-val="{{ false }}">
+                    <div class="mx-bars"><sc-for list="{{prim.data}}" as="d" hint-placeholder-count="5"><div class="mx-br {{d.dim}}" role="button" tabindex="0" aria-pressed="{{d.on}}" onClick="{{d.go}}"><div class="mx-tip" role="tooltip">{{d.tip}}</div><span class="mx-bl" title="{{d.l}}">{{d.l}}</span><div class="mx-bt"><sc-for list="{{d.segs}}" as="g" hint-placeholder-count="2"><i style="{{g.st}}"></i></sc-for></div><span class="mx-bv">{{d.tot}}</span></div></sc-for></div>
+                  </sc-if>
+                  <sc-if value="{{prim.isArea}}" hint-placeholder-val="{{ false }}">
+                    <div class="mx-ar"><div class="mx-y"><span>{{prim.area.ymax}}</span><span>{{prim.area.ymid}}</span><span>0</span></div>
+                      <div class="mx-ap"><svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mxg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".22"></stop><stop offset="1" stop-color="var(--accent)" stop-opacity="0"></stop></linearGradient></defs><path class="mx-af" d="{{prim.area.area}}"></path><path class="mx-al" d="{{prim.area.line}}"></path></svg>
+                        <sc-for list="{{prim.area.dots}}" as="p" hint-placeholder-count="20"><div class="mx-dot" style="{{p.st}}" role="button" tabindex="0" aria-pressed="{{p.on}}" onClick="{{p.go}}"><div class="mx-tip" role="tooltip">{{p.tip}}</div></div></sc-for>
+                        <div class="mx-ax"><sc-for list="{{prim.area.dots}}" as="p" hint-placeholder-count="20"><span style="{{p.st}}" data-show="{{p.show}}">{{p.l}}</span></sc-for></div></div></div>
+                  </sc-if>
+                </div>
+                <div class="card mx-pan">
+                  <div class="mx-ph"><h3>{{sec.title}}</h3></div>
+                  <sc-if value="{{sec.isDonut}}" hint-placeholder-val="{{ true }}">
+                    <div class="mx-dn"><div class="mx-dw"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" class="mx-dbg"></circle><sc-for list="{{sec.donut.segs}}" as="g" hint-placeholder-count="3"><circle cx="60" cy="60" r="46" class="{{g.cls}}" style="{{g.st}}" onClick="{{g.go}}"><title>{{g.l}} · {{g.v}} ({{g.p}})</title></circle></sc-for></svg><div class="mx-dc"><b>{{sec.donut.tot}}</b><span>total</span></div></div>
+                      <ul class="mx-dl2"><sc-for list="{{sec.donut.segs}}" as="g" hint-placeholder-count="3"><li><button class="mx-dli" aria-pressed="{{g.on}}" disabled="{{g.dis}}" onClick="{{g.go}}"><i style="{{g.dot}}"></i><span title="{{g.l}}">{{g.l}}</span><b>{{g.v}}</b><em>{{g.p}}</em></button></li></sc-for></ul></div>
+                  </sc-if>
+                  <sc-if value="{{sec.isLine}}" hint-placeholder-val="{{ false }}">
+                    <div class="mx-ar sm"><div class="mx-y"><span>{{sec.line.ymax}}</span><span>{{sec.line.ymid}}</span><span>0</span></div>
+                      <div class="mx-ap"><svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true"><path class="mx-af" d="{{sec.line.area}}"></path><path class="mx-al" d="{{sec.line.line}}"></path></svg>
+                        <sc-for list="{{sec.line.dots}}" as="p" hint-placeholder-count="6"><div class="mx-dot on" style="{{p.st}}"><div class="mx-tip" role="tooltip">{{p.tip}}</div></div></sc-for>
+                        <div class="mx-ax"><sc-for list="{{sec.line.dots}}" as="p" hint-placeholder-count="6"><span style="{{p.st}}" data-show="true">{{p.l}}</span></sc-for></div></div></div>
+                  </sc-if>
+                </div>
+              </div>
+
+              <div class="{{wrapCls}}">
+                <div class="card mx-tbl">
+                  <div class="mx-tbh">
+                    <sc-if value="{{noSel}}" hint-placeholder-val="{{ true }}"><sc-if value="{{canAtt}}" hint-placeholder-val="{{ true }}"><div class="mis-seg" role="radiogroup" aria-label="Rows to show"><sc-for list="{{attSeg}}" as="a" hint-placeholder-count="2"><button role="radio" aria-checked="{{a.on}}" onClick="{{a.go}}">{{a.t}}</button></sc-for></div></sc-if><sc-if value="{{noAttSeg}}" hint-placeholder-val="{{ false }}"><b class="mx-rc">{{nRows}}</b></sc-if><sc-if value="{{hasFlt}}" hint-placeholder-val="{{ false }}"><span class="mx-fc">Chart filter: <b>{{fltL}}</b><button aria-label="Clear chart filter" title="Clear chart filter" onClick="{{clrFlt}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-if><span class="mx-hint">Click a chart to filter · click a row for details</span></sc-if>
+                    <sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}"><div class="mx-selbar"><b>{{selL}}</b><sc-if value="{{hasBulk}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm btn-primary" onClick="{{bulk}}">{{bulkL}}</button></sc-if><button class="btn btn-sm" onClick="{{expSel}}">Export selected</button><button class="lnk" onClick="{{clrSel}}">Clear</button></div></sc-if>
+                    <div class="mx-srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input class="input" value="{{q}}" onInput="{{setQ}}" placeholder="Search in results" aria-label="Search in results"></div>
+                  </div>
+                  <div class="mx-scroll">
+                    <table class="mis-t mx-t">
+                      <thead><tr><th class="mis-cb"><input type="checkbox" checked="{{allOn}}" onChange="{{togAll}}" aria-label="Select all rows on this page"></th><sc-for list="{{cols}}" as="c" hint-placeholder-count="7"><th class="{{c.cls}}" aria-sort="{{c.sort}}"><button onClick="{{c.go}}">{{c.c}}<span class="mis-si" aria-hidden="true">{{c.ic}}</span></button></th></sc-for><th class="mis-ac">Action</th></tr></thead>
+                      <tbody><sc-for list="{{rows}}" as="r" hint-placeholder-count="10"><tr aria-selected="{{r.on}}" data-act="{{r.act}}" onClick="{{r.open}}"><td class="mis-cb"><input type="checkbox" checked="{{r.on}}" onChange="{{r.tog}}" aria-label="{{r.lab}}"></td><sc-for list="{{r.cells}}" as="x" hint-placeholder-count="7"><td class="{{x.cls}}"><sc-if value="{{x.isTxt}}" hint-placeholder-val="{{ true }}">{{x.t}}</sc-if><sc-if value="{{x.isChip}}" hint-placeholder-val="{{ false }}"><span class="{{x.chip}}">{{x.t}}</span></sc-if><sc-if value="{{x.isBar}}" hint-placeholder-val="{{ false }}"><span class="mis-pb"><i style="{{x.bar}}"></i></span><span class="mis-pt">{{x.t}}</span></sc-if></td></sc-for>
+                        <td class="mis-ac"><sc-if value="{{r.hasA}}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm mis-rb" disabled="{{r.aDis}}" onClick="{{r.aRun}}">{{r.aL}}</button></sc-if></td></tr></sc-for></tbody>
+                    </table>
+                    <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><p class="mis-empty">{{emptyMsg}}</p></sc-if>
+                  </div>
+                  <div class="mis-ft"><span>{{foot}}</span><div class="mis-pg"><label>Rows per page <select class="select select-sm" value="{{psz}}" onChange="{{setPsz}}"><option value="15">15</option><option value="30">30</option><option value="50">50</option></select></label><button class="btn btn-icon btn-sm" aria-label="Previous page" disabled="{{prevDis}}" onClick="{{prev}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button><span>{{pgL}}</span><button class="btn btn-icon btn-sm" aria-label="Next page" disabled="{{nextDis}}" onClick="{{next}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button></div></div>
+                </div>
+
+                <aside class="card mx-side" aria-label="Details">
+                  <sc-if value="{{hasInsp}}" hint-placeholder-val="{{ false }}">
+                    <div class="mx-ih"><div><span class="mx-cr">{{insp.pos}}</span><h3>{{insp.title}}</h3><p>{{insp.sub}}</p></div>
+                      <div class="mx-inav"><button class="btn btn-icon btn-sm" aria-label="Previous row" disabled="{{insp.prevDis}}" onClick="{{insp.prev}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></button><button class="btn btn-icon btn-sm" aria-label="Next row" disabled="{{insp.nextDis}}" onClick="{{insp.next}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button><button class="btn btn-icon btn-sm" aria-label="Close details" title="Close" onClick="{{insp.close}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></div>
+                    <sc-if value="{{insp.hasSt}}" hint-placeholder-val="{{ true }}"><div class="mx-ist"><span class="{{insp.stCls}}">{{insp.st}}</span></div></sc-if>
+                    <sc-if value="{{insp.hasCmp}}" hint-placeholder-val="{{ false }}"><div class="mx-cmp"><h4>LMS vs GIRS</h4><sc-for list="{{insp.cmp}}" as="c" hint-placeholder-count="2"><div class="mx-cmpr"><span>{{c.l}}</span><sc-if value="{{insp.cmpNum}}" hint-placeholder-val="{{ true }}"><span class="mx-cmpb"><i style="{{c.bar}}"></i></span></sc-if><b class="{{c.cls}}">{{c.v}}</b></div></sc-for></div></sc-if>
+                    <dl class="mx-kv"><sc-for list="{{insp.kv}}" as="f" hint-placeholder-count="6"><div><dt>{{f.l}}</dt><dd class="{{f.cls}}">{{f.v}}</dd></div></sc-for></dl>
+                    <p class="mx-guide">{{insp.guide}}</p>
+                    <div class="mx-ia"><sc-if value="{{insp.hasA}}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" disabled="{{insp.aDis}}" onClick="{{insp.aRun}}">{{insp.aL}}</button></sc-if><sc-if value="{{insp.hasLk}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{insp.lkGo}}">{{insp.lkL}}</button></sc-if></div>
+                  </sc-if>
+                  <sc-if value="{{noInsp}}" hint-placeholder-val="{{ true }}">
+                    <div class="mx-ih"><div><h3>Highlights</h3><p>What stands out in this report</p></div></div>
+                    <ul class="mx-ins"><sc-for list="{{ins}}" as="x" hint-placeholder-count="3"><li class="{{x.cls}}"><span class="mx-idot" aria-hidden="true"></span><div><p>{{x.t}}</p><sc-if value="{{x.hasA}}" hint-placeholder-val="{{ false }}"><button class="btn btn-sm" onClick="{{x.run}}">{{x.al}}</button></sc-if></div></li></sc-for></ul>
+                    <p class="mx-guide">{{guide}}</p>
+                  </sc-if>
+                </aside>
+              </div>
+            </section>
+            </sc-if>
+          </div>
+        </div>
+        <sc-if value="{{sOn}}" hint-placeholder-val="{{ false }}">
+          <div class="mis-ov" onClick="{{sClose}}" aria-hidden="true"></div>
+          <div class="mis-dlg" role="dialog" aria-modal="true" aria-labelledby="mis-sh">
+            <div class="mis-dh"><div><h2 id="mis-sh">Schedule report</h2><p>{{title}}</p></div><button class="btn btn-icon btn-sm" onClick="{{sClose}}" aria-label="Close" title="Close" style="width: 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+            <div class="mis-db">
+              <div class="mis-fld"><span>Frequency</span><div class="mis-seg" role="radiogroup" aria-label="Frequency"><sc-for list="{{sFreqs}}" as="f" hint-placeholder-count="3"><button role="radio" aria-checked="{{f.on}}" onClick="{{f.go}}">{{f.t}}</button></sc-for></div></div>
+              <div class="mis-2c">
+                <sc-if value="{{sWeekly}}" hint-placeholder-val="{{ true }}"><label class="mis-fld"><span>Day</span><select class="select" value="{{sd.day}}" onChange="{{sSetDay}}"><sc-for list="{{sDays}}" as="d" hint-placeholder-count="5"><option value="{{d.k}}">{{d.t}}</option></sc-for></select></label></sc-if>
+                <label class="mis-fld"><span>Time (SGT)</span><input class="input" type="time" value="{{sd.time}}" onInput="{{sSetTime}}"></label>
+              </div>
+              <label class="mis-fld"><span>Send to</span><input class="input" value="{{sd.to}}" onInput="{{sSetTo}}" placeholder="name@pilship.com, team@pilship.com"><sc-if value="{{sHasErr}}" hint-placeholder-val="{{ false }}"><em class="mis-err">{{sd.err}}</em></sc-if></label>
+              <div class="mis-fld"><span>Format</span><div class="mis-seg" role="radiogroup" aria-label="Format"><sc-for list="{{sFmts}}" as="f" hint-placeholder-count="3"><button role="radio" aria-checked="{{f.on}}" onClick="{{f.go}}">{{f.t}}</button></sc-for></div></div>
+              <p class="mis-dn">Each run uses the filters on screen: location, direction and the period at the time of sending.</p>
+            </div>
+            <div class="mis-df"><sc-if value="{{sHasOld}}" hint-placeholder-val="{{ false }}"><button class="lnk mis-del" onClick="{{sRemove}}">Remove schedule</button></sc-if><span style="flex: 1"></span><button class="btn" onClick="{{sClose}}">Cancel</button><button class="btn btn-primary" onClick="{{sSave}}">Save schedule</button></div>
+          </div>
+        </sc-if>
+      </main>
+    </div>
+  </div>
+
+
+  <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+  </sc-if>
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+// ---------- MIS reports: sample data (deterministic per month) ----------
+const MIS_R = (seed) => { let x = 0; for (const c of String(seed)) x = (x * 31 + c.charCodeAt(0)) >>> 0; return () => { x = (x * 1664525 + 1013904223) >>> 0; return x / 4294967296; }; };
+const MIS_LOC = [['SGSIN', 'Singapore', 'SG', 'SG-SR-9', 9], ['MYPKG', 'Malaysia', 'MY', 'MY-SST-8', 8], ['INNSA', 'India', 'IN', 'IN-GST-18', 18], ['THLCH', 'Thailand', 'TH', 'TH-VAT-7', 7]];
+const MIS_VSL = [['KOTA JUBAH', 'KCX'], ['KOTA SEJATI', 'CNS'], ['KOTA GEMILANG', 'RSS'], ['KOTA PERDANA', 'KCX'], ['KOTA LAYANG', 'IDS'], ['KOTA CAHAYA', 'MCS'], ['CMA CGM LEKKI', 'NZS'], ['CMA CGM KAURI', 'NZS'], ['KOTA SATRIA', 'RGX'], ['NORFOLK', 'NZS']];
+const MIS_CUST = ['Straits Harbour Logistics', 'Meridian Agro Exports', 'Kinabalu Home Furnishings', 'Orchid Lane Polymers', 'Andaman Bay Traders', 'Lion City Forwarding'];
+const MIS_UNINV = ['Data not received from LMS', 'ROE not received', 'Split-payer unconfirmed', 'Charge hold'];
+const MIS_GFS = ['Accounting period closed for entity', 'No GFS tax mapping for tax code', 'Customer not found in GFS', 'GFS interface timeout'];
+const MIS_FIELDS = [
+  ['Consignee', (r) => { const a = MIS_CUST[Math.floor(r() * 6)], b = MIS_CUST[Math.floor(r() * 6)]; return [a, a === b ? MIS_CUST[(MIS_CUST.indexOf(a) + 1) % 6] : b]; }, 'Invoice to wrong party'],
+  ['Gross weight (kg)', (r) => { const w = 8000 + Math.floor(r() * 18000); return [misN(w), misN(w - 200 - Math.floor(r() * 1500))]; }, 'Charge amount differs'],
+  ['Container count', (r) => { const c = 1 + Math.floor(r() * 6); return [String(c), String(c - 1 || 2)]; }, 'Charge amount differs'],
+  ['Payment term', () => ['Collect', 'Prepaid'], 'Invoice to wrong party'],
+  ['Charge code', (r) => [['BAF', 'THC-O', 'DOC'][Math.floor(r() * 3)], '—'], 'Charge missing on invoice'],
+  ['Commodity', () => ['Reefer · frozen seafood', 'General cargo'], 'Tax code may differ']
+];
+const MIS_TREE = [
+  { g: 'User related', subs: [
+    { t: 'Operational reports', items: [['lmsgirs', 'LMS Voyages vs GIRS Voyages', 'Voyages and B/L counts received from LMS against what GIRS holds'], ['vslbl', 'Vessel-wise B/L', 'B/Ls per vessel and how many are invoiced']] },
+    { t: 'Financial reports', items: [['inv', 'Bookings Invoiced', 'Bookings fully invoiced in the period, with invoice value and tax'], ['uninv', 'Bookings Un-Invoiced', 'Bookings with B/Ls still to invoice, why, and for how long'], ['cn', 'CN related', 'Credit notes by reason, source and status'], ['tax', 'Period-wise Invoice and corresponding Tax Codes', 'Invoice value and tax by tax code for the period']] },
+    { t: 'Exception reports', items: [['lmsdata', 'Data from LMS vs Data in GIRS', 'Booking and B/L fields where GIRS differs from what LMS sent'], ['gfs', 'Posting to GFS', 'Invoices and credit notes that failed to post to GFS']] }] },
+  { g: 'Management reporting', subs: [
+    { t: 'Strategic', items: [['ctry', 'Country-wise Revenue / Loss', 'Net revenue and revenue loss by country']] }] }
+];
+const MIS_ITEMS = MIS_TREE.flatMap((g) => g.subs.flatMap((sb) => sb.items.map(([k, t, d]) => ({ k, t, d, sub: sb.t, g: g.g }))));
+const misFmt = (v) => (+v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const misK = (v) => { const a = Math.abs(+v || 0); return a >= 1e6 ? (v / 1e6).toFixed(2) + 'M' : a >= 1e4 ? (v / 1e3).toFixed(1) + 'K' : misFmt(v); };
+const misN = (v) => (+v || 0).toLocaleString('en-US');
+const misMonths = () => { const out = []; const d = new Date(); for (let i = 0; i < 6; i++) out.push(new Date(d.getFullYear(), d.getMonth() - i, 1)); return out; };
+const misMKey = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+const misMLbl = (d) => d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+const misDay = (d) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+const misPrev = (mk) => { const y = +mk.slice(0, 4), m = +mk.slice(5) - 1; return misMKey(new Date(y, m - 1, 1)); };
+const MIS_CACHE = {};
+
+function misData(mk) {
+  if (MIS_CACHE[mk]) return MIS_CACHE[mk];
+  const r = MIS_R('mis2' + mk), y = +mk.slice(0, 4), m = +mk.slice(5) - 1, days = new Date(y, m + 1, 0).getDate();
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const cur = y === today.getFullYear() && m === today.getMonth(), lastDay = cur ? today.getDate() : days;
+  const voy = [], bkg = [], inv = [], mm = [];
+  MIS_LOC.forEach(([port, ctry, cc, tcode, rate]) => {
+    const n = 14 + Math.floor(r() * 10);
+    for (let i = 0; i < n; i++) {
+      const v = MIS_VSL[Math.floor(r() * MIS_VSL.length)], dir = r() < 0.5 ? 'E' : 'I';
+      const no = String(Math.floor(r() * 9)) + v[0].slice(0, 1) + v[0].split(' ').pop().slice(0, 1) + String(1 + Math.floor(r() * 8)) + String.fromCharCode(65 + Math.floor(r() * 26)) + String.fromCharCode(65 + Math.floor(r() * 26)) + dir;
+      const day = 1 + Math.floor(r() * lastDay), date = new Date(y, m, day), age = Math.round((today - date) / 864e5);
+      const roll = r(), inG = roll > 0.04;
+      const nb = 3 + Math.floor(r() * 5), books = [];
+      let lms = 0, girs = 0;
+      for (let k = 0; k < nb; k++) {
+        const bls = 8 + Math.floor(r() * 70); lms += bls;
+        const miss = !inG ? bls : roll < 0.1 && k === 0 ? 1 + Math.floor(r() * 4) : 0; girs += bls - miss;
+        const openBl = !inG ? bls : age <= 0 ? Math.round(bls * (0.3 + r() * 0.6)) : age <= 7 ? (r() < 0.8 ? 0 : 1 + Math.floor(r() * 3)) : (r() < 0.04 ? 1 + Math.floor(r() * 2) : 0);
+        const cust = MIS_CUST[Math.floor(r() * MIS_CUST.length)] + ' (' + cc + ')';
+        const per = 140 + r() * 180, amt = Math.round((bls - openBl) * per * 100) / 100, tx = r() < 0.55 ? tcode : 'ZR-INTL', tr = tx === 'ZR-INTL' ? 0 : rate;
+        const b = { bkg: port.slice(2) + 'B26' + String(10000 + Math.floor(r() * 89999)), voy: no, vessel: v[0], svc: v[1], port, ctry, cc, dir, date, age: Math.max(0, age), bls, openBl, cust, amt, est: Math.round(openBl * per * 100) / 100,
+          reason: !inG ? 'Data not received from LMS' : MIS_UNINV[Math.floor(r() * MIS_UNINV.length)], inG };
+        books.push(b); bkg.push(b);
+        if (inG && r() < 0.06) { const F = MIS_FIELDS[Math.floor(r() * MIS_FIELDS.length)]; const pair = F[1](r); mm.push({ bkg: b.bkg, bl: 'BL-' + cc + '-' + String(24000 + Math.floor(r() * 9000)), voy: no, port, ctry, dir, cust, field: F[0], lms: pair[0], girs: pair[1], impact: F[2], date: new Date(y, m, Math.max(1, Math.min(lastDay, day + Math.floor(r() * 2)))) }); }
+        if (amt > 0) {
+          const st = r() < 0.6 ? 'Unpaid' : r() < 0.85 ? 'Paid' : 'Receipted', idate = new Date(y, m, Math.min(lastDay, day + Math.floor(r() * 3)));
+          const gf = r() < 0.035 ? 'Failed' : age <= 0 && r() < 0.4 ? 'Pending' : 'Posted';
+          inv.push({ no: port.slice(2) + (dir === 'E' ? 'OF' : 'OD') + '26' + String(10000 + Math.floor(r() * 89999)), bkg: b.bkg, date: idate, ctry, port, dir, cust, voy: no, amt, tcode: tx, rate: tr, tax: Math.round(amt * tr) / 100, st, gfs: gf, err: MIS_GFS[Math.floor(r() * MIS_GFS.length)], tries: 1 + Math.floor(r() * 3) });
+        }
+      }
+      voy.push({ no, vessel: v[0], svc: v[1], dir, port, ctry, date, lms, girs: inG ? girs : 0, open: books.reduce((t, b) => t + b.openBl, 0) });
+    }
+  });
+  MIS_CACHE[mk] = { voy, bkg, inv, mm, days: lastDay, y, m, label: misMLbl(new Date(y, m, 1)) };
+  return MIS_CACHE[mk];
+}
+const MIS_COL = { done: 'var(--bar-done, #A3ADBB)', act: 'var(--accent)', warn: 'var(--bar-blk, #C9780E)', bad: 'var(--bad)', ok: 'var(--ok)' };
+const MIS_CAT = ['var(--accent)', '#7B61D9', '#1D9E75', '#C9780E', '#D4537E', '#A3ADBB'];
+const MIS_ST_COL = { 'Matched': MIS_COL.done, 'B/L count differs': MIS_COL.warn, 'Missing in GIRS': MIS_COL.bad, 'Generated · posted': MIS_COL.ok, 'Needs action': MIS_COL.bad, 'Pending approval': MIS_COL.warn, 'Rejected': '#A3ADBB', 'Draft': '#D3D7DE', 'Invoice to wrong party': MIS_COL.bad, 'Charge amount differs': MIS_COL.warn, 'Charge missing on invoice': '#7B61D9', 'Tax code may differ': '#A3ADBB' };
+const MIS_GUIDE = {
+  lmsgirs: 'Voyages missing in GIRS cannot be invoiced. Raise an LMS check so the interface resends the voyage; for count differences, compare B/Ls to find the missing ones.',
+  vslbl: 'Use this to see which vessels still carry un-invoiced B/Ls and open their voyages to clear them.',
+  inv: 'Bookings fully invoiced in the period. Open the invoices to see payment and GFS status.',
+  uninv: 'Each open booking is waiting on something. Chase the blocker: missing LMS data goes to the port agency, ROE to Treasury, holds to the charge owner.',
+  cn: 'Credit notes raised against invoices. Ones that need action stopped in the automatic flow.',
+  tax: 'Totals by tax code for the period tax return. Open the invoices to check individual documents.',
+  lmsdata: 'GIRS holds a different value from what LMS sent. Re-sync from LMS to take the LMS value, then regenerate the affected invoice if needed.',
+  gfs: 'Documents not yet posted to GFS are missing from the ledger. Fix the cause, then retry the posting.',
+  ctry: 'Net revenue and revenue loss for the country. Drill down to see the bookings behind the loss.'
+};
+
+function misArea(vals, labels, fmt) {
+  const n = vals.length, mx = Math.max(1e-9, ...vals) * 1.1, W = 600, H = 160;
+  const pt = vals.map((v, i) => [n === 1 ? W / 2 : i * W / (n - 1), H - v / mx * H]);
+  const line = pt.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  return { line, area: line + ' L' + W + ' ' + H + ' L0 ' + H + ' Z', ymax: fmt(mx), ymid: fmt(mx / 2),
+    dots: pt.map((p, i) => ({ st: 'left:' + (p[0] / W * 100).toFixed(2) + '%;top:' + (p[1] / H * 100).toFixed(2) + '%', tip: labels[i] + ' · ' + fmt(vals[i]), l: labels[i], show: n <= 12 || (i % Math.ceil(n / 10) === 0 && n - 1 - i >= Math.ceil(n / 20)) || i === n - 1 ? 'true' : 'false' })) };
+}
+function misDonut(items, fmt) {
+  const tot = items.reduce((t, x) => t + x.v, 0), C = 2 * Math.PI * 46;
+  let off = 0;
+  const segs = items.map((x, i) => { const len = tot ? x.v / tot * C : 0; const sg = { st: 'stroke:' + (x.c || MIS_CAT[i % MIS_CAT.length]) + ';stroke-dasharray:' + Math.max(0, len - 1.5).toFixed(2) + ' ' + C.toFixed(2) + ';stroke-dashoffset:' + (-off).toFixed(2), l: x.l, v: fmt(x.v), p: tot ? Math.round(x.v / tot * 100) + '%' : '0%', dot: 'background:' + (x.c || MIS_CAT[i % MIS_CAT.length]) }; off += len; return sg; });
+  return { segs, tot: fmt(tot), empty: !tot };
+}
+
+class GirsPage extends DCLogic {
+  constructor(p) {
+    super(p);
+    let rep = 'home', fav = [], sched = {};
+    try { const q = new URLSearchParams(location.search).get('r'); if (q && MIS_ITEMS.some((i) => i.k === q)) rep = q; } catch (e) {}
+    try { fav = JSON.parse(localStorage.getItem('girs.mis.fav') || '[]') || []; sched = JSON.parse(localStorage.getItem('girs.mis.sched') || '{}') || {}; } catch (e) {}
+    this.state = Object.assign({}, this.state, { rep, mon: misMKey(misMonths()[0]), loc: 'all', dir: 'all', cmp: true, q: '', exp: false, pg: 1, onlyAtt: true, flt: null, psz: 15, sort: null, sel: {}, done: {}, fav, sched, sdlg: null, insp: null, refreshed: new Date() });
+    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.sdlg) this.setState({ sdlg: null }); else if (this.state.insp) this.setState({ insp: null }); else if (this.state.exp) this.setState({ exp: false }); } }); } catch (e) {}
+  }
+  renderVals() {
+    const s = this.state, self = this;
+    const toast = (t) => self.setState({ __toast: t });
+    const D = misData(s.mon), P = misData(misPrev(s.mon)), months = misMonths();
+    const okL = (x) => (s.loc === 'all' || x.port === s.loc) && (s.dir === 'all' || !x.dir || x.dir === s.dir);
+    const q = s.q.trim().toLowerCase();
+    const tot = (a, k) => a.reduce((t, x) => t + (+x[k] || 0), 0);
+    const cnAll = window.GirsCN ? window.GirsCN.all() : [];
+    const cnPort = (c) => ({ SI: 'SGSIN', PK: 'MYPKG', NS: 'INNSA', LC: 'THLCH' })[String(c.no).slice(0, 2)] || 'SGSIN';
+    const cnCty = (c) => (MIS_LOC.find((l) => l[0] === cnPort(c)) || [])[1];
+    const cnUsd = (c, tax) => (c.lines || []).filter((l) => l[5] === 'USD').reduce((t, l) => t + l[2] * (tax ? 1 + (+l[4] || 0) / 100 : 1), 0);
+    const cnTxt = (c) => { const b = {}; (c.lines || []).forEach((l) => { b[l[5]] = (b[l[5]] || 0) + l[2] * (1 + (+l[4] || 0) / 100); }); return Object.keys(b).map((k) => k + ' ' + misFmt(b[k])).join(' + ') || '—'; };
+    const C = (t, o) => Object.assign({ t: String(t), v: t }, o || {});
+    const chip = (t, tone) => C(t, { chip: 'mis-st ' + (tone || '') });
+    const num = (v, f) => C(f === 'n' ? misN(v) : misFmt(v), { v, num: true });
+    const go = (url) => () => { location.href = url; };
+    // ------ report definitions
+    const DEF = {
+      lmsgirs: (X) => { const vs = X.voy.filter(okL);
+        const miss = vs.filter((v) => !v.girs), diff = vs.filter((v) => v.girs && v.girs !== v.lms);
+        return { kpis: [['Voyages in LMS', vs.length, 'n'], ['Voyages in GIRS', vs.length - miss.length, 'n'], ['Missing in GIRS', miss.length, 'n', 'bad', 'down'], ['B/L count differs', diff.length, 'n', 'warn', 'down']],
+          cols: [['Voyage'], ['Vessel / service'], ['Port'], ['ETD / ETA'], ['LMS B/Ls', 1], ['GIRS B/Ls', 1], ['Difference', 1], ['Status']],
+          rows: vs.map((v) => { const d = v.girs - v.lms, st = !v.girs ? ['Missing in GIRS', 'bad'] : d ? ['B/L count differs', 'warn'] : ['Matched', 'ok'];
+            return { id: v.no + v.port, cells: [C(v.no, { mono: true }), C(v.vessel + ' · ' + v.svc), C(v.port), C((v.dir === 'E' ? 'ETD ' : 'ETA ') + misDay(v.date), { v: +v.date }), num(v.lms, 'n'), num(v.girs, 'n'), num(d, 'n'), chip(st[0], st[1])],
+              act: !v.girs ? ['Raise LMS check', 'lms'] : d ? ['Compare B/Ls', go('voyage-invoicing.html?q=' + v.no)] : ['Open voyage', go('voyage-invoicing.html?q=' + v.no)], rank: !v.girs ? 0 : d ? 1 : 2 }; }).sort((a, b) => a.rank - b.rank),
+          chart: { kind: 'cols', title: 'Voyages by day', legend: [['Matched', MIS_COL.done], ['B/L count differs', MIS_COL.warn], ['Missing in GIRS', MIS_COL.bad]],
+            data: Array.from({ length: X.days }, (_, i) => { const dv = vs.filter((v) => v.date.getDate() === i + 1); return { l: String(i + 1), v: [dv.filter((v) => v.girs === v.lms).length, dv.filter((v) => v.girs && v.girs !== v.lms).length, dv.filter((v) => !v.girs).length] }; }) },
+          ins: [miss.length ? [miss.length + (miss.length === 1 ? ' voyage is' : ' voyages are') + ' in LMS but not in GIRS', 'bad', 'Raise LMS check', 'lmsAll'] : ['Every LMS voyage is in GIRS', 'ok'],
+            diff.length ? [diff.length + ' voyages have fewer B/Ls in GIRS than in LMS (' + misN(diff.reduce((t, v) => t + v.lms - v.girs, 0)) + ' B/Ls)', 'warn'] : ['B/L counts match for all voyages', 'ok'],
+            [Math.round((vs.length - miss.length - diff.length) / Math.max(1, vs.length) * 100) + '% of voyages fully match', '']] }; },
+      vslbl: (X) => { const by = {};
+        X.voy.filter(okL).forEach((v) => { const b = by[v.vessel] || (by[v.vessel] = { v: v.vessel, svc: v.svc, voy: 0, bl: 0, inv: 0 }); b.voy++; b.bl += v.lms; b.inv += Math.max(0, v.girs - v.open); });
+        const l = Object.values(by).sort((a, b) => b.bl - a.bl), B = tot(l, 'bl'), I = tot(l, 'inv');
+        return { kpis: [['Vessels', l.length, 'n'], ['B/Ls', B, 'n'], ['Invoiced B/Ls', I, 'n'], ['% invoiced', B ? I / B * 100 : 0, 'p', '', 'up']],
+          cols: [['Vessel'], ['Service'], ['Voyages', 1], ['B/Ls', 1], ['Invoiced', 1], ['Un-invoiced', 1], ['Progress']],
+          rows: l.map((b) => ({ id: b.v, cells: [C(b.v), C(b.svc), num(b.voy, 'n'), num(b.bl, 'n'), num(b.inv, 'n'), num(b.bl - b.inv, 'n'), C((b.inv / Math.max(1, b.bl) * 100).toFixed(1) + '%', { v: b.inv / Math.max(1, b.bl), bar: b.inv / Math.max(1, b.bl) * 100 })], act: ['View voyages', go('voyage-invoicing.html?q=' + encodeURIComponent(b.v))] })),
+          chart: { kind: 'bars', title: 'B/Ls by vessel', legend: [['Invoiced', MIS_COL.done], ['Un-invoiced', MIS_COL.act]], data: l.slice(0, 10).map((b) => ({ l: b.v, v: [b.inv, b.bl - b.inv], tip: misN(b.bl) + ' B/Ls' })) },
+          ins: [[l[0] ? l[0].v + ' carries the most B/Ls (' + misN(l[0].bl) + ')' : 'No vessels', ''], (() => { const w = l.filter((b) => b.bl - b.inv > 0).sort((a, b) => (b.bl - b.inv) - (a.bl - a.inv))[0]; return w ? [w.v + ' has the most un-invoiced B/Ls (' + misN(w.bl - w.inv) + ')', 'warn', 'View voyages', go('voyage-invoicing.html?q=' + encodeURIComponent(w.v))] : ['All B/Ls invoiced', 'ok']; })()] }; },
+      inv: (X) => { const l = X.bkg.filter((b) => okL(b) && b.openBl === 0 && b.amt > 0), ivs = X.inv.filter(okL);
+        const amt = tot(l, 'amt'), taxOf = (b) => ivs.filter((i) => i.bkg === b.bkg).reduce((t, i) => t + i.tax, 0), tax = l.reduce((t, b) => t + taxOf(b), 0);
+        return { kpis: [['Bookings invoiced', l.length, 'n', '', 'up'], ['Invoice value (USD)', amt, 'm', '', 'up'], ['Tax (USD)', tax, 'm'], ['Avg per booking (USD)', amt / Math.max(1, l.length), 'm']],
+          cols: [['Booking no.'], ['Voyage'], ['Customer'], ['B/Ls', 1], ['Invoice date'], ['Amount (USD)', 1], ['Tax (USD)', 1], ['Total (USD)', 1]],
+          rows: l.map((b) => { const t = taxOf(b); return { id: b.bkg, cells: [C(b.bkg, { mono: true }), C(b.voy, { mono: true }), C(b.cust), num(b.bls, 'n'), C(misDay(b.date), { v: +b.date }), num(b.amt), num(t), num(b.amt + t)], act: ['View invoices', go('invoice-list-v2.html?tab=invoices&q=' + b.bkg)] }; }).sort((a, b) => b.cells[4].v - a.cells[4].v),
+          chart: { kind: 'cols', title: 'Invoice value by day (USD)', legend: [['Invoiced', MIS_COL.act]], fmt: 'm', data: Array.from({ length: X.days }, (_, i) => ({ l: String(i + 1), v: [l.filter((b) => b.date.getDate() === i + 1).reduce((t, b) => t + b.amt, 0)] })) },
+          ins: [(() => { const c = {}; l.forEach((b) => c[b.cust] = (c[b.cust] || 0) + b.amt); const k = Object.keys(c).sort((a, b) => c[b] - c[a])[0]; return k ? ['Top customer: ' + k + ' (USD ' + misK(c[k]) + ')', ''] : ['No bookings invoiced', '']; })(),
+            [ivs.filter((i) => i.st === 'Unpaid').length + ' of ' + ivs.length + ' invoices are still unpaid', 'warn', 'Open Invoice List', go('invoice-list-v2.html?tab=invoices')]] }; },
+      uninv: (X) => { const l = X.bkg.filter((b) => okL(b) && b.openBl > 0);
+        const old = l.filter((b) => b.age > 7), byR = {}; l.forEach((b) => { byR[b.reason] = (byR[b.reason] || 0) + 1; });
+        const top = Object.keys(byR).sort((a, b) => byR[b] - byR[a])[0];
+        return { kpis: [['Bookings un-invoiced', l.length, 'n', 'warn', 'down'], ['Open B/Ls', tot(l, 'openBl'), 'n', '', 'down'], ['Est. value (USD)', tot(l, 'est'), 'm', '', 'down'], ['Older than 7 days', old.length, 'n', 'bad', 'down']],
+          cols: [['Booking no.'], ['Voyage'], ['Customer'], ['Open B/Ls', 1], ['Reason'], ['Age (days)', 1], ['Est. value (USD)', 1]],
+          rows: l.map((b) => ({ id: b.bkg, cells: [C(b.bkg, { mono: true }), C(b.voy, { mono: true }), C(b.cust), num(b.openBl, 'n'), chip(b.reason, 'warn'), num(b.age, 'n'), num(b.est)], act: b.reason === 'Data not received from LMS' ? ['Send follow-up', 'fu'] : ['Open voyage', go('voyage-invoicing.html?q=' + b.voy)] })).sort((a, b) => b.cells[5].v - a.cells[5].v),
+          chart: { kind: 'bars', title: 'Open bookings by reason and age', legend: [['0–2 days', MIS_COL.act], ['3–7 days', MIS_COL.warn], ['Over 7 days', MIS_COL.bad]],
+            data: Object.keys(byR).sort((a, b) => byR[b] - byR[a]).map((k) => { const x = l.filter((b) => b.reason === k); return { l: k, v: [x.filter((b) => b.age <= 2).length, x.filter((b) => b.age > 2 && b.age <= 7).length, x.filter((b) => b.age > 7).length], tip: x.length + ' bookings' }; }) },
+          ins: [top ? ['Most common reason: ' + top + ' (' + byR[top] + ')', 'warn', top === 'Data not received from LMS' ? 'Send follow-up' : '', 'fuAll'] : ['Nothing open', 'ok'],
+            old.length ? [old.length + ' bookings have waited more than 7 days', 'bad'] : ['Nothing older than 7 days', 'ok']] }; },
+      cn: () => { const l = cnAll.filter((c) => s.loc === 'all' || cnPort(c) === s.loc);
+        const STL = { Generated: ['Generated · posted', 'ok'], Exception: ['Needs action', 'bad'], 'Pending approval': ['Pending approval', 'warn'], Rejected: ['Rejected', ''], Draft: ['Draft', ''] };
+        const byR = {}; l.forEach((c) => { byR[c.reason] = byR[c.reason] || [0, 0]; byR[c.reason][c.src === 'Auto' ? 0 : 1]++; });
+        return { kpis: [['Credit notes', l.length, 'n'], ['USD value (incl. tax)', l.reduce((t, c) => t + cnUsd(c, 1), 0), 'm', '', 'down'], ['Pending approval', l.filter((c) => c.status === 'Pending approval').length, 'n', 'warn', 'down'], ['Needs action', l.filter((c) => c.status === 'Exception').length, 'n', 'bad', 'down']], flat: true,
+          cols: [['Credit note no.'], ['Original invoice'], ['Billing party'], ['Source'], ['Reason'], ['Total (incl. tax)', 1], ['Date'], ['Status']],
+          rows: l.map((c) => ({ id: c.no, cells: [C(c.no, { mono: true }), C(c.orig, { mono: true }), C(c.party), C(c.src === 'Auto' ? 'Automatic' : 'Manual'), C(c.reason), C(cnTxt(c), { v: cnUsd(c, 1), num: true }), C(c.date || '—'), chip((STL[c.status] || [c.status])[0], (STL[c.status] || [0, ''])[1])], act: ['View credit note', go('credit-note-list.html?q=' + c.no)] })),
+          chart: { kind: 'bars', title: 'Credit notes by reason', legend: [['Automatic', MIS_COL.done], ['Manual', MIS_COL.act]], data: Object.keys(byR).map((k) => ({ l: k, v: byR[k], tip: (byR[k][0] + byR[k][1]) + ' credit notes' })) },
+          ins: [[l.filter((c) => c.status === 'Exception').length + ' automatic credit notes stopped and need action', 'bad', 'Open Credit Note List', go('credit-note-list.html')], [Math.round(l.filter((c) => c.src === 'Auto').length / Math.max(1, l.length) * 100) + '% of credit notes were raised automatically (FCA / DAR)', '']] }; },
+      tax: (X) => { const by = {}; X.inv.filter(okL).forEach((x) => { const k = x.ctry + '|' + x.tcode; const b = by[k] || (by[k] = { ctry: x.ctry, t: x.tcode, rate: x.rate, n: 0, a: 0, tx: 0 }); b.n++; b.a += x.amt; b.tx += x.tax; });
+        const l = Object.values(by).sort((a, b) => a.ctry.localeCompare(b.ctry) || b.rate - a.rate);
+        const cty = [...new Set(l.map((b) => b.ctry))];
+        return { kpis: [['Invoices', tot(l, 'n'), 'n'], ['Taxable value (USD)', tot(l, 'a'), 'm'], ['Tax (USD)', tot(l, 'tx'), 'm'], ['Zero-rated share', tot(l.filter((b) => !b.rate), 'a') / Math.max(1, tot(l, 'a')) * 100, 'p']],
+          cols: [['Period'], ['Country'], ['Tax code'], ['Rate', 1], ['Invoices', 1], ['Taxable (USD)', 1], ['Tax (USD)', 1]],
+          rows: l.map((b) => ({ id: b.ctry + b.t, cells: [C(X.label), C(b.ctry), C(b.t, { mono: true }), C(b.rate + '%', { v: b.rate, num: true }), num(b.n, 'n'), num(b.a), num(b.tx)], act: ['View invoices', go('invoice-list-v2.html?tab=invoices&q=' + b.t)] })),
+          chart: { kind: 'bars', title: 'Taxable value by country (USD)', fmt: 'm', legend: [['Standard-rated', MIS_COL.act], ['Zero-rated (ZR-INTL)', MIS_COL.done]], data: cty.map((c) => ({ l: c, v: [tot(l.filter((b) => b.ctry === c && b.rate), 'a'), tot(l.filter((b) => b.ctry === c && !b.rate), 'a')] })) },
+          ins: [['Tax for ' + X.label + ': USD ' + misK(tot(l, 'tx')) + ' across ' + new Set(l.map((b) => b.t)).size + ' tax codes', ''], ['Ready for the period tax return; export to Excel for the tax team', '', 'Export', 'exp']] }; },
+      lmsdata: (X) => { const l = X.mm.filter(okL);
+        const byF = {}; l.forEach((x) => { byF[x.field] = (byF[x.field] || 0) + 1; });
+        const open = l.filter((x) => !s.done[x.bkg + x.field]);
+        return { kpis: [['Mismatched fields', open.length, 'n', 'bad', 'down'], ['Bookings affected', new Set(open.map((x) => x.bkg)).size, 'n', '', 'down'], ['Blocking invoice', open.filter((x) => x.impact !== 'Tax code may differ').length, 'n', 'warn', 'down'], ['Resolved', l.length - open.length, 'n', '', 'up']],
+          cols: [['Booking no.'], ['B/L no.'], ['Field'], ['In LMS'], ['In GIRS'], ['Impact'], ['Found'], ['Status']],
+          rows: l.map((x) => ({ id: x.bkg + x.field, cells: [C(x.bkg, { mono: true }), C(x.bl, { mono: true }), C(x.field), C(x.lms, { cmpA: true }), C(x.girs, { cmpB: true }), chip(x.impact, x.impact === 'Tax code may differ' ? '' : 'warn'), C(misDay(x.date), { v: +x.date }), s.done[x.bkg + x.field] ? chip('Re-synced', 'ok') : chip('Open', 'bad')], act: s.done[x.bkg + x.field] ? null : ['Re-sync from LMS', 'sync'] })),
+          chart: { kind: 'bars', title: 'Mismatches by field', legend: [['Mismatches', MIS_COL.bad]], data: Object.keys(byF).sort((a, b) => byF[b] - byF[a]).map((k) => ({ l: k, v: [byF[k]] })) },
+          ins: [open.length ? [open.length + ' fields in GIRS differ from LMS; invoices for these bookings may be wrong', 'bad', 'Re-sync all from LMS', 'syncAll'] : ['GIRS matches LMS for every booking', 'ok'], (() => { const k = Object.keys(byF).sort((a, b) => byF[b] - byF[a])[0]; return k ? ['Most frequent: ' + k + ' (' + byF[k] + ')', 'warn'] : ['', '']; })()].filter((x) => x[0]) }; },
+      gfs: (X) => { const l = X.inv.filter((i) => okL(i) && i.gfs === 'Failed');
+        const byE = {}; l.forEach((x) => { byE[x.err] = (byE[x.err] || 0) + 1; });
+        return { kpis: [['Failed postings', l.length, 'n', 'bad', 'down'], ['Value (USD)', tot(l, 'amt') + tot(l, 'tax'), 'm', '', 'down'], ['Retries queued', l.filter((x) => s.done[x.no]).length, 'n'], ['Error types', Object.keys(byE).length, 'n']],
+          cols: [['Document'], ['Type'], ['Country'], ['Value (USD)', 1], ['Error'], ['Since'], ['Attempts', 1], ['Status']],
+          rows: l.map((x) => ({ id: x.no, cells: [C(x.no, { mono: true }), C('Invoice'), C(x.ctry), num(x.amt + x.tax), chip(x.err, 'bad'), C(misDay(x.date), { v: +x.date }), num(x.tries, 'n'), s.done[x.no] ? chip('Retry queued', 'act') : chip('Failed', 'bad')], act: s.done[x.no] ? null : ['Retry posting', 'retry'] })),
+          chart: { kind: 'bars', title: 'Failures by error type', legend: [['Failed postings', MIS_COL.bad]], data: Object.keys(byE).map((k) => ({ l: k, v: [byE[k]] })) },
+          ins: [l.length ? [l.length + ' documents are not in GFS yet', 'bad', 'Retry all', 'retryAll'] : ['Everything posted to GFS', 'ok'], byE['Accounting period closed for entity'] ? ['Some fail because the accounting period is closed: reopen it in Month-End Close before retrying', 'warn', 'Month-End Close', go('month-end.html')] : ['', '']].filter((x) => x[0]) }; },
+      ctry: (X) => { const l = MIS_LOC.filter(([p]) => s.loc === 'all' || p === s.loc).map(([p, c]) => {
+          const iv = X.inv.filter((x) => x.port === p && (s.dir === 'all' || x.dir === s.dir)), cn = cnAll.filter((x) => cnPort(x) === p && x.status === 'Generated'), un = X.bkg.filter((b) => b.port === p && b.openBl > 0 && b.age > 7);
+          const rev = tot(iv, 'amt'), cr = cn.reduce((t, x) => t + cnUsd(x), 0), unb = tot(un, 'est');
+          return { c, p, rev, cr, net: rev - cr, unb, loss: cr + unb }; });
+        const N = tot(l, 'net');
+        return { kpis: [['Net revenue (USD)', N, 'm', '', 'up'], ['Credit notes (USD)', tot(l, 'cr'), 'm', '', 'down'], ['Un-invoiced > 7 days (USD)', tot(l, 'unb'), 'm', 'warn', 'down'], ['Revenue loss (USD)', tot(l, 'loss'), 'm', 'bad', 'down']],
+          cols: [['Country'], ['Invoiced revenue', 1], ['Credit notes', 1], ['Net revenue', 1], ['Un-invoiced > 7 days', 1], ['Revenue loss', 1], ['Loss %', 1]],
+          rows: l.sort((a, b) => b.net - a.net).map((b) => ({ id: b.c, cells: [C(b.c), num(b.rev), num(b.cr), num(b.net), num(b.unb), num(b.loss), C((b.loss / Math.max(1, b.rev) * 100).toFixed(2) + '%', { v: b.loss / Math.max(1, b.rev), num: true })], act: ['Drill down', () => self.setState({ loc: b.p, rep: 'inv', pg: 1, sel: {}, sort: null })] })),
+          chart: { kind: 'bars', title: 'Net revenue and loss by country (USD)', fmt: 'm', legend: [['Net revenue', MIS_COL.act], ['Revenue loss', MIS_COL.bad]], data: l.map((b) => ({ l: b.c, v: [b.net, b.loss] })) },
+          ins: [l[0] ? [l[0].c + ' brings the most net revenue (USD ' + misK(l[0].net) + ', ' + Math.round(l[0].net / Math.max(1, N) * 100) + '%)', ''] : ['', ''], (() => { const w = l.slice().sort((a, b) => b.loss / Math.max(1, b.rev) - a.loss / Math.max(1, a.rev))[0]; return w && w.loss ? ['Highest loss rate: ' + w.c + ' (' + (w.loss / Math.max(1, w.rev) * 100).toFixed(2) + '% of revenue)', 'bad', 'Drill down', () => self.setState({ loc: w.p, rep: 'uninv', pg: 1, sel: {}, sort: null })] : ['No revenue loss this period', 'ok']; })(),
+            ['Revenue loss = credit notes + un-invoiced older than 7 days (definition to confirm with PIL)', 'note']].filter((x) => x[0]) }; }
+    };
+    const ICON = { lmsgirs: 'M3 17h18M5 17l1.5-5h11L19 17M8 12V8h8v4M11 8V5h2v3', vslbl: 'M4 7h16v10H4zM8 7v10M12 7v10M16 7v10', inv: 'M7 3h7l4 4v14H7zM14 3v4h4M10 13l2 2 4-4', uninv: 'M7 3h7l4 4v14H7zM14 3v4h4M12 11v4l2 1', cn: 'M6 3h12v18l-3-2-3 2-3-2-3 2zM9 10h6', tax: 'M6 18L18 6M8 8.5a1.5 1.5 0 1 0 0-.01M16 16.5a1.5 1.5 0 1 0 0-.01', lmsdata: 'M7 7h11l-3-3M17 17H6l3 3M4 7h1M19 17h1', gfs: 'M7 18a4 4 0 0 1-.6-8A5.5 5.5 0 0 1 17 8.5a4.2 4.2 0 0 1 .5 8.4M10 13l4 4M14 13l-4 4', ctry: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M3.5 9h17M3.5 15h17M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18' };
+    const HEAD = {
+      lmsgirs: (k) => [k[2][1] + k[3][1], 'voyages to check', misN(k[1][1]) + ' of ' + misN(k[0][1]) + ' LMS voyages are in GIRS', k[2][1] + k[3][1] > 0, (h) => h[2][1] + h[3][1]],
+      vslbl: (k) => [k[3][1].toFixed(1) + '%', 'of B/Ls invoiced', misN(k[1][1]) + ' B/Ls across ' + k[0][1] + ' vessels', false, (h) => h[3][1]],
+      inv: (k) => ['USD ' + misK(k[1][1]), 'invoice value', misN(k[0][1]) + ' bookings fully invoiced', false, (h) => h[1][1]],
+      uninv: (k) => [misN(k[0][1]), 'bookings open', k[3][1] + ' waiting more than 7 days', k[3][1] > 0, (h) => h[0][1]],
+      cn: (k) => [misN(k[3][1]), 'need action', 'USD ' + misK(k[1][1]) + ' credited · ' + k[2][1] + ' pending approval', k[3][1] > 0, (h) => h[3][1]],
+      tax: (k) => ['USD ' + misK(k[2][1]), 'tax for the period', misN(k[0][1]) + ' invoices · taxable USD ' + misK(k[1][1]), false, (h) => h[2][1]],
+      lmsdata: (k) => [misN(k[0][1]), 'fields differ', k[1][1] + ' bookings affected · ' + k[2][1] + ' blocking invoices', k[0][1] > 0, (h) => h[0][1]],
+      gfs: (k) => [misN(k[0][1]), 'postings failed', 'USD ' + misK(k[1][1]) + ' not yet in GFS', k[0][1] > 0, (h) => h[0][1]],
+      ctry: (k) => ['USD ' + misK(k[0][1]), 'net revenue', 'Revenue loss USD ' + misK(k[3][1]), false, (h) => h[0][1]]
+    };
+    const homeCard = (it) => { const r = DEF[it.k](D), [big, unit, sub, issue, f] = HEAD[it.k](r.kpis);
+      const ser = months.slice().reverse().map((d) => f(DEF[it.k](misData(misMKey(d))).kpis)), mx = Math.max(1e-9, ...ser), mn = Math.min(...ser);
+      return { k: it.k, t: it.t, d: it.d, big: String(big), unit, sub, ic: ICON[it.k], cls: 'mh-card' + (issue ? ' issue' : '') + (it.sub === 'Exception reports' ? ' exc' : ''), st: issue ? 'Needs attention' : 'On track', stCls: 'mh-st ' + (issue ? 'bad' : 'ok'),
+        pts: ser.map((y, j) => (j * 20) + ',' + (24 - ((y - mn) / Math.max(1e-9, mx - mn)) * 20 - 2).toFixed(1)).join(' '), fav: s.fav.includes(it.k), favOn: s.fav.includes(it.k) ? 'true' : 'false',
+        go: () => self.setState({ rep: it.k, pg: 1, q: '', sort: null, sel: {}, exp: false, insp: null, flt: null }), issue };
+    };
+    // ------ rows: search, sort, paging, selection
+    const isHome = s.rep === 'home';
+    const REP = isHome ? 'lmsgirs' : s.rep;
+    const R = DEF[REP](D), RP = DEF[REP](P);
+    const hist = months.slice().reverse().map((d) => DEF[REP](misData(misMKey(d))).kpis);
+    const mLbl = months.slice().reverse().map((d) => d.toLocaleDateString('en-GB', { month: 'short' }));
+    const fmtK = (v, f) => f === 'n' ? misN(Math.round(v)) : f === 'p' ? v.toFixed(1) + '%' : misK(v);
+    // ---------- rows: search, sort, paging, selection
+    const isAtt = (r) => r.cells.some((c) => c.chip && /\b(bad|warn)\b/.test(c.chip));
+    const dateCi = R.rows.length ? R.rows[0].cells.findIndex((c) => typeof c.v === 'number' && c.v > 1e11) : -1;
+    const fOk = (f, r) => !f ? true : f.t === 'day' ? new Date(r.cells[f.ci].v).getDate() === f.v : f.t === 'rng' ? r.cells[f.ci].v >= f.lo && r.cells[f.ci].v <= f.hi : r.cells[f.ci].t === f.v;
+    const flt = s.flt && s.flt.rep === REP ? s.flt : null;
+    const attN = R.rows.filter(isAtt).length, canAtt = !flt && attN > 0 && attN < R.rows.length, onlyAtt = canAtt && s.onlyAtt;
+    const setF = (f) => self.setState({ flt: flt && f && flt.l === f.l ? null : f ? Object.assign({ rep: REP }, f) : null, pg: 1, sel: {}, insp: null });
+    const eqF = (l) => { if (l === 'Other') return null; const ci = R.rows.length ? R.cols.findIndex((c, i) => R.rows.some((r) => r.cells[i].t === l)) : -1; return ci < 0 ? null : { t: 'eq', ci, v: l, l }; };
+    let rows = R.rows.filter((r) => fOk(flt, r) && (!onlyAtt || isAtt(r))).filter((r) => !q || r.cells.map((c) => c.t).join(' ').toLowerCase().includes(q));
+    if (s.sort) { const [ci, dir] = s.sort; rows = rows.slice().sort((a, b) => { const x = a.cells[ci].v, y = b.cells[ci].v; return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y))) * dir; }); }
+    const pages = Math.max(1, Math.ceil(rows.length / s.psz)), pg = Math.min(s.pg, pages), view = rows.slice((pg - 1) * s.psz, pg * s.psz);
+    const selIds = Object.keys(s.sel).filter((k) => s.sel[k] && rows.some((r) => r.id === k));
+    const mark = (ids, msg) => { const d = Object.assign({}, s.done); (ids || []).forEach((i) => d[i] = 1); self.setState({ done: d, sel: {}, __toast: msg }); };
+    const pl = (n, a, b) => n + ' ' + (n === 1 ? a : b);
+    const runAct = (kind, ids) => {
+      const n = (ids || []).length;
+      if (kind === 'lms' || kind === 'lmsAll') mark(ids, pl(n, 'LMS check', 'LMS checks') + ' raised · LMS support notified');
+      else if (kind === 'fu' || kind === 'fuAll') mark(ids, 'Follow-up sent to port agency for ' + pl(n, 'booking', 'bookings'));
+      else if (kind === 'retry' || kind === 'retryAll') mark(ids, pl(n, 'GFS posting', 'GFS postings') + ' queued for retry');
+      else if (kind === 'sync' || kind === 'syncAll') mark(ids, pl(n, 'field', 'fields') + ' re-synced from LMS');
+      else if (kind === 'exp') self.setState({ exp: true });
+    };
+    const DONE_L = { lms: 'Check raised', fu: 'Follow-up sent', retry: 'Retry queued', sync: 'Re-synced' };
+    const rowAct = (r) => { if (!r.act) return null; const [l, k] = r.act; if (s.done[r.id] && typeof k === 'string') return { l: DONE_L[k] || 'Done', dis: true, run: () => {} };
+      return { l, dis: false, run: typeof k === 'function' ? k : () => runAct(k, [r.id]) }; };
+    const kinds = R.rows.map((r) => r.act && typeof r.act[1] === 'string' ? r.act[1] : null).filter(Boolean);
+    const bulkK = kinds[0] || '';
+    const allIds = (k) => R.rows.filter((r) => r.act && r.act[1] === k && !s.done[r.id]).map((r) => r.id);
+    // ---------- KPIs
+    const kpis = R.kpis.map(([l, v, f, tone, better], i) => {
+      const pv = RP.kpis[i][1], dv = v - pv, pct = pv ? dv / Math.abs(pv) * 100 : 0, series = hist.map((h) => h[i][1]), mx = Math.max(1e-9, ...series), mn = Math.min(...series);
+      const pts = series.map((y, j) => (j * 20) + ',' + (24 - ((y - mn) / Math.max(1e-9, mx - mn)) * 20 - 2).toFixed(1)).join(' ');
+      const good = !better || !dv ? 'neu' : (dv > 0) === (better === 'up') ? 'good' : 'bad';
+      return { l, v: fmtK(v, f), cls: 'mx-kv ' + (tone && v ? tone : ''), hasD: s.cmp && !R.flat, d: (dv > 0 ? '▲ ' : dv < 0 ? '▼ ' : '') + (f === 'p' ? Math.abs(dv).toFixed(1) + ' pts' : Math.abs(pct).toFixed(0) + '%'), dCls: 'mx-d ' + good, dL: 'vs ' + P.label.split(' ')[0], pts, hasSp: !R.flat, sCls: 'mx-sp ' + (tone && v ? tone : '') };
+    });
+    // ---------- primary chart
+    const ch = R.chart, fmtC = (v) => ch.fmt === 'm' ? misK(v) : misN(Math.round(v));
+    const toArea = REP === 'inv';
+    const cmax = Math.max(1, ...ch.data.map((d) => d.v.reduce((a, b) => a + b, 0)));
+    const prim = { title: ch.title, isCols: ch.kind === 'cols' && !toArea, isBars: ch.kind === 'bars', isArea: toArea, legend: ch.legend.map(([t, c]) => ({ t, st: 'background:' + c })),
+      data: ch.data.map((d) => { const sum = d.v.reduce((a, b) => a + b, 0); const f = ch.kind === 'cols' ? (dateCi >= 0 ? { t: 'day', ci: dateCi, v: +d.l, l: d.l + ' ' + D.label.split(' ')[0] } : null) : eqF(d.l); return { go: f ? () => setF(f) : () => {}, on: flt && f && flt.l === f.l ? 'true' : 'false', dim: flt && !(f && flt.l === f.l) ? 'dim' : '', l: d.l, tot: fmtC(sum), tip: (ch.kind === 'cols' ? d.l + ' ' + D.label.split(' ')[0] : d.l + ' · ' + (d.tip || fmtC(sum))) + ' · ' + ch.legend.map(([t], i) => t + ' ' + fmtC(d.v[i] || 0)).join(' · '),
+        segs: d.v.map((v, i) => ({ st: (ch.kind === 'cols' ? 'height:' : 'width:') + (v / cmax * 100).toFixed(2) + '%;background:' + ch.legend[i][1] })), wk: ch.kind === 'cols' && [0, 6].includes(new Date(D.y, D.m, +d.l).getDay()) ? 'wk' : '', lab: ch.kind !== 'cols' || +d.l % 2 === 1 || ch.data.length < 16 ? d.l : '' }; }),
+      ymax: fmtC(cmax), ymid: ch.fmt === 'm' ? misK(cmax / 2) : String(Math.round(cmax / 2 * 10) / 10) };
+    if (toArea) { prim.area = misArea(ch.data.map((d) => d.v[0]), ch.data.map((d) => d.l + ' ' + D.label.split(' ')[0]), misK); prim.area.dots.forEach((p, i) => { const f = dateCi >= 0 ? { t: 'day', ci: dateCi, v: +ch.data[i].l, l: ch.data[i].l + ' ' + D.label.split(' ')[0] } : null; p.go = f ? () => setF(f) : () => {}; p.on = flt && f && flt.l === f.l ? 'true' : 'false'; }); }
+    // ---------- secondary chart
+    const byCol = (ci, sumCi, top) => { const m = {}; R.rows.forEach((r) => { const k = r.cells[ci].t; m[k] = (m[k] || 0) + (sumCi == null ? 1 : +r.cells[sumCi].v || 0); }); let a = Object.keys(m).map((k) => ({ l: k, v: m[k], c: MIS_ST_COL[k] })).sort((x, y) => y.v - x.v); if (top && a.length > top) { const o = a.slice(top).reduce((t, x) => t + x.v, 0); a = a.slice(0, top).concat([{ l: 'Other', v: o, c: '#A3ADBB' }]); } return a; };
+    const SEC = {
+      lmsgirs: () => ['donut', 'Voyage status', byCol(7), misN],
+      vslbl: () => ['line', '% of B/Ls invoiced · 6 months', hist.map((h) => h[3][1]), (v) => v.toFixed(1) + '%'],
+      inv: () => ['donut', 'Invoice value by customer', byCol(2, 5, 4), misK],
+      uninv: () => ['donut', 'Open bookings by age', [{ l: '0–2 days', v: R.rows.filter((r) => r.cells[5].v <= 2).length, c: MIS_COL.act, f: { t: 'rng', ci: 5, lo: -1, hi: 2 } }, { l: '3–7 days', v: R.rows.filter((r) => r.cells[5].v > 2 && r.cells[5].v <= 7).length, c: MIS_COL.warn, f: { t: 'rng', ci: 5, lo: 3, hi: 7 } }, { l: 'Over 7 days', v: R.rows.filter((r) => r.cells[5].v > 7).length, c: MIS_COL.bad, f: { t: 'rng', ci: 5, lo: 8, hi: 1e9 } }], misN],
+      cn: () => ['donut', 'Credit notes by status', byCol(7), misN],
+      tax: () => ['donut', 'Tax by tax code (USD)', byCol(2, 6), misK],
+      lmsdata: () => ['donut', 'Mismatches by impact', byCol(5), misN],
+      gfs: () => ['donut', 'Failures by country', byCol(2), misN],
+      ctry: () => ['line', 'Net revenue · 6 months (USD)', hist.map((h) => h[0][1]), misK]
+    };
+    const [sk, st2, sd2, sf] = SEC[REP]();
+    const sec = { title: st2, isDonut: sk === 'donut', isLine: sk === 'line', donut: sk === 'donut' ? (() => { const dn = misDonut(sd2, sf); dn.segs.forEach((g, i) => { const f = sd2[i].f ? Object.assign({ l: sd2[i].l }, sd2[i].f) : eqF(sd2[i].l); g.go = f ? () => setF(f) : () => {}; g.on = flt && f && flt.l === f.l ? 'true' : 'false'; g.cls = 'mx-dsg' + (flt && !(f && flt.l === f.l) ? ' dim' : ''); g.can = !!f; g.dis = f ? 'false' : 'true'; }); return dn; })() : { segs: [] }, line: sk === 'line' ? misArea(sd2, mLbl, sf) : { dots: [] } };
+    // ---------- inspector
+    const ir = s.insp && R.rows.find((r) => r.id === s.insp);
+    const LINK = {
+      lmsgirs: (r) => ['Open in Voyage Invoicing', 'voyage-invoicing.html?q=' + r.cells[0].t], vslbl: (r) => ['Open in Voyage Invoicing', 'voyage-invoicing.html?q=' + encodeURIComponent(r.cells[0].t)],
+      inv: (r) => ['Open in Invoice List', 'invoice-list-v2.html?tab=invoices&q=' + r.cells[0].t], uninv: (r) => ['Open in Voyage Invoicing', 'voyage-invoicing.html?q=' + r.cells[1].t],
+      cn: (r) => ['Open in Credit Note List', 'credit-note-list.html?q=' + r.cells[0].t], tax: (r) => ['Open in Invoice List', 'invoice-list-v2.html?tab=invoices&q=' + r.cells[2].t],
+      lmsdata: (r) => ['Open in Invoice List', 'invoice-list-v2.html?tab=invoices&q=' + r.cells[0].t], gfs: (r) => ['Open in Invoice List', 'invoice-list-v2.html?tab=invoices&q=' + r.cells[0].t], ctry: () => null
+    };
+    let insp = { on: false };
+    if (ir) {
+      const a = rowAct(ir), lk = LINK[REP](ir), stc = ir.cells.find((c) => c.chip && R.cols[ir.cells.indexOf(c)][0] === 'Status') || ir.cells.slice().reverse().find((c) => c.chip);
+      const cmp = REP === 'lmsgirs' ? [['LMS', ir.cells[4].v], ['GIRS', ir.cells[5].v]] : REP === 'lmsdata' ? [['LMS', ir.cells[3].t], ['GIRS', ir.cells[4].t]] : null;
+      const cmx = cmp && typeof cmp[0][1] === 'number' ? Math.max(1, cmp[0][1], cmp[1][1]) : 0;
+      const idx = rows.findIndex((r) => r.id === ir.id);
+      insp = { on: true, title: ir.cells[0].t, sub: R.cols.slice(1, 3).map((c, i) => ir.cells[i + 1].t).join(' · '), hasSt: !!stc, st: stc ? stc.t : '', stCls: stc ? stc.chip : '',
+        kv: R.cols.map(([l], i) => ({ l, v: ir.cells[i].t, cls: ir.cells[i].num ? 'mono' : '' })).slice(1),
+        hasCmp: !!cmp, cmpNum: !!cmx, cmp: (cmp || []).map(([l, v], i) => ({ l, v: typeof v === 'number' ? misN(v) : v, cls: 'mx-cmp-v' + (i && cmp[0][1] !== cmp[1][1] ? ' bad' : ''), bar: cmx ? 'width:' + (v / cmx * 100).toFixed(1) + '%;background:' + (i && cmp[0][1] !== cmp[1][1] ? 'var(--bad)' : 'var(--accent)') : '' })),
+        guide: MIS_GUIDE[REP], hasA: !!a, aL: a ? a.l : '', aRun: a ? a.run : () => {}, aDis: a ? a.dis : true,
+        hasLk: !!lk, lkL: lk ? lk[0] : '', lkGo: lk ? go(lk[1]) : () => {},
+        pos: (idx + 1) + ' of ' + rows.length, prevDis: idx <= 0, nextDis: idx < 0 || idx >= rows.length - 1,
+        prev: () => idx > 0 && self.setState({ insp: rows[idx - 1].id }), next: () => idx < rows.length - 1 && self.setState({ insp: rows[idx + 1].id }),
+        close: () => self.setState({ insp: null }) };
+    }
+    // ---------- home
+    const cur = MIS_ITEMS.find((i) => i.k === REP);
+    const cards = MIS_ITEMS.map(homeCard);
+    const att = cards.filter((c) => c.issue);
+    const Kc = DEF.ctry(D).kpis, Kv = DEF.vslbl(D).kpis, Kg = DEF.gfs(D).kpis, Kd = DEF.lmsdata(D).kpis, Ku = DEF.uninv(D).kpis, Ki = DEF.inv(D).kpis;
+    const invRev = DEF.ctry(D).rows.reduce((t, r) => t + r.cells[1].v, 0), lossPct = invRev ? Kc[3][1] / invRev * 100 : 0;
+    const health = Math.max(0, Math.min(100, Kv[3][1] - lossPct));
+    const trendInv = months.slice().reverse().map((d) => DEF.inv(misData(misMKey(d))).kpis[1][1]), trendUn = months.slice().reverse().map((d) => DEF.uninv(misData(misMKey(d))).kpis[2][1]);
+    const tmax = Math.max(1, ...trendInv.map((v, i) => v + trendUn[i]));
+    const hc = DEF.ctry(D);
+    const quick = { gfs: ['Retry all', 'retryAll', 'retry'], lmsdata: ['Re-sync all', 'syncAll', 'sync'], lmsgirs: ['Raise LMS checks', 'lmsAll', 'lms'] };
+    const openRep = (k) => self.setState({ rep: k, pg: 1, q: '', sort: null, sel: {}, exp: false, insp: null, flt: null });
+    const home = {
+      health: health.toFixed(1), healthSt: 'width:' + health.toFixed(1) + '%', healthL: health >= 95 ? 'Healthy' : health >= 85 ? 'Watch' : 'At risk', healthCls: 'mx-hb ' + (health >= 95 ? 'ok' : health >= 85 ? 'warn' : 'bad'),
+      net: 'USD ' + misK(Kc[0][1]), invd: Kv[3][1].toFixed(1) + '%', loss: lossPct.toFixed(2) + '%', lossV: 'USD ' + misK(Kc[3][1]), exc: misN(Kg[0][1] - Kg[2][1] + Kd[0][1]), open: misN(Ku[0][1]), bookings: misN(Ki[0][1]),
+      trend: mLbl.map((l, i) => ({ l, tip: l + ' · invoiced USD ' + misK(trendInv[i]) + ' · un-invoiced USD ' + misK(trendUn[i]), av: (trendInv[i] >= 1e6 ? (trendInv[i] / 1e6).toFixed(2) + 'M' : (trendInv[i] / 1e3).toFixed(1) + 'K'), bv: (trendUn[i] >= 1e6 ? (trendUn[i] / 1e6).toFixed(2) + 'M' : (trendUn[i] / 1e3).toFixed(1) + 'K'), a: 'height:' + (trendInv[i] / tmax * 100).toFixed(1) + '%', b: 'height:' + (trendUn[i] / tmax * 100).toFixed(1) + '%', cur: i === mLbl.length - 1 ? 'cur' : '' })), tmax: 'USD ' + misK(tmax),
+      ctry: hc.rows.map((r) => ({ l: r.cells[0].t, v: 'USD ' + misK(r.cells[3].v), loss: r.cells[6].t, a: 'width:' + (r.cells[3].v / Math.max(1, ...hc.rows.map((x) => x.cells[1].v)) * 100).toFixed(1) + '%', b: 'width:' + (r.cells[5].v / Math.max(1, ...hc.rows.map((x) => x.cells[1].v)) * 100).toFixed(1) + '%', go: () => self.setState({ rep: 'ctry', insp: r.id, pg: 1, sel: {}, sort: null }) })),
+      att: att.map((c) => { const qk = quick[c.k]; return { big: c.big, t: c.unit, r: c.t, ic: c.ic, go: c.go, hasQ: !!qk, qL: qk ? qk[0] : '', q: qk ? () => { const Rk = DEF[c.k](D); const ids2 = Rk.rows.filter((r) => r.act && r.act[1] === qk[2] && !s.done[r.id]).map((r) => r.id); runAct(qk[1], ids2); } : () => {} }; }),
+      hasAtt: att.length > 0, noAtt: !att.length, attN: String(att.length),
+      secs: MIS_TREE.map((g) => ({ g: g.g, subs: g.subs.map((sb) => ({ t: sb.t, span: '--n:' + sb.items.length, cards: cards.filter((c) => sb.items.some((i) => i[0] === c.k)) })) }))
+    };
+    const sc = s.sched[REP];
+    const csv = (only) => { const body = [R.cols.map((c) => c[0])].concat((only ? rows.filter((r) => selIds.includes(r.id)) : rows).map((r) => r.cells.map((c) => c.t))).map((r) => r.map((v) => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+      try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + body], { type: 'text/csv' })); a.download = cur.t.replace(/[^A-Za-z0-9]+/g, '-') + '-' + s.mon + '.csv'; a.click(); } catch (e) {}
+      self.setState({ exp: false, __toast: cur.t + ' exported' + (only ? ' (' + selIds.length + ' rows)' : '') }); };
+    const badge = { lmsgirs: DEF.lmsgirs(D).kpis[2][1] + DEF.lmsgirs(D).kpis[3][1], uninv: Ku[3][1], gfs: Kg[0][1] - Kg[2][1], cn: DEF.cn(D).kpis[3][1], lmsdata: Kd[0][1] };
+    const navItem = (k, t) => ({ t, on: k === s.rep ? 'true' : 'false', go: () => openRep(k), hasB: !!badge[k], b: String(badge[k] || ''), bCls: 'mx-nb ' + (['gfs', 'cn', 'lmsdata'].includes(k) ? 'bad' : 'warn') });
+    const hr = new Date().getHours();
+    const sd = s.sdlg;
+    return {
+      isHome, isRep: !isHome, home, homeOn: isHome ? 'true' : 'false', goHome: () => openRep('home'),
+      greet: (hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ', ' + (typeof USER_NAME === 'string' ? USER_NAME.split(' ')[0] : 'Daniel'), period: D.label,
+      nav: MIS_TREE.map((g) => ({ g: g.g, subs: g.subs.map((sb) => ({ t: sb.t, items: sb.items.map(([k, t]) => navItem(k, t)) })) })),
+      crumb: cur.g + ' · ' + cur.sub, title: cur.t, desc: cur.d,
+      isFav: s.fav.includes(REP) ? 'true' : 'false', favL: s.fav.includes(REP) ? 'Remove from favourites' : 'Add to favourites',
+      togFav: () => { const f = s.fav.includes(REP) ? s.fav.filter((k) => k !== REP) : s.fav.concat(REP); try { localStorage.setItem('girs.mis.fav', JSON.stringify(f)); } catch (e) {} self.setState({ fav: f }); },
+      hasSched: !!sc, schedL: sc ? sc.freq + (sc.freq === 'Weekly' ? ' · ' + sc.day.slice(0, 3) : '') + ' ' + sc.time : '',
+      refreshL: 'Updated ' + s.refreshed.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }), refresh: () => self.setState({ refreshed: new Date(), __toast: 'Data refreshed' }),
+      months: months.map((d) => ({ k: misMKey(d), t: misMLbl(d) })), mon: s.mon, setMon: (e) => self.setState({ flt: null, mon: e.target.value, pg: 1, sel: {}, insp: null }),
+      locs: [{ k: 'all', t: 'All locations' }].concat(MIS_LOC.map(([p, c]) => ({ k: p, t: c + ' · ' + p.slice(2) }))), loc: s.loc, setLoc: (e) => self.setState({ flt: null, loc: e.target.value, pg: 1, sel: {}, insp: null }),
+      dirs: [['all', 'All'], ['E', 'Export'], ['I', 'Import']].map(([k, t]) => ({ t, on: s.dir === k ? 'true' : 'false', go: () => self.setState({ flt: null, dir: k, pg: 1, sel: {}, insp: null }) })),
+      cmp: s.cmp ? 'true' : 'false', togCmp: () => self.setState({ cmp: !s.cmp }),
+      kpis, prim, sec,
+      ins: R.ins.map(([t, tone, al, ak]) => ({ t, cls: 'mx-in ' + (tone || ''), hasA: !!al, al: al || '', run: typeof ak === 'function' ? ak : () => runAct(ak, ak === 'lmsAll' ? allIds('lms') : ak === 'fuAll' ? allIds('fu') : ak === 'retryAll' ? allIds('retry') : ak === 'syncAll' ? allIds('sync') : []) })),
+      cols: R.cols.map(([c, isNum], i) => ({ c, cls: 'mx-sh' + (isNum ? ' num' : ''), sort: !s.sort || s.sort[0] !== i ? 'none' : s.sort[1] > 0 ? 'ascending' : 'descending', ic: !s.sort || s.sort[0] !== i ? '↕' : s.sort[1] > 0 ? '↑' : '↓', go: () => self.setState({ sort: s.sort && s.sort[0] === i ? (s.sort[1] > 0 ? [i, -1] : null) : [i, 1] }) })),
+      rows: view.map((r) => { const a = rowAct(r); return { on: s.sel[r.id] ? 'true' : 'false', act: s.insp === r.id ? 'true' : 'false', tog: () => self.setState({ sel: Object.assign({}, s.sel, { [r.id]: !s.sel[r.id] }) }), lab: 'Select ' + r.cells[0].t,
+        open: (e) => { if (e && e.target && e.target.closest && e.target.closest('input,button')) return; self.setState({ insp: s.insp === r.id ? null : r.id }); },
+        cells: r.cells.map((c) => ({ t: c.t, cls: (c.num ? 'num mono' : '') + (c.mono ? ' mono' : '') + (c.cmpA ? ' mis-cmpa' : '') + (c.cmpB ? ' mis-cmpb' : ''), isChip: !!c.chip, chip: c.chip || '', isBar: c.bar != null, bar: 'width:' + (c.bar || 0).toFixed(1) + '%', isTxt: !c.chip && c.bar == null })),
+        hasA: !!a, aL: a ? a.l : '', aRun: a ? a.run : () => {}, aDis: a ? a.dis : true }; }),
+      allOn: view.length && view.every((r) => s.sel[r.id]) ? 'true' : 'false',
+      togAll: () => { const all = view.every((r) => s.sel[r.id]); const n = Object.assign({}, s.sel); view.forEach((r) => n[r.id] = !all); self.setState({ sel: n }); },
+      noSel: !selIds.length, hasSel: selIds.length > 0, selL: selIds.length + ' selected', nRows: misN(rows.length) + (rows.length === 1 ? ' row' : ' rows'),
+      hasBulk: selIds.length > 0 && !!bulkK, bulkL: { retry: 'Retry selected', lms: 'Raise LMS check', fu: 'Send follow-up', sync: 'Re-sync from LMS' }[bulkK] || '',
+      bulk: () => runAct(bulkK, selIds.filter((i) => R.rows.find((r) => r.id === i && r.act && r.act[1] === bulkK) && !s.done[i])), expSel: () => csv(true), clrSel: () => self.setState({ sel: {} }),
+      q: s.q, setQ: (e) => self.setState({ q: e.target.value, pg: 1 }),
+      noRows: !rows.length, emptyMsg: q ? 'Nothing matches “' + s.q + '”. Try another search.' : 'Nothing to report for ' + D.label + ' with these filters.',
+      foot: rows.length ? ((pg - 1) * s.psz + 1) + '–' + Math.min(pg * s.psz, rows.length) + ' of ' + misN(rows.length) : '0 rows',
+      pgL: pg + ' / ' + pages, prev: () => self.setState({ pg: Math.max(1, pg - 1) }), next: () => self.setState({ pg: Math.min(pages, pg + 1) }), prevDis: pg <= 1, nextDis: pg >= pages,
+      psz: String(s.psz), setPsz: (e) => self.setState({ psz: +e.target.value, pg: 1 }),
+      hasFlt: !!flt, fltL: flt ? flt.l : '', clrFlt: () => setF(null), canAtt, attSeg: [['att', 'Needs action · ' + attN], ['all', 'All · ' + R.rows.length]].map(([k, t]) => ({ t, on: (k === 'att') === onlyAtt ? 'true' : 'false', go: () => self.setState({ onlyAtt: k === 'att', pg: 1, sel: {}, insp: null }) })), noAttSeg: !canAtt, insp, hasInsp: insp.on, noInsp: !insp.on, guide: MIS_GUIDE[REP], wrapCls: 'mx-work' + (insp.on ? ' with-insp' : ''),
+      exp: s.exp ? 'true' : 'false', expOn: s.exp, togExp: () => self.setState({ exp: !s.exp }), closeExp: () => self.setState({ exp: false }), csv: () => csv(false),
+      pdf: () => { self.setState({ exp: false }); setTimeout(() => { try { window.print(); } catch (e) {} }, 60); },
+      share: () => { try { navigator.clipboard.writeText(location.origin + location.pathname + '?r=' + REP); } catch (e) {} toast('Link to this report copied'); },
+      openSched: () => self.setState({ sdlg: Object.assign({ freq: 'Weekly', day: 'Monday', time: '08:00', to: 'billing.sin@pilship.com', fmt: 'Excel', err: '' }, sc || {}), exp: false }),
+      sOn: !!sd, sd: sd || {}, sFreqs: ['Daily', 'Weekly', 'Monthly'].map((f) => ({ t: f, on: sd && sd.freq === f ? 'true' : 'false', go: () => self.setState({ sdlg: Object.assign({}, sd, { freq: f }) }) })),
+      sWeekly: !!sd && sd.freq === 'Weekly', sDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((d) => ({ k: d, t: d })),
+      sFmts: ['Excel', 'CSV', 'PDF'].map((f) => ({ t: f, on: sd && sd.fmt === f ? 'true' : 'false', go: () => self.setState({ sdlg: Object.assign({}, sd, { fmt: f }) }) })),
+      sSetDay: (e) => self.setState({ sdlg: Object.assign({}, sd, { day: e.target.value }) }), sSetTime: (e) => self.setState({ sdlg: Object.assign({}, sd, { time: e.target.value }) }), sSetTo: (e) => self.setState({ sdlg: Object.assign({}, sd, { to: e.target.value, err: '' }) }),
+      sHasErr: !!(sd && sd.err), sClose: () => self.setState({ sdlg: null }),
+      sSave: () => { if (!/^[^\s@]+@[^\s@]+\.[^\s@]+(\s*[,;]\s*[^\s@]+@[^\s@]+\.[^\s@]+)*$/.test((sd.to || '').trim())) return self.setState({ sdlg: Object.assign({}, sd, { err: 'Enter one or more e-mail addresses, separated by commas' }) });
+        const n = Object.assign({}, s.sched, { [REP]: { freq: sd.freq, day: sd.day, time: sd.time, to: sd.to, fmt: sd.fmt } }); try { localStorage.setItem('girs.mis.sched', JSON.stringify(n)); } catch (e) {}
+        self.setState({ sched: n, sdlg: null, __toast: cur.t + ' scheduled · ' + sd.freq.toLowerCase() + ' to ' + pl(sd.to.split(/[,;]/).length, 'recipient', 'recipients') }); },
+      sRemove: () => { const n = Object.assign({}, s.sched); delete n[REP]; try { localStorage.setItem('girs.mis.sched', JSON.stringify(n)); } catch (e) {} self.setState({ sched: n, sdlg: null, __toast: 'Schedule removed' }); }, sHasOld: !!sc
+    };
+  }
+}
+const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
+const GIRS_LANGS = [['en', 'English', 'English'], ['zh', '中文（简体）', 'Chinese (Simplified)'], ['ar', 'العربية', 'Arabic'], ['es', 'Español', 'Spanish']];
+const LOGINS = [{ role: 'Billing Executive', agency: 'Singapore · SIN', code: 'SIN' }, { role: 'Team Lead', agency: 'Malaysia · PKG', code: 'PKG' }];
+class Component extends GirsPage {
+  constructor(p) {
+    super(p);
+    let sb = false, th = 'light', hub = 'SIN', ent = 'PIL', lang = 'en';
+    try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; lang = localStorage.getItem('girs.lang') || 'en'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
+    let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
+    const narrow = false;
+    const fit = () => { try { const z = Math.max(0.1, window.innerWidth / 1920); return { z, h: window.innerHeight / z }; } catch (e) { return { z: 1, h: 1080 }; } };
+    const f0 = fit();
+    try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
+    try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __lang: lang, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g3' });
+  }
+  renderVals() {
+    const v = super.renderVals();
+    const s = this.state;
+    const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
+    const L = Object.assign({}, {"nHome": "Home", "nVoy": "Voyage Invoicing", "g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nInvoiceList": "Invoice List", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nCreditNoteList": "Credit Note List", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCompanyMaster": "Company Master", "nCompanyBranchMaster": "Company Branch Master", "nCustomerMaster": "Customer Master", "nCustomerBranchMaster": "Customer Branch Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master", "nAccountingConfig": "Accounting Configuration", "nBankMaster": "Bank Master"}, v.navT || {});
+    const c = s.__sb && !s.__narrow;
+    return Object.assign({}, v, { shell: {
+      kit: (typeof KIT_VALS === 'function' ? KIT_VALS(this, s, v) : null),
+      theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
+      drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
+      toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
+      sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '', grp: c ? 'justify-content:center;padding:0' : '',
+      logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
+      logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
+      sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
+      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, c ? s.__fly === g : s.__acc === g])),
+      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? 'true' : 'false'])),
+      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? '180deg' : '0deg'])),
+      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (e) => { if (c) { const t = e && e.currentTarget ? Math.round(e.currentTarget.getBoundingClientRect().top) : 0; this.setState({ __fly: s.__fly === g ? '' : g, __flyT: t }); } else this.setState({ __acc: s.__acc === g ? '' : g }); }])),
+      toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c, __fly: '' }); },
+      // collapsed menu: a section icon opens its pages in a flyout beside the rail
+      cA: c ? 'true' : 'false', flyOn: !!c && !!s.__fly, flyClose: () => this.setState({ __fly: '' }), subCls: c ? 'ng-fly' : '',
+      subSt: c ? 'top:' + (s.__flyT || 0) + 'px;max-height:calc(100vh - ' + ((s.__flyT || 0) + 16) + 'px)' : '',
+      lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
+      lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
+      setLight: () => { save('girs.th', 'light'); this.setState({ __th: 'light' }); },
+      setDark: () => { save('girs.th', 'dark'); this.setState({ __th: 'dark' }); },
+      hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
+      ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
+      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
+      pending: 10, health: (typeof GIRS_HEALTH === 'function' ? GIRS_HEALTH(this, s) : { items: [], cls: 'btn btn-icon', n: '', hasN: false, open: false, aria: 'false', label: 'System health', sum: '', toggle: () => {}, close: () => {} }), l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
+      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um, __lgo: false, __lgq: '' }), closeUm: () => this.setState({ __um: false, __lgo: false, __lgq: '' }),
+      logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
+        pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
+      menuMain: !s.__lgo, langOpen: !!s.__lgo, lgQ: s.__lgq || '', setLgQ: (e) => this.setState({ __lgq: e.target.value }),
+      toggleLang: () => { this.setState({ __lgo: !s.__lgo, __lgq: '' }); if (!s.__lgo) setTimeout(() => { const i = document.querySelector('.lg-q'); if (i) i.focus(); }, 30); },
+      langName: (GIRS_LANGS.find((x) => x[0] === s.__lang) || GIRS_LANGS[0])[1],
+      lgNone: !GIRS_LANGS.some(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())),
+      langs: GIRS_LANGS.filter(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())).map(([code, label, en]) => ({ code, label, en, on: s.__lang === code ? 'true' : 'false', mark: s.__lang === code ? '✓' : '',
+        pick: () => { if (code === s.__lang) return this.setState({ __lgo: false, __um: false }); save('girs.lang', code); location.reload(); } })),
+      userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
+      exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
+      hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
+      signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
+    } });
+  }
+}
+
+</script>
+<script src="girs-dates.js"></script>
+<script src="girs-cn.js"></script>
+<script src="runtime.js"></script>
+<script src="girs-search.js"></script>
+<script src="girs-ui.js"></script>
+<script src="girs-i18n.js"></script>
+</body>
+</html>
