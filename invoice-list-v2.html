@@ -355,6 +355,32 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .cn-facts{list-style:none;margin:0;padding:10px 14px;border-radius:8px;background:var(--sub);display:flex;flex-direction:column;gap:4px;font-size:12.5px}.cn-facts li{display:flex;gap:10px}.cn-facts span{width:120px;flex:none;color:var(--muted)}.cn-facts b{font-weight:500}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .cnc{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px}.cnc-no{font-size:13px;text-decoration:none;white-space:nowrap}.cnc-no:hover{text-decoration:underline}
+
+.icd-scrim{position:fixed;inset:0;background:rgba(15,23,42,.32);z-index:80}
+.icd{position:fixed;top:0;right:0;bottom:0;z-index:81;width:min(640px,100vw);background:var(--surface);box-shadow:-8px 0 24px rgba(15,23,42,.16);display:flex;flex-direction:column}
+.icd-h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.icd-k{font-size:12px;color:var(--muted)}.icd-h h2{margin:2px 0 8px;font-size:18px;font-weight:600}
+.icd-tags{display:flex;gap:6px}
+.icd-b{flex:1 1 auto;overflow:auto;padding:16px 20px 24px;display:flex;flex-direction:column;gap:20px}
+.icd-exc{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:8px;background:var(--badbg);color:var(--bad);font-size:13px}.icd-exc span{color:var(--ink);line-height:18px}
+.icd-kv{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin:0}
+.icd-kv dt{font-size:12px;color:var(--muted);margin-bottom:2px}.icd-kv dd{margin:0;font-size:13.5px;word-break:break-word}.icd-kv dd.mono{font-family:var(--mono, monospace)}.icd-kv dd.strong{font-weight:600}.icd-kv dd.mu{color:var(--muted)}
+.icd-s h3{margin:0 0 10px;font-size:13px;font-weight:600}
+.icd-fl{list-style:none;margin:0;padding:0}
+.icd-fl li{position:relative;display:flex;gap:12px;padding-bottom:12px}.icd-fl li:last-child{padding-bottom:0}
+.icd-fl li::before{content:'';position:absolute;left:9px;top:22px;bottom:2px;width:2px;background:var(--line)}.icd-fl li:last-child::before{display:none}
+.icd-dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--bd);background:var(--surface);box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.icd-done .icd-dot{background:var(--okdot, var(--ok));border-color:var(--okdot, var(--ok))}.icd-fail .icd-dot{background:var(--bad);border-color:var(--bad)}.icd-now .icd-dot{border-color:var(--accent);color:var(--accent)}
+.icd-fl b{display:block;font-size:13px;font-weight:500}.icd-fl small{font-size:12px;color:var(--muted)}.icd-wait b{color:var(--muted2)}.icd-fail small{color:var(--bad)}
+.icd-t{width:100%;border-collapse:collapse;font-size:12.5px}.icd-t th{text-align:left;font-weight:500;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line);background:var(--sub)}
+.icd-t td{padding:7px 8px;border-bottom:1px solid var(--line2);vertical-align:top}.icd-t td small{display:block;font-size:11.5px;color:var(--muted)}.icd-t .num{text-align:right}
+.icd-t tfoot td{border-bottom:0;background:var(--sub)}.icd-gt{font-weight:600;color:var(--accent2)}
+.icd-ap{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px}
+.icd-ap b{display:block;font-size:13px;font-weight:500}.icd-ap small{font-size:12px;color:var(--muted)}.icd-apr{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.icd-ap p{grid-column:1 / -1;margin:4px 0 0;font-size:12.5px;color:var(--muted2)}
+.icd-rm{margin:0;font-size:13px;line-height:19px}
+.icd-f{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;border-top:1px solid var(--line)}.icd-f a{text-decoration:none}
+button.cnc-no{all:unset;cursor:pointer;color:var(--accent);font-family:var(--mono, monospace);font-size:13px;white-space:nowrap}button.cnc-no:hover{text-decoration:underline}button.cnc-no:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -697,7 +723,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <section class="card" style="flex: 1 1 auto; min-height: 0; overflow: auto">
             <table class="lst">
               <thead style="position: sticky; top: 0; z-index: 2"><tr><th class="c-sel"><input type="checkbox" class="cbx" aria-label="Select all invoices" checked="{{allOn}}" onChange="{{toggleAll}}"></th><th class="c-no">Invoice No.</th><sc-if value="{{cv.st2}}" hint-placeholder-val="{{ true }}"><th>Invoice Status</th></sc-if><sc-if value="{{cv.einv}}" hint-placeholder-val="{{ true }}"><th>e-Invoice</th></sc-if><sc-if value="{{cv.gfs}}" hint-placeholder-val="{{ true }}"><th>GFS Status</th></sc-if><sc-if value="{{cv.pay}}" hint-placeholder-val="{{ true }}"><th>Payment Status</th></sc-if><sc-if value="{{cv.cnst}}" hint-placeholder-val="{{ true }}"><th>Credit Note Status</th></sc-if><sc-if value="{{cv.cnno}}" hint-placeholder-val="{{ true }}"><th>Credit Note No.</th></sc-if><sc-if value="{{cv.party}}" hint-placeholder-val="{{ true }}"><th>Customer (Billing Party)</th></sc-if><sc-if value="{{cv.cust}}" hint-placeholder-val="{{ true }}"><th>Customer Code</th></sc-if><sc-if value="{{cv.type}}" hint-placeholder-val="{{ true }}"><th>Invoice Type</th></sc-if><sc-if value="{{cv.bkg}}" hint-placeholder-val="{{ true }}"><th>Booking No.</th></sc-if><sc-if value="{{cv.bl}}" hint-placeholder-val="{{ true }}"><th>B/L No.</th></sc-if><sc-if value="{{cv.cntr}}" hint-placeholder-val="{{ true }}"><th>Container No.</th></sc-if><sc-if value="{{cv.vvd}}" hint-placeholder-val="{{ true }}"><th>Vessel/Voyage</th></sc-if><sc-if value="{{cv.chg}}" hint-placeholder-val="{{ true }}"><th>Charge Code</th></sc-if><sc-if value="{{cv.camt}}" hint-placeholder-val="{{ true }}"><th class="num">Charge Amount</th></sc-if><sc-if value="{{cv.amt}}" hint-placeholder-val="{{ true }}"><th class="num">Invoice Amount</th></sc-if><sc-if value="{{cv.cur}}" hint-placeholder-val="{{ true }}"><th>Currency</th></sc-if><sc-if value="{{cv.roe}}" hint-placeholder-val="{{ true }}"><th>ROE</th></sc-if><sc-if value="{{cv.tax}}" hint-placeholder-val="{{ true }}"><th>Tax Code</th></sc-if><sc-if value="{{cv.due}}" hint-placeholder-val="{{ true }}"><th>Due Date</th></sc-if><sc-if value="{{cv.gov}}" hint-placeholder-val="{{ true }}"><th>Govt. Reference</th></sc-if><sc-if value="{{cv.files}}" hint-placeholder-val="{{ true }}"><th>PDF/JSON Link</th></sc-if><sc-if value="{{cv.audit}}" hint-placeholder-val="{{ true }}"><th>Audit ID</th></sc-if><th class="c-act" style="width: 72px">Action</th></tr></thead>
-              <tbody><sc-for list="{{invs}}" as="i" hint-placeholder-count="9"><tr class="grp {{i.rowCls}}"><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select {{i.no}}" checked="{{i.on}}" onChange="{{i.toggle}}"></td><td class="c-no"><button class="lnk mono" onClick="{{i.details}}">{{i.no}}</button></td><sc-if value="{{cv.st2}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.st2Pill}}">{{i.st2}}</span></td></sc-if><sc-if value="{{cv.einv}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.einvPill}}">{{i.einv}}</span></td></sc-if><sc-if value="{{cv.gfs}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.gfsPill}}">{{i.gfs}}</span></td></sc-if><sc-if value="{{cv.pay}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.payPill}}">{{i.pay}}</span></td></sc-if><sc-if value="{{cv.cnst}}" hint-placeholder-val="{{ true }}"><td><sc-if value="{{i.cnHas}}" hint-placeholder-val="{{ false }}"><span class="chip" style="{{i.cnPill}}">{{i.cnSt}}</span></sc-if><sc-if value="{{i.cnNone}}" hint-placeholder-val="{{ true }}"><span class="mu">—</span></sc-if></td></sc-if><sc-if value="{{cv.cnno}}" hint-placeholder-val="{{ true }}"><td><sc-if value="{{i.cnHasNo}}" hint-placeholder-val="{{ false }}"><a class="lnk mono cnc-no" href="{{i.cnHref}}">{{i.cnNo}}</a></sc-if><sc-if value="{{i.cnNoNone}}" hint-placeholder-val="{{ true }}"><span class="mu">—</span></sc-if></td></sc-if><sc-if value="{{cv.party}}" hint-placeholder-val="{{ true }}"><td>{{i.party}}</td></sc-if><sc-if value="{{cv.cust}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.cust}}</td></sc-if><sc-if value="{{cv.type}}" hint-placeholder-val="{{ true }}"><td>{{i.type}}</td></sc-if><sc-if value="{{cv.bkg}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.bkg}}</td></sc-if><sc-if value="{{cv.bl}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.bl}}</td></sc-if><sc-if value="{{cv.cntr}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.cntr}}</td></sc-if><sc-if value="{{cv.vvd}}" hint-placeholder-val="{{ true }}"><td>{{i.vvd}}</td></sc-if><sc-if value="{{cv.chg}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.chg}}</td></sc-if><sc-if value="{{cv.camt}}" hint-placeholder-val="{{ true }}"><td class="mono num"><span class="stack"><sc-for list="{{i.amts}}" as="a" hint-placeholder-count="1"><span>{{a.v}} {{a.c}}</span></sc-for></span></td></sc-if><sc-if value="{{cv.amt}}" hint-placeholder-val="{{ true }}"><td class="mono num" style="font-weight: 600">{{i.amtMain}}</td></sc-if><sc-if value="{{cv.cur}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.curMain}}</td></sc-if><sc-if value="{{cv.roe}}" hint-placeholder-val="{{ true }}"><td class="mono" style="{{i.roeSt}}">{{i.roe}}</td></sc-if><sc-if value="{{cv.tax}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.tax}}</td></sc-if><sc-if value="{{cv.due}}" hint-placeholder-val="{{ true }}"><td style="{{i.dueSt}}">{{i.due}}</td></sc-if><sc-if value="{{cv.gov}}" hint-placeholder-val="{{ true }}"><td class="mono" style="{{i.govSt}}">{{i.gov}}</td></sc-if><sc-if value="{{cv.files}}" hint-placeholder-val="{{ true }}"><td><sc-if value="{{i.hasPdf}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{i.pdf}}">PDF</button></sc-if><sc-if value="{{i.hasJson}}" hint-placeholder-val="{{ true }}"><span class="mu" style="padding: 0 6px">·</span><button class="lnk" onClick="{{i.json}}">JSON</button></sc-if><sc-if value="{{i.noFile}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if></td></sc-if><sc-if value="{{cv.audit}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.audit}}</td></sc-if><td class="c-act"><button class="dots" aria-label="Actions for {{i.no}}" aria-haspopup="menu" aria-expanded="{{i.menuOpen}}" onClick="{{i.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></td></tr></sc-for></tbody>
+              <tbody><sc-for list="{{invs}}" as="i" hint-placeholder-count="9"><tr class="grp {{i.rowCls}}"><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select {{i.no}}" checked="{{i.on}}" onChange="{{i.toggle}}"></td><td class="c-no"><button class="lnk mono" onClick="{{i.details}}">{{i.no}}</button></td><sc-if value="{{cv.st2}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.st2Pill}}">{{i.st2}}</span></td></sc-if><sc-if value="{{cv.einv}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.einvPill}}">{{i.einv}}</span></td></sc-if><sc-if value="{{cv.gfs}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.gfsPill}}">{{i.gfs}}</span></td></sc-if><sc-if value="{{cv.pay}}" hint-placeholder-val="{{ true }}"><td><span class="chip" style="{{i.payPill}}">{{i.pay}}</span></td></sc-if><sc-if value="{{cv.cnst}}" hint-placeholder-val="{{ true }}"><td><sc-if value="{{i.cnHas}}" hint-placeholder-val="{{ false }}"><span class="chip" style="{{i.cnPill}}">{{i.cnSt}}</span></sc-if><sc-if value="{{i.cnNone}}" hint-placeholder-val="{{ true }}"><span class="mu">—</span></sc-if></td></sc-if><sc-if value="{{cv.cnno}}" hint-placeholder-val="{{ true }}"><td><sc-if value="{{i.cnHasNo}}" hint-placeholder-val="{{ false }}"><button class="lnk mono cnc-no" onClick="{{i.cnOpen}}" aria-haspopup="dialog">{{i.cnNo}}</button></sc-if><sc-if value="{{i.cnNoNone}}" hint-placeholder-val="{{ true }}"><span class="mu">—</span></sc-if></td></sc-if><sc-if value="{{cv.party}}" hint-placeholder-val="{{ true }}"><td>{{i.party}}</td></sc-if><sc-if value="{{cv.cust}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.cust}}</td></sc-if><sc-if value="{{cv.type}}" hint-placeholder-val="{{ true }}"><td>{{i.type}}</td></sc-if><sc-if value="{{cv.bkg}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.bkg}}</td></sc-if><sc-if value="{{cv.bl}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.bl}}</td></sc-if><sc-if value="{{cv.cntr}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.cntr}}</td></sc-if><sc-if value="{{cv.vvd}}" hint-placeholder-val="{{ true }}"><td>{{i.vvd}}</td></sc-if><sc-if value="{{cv.chg}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.chg}}</td></sc-if><sc-if value="{{cv.camt}}" hint-placeholder-val="{{ true }}"><td class="mono num"><span class="stack"><sc-for list="{{i.amts}}" as="a" hint-placeholder-count="1"><span>{{a.v}} {{a.c}}</span></sc-for></span></td></sc-if><sc-if value="{{cv.amt}}" hint-placeholder-val="{{ true }}"><td class="mono num" style="font-weight: 600">{{i.amtMain}}</td></sc-if><sc-if value="{{cv.cur}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.curMain}}</td></sc-if><sc-if value="{{cv.roe}}" hint-placeholder-val="{{ true }}"><td class="mono" style="{{i.roeSt}}">{{i.roe}}</td></sc-if><sc-if value="{{cv.tax}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.tax}}</td></sc-if><sc-if value="{{cv.due}}" hint-placeholder-val="{{ true }}"><td style="{{i.dueSt}}">{{i.due}}</td></sc-if><sc-if value="{{cv.gov}}" hint-placeholder-val="{{ true }}"><td class="mono" style="{{i.govSt}}">{{i.gov}}</td></sc-if><sc-if value="{{cv.files}}" hint-placeholder-val="{{ true }}"><td><sc-if value="{{i.hasPdf}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{i.pdf}}">PDF</button></sc-if><sc-if value="{{i.hasJson}}" hint-placeholder-val="{{ true }}"><span class="mu" style="padding: 0 6px">·</span><button class="lnk" onClick="{{i.json}}">JSON</button></sc-if><sc-if value="{{i.noFile}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if></td></sc-if><sc-if value="{{cv.audit}}" hint-placeholder-val="{{ true }}"><td class="mono">{{i.audit}}</td></sc-if><td class="c-act"><button class="dots" aria-label="Actions for {{i.no}}" aria-haspopup="menu" aria-expanded="{{i.menuOpen}}" onClick="{{i.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></td></tr></sc-for></tbody>
             </table>
             <sc-if value="{{invEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No invoices match these filters</div></sc-if>
           </section>
@@ -872,6 +898,44 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           </div>
         </sc-if>
       </main>
+      <sc-if value="{{cd.on}}" hint-placeholder-val="{{ false }}">
+        <div class="icd-scrim" onClick="{{cd.close}}" aria-hidden="true"></div>
+        <aside class="icd" role="dialog" aria-modal="true" aria-labelledby="icd-h">
+          <header class="icd-h">
+            <div class="icd-ht">
+              <span class="icd-k">Credit note</span>
+              <h2 id="icd-h" class="mono">{{cd.no}}</h2>
+              <div class="icd-tags"><span class="chip" style="{{cd.stPill}}">{{cd.st}}</span><span class="chip" style="background: var(--neutral); color: var(--muted2)">{{cd.src}}</span></div>
+            </div>
+            <button class="btn btn-icon btn-sm" onClick="{{cd.close}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </header>
+          <div class="icd-b">
+            <sc-if value="{{cd.hasExc}}" hint-placeholder-val="{{ false }}"><div class="icd-exc" role="alert"><b>Needs action</b><span>{{cd.exc}}</span></div></sc-if>
+            <dl class="icd-kv"><sc-for list="{{cd.kv}}" as="x" hint-placeholder-count="8"><div><dt>{{x.l}}</dt><dd class="{{x.cls}}">{{x.v}}</dd></div></sc-for></dl>
+
+            <section class="icd-s"><h3>Progress</h3>
+              <ol class="icd-fl"><sc-for list="{{cd.flow}}" as="f" hint-placeholder-count="5"><li class="{{f.cls}}"><span class="icd-dot" aria-hidden="true">{{f.mk}}</span><div><b>{{f.t}}</b><small>{{f.d}}</small></div></li></sc-for></ol>
+            </section>
+
+            <section class="icd-s"><h3>Credit lines</h3>
+              <table class="icd-t"><thead><tr><th>Charge</th><th>Currency</th><th class="num">Amount</th><th>Tax</th><th class="num">Tax reversed</th><th class="num">Total</th></tr></thead>
+                <tbody><sc-for list="{{cd.lines}}" as="l" hint-placeholder-count="2"><tr><td><span class="mono">{{l.code}}</span><small>{{l.name}}</small></td><td>{{l.cur}}</td><td class="num mono">{{l.amt}}</td><td><span class="mono">{{l.tax}}</span><small>{{l.rate}}</small></td><td class="num mono">{{l.tr}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
+                <tfoot><sc-for list="{{cd.tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="2"><b>Total</b> <span class="mu">· {{t.cur}}</span></td><td class="num mono">{{t.a}}</td><td></td><td class="num mono">{{t.t}}</td><td class="num mono icd-gt">{{t.cur}} {{t.g}}</td></tr></sc-for></tfoot>
+              </table>
+            </section>
+
+            <sc-if value="{{cd.hasAppr}}" hint-placeholder-val="{{ false }}">
+              <section class="icd-s"><h3>Approval</h3>
+                <sc-for list="{{cd.appr}}" as="a" hint-placeholder-count="2"><div class="icd-ap"><div><b>{{a.lvl}}</b><small>{{a.who}}</small></div><div class="icd-apr"><span class="chip" style="{{a.pill}}">{{a.st}}</span><small>{{a.when}}</small></div><sc-if value="{{a.hasNote}}" hint-placeholder-val="{{ false }}"><p>“{{a.note}}”</p></sc-if></div></sc-for>
+              </section>
+            </sc-if>
+
+            <sc-if value="{{cd.hasRemark}}" hint-placeholder-val="{{ false }}"><section class="icd-s"><h3>Remarks</h3><p class="icd-rm">{{cd.remark}}</p></section></sc-if>
+          </div>
+          <footer class="icd-f"><a class="btn" href="{{cd.href}}">Open in Credit Note List</a></footer>
+        </aside>
+      </sc-if>
+
     </div>
   </div>
 
@@ -953,14 +1017,10 @@ const IV_CN_SEED = [['SINOF2600341CR', 'SINOF2602298', 'Generated'], ['SINOD2600
   ['NSAOF2600071CR', 'NSAOF2601044', 'Generated'], ['SINOF2600329CR', 'SINOF2602405', 'Generated'], ['SINOF2600324CR', 'SINOF2602401', 'Pending approval'], ['LCHOD2600012CR', 'LCHOD2600198', 'Rejected'], ['NSAOF2600078CR', 'NSAOF2601051', 'Draft']];
 const IV_CN_LBL = { 'Generated': 'Generated · posted', 'Exception': 'Needs action', 'Pending approval': 'Pending approval', 'Rejected': 'Rejected', 'Draft': 'Draft' };
 const IV_CN_PILL = { 'Generated': 'background:var(--okbg);color:var(--ok)', 'Exception': 'background:var(--badbg);color:var(--bad)', 'Pending approval': 'background:var(--warnbg);color:var(--warn)', 'Rejected': 'background:var(--neutral);color:var(--bad)', 'Draft': 'background:var(--neutral);color:var(--muted)' };
-function ivCnMap(storeCn) {
+function ivCnMap(storeCn, all) {
   const m = {};
-  let raised = [], local = {};
-  try { raised = JSON.parse(localStorage.getItem('girs.cn.v1') || '[]') || []; } catch (e) {}
-  try { local = JSON.parse(localStorage.getItem('girs.cnl.v2') || '{}') || {}; } catch (e) {}
-  IV_CN_SEED.forEach(([no, orig, st]) => { m[orig] = { no, st }; });
-  (storeCn || []).concat(raised).forEach((c) => { if (c && c.orig && c.no) m[c.orig] = { no: c.no, st: c.appr === 'Approved' ? 'Generated' : (c.appr || 'Pending approval') }; });
-  Object.keys(m).forEach((k) => { const o = local[m[k].no]; if (o && o.status) m[k].st = o.status; });
+  (storeCn || []).forEach((c) => { if (c && c.orig && c.no) m[c.orig] = { no: c.no, st: c.appr === 'Approved' ? 'Generated' : (c.appr || 'Pending approval') }; });
+  (all || []).slice().reverse().forEach((r) => { m[r.orig] = { no: r.no, st: r.status }; });
   return m;
 }
 const IV_ALL = IV_SEED.concat(ivGen(491));
@@ -1119,6 +1179,7 @@ class GirsPage extends DCLogic {
     if (rvOk) tab = 'ready';
     this.state = { tab, view: rvOk ? 'review' : 'list', rv: rvOk ? { ids: [rvId], i: 0 } : null, q, fd: null, fo: [], fpt: [], fs: [], fe: [], fg: [], fp: [], ft: [], fc: [], fopen: null, sel: {}, exp: {}, menu: null, dlg: null, f: {}, cols: ivColsLoad(), colsOpen: false, colsDraft: null,
       period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
+    try { document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && this.state.cnOpen) this.setState({ cnOpen: '' }); }); } catch (e) {}
   }
   componentDidMount() { if (this.__open) { const i = this.invoices().find((x) => x.no === this.__open); if (i) setTimeout(() => ivView(i), 50); } }
   put(mut, extra) { const d = JSON.parse(JSON.stringify(this.state.store)); mut(d); ivSave(d); if (typeof extra === 'function') extra = extra(); this.setState(Object.assign({ store: d }, extra || {})); if (extra && extra.__toast) this.fade(extra.__toast); }
@@ -1170,7 +1231,8 @@ class GirsPage extends DCLogic {
     const sorter = { new: (a, b) => dt(b.date) - dt(a.date), due: (a, b) => dt(a.due) - dt(b.due), amt: (a, b) => b.lines.reduce((x, l) => x + toUsd(l), 0) - a.lines.reduce((x, l) => x + toUsd(l), 0), no: (a, b) => a.no < b.no ? -1 : 1 }[s.sort] || (() => 0);
     const colsSave = (arr) => { const v = IV_COLS.map((c) => c[0]).filter((k) => arr.includes(k)); try { localStorage.setItem('girs.inv.cols', JSON.stringify(v)); } catch (e) {} return v; };
     const cv = {}; IV_COLS.forEach(([k]) => { cv[k] = s.cols.includes(k); });
-    const CNM = ivCnMap(s.store.cn);
+    const CNALL = window.GirsCN ? window.GirsCN.all() : [];
+    const CNM = ivCnMap(s.store.cn, CNALL);
     const dr = s.colsDraft || s.cols, cdv = {}; IV_COLS.forEach(([k]) => { cdv[k] = dr.includes(k); });
     const colsSet = (arr) => self.setState({ colsDraft: arr });
     const colsAll = IV_COLS.every(([k]) => cdv[k]);
@@ -1232,7 +1294,7 @@ class GirsPage extends DCLogic {
       return Object.assign({}, i, {
         cnHas: !!CNM[i.no] || i.status === 'Credited', cnNone: !CNM[i.no] && i.status !== 'Credited',
         cnSt: CNM[i.no] ? IV_CN_LBL[CNM[i.no].st] || CNM[i.no].st : 'Generated · posted', cnPill: IV_CN_PILL[CNM[i.no] ? CNM[i.no].st : 'Generated'] || IV_CN_PILL.Draft,
-        cnNo: CNM[i.no] ? CNM[i.no].no : '', cnHasNo: !!CNM[i.no], cnNoNone: !CNM[i.no], cnHref: 'credit-note-list.html?q=' + (CNM[i.no] ? CNM[i.no].no : i.no),
+        cnNo: CNM[i.no] ? CNM[i.no].no : '', cnHasNo: !!CNM[i.no], cnNoNone: !CNM[i.no], cnOpen: () => self.setState({ cnOpen: CNM[i.no] ? CNM[i.no].no : '', menu: null }),
         payPill: ivPayPill(i.pay), st2: i.st2, st2Pill: ivChip2(i.st2), einv: i.einv, einvPill: ivChip2(i.einv), gfs: i.gfs, gfsPill: ivChip2(i.gfs), amtMain: ivFmt(ivMain(i)), curMain: i.lines[0][2], on: !!s.sel[i.no], rowCls: s.sel[i.no] ? 'on' : '', open: !!s.exp[i.no],
         toggle: () => self.setState({ sel: Object.assign({}, s.sel, { [i.no]: !s.sel[i.no] }) }),
         expand: () => self.setState({ exp: Object.assign({}, s.exp, { [i.no]: !s.exp[i.no] }) }),
@@ -1262,7 +1324,7 @@ class GirsPage extends DCLogic {
       return [
         it('View invoice', close(() => ivView(i, toast)), i.files === '—', 'The invoice is created after validation'),
         it('View invoice details', () => self.dlg('details', i)),
-        it('View credit note', () => { if (CNM[i.no]) { location.href = 'credit-note-list.html?q=' + CNM[i.no].no; } else self.dlg('cnv', i); }, !hasCn, 'No credit note for this invoice'),
+        it('View credit note', () => { if (CNM[i.no]) self.setState({ cnOpen: CNM[i.no].no, menu: null }); else self.dlg('cnv', i); }, !hasCn, 'No credit note for this invoice'),
         it('View SOA', () => self.dlg('soa', i)),
         it('Download PDF / JSON', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
@@ -1416,6 +1478,33 @@ class GirsPage extends DCLogic {
         totals: [['Total excluding Tax', ivFmt(c.ex) + ' ' + c.cur, ''], ['Tax Amount', ivFmt(c.tx) + ' ' + c.cur, ''], ['Invoice Total', ivFmt(c.inc) + ' ' + c.cur, 'g']].map(([k, v, cls]) => ({ k, v, cls })) };
       rvGenDis = errs.length > 0 || !s.decl;
       rvHint = errs.length ? 'Resolve the errors to enable Generate invoice' : (!s.decl ? 'Tick the declaration to generate' : '');
+    }
+    // ---------------- credit note slider
+    let cd = { on: false };
+    const cr = s.cnOpen && CNALL.find((x) => x.no === s.cnOpen);
+    if (cr) {
+      const f2 = (v) => (+v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const by = {};
+      const lines = (cr.lines || []).map((l) => { const a = +l[2] || 0, t = a * (+l[4] || 0) / 100; const b = by[l[5]] || (by[l[5]] = { a: 0, t: 0 }); b.a += a; b.t += t;
+        return { code: l[0], name: l[1], cur: l[5], amt: f2(a), tax: l[3], rate: (+l[4] || 0) + '%', tr: f2(t), tot: f2(a + t) }; });
+      const tots = Object.keys(by).map((c) => ({ cur: c, a: f2(by[c].a), t: f2(by[c].t), g: f2(by[c].a + by[c].t) }));
+      const KV = [['Original invoice', cr.orig, 'mono'], ['Billing party', cr.party], ['Reason', cr.reason],
+        cr.ref ? [cr.reason === 'DAR waiver' ? 'DAR reference' : 'FCA reference', cr.ref, 'mono'] : null,
+        cr.file ? ['Supporting document', cr.file] : null,
+        ['Credit total (incl. tax)', tots.map((t) => t.cur + ' ' + t.g).join(' + ') || '—', 'strong'],
+        ['Date', cr.date || '—'], ['Raised by', cr.by || '—'],
+        ['GFS posting', cr.gfs || '—', cr.gfs ? 'mono' : 'mu'], ['Replacement invoice', cr.repl || '—', cr.repl ? 'mono' : 'mu']].filter(Boolean);
+      const AP = { Approved: 'background:var(--okbg);color:var(--ok)', Pending: 'background:var(--warnbg);color:var(--warn)', Rejected: 'background:var(--badbg);color:var(--bad)' };
+      cd = { on: true, no: cr.no, st: IV_CN_LBL[cr.status] || cr.status, stPill: IV_CN_PILL[cr.status] || IV_CN_PILL.Draft, src: cr.src === 'Auto' ? 'Automatic' : 'Manual',
+        hasExc: cr.status === 'Exception' && !!cr.exc, exc: cr.exc || '',
+        kv: KV.map(([l, v, cls]) => ({ l, v, cls: cls || '' })),
+        flow: window.GirsCN.flowOf(cr).map((x) => ({ t: x.t, d: x.d || '', cls: 'icd-' + x.cls.replace('fl-', ''), mk: x.mk })),
+        lines, tots,
+        hasAppr: cr.src !== 'Auto' && (cr.appr || []).length > 0,
+        appr: (cr.appr || []).map((a) => ({ lvl: a[0], who: a[1], st: a[2], pill: AP[a[2]] || 'background:var(--neutral);color:var(--muted)', when: a[3] || '', note: a[4] || '', hasNote: !!a[4] })),
+        hasRemark: !!cr.remark, remark: cr.remark || '',
+        href: 'credit-note-list.html?q=' + cr.no,
+        close: () => self.setState({ cnOpen: '' }) };
     }
     // ---------------- dialogs
     const d = s.dlg, f = s.f || {};
@@ -1680,7 +1769,7 @@ class GirsPage extends DCLogic {
       dDetails: !!d && d.kind === 'details', dTable: !!d && ['audit', 'dist', 'roe', 'src', 'ctx', 'bulkmail'].includes(d.kind), dPrf: !!d && d.kind === 'prf', dGen: !!d && ['pay', 'refund', 'cnv', 'soa', 'manual'].includes(d.kind), dMail: !!d && d.kind === 'mail', dCn: !!d && d.kind === 'cn', dCancel: !!d && d.kind === 'cancel',
       dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, gen, okLabel, okCls, dlgOk, doGenerate,
       closeDlg: () => self.setState({ dlg: null, f: {} }),
-      chans, ctypes, cnv, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
+      chans, ctypes, cnv, cd, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
       toLabel: f.ch === 'post' ? 'Postal address' : 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
       amountHint: di ? 'Invoice amount ' + ivFmt(ivMain(di)) + ' ' + di.lines[0][2] : '',
       cancelText: di ? 'The invoice is cancelled in GIRS and the status flows back to LMS.' + (di.gov !== '—' ? ' The e-invoice ' + di.gov + ' is cancelled at the tax portal.' : '') : '',
@@ -1761,6 +1850,7 @@ class Component extends GirsPage {
 <script src="girs-dates.js"></script>
 <script src="girs-docs.js"></script>
 <script src="girs-ctx.js"></script>
+<script src="girs-cn.js"></script>
 <script src="runtime.js"></script>
 <script src="girs-search.js"></script>
 <script src="girs-ui.js"></script>
