@@ -168,7 +168,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .cf-seg{display:inline-flex;height:36px;padding:2px;border-radius:6px;background:var(--neutral);box-sizing:border-box}.cf-seg button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted)}
 .cf-seg button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.cf-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .cf-chip{margin-inline-start:auto;margin-top:24px;display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:14px;font-size:12px;font-weight:500;white-space:nowrap}.cf-chip.warn{background:var(--warnbg);color:var(--warn)}.cf-chip.ok{background:var(--okbg);color:var(--ok)}
-.cf-lt .cn-cb[disabled]{cursor:default}.cf-lt .cn-amt:disabled{background:var(--sub);color:var(--muted2);border-color:var(--line)}.cf-lt tfoot td{vertical-align:middle}
+.cf-full th:first-child,.cf-full td:first-child{display:none}.cf-lt .cn-cb[disabled]{cursor:default}.cf-lt .cn-amt:disabled{background:var(--sub);color:var(--muted2);border-color:var(--line)}.cf-lt tfoot td{vertical-align:middle}
 .cf-bot{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 24px}.cf-rm{flex:1 1 420px}.cf-rm .input{height:36px}
 .cf-tg{border:0 !important;padding:0 0 8px !important;background:none !important;flex:none}.cf-tg b{font-weight:400}
 .cn-md{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.cn-md button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}.cn-md button b{font-size:13px;font-weight:600;color:var(--ink)}.cn-md button span{font-size:12px;color:var(--muted)}.cn-md button:hover{border-color:var(--bd)}.cn-md button[aria-checked=true]{border-color:var(--accent);background:var(--tint);box-shadow:inset 0 0 0 1px var(--accent)}.cn-md button[aria-checked=true] b{color:var(--accent2)}.cn-md button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -596,7 +596,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                   </div>
                   <span class="cf-chip {{apprCls}}">{{apprT}}</span>
                 </div>
-                <table class="cn-lt cr-lt cn-pt cf-lt">
+                <table class="cn-lt cr-lt cn-pt cf-lt {{fullCls}}">
                   <thead><tr><th><span class="sr">Select</span></th><th>Charge</th><th>Currency</th><th class="num">Invoice amount</th><th class="num">Credit amount</th><th>Tax code</th><th class="num">Tax reversed</th><th class="num">Credit total</th></tr></thead>
                   <tbody><sc-for list="{{cl}}" as="l" hint-placeholder-count="3"><tr class="{{l.cls}}"><td><button type="button" class="cn-cb" role="checkbox" aria-checked="{{l.on}}" disabled="{{l.cbDis}}" onClick="{{l.toggle}}" aria-label="Credit {{l.code}}"></button></td><td><span class="mono">{{l.code}}</span><span class="cn-cn">{{l.name}}</span></td><td>{{l.cur}}</td><td class="num mono">{{l.amt}}</td>
                     <td class="num"><input class="input mono cn-amt" inputmode="decimal" value="{{l.val}}" disabled="{{l.ro}}" onInput="{{l.onAmt}}" aria-label="Credit amount for {{l.code}}"><sc-if value="{{l.bad}}" hint-placeholder-val="{{ false }}"><span class="err cn-le">{{l.badT}}</span></sc-if></td><td><span class="mono">{{l.tcode}}</span><span class="cn-cn">{{l.rate}}</span></td><td class="num mono">{{l.tax}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
@@ -781,7 +781,7 @@ class GirsPage extends DCLogic {
       doneT: s.done && s.done.ctype === 'Partial' ? 'sent for approval' : 'created',
       viewPdf: () => { try { if (s.done) window.GirsDocs.credit(Object.assign({}, s.done, { origDate: v.date, bl: v.bl, vvd: v.vvd, cntr: v.cntr, port: v.port, status: s.done.ctype === 'Partial' ? 'Pending approval' : 'Generated' }), {}); } catch (e) {} },
       doneD: s.done && s.done.ctype === 'Partial' ? 'Agency Finance (L1) reviews it first, then the Finance Approver (L2). Once approved it is generated and posted to GFS.' : 'Full credit, so no approval is needed. It is generated and posted to GFS.',
-      modeHint: full ? 'Every line is credited in full' : 'Tick the lines and enter the amounts', apprT: full ? 'Full credit · no approval needed' : 'Partial credit · needs L1 → L2 approval', apprCls: full ? 'ok' : 'warn',
+      fullCls: full ? 'cf-full' : '', modeHint: full ? 'Every line is credited in full' : 'Tick the lines and enter the amounts', apprT: full ? 'Full credit · no approval needed' : 'Partial credit · needs L1 → L2 approval', apprCls: full ? 'ok' : 'warn',
       reason: s.reason,
       setReason: (e) => this.setState({ reason: e.target.value, ref: '', repl: null }),
       cl: plines.map((l, n) => { if (!full) return Object.assign({}, l, { cbDis: '' }); const L0 = v.lines[n], r0 = TR[L0[4]] || 0, tx = Math.round(L0[1] * r0) / 100; return Object.assign({}, l, { on: 'true', cbDis: 'true', ro: 'true', val: m(L0[1]), bad: false, cls: 'cn-on', tax: m(tx), tot: m(L0[1] + tx) }); }),
