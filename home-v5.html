@@ -678,10 +678,11 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .sh-svg{display:block;width:100%;height:auto;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .sh:hover .sh-svg,.sh:focus-visible .sh-svg{transform:translateY(-3px)}
 .sh:focus-visible .sh-v{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.sh-g{transform-box:view-box;transform-origin:50% 50%}.pq-q.ex .sh-g{transform:scaleX(-1)}
 .sh-hull{fill:color-mix(in srgb,var(--muted3) 82%,var(--surface))}
 .sh-br{fill:color-mix(in srgb,var(--muted3) 70%,var(--surface))}
 .sh-win{fill:var(--tint)}
-.sh-wl{stroke:var(--brand);stroke-width:2;opacity:.55}
+.sh-af{fill:var(--brand);opacity:.8}.sh-wk{stroke:color-mix(in srgb,var(--accent) 45%,var(--surface));stroke-width:2;stroke-linecap:round;fill:none}.sh-svg{overflow:visible}
 .sh-svg rect.inv{fill:var(--ok)}.sh-svg rect.rdy{fill:var(--accent)}.sh-svg rect.blk{fill:var(--warn)}
 .sh-svg rect.inv,.sh-svg rect.rdy,.sh-svg rect.blk{animation:bx-in .35s ease-out both;animation-delay:var(--bd,0ms)}
 @keyframes bx-in{from{opacity:0;transform:translateY(-10px)}}
@@ -1096,12 +1097,13 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
               <div class="pq-sea">
                 <sc-for list="{{q.ships}}" as="sh" hint-placeholder-count="5">
                   <a class="sh" href="{{sh.href}}" style="{{sh.st}}" aria-label="{{sh.aria}}">
-                    <svg class="sh-svg" viewBox="0 0 220 104" aria-hidden="true">
+                    <svg class="sh-svg" viewBox="0 0 220 104" aria-hidden="true"><g class="sh-g">
                       <sc-for list="{{sh.boxes}}" as="b" hint-placeholder-count="12"><rect class="{{b.c}}" x="{{b.x}}" y="{{b.y}}" width="17" height="13" rx="1.5" style="{{b.st}}"></rect></sc-for>
-                      <rect class="sh-br" x="178" y="30" width="22" height="40" rx="2"></rect>
-                      <rect class="sh-win" x="182" y="36" width="14" height="4" rx="1"></rect>
-                      <polygon class="sh-hull" points="6,70 214,70 198,98 22,98"></polygon>
-                      <line class="sh-wl" x1="24" y1="88" x2="196" y2="88"></line>
+                      <rect class="sh-br" x="182" y="30" width="20" height="40" rx="2"></rect>
+                      <rect class="sh-win" x="186" y="36" width="12" height="4" rx="1"></rect>
+                      <path class="sh-hull" d="M2,58 L16,58 Q18,70 28,70 L214,70 L210,94 Q209,98 204,98 L38,98 Q12,98 2,58 Z"></path>
+                      <path class="sh-af" d="M22,93.5 L210.8,93.5 L210,94 Q209,98 204,98 L38,98 Q29,98 22,93.5 Z"></path>
+                      <g class="sh-wk"><path d="M218,84 h12"></path><path d="M220,90 h18"></path><path d="M218,96 h10"></path></g></g>
                     </svg>
                     <span class="sh-l"><span class="sh-v">{{sh.vessel}}</span><span class="sh-no mono">{{sh.no}}</span><span class="{{sh.pc}}">{{sh.meta}}</span></span>
                     <span class="pv" role="tooltip">
@@ -1345,7 +1347,7 @@ class GirsPage extends DCLogic {
       const boxes = [];
       for (let k = 0; k < n; k++) {
         const c = k < nI ? 'inv' : k < nI + nR ? 'rdy' : 'blk', col = k % 8, row = Math.floor(k / 8);
-        boxes.push({ c, x: String(14 + col * 19.5), y: String(56 - row * 15), st: '--bd:' + (i * 140 + 380 + k * 18) + 'ms' });
+        boxes.push({ c, x: String(22 + col * 19.5), y: String(56 - row * 15), st: '--bd:' + (i * 140 + 380 + k * 18) + 'ms' });
       }
       const pct = pctOf(v.inv, v.bls);
       return {
