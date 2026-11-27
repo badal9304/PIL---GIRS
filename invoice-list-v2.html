@@ -529,6 +529,7 @@ th.num .th-s{justify-content:flex-end;width:100%}
 .fdw-nav{gap:0!important;padding:8px 12px!important}.fdw-cat{border-radius:0!important;border-bottom:1px solid var(--line2)}.fdw-cat:last-child{border-bottom:0}
 .fdw-cat[aria-current=true]{border-radius:6px!important;border-bottom-color:transparent}
 .fdw-desc{margin:2px 0 0;font-size:12.5px;color:var(--muted)}.fdw-pt{align-items:flex-start}
+input[type=date].dt-i,input[type=date].dt-i::-webkit-calendar-picker-indicator{cursor:pointer}input[type=date].dt-i:hover{border-color:var(--bdh)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -1407,6 +1408,7 @@ class GirsPage extends DCLogic {
     this.state = { tab, view: rvOk ? 'review' : 'list', rv: rvOk ? { ids: [rvId], i: 0 } : null, q, fd: null, fo: [], fpt: [], fs: [], fe: [], fg: [], fp: [], ft: [], fc: [], fopen: null, sel: {}, exp: {}, menu: null, dlg: null, f: {}, cols: ivColsLoad(), colOrder: ivOrdLoad(), colsOpen: false, colsDraft: null,
       period: '', rPort: '', rProc: '', rKpi: '', rsel: {}, rexp: {}, decl: false, store: ivLoad(), pg: {}, psz: {}, sort: 'new', dview: 'cards' };
     try { document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && this.state.cnOpen) this.setState({ cnOpen: '' }); }); } catch (e) {}
+    try { document.addEventListener('click', (ev) => { const t = ev.target; if (t && t.matches && t.matches('input[type=date]') && t.showPicker) { try { t.showPicker(); } catch (x) {} } }); } catch (e) {}
     try {
       // Column personalisation: drag rows in the Columns panel, or drag table headers; Alt + arrow keys move a focused row in the panel
       const clr = () => document.querySelectorAll('.drop-b,.drop-a,.dragging').forEach((x) => x.classList.remove('drop-b', 'drop-a', 'dragging'));
@@ -2091,7 +2093,7 @@ class GirsPage extends DCLogic {
       dateF: (() => { const open = !!s.dOpen, df = open ? (s.dDraft || {}) : {}, has = !!(s.dFrom || s.dTo);
         return { open, openA: open ? 'true' : 'false', has, text: has ? ivDRange(s.dFrom, s.dTo) : 'Invoice date', tip: has ? 'Invoice date: ' + (s.dFrom ? ivDShort(s.dFrom) : 'any') + ' to ' + (s.dTo ? ivDShort(s.dTo) : 'any') : 'Filter by invoice date',
           bst: has ? 'border-color:var(--accent);background:var(--tint);color:var(--accent2)' : '', from: df.from || '', to: df.to || '', err: !!(df.from && df.to && df.from > df.to),
-          toggle: () => self.setState(open ? { dOpen: false, dDraft: null } : { dOpen: true, dDraft: { from: s.dFrom || '', to: s.dTo || '' }, fopen: null, menu: null, fd: null }),
+          toggle: () => { const z = { dFrom: s.dFrom || '', dTo: s.dTo || '' }; FKEYS.forEach((k) => { z[k] = ivArr(s[k]); }); self.setState({ fd: z, fcat: 'date', fq: '', dOpen: false, dDraft: null, fopen: null, fdv: null, menu: null, colsOpen: false }); },
           onFrom: (e) => self.setState({ dDraft: Object.assign({}, df, { from: e.target.value }) }), onTo: (e) => self.setState({ dDraft: Object.assign({}, df, { to: e.target.value }) }),
           presets: [['Today', 0], ['Last 7 days', 6], ['Last 30 days', 29]].map(([l, n]) => ({ l, go: () => { const t = new Date(), f = new Date(t.getTime() - n * 864e5), iso = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); self.setState({ dDraft: { from: iso(f), to: iso(t) } }); } })),
           clear: () => self.setState({ dDraft: { from: '', to: '' } }), close: () => self.setState({ dOpen: false, dDraft: null }),
