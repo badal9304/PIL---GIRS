@@ -682,7 +682,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
 .sh-hull{fill:color-mix(in srgb,var(--muted3) 82%,var(--surface))}
 .sh-br{fill:color-mix(in srgb,var(--muted3) 70%,var(--surface))}
 .sh-win{fill:var(--tint)}
-.sh-af{fill:var(--brand);opacity:.8}.sh-wk{stroke:color-mix(in srgb,var(--accent) 45%,var(--surface));stroke-width:2;stroke-linecap:round;fill:none}.sh-svg{overflow:visible}
+.sh-af{fill:var(--brand);opacity:.8}
 .sh-svg rect.inv{fill:var(--ok)}.sh-svg rect.rdy{fill:var(--accent)}.sh-svg rect.blk{fill:var(--warn)}
 .sh-svg rect.inv,.sh-svg rect.rdy,.sh-svg rect.blk{animation:bx-in .35s ease-out both;animation-delay:var(--bd,0ms)}
 @keyframes bx-in{from{opacity:0;transform:translateY(-10px)}}
@@ -1102,8 +1102,7 @@ table:not(.ktbl):not(.rt) tr:has(> td > div[style*="flex-direction: column"]) > 
                       <rect class="sh-br" x="182" y="30" width="20" height="40" rx="2"></rect>
                       <rect class="sh-win" x="186" y="36" width="12" height="4" rx="1"></rect>
                       <path class="sh-hull" d="M2,58 L16,58 Q18,70 28,70 L214,70 L210,94 Q209,98 204,98 L38,98 Q12,98 2,58 Z"></path>
-                      <path class="sh-af" d="M22,93.5 L210.8,93.5 L210,94 Q209,98 204,98 L38,98 Q29,98 22,93.5 Z"></path>
-                      <g class="sh-wk"><path d="M218,84 h12"></path><path d="M220,90 h18"></path><path d="M218,96 h10"></path></g></g>
+                      <path class="sh-af" d="M22,93.5 L210.8,93.5 L210,94 Q209,98 204,98 L38,98 Q29,98 22,93.5 Z"></path></g>
                     </svg>
                     <span class="sh-l"><span class="sh-v">{{sh.vessel}}</span><span class="sh-no mono">{{sh.no}}</span><span class="{{sh.pc}}">{{sh.meta}}</span></span>
                     <span class="pv" role="tooltip">
