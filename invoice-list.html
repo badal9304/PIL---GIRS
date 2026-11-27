@@ -906,7 +906,7 @@ function ivDist(i) {
   const sent = ['Sent', 'Accepted', 'Paid', 'Credited'].includes(i.status), gen = sent || i.status === 'Generated', cc = String(i.port || '').slice(0, 2);
   const gov = i.gov !== '—' ? (/error|rejected/i.test(i.gov) ? 'Rejected · ' + i.gov : 'Accepted · ' + i.gov) : (['IN', 'MY'].includes(cc) ? (gen ? 'Not submitted yet' : 'Not generated yet') : 'Not required');
   return [['Email to customer-master contacts', sent ? 'Delivered' : (gen ? 'Not sent yet' : 'Not generated yet')],
-    ['PocketApp / MELL / MSC', sent ? 'Uploaded' : (gen ? 'Not uploaded yet' : 'Not generated yet')],
+    ['PocketPIL / MELL / MSC', sent ? 'Uploaded' : (gen ? 'Not uploaded yet' : 'Not generated yet')],
     ['ODeX', 'Not applicable'], ['Qwiik / FAM', 'Not applicable'], ['Government tax portal', gov]];
 }
 function ivView(i, toast) { try { window.GirsDocs.invoice(ivDocData(i), { json: ivHasJson(i) ? ivDocData(i) : null, onDone: toast }); } catch (e) {} }

@@ -540,7 +540,7 @@ class GirsPage extends DCLogic {
       ['odex', 'ODeX', 'API', 'In / out', 0, 'ok', ['Invoice requests with billing party and charges', 'Payments trigger receipting', 'Invoices and receipts uploaded']],
       ['qwiik', 'Qwiik', 'API', 'In / out', 0, 'ok', ['Payments trigger receipting', 'Invoices and receipts uploaded']],
       ['fam', 'FAM', 'API', 'In / out', 0, 'ok', ['Payments trigger receipting', 'Invoices and receipts uploaded']],
-      ['pocket', 'PocketApp / MELL / MSC', 'API', 'In / out', 0, 'ok', ['Invoices and receipts uploaded for customers']],
+      ['pocket', 'PocketPIL / MELL / MSC', 'API', 'In / out', 0, 'ok', ['Invoices and receipts uploaded for customers']],
       ['email', 'Email delivery', 'SMTP', 'Out', 2, 'warn', ['Invoices emailed to customer-master contacts', 'Approval notifications']],
       ['bi', 'PowerBI · data lake · AI agents', 'API · events', 'Out', 0, 'ok', ['Business events for near real-time reporting', 'Integration with approved AI agents']]
     ];
@@ -575,7 +575,7 @@ class GirsPage extends DCLogic {
       ['11:48', 'ODeX', 'In', 'Invoice request REQ-0425', 'Accepted', OK], ['11:40', 'GFS (Oracle Fusion)', 'Out', 'Receipt posting batch', 'Retrying', WARN],
       ['11:30', 'LMS', 'Out', 'Status flow-back · BL-TH-24007', 'No ack', BAD], ['11:22', 'Banks', 'In', 'CAMT.053 statement', 'Imported', OK],
       ['11:15', 'Email delivery', 'Out', 'Invoice email · [Customer E]', 'Bounced', WARN], ['11:02', 'FAM', 'In', 'Invoice request REQ-0423', 'Accepted', OK],
-      ['10:58', 'PocketApp / MELL / MSC', 'Out', 'Receipt upload · P-0006', 'Delivered', OK], ['10:44', 'PowerBI · data lake · AI agents', 'Out', 'Business events batch', 'Delivered', OK]
+      ['10:58', 'PocketPIL / MELL / MSC', 'Out', 'Receipt upload · P-0006', 'Delivered', OK], ['10:44', 'PowerBI · data lake · AI agents', 'Out', 'Business events batch', 'Delivered', OK]
     ].map(([at, ifc, dir, msg, res, chip]) => ({ at: '10 Nov ' + at, ifc, dir, msg, res, chip }));
     const DL = [
       ['DLQ-0091', 'LMS', 'Out of sequence', 'Booking cancellation arrived before booking creation · held in staging buffer', '10 Nov 08:12', 'Replay in order'],

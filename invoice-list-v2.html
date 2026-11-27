@@ -409,6 +409,16 @@ button.cnc-no{all:unset;cursor:pointer;color:var(--accent);font-family:var(--mon
 .ivd-h li div{display:flex;flex-direction:column;min-width:0}.ivd-h span{font-size:13px;color:var(--ink)}.ivd-h small{font-size:12px;color:var(--muted)}
 .ivd-h time{flex:none;font-size:12px;color:var(--muted);white-space:nowrap}
 @media (max-width:900px){.ivd-sum{grid-template-columns:1fr 1fr}.ivd-info,.ivd-bot{grid-template-columns:1fr}.ivd-info section{padding:0}.ivd-info section:first-child{border:0;margin-bottom:16px}}
+.pst{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:6px}
+.pst-r{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line2);cursor:pointer;font-weight:400}.pst-r:first-child{border-top:0}.pst-r:hover{background:var(--hover2)}
+.pst-r[data-dis=true]{cursor:default;opacity:.6}.pst-r[data-dis=true]:hover{background:none}
+.pst-n{flex:1;display:flex;flex-direction:column;font-size:14px;font-weight:600;color:var(--ink)}.pst-n small{font-size:12.5px;font-weight:400;color:var(--muted)}
+.pst-s{flex:none;font-size:12px;font-weight:600;padding:2px 9px;border-radius:10px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pst-s.ok{background:var(--okbg);color:var(--ok)}.pst-s.warn{background:var(--warnbg);color:var(--warn)}.pst-s.bad{background:var(--badbg);color:var(--bad)}.pst-s.mu{background:var(--neutral);color:var(--muted2)}
+.pst-g{display:flex;flex-direction:column}.pst-h{border-top:0}.pst-sub{display:flex;flex-direction:column;background:var(--sub,#F7F8FA)}
+.pst-sub .pst-r{padding:9px 14px 9px 42px;border-top:1px solid var(--line2)}.pst-n2{flex:1;font-size:13.5px;color:var(--ink)}
+.pst-g + .pst-r{border-top:1px solid var(--line)}
+.cbx[data-mixed=mixed]{accent-color:var(--accent)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -903,8 +913,13 @@ button.cnc-no{all:unset;cursor:pointer;color:var(--accent);font-family:var(--mon
                 </sc-if>
                 <sc-if value="{{dMail}}" hint-placeholder-val="{{ false }}">
                   <div class="fld">Channel<div class="seg" role="group" aria-label="Channel"><sc-for list="{{chans}}" as="c" hint-placeholder-count="3"><button aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div></div>
-                  <label class="fld">{{toLabel}}<input class="input" value="{{f.to}}" onInput="{{f.onTo}}"><sc-if value="{{f.toErr}}" hint-placeholder-val="{{ false }}"><span class="err">{{f.toErrText}}</span></sc-if></label>
+                  <sc-if value="{{mailEmail}}" hint-placeholder-val="{{ true }}">
+                  <label class="fld">To<input class="input" value="{{f.to}}" onInput="{{f.onTo}}"><sc-if value="{{f.toErr}}" hint-placeholder-val="{{ false }}"><span class="err">{{f.toErrText}}</span></sc-if></label>
                   <label class="fld">Message <span class="hint">Optional</span><textarea class="input" style="height: 80px; padding-top: 8px; resize: vertical" value="{{f.msg}}" onInput="{{f.onMsg}}"></textarea></label>
+                  </sc-if>
+                  <sc-if value="{{mailPost}}" hint-placeholder-val="{{ false }}">
+                  <div class="fld">Post to<div class="pst" role="group" aria-label="Post to"><div class="pst-g"><label class="pst-r pst-h" data-dis="{{postPlat.dis}}"><input type="checkbox" class="cbx" checked="{{postPlat.on}}" aria-checked="{{postPlat.mixed}}" data-mixed="{{postPlat.mixed}}" disabled="{{postPlat.dis}}" onChange="{{postPlat.tog}}"><span class="pst-n">3rd Party Platform<small>{{postPlat.sum}}</small></span></label><div class="pst-sub"><sc-for list="{{postPlat.rows}}" as="t" hint-placeholder-count="4"><label class="pst-r" data-dis="{{t.dis}}"><input type="checkbox" class="cbx" checked="{{t.on}}" disabled="{{t.dis}}" onChange="{{t.tog}}"><span class="pst-n2">{{t.n}}</span><span class="{{t.stCls}}">{{t.st}}</span></label></sc-for></div></div><sc-for list="{{postTo}}" as="t" hint-placeholder-count="2"><label class="pst-r" data-dis="{{t.dis}}"><input type="checkbox" class="cbx" checked="{{t.on}}" disabled="{{t.dis}}" onChange="{{t.tog}}"><span class="pst-n">{{t.n}}</span><span class="{{t.stCls}}">{{t.st}}</span></label></sc-for></div><sc-if value="{{f.toErr}}" hint-placeholder-val="{{ false }}"><span class="err">Select at least one destination</span></sc-if></div>
+                  </sc-if>
                   <span class="mu">Attachments: {{attach}}</span>
                 </sc-if>
                 <sc-if value="{{dCn}}" hint-placeholder-val="{{ false }}">
@@ -1168,13 +1183,22 @@ function ivPay(i, prf) {
   return 'Not billed yet';
 }
 // Distribution channels (from the former Invoices Hub)
+// Customer / 3rd party platforms (SRS 6.5)
+const IV_PLAT = ['ODeX', 'Qwiik', 'FAM', 'PocketPIL / MELL / MSC'];
 function ivDist(i) {
   const sent = ['Sent', 'Accepted', 'Paid', 'Credited'].includes(i.status), gen = sent || i.status === 'Generated', cc = String(i.port || '').slice(0, 2);
   const gov = i.gov !== '—' ? (/error|rejected/i.test(i.gov) ? 'Rejected · ' + i.gov : 'Accepted · ' + i.gov) : (['IN', 'MY'].includes(cc) ? (gen ? 'Not submitted yet' : 'Not generated yet') : 'Not required');
-  return [['Email to customer-master contacts', sent ? 'Delivered' : (gen ? 'Not sent yet' : 'Not generated yet')],
-    ['PocketApp / MELL / MSC', sent ? 'Uploaded' : (gen ? 'Not uploaded yet' : 'Not generated yet')],
-    ['ODeX', 'Not applicable'], ['Qwiik / FAM', 'Not applicable'], ['Government tax portal', gov]];
+  return [['Email to customer-master contacts', sent ? 'Delivered' : (gen ? 'Not sent yet' : 'Not generated yet')]]
+    .concat(IV_PLAT.map((p) => [p, sent && (p === 'PocketPIL / MELL / MSC' || ivHash(String(i.no) + p) % 2 === 0) ? 'Uploaded' : (gen || sent ? 'Not uploaded yet' : 'Not generated yet')]))
+    .concat([['Government tax portal', gov]]);
 }
+// Post = send the invoice to a 3rd party platform, GFS or the government portal
+function ivPostTo(i) {
+  const d = ivDist(i), gov = d[d.length - 1][1], tone = (st) => /^(Uploaded|Posted|Acknowledged|Accepted)/.test(st) ? 'ok' : /Rejected/.test(st) ? 'bad' : /Not required/.test(st) ? 'mu' : 'warn';
+  return IV_PLAT.map((p, n) => { const st = d[n + 1][1]; return { k: 'p' + n, n: p, grp: 'plat', st, tone: tone(st), dis: false }; })
+    .concat([{ k: 'gfs', n: 'GFS', st: i.gfs, tone: tone(i.gfs), dis: false }, { k: 'gov', n: 'Govt. Portal', st: gov, tone: tone(gov), dis: /Not required/.test(gov) }]);
+}
+function ivPostDef(i) { return ivPostTo(i).filter((t) => !t.dis && t.tone !== 'ok').map((t) => t.k); }
 function ivView(i, toast) { try { window.GirsDocs.invoice(ivDocData(i), { json: ivHasJson(i) ? ivDocData(i) : null, onDone: toast }); } catch (e) {} }
 function ivPdf(i, toast) { try { window.GirsDocs.invoicePdf(ivDocData(i)); toast(i.no + '.pdf downloaded'); } catch (e) {} }
 function ivJsonDl(i, toast) { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); toast(i.no + '.json downloaded'); } catch (e) {} }
@@ -1713,11 +1737,11 @@ class GirsPage extends DCLogic {
         dlgTitle = 'Audit trail · ' + di.no; dlgSub = 'Invoice events, newest last'; dlgCls = 'wide';
         const rows = this.audit(di); tbl = tableOf(['When', 'Event', 'By'], rows); dl = dlFor('Audit trail ' + di.no, ['When', 'Event', 'By'], rows);
       } else if (d.kind === 'mail' && di) {
-        dlgTitle = 'e-Mail / Post · ' + di.no; dlgSub = di.party; okLabel = f.ch === 'post' ? 'Queue for post' : 'Send';
+        dlgTitle = 'e-Mail / Post · ' + di.no; dlgSub = di.party; const pSel = ivPostTo(di).filter((t) => !t.dis && (f.pt || ivPostDef(di)).includes(t.k)); okLabel = f.ch === 'post' ? 'Post' + (pSel.length ? ' (' + pSel.length + ')' : '') : 'Send';
         dlgOk = () => {
           if (f.ch !== 'post' && !/^[^\s@]+@[^\s@]+\.[^\s@]+(\s*[,;]\s*[^\s@]+@[^\s@]+\.[^\s@]+)*$/.test((f.to || '').trim())) { self.setF({ toErr: true }); return; }
-          if (f.ch === 'post' && !(f.to || '').trim()) { self.setF({ toErr: true }); return; }
-          self.put((x) => self.ev(x, di.no, (f.ch === 'post' ? 'Queued for post to ' : 'e-mailed to ') + f.to), { dlg: null, __toast: di.no + (f.ch === 'post' ? ' queued for post' : ' sent to ' + f.to) });
+          if (f.ch === 'post') { if (!pSel.length) { self.setF({ toErr: true }); return; } const names = pSel.map((t) => t.n).join(', '); self.put((x) => self.ev(x, di.no, 'Posted to ' + names), { dlg: null, __toast: di.no + ' posted to ' + names }); return; }
+          self.put((x) => self.ev(x, di.no, 'e-mailed to ' + f.to), { dlg: null, __toast: di.no + ' sent to ' + f.to });
         };
       } else if (d.kind === 'bulkmail') {
         dlgTitle = 'e-Mail / Post · ' + selNos.length + ' invoices'; dlgSub = 'Each invoice goes to its billing party\'s configured channel'; okLabel = 'Send';
@@ -1810,7 +1834,14 @@ class GirsPage extends DCLogic {
         });
       }, () => ({ dlg: null, rsel: {}, decl: false, view: more ? 'review' : 'list', rv: more ? s.rv : null, __toast: (made.length > 1 ? made.length + ' invoices generated' : 'Invoice ' + made[0] + ' generated') + (more ? ' · next B/L ready to review' : ' · see Invoices') }));
     };
-    const chans = [['email', 'e-Mail'], ['post', 'Post']].map(([k, label]) => ({ label, on: (f.ch || 'email') === k ? 'true' : 'false', pick: () => self.setF({ ch: k, toErr: false, to: k === 'post' ? ((IV_CUST[di && di.cust] || {}).addr || '') : ((IV_CUST[di && di.cust] || {}).mail || '') }) }));
+    const chans = [['email', 'e-Mail'], ['post', 'Post']].map(([k, label]) => ({ label, on: (f.ch || 'email') === k ? 'true' : 'false', pick: () => self.setF({ ch: k, toErr: false, to: (IV_CUST[di && di.cust] || {}).mail || '' }) }));
+    const ptSel = di ? (f.pt || ivPostDef(di)) : [];
+    const ptAll = di ? ivPostTo(di) : [], ptRow = (t) => ({ n: t.n, st: t.st, stCls: 'pst-s ' + t.tone, dis: t.dis ? 'true' : 'false', on: !t.dis && ptSel.includes(t.k) ? 'true' : 'false', tog: () => self.setF({ toErr: false, pt: ptSel.includes(t.k) ? ptSel.filter((k) => k !== t.k) : ptSel.concat(t.k) }) });
+    const platRows = ptAll.filter((t) => t.grp === 'plat'), platAvail = platRows.filter((t) => !t.dis), platOnN = platAvail.filter((t) => ptSel.includes(t.k)).length;
+    const postTo = ptAll.filter((t) => !t.grp).map(ptRow);
+    if (di && f.ch === 'post') setTimeout(() => { try { document.querySelectorAll('.cbx[data-mixed]').forEach((e) => { e.indeterminate = e.dataset.mixed === 'mixed'; }); } catch (e) {} }, 0);
+    const postPlat = { rows: platRows.map(ptRow), on: platAvail.length && platOnN === platAvail.length ? 'true' : 'false', mixed: platOnN > 0 && platOnN < platAvail.length ? 'mixed' : 'false', dis: platAvail.length ? 'false' : 'true',
+      sum: platRows.filter((t) => t.tone === 'ok').length + ' of ' + platRows.length + ' uploaded', tog: () => { const ks = platAvail.map((t) => t.k), all = platOnN === platAvail.length; self.setF({ toErr: false, pt: all ? ptSel.filter((k) => !ks.includes(k)) : ptSel.filter((k) => !ks.includes(k)).concat(ks) }); } };
     const ctypes = [['Full', true], ['Partial', false]].map(([label, full]) => ({ label, on: !!f.full === full ? 'true' : 'false',
       pick: () => self.setF({ full, amountErr: false, amount: full && di ? ivFmt(ivMain(di)) : '' }) }));
     const kinds = ['details', 'audit', 'roe', 'src', 'ctx', 'bulkmail', 'dist', 'prf', 'pay', 'cnv', 'soa'];
@@ -1856,11 +1887,11 @@ class GirsPage extends DCLogic {
       dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, gen, okLabel, okCls, dlgOk, doGenerate,
       closeDlg: () => self.setState({ dlg: null, f: {} }),
       chans, ctypes, cnv, cd, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
-      toLabel: f.ch === 'post' ? 'Postal address' : 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
+      postTo, postPlat, mailEmail: (f.ch || 'email') !== 'post', mailPost: f.ch === 'post', toLabel: 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
       amountHint: di ? 'Invoice amount ' + ivFmt(ivMain(di)) + ' ' + di.lines[0][2] : '',
       cancelText: di ? 'The invoice is cancelled in GIRS and the status flows back to LMS.' + (di.gov !== '—' ? ' The e-invoice ' + di.gov + ' is cancelled at the tax portal.' : '') : '',
       f: Object.assign({}, f, { onTo: (e) => self.setF({ to: e.target.value, toErr: false }), onMsg: (e) => self.setF({ msg: e.target.value }),
-        toErrText: f.ch === 'post' ? 'Enter a postal address' : 'Enter a valid e-mail address',
+        toErrText: 'Enter a valid e-mail address',
         onReason: (e) => self.setF({ reason: e.target.value, reasonErr: false, refErr: false }), onAmount: (e) => self.setF({ amount: e.target.value, amountErr: false }),
         onRef: (e) => self.setF({ ref: e.target.value, refErr: false }), onWhy: (e) => self.setF({ why: e.target.value, whyErr: false }) })
     };
