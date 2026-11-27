@@ -214,6 +214,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .cr-form .cr-body{flex:1 1 auto;min-height:0;overflow:auto;padding-bottom:16px}
 .cr-form .cr-act{position:static;margin:0;flex:none;border-radius:0}
 @media (max-width:820px){.cr-grid{min-height:0}.cr-pick,.cr-form{overflow:visible}.cr-form .cr-body{overflow:visible}}
+.lay{white-space:nowrap;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}.lay:hover{color:var(--ink)}.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -518,6 +519,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
             <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Whole-invoice credit against the original invoice · same exchange rate · posted to GFS</p>
           </div>
           <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
+          <nav aria-label="Design versions" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Version</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="credit-notes.html" aria-current="page" title="Current">1</a><a class="lay" href="credit-notes-v2.html" title="Partial credit">2</a></div></nav>
           <a class="btn btn-sm" href="credit-note-list.html">Credit Note List</a>
           
           </div>

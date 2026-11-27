@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIRS Credit Note List</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/x-dc-template" id="tpl">
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root,.theme{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;--selbg:#0071B7;--selfg:#FFFFFF;--selbd:#0071B7}
+.theme[data-theme=dark]{--ink:#ECEEF1;--muted:#9DA3AC;--muted2:#C5CAD1;--muted3:#C5CAD1;--muted4:#878D96;--line:#2E3135;--line2:#25272A;--bd:#43474D;--bdh:#646A72;--line3:#383B40;--bg:#0D0E0F;--sub:#202225;--hover:#26292D;--hover2:#1E2023;--hover3:#1D1F22;--neutral:#2B2E32;--canvas:#09090A;--accent:#4BA0DD;--accent2:#8FC5EC;--tint:#172636;--tintbd:#264A6B;--tint2:#152230;--ok:#5BC48A;--okbg:#122A1E;--ok2:#86D7A8;--okdot:#3DB471;--okbar:#3DB471;--okbd:#1F4B33;--okrow:#111D16;--warn:#D9A449;--warnbg:#241E13;--warn2:#E6B865;--warnbar:#C08A26;--warnbd:#4A3B18;--bad:#F07A7F;--badbg:#2E1719;--badbar:#E04B51;--bad2:#F7A1A4;--badbd:#5A2629;--badrow:#1E1415;--aibg:#231D36;--ai:#B4A2F0;--surface:#191A1C;--brand:#E31D1A;--onaccent:#0B1620;--accenth:#6CB3E6;--gold:#E2C063;--goldbg:#2A2412;--selbg:#172636;--selfg:#9CCBEE;--selbd:#4BA0DD;color-scheme:dark}
+/* dark: filled buttons keep white text on a deeper PIL blue; overlays get real depth */
+.glogo{background:#fff}.theme[data-theme=dark] .glogo{background:transparent}.theme[data-theme=dark] img[src="pil-logo.png"]{content:url(pil-logo-dark.png)}/* dark polish: one 'selected' style, true disabled state, outlined checkboxes, visible focus */.theme[data-theme=dark] .chipb[aria-pressed=true]{background:var(--selbg);border-color:var(--selbd);color:var(--selfg)}.theme[data-theme=dark] .btn:disabled,.theme[data-theme=dark] .btn[disabled],.theme[data-theme=dark] .btn-primary:disabled{opacity:1;background:#232528;border-color:#2E3135;color:#6B7079;box-shadow:none}.theme[data-theme=dark] input[type=checkbox]{-webkit-appearance:none;appearance:none;width:16px;height:16px;flex:none;border:1.5px solid #8A9099;border-radius:3px;background:transparent center/12px no-repeat;box-sizing:border-box}.theme[data-theme=dark] input[type=checkbox]:hover{border-color:#C5CAD1}.theme[data-theme=dark] input[type=checkbox]:checked{background-color:#2580C3;border-color:#2580C3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}.theme[data-theme=dark] input[type=checkbox]:indeterminate{background-color:#2580C3;border-color:#2580C3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8h8' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")}.theme[data-theme=dark] input[type=checkbox]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.theme[data-theme=dark] input[type=checkbox]:disabled{opacity:.35}.theme[data-theme=dark] :is(.input,.select,textarea):is(:focus,:focus-visible){box-shadow:0 0 0 3px rgba(75,160,221,.42)!important;border-color:var(--accent)!important}.theme[data-theme=dark] .select:open{box-shadow:0 0 0 3px rgba(75,160,221,.42)}.theme[data-theme=dark] :is(button,a,[tabindex]):focus-visible{outline-color:#6CB3E6}.theme[data-theme=dark] .btn-primary{background:#1B6FAE;border-color:#1B6FAE;color:#fff}.theme[data-theme=dark] .btn-primary:hover{background:#2580C3;border-color:#2580C3}.theme[data-theme=dark] .menu,.theme[data-theme=dark] .ri-sug,.theme[data-theme=dark] .ng-fly,.theme[data-theme=dark] .amenu,.gs-panel[data-theme=dark]{box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.theme[data-theme=dark] .paper,.paper{--ink:#161A21;--muted:#5A6170;--muted2:#3A4556;--muted3:#33405A;--muted4:#6B7280;--line:#DADDE3;--line2:#ECEEF2;--bd:#C5CAD3;--bdh:#8C95A3;--line3:#C9CED6;--bg:#F4F5F7;--sub:#F7F8FA;--hover:#F1F3F6;--hover2:#F7F9FC;--hover3:#FBFCFD;--neutral:#EEF1F5;--canvas:#E4E7EC;--accent:#0071B7;--accent2:#005C96;--tint:#EAF4FB;--tintbd:#B9D9EE;--tint2:#F2F8FC;--ok:#1F6B45;--okbg:#E6F3EC;--ok2:#1A5C3B;--okdot:#1F8A55;--okbar:#2E8B57;--okbd:#BFE0CC;--okrow:#F1F8F4;--warn:#8A4200;--warnbg:#FDF0E3;--warn2:#7A3A00;--warnbar:#C86B10;--warnbd:#F0C899;--bad:#A3262A;--badbg:#FBEAEA;--badbar:#B3363A;--bad2:#8E1F23;--badbd:#E9B7B9;--badrow:#FFF8F8;--aibg:#F1ECFB;--ai:#5B3BA8;--surface:#FFFFFF;--brand:#E31D1A;--onaccent:#FFFFFF;--accenth:#005C96;color-scheme:light;color:var(--ink)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:13px;line-height:20px}
+a{color:var(--accent)}a:hover{color:var(--accent2)}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-item{position:relative;display:flex;align-items:center;height:32px;padding-inline:42px 12px;border-radius:6px;color:var(--muted2);text-decoration:none;font-size:13px;font-weight:400;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-item:hover{background:var(--hover);color:var(--ink)}
+.nav-grp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;height:36px;padding:0 8px 0 12px;border-radius:6px;color:var(--muted2);font-size:13px;font-weight:600;line-height:18px}.nav-grp .ng-ic{flex:none;width:22px;height:22px;color:var(--muted)}nav[data-c=true] .nav-grp{height:44px}.nav-grp .ng-l{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:start}.nav-grp .ng-ch{flex:none;color:var(--muted);transition:transform .15s}.nav-grp:hover .ng-ic,.nav-grp-on .ng-ic{color:var(--accent)}.nav-grp-on{color:var(--ink)}.ng-sub{display:flex;flex-direction:column;gap:2px}.ng-fly{position:fixed;left:68px;z-index:61;width:280px;overflow:auto;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.18);box-sizing:border-box}.ng-fly .ng-sub,.ng-fly{gap:2px}.ng-fly .nav-item{height:40px;padding-inline:14px;font-size:14px;line-height:20px;border-radius:6px}.ng-fly .nav-on::before{display:none}.ng-fh{padding:8px 14px 8px;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.ng-bd{position:fixed;top:0;right:0;bottom:0;left:64px;z-index:60}nav[data-c=true] .nav-grp[aria-expanded=true]{background:var(--hover)}nav[data-c=true] .nav-grp-on{background:var(--tint)}nav[data-c=true] .nav-grp-on .ng-ic{color:var(--accent)}
+.nav-grp:hover{background:var(--hover);color:var(--ink)}
+.nav-grp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.nav-on,.nav-on:hover{background:var(--tint);color:var(--accent);font-weight:600}.nav-on::before{content:"";position:absolute;inset-inline-start:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:var(--accent)}
+.nav-item svg{flex:none}
+.sbtoggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:12px;height:44px;padding-inline:12px;border-radius:6px;color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden}
+.sbtoggle:hover{background:var(--hover);color:var(--ink)}
+.sbtoggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--bd);background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;box-sizing:border-box}
+.btn:hover{background:var(--hover)}
+.btn-sm{height:32px;padding:0 12px}
+.btn-icon{width:36px;padding:0}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.btn-primary:hover{background:var(--accenth);border-color:var(--accenth)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.nav-item:focus-visible,.select:focus-visible,.input:focus-visible,.seg:focus-visible,.opt:focus-visible,.tile:focus-visible,.pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.select{appearance:none;-webkit-appearance:none;height:36px;padding-block:0;padding-inline:12px 32px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;line-height:34px;cursor:pointer;box-sizing:border-box}
+.select-sm{height:32px;line-height:30px;font-size:12px}
+.select:hover,.input:hover{border-color:var(--bdh)}
+.input{height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:6px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;box-sizing:border-box}
+.input::placeholder{color:var(--muted4)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:500;white-space:nowrap;box-sizing:border-box}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 16px;border-bottom:1px solid var(--line);box-sizing:border-box}
+.card-title{margin:0;font-size:14px;font-weight:600;line-height:20px}
+.card-meta{font-size:12px;color:var(--muted)}
+.lbl{display:block;font-size:12px;font-weight:600;color:var(--muted);line-height:16px;margin-bottom:6px}
+.k{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;line-height:16px}
+.r{text-align:end}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th{position:sticky;top:0;z-index:1;height:36px;text-align:start;font-size:12px;font-weight:600;color:var(--muted);padding:0 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sub);box-sizing:border-box}
+td{height:40px;padding:0 12px;border-bottom:1px solid var(--line2);vertical-align:middle;white-space:nowrap;text-align:start;box-sizing:border-box}
+tbody tr:hover td{background:var(--hover2)}
+th.r,td.r{text-align:end}
+input[type=checkbox],input[type=radio]{width:16px;height:16px;margin:0;accent-color:var(--accent);cursor:pointer;vertical-align:middle}
+input[type=range]{width:100%;height:20px;margin:0;accent-color:var(--accent);cursor:pointer}
+.gsearch{position:relative;flex:0 1 480px;min-width:220px}
+.gsearch .input{width:100%;padding-inline:36px 12px;background:var(--sub)}
+.grow{flex:1 1 auto}
+
+.select:focus,.select:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:active{background:var(--sub)}
+.select:disabled{background:var(--bg);color:var(--muted4);border-color:var(--line);cursor:not-allowed}
+.input:focus,.input:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+@supports (appearance: base-select){
+.select,.select::picker(select){appearance:base-select}
+.select{display:inline-flex;align-items:center;line-height:normal}
+.select::picker-icon{display:none}
+.select::picker(select){margin-top:4px;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 10px 28px rgba(22,26,33,.16);max-height:min(360px,60vh);min-width:anchor-size(width)}
+.select option{display:flex;align-items:center;gap:8px;min-height:32px;padding:5px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;outline:none}
+.select option::checkmark{order:2;margin-inline-start:auto;color:var(--accent);font-weight:700}
+.select option:hover{background:var(--hover)}
+.select option:focus-visible{background:var(--hover);box-shadow:inset 0 0 0 2px var(--accent)}
+.select option:active{background:var(--neutral)}
+.select option:checked{background:var(--tint);color:var(--accent2);font-weight:600}
+.select option:disabled{color:var(--muted4);cursor:not-allowed}
+.select:open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.select:open + svg{transform:rotate(180deg)}
+}
+.select + svg{transition:transform .15s ease}
+.menu{position:absolute;top:44px;inset-inline-end:0;z-index:30;width:296px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(22,26,33,.16);padding:6px;box-sizing:border-box}
+.ap-row{cursor:default}.ap-row:hover{background:transparent}.ap-seg{display:inline-flex;flex:none;margin-inline-start:auto;padding:2px;gap:2px;border-radius:6px;background:var(--neutral)}.ap-seg button{all:unset;box-sizing:border-box;cursor:pointer;height:26px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);display:inline-flex;align-items:center;gap:6px}.ap-seg button:hover{color:var(--ink)}.ap-seg button[aria-checked=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.18)}.ap-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}.lg-list{max-height:280px;overflow-y:auto;overscroll-behavior:contain}.menu-sep{height:1px;background:var(--line2);margin:6px 4px}
+.mi{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:6px;color:var(--ink);font-size:13px;line-height:18px;cursor:pointer;text-decoration:none;text-align:start}
+.mi:hover{background:var(--hover);color:var(--ink)}
+.mi:active{background:var(--neutral)}
+.mi:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mi[aria-checked=true]{background:var(--tint);color:var(--accent2)}
+.mi[aria-checked=true] .mi-sub{color:var(--accent2)}
+.mi svg{flex:none;color:var(--muted)}
+.mi[aria-checked=true] svg{color:var(--accent)}
+.mi-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}
+.mi-lbl{font-weight:500;white-space:normal}
+.mi-sub{font-size:12px;line-height:16px;color:var(--muted);white-space:normal}
+.mi-danger{color:var(--bad)}.mi-danger svg{color:var(--bad)}.mi-danger:hover{background:var(--badbg);color:var(--bad)}
+.ubtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;height:36px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:18px;box-sizing:border-box;transition:background .12s,border-color .12s}
+.ubtn:hover{background:var(--hover);border-color:var(--bd)}
+.ubtn:active{background:var(--neutral)}
+.ubtn[aria-expanded=true]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,183,.20)}
+.ubtn[aria-expanded=true] .uchev{transform:rotate(180deg)}
+.ubtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.uchev{transition:transform .15s ease}
+tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
+@keyframes gfound{0%,40%{background:rgba(255,190,0,.30)}100%{background:transparent}}
+.gfind{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 8px 0 14px;border-radius:8px;background:var(--tint);border:1px solid var(--tintbd);color:var(--accent2);box-sizing:border-box;flex-wrap:wrap}
+.gmenu,.gdclose,.gdctx,.gscrim{display:none !important}
+.lst{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}
+.lst th{white-space:nowrap}
+.lst td{white-space:nowrap}
+.lst th:first-child,.lst td:first-child{position:sticky;inset-inline-start:0;z-index:1;background:var(--surface);box-shadow:inset -1px 0 0 var(--line2)}
+.lst thead th:first-child{z-index:3;background:var(--sub)}
+.lst tbody tr:hover td{background:var(--hover2)}
+.lst .num{text-align:end;font-variant-numeric:tabular-nums}
+.lst .dim{color:var(--muted)}
+.lnk{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
+.lnk:hover{text-decoration:underline}
+.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}.lay.rec{gap:5px}.lay.rec .recst{color:#C77700;font-size:12px;line-height:1}.lay.rec:not([aria-current=page]){color:var(--muted2);font-weight:600}nav[aria-label='Layout options']:has(.lay.rec)::after{content:'\2605  Present first';font-size:12px;font-weight:600;color:var(--warn);white-space:nowrap;padding-left:2px}/* credit notes v2 */
+.cn2 .dim{color:var(--muted)}
+.cn2-tool{padding:12px 16px;display:flex;flex-direction:column;gap:12px}
+.cn2-tr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cn2-sp{flex:1}.cn2-cnt{font-size:13px;color:var(--muted)}
+.cn2-seg{display:inline-flex;gap:2px;padding:2px;border-radius:6px;background:var(--neutral)}
+.cn2-seg button{all:unset;cursor:pointer;height:32px;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted2)}
+.cn2-seg button[aria-pressed=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+.cn2-chips{display:flex;gap:6px;flex-wrap:wrap}
+.cn2-chip{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:15px;font-size:12.5px;background:var(--surface)}
+.cn2-chip b{font-weight:600;color:var(--muted2);font-size:12px}.cn2-chip[aria-pressed=true]{background:var(--tint);border-color:var(--tintbd);color:var(--accent2)}
+.cn2-chip.chip-exc b{color:var(--bad)}
+.cn2-seg button:focus-visible,.cn2-chip:focus-visible,.cn2-no:focus-visible,.cn2-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cn2-t{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.cn2-t th{position:sticky;top:0;z-index:2;height:38px;padding:0 14px;text-align:start;font-size:12px;font-weight:600;color:var(--muted2);background:var(--sub);border-bottom:1px solid var(--line);white-space:nowrap}
+.cn2-t td{height:56px;padding:6px 14px;border-bottom:1px solid var(--line2);white-space:nowrap;vertical-align:middle}
+.cn2-t .num{text-align:end;font-variant-numeric:tabular-nums}
+.cn2-t tbody tr{cursor:pointer}.cn2-t tbody tr:hover td{background:var(--hover2,var(--sub))}
+.cn2-t tbody tr[aria-selected=true] td,.cn2-t tbody tr[data-found=true] td{background:var(--tint)}
+.cn2-no{all:unset;cursor:pointer;color:var(--accent);font-weight:500}
+.cn2-os{display:block;font-size:11.5px;color:var(--muted)}
+.cn2-party{max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.cn2-t2{display:block;font-size:11.5px;color:var(--muted);font-weight:400}
+.cn2-dt{color:var(--muted2)}
+.cn2-src{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;font-size:12px;font-weight:600}
+.src-a{background:#EEF0FF;color:#3B3FB5}.src-m{background:var(--neutral);color:var(--muted2)}
+.cn2-st{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;font-size:12px;font-weight:600;white-space:nowrap}
+.cn2-st::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.st-ok{background:var(--okbg);color:var(--ok)}.st-bad{background:var(--badbg);color:var(--bad)}.st-warn{background:var(--warnbg);color:var(--warn)}.st-bad2{background:var(--neutral);color:var(--bad)}.st-mu{background:var(--neutral);color:var(--muted2)}
+.cn2-empty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:48px;color:var(--muted)}.cn2-empty b{color:var(--ink)}
+.cn2-scrim{all:unset;position:fixed;inset:0;z-index:60;background:rgba(16,20,28,.28)}
+.cn2-dr{position:fixed;top:0;right:0;bottom:0;z-index:61;width:min(720px,100vw);background:var(--surface);box-shadow:-8px 0 32px rgba(22,26,33,.18);display:flex;flex-direction:column;color:var(--ink)}
+.cn2-dh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 22px 12px}
+.cn2-dh1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.cn2-dh h2{margin:0;font-size:18px;font-weight:600}.cn2-dh p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.cn2-tabs{display:flex;gap:4px;padding:0 22px;border-bottom:1px solid var(--line)}
+.cn2-tabs button{all:unset;cursor:pointer;height:40px;padding:0 10px;font-size:13px;font-weight:500;color:var(--muted2);border-bottom:2px solid transparent}
+.cn2-tabs button[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.cn2-db{flex:1;overflow:auto;padding:18px 22px 24px;display:flex;flex-direction:column;gap:18px}
+.cn2-exc{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:8px;background:var(--badbg);border:1px solid var(--badbd,#f1c2c2)}
+.cn2-exc b{color:var(--bad);font-size:13.5px}.cn2-exc span{font-size:13px}.cn2-exc div{display:flex;gap:8px;margin-top:4px}
+.cn2-sec h3{margin:0;font-size:14px;font-weight:600}.cn2-sub{margin:2px 0 10px;font-size:12.5px;color:var(--muted)}
+.cn2-fl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.cn2-fl li{position:relative;display:flex;gap:12px;padding-bottom:14px}
+.cn2-fl li:not(:last-child)::after{content:'';position:absolute;left:10px;top:22px;bottom:2px;width:2px;background:var(--line)}
+.cn2-fl li.fl-done:not(:last-child)::after{background:var(--ok)}
+.cn2-mk{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:700;border:2px solid var(--bd);background:var(--surface);color:var(--muted);box-sizing:border-box;z-index:1}
+.fl-done .cn2-mk{background:var(--ok);border-color:var(--ok);color:#fff}.fl-fail .cn2-mk{background:var(--bad);border-color:var(--bad);color:#fff}.fl-now .cn2-mk{border-color:var(--warn);color:var(--warn)}
+.cn2-fl li > div{display:flex;flex-direction:column;gap:1px;padding-top:1px}.cn2-fl b{font-size:13px}.cn2-fl span:not(.cn2-mk){font-size:12.5px;color:var(--muted2)}
+.fl-fail b,.fl-fail span:not(.cn2-mk){color:var(--bad) !important}.fl-wait b{color:var(--muted)}
+.cn2-kv{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin:10px 0 0}.cn2-kv dt{font-size:11.5px;color:var(--muted)}.cn2-kv dd{margin:2px 0 0;font-size:13px;font-weight:500;word-break:break-word}
+.cn2-rm{margin-top:12px;padding:10px 12px;border-radius:8px;background:var(--sub)}.cn2-rm span{font-size:11.5px;color:var(--muted)}.cn2-rm p{margin:2px 0 0;font-size:13px}
+.cn2-lt{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cn2-lt th{height:34px;padding:0 8px;text-align:start;font-size:12px;font-weight:600;color:var(--muted2);background:var(--sub);border-bottom:1px solid var(--line)}
+.cn2-lt td{padding:9px 8px;border-bottom:1px solid var(--line2);vertical-align:top}.cn2-lt .num{text-align:end;font-variant-numeric:tabular-nums}
+.cn2-lt small{display:block;font-size:12px;color:var(--muted)}.cn2-lt tfoot td{background:var(--sub);border-bottom:0}.cn2-g{font-weight:700;color:var(--accent2);white-space:nowrap}
+.cn2-info{margin:0;padding:10px 12px;border-radius:8px;background:var(--tint);color:var(--accent2);font-size:13px}
+.cn2-ap{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cn2-ap li{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;border-left:3px solid var(--bd);font-size:13px}
+.cn2-ap1{display:flex;justify-content:space-between;gap:8px}.cn2-apr{font-size:12px;font-weight:600}
+.ap-approved{border-left-color:var(--ok) !important}.ap-approved .cn2-apr{color:var(--ok)}.ap-rejected{border-left-color:var(--bad) !important}.ap-rejected .cn2-apr{color:var(--bad)}
+.ap-pending{border-left-color:var(--warn) !important}.ap-pending .cn2-apr{color:var(--warn)}.ap-not-reached .cn2-apr{color:var(--muted)}
+.cn2-ap q{display:block;margin-top:2px;font-style:italic;color:var(--muted2);quotes:none}
+.cn2-act{display:flex;flex-direction:column;gap:6px}.cn2-l{font-size:13px;font-weight:500}.cn2-act textarea{height:70px;padding-top:8px;resize:vertical}
+.cn2-ab{display:flex;justify-content:flex-end;gap:8px}.cn2-rej{color:var(--bad)}
+@media (prefers-reduced-motion:no-preference){.cn2-dr{animation:cn2in .18s ease-out}@keyframes cn2in{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
+.lay{white-space:nowrap;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}.lay:hover{color:var(--ink)}.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
+</style>
+<link rel="stylesheet" href="girs-ui.css">
+</helmet>
+<div class="theme groot" data-theme="{{shell.theme}}"  style="zoom: {{shell.zoom}}; height: {{shell.rootH}}; min-height: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif">
+  <div aria-hidden="true" style="height: 3px; background: var(--brand); flex: none"></div>
+  <div style="flex: 1 1 auto; min-height: 0; display: flex">
+    <sc-if value="{{shell.drawerOpen}}" hint-placeholder-val="{{ false }}"><div class="gscrim" onClick="{{shell.closeDrawer}}" aria-hidden="true"></div></sc-if>
+    <aside id="gside" class="gside" data-drawer="{{shell.drawer}}" aria-label="Side panel" style="flex: none; width: {{shell.sbW}}; background: var(--surface); border-inline-end: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; transition: width .18s ease">
+      <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line2); box-sizing: border-box; {{shell.logoRow}}">
+        <span class="glogo" style="display: inline-flex; border-radius: 4px; padding: 2px 4px"><img src="pil-logo.png" alt="PIL" style="display: block; {{shell.logo}}"></span>
+        <span style="width: 1px; height: 20px; background: var(--line); {{shell.hide}}"></span>
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); {{shell.hide}}">GIRS</span>
+        <button class="btn btn-icon btn-sm gdclose" onClick="{{shell.closeDrawer}}" aria-label="Close menu" style="margin-inline-start: auto; width: 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <div class="gdctx" style="flex: none; flex-direction: column; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line2)">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 8px">
+          <div style="position: relative"><label for="dhub" class="sr">Hub</label><select id="dhub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 100%"><option value="SIN">Singapore · SIN</option><option value="NSA">India · NSA</option><option value="LCH">Thailand · LCH</option><option value="PKG">Malaysia · PKG</option><option value="JED">Saudi Arabia · JED</option><option value="ZLO">Mexico · ZLO</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position: relative"><label for="dent" class="sr">Entity</label><select id="dent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100%"><option value="PIL">PIL</option><option value="MELL">MELL</option><option value="MSC">MSC</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+          <span class="chip" title="Fiscal period" style="background: var(--okbg); color: var(--ok); height: 28px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>[Fiscal period] · Open</span>
+        </div>
+      </div>
+      <nav aria-label="Screens" data-c="{{shell.cA}}" style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 16px">
+        <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-bd" onClick="{{shell.flyClose}}" aria-hidden="true"></div></sc-if>
+        <a href="index.html" class="nav-grp" title="{{shell.l.nHome}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V9.5"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nHome}}</span></a>
+        <a href="voyage-invoicing.html" class="nav-grp" title="{{shell.l.nVoy}}" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"></path><path d="M4 17l-1-5h18l-1 5"></path><path d="M6 12V7h12v5"></path><path d="M12 3v4"></path></svg><span class="ng-l" style="{{shell.hide}}">{{shell.l.nVoy}}</span></a>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g0}}" aria-controls="ng-g0" onClick="{{shell.accT.g0}}" title="{{shell.l.g0}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g0}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g0}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g0}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g0" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g0}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g0}}</div></sc-if>
+          <a href="operations-cockpit.html" class="nav-item" title="{{shell.l.nMain}}">{{shell.l.nMain}}
+          </a>
+          <a href="charge-processing.html" class="nav-item" title="{{shell.l.nChargeProcessing}}">{{shell.l.nChargeProcessing}}
+          </a>
+          <a href="dd-engine.html" class="nav-item" title="{{shell.l.nDDEngine}}">{{shell.l.nDDEngine}}
+          </a>
+          <a href="integration-monitor.html" class="nav-item" title="{{shell.l.nIntegrationMonitor}}">{{shell.l.nIntegrationMonitor}}
+          </a>
+          <a href="document-intake.html" class="nav-item" title="{{shell.l.nDocumentIntake}}">{{shell.l.nDocumentIntake}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp nav-grp-on" aria-expanded="{{shell.accA.g1}}" aria-controls="ng-g1" onClick="{{shell.accT.g1}}" title="{{shell.l.g1}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h9l5 5v13H5z"></path><path d="M14 3v5h5M8.5 12.5h7M8.5 16.5h7"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g1}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g1}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g1}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g1" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g1}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g1}}</div></sc-if>
+          <a href="invoice-list-v2.html" class="nav-item" title="Invoice List">Invoice List
+          </a>
+          <a href="split-billing.html" class="nav-item" title="{{shell.l.nSplitBilling}}">{{shell.l.nSplitBilling}}
+          </a>
+          <a href="manual-invoice.html" class="nav-item" title="{{shell.l.nManualInvoice}}">{{shell.l.nManualInvoice}}
+          </a>
+          <a href="invoice-previewer.html" class="nav-item" title="{{shell.l.nInvoicePreviewer}}">{{shell.l.nInvoicePreviewer}}
+          </a>
+          <a href="credit-notes.html" class="nav-item" title="{{shell.l.nCreditNotes}}">{{shell.l.nCreditNotes}}
+          </a>
+          <a href="credit-note-list.html" class="nav-item nav-on" aria-current="page" title="{{shell.l.nCreditNoteList}}">{{shell.l.nCreditNoteList}}
+          </a>
+          <a href="dar-console.html" class="nav-item" title="{{shell.l.nDARConsole}}">{{shell.l.nDARConsole}}
+          </a>
+          <a href="einvoice-exceptions.html" class="nav-item" title="{{shell.l.nEInvoiceExceptions}}">{{shell.l.nEInvoiceExceptions}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g2}}" aria-controls="ng-g2" onClick="{{shell.accT.g2}}" title="{{shell.l.g2}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="12" cy="12" r="3"></circle><path d="M6.5 9v6M17.5 9v6"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g2}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g2}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g2}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g2" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g2}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g2}}</div></sc-if>
+          <a href="receipting.html" class="nav-item" title="{{shell.l.nReceipting}}">{{shell.l.nReceipting}}
+          </a>
+          <a href="cashapp-workbench.html" class="nav-item" title="{{shell.l.nCashAppWorkbench}}">{{shell.l.nCashAppWorkbench}}
+          </a>
+          <a href="tolerance-coreor.html" class="nav-item" title="{{shell.l.nToleranceCOREOR}}">{{shell.l.nToleranceCOREOR}}
+          </a>
+          <a href="soa-aging.html" class="nav-item" title="{{shell.l.nSOADashboard}}">{{shell.l.nSOADashboard}}
+          </a>
+          <a href="credit-management.html" class="nav-item" title="{{shell.l.nCreditManagement}}">{{shell.l.nCreditManagement}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g3}}" aria-controls="ng-g3" onClick="{{shell.accT.g3}}" title="{{shell.l.g3}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-4.5"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g3}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g3}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g3}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g3" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g3}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g3}}</div></sc-if>
+          <a href="approvals-inbox.html" class="nav-item" title="{{shell.l.nApprovalsInbox}}">{{shell.l.nApprovalsInbox}}
+          </a>
+          <a href="enquiry.html" class="nav-item" title="{{shell.l.nEnquiry}}">{{shell.l.nEnquiry}}
+          </a>
+          <a href="reconciliation.html" class="nav-item" title="{{shell.l.nReconciliation}}">{{shell.l.nReconciliation}}
+          </a>
+          <a href="month-end.html" class="nav-item" title="{{shell.l.nMonthEnd}}">{{shell.l.nMonthEnd}}
+          </a>
+          <a href="reports.html" class="nav-item" title="{{shell.l.nReports}}">{{shell.l.nReports}}
+          </a>
+          <a href="mis-reports-v2.html" class="nav-item" title="MIS Reports">MIS Reports
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g4}}" aria-controls="ng-g4" onClick="{{shell.accT.g4}}" title="{{shell.l.g4}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h10M17 6h4M3 12h4M11 12h10M3 18h12M19 18h2"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g4}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g4}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g4}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g4" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g4}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g4}}</div></sc-if>
+          <a href="company-master.html" class="nav-item" title="{{shell.l.nCompanyMaster}}">{{shell.l.nCompanyMaster}}
+          </a>
+          <a href="customer-master.html" class="nav-item" title="{{shell.l.nCustomerMaster}}">{{shell.l.nCustomerMaster}}
+          </a>
+          <a href="bank-master-v1.html" class="nav-item" title="{{shell.l.nBankMaster}}">{{shell.l.nBankMaster}}
+          </a>
+          <a href="charge-master-v2c.html" class="nav-item" title="{{shell.l.nChargeMaster}}">{{shell.l.nChargeMaster}}
+          </a>
+          <a href="business-rule-engine-v8.html" class="nav-item" title="Business Rule Engine">Business Rule Engine
+          </a>
+          <a href="accounting-configuration.html" class="nav-item" title="{{shell.l.nAccountingConfig}}">{{shell.l.nAccountingConfig}}
+          </a>
+          <a href="exchange-rate-master.html" class="nav-item" title="{{shell.l.nExchangeRate}}">{{shell.l.nExchangeRate}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <button class="nav-grp" aria-expanded="{{shell.accA.g5}}" aria-controls="ng-g5" onClick="{{shell.accT.g5}}" title="{{shell.l.g5}}" style="{{shell.grp}}">
+            <svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+            <span class="ng-l" style="{{shell.hide}}">{{shell.l.g5}}</span>
+            <svg class="ng-ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{shell.accR.g5}}); {{shell.hide}}"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{shell.acc.g5}}" hint-placeholder-val="{{ true }}">
+            <div id="ng-g5" class="ng-sub {{shell.subCls}}" style="{{shell.subSt}}" role="group" aria-label="{{shell.l.g5}}">
+              <sc-if value="{{shell.flyOn}}" hint-placeholder-val="{{ false }}"><div class="ng-fh">{{shell.l.g5}}</div></sc-if>
+          <a href="country-master.html" class="nav-item" title="{{shell.l.nCountryMaster}}">{{shell.l.nCountryMaster}}
+          </a>
+          <a href="currency-master.html" class="nav-item" title="{{shell.l.nCurrencyMaster}}">{{shell.l.nCurrencyMaster}}
+          </a>
+          <a href="city-master.html" class="nav-item" title="{{shell.l.nCityMaster}}">{{shell.l.nCityMaster}}
+          </a>
+          <a href="port-master.html" class="nav-item" title="{{shell.l.nPortMaster}}">{{shell.l.nPortMaster}}
+          </a>
+          <a href="tax-setup.html" class="nav-item" title="{{shell.l.nTaxSetup}}">{{shell.l.nTaxSetup}}
+          </a>
+            </div>
+          </sc-if>
+        </div>
+        <a href="lms-sar-interface.html" class="nav-grp" title="JSON" style="{{shell.grp}}"><svg class="ng-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1"></path><path d="M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"></path></svg><span class="ng-l" style="{{shell.hide}}">JSON</span></a>
+      </nav>
+      <div class="gsbfoot" style="flex: none; padding: 8px 10px; border-top: 1px solid var(--line2)">
+        <button class="sbtoggle" onClick="{{shell.toggleSb}}" aria-expanded="{{shell.sbOpen}}" aria-label="{{shell.sbLabel}}" title="{{shell.sbLabel}}" style="{{shell.item}}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path><path d="{{shell.sbIcon}}"></path></svg>
+          <span style="{{shell.hide}}">Collapse side panel</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="gcontent" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; overflow-y: auto">
+      <div style="position: sticky; top: 0; z-index: 20; flex: none">
+        <div class="gtop" style="height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line2); box-sizing: border-box">
+          <button class="btn btn-icon gmenu" onClick="{{shell.toggleDrawer}}" aria-label="Open menu" aria-controls="gside" aria-expanded="{{shell.drawerAria}}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <div class="gsearch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-start: 12px; top: 10px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            <label for="gq" class="sr">Search</label>
+            <input id="gq" class="input" placeholder="{{shell.ph}}" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="grow"></div>
+          <div class="gctx" style="position: relative">
+            <label for="ghub" class="sr">Hub</label>
+            <select id="ghub" class="select select-sm" value="{{shell.hub}}" onChange="{{shell.setHub}}" style="width: 148px">
+              <option value="SIN">Singapore · SIN</option>
+              <option value="NSA">India · NSA</option>
+              <option value="LCH">Thailand · LCH</option>
+              <option value="PKG">Malaysia · PKG</option>
+              <option value="JED">Saudi Arabia · JED</option>
+              <option value="ZLO">Mexico · ZLO</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div class="gctx" style="position: relative">
+            <label for="gent" class="sr">Entity</label>
+            <select id="gent" class="select select-sm" value="{{shell.ent}}" onChange="{{shell.setEnt}}" style="width: 100px">
+              <option value="PIL">PIL</option>
+              <option value="MELL">MELL</option>
+              <option value="MSC">MSC</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <span class="chip gperiod" style="background: var(--okbg); color: var(--ok); height: 32px; border-radius: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--okdot)"></span>Period [Fiscal period] · Open</span>
+          <div class="ghl">
+            <button class="{{shell.health.cls}}" aria-haspopup="dialog" aria-expanded="{{shell.health.aria}}" aria-label="{{shell.health.label}}" title="{{shell.health.label}}" onClick="{{shell.health.toggle}}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
+              <sc-if value="{{shell.health.hasN}}" hint-placeholder-val="{{ true }}"><span class="ghl-n">{{shell.health.n}}</span></sc-if>
+            </button>
+            <sc-if value="{{shell.health.open}}" hint-placeholder-val="{{ false }}">
+              <button class="ghl-scrim" tabindex="-1" aria-hidden="true" onClick="{{shell.health.close}}"></button>
+              <div class="ghl-p" role="dialog" aria-label="System health">
+                <div class="ghl-h"><div><b>System health</b><small>{{shell.health.upd}}</small></div><span class="{{shell.health.tone}}">{{shell.health.sum}}</span></div>
+                <ul><sc-for list="{{shell.health.items}}" as="h" hint-placeholder-count="10"><sc-if value="{{h.isHead}}" hint-placeholder-val="{{ false }}"><li class="ghl-g">{{h.head}}</li></sc-if><sc-if value="{{h.isRow}}" hint-placeholder-val="{{ true }}"><li class="ghl-r"><i class="{{h.dot}}" aria-hidden="true"></i><span class="ghl-b"><b>{{h.name}}</b><small>{{h.detail}}</small></span><span class="{{h.sc}}">{{h.state}}</span></li></sc-if></sc-for></ul>
+                <a class="ghl-f lnk" href="integration-monitor.html">Open Integration Monitor</a>
+              </div>
+            </sc-if>
+          </div>
+          <a href="approvals-inbox.html" class="btn btn-icon" aria-label="{{shell.pending}} pending approvals" title="{{shell.pending}} pending approvals" style="position: relative; text-decoration: none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>
+            <span class="mono" style="position: absolute; top: -6px; inset-inline-end: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand); color: var(--onaccent); font-size: 12px; line-height: 18px; text-align: center; box-sizing: border-box">{{shell.pending}}</span>
+          </a>
+          <div style="position: relative">
+            <button class="ubtn" onClick="{{shell.toggleUm}}" aria-expanded="{{shell.umAria}}" aria-haspopup="menu" aria-label="User menu: {{shell.curLogin}}, {{shell.curRole}}">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex: none">{{shell.initials}}</span>
+              <span class="gutxt" style="display: flex; flex-direction: column; line-height: 14px"><span style="font-size: 12px; font-weight: 600">{{shell.curLogin}}</span><span style="font-size: 12px; color: var(--muted)">{{shell.curRole}}</span></span>
+              <svg class="gutxt uchev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <sc-if value="{{shell.um}}" hint-placeholder-val="{{ false }}">
+              <div aria-hidden="true" onClick="{{shell.closeUm}}" style="position: fixed; inset: 0; z-index: 29"></div>
+              <div class="menu" role="menu" aria-label="User menu">
+                <sc-if value="{{shell.menuMain}}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px">
+                  <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--onaccent); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex: none">{{shell.initials}}</span>
+                  <span class="mi-txt"><span style="font-weight: 600; line-height: 20px">{{shell.userName}}</span><span class="mi-sub">2 logins · roles from LMS IAM</span></span>
+                </div>
+                <div class="menu-sep"></div>
+                <div class="k" style="padding: 6px 10px 4px">Switch login</div>
+                <sc-for list="{{shell.logins}}" as="g" hint-placeholder-count="2">
+                  <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <span class="mi-txt"><span class="mi-lbl">{{g.label}}</span><span class="mi-sub">{{g.role}}</span></span>
+                    <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                  </button>
+                </sc-for>
+                <div class="menu-sep"></div>
+                <button class="mi" role="menuitem" aria-haspopup="true" onClick="{{shell.toggleLang}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Language</span><span class="mi-sub" translate="no">{{shell.langName}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; color: var(--muted)"><path d="M9 6l6 6-6 6"></path></svg>
+                </button>
+                <div class="mi ap-row" role="none">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18" ></path><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path></svg>
+                  <span class="mi-txt"><span class="mi-lbl">Appearance</span></span>
+                  <div class="ap-seg" role="radiogroup" aria-label="Theme">
+                    <button role="radio" aria-checked="{{shell.lightOn}}" onClick="{{shell.setLight}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><span>Light</span></button>
+                    <button role="radio" aria-checked="{{shell.darkOn}}" onClick="{{shell.setDark}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><span>Dark</span></button>
+                  </div>
+                </div>
+                <div class="menu-sep"></div>
+                <button class="mi mi-danger" role="menuitem" onClick="{{shell.signOut}}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
+                  <span class="mi-lbl">Sign out</span>
+                </button>
+                </sc-if>
+                <sc-if value="{{shell.langOpen}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; align-items: center; gap: 6px; padding: 2px 4px 8px">
+                    <button class="btn btn-icon btn-sm" aria-label="Back to profile menu" onClick="{{shell.toggleLang}}" style="width: 32px; padding: 0; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+                    <span style="font-weight: 600">Language</span>
+                  </div>
+                  <div style="padding: 0 6px 6px"><input class="input lg-q" style="width: 100%; height: 34px" placeholder="Search language" aria-label="Search language" autocomplete="off" value="{{shell.lgQ}}" onInput="{{shell.setLgQ}}"></div>
+                  <div class="lg-list" role="group" aria-label="Languages" translate="no">
+                    <sc-for list="{{shell.langs}}" as="g" hint-placeholder-count="4">
+                      <button class="mi" role="menuitemradio" aria-checked="{{g.on}}" onClick="{{g.pick}}">
+                        <span class="mi-txt"><span class="mi-lbl" lang="{{g.code}}">{{g.label}}</span><span class="mi-sub">{{g.en}}</span></span>
+                        <span aria-hidden="true" style="flex: none; width: 16px; color: var(--accent); font-weight: 700; text-align: center">{{g.mark}}</span>
+                      </button>
+                    </sc-for>
+                    <sc-if value="{{shell.lgNone}}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 10px; color: var(--muted)">No language matches “{{shell.lgQ}}”</div></sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div class="ghead" style="min-height: 56px; flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 8px 20px; background: var(--surface); border-bottom: 1px solid var(--line); box-sizing: border-box">
+          <div style="min-width: 0">
+            <h1 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 22px">Credit Note List</h1>
+            <p style="margin: 0; font-size: 12px; line-height: 16px; color: var(--muted)">Automatic and manual credit notes · full or partial credit · posted to GFS</p>
+          </div>
+          <div class="gright" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-inline-start: auto">
+          <nav aria-label="Design versions" style="display: flex; align-items: center; gap: 8px"><span style="font-size: 12px; color: var(--muted)">Version</span><div style="display: flex; gap: 2px; padding: 2px; border-radius: 6px; background: var(--neutral)"><a class="lay" href="credit-note-list.html" title="Current">1</a><a class="lay" href="credit-note-list-v2.html" aria-current="page" title="Partial credit">2</a></div></nav>
+          <span class="chip" style="background: var(--warnbg); color: var(--warn); height: 32px; border-radius: 6px">Sample values</span>
+          <a class="btn btn-primary" href="credit-notes-v2.html" style="text-decoration: none">Raise credit note</a>
+          <div style="position: relative">
+            <label for="gexp" class="sr">Export</label>
+            <select id="gexp" class="select" value="" onChange="{{shell.exp}}" style="width: 112px">
+              <option value="">Export</option>
+              <option value="xlsx">Excel</option>
+              <option value="csv">CSV</option>
+              <option value="pdf">PDF</option>
+            </select>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          </div>
+        </div>
+      </div>
+      <main class="gmain cn2" style="flex: 1 0 auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+        <section class="card cn2-tool" aria-label="Find credit notes">
+          <div class="cn2-tr">
+            <input class="input" style="width: 340px" placeholder="Search credit note, invoice, customer, FCA / DAR ref" value="{{q}}" onInput="{{onQ}}" aria-label="Search">
+            <div class="cn2-seg" role="group" aria-label="Source"><sc-for list="{{srcs}}" as="x" hint-placeholder-count="3"><button type="button" aria-pressed="{{x.on}}" onClick="{{x.go}}">{{x.t}}</button></sc-for></div>
+            <div style="position: relative"><select class="select" value="{{rsn}}" onChange="{{onRsn}}" aria-label="Reason code" style="width: 210px"><option value="">All reason codes</option><sc-for list="{{rsns}}" as="o" hint-placeholder-count="4"><option value="{{o}}">{{o}}</option></sc-for></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; inset-inline-end: 10px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--muted)"><path d="M6 9l6 6 6-6"></path></svg></div>
+            <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{clear}}">Clear</button></sc-if>
+            <span class="cn2-sp"></span><span class="cn2-cnt">{{countText}}</span>
+          </div>
+          <div class="cn2-chips" role="group" aria-label="Status"><sc-for list="{{chips}}" as="c" hint-placeholder-count="6"><button type="button" class="cn2-chip {{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.go}}">{{c.t}}<b>{{c.n}}</b></button></sc-for></div>
+        </section>
+        <section class="card" style="flex: 1 1 auto; min-height: 0; overflow: auto">
+          <table class="cn2-t">
+            <thead><tr><th scope="col">Credit Note No.</th><th scope="col">Original Invoice</th><th scope="col">Billing Party</th><th scope="col">Source</th><th scope="col">Reason Code</th><th scope="col">Credit Type</th><th scope="col">FCA / DAR Ref.</th><th scope="col" class="num">Credit Total (incl. tax)</th><th scope="col">Status</th><th scope="col">GFS Posting</th><th scope="col">Replacement Invoice</th><th scope="col">Date</th></tr></thead>
+            <tbody><sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+              <tr onClick="{{r.open}}" aria-selected="{{r.on}}" data-found="{{r.hl}}">
+                <td><button type="button" class="cn2-no mono" onClick="{{r.open}}">{{r.no}}</button></td>
+                <td><span class="mono">{{r.orig}}</span><sc-if value="{{r.hasOrigSt}}" hint-placeholder-val="{{ false }}"><small class="cn2-os">{{r.origSt}}</small></sc-if></td>
+                <td class="cn2-party">{{r.party}}</td>
+                <td><span class="cn2-src {{r.srcCls}}">{{r.src}}</span></td>
+                <td>{{r.reason}}</td><td>{{r.ctype}}</td><td class="mono {{r.refDim}}">{{r.ref}}</td>
+                <td class="num mono"><b>{{r.tot}}</b><sc-if value="{{r.hasTot2}}" hint-placeholder-val="{{ false }}"><small class="cn2-t2">{{r.tot2}}</small></sc-if></td>
+                <td><span class="cn2-st {{r.stCls}}">{{r.stT}}</span></td>
+                <td class="mono {{r.gfsDim}}">{{r.gfs}}</td><td class="mono {{r.replDim}}">{{r.repl}}</td><td class="cn2-dt">{{r.date}}</td>
+              </tr>
+            </sc-for></tbody>
+          </table>
+          <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><div class="cn2-empty"><b>No credit notes match</b><span>Try another status or source, or clear the filters.</span><button class="btn" onClick="{{clear}}">Clear filters</button></div></sc-if>
+        </section>
+      </main>
+      <sc-if value="{{dr.on}}" hint-placeholder-val="{{ false }}">
+        <button class="cn2-scrim" tabindex="-1" aria-label="Close" onClick="{{dr.close}}"></button>
+        <aside class="cn2-dr" role="dialog" aria-modal="true" aria-labelledby="cn2-dt">
+          <div class="cn2-dh">
+            <div><div class="cn2-dh1"><h2 id="cn2-dt" class="mono">{{dr.no}}</h2><span class="cn2-src {{dr.srcCls}}">{{dr.src}}</span><span class="cn2-st {{dr.stCls}}">{{dr.stT}}</span></div><p>Credit note against <span class="mono">{{dr.orig}}</span> · {{dr.party}}</p></div>
+            <button class="btn btn-icon btn-sm" onClick="{{dr.close}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+          <div class="cn2-tabs" role="tablist"><sc-for list="{{dr.tabs}}" as="t" hint-placeholder-count="4"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}">{{t.t}}</button></sc-for></div>
+          <div class="cn2-db">
+            <sc-if value="{{dr.isExc}}" hint-placeholder-val="{{ false }}"><div class="cn2-exc" role="alert"><b>Needs action</b><span>{{dr.exc}}</span><div><button class="btn btn-primary" onClick="{{dr.retry}}">{{dr.excRetryT}}</button><button class="btn" onClick="{{dr.manual}}">Handle manually</button></div></div></sc-if>
+            <sc-if value="{{dr.isDet}}" hint-placeholder-val="{{ true }}">
+              <section class="cn2-sec"><h3>{{dr.flowT}}</h3><p class="cn2-sub">{{dr.flowSub}}</p>
+                <ol class="cn2-fl"><sc-for list="{{dr.flow}}" as="f" hint-placeholder-count="5"><li class="{{f.cls}}"><span class="cn2-mk" aria-hidden="true">{{f.mk}}</span><div><b>{{f.t}}</b><span>{{f.d}}</span></div></li></sc-for></ol></section>
+              <section class="cn2-sec"><h3>Credit details</h3><dl class="cn2-kv"><sc-for list="{{dr.kv}}" as="x" hint-placeholder-count="8"><div><dt>{{x.l}}</dt><dd>{{x.v}}</dd></div></sc-for></dl>
+                <sc-if value="{{dr.hasRemark}}" hint-placeholder-val="{{ false }}"><div class="cn2-rm"><span>Remarks</span><p>{{dr.remark}}</p></div></sc-if></section>
+            </sc-if>
+            <sc-if value="{{dr.isLines}}" hint-placeholder-val="{{ false }}">
+              <p class="cn2-sub">{{dr.linesSub}}</p>
+              <table class="cn2-lt"><thead><tr><th>Charge</th><th>Currency</th><sc-if value="{{dr.isPart}}" hint-placeholder-val="{{ false }}"><th class="num">Invoice amount</th></sc-if><th class="num">{{dr.amtL}}</th><th>Tax</th><th class="num">Tax reversed</th><th class="num">Credit total</th></tr></thead>
+                <tbody><sc-for list="{{dr.lines}}" as="l" hint-placeholder-count="2"><tr><td><b class="mono">{{l.code}}</b><small>{{l.name}}</small></td><td class="mono">{{l.cur}}</td><sc-if value="{{dr.isPart}}" hint-placeholder-val="{{ false }}"><td class="num mono dim">{{l.inv}}</td></sc-if><td class="num mono">{{l.amt}}</td><td><span class="mono dim">{{l.tcode}}</span><small>{{l.rate}}</small></td><td class="num mono">{{l.tr}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
+                <tfoot><sc-for list="{{dr.tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="{{dr.totSpan}}"><b>Total</b> · {{t.cur}}</td><td class="num mono"><b>{{t.a}}</b></td><td></td><td class="num mono"><b>{{t.t}}</b></td><td class="num mono cn2-g">{{t.cur}} {{t.g}}</td></tr></sc-for></tfoot></table>
+            </sc-if>
+            <sc-if value="{{dr.isAppr}}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{dr.isAuto}}" hint-placeholder-val="{{ false }}"><p class="cn2-info">{{dr.autoT}}</p></sc-if>
+              <sc-if value="{{dr.hasAppr}}" hint-placeholder-val="{{ true }}"><ol class="cn2-ap"><sc-for list="{{dr.appr}}" as="a" hint-placeholder-count="2"><li class="{{a.cls}}"><div class="cn2-ap1"><b>{{a.lvl}}</b><span class="cn2-apr">{{a.res}}</span></div><span class="dim">{{a.who}} · {{a.at}}</span><sc-if value="{{a.hasC}}" hint-placeholder-val="{{ false }}"><q>{{a.c}}</q></sc-if></li></sc-for></ol></sc-if>
+              <sc-if value="{{dr.canAct}}" hint-placeholder-val="{{ false }}">
+                <sc-if value="{{dr.mine}}" hint-placeholder-val="{{ false }}"><p class="cn2-info">{{dr.mineT}}</p></sc-if>
+                <sc-if value="{{dr.notMine}}" hint-placeholder-val="{{ true }}"><div class="cn2-act"><label class="cn2-l" for="cn2-note">Comment <span class="dim">Required to reject</span></label><textarea id="cn2-note" class="input" value="{{dr.note}}" onInput="{{dr.setNote}}" placeholder="Add a comment for the requester"></textarea><div class="cn2-ab"><button class="btn cn2-rej" onClick="{{dr.reject}}">Reject</button><button class="btn btn-primary" onClick="{{dr.approve}}">Approve</button></div></div></sc-if>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{dr.isHist}}" hint-placeholder-val="{{ false }}">
+              <table class="cn2-lt"><thead><tr><th>Date / Time</th><th>User</th><th>Action</th><th>Details</th></tr></thead><tbody><sc-for list="{{dr.hist}}" as="h" hint-placeholder-count="3"><tr><td class="mono">{{h.at}}</td><td>{{h.who}}</td><td><b>{{h.what}}</b></td><td class="dim">{{h.d}}</td></tr></sc-for></tbody></table>
+            </sc-if>
+          </div>
+        </aside>
+      </sc-if>
+    </div>
+  </div>
+
+
+  <sc-if value="{{shell.hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="gtoast" style="position: fixed; bottom: 20px; inset-inline-end: 20px; z-index: 60; display: flex; align-items: center; gap: 12px; max-width: 520px; min-height: 44px; padding: 0 8px 0 16px; border-radius: 8px; background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(0,0,0,.25); box-sizing: border-box">{{shell.toast}}<button class="btn btn-icon btn-sm" onClick="{{shell.closeToast}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+  </sc-if>
+</div>
+</script>
+<script type="text/x-dc" id="logic">
+class GirsPage extends DCLogic {
+  constructor(p) {
+    super(p);
+    let q0 = '';
+    try { q0 = new URLSearchParams(location.search).get('q') || ''; } catch (e) {}
+    const cx = (window.GirsCtx && window.GirsCtx.take('credit-note-list-v2.html')) || null;
+    if (cx) q0 = cx.inv;
+    let local = {};
+    try { local = JSON.parse(localStorage.getItem('girs.cnl.p2') || '{}') || {}; } catch (e) {}
+    this.state = { q: q0, st: 'all', src: '', rsn: '', open: '', tab: 'det', ctx: cx, local, note: '' };
+    try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.state.open) this.setState({ open: '' }); }); } catch (e) {}
+  }
+  renderVals() {
+    const s = this.state, self = this;
+    const fmt = (n) => Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const ME = 'Daniel Tan';
+    // Sample credit notes. Lines: [charge code, charge name, credited amount, tax code, tax %, currency, invoice amount (partial only)]
+    const L = (c, n, a, t, r, cu, inv) => inv == null ? [c, n, a, t, r, cu] : [c, n, a, t, r, cu, inv];
+    const SEED = [
+      { no: 'SINOF2600341CR', orig: 'SINOF2602298', party: 'Straits Harbour Logistics (SG)', src: 'Auto', reason: 'FCA approval', ref: 'FCA-26-0158', date: '20 Nov 2026', by: 'GIRS rule BR-CRN-003',
+        lines: [L('OFT', 'Ocean Freight', 5200, 'ZR-INTL', 0, 'USD'), L('THC-O', 'Origin THC', 920, 'SG-SR-9', 9, 'SGD')], status: 'Generated', gfs: 'JV-SG-26-118402', repl: 'SINOF2602437', steps: { val: 'done', cxl: 'done', cn: 'done', inv: 'done', gfs: 'done' } },
+      { no: 'SINOD2600311CR', orig: 'SINOD2602150', party: 'Straits Harbour Logistics (MY)', src: 'Auto', reason: 'DAR waiver', ref: 'DAR-26-0087', date: '18 Nov 2026', by: 'DAR workflow',
+        lines: [L('DEM', 'Demurrage', 4200, 'SG-SR-9', 9, 'SGD')], status: 'Generated', gfs: 'JV-SG-26-118377', repl: '', steps: { val: 'done', cxl: 'done', cn: 'done', gfs: 'done' } },
+      { no: 'PKGOF2600045CR', orig: 'PKGOF2600917', party: 'Kinabalu Home Furnishings (MY)', src: 'Auto', reason: 'FCA approval', ref: 'FCA-26-0151', date: '20 Nov 2026', by: 'GIRS rule BR-CRN-003',
+        lines: [L('OFT', 'Ocean Freight', 1650, 'MY-SST-8', 8, 'USD')], status: 'Exception', gfs: '', repl: '', steps: { val: 'fail' },
+        exc: 'Revised charges for BL-MY-24003 not received from LMS. The credit note and new invoice can\'t be generated until LMS sends them.' },
+      { no: 'SINOF2600347CR', orig: 'SINOF2602281', party: 'Meridian Agro Exports (SG)', src: 'Auto', reason: 'FCA approval', ref: 'FCA-26-0160', date: '19 Nov 2026', by: 'GIRS rule BR-CRN-003',
+        lines: [L('OFT', 'Ocean Freight', 62400, 'ZR-INTL', 0, 'USD')], status: 'Exception', gfs: '', repl: '', steps: { val: 'done', cxl: 'done', cn: 'done', inv: 'done', gfs: 'fail' },
+        exc: 'GFS posting failed: accounting period 2026-11 is closed for entity PIL-SG. Credit note and new invoice are created but not yet posted.' },
+      { no: 'NSAOF2600071CR', orig: 'NSAOF2601044', party: 'Straits Harbour Logistics (IN)', src: 'Manual', reason: 'Invoice amendment', ref: '', date: '12 Nov 2026', by: 'Priya Nair',
+        lines: [L('OFT', 'Ocean Freight', 980, 'IN-GST-18', 18, 'USD'), L('DOC', 'Documentation', 220, 'IN-GST-18', 18, 'INR')], status: 'Generated', gfs: 'JV-IN-26-084415', repl: 'NSAOF2601062', remark: 'Billing party should be the consignee, confirmed by customer service.', ctype: 'Full' },
+      { no: 'SINOF2600329CR', orig: 'SINOF2602405', party: 'Meridian Agro Exports (SG)', src: 'Manual', reason: 'Pricing correction', ref: '', date: '14 Nov 2026', by: 'Daniel Tan',
+        lines: [L('OFT', 'Ocean Freight', 3200, 'ZR-INTL', 0, 'USD')], status: 'Generated', gfs: 'JV-SG-26-118120', repl: 'SINOF2602412', remark: 'Spot rate billed instead of the RFA rate.', ctype: 'Full' },
+      { no: 'SINOF2600324CR', orig: 'SINOF2602401', party: 'Straits Harbour Logistics (SG)', src: 'Manual', reason: 'Pricing correction', ref: '', date: '20 Nov 2026', by: 'Daniel Tan',
+        lines: [L('BAF', 'Bunker Adjustment Factor', 80, 'ZR-INTL', 0, 'USD', 320)], ctype: 'Partial', status: 'Pending approval', remark: 'BAF billed at the old quarter rate.',
+        appr: [['L1 · Agency Finance', 'Mei Lin Ong', 'Approved', '20 Nov 2026 10:12', 'Checked against Charge Master'], ['L2 · Finance Approver', 'Thushy (PIL)', 'Pending', '', '']] },
+      { no: 'LCHOD2600012CR', orig: 'LCHOD2600198', party: 'Andaman Bay Traders (TH)', src: 'Manual', reason: 'Invoice amendment', ref: '', date: '13 Nov 2026', by: 'Somchai P.',
+        lines: [L('DET', 'Detention', 720, 'TH-VAT-7', 7, 'THB', 1440)], ctype: 'Partial', status: 'Rejected', remark: '',
+        appr: [['L1 · Agency Finance', 'Niran K.', 'Rejected', '13 Nov 2026 17:20', 'Consignee change is not approved by the shipper. Raise again with the shipper\'s confirmation.'], ['L2 · Finance Approver', '—', 'Not reached', '', '']] },
+      { no: 'NSAOF2600078CR', orig: 'NSAOF2601051', party: 'Orchid Lane Polymers (IN)', src: 'Manual', reason: 'Invoice amendment', ref: '', date: '19 Nov 2026', by: 'Daniel Tan',
+        lines: [L('OFT', 'Ocean Freight', 1500, 'IN-GST-18', 18, 'USD')], ctype: 'Full', status: 'Draft', remark: '' }
+    ];
+    let extra = [];
+    try { extra = (JSON.parse(localStorage.getItem('girs.cn.p2') || '[]') || []).filter((c) => c && c.no); } catch (e) {}
+    const fromPopup = extra.filter((c, i, a) => a.findIndex((y) => y.no === c.no) === i && !SEED.some((y) => y.no === c.no)).map((c) => ({
+      no: c.no, orig: c.orig, party: c.party || '—', src: c.src || 'Manual', reason: c.reason, ref: c.ref && c.ref !== '—' ? c.ref : '', file: c.file || '', date: c.date || '', by: c.by || ME, remark: c.remark || '',
+      lines: Array.isArray(c.lines) && c.lines.length && Array.isArray(c.lines[0]) ? c.lines : [L('—', 'Invoice total', c.amount || 0, (c.taxrev || '—').split(' · ')[0], 0, c.cur || 'USD')],
+      ctype: c.ctype || 'Full', gfs: c.appr === 'Approved' ? 'JV-' + String(c.no).slice(0, 2) + '-26-1186' + String(c.no).slice(-4, -2) : '', repl: c.appr === 'Approved' && c.reason === 'FCA approval' ? String(c.orig).slice(0, 7) + '2650' : '',
+      status: c.appr === 'Approved' ? 'Generated' : (c.appr || 'Pending approval'), appr: c.ctype === 'Partial' ? [['L1 · Agency Finance', 'Mei Lin Ong', 'Pending', '', ''], ['L2 · Finance Approver', 'Thushy (PIL)', 'Not reached', '', '']] : [] }));
+    const R = fromPopup.concat(SEED).map((r) => { const o = s.local[r.no]; return o ? Object.assign({}, r, o) : r; });
+    const cx = s.ctx;
+    // ---- flow steps
+    const flowOf = (r) => {
+      const auto = r.src === 'Auto', fca = r.reason === 'FCA approval', repl = auto ? fca : !!r.repl || (r.status === 'Pending approval' || r.status === 'Draft') && (fca || r.reason === 'Pricing correction' || r.reason === 'Invoice amendment');
+      const st = r.steps || {};
+      const done = r.status === 'Generated';
+      const S = auto ? [['trg', 'Trigger received', (fca ? 'FCA ' : 'DAR waiver ') + r.ref + ' from ' + (fca ? 'LMS' : 'DAR workflow')], ['val', 'Data check', 'Revised charges, ROE and tax from the original invoice'],
+          ['cxl', 'Original invoice cancelled', r.orig], ['cn', 'Credit note generated', r.no]].concat(fca ? [['inv', 'New invoice generated', r.repl || 'With the revised charges · UN-PAID']] : []).concat([['gfs', 'Posted to GFS', r.gfs || 'AR credit']])
+        : (r.ctype === 'Partial' ? [['req', 'Requested', 'By ' + r.by + (r.date ? ' · ' + r.date : '')], ['l1', 'L1 approval', 'Agency Finance'], ['l2', 'L2 approval', 'Finance Approver'], ['cn', 'Credit note generated', r.no]]
+          : [['req', 'Created', 'By ' + r.by + (r.date ? ' · ' + r.date : '') + ' · full credit, no approval needed'], ['cn', 'Credit note generated', r.no]])
+          .concat(repl ? [['inv', 'Replacement invoice', r.repl || (r.ctype === 'Partial' ? 'Generated after approval' : 'Generated with the credit note')]] : []).concat([['gfs', 'Posted to GFS', r.gfs || 'AR credit']]);
+      const ap = r.appr || [];
+      return S.map(([k, t, d]) => {
+        let state = 'wait';
+        if (auto) state = k === 'trg' ? 'done' : (st[k] || (done ? 'done' : 'wait'));
+        else if (k === 'req') state = r.status === 'Draft' ? 'wait' : 'done';
+        else if (k === 'l1' || k === 'l2') { const a = ap[k === 'l1' ? 0 : 1]; state = !a ? (done ? 'done' : 'wait') : a[2] === 'Approved' ? 'done' : a[2] === 'Rejected' ? 'fail' : a[2] === 'Pending' ? 'now' : 'wait'; }
+        else state = done ? 'done' : 'wait';
+        if (r.status === 'Exception' && state === 'fail') d = r.exc;
+        return { t, d, cls: 'fl-' + state, mk: state === 'done' ? '✓' : state === 'fail' ? '!' : state === 'now' ? '…' : '' };
+      });
+    };
+    const ST = { 'Generated': 'st-ok', 'Exception': 'st-bad', 'Pending approval': 'st-warn', 'Rejected': 'st-bad2', 'Draft': 'st-mu' };
+    const STL = { 'Generated': 'Generated · posted', 'Exception': 'Needs action', 'Pending approval': 'Pending approval', 'Rejected': 'Rejected', 'Draft': 'Draft' };
+    const totOf = (r) => { const by = {}; r.lines.forEach((l) => { const b = by[l[5]] || (by[l[5]] = { a: 0, t: 0 }); b.a += +l[2]; b.t += +l[2] * (+l[4] || 0) / 100; }); return by; };
+    const totS = (r, k) => { const by = totOf(r); return Object.keys(by).map((c) => c + ' ' + fmt(k === 'a' ? by[c].a : k === 't' ? by[c].t : by[c].a + by[c].t)); };
+    const q = s.q.trim().toLowerCase();
+    const base = R.filter((r) => (!q || [r.no, r.orig, r.party, r.ref, r.reason, r.repl, r.gfs].join(' ').toLowerCase().includes(q)) && (!s.src || r.src === s.src) && (!s.rsn || r.reason === s.rsn));
+    const KS = [['all', 'All', null], ['exc', 'Needs action', 'Exception'], ['pend', 'Pending approval', 'Pending approval'], ['gen', 'Generated', 'Generated'], ['rej', 'Rejected', 'Rejected'], ['draft', 'Draft', 'Draft']];
+    const stOf = (k) => (KS.find((x) => x[0] === k) || KS[0])[2];
+    const rows = base.filter((r) => !stOf(s.st) || r.status === stOf(s.st)).map((r) => {
+      const tt = totS(r, 'g');
+      return { no: r.no, orig: r.orig, origSt: r.src === 'Auto' && (r.steps || {}).cxl === 'done' ? 'Cancelled' : r.status === 'Generated' ? 'Credited' : '', hasOrigSt: !!(r.src === 'Auto' && (r.steps || {}).cxl === 'done') || r.status === 'Generated',
+        party: r.party, src: r.src, srcCls: r.src === 'Auto' ? 'src-a' : 'src-m', reason: r.reason, ctype: r.ctype === 'Partial' ? 'Partial' : 'Full', ref: r.ref || '—', refDim: r.ref ? '' : 'dim',
+        tot: tt[0] || '—', tot2: tt.slice(1).join(' · '), hasTot2: tt.length > 1, stT: STL[r.status] || r.status, stCls: ST[r.status] || 'st-mu',
+        gfs: r.gfs || '—', gfsDim: r.gfs ? '' : 'dim', repl: r.repl || '—', replDim: r.repl ? '' : 'dim', date: r.date || '—',
+        on: s.open === r.no ? 'true' : 'false', hl: cx && r.orig === cx.inv ? 'true' : 'false', open: () => self.setState({ open: r.no, tab: 'det', note: '' }) };
+    });
+    const chips = KS.map(([k, t, v]) => ({ t, n: String(base.filter((r) => !v || r.status === v).length), on: s.st === k ? 'true' : 'false', cls: k === 'exc' ? 'chip-exc' : '', go: () => self.setState({ st: k }) }));
+    // ---- drawer
+    let dr = { on: false };
+    const r = s.open && R.find((x) => x.no === s.open);
+    if (r) {
+      const by = totOf(r), mine = r.by === ME;
+      const upd = (o, toast) => { const local = Object.assign({}, s.local, { [r.no]: Object.assign({}, s.local[r.no] || {}, o) }); try { localStorage.setItem('girs.cnl.p2', JSON.stringify(local)); } catch (e) {} self.setState({ local, note: '', __toast: toast }); };
+      const pendIdx = (r.appr || []).findIndex((a) => a[2] === 'Pending');
+      const now = (() => { const d = new Date(); return d.getDate() + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + d.getFullYear() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); })();
+      const act = (res) => { if (res === 'Rejected' && !s.note.trim()) return self.setState({ __toast: 'Add a comment so the requester knows why it was rejected.' });
+        const ap = (r.appr || []).map((a) => a.slice()); ap[pendIdx] = [ap[pendIdx][0], ap[pendIdx][1] === '—' ? 'You' : ap[pendIdx][1], res, now, s.note.trim()];
+        if (res === 'Approved' && ap[pendIdx + 1]) ap[pendIdx + 1][2] = 'Pending';
+        if (res === 'Rejected' && ap[pendIdx + 1]) ap[pendIdx + 1][2] = 'Not reached';
+        const last = res === 'Approved' && !ap[pendIdx + 1];
+        upd(Object.assign({ appr: ap, status: res === 'Rejected' ? 'Rejected' : last ? 'Generated' : 'Pending approval' }, last ? { gfs: 'JV-' + r.no.slice(0, 2) + '-26-' + (118500 + r.no.length * 7), repl: r.reason === 'DAR waiver' ? '' : r.orig.slice(0, 7) + String(2600 + r.no.length * 3) } : {}),
+          res === 'Rejected' ? r.no + ' rejected.' : last ? r.no + ' approved · credit note generated and posted to GFS.' : r.no + ' approved at ' + ap[pendIdx][0].split(' · ')[0] + ' · sent to ' + ap[pendIdx + 1][0].split(' · ')[1] + '.'); };
+      const hist = [];
+      if (r.src === 'Auto') { hist.push([r.date + ' 06:02', 'GIRS', 'Trigger received', (r.reason === 'FCA approval' ? 'FCA ' : 'DAR ') + r.ref]);
+        flowOf(r).slice(1).forEach((f, i) => { if (f.cls === 'fl-done') hist.push([r.date + ' 06:0' + (3 + i), 'GIRS', f.t, f.d]); if (f.cls === 'fl-fail') hist.push([r.date + ' 06:0' + (3 + i), 'GIRS', f.t + ' · failed', r.exc]); }); }
+      else { hist.push([r.date + ' 09:30', r.by, r.status === 'Draft' ? 'Draft saved' : r.ctype === 'Partial' ? 'Requested' : 'Created', r.reason + (r.remark ? ' · ' + r.remark : '')]);
+        (r.appr || []).forEach((a) => { if (a[2] === 'Approved' || a[2] === 'Rejected') hist.push([a[3], a[1], a[2] + ' · ' + a[0].split(' · ')[0], a[4] || '—']); });
+        if (r.status === 'Generated') hist.push([((r.appr || [])[1] || [])[3] || r.date + ' 09:31', 'GIRS', 'Credit note generated and posted to GFS', r.gfs || '—']); }
+      dr = { on: true, no: r.no, orig: r.orig, party: r.party, src: r.src, srcCls: r.src === 'Auto' ? 'src-a' : 'src-m', stT: STL[r.status], stCls: ST[r.status], close: () => self.setState({ open: '' }),
+        tabs: [['det', 'Credit details'], ['lines', 'Credit lines'], ['appr', 'Approval'], ['hist', 'History & audit']].map(([k, t]) => ({ t, on: s.tab === k ? 'true' : 'false', go: () => self.setState({ tab: k }) })),
+        isDet: s.tab === 'det', isLines: s.tab === 'lines', isAppr: s.tab === 'appr', isHist: s.tab === 'hist',
+        isExc: r.status === 'Exception', exc: r.exc || '', retry: () => upd({ status: 'Generated', steps: Object.assign({}, r.steps, { val: 'done', cxl: 'done', cn: 'done', inv: r.reason === 'FCA approval' ? 'done' : undefined, gfs: 'done' }), gfs: r.gfs || 'JV-' + r.no.slice(0, 2) + '-26-118' + (400 + r.no.length), repl: r.reason === 'FCA approval' ? (r.repl || r.orig.slice(0, 7) + '2643') : '' }, 'Retried · ' + r.no + ' completed and posted to GFS.'),
+        manual: () => upd({ status: 'Pending approval', src: 'Manual', by: ME, appr: [['L1 · Agency Finance', 'Mei Lin Ong', 'Pending', '', ''], ['L2 · Finance Approver', 'Thushy (PIL)', 'Not reached', '', '']], exc: '' }, r.no + ' moved to manual handling · sent for approval.'),
+        excRetryT: (r.steps || {}).gfs === 'fail' ? 'Retry GFS posting' : 'Retry with LMS',
+        flowT: r.src === 'Auto' ? 'Automatic flow' : 'Manual flow', flowSub: r.src === 'Auto' ? 'Runs on its own. Stops and asks for action only when a step fails or LMS data is missing.' : (r.ctype === 'Partial' ? 'Partial credit raised by a user, approved by Agency Finance (L1) and Finance Approver (L2).' : 'Full credit raised by a user. No approval needed: generated and posted to GFS when created.'),
+        flow: flowOf(r),
+        kv: [['Original invoice', r.orig], ['Billing party', r.party], ['Reason code', r.reason]].concat(r.reason === 'FCA approval' || r.reason === 'DAR waiver' ? [[r.reason === 'FCA approval' ? 'FCA reference' : 'DAR reference', r.ref || '—']] : []).concat([
+          ['Credit type', r.ctype === 'Partial' ? 'Partial · selected lines' : 'Full · whole invoice'], ['ROE and tax', 'Same as original invoice'], ['Credit note date', r.date || '—'], ['Raised by', r.by], ['Replacement invoice', r.repl || '—'], ['GFS posting', r.gfs || '—']]).map(([l, v]) => ({ l, v })),
+        remark: r.remark || '', hasRemark: !!r.remark,
+        isPart: r.ctype === 'Partial', amtL: r.ctype === 'Partial' ? 'Credited' : 'Amount', totSpan: r.ctype === 'Partial' ? '3' : '2',
+        linesSub: r.ctype === 'Partial' ? 'Only the selected lines are credited, for the amounts shown. Tax is reversed at the original invoice ROE and tax rate.' : 'The whole invoice is credited. Amounts and tax are reversed at the original invoice ROE and tax rate.',
+        lines: r.lines.map((l) => ({ code: l[0], name: l[1], cur: l[5], amt: fmt(l[2]), inv: l[6] != null ? fmt(l[6]) : fmt(l[2]), tax: l[3] + ' · ' + l[4] + '%', tcode: l[3], rate: l[4] + '%', tr: fmt(l[2] * l[4] / 100), tot: fmt(l[2] * (1 + l[4] / 100)) })),
+        tots: Object.keys(by).map((c) => ({ cur: c, a: fmt(by[c].a), t: fmt(by[c].t), g: fmt(by[c].a + by[c].t) })),
+        isAuto: r.src === 'Auto' || r.ctype !== 'Partial', autoT: r.src !== 'Auto' ? 'No approval needed. A full credit note is generated and posted to GFS as soon as it is created. Only partial credit notes go to Agency Finance (L1) and Finance Approver (L2).' : r.reason === 'FCA approval' ? 'No approval step. GIRS generates it automatically from the approved FCA (rule BR-CRN-003).' : 'No approval step in GIRS. The waiver was approved in the DAR workflow (' + r.ref + ').',
+        appr: (r.appr || []).map((a) => ({ lvl: a[0], who: a[1], res: a[2], at: a[3] || '—', c: a[4] || '', hasC: !!a[4], cls: 'ap-' + a[2].toLowerCase().replace(/\s+/g, '-') })), hasAppr: !!(r.appr || []).length,
+        canAct: pendIdx >= 0 && r.status === 'Pending approval', mine, notMine: !mine, mineT: 'You raised this request, so you can\'t approve it. It waits for ' + (((r.appr || [])[pendIdx] || [])[1] || 'the approver') + '.',
+        note: s.note, setNote: (e) => self.setState({ note: e.target.value }), approve: () => act('Approved'), reject: () => act('Rejected'),
+        hist: hist.map(([at, who, what, d]) => ({ at, who, what, d })) };
+    }
+    return {
+      rows, empty: rows.length === 0, q: s.q, onQ: (e) => self.setState({ q: e.target.value }), chips,
+      srcs: [['', 'All sources'], ['Auto', 'Automatic'], ['Manual', 'Manual']].map(([v, t]) => ({ t, on: s.src === v ? 'true' : 'false', go: () => self.setState({ src: v }) })),
+      rsn: s.rsn, onRsn: (e) => self.setState({ rsn: e.target.value }), rsns: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
+      filtered: !!(s.q || s.src || s.rsn || s.st !== 'all'), clear: () => self.setState({ q: '', src: '', rsn: '', st: 'all' }),
+      countText: rows.length + ' of ' + R.length + ' credit notes', dr, raise: () => { try { location.href = 'credit-notes-v2.html'; } catch (e) {} }
+    };
+  }
+}
+
+const USER_NAME = 'Daniel Tan', USER_INITIALS = 'DT';
+const GIRS_LANGS = [['en', 'English', 'English'], ['zh', '中文（简体）', 'Chinese (Simplified)'], ['ar', 'العربية', 'Arabic'], ['es', 'Español', 'Spanish']];
+const LOGINS = [{ role: 'Billing Executive', agency: 'Singapore · SIN', code: 'SIN' }, { role: 'Team Lead', agency: 'Malaysia · PKG', code: 'PKG' }];
+class Component extends GirsPage {
+  constructor(p) {
+    super(p);
+    let sb = false, th = 'light', hub = 'SIN', ent = 'PIL', lang = 'en';
+    try { sb = localStorage.getItem('girs.sb') === '1'; th = localStorage.getItem('girs.th') || 'light'; hub = localStorage.getItem('girs.hub') || 'SIN'; lang = localStorage.getItem('girs.lang') || 'en'; ent = localStorage.getItem('girs.ent') || 'PIL'; } catch (e) {}
+    let lg = 0; try { lg = +(localStorage.getItem('girs.lg') || 0); } catch (e) {}
+    const narrow = false;
+    const fit = () => { try { const z = Math.max(0.1, window.innerWidth / 1920); return { z, h: window.innerHeight / z }; } catch (e) { return { z: 1, h: 1080 }; } };
+    const f0 = fit();
+    try { window.addEventListener('resize', () => { const f = fit(); this.setState({ __z: f.z, __vh: f.h }); }); } catch (e) {}
+    try { setTimeout(() => { const el = document.querySelector('[data-found="true"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 450); } catch (e) {}
+    this.state = Object.assign({}, this.state, { __sb: sb, __th: th, __lang: lang, __hub: hub, __ent: ent, __q: '', __um: false, __lg: lg, __toast: '', __narrow: narrow, __drawer: false, __z: f0.z, __vh: f0.h, __acc: 'g1' });
+  }
+  renderVals() {
+    const v = super.renderVals();
+    const s = this.state;
+    const save = (k, val) => { try { localStorage.setItem(k, val); } catch (e) {} };
+    const L = Object.assign({}, {"nHome": "Home", "nVoy": "Voyage Invoicing", "g0": "Operations", "nMain": "Operations Cockpit", "nChargeProcessing": "Charge Processing", "nDDEngine": "D&D Engine", "nIntegrationMonitor": "Integration Monitor", "nDocumentIntake": "Document Intake", "g1": "Invoicing", "nInvoicesHub": "Invoices Hub", "nInvoiceList": "Invoice List", "nSplitBilling": "Split B/L & Billed-To", "nManualInvoice": "Manual & MISC Invoice", "nInvoicePreviewer": "Invoice Previewer", "nCreditNotes": "Credit Notes", "nCreditNoteList": "Credit Note List", "nDARConsole": "DAR Console", "nEInvoiceExceptions": "E-invoice Exceptions", "g2": "Receivables", "nReceipting": "Receipting", "nCashAppWorkbench": "CashApp Workbench", "nToleranceCOREOR": "Tolerance & COREOR", "nSOADashboard": "SOA & Aging", "nCreditManagement": "Credit Management", "g3": "Control", "nApprovalsInbox": "Approvals Inbox", "nEnquiry": "Enquiry & Monitoring", "nReconciliation": "Reconciliation", "nMonthEnd": "Month-End Close", "nReports": "Reports & Analytics", "g4": "System Master", "nCompanyMaster": "Company Master", "nCompanyBranchMaster": "Company Branch Master", "nCustomerMaster": "Customer Master", "nCustomerBranchMaster": "Customer Branch Master", "nContractMaster": "Contract Master", "nChargeMaster": "Charge Master", "g5": "Industry Master", "nCountryMaster": "Country Master", "nCurrencyMaster": "Currency Master", "nCityMaster": "City Master", "nPortMaster": "Port Master", "nTaxSetup": "Tax Set-up", "nExchangeRate": "Exchange Rate Master", "nAccountingConfig": "Accounting Configuration", "nBankMaster": "Bank Master"}, v.navT || {});
+    const c = s.__sb && !s.__narrow;
+    return Object.assign({}, v, { shell: {
+      kit: (typeof KIT_VALS === 'function' ? KIT_VALS(this, s, v) : null),
+      theme: s.__th, dark: s.__th === 'dark', zoom: String(s.__z || 1), rootH: Math.round(s.__vh || 1080) + 'px',
+      drawer: s.__drawer ? 'open' : 'closed', drawerOpen: s.__drawer, drawerAria: s.__drawer ? 'true' : 'false',
+      toggleDrawer: () => this.setState({ __drawer: !s.__drawer, __um: false }), closeDrawer: () => this.setState({ __drawer: false }),
+      sbW: c ? '64px' : '240px', hide: c ? 'display:none' : '', item: c ? 'justify-content:center;padding-inline:0' : '', grp: c ? 'justify-content:center;padding:0' : '',
+      logo: c ? 'height:26px;width:30px;object-fit:cover;object-position:left center' : 'height:26px;width:auto',
+      logoRow: c ? 'justify-content:center;padding:0' : 'padding:0 20px',
+      sbLabel: c ? 'Expand side panel' : 'Collapse side panel', sbIcon: c ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3', sbOpen: c ? 'false' : 'true',
+      acc: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, c ? s.__fly === g : s.__acc === g])),
+      accA: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? 'true' : 'false'])),
+      accR: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (c ? s.__fly : s.__acc) === g ? '180deg' : '0deg'])),
+      accT: Object.fromEntries(['g0', 'g1', 'g2', 'g3', 'g4', 'g5'].map((g) => [g, (e) => { if (c) { const t = e && e.currentTarget ? Math.round(e.currentTarget.getBoundingClientRect().top) : 0; this.setState({ __fly: s.__fly === g ? '' : g, __flyT: t }); } else this.setState({ __acc: s.__acc === g ? '' : g }); }])),
+      toggleSb: () => { save('girs.sb', c ? '0' : '1'); this.setState({ __sb: !c, __fly: '' }); },
+      // collapsed menu: a section icon opens its pages in a flyout beside the rail
+      cA: c ? 'true' : 'false', flyOn: !!c && !!s.__fly, flyClose: () => this.setState({ __fly: '' }), subCls: c ? 'ng-fly' : '',
+      subSt: c ? 'top:' + (s.__flyT || 0) + 'px;max-height:calc(100vh - ' + ((s.__flyT || 0) + 16) + 'px)' : '',
+      lightOn: s.__th === 'dark' ? 'false' : 'true', darkOn: s.__th === 'dark' ? 'true' : 'false',
+      lightBg: s.__th === 'dark' ? 'transparent;color:var(--muted)' : 'var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)', darkBg: s.__th === 'dark' ? 'var(--tint);color:var(--accent2)' : 'transparent;color:var(--muted)',
+      setLight: () => { save('girs.th', 'light'); this.setState({ __th: 'light' }); },
+      setDark: () => { save('girs.th', 'dark'); this.setState({ __th: 'dark' }); },
+      hub: s.__hub, setHub: (e) => { save('girs.hub', e.target.value); this.setState({ __hub: e.target.value }); },
+      ent: s.__ent, setEnt: (e) => { save('girs.ent', e.target.value); this.setState({ __ent: e.target.value }); },
+      q: s.__q, setQ: (e) => this.setState({ __q: e.target.value }), goFind: () => save('girs.find', (s.__q || '').trim()), hasQ: !!s.__q, clearQ: () => this.setState({ __q: '' }),
+      pending: 10, health: (typeof GIRS_HEALTH === 'function' ? GIRS_HEALTH(this, s) : { items: [], cls: 'btn btn-icon', n: '', hasN: false, open: false, aria: 'false', label: 'System health', sum: '', toggle: () => {}, close: () => {} }), l: L, ph: s.__narrow ? 'Search anything…' : 'Search anything: invoice, B/L, customer, container, screen…  (Ctrl K)',
+      um: s.__um, umAria: s.__um ? 'true' : 'false', toggleUm: () => this.setState({ __um: !s.__um, __lgo: false, __lgq: '' }), closeUm: () => this.setState({ __um: false, __lgo: false, __lgq: '' }),
+      logins: LOGINS.map((g, i) => ({ label: g.role, role: g.agency, on: s.__lg === i ? 'true' : 'false', mark: s.__lg === i ? '✓' : '',
+        pick: () => { save('girs.lg', String(i)); this.setState({ __lg: i, __um: false, __toast: 'Switched to ' + g.role + ' · ' + g.agency + '. Screens and actions follow this login.' }); } })),
+      menuMain: !s.__lgo, langOpen: !!s.__lgo, lgQ: s.__lgq || '', setLgQ: (e) => this.setState({ __lgq: e.target.value }),
+      toggleLang: () => { this.setState({ __lgo: !s.__lgo, __lgq: '' }); if (!s.__lgo) setTimeout(() => { const i = document.querySelector('.lg-q'); if (i) i.focus(); }, 30); },
+      langName: (GIRS_LANGS.find((x) => x[0] === s.__lang) || GIRS_LANGS[0])[1],
+      lgNone: !GIRS_LANGS.some(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())),
+      langs: GIRS_LANGS.filter(([c, l, e]) => (c + ' ' + l + ' ' + e).toLowerCase().includes((s.__lgq || '').trim().toLowerCase())).map(([code, label, en]) => ({ code, label, en, on: s.__lang === code ? 'true' : 'false', mark: s.__lang === code ? '✓' : '',
+        pick: () => { if (code === s.__lang) return this.setState({ __lgo: false, __um: false }); save('girs.lang', code); location.reload(); } })),
+      userName: USER_NAME, initials: USER_INITIALS, curLogin: USER_NAME, curRole: (LOGINS[s.__lg] || LOGINS[0]).role + ' · ' + (LOGINS[s.__lg] || LOGINS[0]).code,
+      exp: (e) => { const v = e.target.value; if (!v) return; e.target.value = ''; this.setState({ __toast: 'Export to ' + ({ xlsx: 'Excel', csv: 'CSV', pdf: 'PDF' })[v] + ' prepared — current filters applied.' }); },
+      hasToast: !!s.__toast, toast: s.__toast, closeToast: () => this.setState({ __toast: '' }),
+      elevate: () => this.setState({ __um: false, __toast: 'Elevated access request sent to your manager. Access is time-bound and needs MFA once approved.' }),
+      signOut: () => this.setState({ __um: false, __toast: 'Signed out of GIRS (prototype — no session is ended).' })
+    } });
+  }
+}
+
+</script>
+<script src="girs-ctx.js"></script>
+<script src="girs-dates.js"></script>
+<script src="runtime.js"></script>
+<script src="girs-search.js"></script>
+<script src="girs-ui.js"></script>
+<script src="girs-i18n.js"></script>
+</body>
+</html>
