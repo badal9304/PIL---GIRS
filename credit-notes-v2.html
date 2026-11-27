@@ -160,6 +160,17 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .cr-done{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:8px;background:var(--okbg);color:var(--ok)}
 .cr-done > div:nth-child(2){flex:1 1 320px;display:flex;flex-direction:column;gap:3px;color:var(--ink)}.cr-done > div span{font-size:12.5px;color:var(--muted2)}
 .cr-done-a{display:flex;gap:8px}
+.cf-facts{margin:0;display:flex;flex-wrap:wrap;gap:8px 0;padding:10px 0;border-bottom:1px solid var(--line2)}.cf-facts>div{padding:0 20px;border-left:1px solid var(--line2)}.cf-facts>div:first-child{padding-left:0;border-left:0}
+.cf-facts dt{font-size:12px;line-height:16px;color:var(--muted)}.cf-facts dd{margin:2px 0 0;font-size:13px;line-height:18px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}.cf-facts .hi dd{color:var(--accent2)}
+.cf-top{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 24px}.cf-f{display:flex;flex-direction:column;gap:6px;min-width:0}.cf-rsn{width:300px}
+.cf-l{font-size:13px;line-height:18px;font-weight:500;color:var(--ink)}.cf-o{font-weight:400;color:var(--muted);margin-inline-start:6px}.cf-h{font-size:12px;line-height:16px;color:var(--muted)}
+.cf-sel{position:relative}.cf-sel select{width:100%;height:36px;padding-inline-end:34px}.cf-sel svg{position:absolute;inset-inline-end:10px;top:50%;margin-top:-8px;pointer-events:none;color:var(--muted)}
+.cf-seg{display:inline-flex;height:36px;padding:2px;border-radius:6px;background:var(--neutral);box-sizing:border-box}.cf-seg button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;padding:0 14px;border-radius:4px;font-size:13px;font-weight:500;color:var(--muted)}
+.cf-seg button[aria-checked=true]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.cf-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cf-chip{margin-inline-start:auto;margin-top:24px;display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:14px;font-size:12px;font-weight:500;white-space:nowrap}.cf-chip.warn{background:var(--warnbg);color:var(--warn)}.cf-chip.ok{background:var(--okbg);color:var(--ok)}
+.cf-lt .cn-cb[disabled]{cursor:default}.cf-lt .cn-amt:disabled{background:var(--sub);color:var(--muted2);border-color:var(--line)}.cf-lt tfoot td{vertical-align:middle}
+.cf-bot{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 24px}.cf-rm{flex:1 1 420px}.cf-rm .input{height:36px}
+.cf-tg{border:0 !important;padding:0 0 8px !important;background:none !important;flex:none}.cf-tg b{font-weight:400}
 .cn-md{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.cn-md button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}.cn-md button b{font-size:13px;font-weight:600;color:var(--ink)}.cn-md button span{font-size:12px;color:var(--muted)}.cn-md button:hover{border-color:var(--bd)}.cn-md button[aria-checked=true]{border-color:var(--accent);background:var(--tint);box-shadow:inset 0 0 0 1px var(--accent)}.cn-md button[aria-checked=true] b{color:var(--accent2)}.cn-md button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .cn-pt td:first-child,.cn-pt th:first-child{width:28px;padding-inline-end:0}
 .cn-pt .cn-on td{background:var(--tint)}
@@ -559,7 +570,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
           <section class="card cr-form" aria-labelledby="cr-form-h">
             <div class="card-head"><div><h2 class="card-title" id="cr-form-h">Credit note for <span class="mono">{{invNo}}</span></h2><p class="cr-sub">{{party}}</p></div></div>
             <div class="cr-body">
-              <dl class="cn-strip cr-strip"><sc-for list="{{strip}}" as="x" hint-placeholder-count="5"><div><dt>{{x.l}}</dt><dd>{{x.v}}</dd></div></sc-for></dl>
+              <dl class="cf-facts"><sc-for list="{{strip}}" as="x" hint-placeholder-count="5"><div class="{{x.cls}}"><dt>{{x.l}}</dt><dd>{{x.v}}</dd></div></sc-for></dl>
 
               <sc-if value="{{blocked}}" hint-placeholder-val="{{ false }}"><p class="cr-block">{{blockMsg}}<sc-if value="{{blockLink}}" hint-placeholder-val="{{ false }}"> <a class="lnk" href="credit-note-list-v2.html">Credit Note List</a></sc-if></p></sc-if>
 
@@ -572,43 +583,31 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               </sc-if>
 
               <sc-if value="{{editable}}" hint-placeholder-val="{{ true }}">
-                <div class="cn-sec">
-                  <h3 id="cr-s1"><span class="cn-n">1</span>Why is the credit needed?</h3>
-                  <div class="cn-rs" role="radiogroup" aria-labelledby="cr-s1"><sc-for list="{{reasons}}" as="r" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{r.on}}" onClick="{{r.pick}}">{{r.t}}</button></sc-for></div>
-                  <sc-if value="{{errReason}}" hint-placeholder-val="{{ false }}"><span class="cn-e">Choose a reason code</span></sc-if>
-                  <sc-if value="{{hasReason}}" hint-placeholder-val="{{ false }}"><p class="cn-help">{{reasonHelp}}</p></sc-if>
-                  <sc-if value="{{needRef}}" hint-placeholder-val="{{ false }}"><label class="fld cn-ref">{{refL}}<input class="input mono" value="{{ref}}" onInput="{{onRef}}" placeholder="{{refPh}}"><sc-if value="{{errRef}}" hint-placeholder-val="{{ false }}"><span class="err">Enter the {{refL}}</span></sc-if></label></sc-if>
+                <div class="cf-top">
+                  <div class="cf-f cf-rsn"><label class="cf-l" for="cf-rsn">Reason for the credit</label>
+                    <div class="cf-sel"><select id="cf-rsn" class="select" value="{{reason}}" onChange="{{setReason}}"><option value="">Select a reason</option><option value="FCA approval">FCA approval</option><option value="DAR waiver">DAR waiver</option><option value="Pricing correction">Pricing correction</option><option value="Invoice amendment">Invoice amendment</option></select><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></div>
+                    <sc-if value="{{errReason}}" hint-placeholder-val="{{ false }}"><span class="cn-e">Choose a reason code</span></sc-if>
+                    <sc-if value="{{hasReason}}" hint-placeholder-val="{{ false }}"><span class="cf-h">{{reasonHelp}}</span></sc-if>
+                  </div>
+                  <sc-if value="{{needRef}}" hint-placeholder-val="{{ false }}"><label class="fld cn-ref cf-f">{{refL}}<input class="input mono" value="{{ref}}" onInput="{{onRef}}" placeholder="{{refPh}}"><sc-if value="{{errRef}}" hint-placeholder-val="{{ false }}"><span class="err">Enter the {{refL}}</span></sc-if></label></sc-if>
+                  <div class="cf-f"><span class="cf-l" id="cf-ty">What to credit</span>
+                    <div class="cf-seg" role="radiogroup" aria-labelledby="cf-ty"><sc-for list="{{modes}}" as="m" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{m.on}}" onClick="{{m.pick}}">{{m.t}}</button></sc-for></div>
+                    <span class="cf-h">{{modeHint}}</span>
+                  </div>
+                  <span class="cf-chip {{apprCls}}">{{apprT}}</span>
                 </div>
-
-                <div class="cn-sec">
-                  <h3><span class="cn-n">2</span>What is credited <span class="hint">At the original exchange rate. Tax is reversed in proportion.</span></h3>
-                  <div class="cn-md" role="radiogroup" aria-label="Credit type"><sc-for list="{{modes}}" as="m" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{m.on}}" onClick="{{m.pick}}"><b>{{m.t}}</b><span>{{m.d}}</span></button></sc-for></div>
-                  <sc-if value="{{isFull}}" hint-placeholder-val="{{ true }}">
-                  <table class="cn-lt cr-lt">
-                    <thead><tr><th>Charge</th><th>Currency</th><th class="num">Amount</th><th>Tax code</th><th class="num">Tax reversed</th><th class="num">Credit total</th></tr></thead>
-                    <tbody><sc-for list="{{lines}}" as="l" hint-placeholder-count="3"><tr><td><span class="mono">{{l.code}}</span><span class="cn-cn">{{l.name}}</span></td><td>{{l.cur}}</td><td class="num mono">{{l.amt}}</td><td><span class="mono">{{l.tcode}}</span><span class="cn-cn">{{l.rate}}</span></td><td class="num mono">{{l.tax}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
-                    <tfoot><sc-for list="{{tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="2"><b>Total</b> <span class="mu">· {{t.cur}}</span></td><td class="num mono">{{t.net}}</td><td></td><td class="num mono">{{t.tax}}</td><td class="num mono cn-gt">{{t.cur}} {{t.gross}}</td></tr></sc-for></tfoot>
-                  </table>
-                  </sc-if>
-                  <sc-if value="{{isPart}}" hint-placeholder-val="{{ false }}">
-                  <table class="cn-lt cr-lt cn-pt">
-                    <thead><tr><th><span class="sr">Select</span></th><th>Charge</th><th>Currency</th><th class="num">Invoice amount</th><th class="num">Credit amount</th><th>Tax code</th><th class="num">Tax reversed</th><th class="num">Credit total</th></tr></thead>
-                    <tbody><sc-for list="{{plines}}" as="l" hint-placeholder-count="3"><tr class="{{l.cls}}"><td><button type="button" class="cn-cb" role="checkbox" aria-checked="{{l.on}}" onClick="{{l.toggle}}" aria-label="Credit {{l.code}}"></button></td><td><span class="mono">{{l.code}}</span><span class="cn-cn">{{l.name}}</span></td><td>{{l.cur}}</td><td class="num mono">{{l.amt}}</td>
-                      <td class="num"><input class="input mono cn-amt" inputmode="decimal" value="{{l.val}}" disabled="{{l.ro}}" onInput="{{l.onAmt}}" aria-label="Credit amount for {{l.code}}"><sc-if value="{{l.bad}}" hint-placeholder-val="{{ false }}"><span class="err cn-le">{{l.badT}}</span></sc-if></td><td><span class="mono">{{l.tcode}}</span><span class="cn-cn">{{l.rate}}</span></td><td class="num mono">{{l.tax}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
-                    <tfoot><sc-for list="{{ptots}}" as="t" hint-placeholder-count="1"><tr><td></td><td colspan="3"><b>Total credit</b> <span class="mu">· {{t.cur}}</span></td><td class="num mono">{{t.net}}</td><td></td><td class="num mono">{{t.tax}}</td><td class="num mono cn-gt">{{t.cur}} {{t.gross}}</td></tr></sc-for>
-                      <sc-if value="{{noPtots}}" hint-placeholder-val="{{ false }}"><tr><td></td><td colspan="7" class="mu">Select at least one line to credit</td></tr></sc-if></tfoot>
-                  </table>
-                  <sc-if value="{{errLines}}" hint-placeholder-val="{{ false }}"><span class="cn-e">{{errLinesT}}</span></sc-if>
-                  </sc-if>
-                  <sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}"><p class="cr-paid">This invoice is paid. The payment is unapplied from it when the credit note is generated, and re-applied to the replacement invoice if one is raised.</p></sc-if>
-                  <button type="button" class="cr-tg" role="switch" aria-checked="{{repl}}" onClick="{{togRepl}}"><span class="cr-sw" aria-hidden="true"></span><span><b>{{replL}}</b><small>Re-bills the shipment with the corrected charges</small></span></button>
-                  <sc-if value="{{fca}}" hint-placeholder-val="{{ false }}"><p class="cn-help">FCA: the original invoice is cancelled and a new invoice is generated with the revised charges.</p></sc-if>
-                  
-                </div>
-
-                <div class="cn-sec">
-                  <h3 id="cr-s3"><span class="cn-n">3</span>Remarks <span class="hint">Optional</span></h3>
-                  <textarea class="input cn-ta" value="{{remark}}" onInput="{{onRemark}}" aria-labelledby="cr-s3" placeholder="Add context for the approver, for example who agreed the correction and when"></textarea><span class="cn-cnt mu">{{remN}}</span>
+                <table class="cn-lt cr-lt cn-pt cf-lt">
+                  <thead><tr><th><span class="sr">Select</span></th><th>Charge</th><th>Currency</th><th class="num">Invoice amount</th><th class="num">Credit amount</th><th>Tax code</th><th class="num">Tax reversed</th><th class="num">Credit total</th></tr></thead>
+                  <tbody><sc-for list="{{cl}}" as="l" hint-placeholder-count="3"><tr class="{{l.cls}}"><td><button type="button" class="cn-cb" role="checkbox" aria-checked="{{l.on}}" disabled="{{l.cbDis}}" onClick="{{l.toggle}}" aria-label="Credit {{l.code}}"></button></td><td><span class="mono">{{l.code}}</span><span class="cn-cn">{{l.name}}</span></td><td>{{l.cur}}</td><td class="num mono">{{l.amt}}</td>
+                    <td class="num"><input class="input mono cn-amt" inputmode="decimal" value="{{l.val}}" disabled="{{l.ro}}" onInput="{{l.onAmt}}" aria-label="Credit amount for {{l.code}}"><sc-if value="{{l.bad}}" hint-placeholder-val="{{ false }}"><span class="err cn-le">{{l.badT}}</span></sc-if></td><td><span class="mono">{{l.tcode}}</span><span class="cn-cn">{{l.rate}}</span></td><td class="num mono">{{l.tax}}</td><td class="num mono">{{l.tot}}</td></tr></sc-for></tbody>
+                  <tfoot><sc-for list="{{ftots}}" as="t" hint-placeholder-count="1"><tr><td></td><td colspan="2"><b>Total</b> <span class="mu">· {{t.cur}}</span></td><td class="num mono">{{t.inv}}</td><td class="num mono"><b>{{t.cr}}</b></td><td></td><td class="num mono">{{t.tax}}</td><td class="num mono cn-gt">{{t.gross}}</td></tr></sc-for></tfoot>
+                </table>
+                <sc-if value="{{errLines}}" hint-placeholder-val="{{ false }}"><span class="cn-e">{{errLinesT}}</span></sc-if>
+                <sc-if value="{{isPaid}}" hint-placeholder-val="{{ false }}"><p class="cr-paid">This invoice is paid. The payment is unapplied from it when the credit note is generated, and re-applied to the replacement invoice if one is raised.</p></sc-if>
+                <sc-if value="{{fca}}" hint-placeholder-val="{{ false }}"><p class="cn-help">FCA: the original invoice is cancelled and a new invoice is generated with the revised charges.</p></sc-if>
+                <div class="cf-bot">
+                  <label class="cf-f cf-rm"><span class="cf-l">Remarks <span class="cf-o">Optional · seen by the approver</span></span><input class="input" value="{{remark}}" onInput="{{onRemark}}" maxlength="500" placeholder="Add context, for example who agreed the correction and when"></label>
+                  <button type="button" class="cr-tg cf-tg" role="switch" aria-checked="{{repl}}" onClick="{{togRepl}}"><span class="cr-sw" aria-hidden="true"></span><span><b>{{replL}}</b></span></button>
                 </div>
 
                 
@@ -774,7 +773,7 @@ class GirsPage extends DCLogic {
       pays: [['all', 'All'], ['unpaid', 'Unpaid'], ['paid', 'Paid']].map(([k, t]) => ({ t, on: s.pay === k ? 'true' : 'false', pick: () => this.setState({ pay: k, lim: 25 }) })),
       setQ: (e) => this.setState({ q: e.target.value, lim: 25 }),
       invNo: v.no, party: v.party,
-      strip: [{ l: 'Invoice date', v: v.date }, { l: 'Status', v: v.status === 'Paid' ? 'Paid' : v.status + ' · Unpaid' }, { l: 'B/L', v: v.bl }, { l: 'Exchange rate', v: roe }, { l: 'Credit note total (incl. tax)', v: cGross }],
+      strip: [{ l: 'Invoice date', v: v.date }, { l: 'Status', v: v.status === 'Paid' ? 'Paid' : v.status + ' · Unpaid' }, { l: 'B/L', v: v.bl }, { l: 'Exchange rate', v: roe }, { l: 'Invoice total (incl. tax)', v: grossTxt, cls: 'hi' }],
       blocked: !!block && !s.done, blockMsg: block === 'Credit note already raised' ? 'A credit note has already been raised for this invoice. Open it in the' : 'This invoice can’t be credited: ' + block.toLowerCase() + '. Only generated, sent, accepted or paid invoices can be credited.',
       blockLink: block === 'Credit note already raised',
       isPaid: v.status === 'Paid' && !block,
@@ -782,12 +781,17 @@ class GirsPage extends DCLogic {
       doneT: s.done && s.done.ctype === 'Partial' ? 'sent for approval' : 'created',
       viewPdf: () => { try { if (s.done) window.GirsDocs.credit(Object.assign({}, s.done, { origDate: v.date, bl: v.bl, vvd: v.vvd, cntr: v.cntr, port: v.port, status: s.done.ctype === 'Partial' ? 'Pending approval' : 'Generated' }), {}); } catch (e) {} },
       doneD: s.done && s.done.ctype === 'Partial' ? 'Agency Finance (L1) reviews it first, then the Finance Approver (L2). Once approved it is generated and posted to GFS.' : 'Full credit, so no approval is needed. It is generated and posted to GFS.',
-      modes: [['full', 'Full invoice', 'Credit every line in full · no approval needed'], ['part', 'Selected lines', 'Choose lines and amounts · needs approval']].map(([k, t, d]) => ({ t, d, on: (k === 'full') === full ? 'true' : 'false', pick: () => this.setState({ full: k === 'full', tried: false }) })),
+      modeHint: full ? 'Every line is credited in full' : 'Tick the lines and enter the amounts', apprT: full ? 'Full credit · no approval needed' : 'Partial credit · needs L1 → L2 approval', apprCls: full ? 'ok' : 'warn',
+      reason: s.reason,
+      setReason: (e) => this.setState({ reason: e.target.value, ref: '', repl: null }),
+      cl: plines.map((l, n) => { if (!full) return Object.assign({}, l, { cbDis: '' }); const L0 = v.lines[n], r0 = TR[L0[4]] || 0, tx = Math.round(L0[1] * r0) / 100; return Object.assign({}, l, { on: 'true', cbDis: 'true', ro: 'true', val: m(L0[1]), bad: false, cls: 'cn-on', tax: m(tx), tot: m(L0[1] + tx) }); }),
+      ftots: tots.map((t) => { const c = (full ? tots : ptots).find((x) => x.cur === t.cur); return { cur: t.cur, inv: t.net, cr: c ? c.net : '—', tax: c ? c.tax : '—', gross: c ? t.cur + ' ' + c.gross : '—' }; }),
+      modes: [['full', 'Full invoice', ''], ['part', 'Selected lines', '']].map(([k, t, d]) => ({ t, d, on: (k === 'full') === full ? 'true' : 'false', pick: () => this.setState({ full: k === 'full', tried: false }) })),
       isFull: full, isPart: !full, plines, ptots, noPtots: !ptots.length, errLines, errLinesT,
       submitL: full ? 'Create credit note' : 'Send for approval',
-      actT: full ? 'Full credit: no approval needed. Generated and posted to GFS when you create it.' : 'Partial credit: approved by Agency Finance (L1), then Finance Approver (L2); you can’t approve your own request. Posted to GFS once approved.',
+      actT: 'Credit note total ' + cGross + (full ? ' · generated and posted to GFS when you create it.' : ' · approved by Agency Finance (L1), then Finance Approver (L2).'),
       replL: full ? 'Generate a replacement invoice' : 'Generate a replacement invoice after approval',
-      reasons: Object.keys(R).map((t) => ({ t, on: s.reason === t ? 'true' : 'false', pick: () => this.setState({ reason: t, ref: '', repl: null }) })),
+      reasons: Object.keys(R).map((t) => ({ t, sel: s.reason === t ? 'selected' : '', on: s.reason === t ? 'true' : 'false', pick: () => this.setState({ reason: t, ref: '', repl: null }) })),
       hasReason: !!RC, reasonHelp: RC ? RC[1] : '', errReason,
       needRef, refL: needRef ? RC[2] : '', refPh: needRef ? RC[3] : '', ref: s.ref, onRef: (e) => this.setState({ ref: e.target.value }), errRef,
       lines, tots, tcode,
