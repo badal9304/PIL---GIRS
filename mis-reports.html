@@ -414,6 +414,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .mx-tbh .mis-seg{height:30px}.mx-tbh .mis-seg button{line-height:28px}
 .lay{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}.lay:hover{color:var(--ink)}.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}.lay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .mis-f select{min-width:170px}.mis-f .selw,.mis-fld .selw{display:flex!important}.mis-fld .selw select{width:100%}.mis-pg select{width:72px}.select:open + svg{transform:rotate(180deg)}
+.mx-rail,.mx-side{top:var(--mx-top,16px)}.mx-rail{max-height:calc(100vh - var(--mx-top,16px) - 72px)}.mx-side{max-height:calc(100vh - var(--mx-top,16px) - 72px)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
 </helmet>
@@ -732,7 +733,6 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <sc-for list="{{sb.items}}" as="it" hint-placeholder-count="3"><button class="mx-ni" aria-current="{{it.on}}" onClick="{{it.go}}"><span>{{it.t}}</span><sc-if value="{{it.hasB}}" hint-placeholder-val="{{ false }}"><b class="{{it.bCls}}">{{it.b}}</b></sc-if></button></sc-for>
               </div></sc-for>
             </div></sc-for>
-            <div class="mx-fut"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg><p><b>Future scope</b>Push report data to Databricks. Out of scope for now.</p></div>
           </nav>
 
           <div class="mx-main">
@@ -931,7 +931,7 @@ const MIS_FIELDS = [
 const MIS_TREE = [
   { g: 'User related', subs: [
     { t: 'Operational reports', items: [['lmsgirs', 'LMS Voyages vs GIRS Voyages', 'Voyages and B/L counts received from LMS against what GIRS holds'], ['vslbl', 'Vessel-wise B/L', 'B/Ls per vessel and how many are invoiced']] },
-    { t: 'Financial reports', items: [['inv', 'Bookings Invoiced', 'Bookings fully invoiced in the period, with invoice value and tax'], ['uninv', 'Bookings Un-Invoiced', 'Bookings with B/Ls still to invoice, why, and for how long'], ['cn', 'CN related', 'Credit notes by reason, source and status'], ['tax', 'Period-wise Invoice and corresponding Tax Codes', 'Invoice value and tax by tax code for the period']] },
+    { t: 'Financial reports', items: [['inv', 'Bookings Invoiced', 'Bookings fully invoiced in the period, with invoice value and tax'], ['uninv', 'Bookings Un-Invoiced', 'Bookings with B/Ls still to invoice, why, and for how long'], ['cn', 'Credit Note', 'Credit notes by reason, source and status'], ['tax', 'Period-wise Invoice and corresponding Tax Codes', 'Invoice value and tax by tax code for the period']] },
     { t: 'Exception reports', items: [['lmsdata', 'Data from LMS vs Data in GIRS', 'Booking and B/L fields where GIRS differs from what LMS sent'], ['gfs', 'Posting to GFS', 'Invoices and credit notes that failed to post to GFS']] }] },
   { g: 'Management reporting', subs: [
     { t: 'Strategic', items: [['ctry', 'Country-wise Revenue / Loss', 'Net revenue and revenue loss by country']] }] }
@@ -1020,6 +1020,7 @@ class GirsPage extends DCLogic {
     try { const q = new URLSearchParams(location.search).get('r'); if (q && MIS_ITEMS.some((i) => i.k === q)) rep = q; } catch (e) {}
     try { fav = JSON.parse(localStorage.getItem('girs.mis.fav') || '[]') || []; sched = JSON.parse(localStorage.getItem('girs.mis.sched') || '{}') || {}; } catch (e) {}
     this.state = Object.assign({}, this.state, { rep, mon: misMKey(misMonths()[0]), loc: 'all', dir: 'all', cmp: true, q: '', exp: false, pg: 1, onlyAtt: true, flt: null, psz: 15, sort: null, sel: {}, done: {}, fav, sched, sdlg: null, insp: null, refreshed: new Date() });
+    try { const setTop = () => { const g = document.querySelector('.gcontent'); const h = g ? [...g.children].find((x) => getComputedStyle(x).position === 'sticky') : null; document.documentElement.style.setProperty('--mx-top', ((h ? h.offsetHeight : 0) + 16) + 'px'); }; setTimeout(setTop, 0); setTimeout(setTop, 400); window.addEventListener('resize', setTop); } catch (e) {}
     try { document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (this.state.sdlg) this.setState({ sdlg: null }); else if (this.state.insp) this.setState({ insp: null }); else if (this.state.exp) this.setState({ exp: false }); } }); } catch (e) {}
   }
   renderVals() {
