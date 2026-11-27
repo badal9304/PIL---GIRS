@@ -709,7 +709,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       (isInv ? '<div class="gd-seg" role="group" aria-label="Page orientation">' +
         ori('p', 'Portrait', '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="1.5"/></svg>') +
         ori('l', 'Landscape', '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5"/></svg>') + '</div>' : '') +
-      (opts.json ? '<button class="gd-btn" data-a="json">Download JSON</button>' : '') +
+      (opts.json ? '<button class="gd-btn" data-a="json">Download interface file</button>' : '') +
       '<button class="gd-btn" data-a="print">Print</button>' +
       '<button class="gd-btn p" data-a="pdf"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download PDF</button>' +
       '<button class="gd-x" data-a="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
@@ -725,7 +725,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         el.querySelectorAll('[data-a="ori"]').forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-v') === m.orient)); });
       }
       else if (a === 'pdf') { download([m]); if (opts.onDone) opts.onDone(m.file + '.pdf downloaded'); }
-      else if (a === 'json') { saveFile(m.file + '.json', JSON.stringify(opts.json, null, 2), 'application/json'); if (opts.onDone) opts.onDone(m.file + '.json downloaded'); }
+      else if (a === 'json') { saveFile(m.file + '.json', JSON.stringify(opts.json, null, 2), 'application/json'); if (opts.onDone) opts.onDone(m.file + ' interface file downloaded'); }
       else if (a === 'print') printDoc(m);
     });
     document.body.appendChild(el); openEl = el;

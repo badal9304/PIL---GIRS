@@ -876,14 +876,14 @@ input[type=date].dt-i,input[type=date].dt-i::-webkit-calendar-picker-indicator{c
           <sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}">
             <div class="bulk" role="region" aria-label="Bulk actions"><span>{{selText}}</span>
               <sc-if value="{{canSelAll}}" hint-placeholder-val="{{ false }}"><button class="lnk" onClick="{{selAll}}">{{selAllText}}</button></sc-if>
-              <button class="btn btn-sm" onClick="{{bulkDownload}}">Download PDF / JSON</button>
+              <button class="btn btn-sm" onClick="{{bulkDownload}}">Download PDF / Interface file</button>
               <button class="btn btn-sm" onClick="{{bulkMail}}">e-Mail / Post</button>
               <button class="btn btn-sm" style="margin-inline-start: auto" onClick="{{clearSel}}">Clear selection</button></div>
           </sc-if>
           <section class="card" style="flex: 1 1 auto; min-height: 0; overflow: auto">
             <table class="lst">
               <thead style="position: sticky; top: 0; z-index: 2"><tr><th class="c-sel"><input type="checkbox" class="cbx" aria-label="Select all invoices" checked="{{allOn}}" onChange="{{toggleAll}}"></th><th class="{{noSort.cls}}" aria-sort="{{noSort.aria}}"><button class="th-s" onClick="{{noSort.sort}}" title="Click to sort">Invoice No.<span class="th-i" aria-hidden="true">{{noSort.ic}}</span></button></th><sc-for list="{{headCols}}" as="h" hint-placeholder-count="12"><th class="{{h.cls}}" draggable="true" data-hcol="{{h.k}}" aria-sort="{{h.aria}}" title="{{h.tip}}"><button class="th-s" onClick="{{h.sort}}">{{h.label}}<span class="th-i" aria-hidden="true">{{h.ic}}</span></button></th></sc-for><th class="c-act" style="width: 72px">Action</th></tr></thead>
-              <tbody><sc-for list="{{invs}}" as="i" hint-placeholder-count="9"><tr class="grp {{i.rowCls}}"><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select {{i.no}}" checked="{{i.on}}" onChange="{{i.toggle}}"></td><td class="c-no"><button class="lnk mono" onClick="{{i.details}}">{{i.no}}</button></td><sc-for list="{{i.cells}}" as="x" hint-placeholder-count="12"><td class="{{x.cls}}" style="{{x.st}}"><sc-if value="{{x.isChip}}" hint-placeholder-val="{{ true }}"><span class="chip" style="{{x.pill}}">{{x.t}}</span></sc-if><sc-if value="{{x.isTxt}}" hint-placeholder-val="{{ false }}">{{x.t}}</sc-if><sc-if value="{{x.isDash}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if><sc-if value="{{x.isLink}}" hint-placeholder-val="{{ false }}"><button class="lnk mono cnc-no" onClick="{{x.go}}" aria-haspopup="dialog">{{x.t}}</button></sc-if><sc-if value="{{x.isStack}}" hint-placeholder-val="{{ false }}"><span class="stack"><sc-for list="{{x.amts}}" as="a" hint-placeholder-count="1"><span>{{a.v}} {{a.c}}</span></sc-for></span></sc-if><sc-if value="{{x.isFiles}}" hint-placeholder-val="{{ false }}"><sc-if value="{{x.hasPdf}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{x.pdf}}">PDF</button></sc-if><sc-if value="{{x.sep}}" hint-placeholder-val="{{ true }}"><span class="mu" style="padding: 0 6px">·</span></sc-if><sc-if value="{{x.hasJson}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{x.json}}">JSON</button></sc-if></sc-if></td></sc-for><td class="c-act"><button class="dots" aria-label="Actions for {{i.no}}" aria-haspopup="menu" aria-expanded="{{i.menuOpen}}" onClick="{{i.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></td></tr></sc-for></tbody>
+              <tbody><sc-for list="{{invs}}" as="i" hint-placeholder-count="9"><tr class="grp {{i.rowCls}}"><td class="c-sel"><input type="checkbox" class="cbx" aria-label="Select {{i.no}}" checked="{{i.on}}" onChange="{{i.toggle}}"></td><td class="c-no"><button class="lnk mono" onClick="{{i.details}}">{{i.no}}</button></td><sc-for list="{{i.cells}}" as="x" hint-placeholder-count="12"><td class="{{x.cls}}" style="{{x.st}}"><sc-if value="{{x.isChip}}" hint-placeholder-val="{{ true }}"><span class="chip" style="{{x.pill}}">{{x.t}}</span></sc-if><sc-if value="{{x.isTxt}}" hint-placeholder-val="{{ false }}">{{x.t}}</sc-if><sc-if value="{{x.isDash}}" hint-placeholder-val="{{ false }}"><span class="mu">—</span></sc-if><sc-if value="{{x.isLink}}" hint-placeholder-val="{{ false }}"><button class="lnk mono cnc-no" onClick="{{x.go}}" aria-haspopup="dialog">{{x.t}}</button></sc-if><sc-if value="{{x.isStack}}" hint-placeholder-val="{{ false }}"><span class="stack"><sc-for list="{{x.amts}}" as="a" hint-placeholder-count="1"><span>{{a.v}} {{a.c}}</span></sc-for></span></sc-if><sc-if value="{{x.isFiles}}" hint-placeholder-val="{{ false }}"><sc-if value="{{x.hasPdf}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{x.pdf}}">PDF</button></sc-if><sc-if value="{{x.sep}}" hint-placeholder-val="{{ true }}"><span class="mu" style="padding: 0 6px">·</span></sc-if><sc-if value="{{x.hasJson}}" hint-placeholder-val="{{ true }}"><button class="lnk" onClick="{{x.json}}">Interface file</button></sc-if></sc-if></td></sc-for><td class="c-act"><button class="dots" aria-label="Actions for {{i.no}}" aria-haspopup="menu" aria-expanded="{{i.menuOpen}}" onClick="{{i.openMenu}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg></button></td></tr></sc-for></tbody>
             </table>
             <sc-if value="{{invEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 40px; text-align: center; color: var(--muted)">No invoices match these filters</div></sc-if>
           </section>
@@ -998,7 +998,7 @@ input[type=date].dt-i,input[type=date].dt-i::-webkit-calendar-picker-indicator{c
                     <div><span class="ivd-k">Govt. reference</span><span class="{{det.govCls}}">{{det.gov}}</span></div>
                   </div>
                   <div class="ivd-info"><sc-for list="{{det.groups}}" as="g" hint-placeholder-count="2"><section><h3>{{g.t}}</h3><dl><sc-for list="{{g.fs}}" as="f" hint-placeholder-count="4"><div><dt>{{f.k}}</dt><dd class="{{f.c}}">{{f.v}}</dd></div></sc-for></dl></section></sc-for></div>
-                  <section class="ivd-sec"><div class="ivd-sh"><h3>Charges</h3><button class="lnk" onClick="{{det.openDoc}}">View PDF / JSON</button></div>
+                  <section class="ivd-sec"><div class="ivd-sh"><h3>Charges</h3><button class="lnk" onClick="{{det.openDoc}}">View PDF / Interface file</button></div>
                     <table class="ctab ivd-t"><thead><tr><th>Charge</th><th>Currency</th><th>ROE</th><th class="num">Amount</th><th>Tax code</th><th class="num">Tax</th><th class="num">Total</th></tr></thead>
                       <tbody><sc-for list="{{det.lines}}" as="l" hint-placeholder-count="3"><tr><td><span class="mono">{{l.chg}}</span><small>{{l.name}}</small></td><td>{{l.cur}}</td><td class="mono">{{l.roe}}</td><td class="mono num">{{l.amt}}</td><td><span class="mono">{{l.tax}}</span><small>{{l.rate}}</small></td><td class="mono num">{{l.taxAmt}}</td><td class="mono num">{{l.tot}}</td></tr></sc-for></tbody>
                       <tfoot><sc-for list="{{det.tots}}" as="t" hint-placeholder-count="1"><tr><td colspan="3">Total · {{t.cur}}</td><td class="mono num">{{t.a}}</td><td></td><td class="mono num">{{t.t}}</td><td class="mono num ivd-gt">{{t.cur}} {{t.g}}</td></tr></sc-for></tfoot></table>
@@ -1217,7 +1217,7 @@ function ivGenReady(n) {
   return out;
 }
 const IV_RDY = IV_READY.concat(ivGenReady(52));
-const IV_COLS = [["st2", "Invoice Status"], ["einv", "e-Invoice"], ["gfs", "GFS Status"], ["pay", "Payment Status"], ["cnst", "Credit Note Status"], ["cnno", "Credit Note No."], ["party", "Customer (Billing Party)"], ["cust", "Customer Code"], ["type", "Invoice Type"], ["bkg", "Booking No."], ["bl", "B/L No."], ["cntr", "Container No."], ["vvd", "Vessel/Voyage"], ["chg", "Charge Code"], ["camt", "Charge Amount"], ["amt", "Invoice Amount"], ["cur", "Currency"], ["roe", "ROE"], ["tax", "Tax Code"], ["due", "Due Date"], ["gov", "Govt. Reference"], ["files", "PDF/JSON Link"], ["audit", "Audit ID"]];
+const IV_COLS = [["st2", "Invoice Status"], ["einv", "e-Invoice"], ["gfs", "GFS Status"], ["pay", "Payment Status"], ["cnst", "Credit Note Status"], ["cnno", "Credit Note No."], ["party", "Customer (Billing Party)"], ["cust", "Customer Code"], ["type", "Invoice Type"], ["bkg", "Booking No."], ["bl", "B/L No."], ["cntr", "Container No."], ["vvd", "Vessel/Voyage"], ["chg", "Charge Code"], ["camt", "Charge Amount"], ["amt", "Invoice Amount"], ["cur", "Currency"], ["roe", "ROE"], ["tax", "Tax Code"], ["due", "Due Date"], ["gov", "Govt. Reference"], ["files", "PDF / Interface file"], ["audit", "Audit ID"]];
 const IV_COLS_DEF = ["st2", "einv", "gfs", "cnst", "cnno", "party", "type", "bl", "vvd", "amt", "cur", "due"];
 function ivInDate(d, from, to) { if (!from && !to) return true; const t = Date.parse(d); if (isNaN(t)) return false; if (from && t < Date.parse(from + 'T00:00:00')) return false; if (to && t > Date.parse(to + 'T23:59:59')) return false; return true; }
 function ivDShort(v) { if (!v) return ''; const d = new Date(v + 'T00:00:00'); return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
@@ -1290,7 +1290,9 @@ function ivRcptData(i) {
   return { no: '[Receipt no.]', date: i.due, inv: i.no, bl: i.bl, port: i.port, cur: order[0], amt: per[order[0]],
     items: order.map((cur) => ({ inv: i.no, bl: i.bl, cur, amt: per[cur] })), cust: { code: i.cust, name: c.name || i.party, tax: c.tax, addr: c.addr } };
 }
-function ivHasJson(i) { return String(i.files).indexOf('JSON') >= 0; }
+function ivIsPrf(i) { return i.type === 'Proforma' || /PRF$/.test(String(i.no)); }
+function ivHasJson(i) { return !ivIsPrf(i) && String(i.files).indexOf('JSON') >= 0; }
+function ivFilesL(i) { const f = String(i.files || '—'); if (f === '—') return f; return ivHasJson(i) ? 'PDF · Interface file' : 'PDF'; }
 function ivArr(v) { return Array.isArray(v) ? v : (v ? [v] : []); }
 function ivIn(v, x) { const a = ivArr(v); return !a.length || a.includes(x); }
 // Invoice List statuses: Invoice Status (Unpaid / Paid / Receipted / Cancelled), e-Invoice Status (Active / Cancelled), GFS Status (Pending / Posted / Acknowledged)
@@ -1356,8 +1358,8 @@ function ivPostTo(i) {
 function ivPostDef(i) { return ivPostTo(i).filter((t) => !t.dis && t.tone !== 'ok').map((t) => t.k); }
 function ivView(i, toast) { try { window.GirsDocs.invoice(ivDocData(i), { json: ivHasJson(i) ? ivDocData(i) : null, onDone: toast }); } catch (e) {} }
 function ivPdf(i, toast) { try { window.GirsDocs.invoicePdf(ivDocData(i)); toast(i.no + '.pdf downloaded'); } catch (e) {} }
-function ivJsonDl(i, toast) { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); toast(i.no + '.json downloaded'); } catch (e) {} }
-function ivDownload(i, toast) { ivPdf(i, toast); if (ivHasJson(i)) setTimeout(() => { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); } catch (e) {} toast(i.no + ' downloaded as PDF and JSON'); }, 500); }
+function ivJsonDl(i, toast) { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); toast(i.no + ' interface file downloaded'); } catch (e) {} }
+function ivDownload(i, toast) { ivPdf(i, toast); if (ivHasJson(i)) setTimeout(() => { try { window.GirsDocs.json('Invoice-' + i.no, ivDocData(i)); } catch (e) {} toast(i.no + ' downloaded as PDF and interface file'); }, 500); }
 function ivReceipt(i, toast) { try { window.GirsDocs.receipt(ivRcptData(i), { onDone: toast }); } catch (e) {} }
 function ivReadyCalc(r) {
   const cur = 'USD';
@@ -1599,7 +1601,7 @@ class GirsPage extends DCLogic {
         roe, roeSt: roe === '—' ? 'color:var(--muted)' : '', tax: uniq(i.lines.map((l) => l[4])).join(', '),
         audit: i.lines[0][5], stc: IV_TONE[i.status] || 'var(--muted)',
         dueSt: i.due === '—' ? 'color:var(--muted)' : '', govSt: i.gov === '—' ? 'color:var(--muted)' : (/error/.test(i.gov) ? 'color:var(--bad)' : ''),
-        hasPdf: files.indexOf('PDF') >= 0, hasJson: files.indexOf('JSON') >= 0, noFile: files === '—',
+        hasPdf: files.indexOf('PDF') >= 0, hasJson: files.indexOf('JSON') >= 0 && ivHasJson(i), noFile: files === '—',
         pdf: () => ivPdf(i, toast), json: () => ivJsonDl(i, toast),
         menuOpen: !!(s.menu && s.menu.no === i.no), openMenu: (e) => self.openMenu(i.no, e),
         lines: i.lines.map((l, n) => ({ n: n + 1, chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], roeSt: l[3] === '—' ? 'color:var(--muted)' : '', tax: l[4], audit: l[5] }))
@@ -1630,7 +1632,7 @@ class GirsPage extends DCLogic {
         it('View invoice details', () => self.dlg('details', i)),
         it('View credit note', () => { if (CNM[i.no]) self.setState({ cnOpen: CNM[i.no].no, menu: null }); else self.dlg('cnv', i); }, !hasCn, 'No credit note for this invoice'),
         it('View SOA', () => self.dlg('soa', i)),
-        it('Download PDF / JSON', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
+        it('Download PDF / Interface file', close(() => ivDownload(i, toast)), i.files === '—', 'Files are created after validation'),
         it('e-Mail / Post', () => self.dlg('mail', i, { ch: 'email', to: (IV_CUST[i.cust] || {}).mail || '', msg: '' }), !live, 'Available once the invoice is generated', { sep: true }),
         it('Request credit note', () => self.dlg('cn', i, { full: true, amt: {}, sel: {}, reason: '', ref: '', file: '', remark: '' }), !cnOk || hasCn, st === 'Credited' ? 'Already credited' : hasCn ? 'A credit note already exists for this invoice' : 'Only for generated, sent, accepted or paid invoices'),
         it('Request refund', () => self.dlg('refund', i, { amount: ivFmt(ivMain(i)), reason: '', note: '' }), !paid, 'Only for paid invoices'),
@@ -1643,7 +1645,7 @@ class GirsPage extends DCLogic {
         it('Cancel invoice', () => self.dlg('cancel', i, { why: '' }), !cancelOk, st === 'Cancelled' ? 'Already cancelled' : (st === 'Accepted' ? 'E-invoice accepted · raise a credit note instead' : 'Paid or credited invoices are reversed by credit note'), { cls: 'd', sep: true })
       ].filter(Boolean);
     };
-    const PRIMARY = { 'Draft': 'View invoice details', 'Pending validation': 'View audit trail', 'Generated': 'e-Mail / Post', 'Sent': 'Download PDF / JSON', 'Accepted': 'Download PDF / JSON',
+    const PRIMARY = { 'Draft': 'View invoice details', 'Pending validation': 'View audit trail', 'Generated': 'e-Mail / Post', 'Sent': 'Download PDF / Interface file', 'Accepted': 'Download PDF / Interface file',
       'Paid': 'View receipt', 'Rejected': 'View audit trail', 'Credited': 'View credit note', 'Cancelled': 'View audit trail' };
     const primaryOf = (i) => itemsFor(i).find((m) => m.label === PRIMARY[i.status]) || itemsFor(i)[0];
     let menuItems = [], menuPos = '';
@@ -1676,7 +1678,7 @@ class GirsPage extends DCLogic {
     let dv = null;
     if (curNo && byNo[curNo]) {
       const i = byNo[curNo], stc = IV_TONE[i.status] || 'var(--muted)', t = totalOf(i), pr = primaryOf(i), its = itemsFor(i);
-      const dlIt = its.find((m) => m.label === 'Download PDF / JSON'), mailIt = its.find((m) => m.label === 'e-Mail / Post');
+      const dlIt = its.find((m) => m.label === 'Download PDF / Interface file'), mailIt = its.find((m) => m.label === 'e-Mail / Post');
       const sec = [dlIt, mailIt, its.find((m) => m.label === 'Request credit note')].filter((m) => m && m.label !== pr.label && !m.dis).slice(0, 2);
       const F = (k, v, mono) => ({ k, v, cls: mono ? 'mono' : '', st: v === '—' ? 'color:var(--muted)' : '' });
       dv = { no: i.no, view: () => ivView(i, toast), status: i.status, pay: i.pay, payPill: ivPayPill(i.pay), pill: 'background:' + (PILLC[stc] || 'var(--neutral)') + ';color:' + stc, party: i.party, cust: i.cust, total: t.main, extra: t.extra, hasExtra: !!t.extra,
@@ -1686,7 +1688,7 @@ class GirsPage extends DCLogic {
           { t: 'Invoice', f: [F('Invoice No.', i.no, 1), F('Invoice Type', i.type), F('Invoice Status', i.status), F('Payment Status', i.pay), F('Due Date', i.due)] },
           { t: 'Shipment', f: [F('Booking No.', i.bkg, 1), F('B/L No.', i.bl, 1), F('Container No.', i.cntr, 1), F('Voyage/VVD', i.vvd)] },
           { t: 'Billing', f: [F('Billing Party', i.party), F('Customer Code', i.cust, 1)] },
-          { t: 'Compliance and files', f: [F('Govt. Reference', i.gov, 1), F('PDF/JSON Link', i.files), F('Audit ID', i.lines[0][5], 1)] }],
+          { t: 'Compliance and files', f: [F('Govt. Reference', i.gov, 1), F('PDF / Interface file', ivFilesL(i)), F('Audit ID', i.lines[0][5], 1)] }],
         lines: i.lines.map((l) => ({ chg: l[0], name: IV_CHG[l[0]] || l[0], amt: ivFmt(l[1]), cur: l[2], roe: l[3], tax: l[4] })) };
     }
     const gNow = GROUPS.find((g) => g[0] === grp);
@@ -2126,7 +2128,7 @@ class GirsPage extends DCLogic {
       dlgDl: !!d && ['audit', 'dist', 'ctx'].includes(d.kind), dl, dlgAct: !!d && !kinds.includes(d.kind) || (!!d && d.kind === 'bulkmail'), det, tbl, prf, gen, okLabel, okCls, dlgOk, doGenerate,
       closeDlg: () => self.setState({ dlg: null, f: {} }),
       chans, ctypes, cnv, cd, reasons: ['FCA approval', 'DAR waiver', 'Pricing correction', 'Invoice amendment'],
-      postTo, postPlat, mailEmail: (f.ch || 'email') !== 'post', mailPost: f.ch === 'post', toLabel: 'To', attach: di ? di.no + '.pdf' + (di.files.indexOf('JSON') >= 0 ? ', ' + di.no + '.json' : '') : '',
+      postTo, postPlat, mailEmail: (f.ch || 'email') !== 'post', mailPost: f.ch === 'post', toLabel: 'To', attach: di ? di.no + '.pdf' + (ivHasJson(di) ? ', ' + di.no + ' interface file' : '') : '',
       amountHint: di ? 'Invoice amount ' + ivFmt(ivMain(di)) + ' ' + di.lines[0][2] : '',
       cancelText: di ? 'The invoice is cancelled in GIRS and the status flows back to LMS.' + (di.gov !== '—' ? ' The e-invoice ' + di.gov + ' is cancelled at the tax portal.' : '') : '',
       f: Object.assign({}, f, { onTo: (e) => self.setF({ to: e.target.value, toErr: false }), onMsg: (e) => self.setF({ msg: e.target.value }),
