@@ -567,7 +567,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
                 <div class="cr-done" role="status">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.8 2.8L16 10"></path></svg>
                   <div><b>Credit note <span class="mono">{{doneNo}}</span> {{doneT}}</b><span>{{doneD}}</span></div>
-                  <div class="cr-done-a"><a class="btn btn-sm" href="credit-note-list-v2.html">Open Credit Note List</a><button class="btn btn-sm" onClick="{{another}}">Raise another</button></div>
+                  <div class="cr-done-a"><button class="btn btn-sm" onClick="{{viewPdf}}">View PDF</button><a class="btn btn-sm" href="credit-note-list-v2.html">Open Credit Note List</a><button class="btn btn-sm" onClick="{{another}}">Raise another</button></div>
                 </div>
               </sc-if>
 
@@ -780,6 +780,7 @@ class GirsPage extends DCLogic {
       isPaid: v.status === 'Paid' && !block,
       editable: !block && !s.done, isDone: !!s.done, doneNo: s.done ? s.done.no : '',
       doneT: s.done && s.done.ctype === 'Partial' ? 'sent for approval' : 'created',
+      viewPdf: () => { try { if (s.done) window.GirsDocs.credit(Object.assign({}, s.done, { origDate: v.date, bl: v.bl, vvd: v.vvd, cntr: v.cntr, port: v.port, status: s.done.ctype === 'Partial' ? 'Pending approval' : 'Generated' }), {}); } catch (e) {} },
       doneD: s.done && s.done.ctype === 'Partial' ? 'Agency Finance (L1) reviews it first, then the Finance Approver (L2). Once approved it is generated and posted to GFS.' : 'Full credit, so no approval is needed. It is generated and posted to GFS.',
       modes: [['full', 'Full invoice', 'Credit every line in full · no approval needed'], ['part', 'Selected lines', 'Choose lines and amounts · needs approval']].map(([k, t, d]) => ({ t, d, on: (k === 'full') === full ? 'true' : 'false', pick: () => this.setState({ full: k === 'full', tried: false }) })),
       isFull: full, isPart: !full, plines, ptots, noPtots: !ptots.length, errLines, errLinesT,
@@ -867,6 +868,7 @@ class Component extends GirsPage {
 
 </script>
 <script src="girs-dates.js"></script>
+<script src="girs-docs.js"></script>
 <script src="girs-ctx.js"></script>
 <script src="runtime.js"></script>
 <script src="girs-search.js"></script>

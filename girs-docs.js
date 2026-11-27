@@ -82,7 +82,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   function invoiceModel(inv) { var m = invoiceModelBase(inv); m.v2 = invoiceV2(inv, m); return m; }
   function invoiceModelBase(inv) {
-    var credit = inv.kind === 'credit', sign = credit ? -1 : 1, cust = inv.cust || {};
+    var credit = inv.kind === 'credit', sign = 1, cust = inv.cust || {};
     var dir = String(inv.no || '').charAt(3), port = PORT[inv.port] || inv.port || '', h = hsh(inv.no), cc = String(inv.port || 'SG').slice(0, 2);
     var cur = ((inv.lines || []).filter(function (l) { return l.roe === '—' || !l.roe; })[0] || (inv.lines || [])[0] || {}).cur || 'USD';
     var pay = inv.pay || inv.status || '';
@@ -103,7 +103,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     return {
       kind: credit ? 'credit' : 'invoice', no: inv.no, file: (credit ? 'Credit-note-' : 'Invoice-') + inv.no,
       title: credit ? 'Credit Note' : (taxInv ? 'Tax Invoice' : 'Proforma Invoice'), qr: taxInv ? 'PIL TAX INVOICE ' + inv.no + ' | ' + dShort(inv.date) + ' | ' + cur + ' ' + fmt(G.incl) : '',
-      txn: credit ? 'Credit Note Approved' : (TXN[inv.type] || 'B/L Released'), badge: credit ? '' : badge,
+      txn: credit ? (inv.ctype === 'Partial' ? 'Partial credit' : 'Full credit') : (TXN[inv.type] || 'B/L Released'), badge: credit ? (inv.status && inv.status !== 'Generated' ? 'DRAFT' : '') : badge,
       from: ['Pacific International Lines (China) Ltd. / PIL Logistics', 'Block 5, PIL Building, No. 18 Gongping Road,', 'Hongkou District, Shanghai 200082, China', 'Phone: +86-21-80138801 / +86-21-61235709'],
       to: [ph(cust.name, '—')].concat(cust.addr ? [cust.addr] : []),
       strip: [[credit ? 'Credit Note No.' : 'Invoice No.', inv.no], [credit ? 'Credit Note Date' : 'Invoice Date', dShort(inv.date)], ['Invoice Due Date', dShort(inv.due)], ['Currency', cur]],
@@ -179,7 +179,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     '.gl-ft{position:absolute;left:48px;right:48px;bottom:24px;border-top:1px solid #DADDE3;padding-top:10px;font-size:11px;line-height:16px;color:#5A6170;display:flex;justify-content:space-between;gap:24px}'
   ].join('');
   // Same colours as the Invoice Status chip on the list screens (--okbg/--ok, --warnbg/--warn, --badbg/--bad)
-  var CHIP = { PAID: ['#E6F3EC', '#1F6B45'], 'UN-PAID': ['#FDF0E3', '#8A4200'], CANCELLED: ['#FBEAEA', '#A3262A'] };
+  var CHIP = { PAID: ['#E6F3EC', '#1F6B45'], 'UN-PAID': ['#FDF0E3', '#8A4200'], CANCELLED: ['#FBEAEA', '#A3262A'], DRAFT: ['#EEF0F3', '#3A4556'] };
   var BADGE = {}; Object.keys(CHIP).forEach(function (k) { BADGE[k] = 'background:' + CHIP[k][0] + ';color:' + CHIP[k][1]; });
   function invoiceHtml(m) {
     var kv = function (rows, cls) { return '<div class="' + cls + '">' + rows.map(function (r) { return '<span>' + esc(r[0]) + '</span><span>' + esc(r[1]) + '</span>'; }).join('') + '</div>'; };
@@ -370,8 +370,37 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     return parts.join(' ') + (paise ? ' and Paise ' + words999(paise) : '');
   }
   function hex64(seed) { var s = '', h = (seed % 2147483646) + 1; for (var i = 0; i < 64; i++) { h = (h * 48271) % 2147483647; s += '0123456789abcdef'[(h >> 5) % 16]; } return s; }
-  function invoiceV2(inv, m) {
-    var cust = inv.cust || {}, cc = String(inv.port || 'SG').slice(0, 2), C = V2C[cc] || V2C.SG, h = hsh(inv.no), credit = inv.kind === 'credit', sign = credit ? -1 : 1;
+  function creditV2(inv, x) {
+    // Credit note wording on top of the invoice layout
+    var cust = inv.cust || {}, part = inv.ctype === 'Partial', cur = x.cur;
+    x.meta = [['Credit Note No.', inv.no], ['Credit Note Date', x.meta[1][1]], ['Original Invoice No.', ph(inv.orig, '—')], ['Currency', cur]];
+    x.info = [['Customer Code', ph(cust.code, '—')], ['Original Invoice Date', dShort(inv.origDate) || '—'], ['Reason Code', ph(inv.reason, '—')],
+      ['Credit Type', part ? 'Partial · selected lines' : 'Full · whole invoice'], ['Reference', ph(inv.ref, '—')], ['Replacement Invoice', ph(inv.repl, '—')]];
+    x.totals = x.totals.map(function (t) { return [t[0].replace('Total Taxable Value', 'Taxable Value Credited'), t[1]]; });
+    x.grand = x.grand.map(function (g) { return [g[0].replace('Invoice Total', 'Credit Note Total'), g[1]]; });
+    x.roe = [['ROE as per original invoice ' + ph(inv.orig, ''), x.roe[1][1]]];
+    if (inv.origDate && x.ship[2]) { var sd = minusDays(inv.origDate, 4 + hsh(inv.no) % 6); if (sd) x.ship[2] = [x.ship[2][0], dShort(sd)]; }
+    x.wordsLb = 'Amount Credited in Words';
+    x.lbBank = 'Credit Details';
+    x.banks = [['Credit', [['Reason Code', ph(inv.reason, '—')], ['Credit Type', part ? 'Partial · selected lines' : 'Full · whole invoice'], ['Credit Note Total', x.grand[0][1]], ['Remarks', ph(inv.remark, '—')]]],
+      ['Approval & Posting', (part ? [['L1 · Agency Finance', ph(inv.l1, 'Pending')], ['L2 · Finance Approver', ph(inv.l2, 'Pending')]] : [['Approval', 'Not needed · full credit']]).concat([['Raised By', ph(inv.by, '—')], ['GFS Posting', ph(inv.gfs, 'After generation')]])]];
+    x.lbTax = (x.isIN ? 'GST' : 'Tax') + ' Reversed';
+    x.lbLegal = 'Statutory e-Credit Note'; x.lbLate = 'Adjustment';
+    x.legal = 'Reported to the tax authority against the e-invoice of ' + ph(inv.orig, 'the original invoice') + '. Tax is reversed at the rate charged on that invoice.';
+    x.late = 'The credited amount is adjusted against invoice ' + ph(inv.orig, '—') + (part ? ' for the lines shown on page 1 only.' : ' in full.') + ' Amounts use the exchange rate of the original invoice.';
+    x.tc = ['This credit note is issued against invoice ' + ph(inv.orig, '—') + ' and forms part of the same transaction.',
+      'Credit is applied at the Rate of Exchange and tax rate of the original invoice.',
+      'Any query must be raised in writing within 7 days of the credit note date, quoting the credit note and invoice number.',
+      'All other terms of the original invoice and the PIL Conditions of Carriage remain unchanged.'];
+    x.declaration = 'We declare that this credit note shows the actual adjustment to the services described and that all particulars are true and correct.';
+    x.disclaimer = 'This is a computer generated credit note and further authorization is not required.';
+    x.signed = 'Digitally signed · ' + x.meta[1][1];
+    if (inv.status && inv.status !== 'Generated') { x.signed = ''; x.ids = null; x.qr = ''; x.disclaimer = 'Draft for review. Not a valid credit note until it is generated' + (part ? ' after approval.' : '.'); }
+    return x;
+  }
+  function invoiceV2(inv, m) { var x = invoiceV2Base(inv, m); return inv.kind === 'credit' ? creditV2(inv, x) : x; }
+  function invoiceV2Base(inv, m) {
+    var cust = inv.cust || {}, cc = String(inv.port || 'SG').slice(0, 2), C = V2C[cc] || V2C.SG, h = hsh(inv.no), credit = inv.kind === 'credit', sign = 1;
     var cur = (((inv.lines || []).filter(function (l) { return l.roe === '—' || !l.roe; })[0]) || (inv.lines || [])[0] || {}).cur || 'USD';
     var dir = String(inv.no || '').charAt(3) === 'I' ? 'I' : 'O', isIN = cc === 'IN';
     var gst = String(cust.tax || '').replace(/^\D+\s*/, ''), stCode = isIN ? (gst.match(/^\d\d/) || ['27'])[0] : '';
@@ -493,16 +522,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       '<div class="gv-panel s16">' + x.ship.map(function (r, i) { return i === x.ship.length - 1 ? '<div style="grid-column:span 2"><span class="lb">' + E(r[0]) + '</span><span class="v">' + E(r[1]) + '</span></div>' : cell(r); }).join('') + '</div>' +
       '<table class="s16"><thead><tr>' + x.cols.map(function (c, i) { return '<th class="' + (x.right[i] ? 'r' : '') + '">' + E(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
         x.rows.map(function (r) { return '<tr>' + x.keys.map(function (k, i) { return '<td class="' + (x.right[i] ? 'r' : '') + (k === 'head' ? ' w' : '') + '">' + E(r[k]) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>' +
-      '<div class="gv-two s16"><div><span class="lb">Amount in Words</span><div class="v" style="font-size:11px;line-height:16px">' + E(x.words) + '</div>' + (x.wordsSub ? '<div class="v gv-mu" style="margin-top:4px">' + E(x.wordsSub) + '</div>' : '') + '</div>' +
+      '<div class="gv-two s16"><div><span class="lb">' + E(x.wordsLb || 'Amount in Words') + '</span><div class="v" style="font-size:11px;line-height:16px">' + E(x.words) + '</div>' + (x.wordsSub ? '<div class="v gv-mu" style="margin-top:4px">' + E(x.wordsSub) + '</div>' : '') + '</div>' +
         '<div><div class="gv-tot">' + kv(x.totals) + '</div><div class="gv-gt">' + x.grand.map(function (g) { return '<span>' + E(g[0]) + '</span><span>' + E(g[1]) + '</span>'; }).join('') + '</div>' +
         '<div class="gv-roe">' + x.roe.map(function (r) { return '<span>' + E(r[0]) + '</span><b>' + E(r[1]) + '</b>'; }).join('') + '</div></div></div>' +
       '<div class="gv-sp"></div>' + ft(1) + '</div>';
     var p2 = '<div class="' + cls + '" role="document">' + lh(false) +
       '<div class="gv-ttl s16"><h1 style="font-size:14px">' + E(x.title.toUpperCase()) + ' <span style="font-weight:400;color:#5D6673;font-size:11px;letter-spacing:0">&nbsp;' + E(x.meta[0][1]) + ' · ' + E(x.meta[1][1]) + ' · continued</span></h1></div>' +
-      '<div class="s24"><span class="h">Bank Details for Remittance</span><div class="gv-two">' + x.banks.map(function (b) { return '<div><div class="gv-pn">' + E(b[0]) + '</div><div class="gv-kv">' + b[1].map(function (r) { return '<span>' + E(r[0]) + '</span><span>' + E(r[1]) + '</span>'; }).join('') + '</div></div>'; }).join('') + '</div></div>' +
-      '<div class="s24"><span class="h">' + (x.isIN ? 'GST' : 'Tax') + ' Summary</span><table><thead><tr>' + x.taxCols.map(function (c, i) { return (!x.showCS && (i === 4 || i === 5)) ? '' : '<th class="' + (i ? 'r' : '') + '">' + E(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      '<div class="s24"><span class="h">' + E(x.lbBank || 'Bank Details for Remittance') + '</span><div class="gv-two">' + x.banks.map(function (b) { return '<div><div class="gv-pn">' + E(b[0]) + '</div><div class="gv-kv">' + b[1].map(function (r) { return '<span>' + E(r[0]) + '</span><span>' + E(r[1]) + '</span>'; }).join('') + '</div></div>'; }).join('') + '</div></div>' +
+      '<div class="s24"><span class="h">' + E(x.lbTax || ((x.isIN ? 'GST' : 'Tax') + ' Summary')) + '</span><table><thead><tr>' + x.taxCols.map(function (c, i) { return (!x.showCS && (i === 4 || i === 5)) ? '' : '<th class="' + (i ? 'r' : '') + '">' + E(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
         x.taxRows.concat([x.taxTotal]).map(function (r, n, all) { return '<tr>' + r.map(function (v, i) { return (!x.showCS && (i === 4 || i === 5)) ? '' : '<td class="' + (i ? 'r' : '') + '">' + (n === all.length - 1 ? '<b>' + E(v) + '</b>' : E(v)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>' +
-      '<div class="gv-two s24"><div><span class="h">Statutory e-Invoice</span><div>' + E(x.legal) + '</div></div><div><span class="h">Late Payment</span><div>' + E(x.late) + '</div></div></div>' +
+      '<div class="gv-two s24"><div><span class="h">' + E(x.lbLegal || 'Statutory e-Invoice') + '</span><div>' + E(x.legal) + '</div></div><div><span class="h">' + E(x.lbLate || 'Late Payment') + '</span><div>' + E(x.late) + '</div></div></div>' +
       '<div class="s24 gv-tc"><span class="h">Terms &amp; Conditions</span><ol>' + x.tc.map(function (t) { return '<li>' + E(t) + '</li>'; }).join('') + '</ol><div style="font-size:8px;color:#5D6673;margin-top:4px">Full terms: <a href="https://www.pilship.com" target="_blank" rel="noopener">PIL Conditions of Carriage · www.pilship.com</a></div></div>' +
       '<div class="gv-sig s24"><div><span class="h">Declaration</span><div>' + E(x.declaration) + '</div></div><div class="s">' + E(x.sign) + '<div class="ln">' + E(x.signed) + '</div>Authorised Signatory</div></div>' +
       '<div class="s24"><span class="h">Container Nos. (' + x.cntrs.length + ' x 40HC)</span><div class="gv-cg">' + x.cntrs.map(function (c) { return '<div><i>40HC</i><span>' + E(c) + '</span></div>'; }).join('') + '</div></div>' +
@@ -566,7 +595,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     });
     // words + totals
     var tb = 12 + x.totals.length * 12 + 10 + x.grand.length * 13 + 10 + x.roe.length * 11; need(tb + 8); y += 12;
-    K(L, y + 7, 'Amount in Words'); var wl = wrap(x.words, false, 8.2, hw); wl.forEach(function (t, i) { p.text(L, y + 20 + i * 12, t, { size: 8.2 }); });
+    K(L, y + 7, x.wordsLb || 'Amount in Words'); var wl = wrap(x.words, false, 8.2, hw); wl.forEach(function (t, i) { p.text(L, y + 20 + i * 12, t, { size: 8.2 }); });
     if (x.wordsSub) p.text(L, y + 24 + wl.length * 12, x.wordsSub, { size: 7.5, color: MU });
     var tx = xs2[1], ty = y + 7;
     x.totals.forEach(function (t) { p.text(tx, ty, t[0], { size: 7.9 }); p.text(R, ty, t[1], { size: 7.9, align: 'r' }); ty += 12; });
@@ -577,12 +606,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     // page 2 (always starts a new page)
     newPage(false); y += 18;
     p.text(L, y, x.title.toUpperCase(), { size: 10.5, bold: true }); p.text(L + width(x.title.toUpperCase(), true, 10.5) + 8, y, x.meta[0][1] + ' · ' + x.meta[1][1] + ' · continued', { size: 8.2, color: MU });
-    y += 14; H6('Bank Details for Remittance', L, CW); y += 20; var by = y;
+    y += 14; H6(x.lbBank || 'Bank Details for Remittance', L, CW); y += 20; var by = y;
     x.banks.forEach(function (b, i) { p.text(xs2[i], y + 6, b[0], { size: 8.6, bold: true }); by = Math.max(by, kvBlock(xs2[i], y + 20, hw, b[1], 82)); });
     y = by + 12;
     // tax summary
     var tcols = x.taxCols.filter(function (c, i) { return x.showCS || (i !== 4 && i !== 5); }), trows = x.taxRows.concat([x.taxTotal]).map(function (r) { return r.filter(function (c, i) { return x.showCS || (i !== 4 && i !== 5); }); });
-    need(40 + trows.length * 19); H6((x.isIN ? 'GST' : 'Tax') + ' Summary', L, CW); y += 20; var tf = tcols.map(function (c, i) { return i ? 1 : 1.3; }), tft = tf.reduce(function (a, b) { return a + b; }, 0), txs = [L];
+    need(40 + trows.length * 19); H6(x.lbTax || ((x.isIN ? 'GST' : 'Tax') + ' Summary'), L, CW); y += 20; var tf = tcols.map(function (c, i) { return i ? 1 : 1.3; }), tft = tf.reduce(function (a, b) { return a + b; }, 0), txs = [L];
     tf.forEach(function (f) { txs.push(txs[txs.length - 1] + f * CW / tft); });
     p.rect(L, y, CW, 18, '#F4F5F7'); p.line(L, y, R, y, LN); p.line(L, y + 18, R, y + 18, '#9AA2AD');
     tcols.forEach(function (c, i) { p.text(i ? txs[i + 1] - 3 : txs[i] + 3, y + 12, c, { size: 6.4, bold: true, color: '#3B434E', align: i ? 'r' : 'l' }); }); y += 18;
@@ -590,7 +619,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     y += 18;
     // statutory + late payment
     var sl = wrap(x.legal, false, 7.9, hw), ll = wrap(x.late, false, 7.9, hw); need(24 + Math.max(sl.length, ll.length) * 11);
-    H6('Statutory e-Invoice', L, hw); H6('Late Payment', xs2[1], hw);
+    H6(x.lbLegal || 'Statutory e-Invoice', L, hw); H6(x.lbLate || 'Late Payment', xs2[1], hw);
     sl.forEach(function (t, i) { p.text(L, y + 26 + i * 11, t, { size: 7.9 }); }); ll.forEach(function (t, i) { p.text(xs2[1], y + 26 + i * 11, t, { size: 7.9 }); });
     y += 26 + Math.max(sl.length, ll.length) * 11 + 10;
     // T&C (two columns, small)
@@ -970,11 +999,37 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     saveFile(file + '.pdf', buildPdf(models, file), 'application/pdf');
   }
 
+  // Credit note record (Credit Note List format) -> document input
+  var CN_PORT = { SIN: 'SGSIN', NSA: 'INNSA', PKG: 'MYPKG', LCH: 'THLCH' }, CN_ROE = { SG: '1.3412', IN: '84.1200', MY: '4.4710', TH: '34.2500' }, CN_LOCAL = { SG: 'SGD', IN: 'INR', MY: 'MYR', TH: 'THB' };
+  var CN_CUST = {
+    'Straits Harbour Logistics (SG)': ['SG-100231', 'UEN 201812345K', '21 Pioneer Road, #04-02, Singapore 628491'], 'Meridian Agro Exports (SG)': ['SG-100874', 'UEN 199904417M', '8 Jurong Port Road, Singapore 619088'],
+    'Kinabalu Home Furnishings (SG)': ['SG-101066', 'UEN 201533018D', '60 Tuas South Ave 1, Singapore 637611'], 'Straits Harbour Logistics (MY)': ['MY-200417', 'C20811047090', 'Lot 12, Jalan Pelabuhan, 42000 Port Klang'],
+    'Straits Harbour Logistics (IN)': ['IN-300552', 'GSTIN 27AAGCS4412L1Z5', 'Plot 7, JNPT Road, Navi Mumbai 400707'], 'Orchid Lane Polymers (IN)': ['IN-300781', 'GSTIN 24AACCO9021P1ZK', 'Survey 118, Vapi GIDC, Gujarat 396195'],
+    'Kinabalu Home Furnishings (MY)': ['MY-200903', 'C21003391080', 'No. 3, Jalan Perigi, 81700 Pasir Gudang'], 'Andaman Bay Traders (TH)': ['TH-500318', 'TIN 0105559013374', '88 Moo 3, Laem Chabang, Chonburi 20230']
+  };
+  // Original invoices behind the sample credit notes (same values as the invoice sample data)
+  var CN_ORIG = { SINOF2602401: ['06 Nov 2026', 'BL-SG-24001', 'Vessel 01 / 012E', 'PILU1000016'], SINOF2602405: ['03 Nov 2026', 'BL-SG-24006', 'Vessel 01 / 012E', 'PILU3000014'],
+    SINOD2602150: ['29 Oct 2026', 'BL-SG-24004', 'Vessel 03 / 108N', 'PILU4000021'], NSAOF2601044: ['04 Nov 2026', 'BL-IN-24005', 'Vessel 04 / 021S', 'PILU2000013'],
+    NSAOF2601051: ['07 Nov 2026', 'BL-IN-24008', 'Vessel 04 / 021S', 'PILU2000027'], PKGOF2600917: ['10 Nov 2026', 'BL-MY-24003', 'Vessel 02 / 044W', 'PILU6000011'] };
+  function creditInput(cn) {
+    var oh = hsh(cn.orig), od = CN_ORIG[cn.orig] || [dShort(minusDays(cn.date, 9 + oh % 12)), 'BL-' + ({ SIN: 'SG', NSA: 'IN', PKG: 'MY', LCH: 'TH' }[String(cn.no).slice(0, 3)] || 'SG') + '-' + (24010 + oh % 80), 'Vessel 0' + (1 + oh % 6) + ' / 0' + (10 + oh % 89) + 'E', 'PILU' + (1000000 + oh % 899999)];
+    cn = Object.assign({ origDate: od[0], bl: od[1], vvd: od[2], cntr: od[3] }, cn);
+    ['origDate', 'bl', 'vvd', 'cntr'].forEach(function (k, i) { if (!cn[k] || cn[k] === '—') cn[k] = od[i]; });
+    var port = cn.port || CN_PORT[String(cn.no || '').slice(0, 3)] || 'SGSIN', cc = port.slice(0, 2), c = CN_CUST[cn.party] || [];
+    var ap = cn.appr || [], who = function (a) { return !a ? '' : a[2] === 'Approved' ? a[1] + ' · ' + (a[3] || '') : a[2]; };
+    return { no: cn.no, kind: 'credit', ctype: cn.ctype || 'Full', orig: cn.orig, origDate: cn.origDate, date: cn.date || nowStamp(), due: '—', port: port, status: cn.status,
+      cust: { code: c[0] || '', name: cn.party, tax: c[1] || '', addr: c[2] || '' }, reason: cn.reason, ref: cn.ref, repl: cn.repl, remark: cn.remark, by: cn.by, gfs: cn.gfs,
+      l1: who(ap[0]), l2: who(ap[1]), bl: cn.bl, vvd: cn.vvd, cntr: cn.cntr, type: 'Freight',
+      lines: (cn.lines || []).map(function (l) { return { code: l[0], name: l[1], amt: +l[2] || 0, tax: l[3], cur: l[5], roe: l[5] === 'USD' && CN_LOCAL[cc] !== 'USD' ? CN_ROE[cc] : '—' }; }) };
+  }
+
   window.GirsDocs = {
     invoice: function (inv, opts) { show(invoiceModel(inv), opts); },
     receipt: function (rc, opts) { show(receiptModel(rc), opts); },
     invoicePdf: function (list, name) { list = [].concat(list); download(list.map(function (i) { return invoiceModel(i); }), name); },
     receiptPdf: function (rc) { download([receiptModel(rc)]); },
+    credit: function (cn, opts) { show(invoiceModel(creditInput(cn)), opts); },
+    creditPdf: function (cn) { download([invoiceModel(creditInput(cn))]); },
     json: function (name, obj) { saveFile(name + '.json', JSON.stringify(obj, null, 2), 'application/json'); },
     model: invoiceModel, // the document fields (used by the Ready to invoice screen)
     close: close

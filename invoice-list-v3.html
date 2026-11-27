@@ -1149,7 +1149,7 @@ input[type=date].dt-i,input[type=date].dt-i::-webkit-calendar-picker-indicator{c
 
             <sc-if value="{{cd.hasRemark}}" hint-placeholder-val="{{ false }}"><section class="icd-s"><h3>Remarks</h3><p class="icd-rm">{{cd.remark}}</p></section></sc-if>
           </div>
-          <footer class="icd-f"><a class="btn" href="{{cd.href}}">Open in Credit Note List</a></footer>
+          <footer class="icd-f"><a class="btn" href="{{cd.href}}">Open in Credit Note List</a><button class="btn" onClick="{{cd.viewPdf}}" disabled="{{cd.pdfDis}}" title="{{cd.pdfTip}}">View PDF</button><button class="btn" onClick="{{cd.dlPdf}}" disabled="{{cd.pdfDis}}" title="{{cd.pdfTip}}">Download PDF</button></footer>
         </aside>
       </sc-if>
 
@@ -1818,6 +1818,8 @@ class GirsPage extends DCLogic {
         appr: (cr.appr || []).map((a) => ({ lvl: a[0], who: a[1], st: a[2], pill: AP[a[2]] || 'background:var(--neutral);color:var(--muted)', when: a[3] || '', note: a[4] || '', hasNote: !!a[4] })),
         hasRemark: !!cr.remark, remark: cr.remark || '',
         href: 'credit-note-list-v2.html?q=' + cr.no,
+        pdfDis: ['Generated', 'Pending approval', 'Draft'].includes(cr.status) ? '' : 'true', pdfTip: cr.status === 'Generated' ? 'Credit note document' : 'Preview · final once generated',
+        viewPdf: () => { try { window.GirsDocs.credit(cr, {}); } catch (e) {} }, dlPdf: () => { try { window.GirsDocs.creditPdf(cr); self.setState({ __toast: 'Credit-note-' + cr.no + '.pdf downloaded' }); } catch (e) {} },
         close: () => self.setState({ cnOpen: '' }) };
     }
     // ---------------- dialogs
