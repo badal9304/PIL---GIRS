@@ -1494,7 +1494,7 @@ class GirsPage extends DCLogic {
     const colsAll = IV_COLS.every(([k]) => cdv[k]);
     const colsList = [{ k: '', label: 'Invoice No.', on: true, lock: true, drag: 'false', tip: 'Always first', flip: () => {} }].concat(ordD.map((k) => ({ k, label: LBL[k], on: cdv[k], lock: false, drag: 'true', tip: 'Drag to reorder, or Alt + ↑ / ↓', flip: () => colsSet(cdv[k] ? dr.filter((x) => x !== k) : dr.concat([k])) })), [{ k: '', label: 'Action', on: true, lock: true, drag: 'false', tip: 'Always last', flip: () => {} }]);
     const cq = String(s.colsQ || '').trim().toLowerCase();
-    const colsShown = (cq ? colsList.filter((c) => c.label.toLowerCase().includes(cq)) : colsList).map((c) => Object.assign({}, c, { drag: cq ? 'false' : c.drag, hasH: !c.lock && !cq, noH: c.lock || !!cq }));
+    const colsShown = (cq ? colsList.filter((c) => c.label.toLowerCase().includes(cq)) : colsList).map((c) => Object.assign({}, c, { drag: cq ? 'false' : c.drag, hasH: !c.lock && !cq, noH: !!c.lock }));
     const colsUi = { cv, colsList: colsShown, colsQ: s.colsQ || '', colsHasQ: !!cq, colsNoQ: !cq, colsNone: !colsShown.length,
       colsOnQ: (e) => self.setState({ colsQ: e.target.value }), colsClrQ: () => { self.setState({ colsQ: '' }); setTimeout(() => { const q = document.querySelector('.cols-q'); if (q) q.focus(); }, 30); }, colsAll, colsOpen: !!s.colsOpen, colsN: (s.cols.length + 2) + ' of ' + (IV_COLS.length + 2), colsDN: (dr.length + 2) + ' of ' + (IV_COLS.length + 2),
       colsIsDef: dr.length === IV_COLS_DEF.length && IV_COLS_DEF.every((k) => dr.includes(k)) && ordD.every((k, n) => k === IV_COLS[n][0]),
@@ -2093,7 +2093,7 @@ class GirsPage extends DCLogic {
       dateF: (() => { const open = !!s.dOpen, df = open ? (s.dDraft || {}) : {}, has = !!(s.dFrom || s.dTo);
         return { open, openA: open ? 'true' : 'false', has, text: has ? ivDRange(s.dFrom, s.dTo) : 'Invoice date', tip: has ? 'Invoice date: ' + (s.dFrom ? ivDShort(s.dFrom) : 'any') + ' to ' + (s.dTo ? ivDShort(s.dTo) : 'any') : 'Filter by invoice date',
           bst: has ? 'border-color:var(--accent);background:var(--tint);color:var(--accent2)' : '', from: df.from || '', to: df.to || '', err: !!(df.from && df.to && df.from > df.to),
-          toggle: () => { const z = { dFrom: s.dFrom || '', dTo: s.dTo || '' }; FKEYS.forEach((k) => { z[k] = ivArr(s[k]); }); self.setState({ fd: z, fcat: 'date', fq: '', dOpen: false, dDraft: null, fopen: null, fdv: null, menu: null, colsOpen: false }); },
+          toggle: () => self.setState(open ? { dOpen: false, dDraft: null } : { dOpen: true, dDraft: { from: s.dFrom || '', to: s.dTo || '' }, fopen: null, menu: null, fd: null }),
           onFrom: (e) => self.setState({ dDraft: Object.assign({}, df, { from: e.target.value }) }), onTo: (e) => self.setState({ dDraft: Object.assign({}, df, { to: e.target.value }) }),
           presets: [['Today', 0], ['Last 7 days', 6], ['Last 30 days', 29]].map(([l, n]) => ({ l, go: () => { const t = new Date(), f = new Date(t.getTime() - n * 864e5), iso = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); self.setState({ dDraft: { from: iso(f), to: iso(t) } }); } })),
           clear: () => self.setState({ dDraft: { from: '', to: '' } }), close: () => self.setState({ dOpen: false, dDraft: null }),
