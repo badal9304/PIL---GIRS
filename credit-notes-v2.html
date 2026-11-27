@@ -673,7 +673,7 @@ function ivGen(n) {
 }
 const CR_ALL = IV_SEED.concat(ivGen(491)).sort((a, b) => new Date(b.date) - new Date(a.date));
 // Invoices that already have a credit note in the Credit Note List sample data
-const CR_HASCN = new Set(['SINOF2602298', 'SINOD2602150', 'PKGOF2600917', 'SINOF2602281', 'NSAOF2601044', 'SINOF2602405', 'SINOF2602401', 'LCHOD2600198', 'NSAOF2601051']);
+const CR_HASCN = new Set(['NSAOF2601019', 'SINOF2602298', 'SINOD2602150', 'PKGOF2600917', 'SINOF2602281', 'NSAOF2601044', 'SINOF2602405', 'SINOF2602401', 'LCHOD2600198', 'NSAOF2601051']);
 class GirsPage extends DCLogic {
   constructor(p) {
     super(p);

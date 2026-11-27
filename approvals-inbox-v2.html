@@ -492,6 +492,10 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <sc-if value="{{sel.decided}}" hint-placeholder-val="{{ false }}">
                 <div style="padding: 10px 12px; border-radius: 6px; {{sel.doneStyle}}">{{sel.doneText}}</div>
               </sc-if>
+              <sc-if value="{{sel.isCnRv}}" hint-placeholder-val="{{ false }}">
+                <div style="font-size: 13px; line-height: 18px; color: var(--muted2)">Open the credit note as it was raised. You can change the reason, credit type, lines, amounts and remarks before you approve or reject.</div>
+                <a class="btn btn-primary" href="{{sel.cnHref}}" style="text-decoration: none; align-self: flex-start">Review credit note</a>
+              </sc-if>
               <sc-if value="{{sel.actionable}}" hint-placeholder-val="{{ true }}">
                 <div>
                   <label class="lbl" for="rmk">Remarks <span style="font-weight: 400">· required to reject</span></label>
@@ -526,14 +530,14 @@ class GirsPage extends DCLogic {
     const s = this.state;
     const m = (v) => v == null ? '—' : 'USD ' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const R = [
-      { id: 'AP-1041', type: 'Credit note', ref: 'SINOF2602405', by: '[Requester A]', amt: 700, approver: 'Team lead', at: '05 Nov 09:40', rule: 'Approval matrix · up to USD 50,000', reason: 'Partial credit · FCA approved upstream — Demurrage charge amended.' },
+      { id: 'AP-1041', type: 'Credit note', ref: 'SINOF2600324CR', by: 'Priya Nair', amt: 87.20, approver: 'Finance Approver (L2)', at: '20 Nov 10:12', rule: 'Partial credit · Agency Finance (L1) → Finance Approver (L2)', reason: 'Partial credit · BAF billed at the old quarter rate.', cn: 'SINOF2600324CR' },
       { id: 'AP-1042', type: 'Invoice amendment', ref: 'SINOF2602401', by: '[Requester B]', amt: 1850, approver: 'Team lead', at: '05 Nov 10:05', rule: 'Invoice amendment approval · team lead', reason: 'Billing party corrected after customer request.' },
       { id: 'AP-1043', type: 'DAR waiver', ref: 'BL-SG-24004', by: '[Requester C]', amt: 4200, approver: 'Commercial Director', at: '05 Nov 10:22', rule: 'DAR Tier 3 · above USD 2,500', reason: 'Strategic VIP shipper — 100% demurrage waiver requested.' },
       { id: 'AP-1044', type: 'Credit hold release', ref: '[Customer F]', by: '[Credit team]', amt: null, approver: 'Credit controller', at: '05 Nov 11:10', rule: 'Credit hold review · release, override or deny', reason: 'Credit limit exceeded — release requested to allow invoice issuance.' },
       { id: 'AP-1045', type: 'Receipt backdating', ref: 'P-0005', by: '[User ID]', amt: 5600, approver: 'Team lead', at: '05 Nov 11:32', rule: 'Receipt backdating · approval governance', reason: 'Bank value date earlier than processing date.', self: true },
       { id: 'AP-1047', type: 'DAR waiver', ref: 'BL-SG-24002', by: '[Requester E]', amt: 380, approver: 'Agency Ops', at: '05 Nov 12:20', rule: 'DAR Tier 1 · below USD 500', reason: 'Port holiday — free-time dispute.' },
       { id: 'AP-1048', type: 'Invoice amendment', ref: 'SINOF2602301', by: '[Requester B]', amt: 2880, approver: 'Team lead', at: '05 Nov 12:41', rule: 'Invoice amendment approval · team lead', reason: 'Miscellaneous charge description corrected.' },
-      { id: 'AP-1049', type: 'Credit note', ref: 'NSAOF2601044', by: '[Requester F]', amt: 220, approver: 'Team lead', at: '05 Nov 13:02', rule: 'Approval matrix · up to USD 50,000', reason: 'Partial credit · Documentation fee waived — invoice amendment.' },
+      { id: 'AP-1049', type: 'Credit note', ref: 'NSAOF2600083CR', by: 'Anita Rao', amt: 247.80, approver: 'Agency Finance (L1)', at: '21 Nov 09:30', rule: 'Partial credit · Agency Finance (L1) → Finance Approver (L2)', reason: 'Partial credit · BAF charged above the contract rate.', cn: 'NSAOF2600083CR' },
       { id: 'AP-1050', type: 'Credit hold release', ref: '[Customer H]', by: '[Credit team]', amt: null, approver: 'Credit controller', at: '05 Nov 13:15', rule: 'Credit hold review · release, override or deny', reason: 'Overdue balance — override requested pending payment confirmation.' },
       { id: 'AP-1031', type: 'Receipt backdating', ref: 'P-0001', by: '[Requester C]', amt: 2475, approver: 'Team lead', at: '04 Nov 15:02', rule: 'Receipt backdating · approval governance', reason: 'Bank value date one day earlier.' },
       { id: 'AP-1032', type: 'Invoice amendment', ref: 'SINOF2602144', by: '[Requester D]', amt: 18326, approver: 'Team lead', at: '04 Nov 11:45', rule: 'Invoice amendment approval · team lead', reason: 'Customer reference number added.' }
@@ -553,7 +557,7 @@ class GirsPage extends DCLogic {
     const blocked = !decided && (r.self || r.cco);
     return {
       tabs, rows, empty: rows.length === 0, ftype: s.ftype, setType: (e) => this.setState({ ftype: e.target.value }),
-      sel: { ...r, amtText: m(r.amt), status: st[0], stChip: st[1], decided, blocked, actionable: !decided && !blocked,
+      sel: { ...r, amtText: m(r.amt), status: st[0], stChip: st[1], decided, blocked, actionable: !decided && !blocked && !r.cn, isCnRv: !decided && !!r.cn, cnHref: r.cn ? 'credit-note-approval.html?cn=' + r.cn : '',
         blockText: r.self ? 'You raised this request. Segregation of duties: another approver must decide it.' : 'Above USD 50,000 — this credit note needs Chief Commercial Officer (CCO) approval.',
         doneText: (s.decided[r.id] === 'approved' ? 'Approved · MFA verified.' : 'Rejected with remarks.') + ' Requester notified by email.',
         doneStyle: s.decided[r.id] === 'approved' ? 'background:var(--okbg);color:var(--ok2)' : 'background:var(--badbg);color:var(--bad2)' },

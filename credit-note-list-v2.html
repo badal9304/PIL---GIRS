@@ -184,7 +184,8 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
 .cn2-act{display:flex;flex-direction:column;gap:6px}.cn2-l{font-size:13px;font-weight:500}.cn2-act textarea{height:70px;padding-top:8px;resize:vertical}
 .cn2-ab{display:flex;justify-content:flex-end;gap:8px}.cn2-rej{color:var(--bad)}
 @media (prefers-reduced-motion:no-preference){.cn2-dr{animation:cn2in .18s ease-out}
-.cn2-pdf{display:flex;align-items:center;gap:8px;flex:none}@keyframes cn2in{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
+.cn2-pdf{display:flex;align-items:center;gap:8px;flex:none}
+.cn2-rvb{display:flex;flex-direction:row;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:8px;justify-content:space-between;gap:16px}.cn2-rvb p{margin:0;font-size:13px;color:var(--muted2)}.cn2-rvb .btn{flex:none}@keyframes cn2in{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
 .lay{white-space:nowrap;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--muted);text-decoration:none}.lay:hover{color:var(--ink)}.lay[aria-current=page]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(22,26,33,.12)}
 </style>
 <link rel="stylesheet" href="girs-ui.css">
@@ -541,7 +542,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
         <aside class="cn2-dr" role="dialog" aria-modal="true" aria-labelledby="cn2-dt">
           <div class="cn2-dh">
             <div><div class="cn2-dh1"><h2 id="cn2-dt" class="mono">{{dr.no}}</h2><span class="cn2-src {{dr.srcCls}}">{{dr.src}}</span><span class="cn2-st {{dr.stCls}}">{{dr.stT}}</span></div><p>Credit note against <span class="mono">{{dr.orig}}</span> · {{dr.party}}</p></div>
-            <div class="cn2-pdf"><button class="btn btn-sm" onClick="{{dr.viewPdf}}" disabled="{{dr.pdfDis}}" title="{{dr.pdfTip}}">View PDF</button><button class="btn btn-sm" onClick="{{dr.dlPdf}}" disabled="{{dr.pdfDis}}" title="{{dr.pdfTip}}">Download PDF</button><button class="btn btn-icon btn-sm" onClick="{{dr.close}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+            <div class="cn2-pdf"><sc-if value="{{dr.canReview}}" hint-placeholder-val="{{ false }}"><a class="btn btn-sm btn-primary" href="{{dr.rvHref}}" style="text-decoration: none">Review</a></sc-if><button class="btn btn-sm" onClick="{{dr.viewPdf}}" disabled="{{dr.pdfDis}}" title="{{dr.pdfTip}}">View PDF</button><button class="btn btn-sm" onClick="{{dr.dlPdf}}" disabled="{{dr.pdfDis}}" title="{{dr.pdfTip}}">Download PDF</button><button class="btn btn-icon btn-sm" onClick="{{dr.close}}" aria-label="Close" title="Close" style="width: 32px; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
           </div>
           <div class="cn2-tabs" role="tablist"><sc-for list="{{dr.tabs}}" as="t" hint-placeholder-count="4"><button role="tab" aria-selected="{{t.on}}" onClick="{{t.go}}">{{t.t}}</button></sc-for></div>
           <div class="cn2-db">
@@ -563,7 +564,7 @@ tr[data-found=true] td{animation:gfound 2.8s ease-out 1}
               <sc-if value="{{dr.hasAppr}}" hint-placeholder-val="{{ true }}"><ol class="cn2-ap"><sc-for list="{{dr.appr}}" as="a" hint-placeholder-count="2"><li class="{{a.cls}}"><div class="cn2-ap1"><b>{{a.lvl}}</b><span class="cn2-apr">{{a.res}}</span></div><span class="dim">{{a.who}} · {{a.at}}</span><sc-if value="{{a.hasC}}" hint-placeholder-val="{{ false }}"><q>{{a.c}}</q></sc-if></li></sc-for></ol></sc-if>
               <sc-if value="{{dr.canAct}}" hint-placeholder-val="{{ false }}">
                 <sc-if value="{{dr.mine}}" hint-placeholder-val="{{ false }}"><p class="cn2-info">{{dr.mineT}}</p></sc-if>
-                <sc-if value="{{dr.notMine}}" hint-placeholder-val="{{ true }}"><div class="cn2-act"><label class="cn2-l" for="cn2-note">Comment <span class="dim">Required to reject</span></label><textarea id="cn2-note" class="input" value="{{dr.note}}" onInput="{{dr.setNote}}" placeholder="Add a comment for the requester"></textarea><div class="cn2-ab"><button class="btn cn2-rej" onClick="{{dr.reject}}">Reject</button><button class="btn btn-primary" onClick="{{dr.approve}}">Approve</button></div></div></sc-if>
+                <sc-if value="{{dr.didApprove}}" hint-placeholder-val="{{ false }}"><p class="cn2-info">You approved the previous level, so another approver decides this one.</p></sc-if><sc-if value="{{dr.canReview}}" hint-placeholder-val="{{ true }}"><div class="cn2-act cn2-rvb"><p>Open the credit note as it was raised. You can change the reason, credit type, lines, amounts and remarks before you approve or reject.</p><a class="btn btn-primary" href="{{dr.rvHref}}" style="text-decoration: none">Review credit note</a></div></sc-if>
               </sc-if>
             </sc-if>
             <sc-if value="{{dr.isHist}}" hint-placeholder-val="{{ false }}">
@@ -615,9 +616,12 @@ class GirsPage extends DCLogic {
         lines: [L('OFT', 'Ocean Freight', 980, 'IN-GST-18', 18, 'USD'), L('DOC', 'Documentation', 220, 'IN-GST-18', 18, 'INR')], status: 'Generated', gfs: 'JV-IN-26-084415', repl: 'NSAOF2601062', remark: 'Billing party should be the consignee, confirmed by customer service.', ctype: 'Full' },
       { no: 'SINOF2600329CR', orig: 'SINOF2602405', party: 'Meridian Agro Exports (SG)', src: 'Manual', reason: 'Pricing correction', ref: '', date: '14 Nov 2026', by: 'Daniel Tan',
         lines: [L('OFT', 'Ocean Freight', 3200, 'ZR-INTL', 0, 'USD')], status: 'Generated', gfs: 'JV-SG-26-118120', repl: 'SINOF2602412', remark: 'Spot rate billed instead of the RFA rate.', ctype: 'Full' },
-      { no: 'SINOF2600324CR', orig: 'SINOF2602401', party: 'Straits Harbour Logistics (SG)', src: 'Manual', reason: 'Pricing correction', ref: '', date: '20 Nov 2026', by: 'Daniel Tan',
-        lines: [L('BAF', 'Bunker Adjustment Factor', 80, 'ZR-INTL', 0, 'USD', 320)], ctype: 'Partial', status: 'Pending approval', remark: 'BAF billed at the old quarter rate.',
+      { no: 'SINOF2600324CR', orig: 'SINOF2602401', party: 'Straits Harbour Logistics (SG)', src: 'Manual', reason: 'Pricing correction', ref: '', date: '20 Nov 2026', by: 'Priya Nair',
+        lines: [L('BAF', 'Bunker Adjustment Factor', 80, 'SG-SR-9', 9, 'USD', 320)], ctype: 'Partial', status: 'Pending approval', remark: 'BAF billed at the old quarter rate.',
         appr: [['L1 · Agency Finance', 'Mei Lin Ong', 'Approved', '20 Nov 2026 10:12', 'Checked against Charge Master'], ['L2 · Finance Approver', 'Thushy (PIL)', 'Pending', '', '']] },
+      { no: 'NSAOF2600083CR', orig: 'NSAOF2601019', party: 'Orchid Lane Polymers (IN)', src: 'Manual', reason: 'Pricing correction', ref: '', date: '21 Nov 2026', by: 'Anita Rao',
+        lines: [L('BAF', 'Bunker Adjustment Factor', 210, 'IN-GST-18', 18, 'USD', 630)], ctype: 'Partial', status: 'Pending approval', remark: 'BAF charged at USD 315 per container instead of the contract rate of USD 210.',
+        appr: [['L1 · Agency Finance', 'Rahul Mehta', 'Pending', '', ''], ['L2 · Finance Approver', 'Thushy (PIL)', 'Not reached', '', '']] },
       { no: 'LCHOD2600012CR', orig: 'LCHOD2600198', party: 'Andaman Bay Traders (TH)', src: 'Manual', reason: 'Invoice amendment', ref: '', date: '13 Nov 2026', by: 'Somchai P.',
         lines: [L('DET', 'Detention', 720, 'TH-VAT-7', 7, 'THB', 1440)], ctype: 'Partial', status: 'Rejected', remark: '',
         appr: [['L1 · Agency Finance', 'Niran K.', 'Rejected', '13 Nov 2026 17:20', 'Consignee change is not approved by the shipper. Raise again with the shipper\'s confirmation.'], ['L2 · Finance Approver', '—', 'Not reached', '', '']] },
@@ -712,7 +716,7 @@ class GirsPage extends DCLogic {
         tots: Object.keys(by).map((c) => ({ cur: c, a: fmt(by[c].a), t: fmt(by[c].t), g: fmt(by[c].a + by[c].t) })),
         isAuto: r.src === 'Auto' || r.ctype !== 'Partial', autoT: r.src !== 'Auto' ? 'No approval needed. A full credit note is generated and posted to GFS as soon as it is created. Only partial credit notes go to Agency Finance (L1) and Finance Approver (L2).' : r.reason === 'FCA approval' ? 'No approval step. GIRS generates it automatically from the approved FCA (rule BR-CRN-003).' : 'No approval step in GIRS. The waiver was approved in the DAR workflow (' + r.ref + ').',
         appr: (r.appr || []).map((a) => ({ lvl: a[0], who: a[1], res: a[2], at: a[3] || '—', c: a[4] || '', hasC: !!a[4], cls: 'ap-' + a[2].toLowerCase().replace(/\s+/g, '-') })), hasAppr: !!(r.appr || []).length,
-        canAct: pendIdx >= 0 && r.status === 'Pending approval', mine, notMine: !mine, mineT: 'You raised this request, so you can\'t approve it. It waits for ' + (((r.appr || [])[pendIdx] || [])[1] || 'the approver') + '.',
+        canAct: pendIdx >= 0 && r.status === 'Pending approval', mine, notMine: !mine, rvHref: 'credit-note-approval.html?cn=' + encodeURIComponent(r.no), didApprove: !mine && (r.appr || []).some((a) => a[1] === ME && a[2] === 'Approved') && r.status === 'Pending approval', canReview: pendIdx >= 0 && r.status === 'Pending approval' && !mine && !(r.appr || []).some((a) => a[1] === ME && a[2] === 'Approved'), mineT: 'You raised this request, so you can\'t approve it. It waits for ' + (((r.appr || [])[pendIdx] || [])[1] || 'the approver') + '.',
         note: s.note, setNote: (e) => self.setState({ note: e.target.value }), approve: () => act('Approved'), reject: () => act('Rejected'),
         hist: hist.map(([at, who, what, d]) => ({ at, who, what, d })) };
     }
