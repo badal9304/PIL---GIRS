@@ -936,13 +936,31 @@ class GirsPage extends DCLogic {
       else if (code !== k.orig && allCodes.includes(code)) errs.code = 'Customer code ' + code + ' already exists';
       if (!String(V.name || '').trim()) errs.name = 'Enter the Legal English Name';
       if (brMode && !V.link) errs.link = 'Select the corporate office';
+      // Add branch office: pick the customer by code or name; the rest fills in read-only from it (client comment, 28 Nov)
+      const auto = brMode && mode === 'new';
+      const src = auto ? D.find((c) => c.f.code === V.link) : null;
+      if (auto) { delete errs.code; delete errs.name; if (!V.link) errs.link = 'Select the customer'; }
+      const fmtSrc = (key, kind) => { if (!src) return '—'; const v = src.f[key];
+        if (kind === 'sub') return (v || []).length ? v.join(', ') : '—';
+        if (kind === 'chk') return v ? 'Checked' : 'Unchecked';
+        if (kind === 'cls') return 'Branch Office';
+        if (kind === 'link') return src.f.code + ' · ' + src.f.name;
+        return dash(v); };
       let i = 0;
       const head = (t) => ({ id: 'cuh' + i++, label: t, cls: 'kf kh', isHead: true });
+      let brPart = false;
       const field = (key, label, kind) => {
         const err = k.tried ? errs[key] || '' : '', t = kind || 'text';
         const f = { id: 'cuf' + i++, label, cls: 'kf' + (t === 'area' || t === 'sub' ? ' w2' : '') + (err ? ' bad' : ''), isText: false, isArea: false, isSel: false, isRadio: false, isChk: false, isChks: false, isRO: false, isPhone: false, isDate: false, isHead: false,
           v: V[key] == null ? '' : V[key], opts: [], dis: false, bad: err ? 'true' : 'false', err, hasErr: !!err, on: (e) => setV({ [key]: e.target.value }) };
         if (key === 'code' && mode === 'edit') return Object.assign(f, { isRO: true, v: dash(V.code) });
+        if (auto && !brPart) {
+          const pick = (e) => setV({ link: e.target.value });
+          const lerr = k.tried ? errs.link || '' : '';
+          if (key === 'code' || key === 'name') return Object.assign(f, { isSel: true, v: V.link || '', on: pick, cls: 'kf' + (lerr ? ' bad' : ''), err: lerr, hasErr: !!lerr, bad: lerr ? 'true' : 'false',
+            opts: [{ v: '', t: key === 'code' ? 'Select customer code' : 'Select customer name' }].concat(D.map((c) => ({ v: c.f.code, t: key === 'code' ? c.f.code : c.f.name }))) });
+          if (t !== 'cls') return Object.assign(f, { isRO: true, v: fmtSrc(key, t) });
+        }
         if (t === 'text') f.isText = true;
         else if (t === 'area') f.isArea = true;
         else if (t === 'date') f.isDate = true;
@@ -959,7 +977,7 @@ class GirsPage extends DCLogic {
       };
       const fields = [];
       CU_SECS.forEach(([t, fs]) => { fields.push(head(t)); fs.forEach(([key, l, kind]) => fields.push(field(key, l, kind))); });
-      if (brMode) { fields.push(head('Branch Details')); CU_BRF.forEach(([key, l, kind]) => fields.push(field(key, l, kind))); }
+      if (brMode) { brPart = true; fields.push(head('Branch Details')); CU_BRF.forEach(([key, l, kind]) => fields.push(field(key, l, kind))); }
       const nErr = Object.keys(errs).length;
       form = { on: true, dcls: 'dlg full', gcls: 'kgrid k4', fields, title: mode === 'edit' ? 'Update customer · ' + k.orig : mode === 'copy' ? 'Copy customer' : brMode ? 'Add branch office' : 'Add customer',
         sub: mode === 'copy' ? 'From ' + k.orig : mode === 'edit' ? V.name : 'Customer Master',
@@ -967,6 +985,14 @@ class GirsPage extends DCLogic {
         save: () => {
           if (nErr) return set({ k: Object.assign({}, k, { tried: true }) });
           const d = JSON.parse(JSON.stringify(D)), f = Object.assign({}, V, { code });
+          if (auto) {
+            const parent = d.find((c) => c.f.code === V.link);
+            const nums = parent.br.map((b) => parseInt(String(b.f.code).split('-').pop(), 10)).filter((x) => !isNaN(x));
+            const bcode = parent.f.code + '-' + ((nums.length ? Math.max.apply(null, nums) : 0) + 1);
+            const bf = Object.assign(JSON.parse(JSON.stringify(parent.f)), Object.fromEntries(CU_BRF.map(([key]) => [key, V[key]])), { code: bcode, cls: 'Branch Office', link: parent.f.code });
+            parent.br.push({ f: bf, ct: [], bk: [] });
+            return save(d, { __toast: 'Branch office ' + bcode + ' saved under ' + parent.f.code + '.', sel: parent.id, br: bcode, tab: '1', open: Object.assign({}, s.open, { [parent.id]: true }) });
+          }
           if (mode === 'edit') {
             const c = d.find((x) => x.id === corp.id);
             const tgt = isBr ? c.br.find((x) => x.f.code === k.orig) : c;
