@@ -1040,10 +1040,10 @@ class GirsPage extends DCLogic {
       text: 'The contact will be removed from ' + F0.code + '.' + (c.pri === 'Yes' ? ' This is the primary contact, so ' + F0.code + ' will have no primary contact until you set one.' : ''),
       run: (d) => { ownIn(d).ct.splice(idx, 1); }, after: { tab: '4', __toast: 'Contact ' + [c.first, c.last].filter(Boolean).join(' ') + ' deleted.' } } });
 
-    // ---------- tabs (sheet order: Customer, Branch Details, Contacts, Bank Details)
+    // ---------- tabs (Customer, Branch Details, Bank Details, Contacts — Bank moved before Contacts per PIL, 28 Nov)
     const nCt = (own.ct || []).length, nBk = (own.bk || []).length;
-    const T = isBr ? [['1', 'Customer details', ''], ['4', 'Contacts', String(nCt)], ['3', 'Bank Details', String(nBk)]]
-      : [['1', 'Customer details', ''], ['2', 'Branch Details', String(corp.br.length)], ['4', 'Contacts', String(nCt)], ['3', 'Bank Details', String(nBk)]];
+    const T = isBr ? [['1', 'Customer details', ''], ['3', 'Bank Details', String(nBk)], ['4', 'Contacts', String(nCt)]]
+      : [['1', 'Customer details', ''], ['2', 'Branch Details', String(corp.br.length)], ['3', 'Bank Details', String(nBk)], ['4', 'Contacts', String(nCt)]];
     const tab = T.some((t) => t[0] === s.tab) ? s.tab : '1';
     const tabs = T.map(([key, label, count]) => { const on = tab === key; return { label, count, on: on ? 'true' : 'false', fg: on ? 'var(--accent)' : 'var(--muted)', line: on ? 'var(--accent)' : 'transparent', pick: () => set({ tab: key }) }; });
 
