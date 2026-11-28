@@ -933,7 +933,25 @@ class GirsPage extends DCLogic {
           opts: o.opts || [], dis: !!o.dis, bad: err ? 'true' : 'false', err, hasErr: !!err,
           on: o.on || (t === 'chk' ? (e) => setV({ [key]: e.target.checked }) : t === 'file' ? (e) => setV({ [key]: e.target.files && e.target.files[0] ? e.target.files[0].name : '' }) : (e) => setV({ [key]: e.target.value })) }; };
       const corpOpts = [{ v: '', t: 'Select corporate office' }].concat(D.map((c) => ({ v: c.code, t: c.code + ' · ' + c.name })));
-      const fields = [
+      // Add branch office: pick the company by code or name; its details fill in read-only (client comment, 28 Nov)
+      const auto = br0 && (mode === 'new-br' || mode === 'new');
+      const src = auto ? D.find((c) => c.code === V.link) : null;
+      const RO = (key, label, val, o) => Object.assign(F(key, label, Object.assign({ t: 'ro' }, o || {})), { v: src ? dash(val) : '—' });
+      const pickCo = (e) => setV({ link: e.target.value });
+      const autoFields = !auto ? null : [
+        F('link', 'Company Code', { t: 'sel', on: pickCo, opts: [{ v: '', t: 'Select company code' }].concat(D.map((c) => ({ v: c.code, t: c.code }))) }),
+        F('link', 'Company Name', { t: 'sel', on: pickCo, opts: [{ v: '', t: 'Select company name' }].concat(D.map((c) => ({ v: c.code, t: c.name }))) }),
+        RO('alias', 'Company Alias Name', src && src.alias),
+        RO('addr', 'Company Address', src && src.addr, { w: true }),
+        RO('mob', 'Mobile', src && src.mob), RO('tel', 'Telephone', src && src.tel), RO('email', 'e-mail', src && src.email, { w: true }),
+        RO('tax', 'Tax Registration No', src && src.tax), RO('gfs', 'GFS Code', src && src.gfs),
+        RO('active', 'Active', src && (src.active ? 'Yes' : 'No')),
+        mode === 'new' ? F('cls', 'Classified As', { t: 'radio', opts: ['Corporate Office', 'Branch Office'].map((x) => ({ t: x, on: V.cls === x ? 'true' : 'false', pick: () => setV({ cls: x, link: x === 'Branch Office' ? V.link || corp.code : '' }) })) }) : RO('cls', 'Classified As', 'Branch Office'),
+        RO('link2', 'Linked Corporate Office (For Branch Office)', src && src.code + ' · ' + src.name), RO('ent', 'Entity Type', src && src.ent),
+        F('port', 'Port')
+      ];
+      if (auto) { delete errs.code; delete errs.name; if (!V.link) errs.link = 'Select the company'; }
+      const fields = autoFields || [
         F('code', 'Company Code', mode === 'edit' ? { t: 'ro' } : {}), F('name', 'Company Name'), F('alias', 'Company Alias Name'),
         F('addr', 'Company Address', { t: 'area', w: true }),
         F('mob', 'Mobile'), F('tel', 'Telephone'), F('email', 'e-mail', { w: true }),
@@ -949,6 +967,14 @@ class GirsPage extends DCLogic {
         save: () => {
           if (nErr) return set({ k: Object.assign({}, k, { tried: true }) });
           const d = JSON.parse(JSON.stringify(D));
+          if (auto) {
+            const parent = d.find((c) => c.code === V.link);
+            const nums = parent.br.map((b) => parseInt(String(b.code).split('-').pop(), 10)).filter((x) => !isNaN(x));
+            const bcode = parent.code + '-' + String((nums.length ? Math.max.apply(null, nums) : 0) + 1).padStart(2, '0');
+            parent.br.push({ code: bcode, name: parent.name, alias: parent.alias, addr: parent.addr, mob: parent.mob, tel: parent.tel, email: parent.email, tax: parent.tax, gfs: parent.gfs,
+              port: V.port, act: parent.active ? 'Y' : 'N', bk: [], ct: [] });
+            return save(d, { __toast: 'Branch office ' + bcode + ' saved under ' + parent.code + '.', sel: parent.id, br: bcode, open: Object.assign({}, s.open, { [parent.id]: true }) });
+          }
           const rec = { code, name: V.name.trim(), alias: V.alias, addr: V.addr, mob: V.mob, tel: V.tel, email: V.email, tax: V.tax, gfs: V.gfs };
           // remove the record being edited from where it was
           if (mode === 'edit') {
